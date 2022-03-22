@@ -1,3 +1,5 @@
+package org.example;
+
 public class Dashboard {
     private int Coins;
     private ArrayList<Assistant> AssistantCards;
