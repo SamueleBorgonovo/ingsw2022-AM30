@@ -9,7 +9,7 @@ public class Player {
     private Plance plance;
     private final Wizard wizard;
     private int coins = 0;
-    private final ArrayList<Assistant> assistantCards = new ArrayList<>();
+    private final ArrayList<Assistant> assistantCards = new ArrayList<Assistant>();
 
     public Player(String nickname, int playerID, PlayerState playerState, Dashboard dashboard, Plance plance, Wizard wizard) {
         this.nickname = nickname;
