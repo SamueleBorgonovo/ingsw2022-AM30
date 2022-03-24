@@ -1,35 +1,41 @@
-package org.example;
+package src.main.java.org.example;
+import java.util.ArrayList;
 
 public class Dashboard {
-    private int Coins;
-    private ArrayList<Assistant> AssistantCards;
+    private int coins;
+    private ArrayList<Assistant> assistantCards = new ArrayList<>();
+
+    public Dashboard(int coins, ArrayList<Assistant> assistantCards) {
+        this.coins = coins;
+        this.assistantCards = assistantCards;
+    }
 
     public int getCoins(){
-
+        return coins;
     }
 
-    public int addCoins(){
-
+    public void addCoins(){
+        coins++;
     }
 
-    public removeCoins(int NumOfCoins){
-
+    public void removeCoins(){
+        coins--;
     }
 
     public ArrayList<Assistant> getAssistantCards() {
-        return AssistantCards;
+        return assistantCards;
     }
 
-    public removeAssistant(Assistant assistant){
-
+    public void removeAssistant(Assistant assistant){
+        assistantCards.remove(assistant);
     }
 
     public int getValueAssistant (Assistant assistant){
-
+        return assistant.getValueAssistant();
     }
 
     public int getMovementAssistant (Assistant assistant){
-
+        return assistant.getMovementAssistant();
     }
 
 }
