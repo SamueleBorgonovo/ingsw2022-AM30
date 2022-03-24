@@ -1,7 +1,5 @@
 package src.main.java.org.example;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 
 public class Player {
