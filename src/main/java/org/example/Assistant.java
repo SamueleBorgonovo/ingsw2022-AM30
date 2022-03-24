@@ -12,20 +12,20 @@ public enum Assistant {
     ELEPHANTS(9, 5),
     TURTLE(10, 5);
 
-    private final int valueAssistant;
-    private final int movementAssistant;
+    private final int value;
+    private final int movement;
 
-    private Assistant(int valueAssistant, int movementAssistant){
-        this.valueAssistant = valueAssistant;
-        this.movementAssistant = movementAssistant;
+    private Assistant(int value, int movement){
+        this.value = value;
+        this.movement = movement;
     }
 
-    public int getValueAssistant(){
-        return valueAssistant;
+    public int getValue(){
+        return value;
     }
 
-    public int getMovementAssistant(){
-        return movementAssistant;
+    public int getMovement(){
+        return movement;
     }
 
 }

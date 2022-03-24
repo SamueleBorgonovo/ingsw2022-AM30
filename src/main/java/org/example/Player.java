@@ -1,12 +1,17 @@
 package src.main.java.org.example;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+
 public class Player {
     private final String nickname;
     private final int playerID;
     private PlayerState playerState;
-    private Dashboard dashboard;
     private Plance plance;
     private final Wizard wizard;
+    private int coins = 0;
+    private final ArrayList<Assistant> assistantCards = new ArrayList<>();
 
     public Player(String nickname, int playerID, PlayerState playerState, Dashboard dashboard, Plance plance, Wizard wizard) {
         this.nickname = nickname;
@@ -15,6 +20,8 @@ public class Player {
         this.dashboard = dashboard;
         this.plance = plance;
         this.wizard = wizard;
+        this.coins= coins;
+        this.assistanCards=AssistantCards;
     }
 
     public String getNickname() {
@@ -29,10 +36,6 @@ public class Player {
         return playerState;
     }
 
-    public Dashboard getDashboard() {
-        return dashboard;
-    }
-
     public void setPlayerState(PlayerState playerState) {
         this.playerState = playerState;
     }
@@ -44,6 +47,31 @@ public class Player {
     public Wizard getWizard() {
         return wizard;
     }
+
+    public int getCoins(){
+        return coins;
+    }
+
+    public void addCoins(){
+        coins++;
+    }
+
+    public void removeCoins(int numOfCoins){
+        coins = coins - numOfCoins;
+    }
+
+    public ArrayList<Assistant> getAssistantCards() {
+        return assistantCards;
+    }
+
+    public void removeAssistant(Assistant assistant){
+        assistantCards.remove(assistant);
+    }
+
+
+
+}
+
 
 
 }
