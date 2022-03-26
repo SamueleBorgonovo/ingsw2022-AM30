@@ -1,4 +1,4 @@
-package src.main.java.org.example;
+package org.example;
 import java.util.ArrayList;
 
 public class Plance {
@@ -28,5 +28,9 @@ public class Plance {
 
     public void addProfessor(Professor professor){
         tableProfessor.add(professor.ordinal(),professor);
+    }
+
+    public void removeProfessor(Professor professor){
+        tableProfessor.remove(professor);
     }
 }

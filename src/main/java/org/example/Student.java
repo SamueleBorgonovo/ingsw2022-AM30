@@ -1,4 +1,4 @@
-package src.main.java.org.example;
+package org.example;
 
 public enum Student {
     YELLOW,

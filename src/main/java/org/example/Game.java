@@ -1,4 +1,4 @@
-package src.main.java.org.example;
+package org.example;
 import java.util.ArrayList;
 
 public class Game {
@@ -39,7 +39,11 @@ public class Game {
     }
 
     public Player winner(){
-        return Player;
+        for (Player player : listOfPlayers){
+            if (player.getPlance().getNumOfTowers()== 0)
+                return player;
+            else if
+        }
     }
 }
 

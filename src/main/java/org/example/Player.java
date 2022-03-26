@@ -1,4 +1,4 @@
-package src.main.java.org.example;
+package org.example;
 
 import java.util.ArrayList;
 
@@ -8,18 +8,17 @@ public class Player {
     private PlayerState playerState;
     private Plance plance;
     private final Wizard wizard;
-    private int coins = 0;
-    private final ArrayList<Assistant> assistantCards = new ArrayList<Assistant>();
+    private int coins;
+    private ArrayList<Assistant> assistantCards = new ArrayList<>();
 
-    public Player(String nickname, int playerID, PlayerState playerState, Dashboard dashboard, Plance plance, Wizard wizard) {
+    public Player(String nickname, int playerID, PlayerState playerState, Plance plance, Wizard wizard, int coins, ArrayList<Assistant> assistantCards){
         this.nickname = nickname;
         this.playerID = playerID;
         this.playerState = playerState;
-        this.dashboard = dashboard;
         this.plance = plance;
         this.wizard = wizard;
         this.coins= coins;
-        this.assistanCards=AssistantCards;
+        this.assistantCards=assistantCards;
     }
 
     public String getNickname() {
@@ -72,4 +71,4 @@ public class Player {
 
 
 
-}
+
