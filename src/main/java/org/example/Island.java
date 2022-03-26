@@ -1,5 +1,7 @@
 package org.example;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class Island {
@@ -55,5 +57,11 @@ public class Island {
 
     public void addStudents(Student student) {
         students.add(student);
+    }
+
+    public void changeTowers(@NotNull ArrayList<Tower> towers, Tower tower){
+        int i=towers.size();
+        for(int j=0; j<i ; j++)
+            towers.set(i, tower);
     }
 }
