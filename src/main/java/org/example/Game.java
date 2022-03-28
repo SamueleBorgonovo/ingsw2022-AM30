@@ -45,8 +45,8 @@ public class Game {
         int maxProfessor = 0;
         boolean gameIsFinished = false;
 
-        if(board.getArchipelago().getNumofIsland == 3 ||
-           board.getNumOfStudentsBag == 0)
+        if(board.getArchipelago().getNumOfIslands() == 3 ||
+           board.getNumOfStudentsBag() == 0)
             gameIsFinished = true;
 
         for (Player player : listOfPlayers)

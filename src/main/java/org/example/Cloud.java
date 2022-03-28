@@ -1,4 +1,4 @@
-package src.main.java.org.example;
+package org.example;
 
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;

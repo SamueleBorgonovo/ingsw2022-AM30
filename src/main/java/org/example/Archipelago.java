@@ -1,9 +1,12 @@
 package org.example;
+
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class Archipelago {
     private final ArrayList<Island> islands;
+
 
     public Archipelago(ArrayList<Island> islands) {
         this.islands = islands;
