@@ -18,7 +18,7 @@ public class Plance {
         return entrance;
     }
 
-    public ArrayList<Professor> getTableProfessor() {
+    public ArrayList<Professor> getProfessor() {
         return tableProfessor;
     }
 

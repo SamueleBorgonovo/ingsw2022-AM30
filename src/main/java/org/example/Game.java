@@ -39,11 +39,39 @@ public class Game {
     }
 
     public Player winner(){
-        for (Player player : listOfPlayers){
-            if (player.getPlance().getNumOfTowers()== 0)
-                return player;
-            else if
+        ArrayList<Player> playersCandidate = new ArrayList<>();
+        Player playerChosen = null ;
+        int minTowers = 8;
+        int maxProfessor = 0;
+        boolean gameIsFinished = false;
+
+        if(board.getArchipelago().getNumofIsland == 3 ||
+           board.getNumOfStudentsBag == 0)
+            gameIsFinished = true;
+
+        for (Player player : listOfPlayers)
+
+            if (player.getPlance().getNumOfTowers()== 0 ||
+                player.getAssistantCards().size() == 0)
+                    gameIsFinished = true;
+
+
+        if(gameIsFinished)
+            {
+                for(Player player1 : listOfPlayers)
+                    if(player1.getPlance().getNumOfTowers() < minTowers )
+                        minTowers = player1.getPlance().getNumOfTowers();
+                for(Player player1 : listOfPlayers)
+                    if(player1.getPlance().getNumOfTowers() == minTowers )
+                        playersCandidate.add(player1);
+            }
+        for(Player player2 : playersCandidate) {
+            if (player2.getPlance().getProfessor().size() > maxProfessor) {
+                maxProfessor = player2.getPlance().getProfessor().size();
+                playerChosen = player2;
+            }
+            return playerChosen;
         }
-    }
+    return null;}
 }
 
