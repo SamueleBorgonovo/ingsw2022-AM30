@@ -45,9 +45,10 @@ public class Archipelago {
         return islands.size();
     }
 
-    public void mergeIslands(int islandID) {
-            for (int i = 0; i <islandID; i++){
-                if (islandID == islands.get(i).getIslandID()) {
+    public void mergeIslands(int islandID1, int islandID2) {
+        int max = Math.max(islandID1, islandID2);
+        for (int i = 0; i <max; i++){
+                if (max == islands.get(i).getIslandID()) {
                     //I add the towers of the island I am going to remove in the previous island
                     islands.get(i - 1).addTowers(islands.get(i).getTowers());
                     //I add the students of the island I am going to remove in the previous island

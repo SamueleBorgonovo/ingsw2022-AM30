@@ -73,5 +73,18 @@ public class Game {
             return playerChosen;
         }
     return null;}
+
+    public void moveStudentToEntrance(int playerID, Student student)
+    {
+        for(Player player : listOfPlayers)
+            if(playerID == player.getPlayerID())
+                player.getPlance().getEntrance().add(student);
+    }
+
+    public void moveStudentToIsland(int playerID, Island island, Student student){
+        for(Player player : listOfPlayers)
+            if(playerID == player.getPlayerID())
+                island.addStudents(student);
+    }
 }
 
