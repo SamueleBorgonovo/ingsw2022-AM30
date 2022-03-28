@@ -70,9 +70,9 @@ public class Game {
                 maxProfessor = player2.getPlance().getProfessor().size();
                 playerChosen = player2;
             }
-            return playerChosen;
+
         }
-    return null;}
+    return playerChosen;}
 
     public void moveStudentToEntrance(int playerID, Student student)
     {
