@@ -1,4 +1,4 @@
-package org.example;
+package it.polimi.ingsw;
 
 public class Character {
     private int cost;

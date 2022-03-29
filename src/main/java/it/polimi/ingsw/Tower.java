@@ -1,4 +1,4 @@
-package org.example;
+package it.polimi.ingsw;
 
 public enum Tower {
     WHITE,

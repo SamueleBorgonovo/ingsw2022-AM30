@@ -1,4 +1,4 @@
-package org.example;
+package it.polimi.ingsw;
 
 import java.util.ArrayList;
 
@@ -7,9 +7,9 @@ public class Board {
     private Archipelago Archipelago;
     private ArrayList<Student> Bag = new ArrayList<>();
     private int CoinsReserve;
-    private ArrayList<Character> Characters = new ArrayList<>();
+    private ArrayList<java.lang.Character> Characters = new ArrayList<>();
 
-    public Board(ArrayList<Cloud> Clouds, Archipelago Archipelago, ArrayList<Student> Bag, int CoinsReserve, ArrayList<Character> Characters) {
+    public Board(ArrayList<Cloud> Clouds, Archipelago Archipelago, ArrayList<Student> Bag, int CoinsReserve, ArrayList<java.lang.Character> Characters) {
         this.Clouds = Clouds;
         this.Archipelago = Archipelago;
         this.Bag = Bag;
@@ -54,7 +54,7 @@ public class Board {
             CoinsReserve=CoinsReserve-Coins;
     }
 
-    public ArrayList<Character> getCharacters(){
+    public ArrayList<java.lang.Character> getCharacters(){
         return Characters;
     }
 

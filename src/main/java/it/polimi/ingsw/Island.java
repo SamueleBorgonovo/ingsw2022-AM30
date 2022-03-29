@@ -1,4 +1,4 @@
-package org.example;
+package it.polimi.ingsw;
 
 import org.jetbrains.annotations.NotNull;
 

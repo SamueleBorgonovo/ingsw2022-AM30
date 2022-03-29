@@ -1,4 +1,4 @@
-package org.example;
+package it.polimi.ingsw;
 
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;

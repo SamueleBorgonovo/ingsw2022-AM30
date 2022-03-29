@@ -1,4 +1,4 @@
-package org.example;
+package it.polimi.ingsw;
 
 public enum Assistant {
     LION(1, 1),
