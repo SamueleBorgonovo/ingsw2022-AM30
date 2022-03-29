@@ -71,6 +71,7 @@ public class Game {
                 playerChosen = player2;
             }
 
+
         }
     return playerChosen;}
 
@@ -85,6 +86,27 @@ public class Game {
         for(Player player : listOfPlayers)
             if(playerID == player.getPlayerID())
                 island.addStudents(student);
+    }
+
+    public void useAssistant(int playerID, Assistant assistant){
+        for(Player player : listOfPlayers)
+            if(playerID == player.getPlayerID())
+                player.getAssistantCards().remove(assistant);
+    }
+
+    public void startTurn(){
+        setState(GameState.PLAYING);
+    }
+
+    public void endTurn(){
+        setState(GameState.ENDED);
+    }
+
+    public void moveMotherNature (Island island){
+        for(Island island1 : board.getArchipelago().getIslands())
+            if(island1.isMotherNature())
+                island1.setMotherNature(false);
+        island.setMotherNature(true);
     }
 }
 
