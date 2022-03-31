@@ -1,9 +1,10 @@
 package it.polimi.ingsw;
 
 public enum Professor{
+    GREEN_FROG,
     RED_DRAGON,
-    PINK_FAIRY,
     YELLOW_ELF,
+    PINK_FAIRY,
     BLUE_UNICORN,
-    GREEN_FROG
+
 }

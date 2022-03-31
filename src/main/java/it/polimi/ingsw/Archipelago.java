@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class Archipelago {
     private final ArrayList<Island> islands;
 
-
     public Archipelago(ArrayList<Island> islands) {
         this.islands = islands;
     }
@@ -41,23 +40,22 @@ public class Archipelago {
         island.setMotherNature(true);
     }
 
-    public int getNumOfIslands(){
-        return islands.size();
-    }
+    public void mergeIslands(Island island1, Island island2) {
+        int max = Math.max(island1.getIslandID(), island2.getIslandID());
+        int min = Math.min(island1.getIslandID(), island2.getIslandID());
 
-    public void mergeIslands(int islandID1, int islandID2) {
-        int max = Math.max(islandID1, islandID2);
-        for (int i = 0; i <max; i++){
-                if (max == islands.get(i).getIslandID()) {
-                    //I add the towers of the island I am going to remove in the previous island
-                    islands.get(i - 1).addTowers(islands.get(i).getTowers());
-                    //I add the students of the island I am going to remove in the previous island
-                    for(Student student : islands.get(i).getStudents())
-                        islands.get(i - 1).addStudents(student);
-                    islands.remove(i);
-                }
-
+        //con il seguente if, verifico se il merge che sto cercando di fare ha senso,
+        //ovvero se le isole sono effettivamente vicine tra loro
+        if(Math.abs((islands.indexOf(island1)% islands.size()) - (islands.indexOf(island2)% islands.size()))==1) {
+            //I add the towers of the island I am going to remove in the other island
+            islands.get(min).addTowers(islands.get(max).getTowers());
+            //I add the students of the island I am going to remove in the previous island
+            for (Student student : islands.get(max).getStudents())
+                islands.get(min).addStudents(student);
         }
     }
 
+    public int getNumOfIslands(){
+        return islands.size();
+    }
 }

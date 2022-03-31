@@ -5,50 +5,34 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class Island {
-    private int islandID;
-    private boolean stop;
-    private boolean motherNature;
     private ArrayList<Student> students = new ArrayList<Student>();
     private ArrayList<Tower> towers = new ArrayList<>();
+    private boolean motherNature;
+    private boolean stop;
+    private int islandID;
 
-    public Island(int islandID, boolean stop,ArrayList<Student> students,ArrayList<Tower> towers) {
-        this.islandID = islandID;
-        this.stop = stop;
+    public Island(ArrayList<Student> students, ArrayList<Tower> towers, boolean motherNature, boolean stop, int islandID) {
         this.students = students;
         this.towers = towers;
-
-    }
-
-    public int getIslandID() {
-        return islandID;
-    }
-
-    public ArrayList<Tower> getTowers() {
-        return towers;
-    }
-
-    public boolean isStop() {
-        return stop;
-    }
-
-    public boolean isMotherNature() {
-        return motherNature;
+        this.motherNature = motherNature;
+        this.stop = stop;
+        this.islandID = islandID;
     }
 
     public ArrayList<Student> getStudents() {
         return students;
     }
 
-    public void setIslandID(int islandID) {
-        this.islandID = islandID;
+    public ArrayList<Tower> getTowers() {
+        return towers;
     }
 
-    public void addTowers(ArrayList<Tower> towers) {
-        towers.add(towers.get(0));
+    public void setTowers(Tower tower) {
+        towers.add(tower);
     }
 
-    public void setStop(boolean stop) {
-        this.stop = stop;
+    public boolean isMotherNature() {
+        return motherNature;
     }
 
     public void setMotherNature(boolean motherNature) {
@@ -59,9 +43,30 @@ public class Island {
         students.add(student);
     }
 
+    public boolean isStop() {
+        return stop;
+    }
+
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+
+    public int getIslandID() {
+        return islandID;
+    }
+
+    public void setIslandID(int islandID) {
+        this.islandID = islandID;
+    }
+
     public void changeTowers(@NotNull ArrayList<Tower> towers, Tower tower){
         int i=towers.size();
         for(int j=0; j<i ; j++)
             towers.set(i, tower);
     }
+
+    public void addTowers(ArrayList<Tower> towers) {
+        towers.add(towers.get(0));
+    }
+
 }

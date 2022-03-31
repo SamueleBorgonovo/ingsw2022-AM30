@@ -1,16 +1,18 @@
 package it.polimi.ingsw;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class Plance {
-    private final ArrayList<Student> entrance;
-    private final ArrayList<Professor> tableProfessor;
-    private final Student hall[][];
-    private final ArrayList<Tower> towers;
+    private ArrayList<Student> entrance = new ArrayList<>();
+    private ArrayList<Professor> tableProfessor = new ArrayList<>();
+    ArrayList<ArrayList<Student>> Hall = new ArrayList<>();
+    private ArrayList<Tower> towers = new ArrayList<>();
 
-    public Plance(ArrayList<Student> entrance, ArrayList<Professor> tableProfessor, Student[][] hall, ArrayList<Tower> towers) {
+    public Plance(ArrayList<Student> entrance, ArrayList<Professor> tableProfessor, ArrayList<ArrayList<Student>> hall, ArrayList<Tower> towers) {
         this.entrance = entrance;
         this.tableProfessor = tableProfessor;
-        this.hall = hall;
+        Hall = hall;
         this.towers = towers;
     }
 
@@ -27,10 +29,36 @@ public class Plance {
     }
 
     public void addProfessor(Professor professor){
-        tableProfessor.add(professor.ordinal(),professor);
+        tableProfessor.add(professor);
     }
 
     public void removeProfessor(Professor professor){
         tableProfessor.remove(professor);
+
     }
+
+    public void addTower(Tower tower){
+        towers.add(tower);
+    }
+
+    public void removeTower(){
+        towers.remove(towers.size()-1);
+    }
+
+    public void addStudentEntrance(Student student){
+        entrance.add(student);
+    }
+
+    public void removeStudentEntrance(Student student){
+        entrance.remove(student);
+    }
+
+    public void addStudentHall(@NotNull Student student){
+        Hall.get(student.ordinal()).add(student);
+    }
+
+    public ArrayList<ArrayList<Student>> getStudentHall(){
+        return Hall;
+    }
+
 }

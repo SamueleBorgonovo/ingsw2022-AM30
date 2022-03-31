@@ -6,8 +6,8 @@ public class Game {
     private final GameMode gameMode;
     private ArrayList<Player>listOfPlayers = new ArrayList<>();
     private GameState gameState;
-    private Board board;
-    private final int NumOfPlayers;
+    private final Board board;
+    private final int numOfPlayers;
 
     public Game(int gameID, GameMode gameMode, ArrayList<Player> listOfPlayers, GameState gameState, Board board, int numOfPlayers) {
         this.gameID = gameID;
@@ -15,7 +15,7 @@ public class Game {
         this.listOfPlayers = listOfPlayers;
         this.gameState = gameState;
         this.board = board;
-        NumOfPlayers = numOfPlayers;
+        this.numOfPlayers = numOfPlayers;
     }
 
     public void setState(GameState gameState) {
@@ -27,7 +27,8 @@ public class Game {
     }
 
     public void addPlayer(Player player){
-        listOfPlayers.add(player);
+        if(listOfPlayers.size()<getNumOfPlayers())
+            listOfPlayers.add(player);
     }
 
     public GameMode getGameMode() {
@@ -35,37 +36,36 @@ public class Game {
     }
 
     public int getNumOfPlayers(){
-        return listOfPlayers.size();
+        return numOfPlayers;
     }
 
-    public Player winner(){
+    public Player winner() {
         ArrayList<Player> playersCandidate = new ArrayList<>();
-        Player playerChosen = null ;
+        Player playerChosen = null;
         int minTowers = 8;
         int maxProfessor = 0;
         boolean gameIsFinished = false;
 
-        if(board.getArchipelago().getNumOfIslands() == 3 ||
-           board.getNumOfStudentsBag() == 0)
+        if (board.getArchipelago().getNumOfIslands() == 3 ||
+                board.getNumOfStudentsBag() == 0)
             gameIsFinished = true;
 
         for (Player player : listOfPlayers)
 
-            if (player.getPlance().getNumOfTowers()== 0 ||
-                player.getAssistantCards().size() == 0)
-                    gameIsFinished = true;
+            if (player.getPlance().getNumOfTowers() == 0 ||
+                    player.getAssistantCards().size() == 0)
+                gameIsFinished = true;
 
 
-        if(gameIsFinished)
-            {
-                for(Player player1 : listOfPlayers)
-                    if(player1.getPlance().getNumOfTowers() < minTowers )
-                        minTowers = player1.getPlance().getNumOfTowers();
-                for(Player player1 : listOfPlayers)
-                    if(player1.getPlance().getNumOfTowers() == minTowers )
-                        playersCandidate.add(player1);
-            }
-        for(Player player2 : playersCandidate) {
+        if (gameIsFinished) {
+            for (Player player1 : listOfPlayers)
+                if (player1.getPlance().getNumOfTowers() < minTowers)
+                    minTowers = player1.getPlance().getNumOfTowers();
+            for (Player player1 : listOfPlayers)
+                if (player1.getPlance().getNumOfTowers() == minTowers)
+                    playersCandidate.add(player1);
+        }
+        for (Player player2 : playersCandidate) {
             if (player2.getPlance().getProfessor().size() > maxProfessor) {
                 maxProfessor = player2.getPlance().getProfessor().size();
                 playerChosen = player2;
@@ -73,7 +73,26 @@ public class Game {
 
 
         }
-    return playerChosen;}
+        return playerChosen;
+    }
+
+    public void verifyProfessorControl(Professor professor, Player playerInControl, Player playerInTurn){
+        if(playerInControl==null)
+            playerInTurn.getPlance().addProfessor(professor);
+        else if(playerInTurn.getPlance().getStudentHall().get(professor.ordinal()).size() >
+                playerInControl.getPlance().getStudentHall().get(professor.ordinal()).size())
+            playerInControl.getPlance().removeProfessor(professor);
+        playerInTurn.getPlance().addProfessor(professor);
+
+    }
+
+    public void startTurn(){
+        setState(GameState.PLAYING);
+    }
+
+    public void endTurn(){
+        setState(GameState.ENDED);
+    }
 
     public void moveStudentToEntrance(int playerID, Student student)
     {
@@ -81,6 +100,8 @@ public class Game {
             if(playerID == player.getPlayerID())
                 player.getPlance().getEntrance().add(student);
     }
+
+
 
     public void moveStudentToIsland(int playerID, Island island, Student student){
         for(Player player : listOfPlayers)
@@ -94,19 +115,20 @@ public class Game {
                 player.getAssistantCards().remove(assistant);
     }
 
-    public void startTurn(){
-        setState(GameState.PLAYING);
-    }
-
-    public void endTurn(){
-        setState(GameState.ENDED);
-    }
-
     public void moveMotherNature (Island island){
         for(Island island1 : board.getArchipelago().getIslands())
             if(island1.isMotherNature())
                 island1.setMotherNature(false);
         island.setMotherNature(true);
+        // aggiungere il metodo che verifica chi controlla l'isola
+    }
+
+    public void useCharacter(int playerID, Character character){
+        for(Player player: listOfPlayers)
+            if(player.getPlayerID() == playerID) {
+                player.removeCoins(character.getCost());
+                character.setUsed(true);
+            }
     }
 }
 
