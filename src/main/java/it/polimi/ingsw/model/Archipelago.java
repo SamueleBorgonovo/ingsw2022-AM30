@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 public class Archipelago {
     private final ArrayList<Island> islands;
+    private MotherNature mothernature;
 
-    public Archipelago(ArrayList<Island> islands) {
+    public Archipelago(ArrayList<Island> islands, MotherNature mothernature) {
+
         this.islands = islands;
+        this.mothernature = mothernature;
     }
 
     public ArrayList<Island> getIslands() {
@@ -27,15 +30,9 @@ public class Archipelago {
         return null;
     }
 
-    public int getMotherNatureIsland (){
-        for(Island island: islands)
-            if(island.isMotherNature())
-                return island.getIslandID();
-        return -1;
-    }
 
     public void setMotherNatureIsland(Island island){
-        island.setMotherNature(true);
+        island.setMotherNature(mothernature);
     }
 
     public void mergeIslands(Island island1, Island island2) {

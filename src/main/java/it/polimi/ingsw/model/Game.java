@@ -9,8 +9,9 @@ public class Game {
     private final Board board;
     private final int numOfPlayers;
     private VerifyType verifyType;
+    private MotherNature mothernature;
 
-    public Game(int gameID, GameMode gameMode, ArrayList<Player> listOfPlayers, GameState gameState, Board board, int numOfPlayers, VerifyType verifyType) {
+    public Game(int gameID, GameMode gameMode, ArrayList<Player> listOfPlayers, GameState gameState, Board board, int numOfPlayers, VerifyType verifyType, MotherNature mothernature) {
         this.gameID = gameID;
         this.gameMode = gameMode;
         this.listOfPlayers = listOfPlayers;
@@ -18,6 +19,7 @@ public class Game {
         this.board = board;
         this.numOfPlayers = numOfPlayers;
         this.verifyType = verifyType;
+        this.mothernature = mothernature;
     }
 
     public void setState(GameState gameState) {
@@ -118,10 +120,7 @@ public class Game {
     }
 
     public void moveMotherNature (Island island){
-        for(Island island1 : board.getArchipelago().getIslands())
-            if(island1.isMotherNature())
-                island1.setMotherNature(false);
-        island.setMotherNature(true);
+        mothernature.move(island.getIslandID());
         // aggiungere il metodo che verifica chi controlla l'isola
     }
 
