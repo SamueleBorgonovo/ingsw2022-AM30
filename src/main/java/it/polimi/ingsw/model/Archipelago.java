@@ -1,6 +1,4 @@
-package it.polimi.ingsw;
-
-import org.jetbrains.annotations.NotNull;
+package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 
@@ -36,7 +34,7 @@ public class Archipelago {
         return -1;
     }
 
-    public void setMotherNatureIsland(@NotNull Island island){
+    public void setMotherNatureIsland(Island island){
         island.setMotherNature(true);
     }
 

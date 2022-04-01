@@ -1,5 +1,4 @@
-package it.polimi.ingsw;
-import org.jetbrains.annotations.NotNull;
+package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 
@@ -55,7 +54,7 @@ public class Plance {
         entrance.remove(student);
     }
 
-    public void addStudentHall(@NotNull Student student){
+    public void addStudentHall(Student student){
         hall.get(student.ordinal()).add(student);
         if(hall.get(student.ordinal()).size() % 3 == 0)
             player.addCoins();

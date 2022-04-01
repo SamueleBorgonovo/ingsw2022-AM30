@@ -1,6 +1,4 @@
-package it.polimi.ingsw;
-
-import org.jetbrains.annotations.NotNull;
+package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 
@@ -59,7 +57,7 @@ public class Island {
         this.islandID = islandID;
     }
 
-    public void changeTowers(@NotNull ArrayList<Tower> towers, Tower tower){
+    public void changeTowers(ArrayList<Tower> towers, Tower tower){
         int i=towers.size();
         for(int j=0; j<i ; j++)
             towers.set(i, tower);

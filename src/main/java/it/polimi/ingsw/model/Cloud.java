@@ -1,6 +1,5 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 public class Cloud {
