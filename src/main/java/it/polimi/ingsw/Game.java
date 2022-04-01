@@ -8,14 +8,16 @@ public class Game {
     private GameState gameState;
     private final Board board;
     private final int numOfPlayers;
+    private VerifyType verifyType;
 
-    public Game(int gameID, GameMode gameMode, ArrayList<Player> listOfPlayers, GameState gameState, Board board, int numOfPlayers) {
+    public Game(int gameID, GameMode gameMode, ArrayList<Player> listOfPlayers, GameState gameState, Board board, int numOfPlayers, VerifyType verifyType) {
         this.gameID = gameID;
         this.gameMode = gameMode;
         this.listOfPlayers = listOfPlayers;
         this.gameState = gameState;
         this.board = board;
         this.numOfPlayers = numOfPlayers;
+        this.verifyType = verifyType;
     }
 
     public void setState(GameState gameState) {

@@ -6,14 +6,16 @@ import java.util.ArrayList;
 public class Plance {
     private ArrayList<Student> entrance = new ArrayList<>();
     private ArrayList<Professor> tableProfessor = new ArrayList<>();
-    ArrayList<ArrayList<Student>> Hall = new ArrayList<>();
+    private ArrayList<ArrayList<Student>> hall = new ArrayList<>();
     private ArrayList<Tower> towers = new ArrayList<>();
+    private Player player;
 
-    public Plance(ArrayList<Student> entrance, ArrayList<Professor> tableProfessor, ArrayList<ArrayList<Student>> hall, ArrayList<Tower> towers) {
+    public Plance(ArrayList<Student> entrance, ArrayList<Professor> tableProfessor, ArrayList<ArrayList<Student>> hall, ArrayList<Tower> towers, Player player) {
         this.entrance = entrance;
         this.tableProfessor = tableProfessor;
-        Hall = hall;
+        this.hall = hall;
         this.towers = towers;
+        this.player= player;
     }
 
     public ArrayList<Student> getEntrance() {
@@ -54,11 +56,13 @@ public class Plance {
     }
 
     public void addStudentHall(@NotNull Student student){
-        Hall.get(student.ordinal()).add(student);
+        hall.get(student.ordinal()).add(student);
+        if(hall.get(student.ordinal()).size() % 3 == 0)
+            player.addCoins();
     }
 
     public ArrayList<ArrayList<Student>> getStudentHall(){
-        return Hall;
+        return hall;
     }
 
 }
