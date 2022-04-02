@@ -39,9 +39,23 @@ public class Game {
         return gameMode;
     }
 
+    public Board getBoard(){return board;}
+
     public int getNumOfPlayers(){
         return numOfPlayers;
     }
+
+    public Player getPlayer(int playerid){
+        Player tempplayer=null;
+        for(int count=0;count<numOfPlayers;count ++){
+            if(playerid == listOfPlayers.get(count).getPlayerID()){
+                tempplayer = listOfPlayers.get(count);
+            }
+        }
+        return tempplayer;
+    }
+
+
 
     public Player winner() {
         ArrayList<Player> playersCandidate = new ArrayList<>();
@@ -137,6 +151,11 @@ public class Game {
     public Student chooseStudent(){
         //to implement in GUI
         return Student.BLUE;
+    }
+
+    public int chooseIsland(){
+        //to implement in GUI to choose the island
+        return 1;
     }
 }
 
