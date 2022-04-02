@@ -97,15 +97,12 @@ public class Game {
     public void endTurn(){
         setState(GameState.ENDED);
     }
-
     public void moveStudentToEntrance(int playerID, Student student)
     {
         for(Player player : listOfPlayers)
             if(playerID == player.getPlayerID())
                 player.getPlance().getEntrance().add(student);
     }
-
-
 
     public void moveStudentToIsland(int playerID, Island island, Student student){
         for(Player player : listOfPlayers)
@@ -131,5 +128,15 @@ public class Game {
                 character.setUsed(true);
             }
     }
+
+    public void setVerifyType(VerifyType verifyType) {
+        this.verifyType = verifyType;
+    }
+
+    public Student chooseStudent(){
+        //to implement in GUI
+        return Student.BLUE;
+    }
 }
+
 
