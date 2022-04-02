@@ -7,12 +7,12 @@ public class Island {
     private ArrayList<Tower> towers = new ArrayList<>();
     private boolean stop;
     private int islandID;
-    private MotherNature mothernature;
 
-    public Island(ArrayList<Student> students,MotherNature mothernature, ArrayList<Tower> towers, boolean stop, int islandID) {
+
+    public Island(ArrayList<Student> students, ArrayList<Tower> towers, boolean stop, int islandID) {
         this.students = students;
         this.towers = towers;
-        this.mothernature= mothernature;
+
         this.stop = stop;
         this.islandID = islandID;
     }
@@ -29,7 +29,6 @@ public class Island {
         towers.add(tower);
     }
 
-    public void setMotherNature(MotherNature mothernature) { mothernature.move(this.islandID);}
 
     public void addStudents(Student student) {
         students.add(student);
@@ -51,14 +50,13 @@ public class Island {
         this.islandID = islandID;
     }
 
-    public void changeTowers(ArrayList<Tower> towers, Tower tower){
-        int i=towers.size();
-        for(int j=0; j<i ; j++)
-            towers.set(i, tower);
+    public void changeTowers(Tower tower){
+        for(int j=0; j<towers.size() ; j++)
+            towers.set(j, tower);
     }
 
-    public void addTowers(ArrayList<Tower> towers) {
-        towers.add(towers.get(0));
+    public void addTowers(ArrayList<Tower> towersToAdd) {
+        towers.addAll(towersToAdd);
     }
 
 }

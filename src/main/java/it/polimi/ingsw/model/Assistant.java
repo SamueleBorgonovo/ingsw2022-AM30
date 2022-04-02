@@ -15,7 +15,7 @@ public enum Assistant {
     private final int value;
     private final int movement;
 
-    private Assistant(int value, int movement){
+    Assistant(int value, int movement){
         this.value = value;
         this.movement = movement;
     }

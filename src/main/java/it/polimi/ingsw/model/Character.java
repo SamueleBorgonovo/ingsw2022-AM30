@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 public class Character {
     private int cost;
     private boolean used;
-    private Effect effect;
+    private final Effect effect;
 
     public Character(int cost, boolean used, Effect effect) {
         this.cost = cost;
@@ -17,6 +17,7 @@ public class Character {
 
     public boolean isUsed() {
         return used;
+
     }
 
     public Effect getEffect() {
@@ -25,5 +26,6 @@ public class Character {
 
     public void setUsed(boolean used) {
         this.used = used;
+        cost++;
     }
 }

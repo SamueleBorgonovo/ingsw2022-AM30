@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Archipelago {
     private final ArrayList<Island> islands;
-    private MotherNature mothernature;
+    private final MotherNature mothernature;
 
     public Archipelago(ArrayList<Island> islands, MotherNature mothernature) {
 
@@ -32,21 +32,34 @@ public class Archipelago {
 
 
     public void setMotherNatureIsland(Island island){
-        island.setMotherNature(mothernature);
+        mothernature.move(island.getIslandID());
     }
 
-    public void mergeIslands(Island island1, Island island2) {
-        int max = Math.max(island1.getIslandID(), island2.getIslandID());
-        int min = Math.min(island1.getIslandID(), island2.getIslandID());
+    public void mergeIslands(int islandID1, int islandID2) {
+        int max = Math.max(islandID1, islandID2);
+        int min = Math.min(islandID1, islandID2);
+        int indexMin=-1;
+        int indexMax=-1;
 
-        //con il seguente if, verifico se il merge che sto cercando di fare ha senso,
-        //ovvero se le isole sono effettivamente vicine tra loro
-        if(Math.abs((islands.indexOf(island1)% islands.size()) - (islands.indexOf(island2)% islands.size()))==1) {
+        for(Island island: islands)
+            if(island.getIslandID()==min)
+                indexMin=islands.indexOf(island);
+            else if(island.getIslandID()==max)
+                indexMax=islands.indexOf(island);
+
+
+        //with this if, I want to verify if the merge is possible (if the two islands are one near the other)
+        if((indexMax - indexMin ) == 1
+            || (indexMax - indexMin ) == islands.size()-1) {
             //I add the towers of the island I am going to remove in the other island
-            islands.get(min).addTowers(islands.get(max).getTowers());
-            //I add the students of the island I am going to remove in the previous island
-            for (Student student : islands.get(max).getStudents())
-                islands.get(min).addStudents(student);
+            islands.get(indexMin).addTowers(islands.get(indexMax).getTowers());
+            //I add the students of the island I am going to remove in the other island
+            for (Student student : islands.get(indexMax).getStudents())
+                islands.get(indexMin).addStudents(student);
+            //I remove the island with the bigger ID
+            islands.remove(indexMax);
+            //I have the island that now I have as the one with mother nature
+            mothernature.move(min);
         }
     }
 
