@@ -56,7 +56,8 @@ public class Island {
     }
 
     public void addTowers(ArrayList<Tower> towersToAdd) {
-        towers.addAll(towersToAdd);
+        if(towers.size()==0 || towers.get(0).equals(towersToAdd.get(0)))
+            towers.addAll(towersToAdd);
     }
 
 }
