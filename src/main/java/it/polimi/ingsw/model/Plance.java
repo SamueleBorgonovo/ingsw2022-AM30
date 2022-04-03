@@ -54,10 +54,6 @@ public class Plance {
     }
 
     public void addStudentHall(@NotNull Student student) {
-        // hall.get(student.ordinal()).add(student);
-        //ArrayList<Student> s = new ArrayList<>();
-        //s.add(student);
-        //hall.add(student.ordinal(),s);
         for (int i = 0; i < 10; i++)
             if (hall[student.ordinal()][i] == null) {
                 hall[student.ordinal()][i] = student;
@@ -83,12 +79,14 @@ public class Plance {
                 }
             return student;
         }
-        //while(hall[student.ordinal()][i+1]!=null && i!=9) {
-        //    i++;
+    }
 
-        //}
-        //  hall[student.ordinal()][i]=null;
-        // return student;
+    public int getNumberOfStudent(Student student){
+        int count=0;
+        for(int i=0;i<10;i++)
+            if(hall[student.ordinal()][i] == student)
+                count ++;
+        return count;
     }
 
 }

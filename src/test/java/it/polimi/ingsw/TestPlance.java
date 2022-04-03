@@ -94,14 +94,14 @@ public class TestPlance {
         p.removeStudentFromHall(Student.PINK);
 
         hall= p.getStudentHall();
-      //  int k=0;
-        //  for(int i=0;i<5;i++)
-      //      for(int j=0; j<10;j++)
-       //         if (hall[i][j] != hallWanted[i][j]) {
-       //             k = -1;
-        //            break;
-         //       }
-        //assertEquals(k,0);
+        int k=0;
+        for(int i=0;i<5;i++)
+            for(int j=0; j<10;j++)
+                if (hall[i][j] != hallWanted[i][j]) {
+                    k = -1;
+                    break;
+                }
+        assertEquals(k,0);
 
         for(int z=0;z<5;z++)
             for(int l=0;l<10;l++)

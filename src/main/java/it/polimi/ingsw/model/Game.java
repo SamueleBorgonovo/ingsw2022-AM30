@@ -2,12 +2,12 @@ package it.polimi.ingsw.model;
 import java.util.ArrayList;
 
 public class Game {
-    private final int gameID;
-    private final GameMode gameMode;
+    private int gameID;
+    private GameMode gameMode;
     private ArrayList<Player>listOfPlayers = new ArrayList<>();
     private GameState gameState;
-    private final Board board;
-    private final int numOfPlayers;
+    private Board board;
+    private int numOfPlayers;
     private VerifyType verifyType;
     private MotherNature mothernature;
 
@@ -118,6 +118,7 @@ public class Game {
         }
     }
 
+
     public void startTurn(){
         setState(GameState.PLAYING);
     }
@@ -125,12 +126,22 @@ public class Game {
     public void endTurn(){
         setState(GameState.ENDED);
     }
+
     public void moveStudentToEntrance(int playerID, Student student)
     {
         for(Player player : listOfPlayers)
-            if(playerID == player.getPlayerID())
-                player.getPlance().getEntrance().add(student);
+            if(playerID == player.getPlayerID()) {
+                player.getPlance().addStudentEntrance(student);
+            }
+    }
 
+    public void moveStudentToHall(int playerID, Student student){
+        for(Player player : listOfPlayers)
+            if(playerID == player.getPlayerID()){
+                player.getPlance().addStudentHall(student);
+                if(player.getPlance().getNumberOfStudent(student) % 3 ==0)
+                    player.addCoins();
+            }
     }
 
     public void moveStudentToIsland(int playerID, Island island, Student student){
@@ -160,6 +171,23 @@ public class Game {
 
     public void setVerifyType(VerifyType verifyType) {
         this.verifyType = verifyType;
+    }
+
+    public void verifyMergeableIsland(){
+        for(int i=0; i<board.getArchipelago().getNumOfIslands() ; i++)
+            if(i!=board.getArchipelago().getNumOfIslands() -1 &&
+                board.getArchipelago().getIslands().get(i).getTowers().get(0) ==
+                board.getArchipelago().getIslands().get(i+1).getTowers().get(0)){
+                    board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(),
+                                            board.getArchipelago().getIslands().get(i+1).getIslandID());
+                    i=0;
+            }
+            else if(i==board.getArchipelago().getNumOfIslands() -1 &&
+                    board.getArchipelago().getIslands().get(i).getTowers().get(0) ==
+                            board.getArchipelago().getIslands().get(0).getTowers().get(0)) {
+                board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(), 0);
+                i = 0;
+            }
     }
 
     public Student chooseStudent(){
