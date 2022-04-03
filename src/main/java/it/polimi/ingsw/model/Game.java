@@ -83,11 +83,25 @@ public class Game {
     public void verifyProfessorControl(Professor professor, Player playerInControl, Player playerInTurn){
         if(playerInControl==null)
             playerInTurn.getPlance().addProfessor(professor);
-        else if(playerInTurn.getPlance().getStudentHall().get(professor.ordinal()).size() >
-                playerInControl.getPlance().getStudentHall().get(professor.ordinal()).size())
-            playerInControl.getPlance().removeProfessor(professor);
-        playerInTurn.getPlance().addProfessor(professor);
-
+        else {
+            Student[][] hallInTurn = new Student[4][4];
+            Student[][] hallInControl = new Student[4][4];
+            int numInTurn = 0, numInControl = 0;
+            hallInTurn = playerInTurn.getPlance().getStudentHall();
+            hallInControl = playerInControl.getPlance().getStudentHall();
+            for (int i = 0; i < 10; i++) {
+                if (hallInTurn[professor.ordinal()][i] != null)
+                    numInTurn++;
+                else if (hallInControl[professor.ordinal()][i] != null)
+                    numInControl++;
+                if (numInTurn > numInControl)
+                    playerInTurn.getPlance().addProfessor(professor);
+            }
+            // else if(playerInTurn.getPlance().getStudentHall().get(professor.ordinal()).size() >
+            //         playerInControl.getPlance().getStudentHall().get(professor.ordinal()).size())
+            //    playerInControl.getPlance().removeProfessor(professor);
+            // playerInTurn.getPlance().addProfessor(professor);
+        }
     }
 
     public void startTurn(){
