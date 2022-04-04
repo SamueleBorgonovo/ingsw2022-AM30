@@ -1,13 +1,26 @@
 package it.polimi.ingsw.model;
 
 public class VerifyType {
-    //It contains parameters that Effect6, Effect8 and Effect9 can modify
+    // It contains parameters that Effect6, Effect8 and Effect9 can modify
     // to change the normal operation of the verifyIslandInfluence method.
    private boolean twopoints;
    private boolean notower;
    private boolean nocolor;
    private boolean professorcontroll;
-    private Student student;
+   private Student student;
+   private int numofislandstops = 4;
+
+    public int getNumofislandstops() {
+        return numofislandstops;
+    }
+
+    public void addislandstop(){
+        numofislandstops++;
+    }
+
+    public void removeislandstop(){
+        numofislandstops--;
+    }
 
     public boolean isProfessorcontroll() {
         return professorcontroll;

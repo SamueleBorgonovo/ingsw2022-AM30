@@ -14,7 +14,7 @@ public class Island {
     }
 
     public ArrayList<Student> getStudents() {
-        return students;
+        return new ArrayList<>(students);
     }
 
     public ArrayList<Tower> getTowers() {
