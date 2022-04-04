@@ -55,11 +55,6 @@ public class Island {
             towers.set(j, tower);
     }
 
-    public void addTowers(ArrayList<Tower> towersToAdd) {
-        if(towers.size()==0 || towers.get(0).equals(towersToAdd.get(0)))
-            towers.addAll(towersToAdd);
-    }
-
     public void addTower(Tower towersToAdd) {
         if(towers.size()==0 || towers.get(0).equals(towersToAdd))
             towers.add(towersToAdd);
