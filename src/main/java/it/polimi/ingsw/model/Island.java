@@ -60,4 +60,12 @@ public class Island {
             towers.addAll(towersToAdd);
     }
 
+    public void addTower(Tower towersToAdd) {
+        if(towers.size()==0 || towers.get(0).equals(towersToAdd))
+            towers.add(towersToAdd);
+    }
+
+    public void removeAllTowers(){
+        towers.clear();
+    }
 }
