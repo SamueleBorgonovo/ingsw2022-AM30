@@ -9,11 +9,7 @@ public class Island {
     private int islandID;
 
 
-    public Island(ArrayList<Student> students, ArrayList<Tower> towers, boolean stop, int islandID) {
-        this.students = students;
-        this.towers = towers;
-
-        this.stop = stop;
+    public Island( int islandID) {
         this.islandID = islandID;
     }
 
@@ -30,7 +26,7 @@ public class Island {
     }
 
 
-    public void addStudents(Student student) {
+    public void addStudent(Student student) {
         students.add(student);
     }
 

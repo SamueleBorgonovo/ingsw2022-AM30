@@ -9,11 +9,9 @@ public class Board {
     private int CoinsReserve;
     private ArrayList<java.lang.Character> Characters = new ArrayList<>();
 
-    public Board(ArrayList<Cloud> Clouds, Archipelago Archipelago, ArrayList<Student> Bag, int CoinsReserve, ArrayList<java.lang.Character> Characters) {
+    public Board(ArrayList<Cloud> Clouds, Archipelago Archipelago, ArrayList<java.lang.Character> Characters) {
         this.Clouds = Clouds;
         this.Archipelago = Archipelago;
-        this.Bag = Bag;
-        this.CoinsReserve = CoinsReserve;
         this.Characters = Characters;
     }
 

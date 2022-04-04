@@ -11,10 +11,9 @@ public class Game {
     private VerifyType verifyType;
     private MotherNature mothernature;
 
-    public Game(int gameID, GameMode gameMode, ArrayList<Player> listOfPlayers, GameState gameState, Board board, int numOfPlayers, VerifyType verifyType, MotherNature mothernature) {
+    public Game(int gameID, GameMode gameMode, GameState gameState, Board board, int numOfPlayers, VerifyType verifyType, MotherNature mothernature) {
         this.gameID = gameID;
         this.gameMode = gameMode;
-        this.listOfPlayers = listOfPlayers;
         this.gameState = gameState;
         this.board = board;
         this.numOfPlayers = numOfPlayers;
@@ -109,12 +108,10 @@ public class Game {
                 else if (hallInControl[professor.ordinal()][i] != null)
                     numInControl++;
                 if (numInTurn > numInControl)
+                    playerInControl.getPlance().removeProfessor(professor);
                     playerInTurn.getPlance().addProfessor(professor);
             }
-            // else if(playerInTurn.getPlance().getStudentHall().get(professor.ordinal()).size() >
-            //         playerInControl.getPlance().getStudentHall().get(professor.ordinal()).size())
-            //    playerInControl.getPlance().removeProfessor(professor);
-            // playerInTurn.getPlance().addProfessor(professor);
+
         }
     }
 
@@ -147,7 +144,7 @@ public class Game {
     public void moveStudentToIsland(int playerID, Island island, Student student){
         for(Player player : listOfPlayers)
             if(playerID == player.getPlayerID())
-                island.addStudents(student);
+                island.addStudent(student);
     }
 
     public void useAssistant(int playerID, Assistant assistant){

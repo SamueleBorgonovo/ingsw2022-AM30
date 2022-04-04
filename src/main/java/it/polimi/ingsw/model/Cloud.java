@@ -7,9 +7,7 @@ public class Cloud {
     private boolean choosen;
     private int cloudID;
 
-    public Cloud(ArrayList<Student> students, boolean choosen, int cloudID) {
-        this.students = students;
-        this.choosen = choosen;
+    public Cloud(int cloudID) {
         this.cloudID = cloudID;
     }
 

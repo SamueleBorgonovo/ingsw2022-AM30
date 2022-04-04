@@ -2,12 +2,12 @@ package it.polimi.ingsw.model;
 
 public class Character {
     private int cost;
-    private boolean used;
+    private boolean used = false;
     private final Effect effect;
 
-    public Character(int cost, boolean used, Effect effect) {
+    public Character(int cost, Effect effect) {
         this.cost = cost;
-        this.used = used;
+
         this.effect = effect;
     }
 

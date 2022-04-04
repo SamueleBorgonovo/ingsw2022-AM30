@@ -7,7 +7,6 @@ public class Archipelago {
     private final MotherNature mothernature;
 
     public Archipelago(ArrayList<Island> islands, MotherNature mothernature) {
-
         this.islands = islands;
         this.mothernature = mothernature;
     }
@@ -52,10 +51,11 @@ public class Archipelago {
         if((indexMax - indexMin ) == 1
             || (indexMax - indexMin ) == islands.size()-1) {
             //I add the towers of the island I am going to remove in the other island
-            islands.get(indexMin).addTowers(islands.get(indexMax).getTowers());
+            for(Tower tower : islands.get(indexMin).getTowers() )
+            islands.get(indexMin).addTower(tower);
             //I add the students of the island I am going to remove in the other island
             for (Student student : islands.get(indexMax).getStudents())
-                islands.get(indexMin).addStudents(student);
+                islands.get(indexMin).addStudent(student);
             //I remove the island with the bigger ID
             islands.remove(indexMax);
             //I have the island that now I have as the one with mother nature

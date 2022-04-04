@@ -11,13 +11,12 @@ public class Player {
     private int coins;
     private ArrayList<Assistant> assistantCards = new ArrayList<>();
 
-    public Player(String nickname, int playerID, PlayerState playerState, Plance plance, Wizard wizard, int coins, ArrayList<Assistant> assistantCards){
+    public Player(String nickname, int playerID, PlayerState playerState, Plance plance, Wizard wizard,ArrayList<Assistant> assistantCards){
         this.nickname = nickname;
         this.playerID = playerID;
         this.playerState = playerState;
         this.plance = plance;
         this.wizard = wizard;
-        this.coins= coins;
         this.assistantCards=assistantCards;
     }
 

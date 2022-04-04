@@ -10,11 +10,6 @@ public class Plance {
     private final Student[][] hall = new Student[5][10];
     private ArrayList<Tower> towers = new ArrayList<>();
 
-    public Plance(ArrayList<Student> entrance, ArrayList<Professor> tableProfessor, ArrayList<Tower> towers) {
-        this.entrance = entrance;
-        this.tableProfessor = tableProfessor;
-        this.towers = towers;
-    }
 
     public ArrayList<Student> getEntrance() {
         return entrance;
