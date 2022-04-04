@@ -6,7 +6,16 @@ public class VerifyType {
    private boolean twopoints;
    private boolean notower;
    private boolean nocolor;
-   private Student student;
+   private boolean professorcontroll;
+    private Student student;
+
+    public boolean isProfessorcontroll() {
+        return professorcontroll;
+    }
+
+    public void setProfessorcontroll(boolean professorcontroll) {
+        this.professorcontroll = professorcontroll;
+    }
 
     public boolean isTwopoints() {
         return twopoints;
