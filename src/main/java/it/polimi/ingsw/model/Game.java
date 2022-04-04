@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Game {
     private int gameID;
     private GameMode gameMode;
-    private ArrayList<Player>listOfPlayers = new ArrayList<>();
+    private ArrayList<Player> listOfPlayers = new ArrayList<>();
     private GameState gameState;
     private Board board;
     private int numOfPlayers;
@@ -83,8 +83,8 @@ public class Game {
                     playersCandidate.add(player1);
         }
         for (Player player2 : playersCandidate) {
-            if (player2.getPlance().getProfessor().size() > maxProfessor) {
-                maxProfessor = player2.getPlance().getProfessor().size();
+            if (player2.getPlance().getProfessors().size() > maxProfessor) {
+                maxProfessor = player2.getPlance().getProfessors().size();
                 playerChosen = player2;
             }
 
@@ -166,8 +166,8 @@ public class Game {
             }
     }
 
-    public void setVerifyType(VerifyType verifyType) {
-        this.verifyType = verifyType;
+    public VerifyType getVerifyType() {
+        return verifyType;
     }
 
     public void verifyMergeableIsland(){
@@ -196,6 +196,90 @@ public class Game {
         //to implement in GUI to choose the island
         return 1;
     }
+
+    public void verifyIslandInfluence(Island island){
+        //Check which Player has the most influence on an Island and arrange the towers appropriately.
+        int maxscore =0;
+        int score =0;
+        Player playermaxscore =null;
+
+        for(Player player : listOfPlayers) {
+            for (Professor professor : player.getPlance().getProfessors())
+                for (Student student : island.getStudents())
+                    if (professor.ordinal() ==student.ordinal())
+                        if (!verifyType.isNocolor() || (verifyType.isNocolor() && !verifyType.getStudent().equals(student)))
+                            score++;
+            verifyType.setNocolor(false);
+            for (Tower tower : island.getTowers())
+                if (player.getPlance().getTowers().get(0).equals(tower) && !verifyType.isNotower())
+                    score++;
+            verifyType.setNotower(false);
+            if (verifyType.isTwopoints()) {
+                score =score +2;
+                verifyType.setTwopoints(false);
+            }
+            if (score > maxscore) {
+                maxscore =score;
+                playermaxscore =player;
+            }
+            else if(score ==maxscore)
+                playermaxscore = null;
+        }
+        if(playermaxscore==null)
+            if(!island.getTowers().isEmpty()){
+                for (Player player : listOfPlayers)
+                    if (player.getPlance().getTowers().get(0).equals(island.getTowers().get(0)))
+                        for (Tower tower : island.getTowers())
+                            player.getPlance().addTower();
+                island.removeAllTowers();
+            }
+        else if(!playermaxscore.getPlance().getTowers().get(0).equals(island.getTowers().get(0)) && maxscore !=0) {
+            if (island.getTowers().isEmpty())
+                island.addTower(playermaxscore.getPlance().getTowers().get(0));
+            else {
+                for (Player player : listOfPlayers)
+                    if (player.getPlance().getTowers().get(0).equals(island.getTowers().get(0)))
+                        for (Tower tower : island.getTowers())
+                            player.getPlance().addTower();
+                island.changeTowers(playermaxscore.getPlance().getTowers().get(0));
+            }
+            for (Tower tower : island.getTowers())
+                playermaxscore.getPlance().removeTower();
+        }
+    }
+
+    void verifyProfessorControll(){
+        int count = 0;
+        int countmax = 0;
+        Player playermax=null;
+
+        for (int i = 0; i < 5; i++) {
+            for (Player player : listOfPlayers) {
+                    count=0;
+                    for(int j = 0; j >= 0 && j < 10; j++)
+                        if(player.getPlance().getStudentHall()[i][j]!=null)
+                            count++;
+                    if(verifyType.isProfessorcontroll())
+                        if(count>=countmax){
+                            countmax=count;
+                            playermax=player;
+                        }
+                    else if(count>countmax){
+                            countmax=count;
+                            playermax=player;
+                        }
+            }
+            countmax = 0;
+            if(playermax!=null && !playermax.getPlance().getProfessors().contains(Professor.values()[i])){
+                for (Player player : listOfPlayers)
+                    if(player.getPlance().getProfessors().contains(Professor.values()[i]))
+                        player.getPlance().removeProfessor(Professor.values()[i]);
+                playermax.getPlance().addProfessor(Professor.values()[i]);
+            }
+            playermax=null;
+        }
+    }
 }
+
 
 

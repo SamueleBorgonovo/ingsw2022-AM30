@@ -15,7 +15,7 @@ public class Plance {
         return entrance;
     }
 
-    public ArrayList<Professor> getProfessor() {
+    public ArrayList<Professor> getProfessors() {
         return tableProfessor;
     }
 
@@ -32,9 +32,7 @@ public class Plance {
 
     }
 
-    public void addTower(Tower tower) {
-        towers.add(tower);
-    }
+    public void addTower() {towers.add(towers.get(0));}
 
     public void removeTower() {
         towers.remove(towers.size() - 1);
@@ -82,6 +80,10 @@ public class Plance {
             if(hall[student.ordinal()][i] == student)
                 count ++;
         return count;
+    }
+
+    public ArrayList<Tower> getTowers() {
+        return towers;
     }
 
 }
