@@ -6,5 +6,4 @@ public enum Professor{
     YELLOW_ELF,
     PINK_FAIRY,
     BLUE_UNICORN,
-
 }
