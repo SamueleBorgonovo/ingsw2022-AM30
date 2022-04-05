@@ -16,7 +16,7 @@ public class TestGame {
         //Set game class
         final int gameID = 1;
         final GameMode gameMode = null;
-        final int numOfPlayers = 4;
+        final int numOfPlayers = 3;
         VerifyType verifyType = null;
         MotherNature mothernature = null;
         ArrayList<Player> listOfPlayers = new ArrayList<>();
@@ -58,28 +58,22 @@ public class TestGame {
         Player player3 = new Player(null,3,PlayerState.PLAYINGYOURTURN,plance3,null,assistants);
         game.addPlayer(player3,player3.getPlayerID());
 
-        Plance plance4 = new Plance();
-        Player player4 = new Player(null,4,PlayerState.PLAYINGYOURTURN,plance4,null,assistants);
-        game.addPlayer(player4,player4.getPlayerID());
 
         //Set last played assistant
         player1.removeAssistant(Assistant.SNAKE);
         player2.removeAssistant(Assistant.TURTLE);
         player3.removeAssistant(Assistant.CAT);
-        player4.removeAssistant(Assistant.LION);
 
         ArrayList<Player> playerorder = new ArrayList<>();
         playerorder.addAll(game.VerifyPlayerOrder());
 
         int var=1;
-        if(playerorder.get(0).getPlayerID() != player4.getPlayerID())
+        if(playerorder.get(0).getPlayerID() != player3.getPlayerID())
             var=-1;
-        if(playerorder.get(1).getPlayerID() != player3.getPlayerID())
+        if(playerorder.get(1).getPlayerID() != player1.getPlayerID())
             var=-2;
-        if(playerorder.get(2).getPlayerID() != player1.getPlayerID())
+        if(playerorder.get(2).getPlayerID() != player2.getPlayerID())
             var=-3;
-        if(playerorder.get(3).getPlayerID() != player2.getPlayerID())
-            var=-4;
 
         assertEquals(1,var);
 
