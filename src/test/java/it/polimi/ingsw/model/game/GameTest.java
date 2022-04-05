@@ -181,7 +181,6 @@ class GameTest {
             var=-3;
 
         assertEquals(1,var);
-
     }
 
     @Test
