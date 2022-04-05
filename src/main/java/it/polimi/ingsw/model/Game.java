@@ -198,6 +198,18 @@ public class Game {
         return 1;
     }
 
+    //Just to test Effect7
+    public Student chooseStudentFromPlance(){
+        return Student.YELLOW;
+
+    }
+
+
+    public ArrayList<Player> getListOfPlayers(){
+        return listOfPlayers;
+    }
+
+
     public void verifyIslandInfluence(Island island){
         // Check which Player has the most influence on an Island and arrange the towers appropriately.
         int maxscore =0;
