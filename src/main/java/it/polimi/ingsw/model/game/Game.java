@@ -336,6 +336,11 @@ public class Game {
         }
 
     }
+
+    public void endOfTurn() {
+        if (verifyType.isProfessorcontroll())
+            verifyType.setProfessorcontroll(false);
+    }
 }
 
 
