@@ -42,6 +42,7 @@ public class Island {
         return islandID;
     }
 
+    //IslandID goes from 1 to 12
     public void setIslandID(int islandID) {
         this.islandID = islandID;
     }

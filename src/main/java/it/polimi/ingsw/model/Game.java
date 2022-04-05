@@ -29,9 +29,10 @@ public class Game {
         return gameState;
     }
 
-    public void addPlayer(Player player){
+    public void addPlayer(Player player,int playerid){
         if(listOfPlayers.size()<getNumOfPlayers())
-            listOfPlayers.add(player);
+            listOfPlayers.add(playerid-1,player);
+        //Set the player in the position playerid-1, if player has id=1 he is in listofplayers.get(0)
     }
 
     public GameMode getGameMode() {
@@ -52,6 +53,10 @@ public class Game {
             }
         }
         return tempplayer;
+    }
+
+    public ArrayList<Player> getListOfPlayers(){
+        return listOfPlayers;
     }
 
 
@@ -276,6 +281,29 @@ public class Game {
             playermax=null;
         }
     }
+
+    //Just to test Effect7
+    public Student chooseStudentFromPlance(){
+        return Student.YELLOW;
+
+    }
+
+    public ArrayList<Player> VerifyPlayerOrder(){
+        ArrayList<Player> playerorder = new ArrayList<>();
+        playerorder.addAll(listOfPlayers);
+        Player tempplayer;
+        for(int count=0;count<playerorder.size()-1;count++){
+            for(int counter=0;counter<playerorder.size()-count-1;counter++){
+                if(playerorder.get(counter).getLastassistantplayed().getValue() > playerorder.get(counter+1).getLastassistantplayed().getValue()){
+                    tempplayer=playerorder.get(counter);
+                    playerorder.set(counter,playerorder.get(counter+1));
+                    playerorder.set(counter+1,tempplayer);
+                }
+            }
+        }
+    return playerorder;
+    }
+
 }
 
 

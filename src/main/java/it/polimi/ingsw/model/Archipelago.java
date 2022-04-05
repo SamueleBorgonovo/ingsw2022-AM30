@@ -15,9 +15,10 @@ public class Archipelago {
         return islands;
     }
 
+    //IslandID goes from 1 to 12
     public ArrayList<Student> getStudentIslands(int islandID){
         for(int i=0;i<islands.size();i++)
-            if(islands.get(i).getIslandID() == i)
+            if(islands.get(i).getIslandID() == i+1)
                 return islands.get(i).getStudents();
         return null;
     }

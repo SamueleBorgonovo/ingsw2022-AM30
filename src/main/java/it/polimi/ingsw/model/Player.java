@@ -10,6 +10,7 @@ public class Player {
     private final Wizard wizard;
     private int coins;
     private ArrayList<Assistant> assistantCards = new ArrayList<>();
+    private Assistant lastassistantplayed;
 
     public Player(String nickname, int playerID, PlayerState playerState, Plance plance, Wizard wizard,ArrayList<Assistant> assistantCards){
         this.nickname = nickname;
@@ -56,13 +57,15 @@ public class Player {
         coins = coins - numOfCoins;
     }
 
-    public ArrayList<Assistant> getAssistantCards() {
-        return assistantCards;
-    }
+    public ArrayList<Assistant> getAssistantCards() {return assistantCards; }
 
+    //removeAssistant is used when an assistant is used
     public void removeAssistant(Assistant assistant){
+        lastassistantplayed=assistant;
         assistantCards.remove(assistant);
     }
+
+    public Assistant getLastassistantplayed(){return lastassistantplayed;}
 
 
 
