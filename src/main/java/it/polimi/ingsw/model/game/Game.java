@@ -301,16 +301,28 @@ public class Game {
 
     public ArrayList<Player> VerifyPlayerOrder(){
         ArrayList<Player> playerorder = new ArrayList<>();
-        playerorder.addAll(listOfPlayers);
-        Player tempplayer;
-        for(int count=0;count<playerorder.size()-1;count++){
-            for(int counter=0;counter<playerorder.size()-count-1;counter++){
-                if(playerorder.get(counter).getLastassistantplayed().getValue() > playerorder.get(counter+1).getLastassistantplayed().getValue()){
-                    tempplayer=playerorder.get(counter);
-                    playerorder.set(counter,playerorder.get(counter+1));
-                    playerorder.set(counter+1,tempplayer);
+        Player minplayer = listOfPlayers.get(0);
+        for(int count=1;count<listOfPlayers.size();count++){
+            if(listOfPlayers.get(count).getLastassistantplayed().getValue() < minplayer.getLastassistantplayed().getValue())
+                minplayer = listOfPlayers.get(count);
+        }
+
+        playerorder.add(0,minplayer);
+        Player lasttakenplayer=minplayer;
+        Player tempplayer=null;
+        for(int count=1;count<listOfPlayers.size();count++) {
+            for (int counter = 0; counter < listOfPlayers.size(); counter++) {
+                if (lasttakenplayer.getPlayerID() == getNumOfPlayers()) {
+                    if(listOfPlayers.get(counter).getPlayerID()==1)
+                        tempplayer=listOfPlayers.get(counter);
+                } else {
+                    if (listOfPlayers.get(counter).getPlayerID() == lasttakenplayer.getPlayerID() + 1) {
+                        tempplayer = listOfPlayers.get(counter);
+                    }
                 }
             }
+            lasttakenplayer=tempplayer;
+            playerorder.add(count,lasttakenplayer );
         }
         return playerorder;
     }
