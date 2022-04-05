@@ -250,6 +250,7 @@ public class Game {
     }
 
     void verifyProfessorControll(){
+        // Controll and check Professors.
         int count = 0;
         int countmax = 0;
         Player playermax=null;
