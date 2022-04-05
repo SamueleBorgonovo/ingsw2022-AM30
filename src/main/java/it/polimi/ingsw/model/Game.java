@@ -55,10 +55,6 @@ public class Game {
         return tempplayer;
     }
 
-    public ArrayList<Player> getListOfPlayers(){
-        return listOfPlayers;
-    }
-
 
 
     public Player winner() {
@@ -283,14 +279,7 @@ public class Game {
         }
     }
 
-    //Just to test Effect7
-    public Student chooseStudentFromPlance(){
-        return Student.YELLOW;
-
-    }
-
     public ArrayList<Player> VerifyPlayerOrder(){
-        // Order the players.
         ArrayList<Player> playerorder = new ArrayList<>();
         playerorder.addAll(listOfPlayers);
         Player tempplayer;
@@ -303,9 +292,8 @@ public class Game {
                 }
             }
         }
-    return playerorder;
+        return playerorder;
     }
-
 }
 
 
