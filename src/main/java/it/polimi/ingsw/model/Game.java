@@ -290,6 +290,7 @@ public class Game {
     }
 
     public ArrayList<Player> VerifyPlayerOrder(){
+        // Order the players.
         ArrayList<Player> playerorder = new ArrayList<>();
         playerorder.addAll(listOfPlayers);
         Player tempplayer;
