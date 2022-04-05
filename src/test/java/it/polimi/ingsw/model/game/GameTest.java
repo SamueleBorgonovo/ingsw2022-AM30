@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.Plance;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerState;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -15,9 +16,45 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
+    ArrayList<Player> listOfPlayers;
+    int gameID;
+    GameMode gamemode;
+    int numOfPlayers;
+    VerifyType verifyType;
+    MotherNature mothernature;
+    GameState gameState;
+    ArrayList<Student> studentbag;
+    ArrayList<Student> studentonisland;
+    Island island;
+    Archipelago archipelago;
+    Board board;
+    Game game;
+    ArrayList<Island> islands;
+    @BeforeEach
+    void init() {
+        gameID = 1;
+        GameMode gameMode = null;
+        numOfPlayers = 3;
+        verifyType = null;
+        mothernature = null;
+        listOfPlayers = new ArrayList<>();
+        gameState = null;
+        studentbag = new ArrayList<>();
+        studentonisland = new ArrayList<>();
+        islands = new ArrayList<>();
+        for(int count=0;count<12;count++) {
+            island = new Island(count+1);
+            islands.add(island);
+        }
+        archipelago = new Archipelago(islands, mothernature);
+        board = new Board(null, archipelago, null);
+
+        game = new Game(gameID, gameMode.SIMPLEMODE, gameState.PLAYING, board, numOfPlayers, verifyType, mothernature);
+    }
 
     @Test
     void setState() {
+
     }
 
     @Test
@@ -119,22 +156,6 @@ class GameTest {
     @Test
     void verifyPlayerOrder() {
         //Set game class
-        final int gameID = 1;
-        final GameMode gameMode = null;
-        final int numOfPlayers = 3;
-        VerifyType verifyType = null;
-        MotherNature mothernature = null;
-        ArrayList<Player> listOfPlayers = new ArrayList<>();
-        GameState gameState = null;
-        ArrayList<Student> studentbag = new ArrayList<>();
-        ArrayList<Student> studentonisland = new ArrayList<>();
-        Island island = new Island( 1);
-        ArrayList<Island> islands = new ArrayList<>();
-        islands.add(island);
-        Archipelago archipelago = new Archipelago(islands, null);
-        final Board board = new Board(null, archipelago, null);
-
-        Game game = new Game(gameID, gameMode.SIMPLEMODE,gameState.PLAYING, board, numOfPlayers, verifyType, mothernature);
 
         //Set arraylist of assistants
         ArrayList<Assistant> assistants = new ArrayList<>();
