@@ -15,16 +15,15 @@ public class Game {
     private ArrayList<Player> listOfPlayers = new ArrayList<>();
     private GameState gameState;
     private Board board;
-    private int numOfPlayers;
+    private int numOfPlayers=0;
     private VerifyType verifyType;
     private MotherNature mothernature;
 
-    public Game(int gameID, GameMode gameMode, GameState gameState, Board board, int numOfPlayers, VerifyType verifyType, MotherNature mothernature) {
+    public Game(int gameID, GameMode gameMode, GameState gameState, Board board, VerifyType verifyType, MotherNature mothernature) {
         this.gameID = gameID;
         this.gameMode = gameMode;
         this.gameState = gameState;
         this.board = board;
-        this.numOfPlayers = numOfPlayers;
         this.verifyType = verifyType;
         this.mothernature = mothernature;
     }
@@ -38,8 +37,9 @@ public class Game {
     }
 
     public void addPlayer(Player player,int playerid){
-        if(listOfPlayers.size()<getNumOfPlayers())
+        if(listOfPlayers.size()<3)
             listOfPlayers.add(playerid-1,player);
+        numOfPlayers++;
         //Set the player in the position playerid-1, if player has id=1 he is in listofplayers.get(0)
     }
 

@@ -12,7 +12,6 @@ public class Plance {
     private final Student[][] hall = new Student[5][10];
     private ArrayList<Tower> towers = new ArrayList<>();
 
-
     public ArrayList<Student> getEntrance() {
         return entrance;
     }

@@ -34,7 +34,6 @@ class GameTest {
     void init() {
         gameID = 1;
         GameMode gameMode = null;
-        numOfPlayers = 3;
         verifyType = null;
         mothernature = null;
         listOfPlayers = new ArrayList<>();
@@ -49,20 +48,36 @@ class GameTest {
         archipelago = new Archipelago(islands, mothernature);
         board = new Board(null, archipelago, null);
 
-        game = new Game(gameID, gameMode.SIMPLEMODE, gameState.PLAYING, board, numOfPlayers, verifyType, mothernature);
+        game = new Game(gameID, gameMode.SIMPLEMODE, gameState.PLAYING, board, verifyType, mothernature);
     }
 
     @Test
     void setState() {
-
+        GameState gamestate = GameState.PLAYING;
+        game.setState(gamestate);
+        assertEquals(GameState.PLAYING,game.getState());
     }
 
     @Test
     void getState() {
+        game.setState(GameState.PLAYING);
+        assertEquals(GameState.PLAYING,game.getState());
     }
 
     @Test
     void addPlayer() {
+        Plance plance1 = new Plance();
+        Player player1 = new Player(null,1,PlayerState.PLAYINGYOURTURN,plance1,null,null);
+        game.addPlayer(player1,player1.getPlayerID());
+        int var=1;
+        if(numOfPlayers != 1)
+            var=-1;
+
+        if(!listOfPlayers.contains(player1))
+            var=-2;
+
+        assertEquals(1,var);
+
     }
 
     @Test

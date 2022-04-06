@@ -27,7 +27,6 @@ class Effect1Test {
         int IslandID;
         final int gameID=1;
         final GameMode gameMode = null;
-        final int numOfPlayers=1;
         VerifyType verifyType = null;
         MotherNature mothernature = null;
         ArrayList<Player> listOfPlayers = new ArrayList<>();
@@ -41,7 +40,7 @@ class Effect1Test {
         final Board board = new Board(null,archipelago,null);
 
 
-        Game game = new Game(gameID,gameMode.SIMPLEMODE,gameState.PLAYING,board,numOfPlayers,verifyType,mothernature);
+        Game game = new Game(gameID,gameMode.SIMPLEMODE,gameState.PLAYING,board,verifyType,mothernature);
 
 
 
