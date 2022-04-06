@@ -65,19 +65,39 @@ class GameTest {
     }
 
     @Test
-    void addPlayer() {
+    void addPlayer01() {
         Plance plance1 = new Plance();
         Player player1 = new Player(null,1,PlayerState.PLAYINGYOURTURN,plance1,null,null);
         game.addPlayer(player1,player1.getPlayerID());
         int var=1;
-        if(numOfPlayers != 1)
+        if(game.getNumOfPlayers() != 1)
             var=-1;
 
-        if(!listOfPlayers.contains(player1))
+        if(!game.getListOfPlayers().contains(player1))
             var=-2;
 
         assertEquals(1,var);
 
+    }
+
+    @Test
+    void addPlayer02(){
+        Plance plance1 = new Plance();
+        Player player1 = new Player(null,1,PlayerState.PLAYINGYOURTURN,plance1,null,null);
+        game.addPlayer(player1,player1.getPlayerID());
+        Plance plance2 = new Plance();
+        Player player2 = new Player(null,2,PlayerState.PLAYINGYOURTURN,plance2,null,null);
+        game.addPlayer(player2,player2.getPlayerID());
+        int var=1;
+        if(game.getNumOfPlayers() != 2)
+            var=-1;
+
+        if(game.getListOfPlayers().get(0) != player1)
+            var=-2;
+        if(game.getListOfPlayers().get(1) != player2)
+            var=-3;
+
+        assertEquals(1,var);
     }
 
     @Test

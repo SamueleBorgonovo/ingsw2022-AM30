@@ -37,9 +37,10 @@ public class Game {
     }
 
     public void addPlayer(Player player,int playerid){
-        if(listOfPlayers.size()<3)
-            listOfPlayers.add(playerid-1,player);
-        numOfPlayers++;
+        if(listOfPlayers.size()<3) {
+            listOfPlayers.add(playerid - 1, player);
+            numOfPlayers++;
+        }
         //Set the player in the position playerid-1, if player has id=1 he is in listofplayers.get(0)
     }
 
