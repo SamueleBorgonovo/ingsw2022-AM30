@@ -33,10 +33,6 @@ public class Archipelago {
     }
 
 
-    public void setMotherNatureIsland(Island island){
-        mothernature.move(island.getIslandID());
-    }
-
     public void mergeIslands(int islandID1, int islandID2) {
         int max = Math.max(islandID1, islandID2);
         int min = Math.min(islandID1, islandID2);
@@ -62,9 +58,10 @@ public class Archipelago {
             //I remove the island with the bigger ID
             islands.remove(indexMax);
             //I have the island that now I have as the one with mother nature
-            mothernature.move(min);
+            mothernature.setMotherNature(min);
         }
     }
+
 
     public int getNumOfIslands(){
         return islands.size();

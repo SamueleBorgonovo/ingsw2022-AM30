@@ -13,14 +13,18 @@ package it.polimi.ingsw.model.board;
             return islandID;
         }
 
-        public void move(int islandID) {
-            if (islandID == 1 && this.islandID == 12) {
-                this.islandID = islandID;
-            } else {
-                if (this.islandID+1 == islandID && islandID<=12 && islandID>=1) {
-                    this.islandID = islandID;
-                }
+        public void move() {
+            if(isOn()==12){
+                this.islandID=1;
             }
+            else{
+                this.islandID=this.islandID+1;
+            }
+        }
+
+        public void setMotherNature(int islandID){
+            if(islandID >= 1 && islandID <12)
+                this.islandID=islandID;
         }
     }
 

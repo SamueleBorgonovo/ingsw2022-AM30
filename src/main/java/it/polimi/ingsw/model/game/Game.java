@@ -15,7 +15,7 @@ public class Game {
     private ArrayList<Player> listOfPlayers = new ArrayList<>();
     private GameState gameState;
     private Board board;
-    private int numOfPlayers=0;
+    private int numOfPlayers = 0;
     private VerifyType verifyType;
     private MotherNature mothernature;
 
@@ -36,8 +36,8 @@ public class Game {
         return gameState;
     }
 
-    public void addPlayer(Player player,int playerid){
-        if(listOfPlayers.size()<3) {
+    public void addPlayer(Player player, int playerid) {
+        if (listOfPlayers.size() < 3) {
             listOfPlayers.add(playerid - 1, player);
             numOfPlayers++;
         }
@@ -48,22 +48,23 @@ public class Game {
         return gameMode;
     }
 
-    public Board getBoard(){return board;}
+    public Board getBoard() {
+        return board;
+    }
 
-    public int getNumOfPlayers(){
+    public int getNumOfPlayers() {
         return numOfPlayers;
     }
 
-    public Player getPlayer(int playerid){
-        Player tempplayer=null;
-        for(int count=0;count<numOfPlayers;count ++){
-            if(playerid == listOfPlayers.get(count).getPlayerID()){
+    public Player getPlayer(int playerid) {
+        Player tempplayer = null;
+        for (int count = 0; count < numOfPlayers; count++) {
+            if (playerid == listOfPlayers.get(count).getPlayerID()) {
                 tempplayer = listOfPlayers.get(count);
             }
         }
         return tempplayer;
     }
-
 
 
     public Player winner() {
@@ -103,8 +104,8 @@ public class Game {
         return playerChosen;
     }
 
-    public void verifyProfessorControl(Professor professor, Player playerInControl, Player playerInTurn){
-        if(playerInControl==null)
+    public void verifyProfessorControl(Professor professor, Player playerInControl, Player playerInTurn) {
+        if (playerInControl == null)
             playerInTurn.getPlance().addProfessor(professor);
         else {
             Student[][] hallInTurn = new Student[4][4];
@@ -119,58 +120,58 @@ public class Game {
                     numInControl++;
                 if (numInTurn > numInControl)
                     playerInControl.getPlance().removeProfessor(professor);
-                    playerInTurn.getPlance().addProfessor(professor);
+                playerInTurn.getPlance().addProfessor(professor);
             }
 
         }
     }
 
 
-    public void startTurn(){
+    public void startTurn() {
         setState(GameState.PLAYING);
     }
 
-    public void endTurn(){
+    public void endTurn() {
         setState(GameState.ENDED);
     }
 
-    public void moveStudentToEntrance(int playerID, Student student)
-    {
-        for(Player player : listOfPlayers)
-            if(playerID == player.getPlayerID()) {
+    public void moveStudentToEntrance(int playerID, Student student) {
+        for (Player player : listOfPlayers)
+            if (playerID == player.getPlayerID()) {
                 player.getPlance().addStudentEntrance(student);
             }
     }
 
-    public void moveStudentToHall(int playerID, Student student){
-        for(Player player : listOfPlayers)
-            if(playerID == player.getPlayerID()){
+    public void moveStudentToHall(int playerID, Student student) {
+        for (Player player : listOfPlayers)
+            if (playerID == player.getPlayerID()) {
                 player.getPlance().addStudentHall(student);
-                if(player.getPlance().getNumberOfStudent(student) % 3 ==0)
+                if (player.getPlance().getNumberOfStudent(student) % 3 == 0)
                     player.addCoins();
             }
     }
 
-    public void moveStudentToIsland(int playerID, Island island, Student student){
-        for(Player player : listOfPlayers)
-            if(playerID == player.getPlayerID())
+    public void moveStudentToIsland(int playerID, Island island, Student student) {
+        for (Player player : listOfPlayers)
+            if (playerID == player.getPlayerID())
                 island.addStudent(student);
     }
 
-    public void useAssistant(int playerID, Assistant assistant){
-        for(Player player : listOfPlayers)
-            if(playerID == player.getPlayerID())
+    public void useAssistant(int playerID, Assistant assistant) {
+        for (Player player : listOfPlayers)
+            if (playerID == player.getPlayerID())
                 player.getAssistantCards().remove(assistant);
     }
 
-    public void moveMotherNature (Island island){
-        mothernature.move(island.getIslandID());
-        // aggiungere il metodo che verifica chi controlla l'isola
+    public void moveMotherNature(int playerid) {
+        int numberofMovement = chooseNumberOfMotherNatureMovement(playerid);
+        for(int count=0;count<numberofMovement;count++)
+            mothernature.move();
     }
 
-    public void useCharacter(int playerID, Character character){
-        for(Player player: listOfPlayers)
-            if(player.getPlayerID() == playerID) {
+    public void useCharacter(int playerID, Character character) {
+        for (Player player : listOfPlayers)
+            if (player.getPlayerID() == playerID) {
                 player.removeCoins(character.getCost());
                 character.setUsed(true);
             }
@@ -180,16 +181,15 @@ public class Game {
         return verifyType;
     }
 
-    public void verifyMergeableIsland(){
-        for(int i=0; i<board.getArchipelago().getNumOfIslands() ; i++)
-            if(i!=board.getArchipelago().getNumOfIslands() -1 &&
-                board.getArchipelago().getIslands().get(i).getTowers().get(0) ==
-                board.getArchipelago().getIslands().get(i+1).getTowers().get(0)){
-                    board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(),
-                                            board.getArchipelago().getIslands().get(i+1).getIslandID());
-                    i=0;
-            }
-            else if(i==board.getArchipelago().getNumOfIslands() -1 &&
+    public void verifyMergeableIsland() {
+        for (int i = 0; i < board.getArchipelago().getNumOfIslands(); i++)
+            if (i != board.getArchipelago().getNumOfIslands() - 1 &&
+                    board.getArchipelago().getIslands().get(i).getTowers().get(0) ==
+                            board.getArchipelago().getIslands().get(i + 1).getTowers().get(0)) {
+                board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(),
+                        board.getArchipelago().getIslands().get(i + 1).getIslandID());
+                i = 0;
+            } else if (i == board.getArchipelago().getNumOfIslands() - 1 &&
                     board.getArchipelago().getIslands().get(i).getTowers().get(0) ==
                             board.getArchipelago().getIslands().get(0).getTowers().get(0)) {
                 board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(), 0);
@@ -197,43 +197,56 @@ public class Game {
             }
     }
 
-    public Student chooseStudent(){
+    public Student chooseStudent() {
         //to implement in GUI
         return Student.BLUE;
     }
 
-    public int chooseIsland(){
+    public int chooseIsland() {
         //to implement in GUI to choose the island
         return 1;
     }
 
     //Just to test Effect7
-    public Student chooseStudentFromPlance(){
+    public Student chooseStudentFromPlance() {
         return Student.YELLOW;
+    }
 
+    public Assistant chooseAssistant() {
+        //To implement in GUI and to do the right implement with game's rules and with check if the Assistant is already played
+        return Assistant.CAT;
+    }
+
+    public int chooseNumberOfMotherNatureMovement(int playerid) {
+        int lastassistantplayedvalue = getPlayer(playerid).getLastassistantplayed().getValue();
+        //To implement in GUI the choose from player
+        int choosednumber=5; //Set =5 to do tests
+        if(choosednumber>=1 && choosednumber<=lastassistantplayedvalue)
+            return choosednumber;
+        //To implement Exception if doesn't enter in if
+        return 0;
     }
 
 
-    public ArrayList<Player> getListOfPlayers(){
+    public ArrayList<Player> getListOfPlayers() {
         return listOfPlayers;
     }
 
 
-    public void verifyIslandInfluence(Island island){
+    public void verifyIslandInfluence(Island island) {
         // Check which Player has the most influence on an Island and arrange the towers appropriately.
-        int maxscore =0;
-        int score =0;
-        Player playermaxscore =null;
+        int maxscore = 0;
+        int score = 0;
+        Player playermaxscore = null;
 
-        if(island.isStop()){
+        if (island.isStop()) {
             island.setStop(false);
             verifyType.addislandstop();
-        }
-        else {
-            for(Player player : listOfPlayers) {
+        } else {
+            for (Player player : listOfPlayers) {
                 for (Professor professor : player.getPlance().getProfessors())
                     for (Student student : island.getStudents())
-                        if (professor.ordinal() ==student.ordinal())
+                        if (professor.ordinal() == student.ordinal())
                             if (!verifyType.isNocolor() || (verifyType.isNocolor() && !verifyType.getStudent().equals(student)))
                                 score++;
                 verifyType.setNocolor(false);
@@ -242,7 +255,7 @@ public class Game {
                         score++;
                 verifyType.setNotower(false);
                 if (verifyType.isTwopoints()) {
-                    score = score +2;
+                    score = score + 2;
                     verifyType.setTwopoints(false);
                 }
                 if (score > maxscore) {
@@ -250,7 +263,7 @@ public class Game {
                     playermaxscore = player;
                 }
             }
-            if(playermaxscore!=null && !playermaxscore.getPlance().getTowers().get(0).equals(island.getTowers().get(0)) && maxscore!=0) {
+            if (playermaxscore != null && !playermaxscore.getPlance().getTowers().get(0).equals(island.getTowers().get(0)) && maxscore != 0) {
                 if (island.getTowers().isEmpty())
                     island.addTower(playermaxscore.getPlance().getTowers().get(0));
                 else {
@@ -266,71 +279,70 @@ public class Game {
         }
     }
 
-    void verifyProfessorControll(){
+    void verifyProfessorControll() {
         // Controll and check Professors.
         int count = 0;
         int countmax = 0;
-        Player playermax=null;
+        Player playermax = null;
 
         for (int i = 0; i < 5; i++) {
             for (Player player : listOfPlayers) {
-                    count=0;
-                    for(int j = 0; j >= 0 && j < 10; j++)
-                        if(player.getPlance().getStudentHall()[i][j]!=null)
-                            count++;
-                    if(verifyType.isProfessorcontroll()) {
-                        if (count >= countmax) {
-                            countmax = count;
-                            playermax = player;
-                        }
+                count = 0;
+                for (int j = 0; j >= 0 && j < 10; j++)
+                    if (player.getPlance().getStudentHall()[i][j] != null)
+                        count++;
+                if (verifyType.isProfessorcontroll()) {
+                    if (count >= countmax) {
+                        countmax = count;
+                        playermax = player;
                     }
-                    else if(count>countmax){
-                            countmax=count;
-                            playermax=player;
-                        }
+                } else if (count > countmax) {
+                    countmax = count;
+                    playermax = player;
+                }
             }
             countmax = 0;
-            if(playermax!=null && !playermax.getPlance().getProfessors().contains(Professor.values()[i])){
+            if (playermax != null && !playermax.getPlance().getProfessors().contains(Professor.values()[i])) {
                 for (Player player : listOfPlayers)
-                    if(player.getPlance().getProfessors().contains(Professor.values()[i]))
+                    if (player.getPlance().getProfessors().contains(Professor.values()[i]))
                         player.getPlance().removeProfessor(Professor.values()[i]);
                 playermax.getPlance().addProfessor(Professor.values()[i]);
             }
-            playermax=null;
+            playermax = null;
         }
     }
 
-    public ArrayList<Player> VerifyPlayerOrder(){
+    public ArrayList<Player> VerifyPlayerOrder() {
         ArrayList<Player> playerorder = new ArrayList<>();
         Player minplayer = listOfPlayers.get(0);
-        for(int count=1;count<listOfPlayers.size();count++){
-            if(listOfPlayers.get(count).getLastassistantplayed().getValue() < minplayer.getLastassistantplayed().getValue())
+        for (int count = 1; count < listOfPlayers.size(); count++) {
+            if (listOfPlayers.get(count).getLastassistantplayed().getValue() < minplayer.getLastassistantplayed().getValue())
                 minplayer = listOfPlayers.get(count);
         }
 
-        playerorder.add(0,minplayer);
-        Player lasttakenplayer=minplayer;
-        Player tempplayer=null;
-        for(int count=1;count<listOfPlayers.size();count++) {
+        playerorder.add(0, minplayer);
+        Player lasttakenplayer = minplayer;
+        Player tempplayer = null;
+        for (int count = 1; count < listOfPlayers.size(); count++) {
             for (int counter = 0; counter < listOfPlayers.size(); counter++) {
                 if (lasttakenplayer.getPlayerID() == getNumOfPlayers()) {
-                    if(listOfPlayers.get(counter).getPlayerID()==1)
-                        tempplayer=listOfPlayers.get(counter);
+                    if (listOfPlayers.get(counter).getPlayerID() == 1)
+                        tempplayer = listOfPlayers.get(counter);
                 } else {
                     if (listOfPlayers.get(counter).getPlayerID() == lasttakenplayer.getPlayerID() + 1) {
                         tempplayer = listOfPlayers.get(counter);
                     }
                 }
             }
-            lasttakenplayer=tempplayer;
-            playerorder.add(count,lasttakenplayer );
+            lasttakenplayer = tempplayer;
+            playerorder.add(count, lasttakenplayer);
         }
         return playerorder;
     }
 
-    public void startGame(){
+    public void startGame() {
         ArrayList<Student> studentsColor = new ArrayList<>();
-        for(Student student : Student.values()) {
+        for (Student student : Student.values()) {
             for (int i = 0; i < 26; i++)
                 studentsColor.add(student);
             board.addStudentBag(studentsColor);
@@ -342,6 +354,7 @@ public class Game {
         if (verifyType.isProfessorcontroll())
             verifyType.setProfessorcontroll(false);
     }
+
 }
 
 
