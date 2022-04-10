@@ -66,7 +66,6 @@ public class Game {
         return tempplayer;
     }
 
-
     public Player winner() {
         ArrayList<Player> playersCandidate = new ArrayList<>();
         Player playerChosen = null;
@@ -98,41 +97,8 @@ public class Game {
                 maxProfessor = player2.getPlance().getProfessors().size();
                 playerChosen = player2;
             }
-
-
         }
         return playerChosen;
-    }
-
-    public void verifyProfessorControl(Professor professor, Player playerInControl, Player playerInTurn) {
-        if (playerInControl == null)
-            playerInTurn.getPlance().addProfessor(professor);
-        else {
-            Student[][] hallInTurn = new Student[4][4];
-            Student[][] hallInControl = new Student[4][4];
-            int numInTurn = 0, numInControl = 0;
-            hallInTurn = playerInTurn.getPlance().getStudentHall();
-            hallInControl = playerInControl.getPlance().getStudentHall();
-            for (int i = 0; i < 10; i++) {
-                if (hallInTurn[professor.ordinal()][i] != null)
-                    numInTurn++;
-                else if (hallInControl[professor.ordinal()][i] != null)
-                    numInControl++;
-                if (numInTurn > numInControl)
-                    playerInControl.getPlance().removeProfessor(professor);
-                playerInTurn.getPlance().addProfessor(professor);
-            }
-
-        }
-    }
-
-
-    public void startTurn() {
-        setState(GameState.PLAYING);
-    }
-
-    public void endTurn() {
-        setState(GameState.ENDED);
     }
 
     public void moveStudentToEntrance(int playerID, Student student) {
@@ -146,7 +112,7 @@ public class Game {
         for (Player player : listOfPlayers)
             if (playerID == player.getPlayerID()) {
                 player.getPlance().addStudentHall(student);
-                if (player.getPlance().getNumberOfStudent(student) % 3 == 0)
+                if (player.getPlance().getNumberOfStudentHall(student) % 3 == 0)
                     player.addCoins();
             }
     }
@@ -251,7 +217,7 @@ public class Game {
                                 score++;
                 verifyType.setNocolor(false);
                 for (Tower tower : island.getTowers())
-                    if (player.getPlance().getTowers().get(0).equals(tower) && !verifyType.isNotower())
+                    if (player.getPlance().getTower().equals(tower) && !verifyType.isNotower())
                         score++;
                 verifyType.setNotower(false);
                 if (verifyType.isTwopoints()) {
@@ -263,15 +229,15 @@ public class Game {
                     playermaxscore = player;
                 }
             }
-            if (playermaxscore != null && !playermaxscore.getPlance().getTowers().get(0).equals(island.getTowers().get(0)) && maxscore != 0) {
+            if (playermaxscore != null && !playermaxscore.getPlance().getTower().equals(island.getTowers().get(0)) && maxscore != 0) {
                 if (island.getTowers().isEmpty())
-                    island.addTower(playermaxscore.getPlance().getTowers().get(0));
+                    island.addTower(playermaxscore.getPlance().getTower());
                 else {
                     for (Player player : listOfPlayers)
-                        if (player.getPlance().getTowers().get(0).equals(island.getTowers().get(0)))
+                        if (player.getPlance().getTower().equals(island.getTowers().get(0)))
                             for (Tower tower : island.getTowers())
                                 player.getPlance().addTower();
-                    island.changeTowers(playermaxscore.getPlance().getTowers().get(0));
+                    island.changeTowers(playermaxscore.getPlance().getTower());
                 }
                 for (Tower tower : island.getTowers())
                     playermaxscore.getPlance().removeTower();
@@ -279,35 +245,32 @@ public class Game {
         }
     }
 
-    void verifyProfessorControll() {
+    void verifyProfessorControl() {
         // Controll and check Professors.
-        int count = 0;
-        int countmax = 0;
+        int numofstudentcolorhall = 0;
+        int numofstudentcolorhallmax = 0;
         Player playermax = null;
 
         for (int i = 0; i < 5; i++) {
             for (Player player : listOfPlayers) {
-                count = 0;
-                for (int j = 0; j >= 0 && j < 10; j++)
-                    if (player.getPlance().getStudentHall()[i][j] != null)
-                        count++;
+                numofstudentcolorhall = player.getPlance().getNumberOfStudentHall(Student.values()[i]);
                 if (verifyType.isProfessorcontroll()) {
-                    if (count >= countmax) {
-                        countmax = count;
+                    if (numofstudentcolorhall >= numofstudentcolorhallmax) {
+                        numofstudentcolorhallmax = numofstudentcolorhall;
                         playermax = player;
                     }
-                } else if (count > countmax) {
-                    countmax = count;
+                } else if (numofstudentcolorhall > numofstudentcolorhallmax) {
+                    numofstudentcolorhallmax = numofstudentcolorhall;
                     playermax = player;
                 }
             }
-            countmax = 0;
             if (playermax != null && !playermax.getPlance().getProfessors().contains(Professor.values()[i])) {
                 for (Player player : listOfPlayers)
                     if (player.getPlance().getProfessors().contains(Professor.values()[i]))
                         player.getPlance().removeProfessor(Professor.values()[i]);
                 playermax.getPlance().addProfessor(Professor.values()[i]);
             }
+            numofstudentcolorhallmax = 0;
             playermax = null;
         }
     }
@@ -347,10 +310,9 @@ public class Game {
                 studentsColor.add(student);
             board.addStudentBag(studentsColor);
         }
-
     }
 
-    public void endOfTurn() {
+    public void endOfPlayerTurn() {
         if (verifyType.isProfessorcontroll())
             verifyType.setProfessorcontroll(false);
     }

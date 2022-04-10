@@ -37,7 +37,7 @@ class Effect10Test {
         final Board board = new Board(null, archipelago, null);
 
         Game game = new Game(gameID, gameMode.SIMPLEMODE,gameState.PLAYING, board, verifyType, mothernature);
-        Plance plance = new Plance();
+        Plance plance = new Plance(Tower.WHITE,8);
         Player player = new Player(null,1, PlayerState.PLAYINGYOURTURN,plance,null,null);
         game.addPlayer(player,player.getPlayerID());
 
@@ -63,11 +63,11 @@ class Effect10Test {
         if(blue+yellow!=2)
             var=-1;
 
-        int numberofinterestedstudent = player.getPlance().getNumberOfStudent(Student.BLUE);
+        int numberofinterestedstudent = player.getPlance().getNumberOfStudentHall(Student.BLUE);
         if (numberofinterestedstudent != 1)
             var=-2;
 
-        numberofinterestedstudent = player.getPlance().getNumberOfStudent((Student.YELLOW));
+        numberofinterestedstudent = player.getPlance().getNumberOfStudentHall((Student.YELLOW));
         if(numberofinterestedstudent != 1)
             var=-3;
 
@@ -92,7 +92,7 @@ class Effect10Test {
 
         Game game = new Game(gameID, gameMode.SIMPLEMODE,gameState.PLAYING, board, verifyType, mothernature);
         ArrayList<Student> entrance = new ArrayList<>();
-        Plance plance = new Plance();
+        Plance plance = new Plance(Tower.WHITE,8);
         Player player = new Player(null,1,PlayerState.PLAYINGYOURTURN,plance,null,null);
         game.addPlayer(player,player.getPlayerID());
 
@@ -116,7 +116,7 @@ class Effect10Test {
         if(yellow!=2)
             var=-1;
 
-        int numberofinterestedstudent = player.getPlance().getNumberOfStudent(Student.BLUE);
+        int numberofinterestedstudent = player.getPlance().getNumberOfStudentHall(Student.BLUE);
         if (numberofinterestedstudent != 2)
             var=-2;
 

@@ -42,7 +42,7 @@ class Effect11Test {
 
         Game game = new Game(gameID, gameMode.SIMPLEMODE,gameState.PLAYING, board, verifyType, mothernature);
         ArrayList<Student> entrance = new ArrayList<>();
-        Plance plance = new Plance();
+        Plance plance = new Plance(Tower.WHITE,8);
         Player player = new Player(null,1, PlayerState.PLAYINGYOURTURN,plance,null,null);
         game.addPlayer(player,player.getPlayerID());
 
@@ -70,15 +70,15 @@ class Effect11Test {
         if(!effect11.getStudentsOnCard().containsAll(studentoncard))
             var=-1;
 
-        if(player.getPlance().getNumberOfStudent(Student.BLUE)!=1)
+        if(player.getPlance().getNumberOfStudentHall(Student.BLUE)!=1)
             var=-2;
-        if(player.getPlance().getNumberOfStudent(Student.RED)!=0)
+        if(player.getPlance().getNumberOfStudentHall(Student.RED)!=0)
             var=-3;
-        if(player.getPlance().getNumberOfStudent(Student.YELLOW)!=0)
+        if(player.getPlance().getNumberOfStudentHall(Student.YELLOW)!=0)
             var=-4;
-        if(player.getPlance().getNumberOfStudent(Student.PINK)!=0)
+        if(player.getPlance().getNumberOfStudentHall(Student.PINK)!=0)
             var=-5;
-        if(player.getPlance().getNumberOfStudent(Student.GREEN)!=0)
+        if(player.getPlance().getNumberOfStudentHall(Student.GREEN)!=0)
             var=-6;
 
         assertEquals(1,var);

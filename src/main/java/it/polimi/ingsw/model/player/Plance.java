@@ -2,41 +2,64 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Plance {
     private ArrayList<Student> entrance = new ArrayList<>();
-    private ArrayList<Professor> tableProfessor = new ArrayList<>();
-    private final Student[][] hall = new Student[5][10];
-    private ArrayList<Tower> towers = new ArrayList<>();
+    private ArrayList<Professor> professors = new ArrayList<>();
+    private final HashMap<Student,Integer> hall = new HashMap<>();
+    private int numoftowers;
+    private final Tower tower;
+
+    public Plance(Tower tower, int numoftowers){
+        this.tower = tower;
+        this.numoftowers = numoftowers;
+        hall.put(Student.RED,0);
+        hall.put(Student.BLUE,0);
+        hall.put(Student.YELLOW,0);
+        hall.put(Student.PINK,0);
+        hall.put(Student.GREEN,0);
+    }
+
+    public void addStudentHall(Student student) {
+        hall.replace(student, Integer.valueOf(hall.get(student).intValue() + 1));
+    }
+
+    public int getNumberOfStudentHall(Student student){
+        return hall.get(student).intValue();
+    }
 
     public ArrayList<Student> getEntrance() {
-        return entrance;
+        return new ArrayList<>(entrance);
     }
 
     public ArrayList<Professor> getProfessors() {
-        return tableProfessor;
+        return new ArrayList<>(professors);
     }
 
     public int getNumOfTowers() {
-        return towers.size();
+        return numoftowers;
     }
 
     public void addProfessor(Professor professor) {
-        tableProfessor.add(professor);
+        professors.add(professor);
     }
 
     public void removeProfessor(Professor professor) {
-        tableProfessor.remove(professor);
-
+        professors.remove(professor);
     }
 
-    public void addTower() {towers.add(towers.get(0));}
+    public void addTower() {
+        numoftowers++;
+    }
 
     public void removeTower() {
-        towers.remove(towers.size() - 1);
+        numoftowers--;
+    }
+    public Tower getTower() {
+        return tower;
     }
 
     public void addStudentEntrance(Student student) {
@@ -46,45 +69,8 @@ public class Plance {
     public void removeStudentEntrance(Student student) {
         entrance.remove(student);
     }
-
-    public void addStudentHall(@NotNull Student student) {
-        for (int i = 0; i < 10; i++)
-            if (hall[student.ordinal()][i] == null) {
-                hall[student.ordinal()][i] = student;
-                i = 10;
-            }
+    public void removeStudentFromHall(Student student) {
+        if(hall.get(student).intValue()>0)
+            hall.replace(student, Integer.valueOf(hall.get(student).intValue() - 1));
     }
-
-    public Student[][] getStudentHall() {
-        return hall;
-    }
-
-    public Student removeStudentFromHall(@NotNull Student student) {
-        if (hall[student.ordinal()][0] == null)
-            return null;
-        else {
-            for (int i = 0; i < 10; i++)
-                if (i == 9) {
-                    hall[student.ordinal()][i] = null;
-                    break;
-                } else if (hall[student.ordinal()][i + 1] == null) {
-                    hall[student.ordinal()][i] = null;
-                    break;
-                }
-            return student;
-        }
-    }
-
-    public int getNumberOfStudent(Student student){
-        int count=0;
-        for(int i=0;i<10;i++)
-            if(hall[student.ordinal()][i] == student)
-                count ++;
-        return count;
-    }
-
-    public ArrayList<Tower> getTowers() {
-        return towers;
-    }
-
 }

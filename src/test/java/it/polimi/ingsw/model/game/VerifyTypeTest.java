@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 class VerifyTypeTest {
     VerifyType verifyType= new VerifyType();
 
