@@ -7,12 +7,13 @@ import java.util.ArrayList;
 
 public class Island {
     private ArrayList<Student> students = new ArrayList<Student>();
-    private ArrayList<Tower> towers = new ArrayList<>();
+    private int numoftowers = 0;
+    private Tower tower;
     private boolean stop;
     private int islandID;
 
 
-    public Island( int islandID) {
+    public Island(int islandID) {
         this.islandID = islandID;
     }
 
@@ -20,14 +21,13 @@ public class Island {
         return new ArrayList<>(students);
     }
 
-    public ArrayList<Tower> getTowers() {
-        return towers;
+    public Tower getTowerColor() {
+        return tower;
     }
 
-    public void setTowers(Tower tower) {
-        towers.add(tower);
+    public int getNumOfTowers() {
+        return numoftowers;
     }
-
 
     public void addStudent(Student student) {
         students.add(student);
@@ -50,17 +50,21 @@ public class Island {
         this.islandID = islandID;
     }
 
+    public void setTowerColor(Tower tower) {
+        this.tower = tower;
+        numoftowers=1;
+    }
+
+   public void addTower() {
+       //if the tower is initialized
+            numoftowers++;
+    }
+
+    public void removeAllTowers() {
+        numoftowers = 0;
+    }
+
     public void changeTowers(Tower tower){
-        for(int j=0; j<towers.size() ; j++)
-            towers.set(j, tower);
-    }
-
-    public void addTower(Tower towersToAdd) {
-        if(towers.size()==0 || towers.get(0).equals(towersToAdd))
-            towers.add(towersToAdd);
-    }
-
-    public void removeAllTowers(){
-        towers.clear();
+        this.tower=tower;
     }
 }
