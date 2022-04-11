@@ -8,14 +8,26 @@ public class Board {
     private ArrayList<Cloud> clouds = new ArrayList<>();
     private Archipelago archipelago;
     private ArrayList<Student> bag = new ArrayList<>();
-    private int coinReserve = 20;
-    private ArrayList<java.lang.Character> characters = new ArrayList<>();
+    private int coinReserve=20;
+    private ArrayList<Character> characters = new ArrayList<>();
 
-
-    public Board(ArrayList<Cloud> clouds, Archipelago archipelago, ArrayList<java.lang.Character> Characters) {
+    //constructor for board in EXPERTMODE
+    public Board(ArrayList<Cloud> clouds, Archipelago archipelago, ArrayList<Character> Characters) {
+        //Inizialitazion of the bag
+        for (Student student : Student.values()) {
+            for (int i = 0; i < 26; i++)
+                bag.add(student);
+        }
         this.clouds = clouds;
         this.archipelago = archipelago;
         this.characters = Characters;
+    }
+
+    //constructor for board in SIMPLEMODE
+    public Board(ArrayList<Cloud> clouds, Archipelago archipelago)
+    {
+        this.clouds = clouds;
+        this.archipelago = archipelago;
     }
 
     public int getNumOfStudentsBag() {
@@ -55,7 +67,7 @@ public class Board {
             coinReserve = coinReserve -Coins;
     }
 
-    public ArrayList<java.lang.Character> getCharacters(){
+    public ArrayList<Character> getCharacters(){
         return characters;
     }
 
