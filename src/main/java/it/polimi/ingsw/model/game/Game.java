@@ -1,13 +1,10 @@
 package it.polimi.ingsw.model.game;
-import it.polimi.ingsw.model.board.Board;
+
 import it.polimi.ingsw.model.board.Character;
-import it.polimi.ingsw.model.board.Island;
-import it.polimi.ingsw.model.board.MotherNature;
+import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.Plance;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Professor;
-import it.polimi.ingsw.model.board.Cloud;
 
 import java.util.ArrayList;
 
@@ -217,12 +214,9 @@ public class Game {
                         if (professor.ordinal() == student.ordinal())
                             if (!verifyType.isNocolor() || (verifyType.isNocolor() && !verifyType.getStudent().equals(student)))
                                 score++;
-                verifyType.setNocolor(false);
-                for (int i=0; i<island.getNumOfTowers(); i++)
-                    if (player.getPlance().getTower().equals(tower) && !verifyType.isNotower())
-                        score++;
-                verifyType.setNotower(false);
-                if (verifyType.isTwopoints()) {
+                for (int i=0; i<island.getNumOfTowers() && player.getPlance().getTower().equals(island.getTowerColor()) && !verifyType.isNotower(); i++)
+                    score++;
+                if (verifyType.isTwopoints()) { //Add controll for player REWATCH!!
                     score = score + 2;
                     verifyType.setTwopoints(false);
                 }
@@ -231,17 +225,19 @@ public class Game {
                     playermaxscore = player;
                 }
             }
+            verifyType.setNocolor(false);
+            verifyType.setNotower(false);
             if (playermaxscore != null && !playermaxscore.getPlance().getTower().equals(island.getTowerColor()) && maxscore != 0) {
                 if (island.getNumOfTowers()==0)
-                    island.addTower(playermaxscore.getPlance().getTower());
+                    island.setTowerColor(playermaxscore.getPlance().getTower());
                 else {
                     for (Player player : listOfPlayers)
-                        if (player.getPlance().getTower().equals(island.getTowers().get(0)))
-                            for (Tower tower : island.getTowers())
+                        if (player.getPlance().getTower().equals(island.getTowerColor()))
+                            for (int i = 0; i<island.getNumOfTowers();i++)
                                 player.getPlance().addTower();
-                    island.changeTowers(playermaxscore.getPlance().getTower());
+                    island.setTowerColor(playermaxscore.getPlance().getTower());
                 }
-                for (Tower tower : island.getTowers())
+                for (int i = 0; i<island.getNumOfTowers();i++)
                     playermaxscore.getPlance().removeTower();
             }
         }
