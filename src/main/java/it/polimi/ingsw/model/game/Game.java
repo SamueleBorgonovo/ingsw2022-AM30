@@ -4,8 +4,10 @@ import it.polimi.ingsw.model.board.Character;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.MotherNature;
 import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.Plance;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Professor;
+import it.polimi.ingsw.model.board.Cloud;
 
 import java.util.ArrayList;
 
@@ -150,14 +152,14 @@ public class Game {
     public void verifyMergeableIsland() {
         for (int i = 0; i < board.getArchipelago().getNumOfIslands(); i++)
             if (i != board.getArchipelago().getNumOfIslands() - 1 &&
-                    board.getArchipelago().getIslands().get(i).getTowers().get(0) ==
-                            board.getArchipelago().getIslands().get(i + 1).getTowers().get(0)) {
+                    board.getArchipelago().getIslands().get(i).getTowerColor() ==
+                            board.getArchipelago().getIslands().get(i + 1).getTowerColor()) {
                 board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(),
                         board.getArchipelago().getIslands().get(i + 1).getIslandID());
                 i = 0;
             } else if (i == board.getArchipelago().getNumOfIslands() - 1 &&
-                    board.getArchipelago().getIslands().get(i).getTowers().get(0) ==
-                            board.getArchipelago().getIslands().get(0).getTowers().get(0)) {
+                    board.getArchipelago().getIslands().get(i).getTowerColor() ==
+                            board.getArchipelago().getIslands().get(0).getTowerColor()) {
                 board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(), 0);
                 i = 0;
             }
@@ -216,7 +218,7 @@ public class Game {
                             if (!verifyType.isNocolor() || (verifyType.isNocolor() && !verifyType.getStudent().equals(student)))
                                 score++;
                 verifyType.setNocolor(false);
-                for (Tower tower : island.getTowers())
+                for (int i=0; i<island.getNumOfTowers(); i++)
                     if (player.getPlance().getTower().equals(tower) && !verifyType.isNotower())
                         score++;
                 verifyType.setNotower(false);
@@ -229,8 +231,8 @@ public class Game {
                     playermaxscore = player;
                 }
             }
-            if (playermaxscore != null && !playermaxscore.getPlance().getTower().equals(island.getTowers().get(0)) && maxscore != 0) {
-                if (island.getTowers().isEmpty())
+            if (playermaxscore != null && !playermaxscore.getPlance().getTower().equals(island.getTowerColor()) && maxscore != 0) {
+                if (island.getNumOfTowers()==0)
                     island.addTower(playermaxscore.getPlance().getTower());
                 else {
                     for (Player player : listOfPlayers)
@@ -275,7 +277,7 @@ public class Game {
         }
     }
 
-    public ArrayList<Player> VerifyPlayerOrder() {
+    public ArrayList<Player> verifyPlayerOrder() {
         ArrayList<Player> playerorder = new ArrayList<>();
         Player minplayer = listOfPlayers.get(0);
         for (int count = 1; count < listOfPlayers.size(); count++) {
@@ -304,12 +306,32 @@ public class Game {
     }
 
     public void startGame() {
-        ArrayList<Student> studentsColor = new ArrayList<>();
-        for (Student student : Student.values()) {
-            for (int i = 0; i < 26; i++)
-                studentsColor.add(student);
-            board.addStudentBag(studentsColor);
+        //Inizialitazion of the bag
+       // ArrayList<Student> studentsColor = new ArrayList<>();
+       // for (Student student : Student.values()) {
+         //   for (int i = 0; i < 26; i++)
+          //      studentsColor.add(student);
+           // board.addStudentBag(studentsColor);
+        //}
+
+        //Initialization of every Plance
+        int numTowers;
+        int numStudentsCloud;
+        if(listOfPlayers.size()==2){
+            numStudentsCloud=3;
+            numTowers=8;
         }
+        else{
+            numStudentsCloud=4;
+            numTowers=6;
+        }
+        //Initialization of the plances
+        for(Player player : listOfPlayers)
+            for(int i=0; i<numTowers;i++)
+                player.getPlance().addTower();
+        //Initialization of the clouds
+        for(Cloud cloud: board.getClouds())
+            cloud.setStudents(board.getAndRemoveRandomBagStudent(numStudentsCloud));
     }
 
     public void endOfPlayerTurn() {
