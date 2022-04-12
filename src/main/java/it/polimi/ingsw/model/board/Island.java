@@ -51,8 +51,12 @@ public class Island {
     }
 
     public void setTowerColor(Tower tower) {
-        this.tower = tower;
-        numoftowers=1;
+        if(this.tower == null) {
+            this.tower = tower;
+            numoftowers = 1;
+        }
+        else
+            this.tower=tower;
     }
 
    public void addTower() {
@@ -64,7 +68,4 @@ public class Island {
         numoftowers = 0;
     }
 
-    public void changeTowers(Tower tower){
-        this.tower=tower;
-    }
 }
