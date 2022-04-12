@@ -25,10 +25,10 @@ public class Archipelago {
         return null;
     }
 
-    public  ArrayList<Tower> getTowersIsland (int islandID){
+    public  Tower getTowerTypeIsland (int islandID){
         for(int i=0;i<islands.size();i++)
             if(islands.get(i).getIslandID() == islandID)
-                return islands.get(i).getTowers();
+              return islands.get(i).getTowerColor();
         return null;
     }
 
@@ -50,8 +50,8 @@ public class Archipelago {
         if((indexMax - indexMin ) == 1
             || (indexMax - indexMin ) == islands.size()-1) {
             //I add the towers of the island I am going to remove in the other island
-            for(Tower tower : islands.get(indexMin).getTowers() )
-            islands.get(indexMin).addTower(tower);
+            for(int i=0; i<islands.get(indexMax).getNumOfTowers(); i++)
+                islands.get(indexMin).addTower();
             //I add the students of the island I am going to remove in the other island
             for (Student student : islands.get(indexMax).getStudents())
                 islands.get(indexMin).addStudent(student);

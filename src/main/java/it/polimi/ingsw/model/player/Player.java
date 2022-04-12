@@ -68,7 +68,6 @@ public class Player {
     public Assistant getLastassistantplayed(){return lastassistantplayed;}
 
 
-
 }
 
 

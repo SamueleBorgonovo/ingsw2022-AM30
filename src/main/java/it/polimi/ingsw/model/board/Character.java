@@ -9,7 +9,6 @@ public class Character {
 
     public Character(int cost, Effect effect) {
         this.cost = cost;
-
         this.effect = effect;
     }
 

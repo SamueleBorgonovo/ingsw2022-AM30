@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Cloud {
     private ArrayList<Student> students = new ArrayList<>();
-    private boolean choosen;
+    private boolean choosen = false;
     private int cloudID;
 
     public Cloud(int cloudID) {

@@ -225,7 +225,7 @@ class GameTest {
         player3.removeAssistant(Assistant.CAT);
 
         ArrayList<Player> playerorder = new ArrayList<>();
-        playerorder.addAll(game.VerifyPlayerOrder());
+        playerorder.addAll(game.verifyPlayerOrder());
 
         int var=1;
         if(playerorder.get(0).getPlayerID() != player3.getPlayerID())
