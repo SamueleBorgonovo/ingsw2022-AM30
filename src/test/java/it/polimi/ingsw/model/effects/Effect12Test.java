@@ -21,7 +21,6 @@ class Effect12Test {
         int IslandID;
         final int gameID=1;
         final GameMode gameMode = null;
-        VerifyType verifyType = null;
         MotherNature mothernature = null;
         ArrayList<Player> listOfPlayers = new ArrayList<>();
         GameState gameState = null;
@@ -34,7 +33,7 @@ class Effect12Test {
         final Board board = new Board(null,archipelago,null);
 
 
-        Game game = new Game(gameID,gameMode.SIMPLEMODE,gameState.PLAYING,board,verifyType,mothernature);
+        Game game = new Game(gameID,gameMode.SIMPLEMODE,gameState.PLAYING,board, mothernature);
 
         Plance plance1 = new Plance(Tower.WHITE,8);
         Player player1 = new Player(null, 1, PlayerState.PLAYINGYOURTURN, plance1, null, null);
@@ -100,7 +99,7 @@ class Effect12Test {
         final Board board = new Board(null,archipelago,null);
 
 
-        Game game = new Game(gameID,gameMode.SIMPLEMODE,gameState.PLAYING,board,verifyType,mothernature);
+        Game game = new Game(gameID,gameMode.SIMPLEMODE,gameState.PLAYING,board, mothernature);
 
         Plance plance1 = new Plance(Tower.WHITE,6);
         Player player1 = new Player(null, 1, PlayerState.PLAYINGYOURTURN, plance1, null,  null);

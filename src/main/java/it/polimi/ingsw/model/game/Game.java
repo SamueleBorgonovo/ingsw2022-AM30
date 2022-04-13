@@ -18,12 +18,11 @@ public class Game {
     private VerifyType verifyType;
     private MotherNature mothernature;
 
-    public Game(int gameID, GameMode gameMode, GameState gameState, Board board, VerifyType verifyType, MotherNature mothernature) {
+    public Game(int gameID, GameMode gameMode, GameState gameState, Board board, MotherNature mothernature) {
         this.gameID = gameID;
         this.gameMode = gameMode;
         this.gameState = gameState;
         this.board = board;
-        this.verifyType = verifyType;
         this.mothernature = mothernature;
     }
 
@@ -216,9 +215,9 @@ public class Game {
                                 score++;
                 for (int i=0; i<island.getNumOfTowers() && player.getPlance().getTower().equals(island.getTowerColor()) && !verifyType.isNotower(); i++)
                     score++;
-                if (verifyType.isTwopoints()) { //Add controll for player REWATCH!!
+                if (verifyType.getTwopoints()!=0 && player.getPlayerID() == verifyType.getTwopoints()) {
                     score = score + 2;
-                    verifyType.setTwopoints(false);
+                    verifyType.setTwopoints(0);
                 }
                 if (score > maxscore) {
                     maxscore = score;

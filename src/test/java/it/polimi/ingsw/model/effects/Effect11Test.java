@@ -11,7 +11,6 @@ import it.polimi.ingsw.model.player.PlayerState;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,7 +28,6 @@ class Effect11Test {
     void effect() {
         final int gameID = 1;
         final GameMode gameMode = null;
-        VerifyType verifyType = null;
         MotherNature mothernature = null;
         ArrayList<Player> listOfPlayers = new ArrayList<>();
         GameState gameState = null;
@@ -41,7 +39,7 @@ class Effect11Test {
         Archipelago archipelago = new Archipelago(islands, null);
         final Board board = new Board(null, archipelago, null);
 
-        Game game = new Game(gameID, gameMode.SIMPLEMODE,gameState.PLAYING, board, verifyType, mothernature);
+        Game game = new Game(gameID, gameMode.SIMPLEMODE,gameState.PLAYING, board, mothernature);
         ArrayList<Student> entrance = new ArrayList<>();
         Plance plance = new Plance(Tower.WHITE,8);
         Player player = new Player(null,1, PlayerState.PLAYINGYOURTURN,plance,null,null);
