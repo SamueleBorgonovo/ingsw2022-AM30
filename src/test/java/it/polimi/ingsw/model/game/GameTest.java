@@ -48,7 +48,7 @@ class GameTest {
         archipelago = new Archipelago(islands, mothernature);
         board = new Board(null, archipelago, null);
 
-        game = new Game(gameID, gameMode.SIMPLEMODE, gameState.PLAYING, board, verifyType, mothernature);
+        game = new Game(gameID, gameMode.SIMPLEMODE, gameState.PLAYING, board, mothernature);
     }
 
     @Test

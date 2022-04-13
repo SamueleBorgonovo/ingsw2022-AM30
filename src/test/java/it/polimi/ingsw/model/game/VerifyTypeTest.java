@@ -63,19 +63,19 @@ class VerifyTypeTest {
     }
 
     @Test
-    void isTwopoints() {
-        verifyType.setTwopoints(false);
-        assertFalse(verifyType.isTwopoints());
-        verifyType.setTwopoints(true);
-        assertTrue(verifyType.isTwopoints());
+    void getTwopoints() {
+        assertEquals(0,verifyType.getTwopoints());
+        verifyType.setTwopoints(1);
+        assertEquals(1,verifyType.getTwopoints());
+        verifyType.setTwopoints(0);
     }
 
     @Test
     void setTwopoints() {verifyType.setNotower(false);
-        verifyType.setTwopoints(false);
-        assertFalse(verifyType.isTwopoints());
-        verifyType.setTwopoints(true);
-        assertTrue(verifyType.isTwopoints());
+        assertEquals(0,verifyType.getTwopoints());
+        verifyType.setTwopoints(1);
+        assertEquals(1,verifyType.getTwopoints());
+        verifyType.setTwopoints(0);
     }
 
     @Test
