@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.board.Character;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Professor;
 
 import java.util.ArrayList;

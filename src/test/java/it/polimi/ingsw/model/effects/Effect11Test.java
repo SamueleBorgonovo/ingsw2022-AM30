@@ -44,7 +44,7 @@ class Effect11Test {
         Game game = new Game(gameID, gameMode.SIMPLEMODE,gameState.PLAYING, board, verifyType, mothernature);
         ArrayList<Student> entrance = new ArrayList<>();
         Plance plance = new Plance(Tower.WHITE,8);
-        Player player = new Player(null,1, PlayerState.PLAYINGYOURTURN,plance,null,null);
+        Player player = new Player(null,1, PlayerState.MOTHERNATUREPHASE,plance,null,null);
         game.addPlayer(player,player.getPlayerID());
 
         Effect11 effect11 = new Effect11();

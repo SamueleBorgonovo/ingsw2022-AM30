@@ -38,7 +38,7 @@ class Effect10Test {
 
         Game game = new Game(gameID, gameMode.SIMPLEMODE,gameState.PLAYING, board, verifyType, mothernature);
         Plance plance = new Plance(Tower.WHITE,8);
-        Player player = new Player(null,1, PlayerState.PLAYINGYOURTURN,plance,null,null);
+        Player player = new Player(null,1, PlayerState.MOTHERNATUREPHASE,plance,null,null);
         game.addPlayer(player,player.getPlayerID());
 
         Effect10 effect10 = new Effect10();
@@ -93,7 +93,7 @@ class Effect10Test {
         Game game = new Game(gameID, gameMode.SIMPLEMODE,gameState.PLAYING, board, verifyType, mothernature);
         ArrayList<Student> entrance = new ArrayList<>();
         Plance plance = new Plance(Tower.WHITE,8);
-        Player player = new Player(null,1,PlayerState.PLAYINGYOURTURN,plance,null,null);
+        Player player = new Player(null,1,PlayerState.MOTHERNATUREPHASE,plance,null,null);
         game.addPlayer(player,player.getPlayerID());
 
         Effect10 effect10 = new Effect10();

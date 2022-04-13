@@ -67,7 +67,7 @@ class GameTest {
     @Test
     void addPlayer01() {
         Plance plance1 = new Plance(Tower.WHITE,8);
-        Player player1 = new Player(null,1,PlayerState.PLAYINGYOURTURN,plance1,null,null);
+        Player player1 = new Player(null,1,PlayerState.MOTHERNATUREPHASE,plance1,null,null);
         game.addPlayer(player1,player1.getPlayerID());
         int var=1;
         if(game.getNumOfPlayers() != 1)
@@ -82,10 +82,10 @@ class GameTest {
     @Test
     void addPlayer02(){
         Plance plance1 = new Plance(Tower.WHITE,8);
-        Player player1 = new Player(null,1,PlayerState.PLAYINGYOURTURN,plance1,null,null);
+        Player player1 = new Player(null,1,PlayerState.MOTHERNATUREPHASE,plance1,null,null);
         game.addPlayer(player1,player1.getPlayerID());
         Plance plance2 = new Plance(Tower.BLACK,8);
-        Player player2 = new Player(null,2,PlayerState.PLAYINGYOURTURN,plance2,null,null);
+        Player player2 = new Player(null,2,PlayerState.MOTHERNATUREPHASE,plance2,null,null);
         game.addPlayer(player2,player2.getPlayerID());
         int var=1;
         if(game.getNumOfPlayers() != 2)
@@ -207,15 +207,15 @@ class GameTest {
 
         //Set all players
         Plance plance1 = new Plance(Tower.WHITE,6);
-        Player player1 = new Player(null,1, PlayerState.PLAYINGYOURTURN,plance1,null,assistants);
+        Player player1 = new Player(null,1, PlayerState.MOTHERNATUREPHASE,plance1,null,assistants);
         game.addPlayer(player1,player1.getPlayerID());
 
         Plance plance2 = new Plance(Tower.BLACK,6);
-        Player player2 = new Player(null,2,PlayerState.PLAYINGYOURTURN,plance2,null,assistants);
+        Player player2 = new Player(null,2,PlayerState.MOTHERNATUREPHASE,plance2,null,assistants);
         game.addPlayer(player2,player2.getPlayerID());
 
         Plance plance3 = new Plance(Tower.GREY,6);
-        Player player3 = new Player(null,3,PlayerState.PLAYINGYOURTURN,plance3,null,assistants);
+        Player player3 = new Player(null,3,PlayerState.MOTHERNATUREPHASE,plance3,null,assistants);
         game.addPlayer(player3,player3.getPlayerID());
 
 
