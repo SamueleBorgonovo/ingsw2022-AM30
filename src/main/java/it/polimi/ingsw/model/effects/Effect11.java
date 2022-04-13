@@ -19,6 +19,7 @@ public class Effect11 extends Effect{
     public void effect(Game game, int playerID) {
         choosedstudent = game.chooseStudent();
         game.getPlayer(playerID).getPlance().addStudentHall(choosedstudent);
+        students.remove(choosedstudent);
         students.addAll(game.getBoard().getAndRemoveRandomBagStudent(1));
     }
 }

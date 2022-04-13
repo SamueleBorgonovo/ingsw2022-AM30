@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.player.PlayerState;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,27 +58,24 @@ class Effect11Test {
         effect11.setStudentsOnCard(game);
 
 
-        //Set the bag
-        ArrayList<Student> addtobag = new ArrayList<>();
-        addtobag.add(Student.PINK);
-        game.getBoard().addStudentBag(addtobag);
-
         effect11.effect(game,player.getPlayerID());
 
-        studentoncard.remove(Student.BLUE);
-        studentoncard.add(Student.PINK);
         int var=1;
-        if(!effect11.getStudentsOnCard().containsAll(studentoncard))
+        if(effect11.getStudentsOnCard().size()!=4)
             var=-1;
 
         if(player.getPlance().getNumberOfStudentHall(Student.BLUE)!=1)
             var=-2;
+
         if(player.getPlance().getNumberOfStudentHall(Student.RED)!=0)
             var=-3;
+
         if(player.getPlance().getNumberOfStudentHall(Student.YELLOW)!=0)
             var=-4;
+
         if(player.getPlance().getNumberOfStudentHall(Student.PINK)!=0)
             var=-5;
+
         if(player.getPlance().getNumberOfStudentHall(Student.GREEN)!=0)
             var=-6;
 

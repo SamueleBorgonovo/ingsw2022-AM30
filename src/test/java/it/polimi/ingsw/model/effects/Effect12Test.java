@@ -57,6 +57,7 @@ class Effect12Test {
 
         Effect12 effect12 = new Effect12();
 
+        int bagsize=game.getBoard().getNumOfStudentsBag();
         effect12.effect(game,player1.getPlayerID());
 
         int var=1;
@@ -66,18 +67,11 @@ class Effect12Test {
         //Test that choosedstudent is removed from player2's hall
         if(player2.getPlance().getNumberOfStudentHall(Student.BLUE)!=0)
             var=-2;
-        //Test that bag is filled with removed students
-        if(game.getBoard().getNumOfStudentsBag()!=4){
+
+        //Test that bag is filled with students
+        if(game.getBoard().getNumOfStudentsBag()!= bagsize+4)
             var=-3;
-        }
-        else {
-            ArrayList<Student> bag = new ArrayList<>();
-            bag = game.getBoard().getAndRemoveRandomBagStudent(4);
-            for(int count=0;count<bag.size();count++){
-                if(bag.get(count)!=Student.BLUE)
-                    var=-4;
-            }
-        }
+
         //Test that not choosedstudent are not changed in player1's hall
         if(player1.getPlance().getNumberOfStudentHall(Student.RED)!=2)
             var=-5;
@@ -141,6 +135,7 @@ class Effect12Test {
 
         Effect12 effect12 = new Effect12();
 
+        int bagsize = game.getBoard().getNumOfStudentsBag();
         effect12.effect(game,player1.getPlayerID());
 
         int var=1;
@@ -154,17 +149,9 @@ class Effect12Test {
         if(player3.getPlance().getNumberOfStudentHall(Student.BLUE)!=0)
             var=-3;
         //Test that bag is filled with removed students
-        if(game.getBoard().getNumOfStudentsBag()!=6){
+        if(game.getBoard().getNumOfStudentsBag() != bagsize+6)
             var=-4;
-        }
-        else {
-            ArrayList<Student> bag = new ArrayList<>();
-            bag = game.getBoard().getAndRemoveRandomBagStudent(6);
-            for(int count=0;count<bag.size();count++){
-                if(bag.get(count)!=Student.BLUE)
-                    var=-5;
-            }
-        }
+
         //Test that not choosedstudent are not changed in player1's hall
         if(player1.getPlance().getNumberOfStudentHall(Student.RED)!=2)
             var=-6;
