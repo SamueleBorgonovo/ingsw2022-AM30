@@ -126,11 +126,16 @@ class ArchipelagoTest {
         islands2.add(i10);
         islands2.add(i11);
         islands2.add(i12);
-
-
+        assertTrue(islands.equals(islands2));
+        System.out.println(islands);
     }
 
     @Test
     void getNumOfIslands() {
+        assertEquals(12,archipelago.getNumOfIslands());
+        archipelago.mergeIslands(2,3);
+        assertEquals(11, archipelago.getNumOfIslands());
+        archipelago.mergeIslands(1,12);
+        assertEquals(10,archipelago.getNumOfIslands());
     }
 }

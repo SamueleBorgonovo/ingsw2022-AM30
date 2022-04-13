@@ -26,6 +26,11 @@ public class Board {
     //constructor for board in SIMPLEMODE
     public Board(ArrayList<Cloud> clouds, Archipelago archipelago)
     {
+        //Inizialitazion of the bag
+        for (Student student : Student.values()) {
+            for (int i = 0; i < 26; i++)
+                bag.add(student);
+        }
         this.clouds = clouds;
         this.archipelago = archipelago;
     }
