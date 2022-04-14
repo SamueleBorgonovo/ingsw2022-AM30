@@ -7,8 +7,8 @@ public class Character {
     private boolean used = false;
     private final Effect effect;
 
-    public Character(int cost, Effect effect) {
-        this.cost = cost;
+    public Character(Effect effect) {
+        cost = effect.getCost();
         this.effect = effect;
     }
 
@@ -18,7 +18,6 @@ public class Character {
 
     public boolean isUsed() {
         return used;
-
     }
 
     public Effect getEffect() {

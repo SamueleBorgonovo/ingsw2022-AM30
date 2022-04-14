@@ -6,12 +6,18 @@ import it.polimi.ingsw.model.game.Tower;
 import java.util.ArrayList;
 
 public class Archipelago {
-    private final ArrayList<Island> islands;
+    private final ArrayList<Island> islands = new ArrayList<>();
     private final MotherNature mothernature;
 
-    public Archipelago(ArrayList<Island> islands, MotherNature mothernature) {
-        this.islands = islands;
-        this.mothernature = mothernature;
+
+    public Archipelago() {
+        for(int i = 1; i < 13; i++)
+            islands.add(new Island(i));
+        mothernature = new MotherNature((int) (Math.random() * 11 + 1));
+    }
+
+    public MotherNature getMothernature() {
+        return mothernature;
     }
 
     public ArrayList<Island> getIslands() {
@@ -31,7 +37,6 @@ public class Archipelago {
               return islands.get(i).getTowerColor();
         return null;
     }
-
 
     public void mergeIslands(int islandID1, int islandID2) {
         int max = Math.max(islandID1, islandID2);

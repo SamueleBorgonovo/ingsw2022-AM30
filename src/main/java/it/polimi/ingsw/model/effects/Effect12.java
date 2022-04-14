@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class Effect12 extends Effect{
     private Student choosedcolor;
     private ArrayList<Student> studentTobag = new ArrayList<>();
+    private int cost = 3;
+
+    @Override
+    public int getCost(){ return cost;}
 
     @Override
     public void effect(Game game, int playerID) {

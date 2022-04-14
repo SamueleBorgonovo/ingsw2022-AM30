@@ -9,6 +9,10 @@ public class Effect11 extends Effect{
 
     private ArrayList<Student> students = new ArrayList<>();
     private Student choosedstudent;
+    private int cost = 2;
+
+    @Override
+    public int getCost(){ return cost;}
 
     public void setStudentsOnCard (Game game){
         students.addAll(game.getBoard().getAndRemoveRandomBagStudent(4));

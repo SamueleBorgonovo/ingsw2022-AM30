@@ -1,12 +1,8 @@
 package it.polimi.ingsw.model.game;
 
-import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.board.Character;
 import it.polimi.ingsw.model.board.*;
-import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.PlayerState;
-import it.polimi.ingsw.model.player.Professor;
+import it.polimi.ingsw.model.player.*;
 
 import java.util.ArrayList;
 
@@ -16,21 +12,22 @@ public class Game {
     private ArrayList<Player> listOfPlayers = new ArrayList<>();
     private GameState gameState;
     private Board board;
-    private int numOfPlayers = 0;
+    private final int numOfPlayers;
     private VerifyType verifyType;
-    private MotherNature mothernature;
-    private int numplayerhasplayed=0;
-    private int movementStudents=0;
 
-    public Game(int gameID, GameMode gameMode, GameState gameState, Board board, MotherNature mothernature) {
-        this.gameID = gameID;
+    public Game(GameMode gameMode, int numofplayers) {
         this.gameMode = gameMode;
-        this.gameState = gameState;
-        this.board = board;
-        this.mothernature = mothernature;
+        this.numOfPlayers = numofplayers;
+        gameState = GameState.WAITINGFORPLAYERS;
+        board = new Board(gameMode, numofplayers);
+        verifyType = new VerifyType();
     }
 
-    public void setState(GameState gameState) {
+    public void setGameID(int gameID) {
+        this.gameID = gameID;
+    }
+
+    public void setState(GameState gameState) { //SECONDO ME SI PUò TOGLIERE
         this.gameState = gameState;
     }
 
@@ -38,12 +35,20 @@ public class Game {
         return gameState;
     }
 
-    public void addPlayer(Player player, int playerid) {
-        if (listOfPlayers.size() < 3) {
-            listOfPlayers.add(playerid - 1, player);
-            numOfPlayers++;
+    public void addPlayer(Player player) {
+        listOfPlayers.add(player);
+        player.setPlayerID(listOfPlayers.size());
+        if (numOfPlayers == 2) {
+            player.setPlance(new Plance(Tower.values()[listOfPlayers.size()-1], 8));
+            for(int i = 0; i < 7; i++)
+                player.getPlance().addStudentEntrance(board.getAndRemoveRandomBagStudent(1).get(0));
+        } else {
+            player.setPlance(new Plance(Tower.values()[listOfPlayers.size()-1], 6));
+            for(int i = 0; i < 9; i++)
+                player.getPlance().addStudentEntrance(board.getAndRemoveRandomBagStudent(1).get(0));
         }
-        //Set the player in the position playerid-1, if player has id=1 he is in listofplayers.get(0)
+        if (listOfPlayers.size() == numOfPlayers)
+            gameState = GameState.PLAYING;
     }
 
     public GameMode getGameMode() {
@@ -103,99 +108,38 @@ public class Game {
         return playerChosen;
     }
 
-    public void selectCloud(int playerID, int cloudID) throws InvalidTurnExceptions {
-        boolean endOfTurn = true;
-        if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
-            for (Cloud cloud : board.getClouds())
-                if (cloud.getCloudID() == cloudID) {
-                    for (Student student : cloud.getStudents())
-                        getPlayer(playerID).getPlance().addStudentEntrance(student);
-                    cloud.setChoosen(true);
-                }
-            //now we control if the turn is complete
-            if(listOfPlayers.get(numOfPlayers).getPlayerID()==playerID)
-                getPlayer(playerID).setPlayerState(PlayerState.WAITING);
-            else
-                for(Player player : listOfPlayers)
-                    if (player.getPlayerID() == playerID){
-                        player.setPlayerState(PlayerState.WAITING);
-                        listOfPlayers.get(listOfPlayers.indexOf(player)+1).setPlayerState(PlayerState.ASSISTANTPHASE);
-                    }
-        }
-        else throw new InvalidTurnExceptions();
-    }
-
-    public void moveStudentToHall(int playerID, Student student) throws InvalidTurnExceptions{
-        if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
-            for (Player player : listOfPlayers)
-                if (playerID == player.getPlayerID()) {
-                    player.getPlance().addStudentHall(student);
-                    if (player.getPlance().getNumberOfStudentHall(student) % 3 == 0)
-                        player.addCoins();
-                }
-            movementStudents++;
-            if(movementStudents==numOfPlayers+1)
-                getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
-        }
-        else throw new InvalidTurnExceptions();
-    }
-
-    public void moveStudentToIsland(int playerID, Island island, Student student) throws InvalidTurnExceptions {
-        if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
-            for (Player player : listOfPlayers)
-                if (playerID == player.getPlayerID())
-                    island.addStudent(student);
-            movementStudents++;
-            if (movementStudents == numOfPlayers + 1)
-                getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
-        }
-        else throw new InvalidTurnExceptions();
-    }
-
-    public void useAssistant(int playerID, Assistant assistant) throws WrongAssistantException,InvalidTurnExceptions{
-        ArrayList<Player> playerorder = verifyPlayerOrder();
-        Player playertoplay;
-
-        if(getPlayer(playerID).getPlayerState() == PlayerState.ASSISTANTPHASE) { //Check that is the right id of the player that has to play
-            if (numplayerhasplayed == 0) {  //First to choose, no controls to do
-                if (getPlayer(playerID).getAssistantCards().contains(assistant)) {
-                    getPlayer(playerID).removeAssistant(assistant);
-                    numplayerhasplayed++;
-                } else
-                    throw new WrongAssistantException();
+    public void moveStudentToEntrance(int playerID, Student student) {
+        for (Player player : listOfPlayers)
+            if (playerID == player.getPlayerID()) {
+                player.getPlance().addStudentEntrance(student);
             }
-            else{
-                if(numplayerhasplayed==1){  //Second to choose, control if first has played same assistant
-                    if(getPlayer(playerID).getAssistantCards().contains(assistant)) {
-                        if(assistant != playerorder.get(numplayerhasplayed-1).getLastassistantplayed() || getPlayer(playerID).getAssistantCards().size()==1) {
-                            getPlayer(playerID).removeAssistant(assistant);
-                            if(numOfPlayers==2)
-                                numplayerhasplayed=0;
-                            else
-                                numplayerhasplayed++;
-
-                        } else throw new WrongAssistantException();
-                    } else throw new WrongAssistantException();
-                } else {
-                    if(getPlayer(playerID).getAssistantCards().contains(assistant)){ //Third to choose, control first and second assistants played
-                        if((assistant != playerorder.get(numplayerhasplayed-1).getLastassistantplayed() && assistant != playerorder.get(numplayerhasplayed-2).getLastassistantplayed()) || getPlayer(playerID).getAssistantCards().size()==1){
-                            getPlayer(playerID).removeAssistant(assistant);
-                            numplayerhasplayed=0;
-                        }else throw new WrongAssistantException();
-                    }else throw new WrongAssistantException();
-                }
-            }
-        }
-        else throw new InvalidTurnExceptions();
     }
 
-    public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnExceptions {
-        if(getPlayer(playerID).getPlayerState()==PlayerState.MOTHERNATUREPHASE) {
-            for (int count = 0; count < numberOfMovement; count++)
-                mothernature.move();
-            getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
-        }
-        else throw new InvalidTurnExceptions();
+    public void moveStudentToHall(int playerID, Student student) {
+        for (Player player : listOfPlayers)
+            if (playerID == player.getPlayerID()) {
+                player.getPlance().addStudentHall(student);
+                if (player.getPlance().getNumberOfStudentHall(student) % 3 == 0)
+                    player.addCoins();
+            }
+    }
+
+    public void moveStudentToIsland(int playerID, Island island, Student student) {
+        for (Player player : listOfPlayers)
+            if (playerID == player.getPlayerID())
+                island.addStudent(student);
+    }
+
+    public void useAssistant(int playerID, Assistant assistant) {
+        for (Player player : listOfPlayers)
+            if (playerID == player.getPlayerID())
+                player.getAssistantCards().remove(assistant);
+    }
+
+    public void moveMotherNature(int playerid) {
+        int numberofMovement = chooseNumberOfMotherNatureMovement(playerid);
+        for(int count=0;count<numberofMovement;count++)
+            board.getArchipelago().getMothernature().move();
     }
 
     public void useCharacter(int playerID, Character character) {
