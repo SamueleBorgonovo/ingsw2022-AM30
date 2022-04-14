@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.game;
 
+import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.board.Character;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.player.Assistant;
@@ -18,6 +19,7 @@ public class Game {
     private int numOfPlayers = 0;
     private VerifyType verifyType;
     private MotherNature mothernature;
+    private int numplayerhasplayed=0;
 
     public Game(int gameID, GameMode gameMode, GameState gameState, Board board, MotherNature mothernature) {
         this.gameID = gameID;
@@ -122,10 +124,41 @@ public class Game {
                 island.addStudent(student);
     }
 
-    public void useAssistant(int playerID, Assistant assistant) {
-        for (Player player : listOfPlayers)
-            if (playerID == player.getPlayerID())
-                player.getAssistantCards().remove(assistant);
+    public void useAssistant(int playerID, Assistant assistant) throws WrongAssistantException,InvalidTurnExceptions{
+        ArrayList<Player> playerorder = verifyPlayerOrder();
+        Player playertoplay;
+
+        if(getPlayer(playerID).getPlayerState() == PlayerState.ASSISTANTPHASE) { //Check that is the right id of the player that has to play
+            if (numplayerhasplayed == 0) {  //First to choose, no controls to do
+                if (getPlayer(playerID).getAssistantCards().contains(assistant)) {
+                    getPlayer(playerID).removeAssistant(assistant);
+                    numplayerhasplayed++;
+                } else
+                    throw new WrongAssistantException();
+            }
+            else{
+                if(numplayerhasplayed==1){  //Second to choose, control if first has played same assistant
+                    if(getPlayer(playerID).getAssistantCards().contains(assistant)) {
+                        if(assistant != playerorder.get(numplayerhasplayed-1).getLastassistantplayed() || getPlayer(playerID).getAssistantCards().size()==1) {
+                            getPlayer(playerID).removeAssistant(assistant);
+                            if(numOfPlayers==2)
+                                numplayerhasplayed=0;
+                            else
+                                numplayerhasplayed++;
+
+                        } else throw new WrongAssistantException();
+                    } else throw new WrongAssistantException();
+                } else {
+                    if(getPlayer(playerID).getAssistantCards().contains(assistant)){ //Third to choose, control first and second assistants played
+                        if((assistant != playerorder.get(numplayerhasplayed-1).getLastassistantplayed() && assistant != playerorder.get(numplayerhasplayed-2).getLastassistantplayed()) || getPlayer(playerID).getAssistantCards().size()==1){
+                            getPlayer(playerID).removeAssistant(assistant);
+                            numplayerhasplayed=0;
+                        }else throw new WrongAssistantException();
+                    }else throw new WrongAssistantException();
+                }
+            }
+        }
+        else throw new InvalidTurnExceptions();
     }
 
     public void moveMotherNature(int playerid) {
