@@ -20,6 +20,7 @@ public class Game {
     private VerifyType verifyType;
     private MotherNature mothernature;
     private int numplayerhasplayed=0;
+    private int movementStudents=0;
 
     public Game(int gameID, GameMode gameMode, GameState gameState, Board board, MotherNature mothernature) {
         this.gameID = gameID;
@@ -109,19 +110,31 @@ public class Game {
             }
     }
 
-    public void moveStudentToHall(int playerID, Student student) {
-        for (Player player : listOfPlayers)
-            if (playerID == player.getPlayerID()) {
-                player.getPlance().addStudentHall(student);
-                if (player.getPlance().getNumberOfStudentHall(student) % 3 == 0)
-                    player.addCoins();
-            }
+    public void moveStudentToHall(int playerID, Student student) throws InvalidTurnExceptions{
+        if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
+            for (Player player : listOfPlayers)
+                if (playerID == player.getPlayerID()) {
+                    player.getPlance().addStudentHall(student);
+                    if (player.getPlance().getNumberOfStudentHall(student) % 3 == 0)
+                        player.addCoins();
+                }
+            movementStudents++;
+            if(movementStudents==numOfPlayers+1)
+                getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
+        }
+        else throw new InvalidTurnExceptions();
     }
 
-    public void moveStudentToIsland(int playerID, Island island, Student student) {
-        for (Player player : listOfPlayers)
-            if (playerID == player.getPlayerID())
-                island.addStudent(student);
+    public void moveStudentToIsland(int playerID, Island island, Student student) throws InvalidTurnExceptions {
+        if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
+            for (Player player : listOfPlayers)
+                if (playerID == player.getPlayerID())
+                    island.addStudent(student);
+            movementStudents++;
+            if (movementStudents == numOfPlayers + 1)
+                getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
+        }
+        else throw new InvalidTurnExceptions();
     }
 
     public void useAssistant(int playerID, Assistant assistant) throws WrongAssistantException,InvalidTurnExceptions{
@@ -161,10 +174,13 @@ public class Game {
         else throw new InvalidTurnExceptions();
     }
 
-    public void moveMotherNature(int playerid) {
-        int numberofMovement = chooseNumberOfMotherNatureMovement(playerid);
-        for(int count=0;count<numberofMovement;count++)
-            mothernature.move();
+    public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnExceptions {
+        if(getPlayer(playerID).getPlayerState()==PlayerState.MOTHERNATUREPHASE) {
+            for (int count = 0; count < numberOfMovement; count++)
+                mothernature.move();
+            getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
+        }
+        else throw new InvalidTurnExceptions();
     }
 
     public void useCharacter(int playerID, Character character) {

@@ -1,4 +1,4 @@
 package it.polimi.ingsw.exceptions;
 
-public class InvalidTurnExceptions extends Exception{
+public class InvalidTurnExceptions extends Exception {
 }
