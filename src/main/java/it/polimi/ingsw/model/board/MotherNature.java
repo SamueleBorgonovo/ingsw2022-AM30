@@ -23,7 +23,7 @@ package it.polimi.ingsw.model.board;
         }
 
         public void setMotherNature(int islandID){
-            if(islandID >= 1 && islandID <12)
+            if(islandID >= 1 && islandID <=12)
                 this.islandID=islandID;
         }
     }

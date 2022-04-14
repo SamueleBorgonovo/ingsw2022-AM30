@@ -1,12 +1,9 @@
 package it.polimi.ingsw.model.game;
 
-import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.board.Character;
 import it.polimi.ingsw.model.board.*;
-import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.PlayerState;
-import it.polimi.ingsw.model.player.Professor;
+import it.polimi.ingsw.model.player.*;
+import it.polimi.ingsw.exceptions.*;
 
 import java.util.ArrayList;
 
@@ -16,22 +13,26 @@ public class Game {
     private ArrayList<Player> listOfPlayers = new ArrayList<>();
     private GameState gameState;
     private Board board;
-    private int numOfPlayers = 0;
+    private final int numOfPlayers;
     private VerifyType verifyType;
     private MotherNature mothernature;
     private int numplayerhasplayed=0;
     private int movementStudents=0;
     private ArrayList<Player> playerorder = new ArrayList<>();
 
-    public Game(int gameID, GameMode gameMode, GameState gameState, Board board, MotherNature mothernature) {
-        this.gameID = gameID;
+    public Game(GameMode gameMode, int numofplayers) {
         this.gameMode = gameMode;
-        this.gameState = gameState;
-        this.board = board;
-        this.mothernature = mothernature;
+        this.numOfPlayers = numofplayers;
+        gameState = GameState.WAITINGFORPLAYERS;
+        board = new Board(gameMode, numofplayers);
+        verifyType = new VerifyType();
     }
 
-    public void setState(GameState gameState) {
+    public void setGameID(int gameID) {
+        this.gameID = gameID;
+    }
+
+    public void setState(GameState gameState) { //SECONDO ME SI PUò TOGLIERE
         this.gameState = gameState;
     }
 
@@ -39,12 +40,20 @@ public class Game {
         return gameState;
     }
 
-    public void addPlayer(Player player, int playerid) {
-        if (listOfPlayers.size() < 3) {
-            listOfPlayers.add(playerid - 1, player);
-            numOfPlayers++;
+    public void addPlayer(Player player) {
+        listOfPlayers.add(player);
+        player.setPlayerID(listOfPlayers.size());
+        if (numOfPlayers == 2) {
+            player.setPlance(new Plance(Tower.values()[listOfPlayers.size()-1], 8));
+            for(int i = 0; i < 7; i++)
+                player.getPlance().addStudentEntrance(board.getAndRemoveRandomBagStudent(1).get(0));
+        } else {
+            player.setPlance(new Plance(Tower.values()[listOfPlayers.size()-1], 6));
+            for(int i = 0; i < 9; i++)
+                player.getPlance().addStudentEntrance(board.getAndRemoveRandomBagStudent(1).get(0));
         }
-        //Set the player in the position playerid-1, if player has id=1 he is in listofplayers.get(0)
+        if (listOfPlayers.size() == numOfPlayers)
+            gameState = GameState.PLAYING;
     }
 
     public GameMode getGameMode() {
@@ -141,6 +150,10 @@ public class Game {
             }
             else {
                 //All players played, ending round
+                //Set all clouds choosed false
+                for(int count=0;count<getBoard().getClouds().size();count++){
+                    getBoard().getClouds().get(count).setChoosen(false);
+                }
                 //Create a method StartTurn and use it on playerorder.get(0)
             }
             //Fix the code below
@@ -166,6 +179,8 @@ public class Game {
                 getPlayer(playerID).getPlance().addStudentHall(student);
                 getPlayer(playerID).getPlance().getEntrance().remove(student);
                 movementStudents++;
+                if (getPlayer(playerID).getPlance().getNumberOfStudentHall(student) % 3 == 0)
+                    getPlayer(playerID).addCoins();
                 if (movementStudents == numOfPlayers + 1) {
                     getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
                     movementStudents=0;
@@ -381,6 +396,7 @@ public class Game {
     }
 
     public ArrayList<Player> verifyPlayerOrder() {
+        ArrayList<Player> playerorder = new ArrayList<>();
         Player minplayer = listOfPlayers.get(0);
         for (int count = 1; count < listOfPlayers.size(); count++) {
             if (listOfPlayers.get(count).getLastassistantplayed().getValue() < minplayer.getLastassistantplayed().getValue())

@@ -1,19 +1,7 @@
 package it.polimi.ingsw.model.board;
 
-import it.polimi.ingsw.model.board.Archipelago;
-import it.polimi.ingsw.model.board.Island;
-import it.polimi.ingsw.model.board.MotherNature;
-import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.game.Tower;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class ArchipelagoTest {
-
+    /*
     Island i1;
     Island i2;
     Island i3;
@@ -137,5 +125,5 @@ class ArchipelagoTest {
         assertEquals(11, archipelago.getNumOfIslands());
         archipelago.mergeIslands(1,12);
         assertEquals(10,archipelago.getNumOfIslands());
-    }
+    }*/
 }
