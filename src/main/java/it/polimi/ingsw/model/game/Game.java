@@ -103,11 +103,26 @@ public class Game {
         return playerChosen;
     }
 
-    public void moveStudentToEntrance(int playerID, Student student) {
-        for (Player player : listOfPlayers)
-            if (playerID == player.getPlayerID()) {
-                player.getPlance().addStudentEntrance(student);
-            }
+    public void selectCloud(int playerID, int cloudID) throws InvalidTurnExceptions {
+        boolean endOfTurn = true;
+        if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
+            for (Cloud cloud : board.getClouds())
+                if (cloud.getCloudID() == cloudID) {
+                    for (Student student : cloud.getStudents())
+                        getPlayer(playerID).getPlance().addStudentEntrance(student);
+                    cloud.setChoosen(true);
+                }
+            //now we control if the turn is complete
+            if(listOfPlayers.get(numOfPlayers).getPlayerID()==playerID)
+                getPlayer(playerID).setPlayerState(PlayerState.WAITING);
+            else
+                for(Player player : listOfPlayers)
+                    if (player.getPlayerID() == playerID){
+                        player.setPlayerState(PlayerState.WAITING);
+                        listOfPlayers.get(listOfPlayers.indexOf(player)+1).setPlayerState(PlayerState.ASSISTANTPHASE);
+                    }
+        }
+        else throw new InvalidTurnExceptions();
     }
 
     public void moveStudentToHall(int playerID, Student student) throws InvalidTurnExceptions{
@@ -178,7 +193,7 @@ public class Game {
         if(getPlayer(playerID).getPlayerState()==PlayerState.MOTHERNATUREPHASE) {
             for (int count = 0; count < numberOfMovement; count++)
                 mothernature.move();
-            getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
+            getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
         }
         else throw new InvalidTurnExceptions();
     }
