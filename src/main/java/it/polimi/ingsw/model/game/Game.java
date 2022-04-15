@@ -128,7 +128,6 @@ public class Game {
     }
 
     public void selectCloud(int playerID, int cloudID) throws InvalidTurnExceptions, WrongCloudException {
-        boolean endOfTurn = true;
         if(getPlayer(playerID).getPlayerState()==PlayerState.CLOUDPHASE) {
             if(!getCloud(cloudID).isChoosen()){
                     for(int count=0;count<getCloud(cloudID).getStudents().size();count++)
@@ -141,33 +140,22 @@ public class Game {
             if(numplayerhasplayed < numOfPlayers) {
                 //Set next player to play
                 getPlayer(playerID).setPlayerState(PlayerState.WAITING);
+                if (verifyType.isProfessorcontroll())
+                    verifyType.setProfessorcontroll(false);
                 playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
                 //Qui possiamo pure mandare un messaggio al server tipo "Tocca al secondo giocatore"
             }
             else {
                 //All players played, ending round
-                //Set all clouds choosed false
+                numplayerhasplayed=0;
                 for(int count=0;count<getBoard().getClouds().size();count++){
                     getBoard().getClouds().get(count).setChoosen(false);
                 }
 
                 for (Player player : listOfPlayers)
                     player.setPlayerState(PlayerState.WAITING);
-                assistantPhase();
-                //Create a method StartTurn and use it on playerorder.get(0)
+                assistantPhase(); //Start the new round
             }
-            //Fix the code below
-            //now we control if the turn is complete
-            /*
-            if(listOfPlayers.get(numOfPlayers).getPlayerID()==playerID)
-                getPlayer(playerID).setPlayerState(PlayerState.WAITING);
-            else
-                for(Player player : listOfPlayers)
-                    if (player.getPlayerID() == playerID){
-                        player.setPlayerState(PlayerState.WAITING);
-                        listOfPlayers.get(listOfPlayers.indexOf(player)+1).setPlayerState(PlayerState.ASSISTANTPHASE);
-                    }
-               */
 
         }
         else throw new InvalidTurnExceptions();
@@ -213,6 +201,7 @@ public class Game {
             if (numplayerhasplayed == 0) {  //First to choose, no controls to do
                 if (getPlayer(playerID).getAssistantCards().contains(assistant)) {
                     getPlayer(playerID).removeAssistant(assistant);
+                    getPlayer(playerID).setAssistantPlayed(true);
                     numplayerhasplayed++;
                 } else
                     throw new WrongAssistantException();
@@ -222,6 +211,7 @@ public class Game {
                     if(getPlayer(playerID).getAssistantCards().contains(assistant)) {
                         if(assistant != playerorder.get(numplayerhasplayed-1).getLastassistantplayed() || getPlayer(playerID).getAssistantCards().size()==1) {
                             getPlayer(playerID).removeAssistant(assistant);
+                            getPlayer(playerID).setAssistantPlayed(true);
                             if(numOfPlayers==2)
                                 numplayerhasplayed=0;
                             else
@@ -233,6 +223,7 @@ public class Game {
                     if(getPlayer(playerID).getAssistantCards().contains(assistant)){ //Third to choose, control first and second assistants played
                         if((assistant != playerorder.get(numplayerhasplayed-1).getLastassistantplayed() && assistant != playerorder.get(numplayerhasplayed-2).getLastassistantplayed()) || getPlayer(playerID).getAssistantCards().size()==1){
                             getPlayer(playerID).removeAssistant(assistant);
+                            getPlayer(playerID).setAssistantPlayed(true);
                             numplayerhasplayed=0;
                         }else throw new WrongAssistantException();
                     }else throw new WrongAssistantException();
@@ -252,7 +243,7 @@ public class Game {
         for(Player player : listOfPlayers)
             player.setAssistantPlayed(false);
         verifyPlayerOrder();
-        listOfPlayers.get(0).setPlayerState(PlayerState.STUDENTPHASE);
+        playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
 
     }
 
@@ -412,7 +403,6 @@ public class Game {
     }
 
     public ArrayList<Player> verifyPlayerOrder() {
-        ArrayList<Player> playerorder = new ArrayList<>();
         Player minplayer = listOfPlayers.get(0);
         for (int count = 1; count < listOfPlayers.size(); count++) {
             if (listOfPlayers.get(count).getLastassistantplayed().getValue() < minplayer.getLastassistantplayed().getValue())
@@ -441,7 +431,7 @@ public class Game {
 
     public void startGame() {
         ArrayList<Player> playerOrder=new ArrayList<>();
-        Random rnd = new Random();//
+        Random rnd = new Random();
         int num;
         int index=0;
         if(numOfPlayers==2)
@@ -464,10 +454,6 @@ public class Game {
         assistantPhase();
     }
 
-    public void endOfPlayerTurn() {
-        if (verifyType.isProfessorcontroll())
-            verifyType.setProfessorcontroll(false);
-    }
 
 }
 
