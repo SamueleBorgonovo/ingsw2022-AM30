@@ -55,18 +55,18 @@ class BoardTest {
         // Also tests addCoinToReserve and removeCoinsFromReserve
 
         // Test 2 Players Game
-        assertEquals(20,game2players.getBoard().getCoinReserve());
+        assertEquals(18,game2players.getBoard().getCoinReserve());
         game2players.getBoard().removeCoinsFromReserve(3);
-        assertEquals(17, game2players.getBoard().getCoinReserve());
+        assertEquals(15, game2players.getBoard().getCoinReserve());
         game2players.getBoard().addCoinstoReserve(1);
-        assertEquals(18, game2players.getBoard().getCoinReserve());
+        assertEquals(16, game2players.getBoard().getCoinReserve());
 
         // Test 3 Players Game
-        assertEquals(20,game3players.getBoard().getCoinReserve());
+        assertEquals(17,game3players.getBoard().getCoinReserve());
         game3players.getBoard().removeCoinsFromReserve(4);
-        assertEquals(16, game3players.getBoard().getCoinReserve());
-        game3players.getBoard().addCoinstoReserve(3);
-        assertEquals(19, game3players.getBoard().getCoinReserve());
+        assertEquals(13, game3players.getBoard().getCoinReserve());
+        game3players.getBoard().addCoinstoReserve(2);
+        assertEquals(15, game3players.getBoard().getCoinReserve());
     }
 
     /*@Test

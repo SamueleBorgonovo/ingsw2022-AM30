@@ -11,13 +11,14 @@ public class Player {
     private int coins;
     private ArrayList<Assistant> assistantCards = new ArrayList<>();
     private Assistant lastassistantplayed;
-    private boolean assistantPlayed = false;
+    private boolean assistantPlayed;
 
     public Player(String nickname, Wizard wizard){
         this.nickname = nickname;
         this.wizard = wizard;
-        coins = 0;
+        coins = 1;
         lastassistantplayed = null;
+        assistantPlayed = false;
         playerState = PlayerState.WAITING;
         for(Assistant assistant : Assistant.values())
             assistantCards.add(assistant);

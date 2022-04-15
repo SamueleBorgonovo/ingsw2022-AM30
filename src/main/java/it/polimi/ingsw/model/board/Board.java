@@ -31,11 +31,12 @@ public class Board {
         for (Cloud cloud : clouds)
             cloud.setStudents(this.getAndRemoveRandomBagStudent(numofplayers + 1));
         if (gamemode == GameMode.EXPERTMODE){
-            coinReserve = 20;
+            coinReserve = 20 - numofplayers;
             ArrayList<Effect> effects = new ArrayList<>();
             effects.add(new Effect1());
             effects.add(new Effect2());
             effects.add(new Effect3());
+            effects.add(new Effect4());
             effects.add(new Effect5());
             effects.add(new Effect6());
             effects.add(new Effect7());
