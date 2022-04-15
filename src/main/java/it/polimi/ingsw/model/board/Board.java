@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.exceptions.OutOfCoinsException;
 import it.polimi.ingsw.model.effects.*;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
@@ -80,9 +81,9 @@ public class Board {
         coinReserve = coinReserve +Coins;
     }
 
-    public void removeCoinsFromReserve(int Coins){
+    public void removeCoinsFromReserve(int Coins) throws OutOfCoinsException {
         if(coinReserve < Coins)
-            coinReserve =0;
+            throw new OutOfCoinsException();
         else
             coinReserve = coinReserve -Coins;
     }

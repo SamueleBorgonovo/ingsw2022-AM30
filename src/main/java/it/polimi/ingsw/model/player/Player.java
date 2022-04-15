@@ -11,6 +11,7 @@ public class Player {
     private int coins;
     private ArrayList<Assistant> assistantCards = new ArrayList<>();
     private Assistant lastassistantplayed;
+    private boolean assistantPlayed = false;
 
     public Player(String nickname, Wizard wizard){
         this.nickname = nickname;
@@ -75,7 +76,13 @@ public class Player {
 
     public Assistant getLastassistantplayed(){return lastassistantplayed;}
 
+    public boolean isAssistantPlayed() {
+        return assistantPlayed;
+    }
 
+    public void setAssistantPlayed(boolean assistantPlayed) {
+        this.assistantPlayed = assistantPlayed;
+    }
 }
 
 

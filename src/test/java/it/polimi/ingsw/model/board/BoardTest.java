@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.exceptions.OutOfCoinsException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
@@ -50,7 +51,7 @@ class BoardTest {
     }
 
     @Test
-    void getCoinReserve() {
+    void getCoinReserve() throws OutOfCoinsException {
         // Also tests addCoinToReserve and removeCoinsFromReserve
 
         // Test 2 Players Game

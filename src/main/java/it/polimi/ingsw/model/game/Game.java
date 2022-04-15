@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.player.*;
 import it.polimi.ingsw.exceptions.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
     private int gameID;
@@ -29,11 +30,8 @@ public class Game {
     }
 
     public void setGameID(int gameID) {
-        this.gameID = gameID;
-    }
 
-    public void setState(GameState gameState) { //SECONDO ME SI PUò TOGLIERE
-        this.gameState = gameState;
+        this.gameID = gameID;
     }
 
     public GameState getState() {
@@ -56,9 +54,6 @@ public class Game {
             gameState = GameState.PLAYING;
     }
 
-    public GameMode getGameMode() {
-        return gameMode;
-    }
 
     public Board getBoard() {
         return board;
@@ -95,6 +90,7 @@ public class Game {
         }
         return tempcloud;
     }
+
 
     public Player winner() {
         ArrayList<Player> playersCandidate = new ArrayList<>();
@@ -134,7 +130,7 @@ public class Game {
     public void selectCloud(int playerID, int cloudID) throws InvalidTurnExceptions, WrongCloudException {
         boolean endOfTurn = true;
         if(getPlayer(playerID).getPlayerState()==PlayerState.CLOUDPHASE) {
-            if(getCloud(cloudID).isChoosen() == false){
+            if(!getCloud(cloudID).isChoosen()){
                     for(int count=0;count<getCloud(cloudID).getStudents().size();count++)
                         getPlayer(playerID).getPlance().addStudentEntrance(getCloud(cloudID).getStudents().get(count));
                     getCloud(cloudID).setChoosen(true);
@@ -154,6 +150,10 @@ public class Game {
                 for(int count=0;count<getBoard().getClouds().size();count++){
                     getBoard().getClouds().get(count).setChoosen(false);
                 }
+
+                for (Player player : listOfPlayers)
+                    player.setPlayerState(PlayerState.WAITING);
+                assistantPhase();
                 //Create a method StartTurn and use it on playerorder.get(0)
             }
             //Fix the code below
@@ -179,6 +179,7 @@ public class Game {
                 getPlayer(playerID).getPlance().addStudentHall(student);
                 getPlayer(playerID).getPlance().getEntrance().remove(student);
                 movementStudents++;
+                verifyProfessorControl();
                 if (getPlayer(playerID).getPlance().getNumberOfStudentHall(student) % 3 == 0)
                     getPlayer(playerID).addCoins();
                 if (movementStudents == numOfPlayers + 1) {
@@ -241,6 +242,20 @@ public class Game {
         else throw new InvalidTurnExceptions();
     }
 
+    public void assistantPhase(){
+        for (Player player : listOfPlayers) {
+            do {
+                player.setPlayerState(PlayerState.ASSISTANTPHASE);
+            }while(!player.isAssistantPlayed());//<-------------------------------- modificare useAssistant
+            player.setPlayerState(PlayerState.WAITING);
+        }
+        for(Player player : listOfPlayers)
+            player.setAssistantPlayed(false);
+        verifyPlayerOrder();
+        listOfPlayers.get(0).setPlayerState(PlayerState.STUDENTPHASE);
+
+    }
+
     public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnExceptions, WrongValueException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.MOTHERNATUREPHASE) {
             if(numberOfMovement >= 1 && numberOfMovement <= getPlayer(playerID).getLastassistantplayed().getValue()) {
@@ -256,6 +271,7 @@ public class Game {
     }
 
     public void useCharacter(int playerID, Character character) {
+
         for (Player player : listOfPlayers)
             if (player.getPlayerID() == playerID) {
                 player.removeCoins(character.getCost());
@@ -424,32 +440,28 @@ public class Game {
     }
 
     public void startGame() {
-        //Inizialitazion of the bag
-       // ArrayList<Student> studentsColor = new ArrayList<>();
-       // for (Student student : Student.values()) {
-         //   for (int i = 0; i < 26; i++)
-          //      studentsColor.add(student);
-           // board.addStudentBag(studentsColor);
-        //}
+        ArrayList<Player> playerOrder=new ArrayList<>();
+        Random rnd = new Random();//
+        int num;
+        int index=0;
+        if(numOfPlayers==2)
+            num = rnd.nextInt(2);
+        else
+            num = rnd.nextInt(3);
+        for(int i=0;i<listOfPlayers.size();i++)
+            if(listOfPlayers.get(i).getPlayerID()==num)
+                index=i;
 
-        //Initialization of every Plance
-        int numTowers;
-        int numStudentsCloud;
-        if(listOfPlayers.size()==2){
-            numStudentsCloud=3;
-            numTowers=8;
-        }
-        else{
-            numStudentsCloud=4;
-            numTowers=6;
-        }
-        //Initialization of the plances
-        for(Player player : listOfPlayers)
-            for(int i=0; i<numTowers;i++)
-                player.getPlance().addTower();
-        //Initialization of the clouds
-        for(Cloud cloud: board.getClouds())
-            cloud.setStudents(board.getAndRemoveRandomBagStudent(numStudentsCloud));
+        for(int j=index; j<listOfPlayers.size(); j++)
+            playerOrder.add(listOfPlayers.get(j));
+
+        for(int k=0; k<index; k++)
+            playerOrder.add(listOfPlayers.get(k));
+
+        verifyPlayerOrder();
+        for(Player player : this.playerorder)
+            player.setPlayerState(PlayerState.WAITING);
+        assistantPhase();
     }
 
     public void endOfPlayerTurn() {
