@@ -71,4 +71,13 @@ public class Archipelago {
     public int getNumOfIslands(){
         return islands.size();
     }
+
+    public Island getSingleIsland(int islandid){ //<---------------------------------------------------------- ?
+        Island tempisland = null;
+        for(int count=0;count<getNumOfIslands();count++){
+            if(islandid == getIslands().get(count).getIslandID())
+                tempisland = getIslands().get(count);
+        }
+        return tempisland;
+    }
 }

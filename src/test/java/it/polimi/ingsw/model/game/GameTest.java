@@ -1,11 +1,13 @@
 package it.polimi.ingsw.model.game;
 
-import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.Wizard;
+import it.polimi.ingsw.exceptions.InvalidTurnExceptions;
+import it.polimi.ingsw.exceptions.WrongAssistantException;
+import it.polimi.ingsw.exceptions.WrongStudentException;
+import it.polimi.ingsw.model.player.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -75,15 +77,13 @@ class GameTest {
     }
 
     @Test
-    void getGameMode() {
-    }
-
-    @Test
     void getBoard() {
     }
 
     @Test
     void getNumOfPlayers() {
+        assertEquals(2,game2players.getNumOfPlayers());
+        assertEquals(3,game3players.getNumOfPlayers());
     }
 
     @Test
@@ -96,6 +96,16 @@ class GameTest {
 
     @Test
     void verifyProfessorControl() {
+        game2players.addPlayer(player1);
+        game2players.addPlayer(player2);
+        player1.getPlance().addStudentEntrance(Student.RED);
+        player1.getPlance().addStudentEntrance(Student.RED);
+        player2.getPlance().addStudentEntrance(Student.RED);
+        player1.getPlance().addStudentHall(Student.RED);
+        player1.getPlance().addStudentHall(Student.RED);
+        player2.getPlance().addStudentHall(Student.RED);
+        game2players.verifyProfessorControl();
+        assertEquals(Professor.RED_DRAGON, player1.getPlance().getProfessors().get(0));
     }
 
     @Test
@@ -111,15 +121,60 @@ class GameTest {
     }
 
     @Test
-    void moveStudentToHall() {
+    void moveStudentToHall() throws InvalidTurnExceptions, WrongStudentException {
+        game2players.addPlayer(player1);
+        game2players.addPlayer(player2);
+        player1.setPlayerState(PlayerState.STUDENTPHASE);
+        player1.getPlance().addStudentEntrance(Student.RED);
+        player1.getPlance().addStudentEntrance(Student.BLUE);
+        player1.getPlance().addStudentEntrance(Student.YELLOW);
+       // System.out.println(player1.getPlance().getEntrance());
+        try {
+            game2players.moveStudentToHall(1, Student.RED);
+            game2players.moveStudentToHall(1, Student.BLUE);
+            game2players.moveStudentToHall(1, Student.YELLOW);
+        }
+        catch (WrongStudentException e) {System.out.println("Errore");};
+       // System.out.println(player1.getPlance().getEntrance());
+        assertEquals(player1.getPlance().getNumberOfStudentHall(Student.RED),1);
+        assertEquals(player1.getPlance().getNumberOfStudentHall(Student.BLUE),1);
+        assertEquals(player1.getPlance().getNumberOfStudentHall(Student.YELLOW),1);
+       // game2players.moveStudentToHall(1, Student.RED);
     }
 
     @Test
-    void moveStudentToIsland() {
+    void moveStudentToIsland() throws InvalidTurnExceptions, WrongStudentException {
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(game2players.getBoard().getArchipelago().getSingleIsland(2).getStudents().get(0));
+        students.add(Student.RED);
+        students.add(Student.BLUE);
+        students.add(Student.YELLOW);
+        game2players.addPlayer(player1);
+        game2players.addPlayer(player2);
+        player1.setPlayerState(PlayerState.STUDENTPHASE);
+        player1.getPlance().addStudentEntrance(Student.RED);
+        player1.getPlance().addStudentEntrance(Student.BLUE);
+        player1.getPlance().addStudentEntrance(Student.YELLOW);
+        game2players.moveStudentToIsland(1,2,Student.RED);
+        game2players.moveStudentToIsland(1,2,Student.BLUE);
+        game2players.moveStudentToIsland(1,2,Student.YELLOW);
+        assertEquals(game2players.getBoard().getArchipelago().getSingleIsland(2).getStudents(),students);
     }
 
     @Test
-    void useAssistant() {
+    void useAssistant() throws WrongAssistantException, InvalidTurnExceptions {
+      /*  ArrayList<Assistant> wanted1 = new ArrayList<>(Arrays.asList(Assistant.values()));
+        ArrayList<Assistant> wanted2 = new ArrayList<>(Arrays.asList(Assistant.values()));
+        wanted1.remove(Assistant.CAT);
+        wanted2.remove(Assistant.DOG);
+        game2players.addPlayer(player1);
+        game2players.addPlayer(player2);
+        player1.setPlayerState(PlayerState.ASSISTANTPHASE);
+        game2players.useAssistant(1,Assistant.CAT);
+        player2.setPlayerState(PlayerState.ASSISTANTPHASE);
+        game2players.useAssistant(2,Assistant.DOG);
+        assertEquals(wanted1, player1.getAssistantCards());
+        assertEquals(wanted2, player2.getAssistantCards()); */
     }
 
     @Test
@@ -158,9 +213,6 @@ class GameTest {
     void verifyIslandInfluence() {
     }
 
-    @Test
-    void verifyProfessorControll() {
-    }
 
     @Test
     void verifyPlayerOrder() {

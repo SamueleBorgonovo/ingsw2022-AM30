@@ -73,14 +73,7 @@ public class Game {
         return tempplayer;
     }
 
-    public Island getIsland(int islandid){
-        Island tempisland = null;
-        for(int count=0;count<getBoard().getArchipelago().getNumOfIslands();count++){
-            if(islandid == getBoard().getArchipelago().getIslands().get(count).getIslandID())
-                tempisland = getBoard().getArchipelago().getIslands().get(count);
-        }
-        return tempisland;
-    }
+    // getIsland moved to class Archipelago
 
     public Cloud getCloud(int cloudid){
         Cloud tempcloud = null;
@@ -165,7 +158,7 @@ public class Game {
         if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
             if(getPlayer(playerID).getPlance().getEntrance().contains(student)){
                 getPlayer(playerID).getPlance().addStudentHall(student);
-                getPlayer(playerID).getPlance().getEntrance().remove(student);
+                getPlayer(playerID).getPlance().removeStudentEntrance(student);
                 movementStudents++;
                 verifyProfessorControl();
                 if (getPlayer(playerID).getPlance().getNumberOfStudentHall(student) % 3 == 0)
@@ -179,11 +172,12 @@ public class Game {
         else throw new InvalidTurnExceptions();
     }
 
-    public void moveStudentToIsland(int playerID, Island island, Student student) throws InvalidTurnExceptions, WrongStudentException {
+    public void moveStudentToIsland(int playerID, int islandID, Student student) throws InvalidTurnExceptions, WrongStudentException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
             if(getPlayer(playerID).getPlance().getEntrance().contains(student)){
+                Island island = getBoard().getArchipelago().getSingleIsland(islandID);
                 island.addStudent(student);
-                getPlayer(playerID).getPlance().getEntrance().remove(student);
+                getPlayer(playerID).getPlance().removeStudentFromHall(student);
                 movementStudents++;
                 if (movementStudents == numOfPlayers + 1) {
                     getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
@@ -252,7 +246,7 @@ public class Game {
             if(numberOfMovement >= 1 && numberOfMovement <= getPlayer(playerID).getLastassistantplayed().getValue()) {
                 for (int count = 0; count < numberOfMovement; count++)
                     mothernature.move();
-                verifyIslandInfluence(getIsland(mothernature.isOn()));
+                verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((mothernature.isOn())));
                 verifyMergeableIsland();
                 //probably have to put winner method
                 getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
