@@ -163,18 +163,22 @@ class GameTest {
 
     @Test
     void useAssistant() throws WrongAssistantException, InvalidTurnExceptions {
-      /*  ArrayList<Assistant> wanted1 = new ArrayList<>(Arrays.asList(Assistant.values()));
+        ArrayList<Assistant> wanted1 = new ArrayList<>(Arrays.asList(Assistant.values()));
         ArrayList<Assistant> wanted2 = new ArrayList<>(Arrays.asList(Assistant.values()));
         wanted1.remove(Assistant.CAT);
         wanted2.remove(Assistant.DOG);
         game2players.addPlayer(player1);
         game2players.addPlayer(player2);
+        ArrayList<Player> playerorder = new ArrayList<>();
+        playerorder = game2players.getPlayerorder();
+        playerorder.add(0,player1);
+        playerorder.add(1,player2);
         player1.setPlayerState(PlayerState.ASSISTANTPHASE);
         game2players.useAssistant(1,Assistant.CAT);
         player2.setPlayerState(PlayerState.ASSISTANTPHASE);
         game2players.useAssistant(2,Assistant.DOG);
         assertEquals(wanted1, player1.getAssistantCards());
-        assertEquals(wanted2, player2.getAssistantCards()); */
+        assertEquals(wanted2, player2.getAssistantCards());
     }
 
     @Test

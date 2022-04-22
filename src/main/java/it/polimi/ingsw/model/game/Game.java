@@ -188,7 +188,6 @@ public class Game {
     }
 
     public void useAssistant(int playerID, Assistant assistant) throws WrongAssistantException,InvalidTurnExceptions{
-        ArrayList<Player> playerorder = verifyPlayerOrder();
         Player playertoplay;
 
         if(getPlayer(playerID).getPlayerState() == PlayerState.ASSISTANTPHASE) { //Check that is the right id of the player that has to play
@@ -203,17 +202,18 @@ public class Game {
             else{
                 if(numplayerhasplayed==1){  //Second to choose, control if first has played same assistant
                     if(getPlayer(playerID).getAssistantCards().contains(assistant)) {
-                        if(assistant != playerorder.get(numplayerhasplayed-1).getLastassistantplayed() || getPlayer(playerID).getAssistantCards().size()==1) {
-                            getPlayer(playerID).removeAssistant(assistant);
-                            getPlayer(playerID).setAssistantPlayed(true);
-                            if(numOfPlayers==2)
-                                numplayerhasplayed=0;
-                            else
-                                numplayerhasplayed++;
+                            if (assistant != playerorder.get(numplayerhasplayed - 1).getLastassistantplayed() || getPlayer(playerID).getAssistantCards().size() == 1) {
+                                getPlayer(playerID).removeAssistant(assistant);
+                                getPlayer(playerID).setAssistantPlayed(true);
+                                if (numOfPlayers == 2)
+                                    numplayerhasplayed = 0;
+                                else
+                                    numplayerhasplayed++;
 
+                            } else throw new WrongAssistantException();
                         } else throw new WrongAssistantException();
-                    } else throw new WrongAssistantException();
-                } else {
+                }
+                else {
                     if(getPlayer(playerID).getAssistantCards().contains(assistant)){ //Third to choose, control first and second assistants played
                         if((assistant != playerorder.get(numplayerhasplayed-1).getLastassistantplayed() && assistant != playerorder.get(numplayerhasplayed-2).getLastassistantplayed()) || getPlayer(playerID).getAssistantCards().size()==1){
                             getPlayer(playerID).removeAssistant(assistant);
@@ -228,10 +228,10 @@ public class Game {
     }
 
     public void assistantPhase(){
-        for (Player player : listOfPlayers) {
+        for (Player player : playerorder) {
             do {
                 player.setPlayerState(PlayerState.ASSISTANTPHASE);
-            }while(!player.isAssistantPlayed());//<-------------------------------- modificare useAssistant
+            }while(!player.isAssistantPlayed());
             player.setPlayerState(PlayerState.WAITING);
         }
         for(Player player : listOfPlayers)
@@ -424,28 +424,33 @@ public class Game {
     }
 
     public void startGame() {
-        ArrayList<Player> playerOrder=new ArrayList<>();
         Random rnd = new Random();
-        int num;
         int index=0;
-        if(numOfPlayers==2)
-            num = rnd.nextInt(2);
-        else
-            num = rnd.nextInt(3);
-        for(int i=0;i<listOfPlayers.size();i++)
+        int num;
+        do {    //nextInt can give he int 0, but playerID start from 1
+            if (numOfPlayers == 2)
+                num = rnd.nextInt(2);
+            else
+                num = rnd.nextInt(3);
+        }while(num==0);
+
+        for(int i=0;i<numOfPlayers;i++)
             if(listOfPlayers.get(i).getPlayerID()==num)
                 index=i;
 
-        for(int j=index; j<listOfPlayers.size(); j++)
-            playerOrder.add(listOfPlayers.get(j));
+        for(int j=index; j<numOfPlayers; j++)
+            playerorder.add(listOfPlayers.get(j));
 
         for(int k=0; k<index; k++)
-            playerOrder.add(listOfPlayers.get(k));
+            playerorder.add(listOfPlayers.get(k));
 
-        verifyPlayerOrder();
-        for(Player player : this.playerorder)
+        for(Player player : playerorder)
             player.setPlayerState(PlayerState.WAITING);
         assistantPhase();
+    }
+
+    public ArrayList<Player> getPlayerorder(){
+        return playerorder;
     }
 
 
