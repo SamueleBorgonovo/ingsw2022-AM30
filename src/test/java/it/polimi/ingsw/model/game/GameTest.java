@@ -1,6 +1,4 @@
 package it.polimi.ingsw.model.game;
-import java.util.Random;
-
 
 import it.polimi.ingsw.exceptions.InvalidTurnExceptions;
 import it.polimi.ingsw.exceptions.WrongAssistantException;
@@ -11,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,38 +18,41 @@ class GameTest {
 
     Game game2players = new Game(GameMode.SIMPLEMODE,2);
     Game game3players = new Game(GameMode.SIMPLEMODE,3);
-    Player player1 = new Player("Daniele", Wizard.WIZARDYELLOW);
-    Player player2 = new Player("Giuseppe", Wizard.WIZARDBLUE);
-    Player player3 = new Player("Samuele", Wizard.WIZARDGREEN);
+    Player player1;
+    Player player2;
+    Player player3;
 
     @Test
     void getState() {
         // Test 2 Players Game
-        game2players.addPlayer(player1);
+        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
         assertEquals(GameState.WAITINGFORPLAYERS,game2players.getState());
-        game2players.addPlayer(player2);
+        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
         assertEquals(GameState.PLAYING,game2players.getState());
-        game3players.addPlayer(player1);
 
         // Test 3 Players Game
+        game3players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
         assertEquals(GameState.WAITINGFORPLAYERS,game3players.getState());
-        game3players.addPlayer(player2);
+        game3players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
         assertEquals(GameState.WAITINGFORPLAYERS,game3players.getState());
-        game3players.addPlayer(player3);
+        game3players.addPlayer("Samuele", Wizard.WIZARDGREEN);
         assertEquals(GameState.PLAYING,game3players.getState());
     }
 
     @Test
     void addPlayer() {
         // Test 2 Players Game
+
         assertEquals(0,game2players.getListOfPlayers().size());
-        game2players.addPlayer(player1);
+        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        player1 = game2players.getPlayer(1);
         assertTrue(game2players.getListOfPlayers().contains(player1));
         assertEquals(1,game2players.getListOfPlayers().size());
         assertEquals(Tower.WHITE,player1.getPlance().getTower());
         assertEquals(8,player1.getPlance().getNumOfTowers());
         assertEquals(7,player1.getPlance().getEntrance().size());
-        game2players.addPlayer(player2);
+        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        player2 = game2players.getPlayer(2);
         assertTrue(game2players.getListOfPlayers().contains(player2));
         assertEquals(2,game2players.getListOfPlayers().size());
         assertEquals(Tower.BLACK,player2.getPlance().getTower());
@@ -58,20 +60,24 @@ class GameTest {
         assertEquals(7,player2.getPlance().getEntrance().size());
 
         // Test 3 Players Game
+
         assertEquals(0,game3players.getListOfPlayers().size());
-        game3players.addPlayer(player1);
+        game3players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        player1 = game3players.getPlayer(1);
         assertTrue(game3players.getListOfPlayers().contains(player1));
         assertEquals(1,game3players.getListOfPlayers().size());
         assertEquals(Tower.WHITE,player1.getPlance().getTower());
         assertEquals(6,player1.getPlance().getNumOfTowers());
         assertEquals(9,player1.getPlance().getEntrance().size());
-        game3players.addPlayer(player2);
+        game3players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        player2 = game3players.getPlayer(2);
         assertTrue(game3players.getListOfPlayers().contains(player2));
         assertEquals(2,game3players.getListOfPlayers().size());
         assertEquals(Tower.BLACK,player2.getPlance().getTower());
         assertEquals(6,player2.getPlance().getNumOfTowers());
         assertEquals(9,player2.getPlance().getEntrance().size());
-        game3players.addPlayer(player3);
+        game3players.addPlayer("Samuele", Wizard.WIZARDGREEN);
+        player3 = game3players.getPlayer(3);
         assertTrue(game3players.getListOfPlayers().contains(player3));
         assertEquals(3,game3players.getListOfPlayers().size());
         assertEquals(Tower.GREY,player3.getPlance().getTower());
@@ -99,8 +105,10 @@ class GameTest {
 
     @Test
     void verifyProfessorControl() {
-        game2players.addPlayer(player1);
-        game2players.addPlayer(player2);
+        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        player1 = game2players.getPlayer(1);
+        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        player2 = game2players.getPlayer(2);
         System.out.println(game2players.getListOfPlayers().get(0).getPlayerID());
         System.out.println(game2players.getListOfPlayers().get(1).getPlayerID());
         player1.getPlance().addStudentEntrance(Student.RED);
@@ -123,8 +131,10 @@ class GameTest {
 
     @Test
     void moveStudentToHall() throws InvalidTurnExceptions, WrongStudentException {
-        game2players.addPlayer(player1);
-        game2players.addPlayer(player2);
+        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        player1 = game2players.getPlayer(1);
+        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        player2 = game2players.getPlayer(2);
         player1.setPlayerState(PlayerState.STUDENTPHASE);
         player1.getPlance().addStudentEntrance(Student.RED);
         player1.getPlance().addStudentEntrance(Student.BLUE);
@@ -168,8 +178,10 @@ class GameTest {
         ArrayList<Assistant> wanted2 = new ArrayList<>(Arrays.asList(Assistant.values()));
         wanted1.remove(Assistant.CAT);
         wanted2.remove(Assistant.DOG);
-        game2players.addPlayer(player1);
-        game2players.addPlayer(player2);
+        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        player1 = game2players.getPlayer(1);
+        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        player2 = game2players.getPlayer(2);
         ArrayList<Player> playerorder = new ArrayList<>();
         playerorder = game2players.getPlayerorder();
         playerorder.add(0,player1);
@@ -184,8 +196,10 @@ class GameTest {
 
     @Test
     void moveMotherNature() throws InvalidTurnExceptions, WrongValueException, WrongAssistantException {
-        game2players.addPlayer(player1);
-        game2players.addPlayer(player2);
+        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        player1 = game2players.getPlayer(1);
+        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        player2 = game2players.getPlayer(2);
         int num=0;
         ArrayList<Player> playerorder = new ArrayList<>();
         playerorder = game2players.getPlayerorder();
@@ -238,9 +252,12 @@ class GameTest {
 
     @Test
     void verifyPlayerOrder() {
-        game3players.addPlayer(player1);
-        game3players.addPlayer(player2);
-        game3players.addPlayer(player3);
+        game3players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        player1 = game3players.getPlayer(1);
+        game3players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        player2 = game3players.getPlayer(2);
+        game3players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        player3 = game3players.getPlayer(3);
 
         //Set last played assistant
         player1.removeAssistant(Assistant.SNAKE);

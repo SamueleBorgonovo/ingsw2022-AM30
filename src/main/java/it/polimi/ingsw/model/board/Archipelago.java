@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Archipelago {
     private final ArrayList<Island> islands = new ArrayList<>();
@@ -11,9 +12,11 @@ public class Archipelago {
 
 
     public Archipelago() {
+        Random rnd = new Random();
+
         for(int i = 1; i < 13; i++)
             islands.add(new Island(i));
-        mothernature = new MotherNature((int) (Math.random() * 11 + 1));
+        mothernature = new MotherNature(rnd.nextInt(12) + 1);
     }
 
     public MotherNature getMothernature() {
@@ -65,14 +68,12 @@ public class Archipelago {
             //I have the island that now I have as the one with mother nature
             mothernature.setMotherNature(min);
         }
-
         int i=1;
         for(Island island : islands){
             island.setIslandID(i);
             i++;
         }
     }
-
 
     public int getNumOfIslands(){
         return islands.size();

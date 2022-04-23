@@ -30,7 +30,6 @@ public class Game {
     }
 
     public void setGameID(int gameID) {
-
         this.gameID = gameID;
     }
 
@@ -38,7 +37,9 @@ public class Game {
         return gameState;
     }
 
-    public void addPlayer(Player player) {
+    public void addPlayer(String nickname, Wizard wizard) {
+        Player player = new Player(nickname, wizard);
+
         listOfPlayers.add(player);
         player.setPlayerID(listOfPlayers.size());
         if (numOfPlayers == 2) {
@@ -54,7 +55,6 @@ public class Game {
             gameState = GameState.PLAYING;
     }
 
-
     public Board getBoard() {
         return board;
     }
@@ -64,13 +64,10 @@ public class Game {
     }
 
     public Player getPlayer(int playerid) {
-        Player tempplayer = null;
-        for (int count = 0; count < numOfPlayers; count++) {
-            if (playerid == listOfPlayers.get(count).getPlayerID()) {
-                tempplayer = listOfPlayers.get(count);
-            }
-        }
-        return tempplayer;
+        for(Player player : listOfPlayers)
+            if(player.getPlayerID() == playerid)
+                return player;
+        return null;
     }
 
     // getIsland moved to class Archipelago
@@ -287,7 +284,6 @@ public class Game {
                 board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(), 0);
                 i = 0;
             }
-        //Probably have to put winner method
     }
 
     public Student chooseStudent() {
@@ -321,11 +317,9 @@ public class Game {
         return 0;
     }
 
-
     public ArrayList<Player> getListOfPlayers() {
         return listOfPlayers;
     }
-
 
     public void verifyIslandInfluence(Island island) {
         // Check which Player has the most influence on an Island and arrange the towers appropriately.
@@ -378,15 +372,10 @@ public class Game {
         int numofstudentcolorhallmax = 0;
         Player playermax = null;
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < Professor.values().length; i++) {
             for (Player player : listOfPlayers) {
                 numofstudentcolorhall = player.getPlance().getNumberOfStudentHall(Student.values()[i]);
-                if (verifyType.isProfessorcontroll()) {
-                    if (numofstudentcolorhall >= numofstudentcolorhallmax) {
-                        numofstudentcolorhallmax = numofstudentcolorhall;
-                        playermax = player;
-                    }
-                } else if (numofstudentcolorhall > numofstudentcolorhallmax) {
+                if (numofstudentcolorhall > numofstudentcolorhallmax || (verifyType.isProfessorcontroll() && numofstudentcolorhall >= numofstudentcolorhallmax)) {
                     numofstudentcolorhallmax = numofstudentcolorhall;
                     playermax = player;
                 }
@@ -431,34 +420,20 @@ public class Game {
 
     public void startGame() {
         Random rnd = new Random();
-        int index=0;
-        int num;
-        do {    //nextInt can give he int 0, but playerID start from 1
-            if (numOfPlayers == 2)
-                num = rnd.nextInt(2);
-            else
-                num = rnd.nextInt(3);
-        }while(num==0);
+        int index;
 
-        for(int i=0;i<numOfPlayers;i++)
-            if(listOfPlayers.get(i).getPlayerID()==num)
-                index=i;
-
+        index = rnd.nextInt(numOfPlayers);
         for(int j=index; j<numOfPlayers; j++)
             playerorder.add(listOfPlayers.get(j));
-
         for(int k=0; k<index; k++)
             playerorder.add(listOfPlayers.get(k));
 
-        for(Player player : playerorder)
-            player.setPlayerState(PlayerState.WAITING);
         assistantPhase();
     }
 
     public ArrayList<Player> getPlayerorder(){
         return playerorder;
     }
-
 
 }
 
