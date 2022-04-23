@@ -16,7 +16,7 @@ public class Game {
     private Board board;
     private final int numOfPlayers;
     private VerifyType verifyType;
-    private MotherNature mothernature;
+  //  private MotherNature mothernature;
     private int numplayerhasplayed=0;
     private int movementStudents=0;
     private ArrayList<Player> playerorder = new ArrayList<>();
@@ -244,10 +244,10 @@ public class Game {
     public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnExceptions, WrongValueException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.MOTHERNATUREPHASE) {
             if(numberOfMovement >= 1 && numberOfMovement <= getPlayer(playerID).getLastassistantplayed().getValue()) {
-                for (int count = 0; count < numberOfMovement; count++)
-                    mothernature.move();
-                verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((mothernature.isOn())));
-                verifyMergeableIsland();
+               for (int count = 0; count < numberOfMovement; count++)
+                    this.getBoard().getArchipelago().getMothernature().move(this.getBoard().getArchipelago().getNumOfIslands());
+                verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((this.getBoard().getArchipelago().getMothernature().isOn())));
+              this.verifyMergeableIsland();
                 //probably have to put winner method
                 getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
             } else throw new WrongValueException();
@@ -262,6 +262,7 @@ public class Game {
                 player.removeCoins(character.getCost());
                 character.setUsed(true);
             }
+
     }
 
     public VerifyType getVerifyType() {
@@ -270,15 +271,19 @@ public class Game {
 
     public void verifyMergeableIsland() {
         for (int i = 0; i < board.getArchipelago().getNumOfIslands(); i++)
-            if (i != board.getArchipelago().getNumOfIslands() - 1 &&
+            if (i != board.getArchipelago().getNumOfIslands() -1 &&
                     board.getArchipelago().getIslands().get(i).getTowerColor() ==
-                            board.getArchipelago().getIslands().get(i + 1).getTowerColor()) {
+                            board.getArchipelago().getIslands().get(i + 1).getTowerColor()
+            && board.getArchipelago().getIslands().get(i).getTowerColor()!= null
+            && board.getArchipelago().getIslands().get(i+1).getTowerColor()!= null ) {
                 board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(),
                         board.getArchipelago().getIslands().get(i + 1).getIslandID());
-                i = 0;
+                i=0;
             } else if (i == board.getArchipelago().getNumOfIslands() - 1 &&
                     board.getArchipelago().getIslands().get(i).getTowerColor() ==
-                            board.getArchipelago().getIslands().get(0).getTowerColor()) {
+                            board.getArchipelago().getIslands().get(0).getTowerColor()
+                    && board.getArchipelago().getIslands().get(i).getTowerColor()!= null
+                    && board.getArchipelago().getIslands().get(0).getTowerColor()!= null) {
                 board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(), 0);
                 i = 0;
             }
@@ -291,6 +296,7 @@ public class Game {
     }
 
     public int chooseIsland() {
+
         //to implement in GUI to choose the island
         return 1;
     }

@@ -84,7 +84,9 @@ public class Player {
     public void setAssistantPlayed(boolean assistantPlayed) {
         this.assistantPlayed = assistantPlayed;
     }
-}
+
+    }
+
 
 
 

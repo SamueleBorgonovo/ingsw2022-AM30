@@ -19,7 +19,7 @@ class MotherNatureTest {
         MotherNature mothernature = new MotherNature(islandID);
         int numberofmovement = 12;
         for(int count=0;count<numberofmovement;count++)
-            mothernature.move();
+            mothernature.move(12);
         assertEquals(12,mothernature.isOn());
     }
     @Test
@@ -28,7 +28,7 @@ class MotherNatureTest {
         MotherNature mothernature = new MotherNature(islandID);
         int numberofmovement = 3;
         for(int count=0;count<numberofmovement;count++)
-            mothernature.move();
+            mothernature.move(12);
         assertEquals(8,mothernature.isOn());
     }
 

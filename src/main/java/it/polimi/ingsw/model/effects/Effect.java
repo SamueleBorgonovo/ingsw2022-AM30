@@ -5,6 +5,6 @@ import it.polimi.ingsw.model.game.Game;
 public abstract class Effect {
 
     public abstract int getCost();
-    public abstract void effect(Game game, int playerID );
+    public abstract void effect(Game game, int playerID);
 
 }

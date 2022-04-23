@@ -65,6 +65,12 @@ public class Archipelago {
             //I have the island that now I have as the one with mother nature
             mothernature.setMotherNature(min);
         }
+
+        int i=1;
+        for(Island island : islands){
+            island.setIslandID(i);
+            i++;
+        }
     }
 
 

@@ -10,6 +10,7 @@ public class Effect3 extends Effect {
     public int getCost(){ return cost;}
     @Override
     public void effect(Game game, int playerID) {
+
         game.verifyIslandInfluence(game.getBoard().getArchipelago().getIslands().get(game.chooseIsland()));
     }
 }

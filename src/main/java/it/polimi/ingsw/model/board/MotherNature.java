@@ -13,8 +13,8 @@ package it.polimi.ingsw.model.board;
             return islandID;
         }
 
-        public void move() {
-            if(isOn()==12){
+        public void move(int numOfIslands) {
+            if(isOn()==numOfIslands){
                 this.islandID=1;
             }
             else{

@@ -1,8 +1,11 @@
 package it.polimi.ingsw.model.game;
+import java.util.Random;
+
 
 import it.polimi.ingsw.exceptions.InvalidTurnExceptions;
 import it.polimi.ingsw.exceptions.WrongAssistantException;
 import it.polimi.ingsw.exceptions.WrongStudentException;
+import it.polimi.ingsw.exceptions.WrongValueException;
 import it.polimi.ingsw.model.player.*;
 import org.junit.jupiter.api.Test;
 
@@ -98,6 +101,8 @@ class GameTest {
     void verifyProfessorControl() {
         game2players.addPlayer(player1);
         game2players.addPlayer(player2);
+        System.out.println(game2players.getListOfPlayers().get(0).getPlayerID());
+        System.out.println(game2players.getListOfPlayers().get(1).getPlayerID());
         player1.getPlance().addStudentEntrance(Student.RED);
         player1.getPlance().addStudentEntrance(Student.RED);
         player2.getPlance().addStudentEntrance(Student.RED);
@@ -114,10 +119,6 @@ class GameTest {
 
     @Test
     void endTurn() {
-    }
-
-    @Test
-    void moveStudentToEntrance() {
     }
 
     @Test
@@ -182,7 +183,24 @@ class GameTest {
     }
 
     @Test
-    void moveMotherNature() {
+    void moveMotherNature() throws InvalidTurnExceptions, WrongValueException, WrongAssistantException {
+        game2players.addPlayer(player1);
+        game2players.addPlayer(player2);
+        int num=0;
+        ArrayList<Player> playerorder = new ArrayList<>();
+        playerorder = game2players.getPlayerorder();
+        playerorder.add(0,player1);
+        playerorder.add(1,player2);
+
+        for(Assistant assistant: Assistant.values()) {
+            int j= game2players.getBoard().getArchipelago().getMothernature().isOn();
+            player1.setPlayerState(PlayerState.ASSISTANTPHASE);
+            game2players.useAssistant(1,assistant);
+            player1.setPlayerState(PlayerState.MOTHERNATUREPHASE);
+            Random rnd = new Random();
+            game2players.moveMotherNature(1, num = (rnd.nextInt(assistant.getMovement())+1));
+            assertEquals(((j + num - 1) % 12) + 1, game2players.getBoard().getArchipelago().getMothernature().isOn());
+        }
     }
 
     @Test
