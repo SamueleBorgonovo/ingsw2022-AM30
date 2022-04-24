@@ -155,21 +155,22 @@ class GameTest {
 
     @Test
     void moveStudentToIsland() throws InvalidTurnExceptions, WrongStudentException {
-       /* ArrayList<Student> students = new ArrayList<>();
-        students.add(game2players.getBoard().getArchipelago().getIslands().get(game2players.getBoard().getArchipelago().getMothernature().isOn()+1).getStudents().get(0));
+        ArrayList<Student> students = new ArrayList<>();
         students.add(Student.RED);
         students.add(Student.BLUE);
         students.add(Student.YELLOW);
-        game2players.addPlayer(player1);
-        game2players.addPlayer(player2);
+        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        player1 = game2players.getPlayer(1);
+        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        player2 = game2players.getPlayer(2);
         player1.setPlayerState(PlayerState.STUDENTPHASE);
         player1.getPlance().addStudentEntrance(Student.RED);
         player1.getPlance().addStudentEntrance(Student.BLUE);
         player1.getPlance().addStudentEntrance(Student.YELLOW);
-        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMothernature().isOn()+1,Student.RED);
-        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMothernature().isOn()+1,Student.BLUE);
-        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMothernature().isOn()+1,Student.YELLOW);
-        assertEquals(game2players.getBoard().getArchipelago().getSingleIsland(2).getStudents(),students); */
+        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMothernature().isOn(),Student.RED);
+        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMothernature().isOn(),Student.BLUE);
+        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMothernature().isOn(),Student.YELLOW);
+        assertEquals(game2players.getBoard().getArchipelago().getSingleIsland(game2players.getBoard().getArchipelago().getMothernature().isOn()).getStudents(),students);
     }
 
     @Test
@@ -225,21 +226,7 @@ class GameTest {
     void getVerifyType() {
     }
 
-    @Test
-    void verifyMergeableIsland() {
-    }
 
-    @Test
-    void chooseStudent() {
-    }
-
-    @Test
-    void chooseIsland() {
-    }
-
-    @Test
-    void chooseStudentFromPlance() {
-    }
 
     @Test
     void getListOfPlayers() {

@@ -87,4 +87,24 @@ public class Archipelago {
         }
         return tempisland;
     }
+
+    public void verifyMergeableIsland() {
+        for (int i = 0; i < this.getNumOfIslands(); i++)
+            if (i != this.getNumOfIslands() -1 &&
+                    islands.get(i).getTowerColor() ==
+                            islands.get(i + 1).getTowerColor()
+                    && islands.get(i).getTowerColor()!= null
+                    && islands.get(i+1).getTowerColor()!= null ) {
+                this.mergeIslands(islands.get(i).getIslandID(),
+                        islands.get(i + 1).getIslandID());
+                i=0;
+            } else if (i == this.getNumOfIslands() - 1 &&
+                    islands.get(i).getTowerColor() ==
+                            islands.get(0).getTowerColor()
+                    && islands.get(i).getTowerColor()!= null
+                    && islands.get(0).getTowerColor()!= null) {
+                this.mergeIslands(islands.get(i).getIslandID(), 1);
+                i = 0;
+            }
+    }
 }

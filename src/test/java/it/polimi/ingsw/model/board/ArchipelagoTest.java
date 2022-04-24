@@ -1,6 +1,16 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.game.Tower;
+import it.polimi.ingsw.model.player.Wizard;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class ArchipelagoTest {
+    Board board2Players = new Board(GameMode.EXPERTMODE,2);
+    Board board3Players = new Board(GameMode.EXPERTMODE,3);
+
     /*
     Island i1;
     Island i2;
@@ -126,4 +136,18 @@ class ArchipelagoTest {
         archipelago.mergeIslands(1,12);
         assertEquals(10,archipelago.getNumOfIslands());
     }*/
+
+    @Test
+    void verifyMergeableIsland() {
+        board2Players.getArchipelago().getSingleIsland(4).setTowerColor(Tower.WHITE);
+        board2Players.getArchipelago().getSingleIsland(5).setTowerColor(Tower.WHITE);
+        board2Players.getArchipelago().verifyMergeableIsland();
+        assertEquals(11, board2Players.getArchipelago().getNumOfIslands());
+        assertEquals(Tower.WHITE,board2Players.getArchipelago().getSingleIsland(4).getTowerColor());
+        board2Players.getArchipelago().getSingleIsland(1).setTowerColor(Tower.WHITE);
+        board2Players.getArchipelago().getSingleIsland(11).setTowerColor(Tower.WHITE);
+        board2Players.getArchipelago().verifyMergeableIsland();
+        assertEquals(10, board2Players.getArchipelago().getNumOfIslands());
+        assertEquals(Tower.WHITE,board2Players.getArchipelago().getSingleIsland(1).getTowerColor());
+    }
 }

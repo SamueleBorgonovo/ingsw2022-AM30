@@ -246,7 +246,7 @@ public class Game {
                for (int count = 0; count < numberOfMovement; count++)
                     this.getBoard().getArchipelago().getMothernature().move(this.getBoard().getArchipelago().getNumOfIslands());
                 verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((this.getBoard().getArchipelago().getMothernature().isOn())));
-              this.verifyMergeableIsland();
+              this.getBoard().getArchipelago().verifyMergeableIsland();
                 //probably have to put winner method
                 getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
             } else throw new WrongValueException();
@@ -286,26 +286,6 @@ public class Game {
 
     public EffectHandler getEffectHandler() {
         return effectHandler;
-    }
-
-    public void verifyMergeableIsland() {
-        for (int i = 0; i < board.getArchipelago().getNumOfIslands(); i++)
-            if (i != board.getArchipelago().getNumOfIslands() -1 &&
-                    board.getArchipelago().getIslands().get(i).getTowerColor() ==
-                            board.getArchipelago().getIslands().get(i + 1).getTowerColor()
-            && board.getArchipelago().getIslands().get(i).getTowerColor()!= null
-            && board.getArchipelago().getIslands().get(i+1).getTowerColor()!= null ) {
-                board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(),
-                        board.getArchipelago().getIslands().get(i + 1).getIslandID());
-                i=0;
-            } else if (i == board.getArchipelago().getNumOfIslands() - 1 &&
-                    board.getArchipelago().getIslands().get(i).getTowerColor() ==
-                            board.getArchipelago().getIslands().get(0).getTowerColor()
-                    && board.getArchipelago().getIslands().get(i).getTowerColor()!= null
-                    && board.getArchipelago().getIslands().get(0).getTowerColor()!= null) {
-                board.getArchipelago().mergeIslands(board.getArchipelago().getIslands().get(i).getIslandID(), 0);
-                i = 0;
-            }
     }
 
     public Student chooseStudent() {
