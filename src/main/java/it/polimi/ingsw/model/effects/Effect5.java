@@ -6,10 +6,9 @@ public class Effect5 extends Effect {
     // Place a ban on an island of your choice.
     // The first time Mother Nature moves there the ban falls and does not calculate the influence there.
     // The bans can be a maximum of 4.
-    private int cost = 2;
 
     @Override
-    public int getCost(){ return cost;}
+    public int getCost(){ return 2;}
     @Override
     public void effect(Game game, int playerID) {
         if(game.getEffectHandler().getNumofislandstops()>0) {

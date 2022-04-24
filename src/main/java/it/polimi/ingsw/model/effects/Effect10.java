@@ -9,10 +9,9 @@ public class Effect10 extends Effect{
     private int numberofstudents=0;
     private ArrayList<Student> choosedstudents = new ArrayList<>();
     private ArrayList<Student> choosedstudentfromhall = new ArrayList<>();
-    private int cost = 1;
 
     @Override
-    public int getCost(){ return cost;}
+    public int getCost(){ return 1;}
 
     public void setNumberofstudents(int numberofstudents){
         if(numberofstudents >0 && numberofstudents <3)
