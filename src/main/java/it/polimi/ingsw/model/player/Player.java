@@ -85,6 +85,8 @@ public class Player {
         this.assistantPlayed = assistantPlayed;
     }
 
+    public void setLastassistantplayed(Assistant assistant){ lastassistantplayed=assistant;} //Only used for tests
+
     }
 
 

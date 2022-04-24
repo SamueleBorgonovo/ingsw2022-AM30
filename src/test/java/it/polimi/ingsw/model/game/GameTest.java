@@ -206,6 +206,9 @@ class GameTest {
         playerorder = game2players.getPlayerorder();
         playerorder.add(0,player1);
         playerorder.add(1,player2);
+        player1.setLastassistantplayed(Assistant.CAT);
+        player2.setLastassistantplayed(Assistant.DOG);
+
 
         for(Assistant assistant: Assistant.values()) {
             int j= game2players.getBoard().getArchipelago().getMothernature().isOn();
