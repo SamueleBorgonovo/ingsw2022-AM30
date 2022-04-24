@@ -8,18 +8,16 @@ public class Effect2 extends Effect {
 
     @Override
     public int getCost(){ return 2;}
+
     @Override
     public void effect(Game game, int playerID) {
         game.getEffectHandler().setProfessorcontroll(true);
+        game.setCharacterInUse(null);
     }
 
     @Override
-    public void inizialize(Game game) {
-
-    }
+    public void inizialize(Game game) {}
 
     @Override
-    public void secondPartEffect(Game game, int playerID) {
-
-    }
+    public void secondPartEffect(Game game, int playerID) {}
 }

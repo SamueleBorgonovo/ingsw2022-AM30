@@ -10,6 +10,7 @@ public class Effect3 extends Effect {
 
     @Override
     public int getCost(){ return 3;}
+
     @Override
     public void effect(Game game, int playerID) {
         prevPlayerState = game.getListOfPlayers().get(playerID).getPlayerState();
