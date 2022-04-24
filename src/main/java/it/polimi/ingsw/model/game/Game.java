@@ -16,10 +16,10 @@ public class Game {
     private Board board;
     private final int numOfPlayers;
     private EffectHandler effectHandler;
-  //  private MotherNature mothernature;
     private int numplayerhasplayed=0;
     private int movementStudents=0;
     private ArrayList<Player> playerorder = new ArrayList<>();
+    private Character characterInUse = null;
 
     public Game(GameMode gameMode, int numofplayers) {
         this.gameMode = gameMode;
@@ -28,6 +28,8 @@ public class Game {
         board = new Board(gameMode, numofplayers);
         effectHandler = new EffectHandler();
     }
+
+    public void setCharacterInUse(Character character){characterInUse=character;}
 
     public void setGameID(int gameID) {
         this.gameID = gameID;
@@ -80,6 +82,7 @@ public class Game {
         }
         return tempcloud;
     }
+
 
 
     public Player winner() {
@@ -256,8 +259,29 @@ public class Game {
         for (Player player : listOfPlayers)
             if (player.getPlayerID() == playerID) {
                 player.removeCoins(character.getCost());
+                characterInUse=character;
+                character.getEffect().effect(this,playerID);
                 character.setUsed(true);
             }
+    }
+
+    public void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnExceptions, WrongIslandException{
+        if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERISLANDPHASE) {
+            if (islandID >= 1 && islandID <= board.getArchipelago().getNumOfIslands()) {
+                effectHandler.setIslandIDchoose(islandID);
+                characterInUse.getEffect().secondPartEffect(playerID);
+            }
+            else throw new WrongIslandException();
+        }
+        else throw new InvalidTurnExceptions();
+    }
+
+    public void CharacterStudentsPhase(int playerID,ArrayList<Student> students) throws InvalidTurnExceptions{
+        if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERSTUDENTSPHASE) {
+            effectHandler.setStudentschoose(students);
+            characterInUse.getEffect().secondPartEffect(playerID);
+        }
+        else throw new InvalidTurnExceptions();
     }
 
     public EffectHandler getEffectHandler() {

@@ -19,7 +19,7 @@ public class Effect8 extends Effect {
     }
 
     @Override
-    public void secondPartEffect() {
+    public void secondPartEffect(int playerID) {
 
     }
 }

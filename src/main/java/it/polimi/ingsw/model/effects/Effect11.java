@@ -33,7 +33,7 @@ public class Effect11 extends Effect{
     }
 
     @Override
-    public void secondPartEffect() {
+    public void secondPartEffect(int playerID) {
 
     }
 }

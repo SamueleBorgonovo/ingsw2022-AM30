@@ -20,7 +20,7 @@ public class Effect6 extends Effect {
     }
 
     @Override
-    public void secondPartEffect() {
+    public void secondPartEffect(int playerID) {
 
     }
 }
