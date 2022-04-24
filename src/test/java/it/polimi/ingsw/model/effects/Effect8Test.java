@@ -1,12 +1,28 @@
 package it.polimi.ingsw.model.effects;
 
+import it.polimi.ingsw.model.game.Game;
+import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.player.Wizard;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class Effect8Test {
 
     Effect effect8 = new Effect8();
+
+    Game game2players = new Game(GameMode.EXPERTMODE,2);
+    Game game3players = new Game(GameMode.EXPERTMODE,3);
+
+    @BeforeEach
+    void init() {
+        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game3players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game3players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game3players.addPlayer("Samuele", Wizard.WIZARDGREEN);
+    }
 
     @Test
     void getCost() {
@@ -15,5 +31,16 @@ class Effect8Test {
 
     @Test
     void effect() {
+        // Test 2 Players Game
+        for(int i = 1; i < 3; i++) {
+            effect8.effect(game2players, i);
+            assertEquals(game2players.getEffectHandler().getTwopoints(),i);
+        }
+
+        // Test 3 Players Game
+        for(int i = 1; i < 4; i++) {
+            effect8.effect(game3players, i);
+            assertEquals(game3players.getEffectHandler().getTwopoints(),i);
+        }
     }
 }

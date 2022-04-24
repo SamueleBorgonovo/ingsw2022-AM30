@@ -14,8 +14,8 @@ public class Effect5 extends Effect {
 
     @Override
     public void effect(Game game, int playerID) {
-        prevPlayerState = game.getListOfPlayers().get(playerID).getPlayerState();
-        game.getListOfPlayers().get(playerID).setPlayerState(PlayerState.CHARACTHERISLANDPHASE);
+        prevPlayerState = game.getPlayer(playerID).getPlayerState();
+        game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERISLANDPHASE);
     }
 
     @Override
@@ -28,6 +28,6 @@ public class Effect5 extends Effect {
             game.getEffectHandler().removeislandstop();
         }
         game.setCharacterInUse(null);
-        game.getListOfPlayers().get(playerID).setPlayerState(prevPlayerState);
+        game.getPlayer(playerID).setPlayerState(prevPlayerState);
     }
 }

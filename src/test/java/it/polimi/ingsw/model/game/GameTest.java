@@ -42,7 +42,6 @@ class GameTest {
     @Test
     void addPlayer() {
         // Test 2 Players Game
-
         assertEquals(0,game2players.getListOfPlayers().size());
         game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
         player1 = game2players.getPlayer(1);
@@ -60,7 +59,6 @@ class GameTest {
         assertEquals(7,player2.getPlance().getEntrance().size());
 
         // Test 3 Players Game
-
         assertEquals(0,game3players.getListOfPlayers().size());
         game3players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
         player1 = game3players.getPlayer(1);

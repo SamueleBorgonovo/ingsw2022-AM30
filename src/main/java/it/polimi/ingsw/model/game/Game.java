@@ -55,10 +55,8 @@ public class Game {
             for(int i = 0; i < 9; i++)
                 player.getPlance().addStudentEntrance(board.getAndRemoveRandomBagStudent(1).get(0));
         }
-        if (listOfPlayers.size() == numOfPlayers) {
-            gameState = GameState.PLAYING;
+        if (listOfPlayers.size() == numOfPlayers)
             this.startGame();
-        }
     }
 
     public Board getBoard() {
@@ -426,6 +424,7 @@ public class Game {
         Random rnd = new Random();
         int index;
 
+        gameState = GameState.PLAYING;
         index = rnd.nextInt(numOfPlayers);
         for(int j=index; j<numOfPlayers; j++)
             playerorder.add(listOfPlayers.get(j));

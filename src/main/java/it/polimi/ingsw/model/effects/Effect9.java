@@ -13,8 +13,8 @@ public class Effect9 extends Effect {
 
     @Override
     public void effect(Game game, int playerID) {
-        prevPlayerState = game.getListOfPlayers().get(playerID).getPlayerState();
-        game.getListOfPlayers().get(playerID).setPlayerState(PlayerState.CHARACTHERSTUDENTSPHASE);
+        prevPlayerState = game.getPlayer(playerID).getPlayerState();
+        game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERSTUDENTSPHASE);
     }
 
     @Override
@@ -25,6 +25,6 @@ public class Effect9 extends Effect {
         game.getEffectHandler().setNocolor(true);
         game.getEffectHandler().setStudent(game.getEffectHandler().getStudentschoose().get(0));
         game.setCharacterInUse(null);
-        game.getListOfPlayers().get(playerID).setPlayerState(prevPlayerState);
+        game.getPlayer(playerID).setPlayerState(prevPlayerState);
     }
 }

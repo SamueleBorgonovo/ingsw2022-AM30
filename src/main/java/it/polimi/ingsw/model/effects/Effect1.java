@@ -1,45 +1,41 @@
 package it.polimi.ingsw.model.effects;
 
 import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.game.Student;
-
-import java.util.ArrayList;
+import it.polimi.ingsw.model.player.PlayerState;
 
 public class Effect1 extends Effect {
-    private ArrayList<Student> studentsoncard = new ArrayList<>();
-    private Student choosedstudent;
-    private int choosedislandID;
-    private ArrayList<Island> island = new ArrayList<>();
-
-    public void setStudentsOnCard (Game game){ studentsoncard.addAll(game.getBoard().getAndRemoveRandomBagStudent(4));}
-    public ArrayList<Student> getStudentsOnCard (){ return studentsoncard;}
+    private PlayerState prevPlayerState;
 
     @Override
     public int getCost(){ return 1;}
 
     @Override
     public void effect(Game game, int playerID) {
-        choosedstudent = game.chooseStudent();
-        choosedislandID = game.chooseIsland();
-
-        island.addAll(game.getBoard().getArchipelago().getIslands());
-        for(int count=0;count < game.getBoard().getArchipelago().getNumOfIslands();count ++) {
-            if (island.get(count).getIslandID() == choosedislandID) {
-                island.get(count).addStudent(choosedstudent);
-                studentsoncard.remove(choosedstudent);
-            }
-        }
-        studentsoncard.addAll(game.getBoard().getAndRemoveRandomBagStudent(1));
+        prevPlayerState = game.getPlayer(playerID).getPlayerState();
+        game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERSTUDENTSPHASE);
     }
 
     @Override
     public void inizialize(Game game) {
-
+        game.getEffectHandler().setEffect1students(game.getBoard().getAndRemoveRandomBagStudent(4));
     }
 
     @Override
     public void secondPartEffect(Game game, int playerID) {
+        Student choosedstudent;
 
+        if(game.getListOfPlayers().get(playerID-1).getPlayerState() == PlayerState.CHARACTHERSTUDENTSPHASE)
+            game.getListOfPlayers().get(playerID-1).setPlayerState(PlayerState.CHARACTHERISLANDPHASE);
+        else if(game.getListOfPlayers().get(playerID-1).getPlayerState() == PlayerState.CHARACTHERISLANDPHASE) {
+            choosedstudent = game.getEffectHandler().getStudentschoose().get(0);
+            if(game.getEffectHandler().getEffect1students().contains(choosedstudent)){
+                game.getBoard().getArchipelago().getSingleIsland(game.getEffectHandler().getIslandIDchoose()).addStudent(choosedstudent);
+                game.getEffectHandler().removeStudentFromEffect1students(choosedstudent);
+                game.getEffectHandler().addStudentInEffect1students(game.getBoard().getAndRemoveRandomBagStudent(1).get(0));
+            }
+            game.setCharacterInUse(null);
+            game.getPlayer(playerID).setPlayerState(prevPlayerState);
+        }
     }
 }

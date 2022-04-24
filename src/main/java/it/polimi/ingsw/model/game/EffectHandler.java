@@ -13,6 +13,8 @@ public class EffectHandler {
    private int numofislandstops;
    private int islandIDchoose;
    private ArrayList<Student> studentschoose = new ArrayList<>();
+   private ArrayList<Student> effect1students = new ArrayList<>();
+    private ArrayList<Student> effect11students = new ArrayList<>();
 
    public EffectHandler(){
        twopoints = 0;
@@ -22,6 +24,36 @@ public class EffectHandler {
        Student student = null;
        numofislandstops = 4;
    }
+
+    public ArrayList<Student> getEffect1students() {
+        return effect1students;
+    }
+
+    public void removeStudentFromEffect1students(Student student) {
+        effect1students.remove(student);
+    }
+
+    public void addStudentInEffect1students(Student student) {
+        effect1students.add(student);
+    }
+
+    public void setEffect1students(ArrayList<Student> effect1students) { this.effect1students = effect1students; }
+
+    public ArrayList<Student> getEffect11students() {
+        return effect11students;
+    }
+
+    public void removeStudentFromEffect11students(Student student) {
+        effect11students.remove(student);
+    }
+
+    public void addStudentInEffect11students(Student student) {
+        effect11students.add(student);
+    }
+
+    public void setEffect11students(ArrayList<Student> effect11students) {
+        this.effect11students = effect11students;
+    }
 
     public int getIslandIDchoose() {
         return islandIDchoose;

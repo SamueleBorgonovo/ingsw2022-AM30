@@ -2,37 +2,35 @@ package it.polimi.ingsw.model.effects;
 
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Student;
-
-import java.util.ArrayList;
+import it.polimi.ingsw.model.player.PlayerState;
 
 public class Effect11 extends Effect{
-
-    private ArrayList<Student> students = new ArrayList<>();
-    private Student choosedstudent;
+    private PlayerState prevPlayerState;
 
     @Override
     public int getCost(){ return 2;}
 
-    public void setStudentsOnCard (Game game){
-        students.addAll(game.getBoard().getAndRemoveRandomBagStudent(4));
-    }
-    public ArrayList<Student> getStudentsOnCard (){ return students;} //Just to test it
-
     @Override
     public void effect(Game game, int playerID) {
-        choosedstudent = game.chooseStudent();
-        game.getPlayer(playerID).getPlance().addStudentHall(choosedstudent);
-        students.remove(choosedstudent);
-        students.addAll(game.getBoard().getAndRemoveRandomBagStudent(1));
+        prevPlayerState = game.getPlayer(playerID).getPlayerState();
+        game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERSTUDENTSPHASE);
     }
 
     @Override
     public void inizialize(Game game) {
-
+        game.getEffectHandler().setEffect11students(game.getBoard().getAndRemoveRandomBagStudent(4));
     }
 
     @Override
     public void secondPartEffect(Game game, int playerID) {
+        Student choosedstudent = game.getEffectHandler().getStudentschoose().get(0);
 
+        if(game.getEffectHandler().getEffect11students().contains(choosedstudent)){
+            game.getPlayer(playerID).getPlance().addStudentHall(choosedstudent);
+            game.getEffectHandler().removeStudentFromEffect11students(choosedstudent);
+            game.getEffectHandler().addStudentInEffect11students(game.getBoard().getAndRemoveRandomBagStudent(1).get(0));
+        }
+        game.setCharacterInUse(null);
+        game.getPlayer(playerID).setPlayerState(prevPlayerState);
     }
 }

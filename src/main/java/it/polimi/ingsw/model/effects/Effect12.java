@@ -14,8 +14,8 @@ public class Effect12 extends Effect{
 
     @Override
     public void effect(Game game, int playerID) {
-        prevPlayerState = game.getListOfPlayers().get(playerID).getPlayerState();
-        game.getListOfPlayers().get(playerID).setPlayerState(PlayerState.CHARACTHERSTUDENTSPHASE);
+        prevPlayerState = game.getPlayer(playerID).getPlayerState();
+        game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERSTUDENTSPHASE);
     }
 
     @Override
@@ -33,6 +33,6 @@ public class Effect12 extends Effect{
             }
         game.getBoard().addStudentBag(studentTobag);
         game.setCharacterInUse(null);
-        game.getListOfPlayers().get(playerID).setPlayerState(prevPlayerState);
+        game.getPlayer(playerID).setPlayerState(prevPlayerState);
     }
 }
