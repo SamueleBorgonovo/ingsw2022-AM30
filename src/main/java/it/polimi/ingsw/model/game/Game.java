@@ -27,6 +27,8 @@ public class Game {
         gameState = GameState.WAITINGFORPLAYERS;
         board = new Board(gameMode, numofplayers);
         effectHandler = new EffectHandler();
+        for(Character character : board.getCharacters())
+            character.getEffect().inizialize(this);
     }
 
     public void setCharacterInUse(Character character){characterInUse=character;}
@@ -53,8 +55,10 @@ public class Game {
             for(int i = 0; i < 9; i++)
                 player.getPlance().addStudentEntrance(board.getAndRemoveRandomBagStudent(1).get(0));
         }
-        if (listOfPlayers.size() == numOfPlayers)
+        if (listOfPlayers.size() == numOfPlayers) {
             gameState = GameState.PLAYING;
+            this.startGame();
+        }
     }
 
     public Board getBoard() {
@@ -267,7 +271,7 @@ public class Game {
         if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERISLANDPHASE) {
             if (islandID >= 1 && islandID <= board.getArchipelago().getNumOfIslands()) {
                 effectHandler.setIslandIDchoose(islandID);
-                characterInUse.getEffect().secondPartEffect(playerID);
+                characterInUse.getEffect().secondPartEffect(this, playerID);
             }
             else throw new WrongIslandException();
         }
@@ -277,7 +281,7 @@ public class Game {
     public void CharacterStudentsPhase(int playerID,ArrayList<Student> students) throws InvalidTurnExceptions{
         if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERSTUDENTSPHASE) {
             effectHandler.setStudentschoose(students);
-            characterInUse.getEffect().secondPartEffect(playerID);
+            characterInUse.getEffect().secondPartEffect(this, playerID);
         }
         else throw new InvalidTurnExceptions();
     }
