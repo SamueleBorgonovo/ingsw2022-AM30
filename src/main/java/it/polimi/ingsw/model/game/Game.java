@@ -147,7 +147,7 @@ public class Game {
 
                 for (Player player : listOfPlayers)
                     player.setPlayerState(PlayerState.WAITING);
-                assistantPhase(); //Start the new round
+                playerorder.get(0).setPlayerState(PlayerState.ASSISTANTPHASE);  //Start the new round
             }
 
         }
@@ -195,6 +195,8 @@ public class Game {
                     getPlayer(playerID).removeAssistant(assistant);
                     getPlayer(playerID).setAssistantPlayed(true);
                     numplayerhasplayed++;
+                    getPlayer(playerID).setPlayerState(PlayerState.WAITING);
+                    playerorder.get(1).setPlayerState(PlayerState.ASSISTANTPHASE);
                 } else
                     throw new WrongAssistantException();
             }
@@ -204,10 +206,16 @@ public class Game {
                             if (assistant != playerorder.get(numplayerhasplayed - 1).getLastassistantplayed() || getPlayer(playerID).getAssistantCards().size() == 1) {
                                 getPlayer(playerID).removeAssistant(assistant);
                                 getPlayer(playerID).setAssistantPlayed(true);
-                                if (numOfPlayers == 2)
+                                getPlayer(playerID).setPlayerState(PlayerState.WAITING);
+                                if (numOfPlayers == 2) {
                                     numplayerhasplayed = 0;
-                                else
+                                    verifyPlayerOrder();
+                                    playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
+                                }
+                                else {
                                     numplayerhasplayed++;
+                                    playerorder.get(2).setPlayerState(PlayerState.ASSISTANTPHASE);
+                                }
 
                             } else throw new WrongAssistantException();
                         } else throw new WrongAssistantException();
@@ -217,7 +225,10 @@ public class Game {
                         if((assistant != playerorder.get(numplayerhasplayed-1).getLastassistantplayed() && assistant != playerorder.get(numplayerhasplayed-2).getLastassistantplayed()) || getPlayer(playerID).getAssistantCards().size()==1){
                             getPlayer(playerID).removeAssistant(assistant);
                             getPlayer(playerID).setAssistantPlayed(true);
+                            getPlayer(playerID).setPlayerState(PlayerState.WAITING);
                             numplayerhasplayed=0;
+                            verifyPlayerOrder();
+                            playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
                         }else throw new WrongAssistantException();
                     }else throw new WrongAssistantException();
                 }
@@ -226,19 +237,6 @@ public class Game {
         else throw new InvalidTurnExceptions();
     }
 
-    public void assistantPhase(){
-        for (Player player : playerorder) {
-            do {
-                player.setPlayerState(PlayerState.ASSISTANTPHASE);
-            }while(!player.isAssistantPlayed());
-            player.setPlayerState(PlayerState.WAITING);
-        }
-        for(Player player : listOfPlayers)
-            player.setAssistantPlayed(false);
-        verifyPlayerOrder();
-        playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
-
-    }
 
     public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnExceptions, WrongValueException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.MOTHERNATUREPHASE) {
@@ -430,7 +428,7 @@ public class Game {
         for(int k=0; k<index; k++)
             playerorder.add(listOfPlayers.get(k));
 
-        assistantPhase();
+        playerorder.get(0).setPlayerState(PlayerState.ASSISTANTPHASE);
     }
 
     public ArrayList<Player> getPlayerorder(){
