@@ -15,10 +15,9 @@ public class Effect7 extends Effect{
     }
     public ArrayList<Student> getStudentOnCard(){ return students;}
     public void setNumberofstudent (int numberofstudent){ this.numberofstudent = numberofstudent;}
-    private int cost = 1;
 
     @Override
-    public int getCost(){ return cost;}
+    public int getCost(){ return 1;}
 
     //Capire come prendere numberofstudent dall'utente
 

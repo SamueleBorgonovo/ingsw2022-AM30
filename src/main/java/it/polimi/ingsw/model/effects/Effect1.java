@@ -11,13 +11,12 @@ public class Effect1 extends Effect {
     private Student choosedstudent;
     private int choosedislandID;
     private ArrayList<Island> island = new ArrayList<>();
-    private int cost = 1;
 
     public void setStudentsOnCard (Game game){ studentsoncard.addAll(game.getBoard().getAndRemoveRandomBagStudent(4));}
     public ArrayList<Student> getStudentsOnCard (){ return studentsoncard;}
 
     @Override
-    public int getCost(){ return cost;}
+    public int getCost(){ return 1;}
 
     @Override
     public void effect(Game game, int playerID) {
