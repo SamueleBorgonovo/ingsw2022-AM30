@@ -37,8 +37,16 @@ public class Effect10 extends Effect{
             game.getPlayer(playerID).getPlance().addStudentHall(choosedstudents.get(count));
             game.getPlayer(playerID).getPlance().addStudentEntrance(choosedstudentfromhall.get(count));
         }
+    }
 
-
+    @Override
+    public void inizialize(Game game) {
 
     }
+
+    @Override
+    public void secondPartEffect() {
+
+    }
+
 }

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.game;
 
-public class VerifyType {
+public class EffectHandler {
     // It contains parameters that Effect6, Effect8 and Effect9 can modify
     // to change the normal operation of the verifyIslandInfluence method.
    private int twopoints;
@@ -10,7 +10,7 @@ public class VerifyType {
    private Student student;
    private int numofislandstops;
 
-   public VerifyType(){
+   public EffectHandler(){
        twopoints = 0;
        notower = false;
        nocolor = false;

@@ -11,6 +11,16 @@ public class Effect6 extends Effect {
     public int getCost(){ return cost;}
     @Override
     public void effect(Game game, int playerID) {
-        game.getVerifyType().setNotower(true);
+        game.getEffectHandler().setNotower(true);
+    }
+
+    @Override
+    public void inizialize(Game game) {
+
+    }
+
+    @Override
+    public void secondPartEffect() {
+
     }
 }

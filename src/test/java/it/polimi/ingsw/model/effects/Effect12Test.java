@@ -72,7 +72,7 @@ class Effect12Test {
         int IslandID;
         final int gameID=1;
         final GameMode gameMode = null;
-        VerifyType verifyType = null;
+        EffectHandler verifyType = null;
         MotherNature mothernature = null;
         ArrayList<Player>listOfPlayers = new ArrayList<>();
         GameState gameState = null;

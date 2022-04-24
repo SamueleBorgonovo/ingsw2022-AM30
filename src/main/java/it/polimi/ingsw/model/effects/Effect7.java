@@ -40,4 +40,14 @@ public class Effect7 extends Effect{
 
 
     }
+
+    @Override
+    public void inizialize(Game game) {
+
+    }
+
+    @Override
+    public void secondPartEffect() {
+
+    }
 }

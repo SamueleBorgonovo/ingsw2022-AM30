@@ -33,4 +33,14 @@ public class Effect1 extends Effect {
         }
         studentsoncard.addAll(game.getBoard().getAndRemoveRandomBagStudent(1));
     }
+
+    @Override
+    public void inizialize(Game game) {
+
+    }
+
+    @Override
+    public void secondPartEffect() {
+
+    }
 }

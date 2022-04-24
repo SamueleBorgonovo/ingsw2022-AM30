@@ -10,7 +10,7 @@ class Effect10Test {
     void effect01() {
         final int gameID = 1;
         final GameMode gameMode = null;
-        VerifyType verifyType = null;
+        EffectHandler verifyType = null;
         MotherNature mothernature = null;
         ArrayList<Player> listOfPlayers = new ArrayList<>();
         GameState gameState = null;

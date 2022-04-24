@@ -12,9 +12,19 @@ public class Effect5 extends Effect {
     public int getCost(){ return cost;}
     @Override
     public void effect(Game game, int playerID) {
-        if(game.getVerifyType().getNumofislandstops()>0) {
+        if(game.getEffectHandler().getNumofislandstops()>0) {
             game.getBoard().getArchipelago().getIslands().get(game.chooseIsland()).setStop(true);
-            game.getVerifyType().removeislandstop();
+            game.getEffectHandler().removeislandstop();
         }
+    }
+
+    @Override
+    public void inizialize(Game game) {
+
+    }
+
+    @Override
+    public void secondPartEffect() {
+
     }
 }

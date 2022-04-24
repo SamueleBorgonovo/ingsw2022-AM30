@@ -8,10 +8,23 @@ public class Effect9 extends Effect {
     private int cost = 3;
 
     @Override
-    public int getCost(){ return cost;}
+    public int getCost() {
+        return cost;
+    }
+
     @Override
     public void effect(Game game, int playerID) {
-        game.getVerifyType().setNocolor(true);
-        game.getVerifyType().setStudent(game.chooseStudent());
+        game.getEffectHandler().setNocolor(true);
+        game.getEffectHandler().setStudent(game.chooseStudent());
+    }
+
+    @Override
+    public void inizialize(Game game) {
+
+    }
+
+    @Override
+    public void secondPartEffect() {
+
     }
 }

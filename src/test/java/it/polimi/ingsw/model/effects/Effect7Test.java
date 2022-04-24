@@ -19,7 +19,7 @@ class Effect7Test {
         //TEST NOT WORKING BECAUSE FOR NOW PLAYER CAN'T CHOOSE STUDENTS TO SWAP
         final int gameID = 1;
         final GameMode gameMode = null;
-        VerifyType verifyType = null;
+        EffectHandler verifyType = null;
         MotherNature mothernature = null;
         ArrayList<Player> listOfPlayers = new ArrayList<>();
         GameState gameState = null;

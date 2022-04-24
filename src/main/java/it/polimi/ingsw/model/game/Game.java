@@ -15,7 +15,7 @@ public class Game {
     private GameState gameState;
     private Board board;
     private final int numOfPlayers;
-    private VerifyType verifyType;
+    private EffectHandler effectHandler;
   //  private MotherNature mothernature;
     private int numplayerhasplayed=0;
     private int movementStudents=0;
@@ -26,7 +26,7 @@ public class Game {
         this.numOfPlayers = numofplayers;
         gameState = GameState.WAITINGFORPLAYERS;
         board = new Board(gameMode, numofplayers);
-        verifyType = new VerifyType();
+        effectHandler = new EffectHandler();
     }
 
     public void setGameID(int gameID) {
@@ -130,8 +130,8 @@ public class Game {
             if(numplayerhasplayed < numOfPlayers) {
                 //Set next player to play
                 getPlayer(playerID).setPlayerState(PlayerState.WAITING);
-                if (verifyType.isProfessorcontroll())
-                    verifyType.setProfessorcontroll(false);
+                if (effectHandler.isProfessorcontroll())
+                    effectHandler.setProfessorcontroll(false);
                 playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
                 //Qui possiamo pure mandare un messaggio al server tipo "Tocca al secondo giocatore"
             }
@@ -185,7 +185,6 @@ public class Game {
     }
 
     public void useAssistant(int playerID, Assistant assistant) throws WrongAssistantException,InvalidTurnExceptions{
-        Player playertoplay;
 
         if(getPlayer(playerID).getPlayerState() == PlayerState.ASSISTANTPHASE) { //Check that is the right id of the player that has to play
             if (numplayerhasplayed == 0) {  //First to choose, no controls to do
@@ -253,17 +252,16 @@ public class Game {
     }
 
     public void useCharacter(int playerID, Character character) {
-
+        //To add control if player is in the right phase
         for (Player player : listOfPlayers)
             if (player.getPlayerID() == playerID) {
                 player.removeCoins(character.getCost());
                 character.setUsed(true);
             }
-
     }
 
-    public VerifyType getVerifyType() {
-        return verifyType;
+    public EffectHandler getEffectHandler() {
+        return effectHandler;
     }
 
     public void verifyMergeableIsland() {
@@ -329,27 +327,27 @@ public class Game {
 
         if (island.isStop()) {
             island.setStop(false);
-            verifyType.addislandstop();
+            effectHandler.addislandstop();
         } else {
             for (Player player : listOfPlayers) {
                 for (Professor professor : player.getPlance().getProfessors())
                     for (Student student : island.getStudents())
                         if (professor.ordinal() == student.ordinal())
-                            if (!verifyType.isNocolor() || (verifyType.isNocolor() && !verifyType.getStudent().equals(student)))
+                            if (!effectHandler.isNocolor() || (effectHandler.isNocolor() && !effectHandler.getStudent().equals(student)))
                                 score++;
-                for (int i=0; i<island.getNumOfTowers() && player.getPlance().getTower().equals(island.getTowerColor()) && !verifyType.isNotower(); i++)
+                for (int i = 0; i<island.getNumOfTowers() && player.getPlance().getTower().equals(island.getTowerColor()) && !effectHandler.isNotower(); i++)
                     score++;
-                if (verifyType.getTwopoints()!=0 && player.getPlayerID() == verifyType.getTwopoints()) {
+                if (effectHandler.getTwopoints()!=0 && player.getPlayerID() == effectHandler.getTwopoints()) {
                     score = score + 2;
-                    verifyType.setTwopoints(0);
+                    effectHandler.setTwopoints(0);
                 }
                 if (score > maxscore) {
                     maxscore = score;
                     playermaxscore = player;
                 }
             }
-            verifyType.setNocolor(false);
-            verifyType.setNotower(false);
+            effectHandler.setNocolor(false);
+            effectHandler.setNotower(false);
             if (playermaxscore != null && !playermaxscore.getPlance().getTower().equals(island.getTowerColor()) && maxscore != 0) {
                 if (island.getNumOfTowers()==0)
                     island.setTowerColor(playermaxscore.getPlance().getTower());
@@ -375,7 +373,7 @@ public class Game {
         for (int i = 0; i < Professor.values().length; i++) {
             for (Player player : listOfPlayers) {
                 numofstudentcolorhall = player.getPlance().getNumberOfStudentHall(Student.values()[i]);
-                if (numofstudentcolorhall > numofstudentcolorhallmax || (verifyType.isProfessorcontroll() && numofstudentcolorhall >= numofstudentcolorhallmax)) {
+                if (numofstudentcolorhall > numofstudentcolorhallmax || (effectHandler.isProfessorcontroll() && numofstudentcolorhall >= numofstudentcolorhallmax)) {
                     numofstudentcolorhallmax = numofstudentcolorhall;
                     playermax = player;
                 }

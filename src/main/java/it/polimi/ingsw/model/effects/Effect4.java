@@ -14,4 +14,14 @@ public class Effect4 extends Effect{
     public void effect(Game game, int playerID) {
 
     }
+
+    @Override
+    public void inizialize(Game game) {
+
+    }
+
+    @Override
+    public void secondPartEffect() {
+
+    }
 }

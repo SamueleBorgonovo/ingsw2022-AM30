@@ -13,4 +13,14 @@ public class Effect3 extends Effect {
 
         game.verifyIslandInfluence(game.getBoard().getArchipelago().getIslands().get(game.chooseIsland()));
     }
+
+    @Override
+    public void inizialize(Game game) {
+
+    }
+
+    @Override
+    public void secondPartEffect() {
+
+    }
 }

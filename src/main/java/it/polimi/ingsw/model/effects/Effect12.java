@@ -24,4 +24,14 @@ public class Effect12 extends Effect{
         }
         game.getBoard().addStudentBag(studentTobag);
     }
+
+    @Override
+    public void inizialize(Game game) {
+
+    }
+
+    @Override
+    public void secondPartEffect() {
+
+    }
 }
