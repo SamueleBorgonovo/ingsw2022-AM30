@@ -26,17 +26,18 @@ class ArchipelagoTest {
     void getStudentIslands() {
         ArrayList<Student> studentWanted= new ArrayList<>();
         ArrayList<Student> student;
-        board2Players.getArchipelago().getMothernature().setMotherNature(3);
-        studentWanted.add(board2Players.getArchipelago().getSingleIsland(1).getStudents().get(0));
+        int num = board2Players.getArchipelago().getMothernature().isOn();
+
+        studentWanted.add(board2Players.getArchipelago().getSingleIsland(num+1).getStudents().get(0));
         studentWanted.add(Student.RED);
         studentWanted.add(Student.RED);
         studentWanted.add(Student.YELLOW);
         studentWanted.add(Student.BLUE);
-        board2Players.getArchipelago().getSingleIsland(1).addStudent(Student.RED);
-        board2Players.getArchipelago().getSingleIsland(1).addStudent(Student.RED);
-        board2Players.getArchipelago().getSingleIsland(1).addStudent(Student.YELLOW);
-        board2Players.getArchipelago().getSingleIsland(1).addStudent(Student.BLUE);
-        student=board2Players.getArchipelago().getStudentIslands(1);
+        board2Players.getArchipelago().getSingleIsland(num+1).addStudent(Student.RED);
+        board2Players.getArchipelago().getSingleIsland(num+1).addStudent(Student.RED);
+        board2Players.getArchipelago().getSingleIsland(num+1).addStudent(Student.YELLOW);
+        board2Players.getArchipelago().getSingleIsland(num+1).addStudent(Student.BLUE);
+        student=board2Players.getArchipelago().getStudentIslands(num+1);
         assertEquals(student, studentWanted);
     }
 
