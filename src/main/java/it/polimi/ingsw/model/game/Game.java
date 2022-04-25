@@ -242,19 +242,33 @@ public class Game {
 
     public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnExceptions, WrongValueException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.MOTHERNATUREPHASE) {
-            if(numberOfMovement >= 1 && numberOfMovement <= getPlayer(playerID).getLastassistantplayed().getValue()) {
-               for (int count = 0; count < numberOfMovement; count++)
-                    this.getBoard().getArchipelago().getMothernature().move(this.getBoard().getArchipelago().getNumOfIslands());
-                verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((this.getBoard().getArchipelago().getMothernature().isOn())));
-              this.getBoard().getArchipelago().verifyMergeableIsland();
-                //probably have to put winner method
-                getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
-            } else throw new WrongValueException();
-        }
-        else throw new InvalidTurnExceptions();
+            if (!this.getEffectHandler().getTwomoremoves()) {  //Check if effect4 is in use
+                if (numberOfMovement >= 1 && numberOfMovement <= getPlayer(playerID).getLastassistantplayed().getValue()) {
+                    for (int count = 0; count < numberOfMovement; count++)
+                        this.getBoard().getArchipelago().getMothernature().move(this.getBoard().getArchipelago().getNumOfIslands());
+                    verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((this.getBoard().getArchipelago().getMothernature().isOn())));
+                    this.getBoard().getArchipelago().verifyMergeableIsland();
+                    //probably have to put winner method
+                    getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
+                } else throw new WrongValueException();
+            } else{
+                //Effect4 used
+                if (numberOfMovement >= 1 && numberOfMovement+2 <= getPlayer(playerID).getLastassistantplayed().getValue()) {
+                    for (int count = 0; count < numberOfMovement; count++)
+                        this.getBoard().getArchipelago().getMothernature().move(this.getBoard().getArchipelago().getNumOfIslands());
+                    verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((this.getBoard().getArchipelago().getMothernature().isOn())));
+                    this.getBoard().getArchipelago().verifyMergeableIsland();
+                    //probably have to put winner method
+                    this.getEffectHandler().setTwomoremoves(false);
+                    getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
+                } else throw new WrongValueException();
+            }
+        } else throw new InvalidTurnExceptions();
     }
 
     public void useCharacter(int playerID, Character character) {
+        //Check on effect exception if it put everything like before
+
         //To add control if player is in the right phase
         for (Player player : listOfPlayers)
             if (player.getPlayerID() == playerID) {
@@ -265,7 +279,7 @@ public class Game {
             }
     }
 
-    public void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnExceptions, WrongIslandException{
+    public void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnExceptions, WrongIslandException, WrongStudentEffectException {
         if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERISLANDPHASE) {
             if (islandID >= 1 && islandID <= board.getArchipelago().getNumOfIslands()) {
                 effectHandler.setIslandIDchoose(islandID);
@@ -276,7 +290,7 @@ public class Game {
         else throw new InvalidTurnExceptions();
     }
 
-    public void CharacterStudentsPhase(int playerID,ArrayList<Student> students) throws InvalidTurnExceptions{
+    public void CharacterStudentsPhase(int playerID,ArrayList<Student> students) throws InvalidTurnExceptions, WrongStudentEffectException {
         if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERSTUDENTSPHASE) {
             effectHandler.setStudentschoose(students);
             characterInUse.getEffect().secondPartEffect(this, playerID);
@@ -288,35 +302,14 @@ public class Game {
         return effectHandler;
     }
 
-    public Student chooseStudent() {
+    public Student chooseStudent() { //Remove
         //to implement in GUI
         return Student.BLUE;
     }
 
-    public int chooseIsland() {
-
-        //to implement in GUI to choose the island
-        return 1;
-    }
-
     //Just to test Effect7
-    public Student chooseStudentFromPlance() {
+    public Student chooseStudentFromPlance() {   //Remove
         return Student.YELLOW;
-    }
-
-    public Assistant chooseAssistant() {
-        //To implement in GUI and to do the right implement with game's rules and with check if the Assistant is already played
-        return Assistant.CAT;
-    }
-
-    public int chooseNumberOfMotherNatureMovement(int playerid) {
-        int lastassistantplayedvalue = getPlayer(playerid).getLastassistantplayed().getValue();
-        //To implement in GUI the choose from player
-        int choosednumber=5; //Set =5 to do tests
-        if(choosednumber>=1 && choosednumber<=lastassistantplayedvalue)
-            return choosednumber;
-        //To implement Exception if doesn't enter in if
-        return 0;
     }
 
     public ArrayList<Player> getListOfPlayers() {

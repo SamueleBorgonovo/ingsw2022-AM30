@@ -11,6 +11,7 @@ public class Effect4 extends Effect{
 
     @Override
     public void effect(Game game, int playerID) {
+        game.getEffectHandler().setTwomoremoves(true);
 
     }
 

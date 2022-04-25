@@ -33,7 +33,7 @@ class BoardTest {
         int randomeffectsstudents;
 
         // Test 2 Players Game
-        randomeffectsstudents = game2players.getEffectHandler().getEffect1students().size() + game2players.getEffectHandler().getEffect11students().size();
+        randomeffectsstudents = game2players.getEffectHandler().getEffect1students().size() + game2players.getEffectHandler().getEffect11students().size() + game2players.getEffectHandler().getEffect7students().size();
         assertEquals(100 - randomeffectsstudents, game2players.getBoard().getNumOfStudentsBag());
         students = game2players.getBoard().getAndRemoveRandomBagStudent(5);
         assertEquals(95 - randomeffectsstudents, game2players.getBoard().getNumOfStudentsBag());
@@ -41,7 +41,7 @@ class BoardTest {
         assertEquals(100 - randomeffectsstudents, game2players.getBoard().getNumOfStudentsBag());
 
         // Test 3 Players Game
-        randomeffectsstudents = game3players.getEffectHandler().getEffect1students().size() + game3players.getEffectHandler().getEffect11students().size();
+        randomeffectsstudents = game3players.getEffectHandler().getEffect1students().size() + game3players.getEffectHandler().getEffect11students().size() + game3players.getEffectHandler().getEffect7students().size();
         assertEquals(81 - randomeffectsstudents, game3players.getBoard().getNumOfStudentsBag());
         students = game3players.getBoard().getAndRemoveRandomBagStudent(5);
         assertEquals(76 - randomeffectsstudents, game3players.getBoard().getNumOfStudentsBag());

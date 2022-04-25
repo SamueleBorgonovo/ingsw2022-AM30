@@ -14,7 +14,9 @@ public class EffectHandler {
    private int islandIDchoose;
    private ArrayList<Student> studentschoose = new ArrayList<>();
    private ArrayList<Student> effect1students = new ArrayList<>();
-    private ArrayList<Student> effect11students = new ArrayList<>();
+   private ArrayList<Student> effect11students = new ArrayList<>();
+   private ArrayList<Student> effect7students = new ArrayList<>();
+   private boolean twomoremoves = false;
 
    public EffectHandler(){
        twopoints = 0;
@@ -24,6 +26,14 @@ public class EffectHandler {
        Student student = null;
        numofislandstops = 4;
    }
+
+    public ArrayList<Student> getEffect7students() { return effect7students;}
+
+    public void setEffect7students(ArrayList<Student> effect7students) {this.effect7students = effect7students;}
+
+    public void removeStudentFromEffect7(Student student){ effect7students.remove(student);}
+
+    public void addStudentInEffect7(Student student){ effect7students.add(student);}
 
     public ArrayList<Student> getEffect1students() {
         return effect1students;
@@ -123,6 +133,8 @@ public class EffectHandler {
         this.student = student;
     }
 
+    public void setTwomoremoves(boolean choose){ twomoremoves=choose;}
 
+    public boolean getTwomoremoves(){ return twomoremoves;}
 
 }
