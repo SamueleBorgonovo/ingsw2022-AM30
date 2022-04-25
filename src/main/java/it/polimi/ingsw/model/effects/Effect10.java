@@ -51,10 +51,8 @@ public class Effect10 extends Effect{
 
             game.setCharacterInUse(null);
             game.getPlayer(playerID).setPlayerState(prevPlayerState);
-        } else{
-            game.getPlayer(playerID).setPlayerState(prevPlayerState);
+        } else
             throw new WrongStudentEffectException();
-        }
     }
 
 }

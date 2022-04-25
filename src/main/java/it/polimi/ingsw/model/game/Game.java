@@ -266,7 +266,7 @@ public class Game {
         } else throw new InvalidTurnExceptions();
     }
 
-    public void useCharacter(int playerID, Character character) {
+    public void useCharacter(int playerID, Character character)  throws InvalidStopException {
         //Check on effect exception if it put everything like before
 
         //To add control if player is in the right phase

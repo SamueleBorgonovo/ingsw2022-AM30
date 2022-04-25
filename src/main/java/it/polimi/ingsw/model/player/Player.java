@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Player {
     private final String nickname;
@@ -20,8 +21,7 @@ public class Player {
         lastassistantplayed = null;
         assistantPlayed = false;
         playerState = PlayerState.WAITING;
-        for(Assistant assistant : Assistant.values())
-            assistantCards.add(assistant);
+        Collections.addAll(assistantCards, Assistant.values());
     }
 
     public void setPlayerID(int playerID) {
@@ -31,6 +31,7 @@ public class Player {
     public void setPlance(Plance plance) {
         this.plance = plance;
     }
+
     public String getNickname() {
         return nickname;
     }

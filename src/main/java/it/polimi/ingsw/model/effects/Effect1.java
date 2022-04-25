@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.effects;
 
+import it.polimi.ingsw.exceptions.WrongStudentEffectException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.PlayerState;
@@ -22,20 +23,22 @@ public class Effect1 extends Effect {
     }
 
     @Override
-    public void secondPartEffect(Game game, int playerID) {
+    public void secondPartEffect(Game game, int playerID) throws WrongStudentEffectException {
         Student choosedstudent;
 
-        if(game.getListOfPlayers().get(playerID-1).getPlayerState() == PlayerState.CHARACTHERSTUDENTSPHASE)
-            game.getListOfPlayers().get(playerID-1).setPlayerState(PlayerState.CHARACTHERISLANDPHASE);
+        if(game.getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERSTUDENTSPHASE)
+            game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERISLANDPHASE);
         else if(game.getListOfPlayers().get(playerID-1).getPlayerState() == PlayerState.CHARACTHERISLANDPHASE) {
             choosedstudent = game.getEffectHandler().getStudentschoose().get(0);
             if(game.getEffectHandler().getEffect1students().contains(choosedstudent)){
                 game.getBoard().getArchipelago().getSingleIsland(game.getEffectHandler().getIslandIDchoose()).addStudent(choosedstudent);
                 game.getEffectHandler().removeStudentFromEffect1students(choosedstudent);
                 game.getEffectHandler().addStudentInEffect1students(game.getBoard().getAndRemoveRandomBagStudent(1).get(0));
+                game.setCharacterInUse(null);
+                game.getPlayer(playerID).setPlayerState(prevPlayerState);
             }
-            game.setCharacterInUse(null);
-            game.getPlayer(playerID).setPlayerState(prevPlayerState);
+            else
+                throw new WrongStudentEffectException();
         }
     }
 }

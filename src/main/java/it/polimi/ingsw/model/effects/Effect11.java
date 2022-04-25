@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.effects;
 
+import it.polimi.ingsw.exceptions.WrongStudentEffectException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.PlayerState;
@@ -22,15 +23,17 @@ public class Effect11 extends Effect{
     }
 
     @Override
-    public void secondPartEffect(Game game, int playerID) {
+    public void secondPartEffect(Game game, int playerID) throws WrongStudentEffectException {
         Student choosedstudent = game.getEffectHandler().getStudentschoose().get(0);
 
         if(game.getEffectHandler().getEffect11students().contains(choosedstudent)){
             game.getPlayer(playerID).getPlance().addStudentHall(choosedstudent);
             game.getEffectHandler().removeStudentFromEffect11students(choosedstudent);
             game.getEffectHandler().addStudentInEffect11students(game.getBoard().getAndRemoveRandomBagStudent(1).get(0));
+            game.setCharacterInUse(null);
+            game.getPlayer(playerID).setPlayerState(prevPlayerState);
         }
-        game.setCharacterInUse(null);
-        game.getPlayer(playerID).setPlayerState(prevPlayerState);
+        else
+            throw new WrongStudentEffectException();
     }
 }

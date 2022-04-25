@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.effects;
 
+import it.polimi.ingsw.exceptions.InvalidStopException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.player.PlayerState;
 
@@ -13,9 +14,13 @@ public class Effect5 extends Effect {
     public int getCost(){ return 2;}
 
     @Override
-    public void effect(Game game, int playerID) {
-        prevPlayerState = game.getPlayer(playerID).getPlayerState();
-        game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERISLANDPHASE);
+    public void effect(Game game, int playerID)  throws InvalidStopException{
+        if(game.getEffectHandler().getNumofislandstops()>0) {
+            prevPlayerState = game.getPlayer(playerID).getPlayerState();
+            game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERISLANDPHASE);
+        }
+        else
+             throw new InvalidStopException();
     }
 
     @Override
@@ -23,10 +28,8 @@ public class Effect5 extends Effect {
 
     @Override
     public void secondPartEffect(Game game, int playerID) {
-        if(game.getEffectHandler().getNumofislandstops()>0) {
-            game.getBoard().getArchipelago().getSingleIsland(game.getEffectHandler().getIslandIDchoose()).setStop(true);
-            game.getEffectHandler().removeislandstop();
-        }
+        game.getBoard().getArchipelago().getSingleIsland(game.getEffectHandler().getIslandIDchoose()).setStop(true);
+        game.getEffectHandler().removeislandstop();
         game.setCharacterInUse(null);
         game.getPlayer(playerID).setPlayerState(prevPlayerState);
     }

@@ -16,7 +16,7 @@ public class EffectHandler {
    private ArrayList<Student> effect1students = new ArrayList<>();
    private ArrayList<Student> effect11students = new ArrayList<>();
    private ArrayList<Student> effect7students = new ArrayList<>();
-   private boolean twomoremoves = false;
+   private boolean twomoremoves;
 
    public EffectHandler(){
        twopoints = 0;
@@ -25,6 +25,7 @@ public class EffectHandler {
        professorcontroll = false;
        Student student = null;
        numofislandstops = 4;
+       twomoremoves = false;
    }
 
     public ArrayList<Student> getEffect7students() { return effect7students;}
