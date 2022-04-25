@@ -27,7 +27,8 @@ class ArchipelagoTest {
         ArrayList<Student> studentWanted= new ArrayList<>();
         ArrayList<Student> student;
         int num = board2Players.getArchipelago().getMothernature().isOn();
-
+        if(num==12)
+            num=0;
         studentWanted.add(board2Players.getArchipelago().getSingleIsland(num+1).getStudents().get(0));
         studentWanted.add(Student.RED);
         studentWanted.add(Student.RED);
