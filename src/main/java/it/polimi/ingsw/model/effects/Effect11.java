@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.effects;
 
+import it.polimi.ingsw.exceptions.InvalidStopException;
 import it.polimi.ingsw.exceptions.WrongStudentEffectException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Student;
@@ -12,7 +13,7 @@ public class Effect11 extends Effect{
     public int getCost(){ return 2;}
 
     @Override
-    public void effect(Game game, int playerID) {
+    public void effect(Game game, int playerID)  throws InvalidStopException {
         prevPlayerState = game.getPlayer(playerID).getPlayerState();
         game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERSTUDENTSPHASE);
     }

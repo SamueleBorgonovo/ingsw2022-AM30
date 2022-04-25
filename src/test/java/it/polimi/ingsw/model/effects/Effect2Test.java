@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.effects;
 
+import it.polimi.ingsw.exceptions.InvalidStopException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Wizard;
@@ -30,7 +31,7 @@ class Effect2Test {
     }
 
     @Test
-    void effect() {
+    void effect() throws InvalidStopException {
         // Test 2 Players Game
         assertFalse(game2players.getEffectHandler().isProfessorcontroll());
         effect2.effect(game2players,1);
