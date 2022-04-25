@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.player;
 
+import it.polimi.ingsw.exceptions.OutOfCoinsException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -13,6 +15,7 @@ public class Player {
     private ArrayList<Assistant> assistantCards = new ArrayList<>();
     private Assistant lastassistantplayed;
     private boolean assistantPlayed;
+    private boolean characterPlayed=false;
 
     public Player(String nickname, Wizard wizard){
         this.nickname = nickname;
@@ -23,6 +26,10 @@ public class Player {
         playerState = PlayerState.WAITING;
         Collections.addAll(assistantCards, Assistant.values());
     }
+
+    public boolean getCharacterPlayed() {return characterPlayed;}
+
+    public void setCharacterPlayed(boolean characterPlayed) {this.characterPlayed = characterPlayed;}
 
     public void setPlayerID(int playerID) {
         this.playerID = playerID;
@@ -64,8 +71,10 @@ public class Player {
         coins++;
     }
 
-    public void removeCoins(int numOfCoins){
-        coins = coins - numOfCoins;
+    public void removeCoins(int numOfCoins) throws OutOfCoinsException {
+        if(coins>=numOfCoins)
+            coins = coins - numOfCoins;
+        else throw new OutOfCoinsException();
     }
 
     public ArrayList<Assistant> getAssistantCards() {return assistantCards; }

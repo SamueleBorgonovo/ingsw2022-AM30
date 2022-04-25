@@ -122,7 +122,7 @@ public class Game {
         return playerChosen;
     }
 
-    public void selectCloud(int playerID, int cloudID) throws InvalidTurnExceptions, WrongCloudException {
+    public void selectCloud(int playerID, int cloudID) throws InvalidTurnException, WrongCloudException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.CLOUDPHASE) {
             if(!getCloud(cloudID).isChoosen()){
                     for(int count=0;count<getCloud(cloudID).getStudents().size();count++)
@@ -147,16 +147,18 @@ public class Game {
                     getBoard().getClouds().get(count).setChoosen(false);
                 }
 
-                for (Player player : listOfPlayers)
+                for (Player player : listOfPlayers) {
                     player.setPlayerState(PlayerState.WAITING);
+                    player.setCharacterPlayed(false);
+                }
                 playerorder.get(0).setPlayerState(PlayerState.ASSISTANTPHASE);  //Start the new round
             }
 
         }
-        else throw new InvalidTurnExceptions();
+        else throw new InvalidTurnException();
     }
 
-    public void moveStudentToHall(int playerID, Student student) throws InvalidTurnExceptions, WrongStudentException{
+    public void moveStudentToHall(int playerID, Student student) throws InvalidTurnException, WrongStudentException{
         if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
             if(getPlayer(playerID).getPlance().getEntrance().contains(student)){
                 getPlayer(playerID).getPlance().addStudentHall(student);
@@ -171,10 +173,10 @@ public class Game {
                 }
             } else throw new WrongStudentException();
         }
-        else throw new InvalidTurnExceptions();
+        else throw new InvalidTurnException();
     }
 
-    public void moveStudentToIsland(int playerID, int islandID, Student student) throws InvalidTurnExceptions, WrongStudentException {
+    public void moveStudentToIsland(int playerID, int islandID, Student student) throws InvalidTurnException, WrongStudentException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
             if(getPlayer(playerID).getPlance().getEntrance().contains(student)){
                 Island island = getBoard().getArchipelago().getSingleIsland(islandID);
@@ -186,10 +188,10 @@ public class Game {
                     movementStudents=0;
                 }
             } else throw new WrongStudentException();
-        }  else throw new InvalidTurnExceptions();
+        }  else throw new InvalidTurnException();
     }
 
-    public void useAssistant(int playerID, Assistant assistant) throws WrongAssistantException,InvalidTurnExceptions{
+    public void useAssistant(int playerID, Assistant assistant) throws WrongAssistantException, InvalidTurnException {
 
         if(getPlayer(playerID).getPlayerState() == PlayerState.ASSISTANTPHASE) { //Check that is the right id of the player that has to play
             if (numplayerhasplayed == 0) {  //First to choose, no controls to do
@@ -236,11 +238,11 @@ public class Game {
                 }
             }
         }
-        else throw new InvalidTurnExceptions();
+        else throw new InvalidTurnException();
     }
 
 
-    public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnExceptions, WrongValueException {
+    public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnException, WrongValueException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.MOTHERNATUREPHASE) {
             if (!this.getEffectHandler().getTwomoremoves()) {  //Check if effect4 is in use
                 if (numberOfMovement >= 1 && numberOfMovement <= getPlayer(playerID).getLastassistantplayed().getValue()) {
@@ -263,23 +265,29 @@ public class Game {
                     getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
                 } else throw new WrongValueException();
             }
-        } else throw new InvalidTurnExceptions();
+        } else throw new InvalidTurnException();
     }
 
-    public void useCharacter(int playerID, Character character)  throws InvalidStopException {
-        //Check on effect exception if it put everything like before
+    public void useCharacter(int playerID, Character character)  throws InvalidStopException, InvalidTurnException, OutOfCoinsException, InvalidCharacterException {
 
-        //To add control if player is in the right phase
-        for (Player player : listOfPlayers)
-            if (player.getPlayerID() == playerID) {
-                player.removeCoins(character.getCost());
-                characterInUse=character;
-                character.getEffect().effect(this,playerID);
-                character.setUsed(true);
-            }
+        if(getPlayer(playerID).getPlayerState() != PlayerState.WAITING) {
+            if(!getPlayer(playerID).getCharacterPlayed()) {
+                if (getBoard().getCharacters().contains(character)) {
+                    getPlayer(playerID).removeCoins(character.getCost());
+                    getPlayer(playerID).setCharacterPlayed(true);
+                    characterInUse = character;
+                    character.getEffect().effect(this, playerID);
+                    character.setUsed(true);
+                } else
+                throw new InvalidCharacterException();//If choosed character is not on the 3 of the game
+            } else
+            throw new InvalidCharacterException(); //If player has already played a character in this turn, maybe use a different Exception
+        }
+        else throw new InvalidTurnException();//If player can't play a character
+
     }
 
-    public void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnExceptions, WrongIslandException, WrongStudentEffectException {
+    public void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnException, WrongIslandException, WrongStudentEffectException {
         if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERISLANDPHASE) {
             if (islandID >= 1 && islandID <= board.getArchipelago().getNumOfIslands()) {
                 effectHandler.setIslandIDchoose(islandID);
@@ -287,15 +295,15 @@ public class Game {
             }
             else throw new WrongIslandException();
         }
-        else throw new InvalidTurnExceptions();
+        else throw new InvalidTurnException();
     }
 
-    public void CharacterStudentsPhase(int playerID,ArrayList<Student> students) throws InvalidTurnExceptions, WrongStudentEffectException {
+    public void CharacterStudentsPhase(int playerID,ArrayList<Student> students) throws InvalidTurnException, WrongStudentEffectException {
         if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERSTUDENTSPHASE) {
             effectHandler.setStudentschoose(students);
             characterInUse.getEffect().secondPartEffect(this, playerID);
         }
-        else throw new InvalidTurnExceptions();
+        else throw new InvalidTurnException();
     }
 
     public EffectHandler getEffectHandler() {

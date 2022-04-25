@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.game;
 
-import it.polimi.ingsw.exceptions.InvalidTurnExceptions;
+import it.polimi.ingsw.exceptions.InvalidTurnException;
 import it.polimi.ingsw.exceptions.WrongAssistantException;
 import it.polimi.ingsw.exceptions.WrongStudentException;
 import it.polimi.ingsw.exceptions.WrongValueException;
@@ -128,7 +128,7 @@ class GameTest {
     }
 
     @Test
-    void moveStudentToHall() throws InvalidTurnExceptions, WrongStudentException {
+    void moveStudentToHall() throws InvalidTurnException, WrongStudentException {
         game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
         player1 = game2players.getPlayer(1);
         game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
@@ -152,7 +152,7 @@ class GameTest {
     }
 
     @Test
-    void moveStudentToIsland() throws InvalidTurnExceptions, WrongStudentException {
+    void moveStudentToIsland() throws InvalidTurnException, WrongStudentException {
         ArrayList<Student> students = new ArrayList<>();
         students.add(Student.RED);
         students.add(Student.BLUE);
@@ -172,7 +172,7 @@ class GameTest {
     }
 
     @Test
-    void useAssistant() throws WrongAssistantException, InvalidTurnExceptions {
+    void useAssistant() throws WrongAssistantException, InvalidTurnException {
         ArrayList<Assistant> wanted1 = new ArrayList<>(Arrays.asList(Assistant.values()));
         ArrayList<Assistant> wanted2 = new ArrayList<>(Arrays.asList(Assistant.values()));
         wanted1.remove(Assistant.CAT);
@@ -194,7 +194,7 @@ class GameTest {
     }
 
     @Test
-    void moveMotherNature() throws InvalidTurnExceptions, WrongValueException, WrongAssistantException {
+    void moveMotherNature() throws InvalidTurnException, WrongValueException, WrongAssistantException {
         game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
         player1 = game2players.getPlayer(1);
         game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
