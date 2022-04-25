@@ -107,8 +107,6 @@ class GameTest {
         player1 = game2players.getPlayer(1);
         game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
         player2 = game2players.getPlayer(2);
-        System.out.println(game2players.getListOfPlayers().get(0).getPlayerID());
-        System.out.println(game2players.getListOfPlayers().get(1).getPlayerID());
         player1.getPlance().addStudentEntrance(Student.RED);
         player1.getPlance().addStudentEntrance(Student.RED);
         player2.getPlance().addStudentEntrance(Student.RED);

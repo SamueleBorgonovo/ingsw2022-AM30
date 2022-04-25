@@ -67,24 +67,47 @@ class BoardTest {
         game3players.getBoard().addCoinstoReserve(2);
         assertEquals(15, game3players.getBoard().getCoinReserve());
     }
+    @Test
+    void addCoinstoReserve() throws OutOfCoinsException {
+        //also test removeeCoinFromReserve
+        assertEquals(17,game3players.getBoard().getCoinReserve());
+        game3players.getBoard().addCoinstoReserve(2);
+        assertEquals(19,game3players.getBoard().getCoinReserve());
+        game3players.getBoard().removeCoinsFromReserve(3);
+        assertEquals(16,game3players.getBoard().getCoinReserve());
+    }
 
-    /*@Test
+
+    @Test
     void getClouds() {
-        ArrayList<Cloud> cloudsExpected = new ArrayList<>();
-        cloudsExpected.add(cloud1);
-        cloudsExpected.add(cloud2);
-        clouds= board.getClouds();
-        assertTrue(cloudsExpected.equals(clouds));
+        ArrayList<Cloud> clouds2Player = game2players.getBoard().getClouds();
+        ArrayList<Cloud> clouds3Player = game3players.getBoard().getClouds();
+        assertEquals(clouds2Player,game2players.getBoard().getClouds());
+        assertEquals(clouds3Player,game3players.getBoard().getClouds());
     }
 
     @Test
     void getCharacters() {
-        assertTrue(characters.equals(board.getCharacters()));
+        ArrayList<Character> characters = game3players.getBoard().getCharacters();
+        assertEquals(characters,game3players.getBoard().getCharacters());
+    }
 
+    @Test
+    void addStudentBag(){
+        //also tests get and remove random bag student
+        ArrayList<Student> students = new ArrayList<>();
+        int num= game2players.getBoard().getNumOfStudentsBag();
+        game2players.getBoard().getAndRemoveRandomBagStudent(3);
+        students.add(Student.BLUE);
+        students.add(Student.RED);
+        game2players.getBoard().addStudentBag(students);
+        assertEquals(num-1, game2players.getBoard().getNumOfStudentsBag());
     }
 
     @Test
     void getArchipelago() {
-        assertTrue(archipelago.equals(board.getArchipelago()));
-    }*/
+        Archipelago archipelago=new Archipelago();
+        archipelago=game2players.getBoard().getArchipelago();
+        assertEquals(archipelago,game2players.getBoard().getArchipelago());
+    }
 }
