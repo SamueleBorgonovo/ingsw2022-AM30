@@ -76,15 +76,6 @@ public class Game {
 
     // getIsland moved to class Archipelago
 
-    public Cloud getCloud(int cloudid){
-        Cloud tempcloud = null;
-        for(int count=0;count<getBoard().getClouds().size();count++){
-            if(cloudid == getBoard().getClouds().get(count).getCloudID())
-                tempcloud = getBoard().getClouds().get(count);
-        }
-        return tempcloud;
-    }
-
 
 
     public Player winner() {
@@ -124,10 +115,10 @@ public class Game {
 
     public void selectCloud(int playerID, int cloudID) throws InvalidTurnException, WrongCloudException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.CLOUDPHASE) {
-            if(!getCloud(cloudID).isChoosen()){
-                    for(int count=0;count<getCloud(cloudID).getStudents().size();count++)
-                        getPlayer(playerID).getPlance().addStudentEntrance(getCloud(cloudID).getStudents().get(count));
-                    getCloud(cloudID).setChoosen(true);
+            if(!getBoard().getCloud(cloudID).isChoosen()){
+                    for(int count=0;count<getBoard().getCloud(cloudID).getStudents().size();count++)
+                        getPlayer(playerID).getPlance().addStudentEntrance(getBoard().getCloud(cloudID).getStudents().get(count));
+                    getBoard().getCloud(cloudID).setChoosen(true);
                     numplayerhasplayed++;
                 }
             else throw new WrongCloudException();
@@ -255,7 +246,7 @@ public class Game {
                 } else throw new WrongValueException();
             } else{
                 //Effect4 used
-                if (numberOfMovement >= 1 && numberOfMovement+2 <= getPlayer(playerID).getLastassistantplayed().getValue()) {
+                if (numberOfMovement >= 1 && numberOfMovement <= getPlayer(playerID).getLastassistantplayed().getValue()+2) {
                     for (int count = 0; count < numberOfMovement; count++)
                         this.getBoard().getArchipelago().getMothernature().move(this.getBoard().getArchipelago().getNumOfIslands());
                     verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((this.getBoard().getArchipelago().getMothernature().isOn())).getIslandID());

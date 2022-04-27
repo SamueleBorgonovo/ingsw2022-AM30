@@ -101,5 +101,14 @@ public class Board {
         return archipelago;
     }
 
+    public Cloud getCloud(int cloudid){
+        Cloud tempcloud = null;
+        for(int count=0;count<getClouds().size();count++){
+            if(cloudid == getClouds().get(count).getCloudID())
+                tempcloud = getClouds().get(count);
+        }
+        return tempcloud;
+    }
+
 
 }
