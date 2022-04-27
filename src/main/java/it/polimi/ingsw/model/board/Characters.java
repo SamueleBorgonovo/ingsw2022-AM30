@@ -2,12 +2,12 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.effects.Effect;
 
-public class Character {
+public class Characters {
     private int cost;
     private boolean used = false;
     private final Effect effect;
 
-    public Character(Effect effect) {
+    public Characters(Effect effect) {
         cost = effect.getCost();
         this.effect = effect;
     }

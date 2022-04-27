@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.game;
 
-import it.polimi.ingsw.model.board.Character;
+import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.player.*;
 import it.polimi.ingsw.exceptions.*;
@@ -19,7 +19,7 @@ public class Game {
     private int numplayerhasplayed=0;
     private int movementStudents=0;
     private ArrayList<Player> playerorder = new ArrayList<>();
-    private Character characterInUse = null;
+    private Characters characterInUse = null;
 
     public Game(GameMode gameMode, int numofplayers) {
         this.gameMode = gameMode;
@@ -27,11 +27,11 @@ public class Game {
         gameState = GameState.WAITINGFORPLAYERS;
         board = new Board(gameMode, numofplayers);
         effectHandler = new EffectHandler();
-        for(Character character : board.getCharacters())
+        for(Characters character : board.getCharacters())
             character.getEffect().inizialize(this);
     }
 
-    public void setCharacterInUse(Character character){characterInUse=character;}
+    public void setCharacterInUse(Characters character){characterInUse=character;}
 
     public void setGameID(int gameID) {
         this.gameID = gameID;
@@ -268,7 +268,7 @@ public class Game {
         } else throw new InvalidTurnException();
     }
 
-    public void useCharacter(int playerID, Character character)  throws InvalidStopException, InvalidTurnException, OutOfCoinsException, InvalidCharacterException {
+    public void useCharacter(int playerID, Characters character)  throws InvalidStopException, InvalidTurnException, OutOfCoinsException, InvalidCharacterException {
 
         if(getPlayer(playerID).getPlayerState() != PlayerState.WAITING) {
             if(!getPlayer(playerID).getCharacterPlayed()) {

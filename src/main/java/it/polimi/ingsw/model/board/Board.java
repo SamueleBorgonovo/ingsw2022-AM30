@@ -12,7 +12,7 @@ public class Board {
     private Archipelago archipelago;
     private ArrayList<Student> bag = new ArrayList<>();
     private int coinReserve;
-    private ArrayList<Character> characters = new ArrayList<>();
+    private ArrayList<Characters> characters = new ArrayList<>();
 
     public Board(GameMode gamemode, int numofplayers){
         for (Student student : Student.values())
@@ -47,7 +47,7 @@ public class Board {
             effects.add(new Effect12());
             for (int i = 0; i < 3; i++){
                 int j = (int) (Math.random() * effects.size());
-                characters.add(new Character(effects.get(j)));
+                characters.add(new Characters(effects.get(j)));
                 effects.remove(j);
             }
         }
@@ -89,7 +89,7 @@ public class Board {
             coinReserve = coinReserve -Coins;
     }
 
-    public ArrayList<Character> getCharacters(){
+    public ArrayList<Characters> getCharacters(){
         return characters;
     }
 

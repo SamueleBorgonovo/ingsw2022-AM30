@@ -88,7 +88,7 @@ class BoardTest {
 
     @Test
     void getCharacters() {
-        ArrayList<Character> characters = game3players.getBoard().getCharacters();
+        ArrayList<Characters> characters = game3players.getBoard().getCharacters();
         assertEquals(characters,game3players.getBoard().getCharacters());
     }
 

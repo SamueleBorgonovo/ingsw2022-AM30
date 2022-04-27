@@ -1,14 +1,25 @@
 package it.polimi.ingsw.model.effects;
+import it.polimi.ingsw.model.board.Characters;
+import it.polimi.ingsw.model.game.*;
+import it.polimi.ingsw.model.player.Player;
+import org.junit.jupiter.api.Test;
 
 class Effect1Test {
 
-    /*@Test
-    void setStudentsOnCard() {
-    }
+    Effect effect1 = new Effect1();
+    Characters character = new Characters(effect1);
+    Player player = new Player("Daniele",null);
 
     @Test
-    void getStudentsOnCard() {
+    public void getCostTest(){
+
     }
+
+
+
+
+
+    /*
 
     @Test
     void effect() {
