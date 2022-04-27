@@ -233,6 +233,19 @@ class GameTest {
 
     @Test
     void verifyIslandInfluence() {
+        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        player1 = game2players.getPlayer(1);
+        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        player2 = game2players.getPlayer(2);
+        player1.getPlance().addProfessor(Professor.RED_DRAGON);
+        player1.getPlance().addProfessor(Professor.RED_DRAGON);
+        player1.getPlance().addProfessor(Professor.GREEN_FROG);
+        player2.getPlance().addProfessor(Professor.BLUE_UNICORN);
+        game2players.getBoard().getArchipelago().getSingleIsland(2).addStudent(Student.RED);
+        game2players.getBoard().getArchipelago().getSingleIsland(2).addStudent(Student.BLUE);
+        game2players.getBoard().getArchipelago().getSingleIsland(2).addStudent(Student.GREEN);
+        game2players.verifyIslandInfluence(2);
+        assertEquals(Tower.WHITE, game2players.getBoard().getArchipelago().getSingleIsland(2).getTowerColor());
     }
 
 

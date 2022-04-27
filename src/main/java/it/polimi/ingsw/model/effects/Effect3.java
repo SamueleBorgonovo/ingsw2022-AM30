@@ -24,7 +24,7 @@ public class Effect3 extends Effect {
 
     @Override
     public void secondPartEffect(Game game, int playerID)  throws WrongStudentEffectException {
-        game.verifyIslandInfluence(game.getBoard().getArchipelago().getSingleIsland(game.getEffectHandler().getIslandIDchoose()));
+        game.verifyIslandInfluence(game.getBoard().getArchipelago().getSingleIsland(game.getEffectHandler().getIslandIDchoose()).getIslandID());
         game.setCharacterInUse(null);
         game.getPlayer(playerID).setPlayerState(prevPlayerState);
     }

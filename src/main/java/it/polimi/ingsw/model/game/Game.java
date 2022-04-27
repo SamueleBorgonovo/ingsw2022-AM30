@@ -248,7 +248,7 @@ public class Game {
                 if (numberOfMovement >= 1 && numberOfMovement <= getPlayer(playerID).getLastassistantplayed().getValue()) {
                     for (int count = 0; count < numberOfMovement; count++)
                         this.getBoard().getArchipelago().getMothernature().move(this.getBoard().getArchipelago().getNumOfIslands());
-                    verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((this.getBoard().getArchipelago().getMothernature().isOn())));
+                    verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((this.getBoard().getArchipelago().getMothernature().isOn())).getIslandID());
                     this.getBoard().getArchipelago().verifyMergeableIsland();
                     //probably have to put winner method
                     getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
@@ -258,7 +258,7 @@ public class Game {
                 if (numberOfMovement >= 1 && numberOfMovement+2 <= getPlayer(playerID).getLastassistantplayed().getValue()) {
                     for (int count = 0; count < numberOfMovement; count++)
                         this.getBoard().getArchipelago().getMothernature().move(this.getBoard().getArchipelago().getNumOfIslands());
-                    verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((this.getBoard().getArchipelago().getMothernature().isOn())));
+                    verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((this.getBoard().getArchipelago().getMothernature().isOn())).getIslandID());
                     this.getBoard().getArchipelago().verifyMergeableIsland();
                     //probably have to put winner method
                     this.getEffectHandler().setTwomoremoves(false);
@@ -324,17 +324,18 @@ public class Game {
         return listOfPlayers;
     }
 
-    public void verifyIslandInfluence(Island island) {
+    public void verifyIslandInfluence(int islandID) {
         // Check which Player has the most influence on an Island and arrange the towers appropriately.
         int maxscore = 0;
-        int score = 0;
+        int score;
         Player playermaxscore = null;
-
+        Island island = this.getBoard().getArchipelago().getSingleIsland(islandID);
         if (island.isStop()) {
             island.setStop(false);
             effectHandler.addislandstop();
         } else {
             for (Player player : listOfPlayers) {
+                score=0;
                 for (Professor professor : player.getPlance().getProfessors())
                     for (Student student : island.getStudents())
                         if (professor.ordinal() == student.ordinal())
