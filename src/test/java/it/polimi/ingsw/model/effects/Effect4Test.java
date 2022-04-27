@@ -35,8 +35,5 @@ class Effect4Test {
         effect4.effect(game,1);
         game.moveMotherNature(1,4);
         assertEquals(mtpos+4,game.getBoard().getArchipelago().getMothernature().isOn());
-
-
-
     }
 }
