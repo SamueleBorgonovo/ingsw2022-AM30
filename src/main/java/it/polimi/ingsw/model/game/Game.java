@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.game;
 
+import it.polimi.ingsw.model.ModelInterface;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.player.*;
@@ -8,7 +9,7 @@ import it.polimi.ingsw.exceptions.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Game {
+public class Game implements ModelInterface {
     private int gameID;
     private GameMode gameMode;
     private ArrayList<Player> listOfPlayers = new ArrayList<>();
@@ -299,16 +300,6 @@ public class Game {
 
     public EffectHandler getEffectHandler() {
         return effectHandler;
-    }
-
-    public Student chooseStudent() { //Remove
-        //to implement in GUI
-        return Student.BLUE;
-    }
-
-    //Just to test Effect7
-    public Student chooseStudentFromPlance() {   //Remove
-        return Student.YELLOW;
     }
 
     public ArrayList<Player> getListOfPlayers() {

@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Archipelago {
     private final ArrayList<Island> islands = new ArrayList<>();
-    private final MotherNature mothernature;
+    private MotherNature mothernature;
 
 
     public Archipelago() {
@@ -28,16 +28,16 @@ public class Archipelago {
     }
 
     public ArrayList<Student> getStudentIslands(int islandID){
-        for(int i=0;i<islands.size();i++)
-            if(islands.get(i).getIslandID() == islandID)
-                return islands.get(i).getStudents();
+        for (Island island : islands)
+            if (island.getIslandID() == islandID)
+                return island.getStudents();
         return null;
     }
 
     public  Tower getTowerTypeIsland (int islandID){
-        for(int i=0;i<islands.size();i++)
-            if(islands.get(i).getIslandID() == islandID)
-              return islands.get(i).getTowerColor();
+        for (Island island : islands)
+            if (island.getIslandID() == islandID)
+                return island.getTowerColor();
         return null;
     }
 
@@ -79,13 +79,11 @@ public class Archipelago {
         return islands.size();
     }
 
-    public Island getSingleIsland(int islandid){ //<---------------------------------------------------------- ?
-        Island tempisland = null;
-        for(int count=0;count<getNumOfIslands();count++){
-            if(islandid == getIslands().get(count).getIslandID())
-                tempisland = getIslands().get(count);
-        }
-        return tempisland;
+    public Island getSingleIsland(int islandID){
+        for (Island island : islands)
+            if (island.getIslandID() == islandID)
+                return island;
+        return null;
     }
 
     public void verifyMergeableIsland() {

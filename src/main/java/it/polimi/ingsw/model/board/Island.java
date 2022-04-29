@@ -6,15 +6,17 @@ import it.polimi.ingsw.model.game.Tower;
 import java.util.ArrayList;
 
 public class Island {
-    private ArrayList<Student> students = new ArrayList<Student>();
-    private int numoftowers = 0;
+    private final ArrayList<Student> students = new ArrayList<>();
+    private int numOfTowers;
     private Tower tower;
     private boolean stop;
     private int islandID;
 
-
     public Island(int islandID) {
         this.islandID = islandID;
+        numOfTowers = 0;
+        stop = false;
+        tower = null;
     }
 
     public ArrayList<Student> getStudents() {
@@ -26,7 +28,7 @@ public class Island {
     }
 
     public int getNumOfTowers() {
-        return numoftowers;
+        return numOfTowers;
     }
 
     public void addStudent(Student student) {
@@ -53,19 +55,16 @@ public class Island {
     public void setTowerColor(Tower tower) {
         if(this.tower == null) {
             this.tower = tower;
-            numoftowers = 1;
+            numOfTowers = 1;
         }
         else
-            this.tower=tower;
+            this.tower = tower;
     }
 
-   public void addTower() {
-       //if the tower is initialized
-            numoftowers++;
-    }
+   public void addTower() { numOfTowers++; }
 
     public void removeAllTowers() {
-        numoftowers = 0;
+        numOfTowers = 0;
     }
 
 }
