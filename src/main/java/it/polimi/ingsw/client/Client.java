@@ -1,28 +1,24 @@
 package it.polimi.ingsw.client;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+
 public class Client {
 
-    /*
-    public static void main(String[] args) {
+    public void main(String[] args) throws IOException {
         Scanner stdin = new Scanner(System.in);
         Client client = new Client();
-
-        if(args.length > 0) {
-            ArrayList<String> arguments = new ArrayList<>(Arrays.asList(args));
-            if(arguments.contains("-cli")) client.setClientConfig(ClientConfig.CLI);
-            else if(arguments.contains("-gui")) client.setClientConfig(ClientConfig.GUI);
-            if((arguments.contains("-ip") && (arguments.contains("-port")))) {
-                try {
-                    client.setServerHandler(arguments.get(arguments.indexOf("-ip")+1), Integer.parseInt(arguments.get(arguments.indexOf("-port")+1)));
-                } catch (Exception exception) {
-                    String[] arg = new String[0];
-                    main(arg);
-                }
-            }
-        }
+        //Va chiesta se CLI o GUI
+        if(!setup()) {
+            System.out.println("Connesione non riuscita");
+         }
 
         try {
-            client.run();
+            //client.run();
         } catch (Exception exception) {
             System.out.println();
             System.out.println("|!| I wasn't able to connect to the specified ip-port address. Press ENTER to try again.");
@@ -33,7 +29,28 @@ public class Client {
             main(args);
         }
     }
+    public boolean setup() throws IOException {
+        Scanner stdin = new Scanner(System.in);
+        String ip;
+        System.out.println("Welcome. Please insert the ip-addres");
+        ip = stdin.nextLine();
+        System.out.println("Please insert port");
+        int port;
+        port=stdin.nextInt();
+        Socket socket;
+        try{
+            socket = new Socket(ip, port);
+        } catch (IOException e) {
+            return false;
+        }
 
+        ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
+
+        return true;
+    }
+
+    /*
     public void run(){
         Scanner stdin = new Scanner(System.in);
 
@@ -74,5 +91,7 @@ public class Client {
             runViewStateMachine();
         }
     }
-    */
+
+
+     */
 }
