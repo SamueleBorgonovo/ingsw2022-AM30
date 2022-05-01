@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class Client {
 
+    private static int port;
+
     public void main(String[] args) throws IOException {
         Scanner stdin = new Scanner(System.in);
         Client client = new Client();

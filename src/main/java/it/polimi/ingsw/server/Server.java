@@ -1,6 +1,8 @@
 package it.polimi.ingsw.server;
 
 
+import it.polimi.ingsw.controller.GameHandler;
+
 import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.Socket;
@@ -10,41 +12,44 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.net.ServerSocket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server {
-    private static int port;
-
-    public static void main(String[] args) throws UnknownHostException {
-        Server server = new Server();
-        Scanner stdin = new Scanner(System.in);
-        System.out.println("Welcome");
-        System.out.println("Insert the port");
-        port = stdin.nextInt();
-        while(port<1024 || port>65000){
-            System.out.println("Port Number is not valid, please insert a new one");
-            port=stdin.nextInt();
-        };
-
-        System.out.println("IP: " + Inet4Address.getLocalHost().getHostAddress());
-        System.out.println("Server listening on port: " + port);
-        server.start();
+   private int serverPort;
+    private final ExecutorService executor;
+    private boolean isActive;
+    GameHandler gameHandler;
+    public Server(int port) {
+        serverPort=port;
+        executor = Executors.newCachedThreadPool();
+        GameHandler gameHandler = new GameHandler();
     }
 
-    public int getServerPort(int port){ return port;}
+    public GameHandler getGameHandler() {
+        return gameHandler;
+    }
 
-
-    private void start(){
+    public void start(){
         try{
-            ServerSocket serverSocket = new ServerSocket(port);
-            serverSocket.accept();
+            ServerSocket serverSocket = new ServerSocket(serverPort);
             System.out.println("Server avviato");
-
+            while(true) {
+                Socket clientSocket = serverSocket.accept();
+                ClientHandler clientHandler = new ClientHandler(clientSocket, this);
+                executor.submit(clientHandler);
+            }
         }catch (IOException e) {
             e.printStackTrace();
-        } {
-
+            return;
         }
 
     }
+
+
+    /*
+        Message mess = takemessage(...);
+        mess.action(this);
+     */
 
 }
