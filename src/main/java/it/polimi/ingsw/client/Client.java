@@ -11,26 +11,6 @@ public class Client {
     ObjectInputStream input;
     private static int port;
 
-    public void main(String[] args) throws IOException, ClassNotFoundException {
-        Scanner stdin = new Scanner(System.in);
-        Client client = new Client();
-        //Va chiesta se CLI o GUI
-        if(!setup()) {
-            System.out.println("Connesione non riuscita");
-         }
-
-        try {
-            //client.run();
-        } catch (Exception exception) {
-            System.out.println();
-            System.out.println("|!| I wasn't able to connect to the specified ip-port address. Press ENTER to try again.");
-            stdin.nextLine();
-
-            for (int i = 0; i < 50; ++i) System.out.println();
-
-            main(args);
-        }
-    }
     public boolean setup() throws IOException, ClassNotFoundException {
         Scanner stdin = new Scanner(System.in);
         String ip;
