@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.board.Characters;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
@@ -9,13 +10,15 @@ import it.polimi.ingsw.model.player.Wizard;
 
 import java.util.ArrayList;
 
-public interface ModelInterface {
+public interface GameInterface {
 
-    public void addPlayer(String nickname, Wizard wizard);
-
-    public void setGameID(int gameID);
+    public int addPlayer(String nickname, Wizard wizard);
 
     public GameState getState();
+
+    public int getNumOfPlayers();
+
+    public GameMode getGameMode();
 
     public void selectCloud(int playerID, int cloudID) throws InvalidTurnException, WrongCloudException;
 

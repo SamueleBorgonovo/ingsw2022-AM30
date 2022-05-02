@@ -30,7 +30,8 @@ class Effect5Test {
         game.getPlayer(1).setPlayerState(PlayerState.MOTHERNATUREPHASE);
         int mtpos = game.getBoard().getArchipelago().getMothernature().isOn();
         game.getPlayer(1).setLastassistantplayed(Assistant.CAT);
-        game.getBoard().getArchipelago().getSingleIsland(mtpos+1).setTowerColor(Tower.BLACK);
+        if(mtpos==12) mtpos=0;
+        game.getBoard().getArchipelago().getSingleIsland(mtpos + 1).setTowerColor(Tower.BLACK);
         effect5.effect(game,1);
         Characters character = new Characters(effect5);
         game.setCharacterInUse(character);

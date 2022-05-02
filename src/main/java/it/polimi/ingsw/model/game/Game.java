@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.game;
 
-import it.polimi.ingsw.model.ModelInterface;
+import it.polimi.ingsw.model.GameInterface;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.player.*;
@@ -9,8 +9,7 @@ import it.polimi.ingsw.exceptions.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Game implements ModelInterface {
-    private int gameID;
+public class Game implements GameInterface {
     private GameMode gameMode;
     private ArrayList<Player> listOfPlayers = new ArrayList<>();
     private GameState gameState;
@@ -34,15 +33,16 @@ public class Game implements ModelInterface {
 
     public void setCharacterInUse(Characters character){characterInUse=character;}
 
-    public void setGameID(int gameID) {
-        this.gameID = gameID;
-    }
 
     public GameState getState() {
         return gameState;
     }
 
-    public void addPlayer(String nickname, Wizard wizard) {
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    public int addPlayer(String nickname, Wizard wizard) {
         Player player = new Player(nickname, wizard);
 
         listOfPlayers.add(player);
@@ -58,6 +58,7 @@ public class Game implements ModelInterface {
         }
         if (listOfPlayers.size() == numOfPlayers)
             this.startGame();
+        return listOfPlayers.size();
     }
 
     public Board getBoard() {
@@ -75,7 +76,6 @@ public class Game implements ModelInterface {
         return null;
     }
 
-    // getIsland moved to class Archipelago
 
 
 

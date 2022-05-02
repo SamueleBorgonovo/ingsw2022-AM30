@@ -4,7 +4,6 @@ package it.polimi.ingsw.server;
 import it.polimi.ingsw.controller.GameHandler;
 
 import java.io.IOException;
-import java.net.Inet4Address;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;

@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Client {
-
+    ObjectOutputStream outputStream;
+    ObjectInputStream input;
     private static int port;
 
-    public void main(String[] args) throws IOException {
+    public void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner stdin = new Scanner(System.in);
         Client client = new Client();
         //Va chiesta se CLI o GUI
@@ -31,10 +31,10 @@ public class Client {
             main(args);
         }
     }
-    public boolean setup() throws IOException {
+    public boolean setup() throws IOException, ClassNotFoundException {
         Scanner stdin = new Scanner(System.in);
         String ip;
-        System.out.println("Welcome. Please insert the ip-addres");
+        System.out.println("Please insert the ip-addres");
         ip = stdin.nextLine();
         System.out.println("Please insert port");
         int port;
@@ -48,8 +48,16 @@ public class Client {
 
         ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
+        receiveMessage();
 
         return true;
+    }
+
+    public void receiveMessage() throws IOException, ClassNotFoundException {
+        while(true){
+            Object messageFromServer = input.readObject();
+            //view.((Message) messageFromServer).action();
+        }
     }
 
     /*

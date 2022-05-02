@@ -34,6 +34,7 @@ class Effect4Test {
         game.setCharacterInUse(character);
         effect4.effect(game,1);
         game.moveMotherNature(1,4);
+        if(mtpos+4>12) mtpos=mtpos-12;
         assertEquals(mtpos+4,game.getBoard().getArchipelago().getMothernature().isOn());
     }
 }
