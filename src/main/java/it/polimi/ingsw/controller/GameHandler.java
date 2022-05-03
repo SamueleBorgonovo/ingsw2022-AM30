@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
+import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.Wizard;
 import it.polimi.ingsw.server.ClientHandlerInterface;
@@ -134,6 +135,20 @@ public class GameHandler {
             game.moveMotherNature(playerID,movement);
 
         } catch (WrongValueException e) {
+            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
+            // server.sendMessage(nickname,InvalidPhaseMa);
+        } catch (InvalidTurnException e) {
+            //Meesagge to client to notify excepion
+        }
+    }
+
+    public void moveStudentToHall(ClientHandlerInterface clientHandler, Student student) throws InvalidTurnException, WrongStudentException {
+        GameInterface game = findGameofPlayer(clientHandler.getNickname());
+        int playerID = findPlayeridofPlayer(clientHandler.getNickname());
+        try {
+            game.moveStudentToHall(playerID,student);
+
+        } catch (WrongStudentException e) {
             //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
             // server.sendMessage(nickname,InvalidPhaseMa);
         } catch (InvalidTurnException e) {
