@@ -62,6 +62,37 @@ public class Client {
 
         }while(correct);
 
+        System.out.println("Press s for SimpleMode or e for ExpertMode");
+        String choice = stdin.nextLine();
+        boolean pass=false;
+        char cho='a';
+        do {
+            if (choice.toLowerCase().startsWith("c") || choice.toLowerCase().startsWith("s")) {
+                pass = true;
+                cho = choice.toLowerCase().charAt(0);
+            }
+        }while(!pass);
+
+        if(cho=='s')
+            this.setGamemode(GameMode.SIMPLEMODE);
+        else
+            this.setGamemode(GameMode.EXPERTMODE);
+
+        System.out.println("Choose the number of the players ( 2 | 3 )");
+        String choice2 = stdin.nextLine();
+        boolean pass2=false;
+        char cho2='0';
+        do {
+            if (choice2.toLowerCase().startsWith("1") || choice2.toLowerCase().startsWith("2")) {
+                pass2 = true;
+                cho2 = choice.toLowerCase().charAt(0);
+            }
+        }while(!pass2);
+
+        if(cho=='2')
+            this.setNumofPlayers(2);
+        else
+            this.setNumofPlayers(3);
         return true;
 
     }
