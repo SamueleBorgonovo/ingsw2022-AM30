@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.messages.toClient.MessageToClient;
+import it.polimi.ingsw.messages.toServer.MessageToServer;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Wizard;
 
@@ -95,6 +96,17 @@ public class Client {
             this.setNumofPlayers(3);
         return true;
 
+    }
+
+    public void sendMessage(MessageToServer message){
+        try {
+            outputStream.reset();
+            outputStream.writeObject(message);
+            outputStream.flush();
+        } catch (IOException e) {
+            System.err.println("Error during send process.");
+            System.err.println(e.getMessage());
+        }
     }
 
     public String getNickname() {
