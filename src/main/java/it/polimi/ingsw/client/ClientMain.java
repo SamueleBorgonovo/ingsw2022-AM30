@@ -17,9 +17,9 @@ public class ClientMain {
         do {
           worked = client.setup();
           if (!worked) {
-            System.out.println("Connessione non riuscita");
+            System.out.println("Connection failed");
           }
-        }while(worked);
+        }while(!worked);
 
 
 

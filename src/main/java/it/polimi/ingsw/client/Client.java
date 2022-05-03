@@ -1,17 +1,27 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.player.Wizard;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Client {
     ObjectOutputStream outputStream;
     ObjectInputStream input;
     private static int port;
+    boolean active=false;
+    String nickname;
+    Wizard wizard;
+    GameMode gamemode;
+    int numofPlayers;
 
-    public boolean setup() throws IOException, ClassNotFoundException {
+    public boolean setup() throws ClassNotFoundException, IOException {
         Scanner stdin = new Scanner(System.in);
         String ip;
         System.out.println("Please insert the ip-addres");
@@ -28,16 +38,53 @@ public class Client {
 
         ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
-        receiveMessage();
-
+        active=true;
+        new Thread(() -> {
+            try {
+                while(active) {
+                    Object messageFromServer = input.readObject();
+                    //view.((Message) messageFromServer).action();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }).start();
         return true;
+
     }
 
-    public void receiveMessage() throws IOException, ClassNotFoundException {
-        while(true){
-            Object messageFromServer = input.readObject();
-            //view.((Message) messageFromServer).action();
-        }
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public Wizard getWizard() {
+        return wizard;
+    }
+
+    public void setWizard(Wizard wizard) {
+        this.wizard = wizard;
+    }
+
+    public GameMode getGamemode() {
+        return gamemode;
+    }
+
+    public void setGamemode(GameMode gamemode) {
+        this.gamemode = gamemode;
+    }
+
+    public int getNumofPlayers() {
+        return numofPlayers;
+    }
+
+    public void setNumofPlayers(int numofPlayers) {
+        this.numofPlayers = numofPlayers;
     }
 
     /*

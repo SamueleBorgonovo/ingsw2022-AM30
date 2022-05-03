@@ -4,7 +4,7 @@ import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.exceptions.InvalidTurnException;
 import it.polimi.ingsw.exceptions.WrongAssistantException;
 import it.polimi.ingsw.messages.toServer.MessageToServer;
-import it.polimi.ingsw.messages.toServer.CreatePlayerInGameMessageToServer;
+import it.polimi.ingsw.messages.toServer.CreatePlayerInGameMessage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -61,9 +61,9 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
             try {
                    do {
                        Object messageFromClient = is.readObject();
-                       if (messageFromClient instanceof CreatePlayerInGameMessageToServer) {
-                           setNickname(((CreatePlayerInGameMessageToServer) messageFromClient).getNickname());
-                           ((CreatePlayerInGameMessageToServer) messageFromClient).action(this);
+                       if (messageFromClient instanceof CreatePlayerInGameMessage) {
+                           setNickname(((CreatePlayerInGameMessage) messageFromClient).getNickname());
+                           ((CreatePlayerInGameMessage) messageFromClient).action(this);
                            arrived=true;
                        }
                        else{

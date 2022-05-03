@@ -22,6 +22,7 @@ public class EriantysMain {
                 pass=true;
                 cho = choice.toLowerCase().charAt(0);
             }
+
         }while (!pass);
 
         if (cho=='s') {
