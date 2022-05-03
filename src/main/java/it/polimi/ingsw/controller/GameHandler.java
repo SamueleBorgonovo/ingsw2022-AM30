@@ -156,5 +156,18 @@ public class GameHandler {
         }
     }
 
+    public void moveStudentToIsland(ClientHandlerInterface clientHandler, int islandID, Student student) throws InvalidTurnException, WrongStudentException {
+        GameInterface game = findGameofPlayer(clientHandler.getNickname());
+        int playerID = findPlayeridofPlayer(clientHandler.getNickname());
+        try {
+            game.moveStudentToIsland(playerID,islandID,student);
+
+        } catch (WrongStudentException e) {
+            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
+            // server.sendMessage(nickname,InvalidPhaseMa);
+        } catch (InvalidTurnException e) {
+            //Meesagge to client to notify excepion
+        }
+    }
 
 }
