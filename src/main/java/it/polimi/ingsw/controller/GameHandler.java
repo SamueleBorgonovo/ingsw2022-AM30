@@ -48,6 +48,15 @@ public class GameHandler {
         }
 
     }
+    public void checkNickname(ClientHandlerInterface clientHandler,String nickname){
+        for (String name : playertoPlayerIDMap.keySet())
+            if(nickname.equals(name)){
+                //Mandiamo un messaggio di nome già occupato
+                return;
+            }
+        //Mandiamo un messaggio di nome valido
+    }
+
 
 
     public GameInterface findGameofPlayer(String nickname) {
@@ -100,4 +109,7 @@ public class GameHandler {
         }
 
     }
+
+
+
 }

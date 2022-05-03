@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ClientMain {
 
-  public void main(String[] args) throws IOException, ClassNotFoundException {
+  public static void main(String[] args) throws IOException, ClassNotFoundException {
 
       Scanner stdin = new Scanner(System.in);
       System.out.println("Do you want use CLI or GUI? c | g");

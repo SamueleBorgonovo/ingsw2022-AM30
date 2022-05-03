@@ -2,7 +2,7 @@ package it.polimi.ingsw.messages.toServer;
 
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Wizard;
-import it.polimi.ingsw.server.ClientHandler;
+import it.polimi.ingsw.server.ClientHandlerInterface;
 
 public class CreatePlayerInGameMessage extends MessageToServer {
     String nickname;
@@ -17,15 +17,12 @@ public class CreatePlayerInGameMessage extends MessageToServer {
         this.numofplayers = numofplayers;
     }
 
-    public void action(ClientHandler clienthandler) {
-       /* id=gamehandler.getid(nickname)
-        gamehandler.chooseStudent(id,gamehandler.getgame(nickname));
-
-        */
-
+    public void action(ClientHandlerInterface clienthandler) {
+          clienthandler.getGameHandler().addPlayer(nickname,wizard,gamemode,numofplayers);
     }
 
-    public String getNickname() {
-        return this.nickname;
+    public String getNickname(){
+        return nickname;
     }
+
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.messages.toClient.MessageToClient;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Wizard;
 
@@ -35,6 +36,7 @@ public class Client {
         } catch (IOException e) {
             return false;
         }
+        System.out.println("Correctly connected to the Server");
 
         ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
@@ -43,7 +45,7 @@ public class Client {
             try {
                 while(active) {
                     Object messageFromServer = input.readObject();
-                    //view.((Message) messageFromServer).action();
+                    ((MessageToClient) messageFromServer).action();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -51,6 +53,15 @@ public class Client {
                 e.printStackTrace();
             }
         }).start();
+
+        System.out.println("Choose your nickname");
+        stdin.nextLine();
+        boolean correct=false;
+        do{
+
+
+        }while(correct);
+
         return true;
 
     }

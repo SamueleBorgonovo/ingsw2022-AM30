@@ -8,7 +8,7 @@ public class ServerMain {
     private static final int MIN_PORT = 1024;
     private static final int MAX_PORT = 65535;
 
-    public void main(String[] args) throws UnknownHostException {
+    public static void main(String[] args) throws UnknownHostException {
         Scanner stdin = new Scanner(System.in);
         int serverPort;
         System.out.println("Welcome");
