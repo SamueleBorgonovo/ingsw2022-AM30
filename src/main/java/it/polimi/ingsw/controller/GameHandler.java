@@ -127,5 +127,19 @@ public class GameHandler {
         }
     }
 
+    public void moveMotherNature(ClientHandlerInterface clientHandler, int movement) throws InvalidTurnException, WrongValueException {
+        GameInterface game = findGameofPlayer(clientHandler.getNickname());
+        int playerID = findPlayeridofPlayer(clientHandler.getNickname());
+        try {
+            game.moveMotherNature(playerID,movement);
+
+        } catch (WrongValueException e) {
+            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
+            // server.sendMessage(nickname,InvalidPhaseMa);
+        } catch (InvalidTurnException e) {
+            //Meesagge to client to notify excepion
+        }
+    }
+
 
 }
