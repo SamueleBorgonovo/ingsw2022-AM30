@@ -1,14 +1,13 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.exceptions.InvalidTurnException;
-import it.polimi.ingsw.exceptions.WrongAssistantException;
+import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.GameInterface;
+import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.Wizard;
-import it.polimi.ingsw.server.ClientHandler;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
 import java.util.HashMap;
@@ -110,6 +109,23 @@ public class GameHandler {
 
     }
 
+    public void chooseCharacter(ClientHandlerInterface clientHandler, Characters character) throws InvalidStopException, InvalidTurnException, OutOfCoinsException, InvalidCharacterException {
+        GameInterface game = findGameofPlayer(clientHandler.getNickname());
+        int playerID = findPlayeridofPlayer(clientHandler.getNickname());
+        try {
+            game.useCharacter(playerID, character);
+
+        } catch (InvalidStopException e) {
+            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
+            // server.sendMessage(nickname,InvalidPhaseMa);
+        } catch (InvalidTurnException e) {
+            //Meesagge to client to notify excepion
+        } catch (OutOfCoinsException e) {
+            //Notify excepion
+        } catch (InvalidCharacterException e) {
+            //C
+        }
+    }
 
 
 }
