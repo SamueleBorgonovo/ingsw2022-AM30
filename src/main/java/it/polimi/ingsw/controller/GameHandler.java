@@ -19,19 +19,15 @@ public class GameHandler {
 
 
     //Da vedere se è meglio mettere in ingresso solo il nickname o direttamente il clientHandler del player
-    public void addPlayer(String nickname, Wizard wizard, GameMode gamemode, int numofplayers){
+    public void addPlayer(String nickname, GameMode gamemode, int numofplayers){
         int playerid;
         int found=0;
-        for (String name : playertoPlayerIDMap.keySet())
-            if(nickname.equals(name)){
-                //Mandiamo un messaggio di nome già occupato
-                return;
-            }
+
         for(GameInterface game : playertoGameMap.values()){
             if(game.getGameMode()==gamemode)
                     if(game.getNumOfPlayers()==numofplayers){
                         if(game.getState()== GameState.WAITINGFORPLAYERS) {
-                            playerid = game.addPlayer(nickname, wizard);
+                            playerid = game.addPlayer(nickname, null);
                             setGameofPlayer(nickname, game);
                             setPlayeridofPlayer(nickname, playerid);
                             found = 1;
@@ -41,7 +37,7 @@ public class GameHandler {
         }
         if(found==0) {
             GameInterface game = new Game(gamemode,numofplayers);
-            playerid = game.addPlayer(nickname,wizard);
+            playerid = game.addPlayer(nickname,null);
             setGameofPlayer(nickname,game);
             setPlayeridofPlayer(nickname,playerid);
 
