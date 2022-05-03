@@ -3,6 +3,7 @@ package it.polimi.ingsw.server;
 import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.exceptions.InvalidTurnException;
 import it.polimi.ingsw.exceptions.WrongAssistantException;
+import it.polimi.ingsw.messages.toClient.MessageToClient;
 import it.polimi.ingsw.messages.toServer.MessageToServer;
 import it.polimi.ingsw.messages.toServer.CreatePlayerInGameMessage;
 
@@ -84,8 +85,8 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
         }
     }
 
-    public void sendMessage(MessageToServer messageToServer) throws IOException {
-        os.writeObject(messageToServer);
+    public void sendMessage(MessageToClient message) throws IOException {
+        os.writeObject(message);
         os.flush();
         os.reset();
     }
