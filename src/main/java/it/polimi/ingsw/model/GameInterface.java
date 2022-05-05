@@ -20,20 +20,20 @@ public interface GameInterface {
 
     public GameMode getGameMode();
 
-    public void selectCloud(int playerID, int cloudID) throws InvalidTurnException, WrongCloudException;
+    public void selectCloud(int playerID, int cloudID) throws InvalidTurnException, InvalidCloudException;
 
-    public void moveStudentToHall(int playerID, Student student) throws InvalidTurnException, WrongStudentException;
+    public void moveStudentToHall(int playerID, Student student) throws InvalidTurnException, InvalidStudentException;
 
-    public void moveStudentToIsland(int playerID, int islandID, Student student) throws InvalidTurnException, WrongStudentException;
+    public void moveStudentToIsland(int playerID, int islandID, Student student) throws InvalidTurnException, InvalidStudentException;
 
-    public void useAssistant(int playerID, Assistant assistant) throws WrongAssistantException, InvalidTurnException;
+    public void useAssistant(int playerID, Assistant assistant) throws InvalidAssistantException, InvalidTurnException;
 
-    public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnException, WrongValueException;
+    public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnException, InvalidValueException;
 
     public void useCharacter(int playerID, Characters character)  throws InvalidStopException, InvalidTurnException, OutOfCoinsException, InvalidCharacterException;
 
-    public void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnException, WrongIslandException, WrongStudentEffectException;
+    public void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnException, InvalidIslandException, InvalidStudentEffectException;
 
-    public void CharacterStudentsPhase(int playerID, ArrayList<Student> students) throws InvalidTurnException, WrongStudentEffectException;
+    public void CharacterStudentsPhase(int playerID, ArrayList<Student> students) throws InvalidTurnException, InvalidStudentEffectException;
 
 }

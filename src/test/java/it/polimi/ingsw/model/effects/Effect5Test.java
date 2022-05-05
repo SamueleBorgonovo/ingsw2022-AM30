@@ -21,7 +21,7 @@ class Effect5Test {
     }
 
     @Test
-    void effect() throws InvalidStopException, WrongStudentEffectException, InvalidTurnException, WrongIslandException, WrongValueException {
+    void effect() throws InvalidStopException, InvalidStudentEffectException, InvalidTurnException, InvalidIslandException, InvalidValueException {
         //This test checks effect and also secondparteffect
 
         Game game = new Game(GameMode.EXPERTMODE,2);

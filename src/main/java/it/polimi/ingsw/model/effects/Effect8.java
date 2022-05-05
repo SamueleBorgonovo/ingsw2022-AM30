@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.effects;
 
 import it.polimi.ingsw.exceptions.InvalidStopException;
-import it.polimi.ingsw.exceptions.WrongStudentEffectException;
+import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
 import it.polimi.ingsw.model.game.Game;
 
 public class Effect8 extends Effect {
@@ -20,5 +20,5 @@ public class Effect8 extends Effect {
     public void inizialize(Game game) {}
 
     @Override
-    public void secondPartEffect(Game game, int playerID) throws WrongStudentEffectException {}
+    public void secondPartEffect(Game game, int playerID) throws InvalidStudentEffectException {}
 }

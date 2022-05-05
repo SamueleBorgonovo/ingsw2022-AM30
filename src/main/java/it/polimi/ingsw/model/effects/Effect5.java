@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.effects;
 
 import it.polimi.ingsw.exceptions.InvalidStopException;
-import it.polimi.ingsw.exceptions.WrongStudentEffectException;
+import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.player.PlayerState;
 
@@ -30,7 +30,7 @@ public class Effect5 extends Effect {
     }
 
     @Override
-    public void secondPartEffect(Game game, int playerID) throws WrongStudentEffectException {
+    public void secondPartEffect(Game game, int playerID) throws InvalidStudentEffectException {
         game.getBoard().getArchipelago().getSingleIsland(game.getEffectHandler().getIslandIDchoose()).setStop(true);
         game.getEffectHandler().removeislandstop();
         game.setCharacterInUse(null);

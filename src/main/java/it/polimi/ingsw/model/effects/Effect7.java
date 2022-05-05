@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.effects;
 
 import it.polimi.ingsw.exceptions.InvalidStopException;
-import it.polimi.ingsw.exceptions.WrongStudentEffectException;
+import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.PlayerState;
@@ -28,7 +28,7 @@ public class Effect7 extends Effect{
     }
 
     @Override
-    public void secondPartEffect(Game game, int playerID) throws WrongStudentEffectException {
+    public void secondPartEffect(Game game, int playerID) throws InvalidStudentEffectException {
 
         if(game.getEffectHandler().getStudentschoose().size()>=1 && game.getEffectHandler().getStudentschoose().size()<=6 && game.getEffectHandler().getStudentschoose().size()%2==0) {
             ArrayList<Student> toEntrance = new ArrayList<>();
@@ -57,6 +57,6 @@ public class Effect7 extends Effect{
             game.getPlayer(playerID).setPlayerState(prevPlayerState);
         }
         else
-            throw new WrongStudentEffectException();
+            throw new InvalidStudentEffectException();
         }
 }

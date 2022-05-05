@@ -2,12 +2,11 @@ package it.polimi.ingsw.model.effects;
 
 import it.polimi.ingsw.exceptions.InvalidStopException;
 import it.polimi.ingsw.exceptions.InvalidTurnException;
-import it.polimi.ingsw.exceptions.WrongValueException;
+import it.polimi.ingsw.exceptions.InvalidValueException;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerState;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +22,7 @@ class Effect4Test {
     }
 
     @Test
-    void effect() throws InvalidStopException, InvalidTurnException, WrongValueException {
+    void effect() throws InvalidStopException, InvalidTurnException, InvalidValueException {
 
         Game game = new Game(GameMode.EXPERTMODE,2);
         game.addPlayer("kek",null);

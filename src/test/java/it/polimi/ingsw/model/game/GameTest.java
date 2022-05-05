@@ -1,9 +1,9 @@
 package it.polimi.ingsw.model.game;
 
 import it.polimi.ingsw.exceptions.InvalidTurnException;
-import it.polimi.ingsw.exceptions.WrongAssistantException;
-import it.polimi.ingsw.exceptions.WrongStudentException;
-import it.polimi.ingsw.exceptions.WrongValueException;
+import it.polimi.ingsw.exceptions.InvalidAssistantException;
+import it.polimi.ingsw.exceptions.InvalidStudentException;
+import it.polimi.ingsw.exceptions.InvalidValueException;
 import it.polimi.ingsw.model.player.*;
 import org.junit.jupiter.api.Test;
 
@@ -126,7 +126,7 @@ class GameTest {
     }
 
     @Test
-    void moveStudentToHall() throws InvalidTurnException, WrongStudentException {
+    void moveStudentToHall() throws InvalidTurnException, InvalidStudentException {
         game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
         player1 = game2players.getPlayer(1);
         game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
@@ -141,7 +141,7 @@ class GameTest {
             game2players.moveStudentToHall(1, Student.BLUE);
             game2players.moveStudentToHall(1, Student.YELLOW);
         }
-        catch (WrongStudentException e) {System.out.println("Errore");};
+        catch (InvalidStudentException e) {System.out.println("Errore");};
        // System.out.println(player1.getPlance().getEntrance());
         assertEquals(player1.getPlance().getNumberOfStudentHall(Student.RED),1);
         assertEquals(player1.getPlance().getNumberOfStudentHall(Student.BLUE),1);
@@ -150,7 +150,7 @@ class GameTest {
     }
 
     @Test
-    void moveStudentToIsland() throws InvalidTurnException, WrongStudentException {
+    void moveStudentToIsland() throws InvalidTurnException, InvalidStudentException {
         ArrayList<Student> students = new ArrayList<>();
         students.add(Student.RED);
         students.add(Student.BLUE);
@@ -170,7 +170,7 @@ class GameTest {
     }
 
     @Test
-    void useAssistant() throws WrongAssistantException, InvalidTurnException {
+    void useAssistant() throws InvalidAssistantException, InvalidTurnException {
         ArrayList<Assistant> wanted1 = new ArrayList<>(Arrays.asList(Assistant.values()));
         ArrayList<Assistant> wanted2 = new ArrayList<>(Arrays.asList(Assistant.values()));
         wanted1.remove(Assistant.CAT);
@@ -192,7 +192,7 @@ class GameTest {
     }
 
     @Test
-    void moveMotherNature() throws InvalidTurnException, WrongValueException, WrongAssistantException {
+    void moveMotherNature() throws InvalidTurnException, InvalidValueException, InvalidAssistantException {
         game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
         player1 = game2players.getPlayer(1);
         game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);

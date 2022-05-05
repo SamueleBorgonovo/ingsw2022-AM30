@@ -114,7 +114,7 @@ public class Game implements GameInterface {
         return playerChosen;
     }
 
-    public void selectCloud(int playerID, int cloudID) throws InvalidTurnException, WrongCloudException {
+    public void selectCloud(int playerID, int cloudID) throws InvalidTurnException, InvalidCloudException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.CLOUDPHASE) {
             if(!getBoard().getCloud(cloudID).isChoosen()){
                     for(int count=0;count<getBoard().getCloud(cloudID).getStudents().size();count++)
@@ -122,7 +122,7 @@ public class Game implements GameInterface {
                     getBoard().getCloud(cloudID).setChoosen(true);
                     numplayerhasplayed++;
                 }
-            else throw new WrongCloudException();
+            else throw new InvalidCloudException();
 
             if(numplayerhasplayed < numOfPlayers) {
                 //Set next player to play
@@ -150,7 +150,7 @@ public class Game implements GameInterface {
         else throw new InvalidTurnException();
     }
 
-    public void moveStudentToHall(int playerID, Student student) throws InvalidTurnException, WrongStudentException{
+    public void moveStudentToHall(int playerID, Student student) throws InvalidTurnException, InvalidStudentException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
             if(getPlayer(playerID).getPlance().getEntrance().contains(student)){
                 getPlayer(playerID).getPlance().addStudentHall(student);
@@ -163,12 +163,12 @@ public class Game implements GameInterface {
                     getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
                     movementStudents=0;
                 }
-            } else throw new WrongStudentException();
+            } else throw new InvalidStudentException();
         }
         else throw new InvalidTurnException();
     }
 
-    public void moveStudentToIsland(int playerID, int islandID, Student student) throws InvalidTurnException, WrongStudentException {
+    public void moveStudentToIsland(int playerID, int islandID, Student student) throws InvalidTurnException, InvalidStudentException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
             if(getPlayer(playerID).getPlance().getEntrance().contains(student)){
                 Island island = getBoard().getArchipelago().getSingleIsland(islandID);
@@ -179,11 +179,11 @@ public class Game implements GameInterface {
                     getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
                     movementStudents=0;
                 }
-            } else throw new WrongStudentException();
+            } else throw new InvalidStudentException();
         }  else throw new InvalidTurnException();
     }
 
-    public void useAssistant(int playerID, Assistant assistant) throws WrongAssistantException, InvalidTurnException {
+    public void useAssistant(int playerID, Assistant assistant) throws InvalidAssistantException, InvalidTurnException {
 
         if(getPlayer(playerID).getPlayerState() == PlayerState.ASSISTANTPHASE) { //Check that is the right id of the player that has to play
             if (numplayerhasplayed == 0) {  //First to choose, no controls to do
@@ -194,7 +194,7 @@ public class Game implements GameInterface {
                     getPlayer(playerID).setPlayerState(PlayerState.WAITING);
                     playerorder.get(1).setPlayerState(PlayerState.ASSISTANTPHASE);
                 } else
-                    throw new WrongAssistantException();
+                    throw new InvalidAssistantException();
             }
             else{
                 if(numplayerhasplayed==1){  //Second to choose, control if first has played same assistant
@@ -213,8 +213,8 @@ public class Game implements GameInterface {
                                     playerorder.get(2).setPlayerState(PlayerState.ASSISTANTPHASE);
                                 }
 
-                            } else throw new WrongAssistantException();
-                        } else throw new WrongAssistantException();
+                            } else throw new InvalidAssistantException();
+                        } else throw new InvalidAssistantException();
                 }
                 else {
                     if(getPlayer(playerID).getAssistantCards().contains(assistant)){ //Third to choose, control first and second assistants played
@@ -225,8 +225,8 @@ public class Game implements GameInterface {
                             numplayerhasplayed=0;
                             verifyPlayerOrder();
                             playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
-                        }else throw new WrongAssistantException();
-                    }else throw new WrongAssistantException();
+                        }else throw new InvalidAssistantException();
+                    }else throw new InvalidAssistantException();
                 }
             }
         }
@@ -234,7 +234,7 @@ public class Game implements GameInterface {
     }
 
 
-    public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnException, WrongValueException {
+    public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnException, InvalidValueException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.MOTHERNATUREPHASE) {
             if (!this.getEffectHandler().getTwomoremoves()) {  //Check if effect4 is in use
                 if (numberOfMovement >= 1 && numberOfMovement <= getPlayer(playerID).getLastassistantplayed().getValue()) {
@@ -244,7 +244,7 @@ public class Game implements GameInterface {
                     this.getBoard().getArchipelago().verifyMergeableIsland();
                     //probably have to put winner method
                     getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
-                } else throw new WrongValueException();
+                } else throw new InvalidValueException();
             } else{
                 //Effect4 used
                 if (numberOfMovement >= 1 && numberOfMovement <= getPlayer(playerID).getLastassistantplayed().getValue()+2) {
@@ -255,7 +255,7 @@ public class Game implements GameInterface {
                     //probably have to put winner method
                     this.getEffectHandler().setTwomoremoves(false);
                     getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
-                } else throw new WrongValueException();
+                } else throw new InvalidValueException();
             }
         } else throw new InvalidTurnException();
     }
@@ -279,18 +279,18 @@ public class Game implements GameInterface {
 
     }
 
-    public void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnException, WrongIslandException, WrongStudentEffectException {
+    public void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnException, InvalidIslandException, InvalidStudentEffectException {
         if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERISLANDPHASE) {
             if (islandID >= 1 && islandID <= board.getArchipelago().getNumOfIslands()) {
                 effectHandler.setIslandIDchoose(islandID);
                 characterInUse.getEffect().secondPartEffect(this, playerID);
             }
-            else throw new WrongIslandException();
+            else throw new InvalidIslandException();
         }
         else throw new InvalidTurnException();
     }
 
-    public void CharacterStudentsPhase(int playerID,ArrayList<Student> students) throws InvalidTurnException, WrongStudentEffectException {
+    public void CharacterStudentsPhase(int playerID,ArrayList<Student> students) throws InvalidTurnException, InvalidStudentEffectException {
         if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERSTUDENTSPHASE) {
             effectHandler.setStudentschoose(students);
             characterInUse.getEffect().secondPartEffect(this, playerID);

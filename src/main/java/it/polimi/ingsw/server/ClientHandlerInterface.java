@@ -11,5 +11,5 @@ public interface ClientHandlerInterface {
 
     public MessageHandler getController();
 
-    public void sendMessageToClient(MessageToClient message) throws IOException;
+    public void sendMessageToClient(MessageToClient message);
 }

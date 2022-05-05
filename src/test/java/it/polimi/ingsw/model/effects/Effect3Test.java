@@ -2,8 +2,8 @@ package it.polimi.ingsw.model.effects;
 
 import it.polimi.ingsw.exceptions.InvalidStopException;
 import it.polimi.ingsw.exceptions.InvalidTurnException;
-import it.polimi.ingsw.exceptions.WrongIslandException;
-import it.polimi.ingsw.exceptions.WrongStudentEffectException;
+import it.polimi.ingsw.exceptions.InvalidIslandException;
+import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
@@ -26,7 +26,7 @@ class Effect3Test {
     }
 
     @Test
-    void effect() throws InvalidStopException, WrongStudentEffectException, InvalidTurnException, WrongIslandException {
+    void effect() throws InvalidStopException, InvalidStudentEffectException, InvalidTurnException, InvalidIslandException {
         //This test check effect and also secondparteffect
 
         Game game = new Game(GameMode.EXPERTMODE,2);

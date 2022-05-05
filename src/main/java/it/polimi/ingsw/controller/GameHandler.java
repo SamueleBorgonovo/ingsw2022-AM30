@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.model.GameInterface;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.game.Game;
@@ -11,6 +12,7 @@ import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.Wizard;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -72,32 +74,17 @@ public class GameHandler {
 
 
 
-
-    //ChooseStudent va splittato in movestudentotoisland e movestudenttohall
-    /*public void chooseStudent(String nickname, Student student){
-        Game game= findGameofPlayer(nickname);
-        int playerid= findPlayeridofPlayer(nickname);
-        try{
-            game.chooseStudent(id,student)
-        }
-        catch{
-            Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
-           // server.sendMessage(nickname,InvalidPhaseMa);
-        }
-    }
-
-     */
-
-
-    public void chooseAssistant(ClientHandlerInterface clientHandler, Assistant assistant) {
+    public void chooseAssistant(ClientHandlerInterface clientHandler, Assistant assistant){
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.useAssistant(playerID, assistant);
-        } catch (WrongAssistantException e) {
-            //clientHandler.sendMessageToClient(wrongAssistantMessage);
+        } catch (InvalidAssistantException e) {
+            InvalidAssistantMessage message = new InvalidAssistantMessage();
+            clientHandler.sendMessageToClient(message);
         } catch (InvalidTurnException e) {
-            //clientHandler.sendMessageToClient(invalidTurnMessage);
+            InvalidTurnMessage message = new InvalidTurnMessage();
+            clientHandler.sendMessageToClient(message);
         }
     }
 
@@ -108,14 +95,17 @@ public class GameHandler {
             game.useCharacter(playerID, character);
 
         } catch (InvalidStopException e) {
-            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
-            // server.sendMessage(nickname,InvalidPhaseMa);
+            InvalidStopMessage message = new InvalidStopMessage();
+            clientHandler.sendMessageToClient(message);
         } catch (InvalidTurnException e) {
-            //Meesagge to client to notify excepion
+            InvalidTurnMessage message = new InvalidTurnMessage();
+            clientHandler.sendMessageToClient(message);
         } catch (OutOfCoinsException e) {
-            //Notify excepion
+            OutOfCoinsMessage message = new OutOfCoinsMessage();
+            clientHandler.sendMessageToClient(message);
         } catch (InvalidCharacterException e) {
-            //C
+            InvalidCharacterMessage message = new InvalidCharacterMessage();
+            clientHandler.sendMessageToClient(message);
         }
     }
 
@@ -124,10 +114,12 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.selectCloud(playerID,cloudID);
-        } catch (WrongCloudException e) {
-            //clientHandler.sendMessageToClient(wrongAssistantMessage);
+        } catch (InvalidCloudException e) {
+            InvalidCloudMessage message = new InvalidCloudMessage();
+            clientHandler.sendMessageToClient(message);
         } catch (InvalidTurnException e) {
-            //clientHandler.sendMessageToClient(invalidTurnMessage);
+            InvalidTurnMessage message = new InvalidTurnMessage();
+            clientHandler.sendMessageToClient(message);
         }
     }
 
@@ -137,11 +129,12 @@ public class GameHandler {
         try {
             game.moveMotherNature(playerID,movement);
 
-        } catch (WrongValueException e) {
-            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
-            // server.sendMessage(nickname,InvalidPhaseMa);
+        } catch (InvalidValueException e) {
+            InvalidValueMessage message = new InvalidValueMessage();
+            clientHandler.sendMessageToClient(message);
         } catch (InvalidTurnException e) {
-            //Meesagge to client to notify excepion
+            InvalidTurnMessage message = new InvalidTurnMessage();
+            clientHandler.sendMessageToClient(message);
         }
     }
 
@@ -151,11 +144,12 @@ public class GameHandler {
         try {
             game.moveStudentToHall(playerID,student);
 
-        } catch (WrongStudentException e) {
-            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
-            // server.sendMessage(nickname,InvalidPhaseMa);
+        } catch (InvalidStudentException e) {
+            InvalidStudentMessage message = new InvalidStudentMessage();
+            clientHandler.sendMessageToClient(message);
         } catch (InvalidTurnException e) {
-            //Meesagge to client to notify excepion
+            InvalidTurnMessage message = new InvalidTurnMessage();
+            clientHandler.sendMessageToClient(message);
         }
     }
 
@@ -165,11 +159,12 @@ public class GameHandler {
         try {
             game.CharacterStudentsPhase(playerID,students);
 
-        } catch (WrongStudentEffectException e) {
-            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
-            // server.sendMessage(nickname,InvalidPhaseMa);
+        } catch (InvalidStudentEffectException e) {
+            InvalidStudentEffectMessage message = new InvalidStudentEffectMessage();
+            clientHandler.sendMessageToClient(message);
         } catch (InvalidTurnException e) {
-            //Meesagge to client to notify excepion
+            InvalidTurnMessage message = new InvalidTurnMessage();
+            clientHandler.sendMessageToClient(message);
         }
     }
 
@@ -179,13 +174,15 @@ public class GameHandler {
         try {
             game.CharacterIslandPhase(playerID,islandID);
 
-        } catch (WrongIslandException e) {
-            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
-            // server.sendMessage(nickname,InvalidPhaseMa);
+        } catch (InvalidIslandException e) {
+            InvalidIslandMessage message = new InvalidIslandMessage();
+            clientHandler.sendMessageToClient(message);
         } catch (InvalidTurnException e) {
-            //Meesagge to client to notify excepion
-        } catch (WrongStudentEffectException e) {
-            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
+            InvalidTurnMessage message = new InvalidTurnMessage();
+            clientHandler.sendMessageToClient(message);
+        } catch (InvalidStudentEffectException e) {
+            InvalidStudentEffectMessage message = new InvalidStudentEffectMessage();
+            clientHandler.sendMessageToClient(message);
         }
     }
 
@@ -195,11 +192,12 @@ public class GameHandler {
         try {
             game.moveStudentToIsland(playerID,islandID,student);
 
-        } catch (WrongStudentException e) {
-            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
-            // server.sendMessage(nickname,InvalidPhaseMa);
+        } catch (InvalidStudentException e) {
+            InvalidStudentMessage message = new InvalidStudentMessage();
+            clientHandler.sendMessageToClient(message);
         } catch (InvalidTurnException e) {
-            //Meesagge to client to notify excepion
+            InvalidTurnMessage message = new InvalidTurnMessage();
+            clientHandler.sendMessageToClient(message);
         }
     }
 

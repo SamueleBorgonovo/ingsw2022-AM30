@@ -1,8 +1,9 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.View.View;
-import it.polimi.ingsw.messages.toClient.CorrectNicknameMessage;
-import it.polimi.ingsw.messages.toClient.InvalidNicknameMessage;
+import it.polimi.ingsw.controller.MessageHandler;
+import it.polimi.ingsw.messages.toClient.InvalidAssistantMessage;
+import it.polimi.ingsw.messages.toClient.NicknameMessage;
 import it.polimi.ingsw.messages.toClient.MessageToClient;
 import it.polimi.ingsw.messages.toServer.ChooseNicknameMessage;
 import it.polimi.ingsw.messages.toServer.CreatePlayerInGameMessage;
@@ -28,12 +29,15 @@ public class Client {
     int numofPlayers;
     private final Thread socketListener;
     private View view;
+    ClientMessageHandler messageHandler;
 
     //Cli e gui dopo che vengono scelti ip e porta chiamano il costruttore di client e poi il suo .setup
     public Client(String ip, int port, View view){ //Mettere ip e port come parametri del costruttore
         this.ip = ip;
         this.port = port;
         this.view = view;
+        messageHandler = new ClientMessageHandler();
+
         this.socketListener = new Thread(this::messageListener);
     }
     public boolean setupConnection() throws IOException, ClassNotFoundException {
@@ -56,9 +60,8 @@ public class Client {
        input = new ObjectInputStream(socket.getInputStream());
        gameSetup();
 
-
-        active=true;
-        socketListener.start();
+       active=true;
+       socketListener.start();
 
 
         return true;
@@ -74,13 +77,12 @@ public class Client {
             ChooseNicknameMessage message = new ChooseNicknameMessage(s);
             sendMessage(message);
             Object message2 = input.readObject();
-            if(message2 instanceof CorrectNicknameMessage) {
-                correct = true;
-                setNickname(s);
+            if(message2 instanceof NicknameMessage) {
+                if(((NicknameMessage) message2).getCheck()) {
+                    correct=true;
+                    setNickname(s);
+                }
             }
-            if(message2 instanceof InvalidNicknameMessage)
-                System.out.println("Nickname already chosen, please insert another one");
-
         }while(correct);
 
         System.out.println("Press s for SimpleMode or e for ExpertMode");
@@ -125,7 +127,7 @@ public class Client {
         try{
         while(active){
             Object messageFromServer = input.readObject();
-            ((MessageToClient) messageFromServer).action();
+            ((MessageToClient) messageFromServer).action(this);
         }
         }catch(IOException | ClassNotFoundException e) {
             //Da scrivere cosa fare in questi casi
@@ -143,6 +145,10 @@ public class Client {
             System.err.println("Error during send process.");
             System.err.println(e.getMessage());
         }
+    }
+
+    public ClientMessageHandler getMessageHandler() {
+        return messageHandler;
     }
 
     public String getNickname() {

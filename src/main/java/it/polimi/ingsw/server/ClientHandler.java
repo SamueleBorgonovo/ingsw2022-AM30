@@ -66,10 +66,15 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
         }
     }
 
-    public void sendMessageToClient(MessageToClient message) throws IOException {
-        os.writeObject(message);
-        os.flush();
-        os.reset();
+    public void sendMessageToClient(MessageToClient message){
+        try {
+            os.writeObject(message);
+            os.flush();
+            os.reset();
+        }
+        catch(IOException e) {
+            //Fa qualcosa
+        }
     }
 
 
