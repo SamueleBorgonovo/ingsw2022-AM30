@@ -1,7 +1,9 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toClient.CorrectNicknameMessage;
 import it.polimi.ingsw.messages.toClient.InvalidNicknameMessage;
+import it.polimi.ingsw.messages.toClient.MessageToClient;
 import it.polimi.ingsw.messages.toServer.ChooseNicknameMessage;
 import it.polimi.ingsw.messages.toServer.CreatePlayerInGameMessage;
 import it.polimi.ingsw.messages.toServer.MessageToServer;
@@ -15,16 +17,26 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
+    String ip;
+    int port;
     ObjectOutputStream output;
     ObjectInputStream input;
-    private static int port;
     boolean active=false;
     String nickname;
     Wizard wizard;
     GameMode gamemode;
     int numofPlayers;
+    private final Thread socketListener;
+    private View view;
 
-    public boolean setup() throws ClassNotFoundException, IOException {
+    //Cli e gui dopo che vengono scelti ip e porta chiamano il costruttore di client e poi il suo .setup
+    public Client(String ip, int port, View view){ //Mettere ip e port come parametri del costruttore
+        this.ip = ip;
+        this.port = port;
+        this.view = view;
+        this.socketListener = new Thread(this::messageListener);
+    }
+    public boolean setupConnection() throws IOException, ClassNotFoundException {
         Scanner stdin = new Scanner(System.in);
         String ip;
         System.out.println("Please insert the ip-addres");
@@ -42,8 +54,20 @@ public class Client {
 
        output = new ObjectOutputStream(socket.getOutputStream());
        input = new ObjectInputStream(socket.getInputStream());
+       gameSetup();
 
-        System.out.println("Choose your nickname");
+
+        active=true;
+        socketListener.start();
+
+
+        return true;
+    }
+
+    public void gameSetup() throws IOException, ClassNotFoundException {
+        Scanner stdin = new Scanner(System.in);
+        //Mettere tutto la scelta delle options in un metodo a parte
+        System.out.println("Choose your nickname"); //Invece di questi print usare view. per poi dividere in cli o gui
         boolean correct=false;
         do{
             String s=stdin.nextLine();
@@ -56,7 +80,6 @@ public class Client {
             }
             if(message2 instanceof InvalidNicknameMessage)
                 System.out.println("Nickname already chosen, please insert another one");
-
 
         }while(correct);
 
@@ -87,7 +110,7 @@ public class Client {
             }
         }while(!pass2);
 
-        if(cho=='2')
+        if(cho2=='2')
             this.setNumofPlayers(2);
         else
             this.setNumofPlayers(3);
@@ -95,25 +118,18 @@ public class Client {
         CreatePlayerInGameMessage message = new CreatePlayerInGameMessage(nickname,gamemode,numofPlayers);
         sendMessage(message);
 
-        //Manca la parte della scelta del wizard
-        return true;
+        //Arriva la lista di wizard disponibili e sceglie
+    }
 
-        //Vedere come gestire l'arrivo dei messaggi
-         /*    active=true;
-        new Thread(() -> {
-            try {
-                while(active) {
-                    Object messageFromServer = input.readObject();
-                    ((MessageToClient) messageFromServer).action();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }).start();
-
-     */
+    public void messageListener(){
+        try{
+        while(active){
+            Object messageFromServer = input.readObject();
+            ((MessageToClient) messageFromServer).action();
+        }
+        }catch(IOException | ClassNotFoundException e) {
+            //Da scrivere cosa fare in questi casi
+        }
 
     }
 

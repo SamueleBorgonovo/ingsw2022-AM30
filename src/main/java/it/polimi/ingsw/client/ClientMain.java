@@ -11,15 +11,16 @@ public class ClientMain {
       System.out.println("Do you want use CLI or GUI? c | g");
       stdin.next();
       //To see how to setup CLI and GUI
-
+      /*
         Client client = new Client();
         boolean worked;
         do {
-          worked = client.setup();
+          worked = client.setupConnection();
           if (!worked) {
             System.out.println("Connection failed");
           }
         }while(!worked);
+        /*
 
 
 
