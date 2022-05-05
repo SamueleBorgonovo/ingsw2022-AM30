@@ -3,17 +3,11 @@ package it.polimi.ingsw.messages.toServer;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
-public class MoveStudentToIslandMessage extends MessageToServer {
-    Student student;
+public class ChooseIslandEffectMessage {
     int islandID;
 
-    public MoveStudentToIslandMessage(int islandID, Student student){
+    public ChooseIslandEffectMessage(int islandID){
         this.islandID = islandID;
-        this.student = student;
-    }
-
-    public Student getStudent() {
-        return student;
     }
 
     public int getIslandID() {

@@ -1,54 +1,34 @@
 package it.polimi.ingsw.server;
 
 
-import it.polimi.ingsw.controller.GameHandler;
+import it.polimi.ingsw.controller.MessageHandler;
 
 import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import java.net.ServerSocket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.net.Socket;
 
 public class Server {
-   private int serverPort;
-    private final ExecutorService executor;
+   private final int serverPort;
     private boolean isActive;
-    GameHandler gameHandler;
-    public Server(int port) {
-        serverPort=port;
-        executor = Executors.newCachedThreadPool();
-        GameHandler gameHandler = new GameHandler();
-    }
+    MessageHandler messageHandler;
 
-    public GameHandler getGameHandler() {
-        return gameHandler;
+    public Server(int port) {
+        serverPort = port;
+        MessageHandler messageHandler = new MessageHandler();
+        isActive = true;
     }
 
     public void start(){
         try{
             ServerSocket serverSocket = new ServerSocket(serverPort);
-            System.out.println("Server avviato");
-            while(true) {
+            System.out.println("Server started");
+            while(isActive) {
                 Socket clientSocket = serverSocket.accept();
-                ClientHandler clientHandler = new ClientHandler(clientSocket, this);
-                executor.submit(clientHandler);
+                ClientHandler clientHandler = new ClientHandler(clientSocket, messageHandler);
+                new Thread(clientHandler).start();
             }
         }catch (IOException e) {
             e.printStackTrace();
-            return;
         }
-
     }
-
-
-    /*
-        Message mess = takemessage(...);
-        mess.action(this);
-     */
-
 }

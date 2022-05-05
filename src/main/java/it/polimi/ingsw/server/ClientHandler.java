@@ -1,11 +1,8 @@
 package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.controller.GameHandler;
-import it.polimi.ingsw.exceptions.InvalidTurnException;
-import it.polimi.ingsw.exceptions.WrongAssistantException;
+import it.polimi.ingsw.controller.MessageHandler;
 import it.polimi.ingsw.messages.toClient.MessageToClient;
 import it.polimi.ingsw.messages.toServer.MessageToServer;
-import it.polimi.ingsw.messages.toServer.CreatePlayerInGameMessage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,18 +11,16 @@ import java.net.Socket;
 
 public class ClientHandler implements Runnable, ClientHandlerInterface {
     private final int PING_PERIOD = 5000;
-    private Server server;
+    private MessageHandler controller;
     private Socket clientSocket;
     private boolean active;
     private final Thread pinger;
     private ObjectOutputStream os;
     private ObjectInputStream is;
-    GameHandler gameHandler;
-    String nickname;
+    private String nickname;
 
-    public ClientHandler(Socket clientSocket, Server server) {
-        this.server = server;
-        gameHandler = server.getGameHandler();
+    public ClientHandler(Socket clientSocket, MessageHandler messageHandler) {
+        controller = messageHandler;
         this.clientSocket = clientSocket;
         this.pinger = new Thread(() -> {
             while (active) {
@@ -40,8 +35,8 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
 
     }
 
-    public GameHandler getGameHandler() {
-        return gameHandler;
+    public MessageHandler getController() {
+        return controller;
     }
 
     public String getNickname() {
@@ -57,27 +52,13 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
         try {
             is = new ObjectInputStream(clientSocket.getInputStream());
             os = new ObjectOutputStream(clientSocket.getOutputStream());
-            boolean arrived=false;
             //pinger.start();
             try {
-                   do {
-                       Object messageFromClient = is.readObject();
-                       if (messageFromClient instanceof CreatePlayerInGameMessage) {
-                           setNickname(((CreatePlayerInGameMessage) messageFromClient).getNickname());
-                           ((CreatePlayerInGameMessage) messageFromClient).action(this);
-                           arrived=true;
-                       }
-                       else{
-                           //Manda il messaggio di darmi il messaggio giusto
-                       }
-                   }while(!arrived);
-
                    while(true){
                        Object messageFromClient = is.readObject();
                        ((MessageToServer) messageFromClient).action(this);
                    }
-
-           } catch (ClassNotFoundException | InvalidTurnException | WrongAssistantException ignored) {}
+           } catch (ClassNotFoundException ignored) {}
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,9 +66,11 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
         }
     }
 
-    public void sendMessage(MessageToClient message) throws IOException {
+    public void sendMessageToClient(MessageToClient message) throws IOException {
         os.writeObject(message);
         os.flush();
         os.reset();
     }
+
+
 }

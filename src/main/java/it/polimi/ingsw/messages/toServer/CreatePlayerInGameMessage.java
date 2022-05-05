@@ -8,18 +8,14 @@ public class CreatePlayerInGameMessage extends MessageToServer {
     GameMode gamemode;
     int numofplayers;
 
-    public CreatePlayerInGameMessage(String nickname, GameMode gamemode, int numofplayers) {
+    public CreatePlayerInGameMessage(String nickname, GameMode gamemode,int numofplayers) {
         this.nickname = nickname;
         this.gamemode = gamemode;
         this.numofplayers = numofplayers;
     }
 
-    public void action(ClientHandlerInterface clienthandler) {
-         clienthandler.getGameHandler().addPlayer(nickname,gamemode,numofplayers);
-    }
-
-    public String getNickname(){
-        return nickname;
+    public void action(ClientHandlerInterface clientHandler) {
+        clientHandler.getController().process(this, clientHandler);
     }
 
 }

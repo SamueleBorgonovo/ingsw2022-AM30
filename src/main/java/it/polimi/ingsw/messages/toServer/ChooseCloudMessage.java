@@ -1,13 +1,16 @@
 package it.polimi.ingsw.messages.toServer;
 
-import it.polimi.ingsw.model.player.Wizard;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
-public class ChooseWizardMessage {
-    Wizard wizard;
+public class ChooseCloudMessage extends MessageToServer {
+    int cloudID;
 
-    public ChooseWizardMessage(Wizard wizard) {
-        this.wizard = wizard;
+    public ChooseCloudMessage(int cloudID){
+        this.cloudID = cloudID;
+    }
+
+    public int getCloudID() {
+        return cloudID;
     }
 
     public void action(ClientHandlerInterface clientHandler) {

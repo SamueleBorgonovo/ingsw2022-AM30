@@ -1,7 +1,5 @@
 package it.polimi.ingsw.messages.toServer;
 
-import it.polimi.ingsw.exceptions.InvalidTurnException;
-import it.polimi.ingsw.exceptions.WrongValueException;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
 public class MoveMotherNatureMessage extends MessageToServer{
@@ -11,7 +9,11 @@ public class MoveMotherNatureMessage extends MessageToServer{
         this.movement = movement;
     }
 
-    public void action(ClientHandlerInterface clienthandler) throws InvalidTurnException, WrongValueException {
-        clienthandler.getGameHandler().moveMotherNature(clienthandler,movement);
+    public int getMovement() {
+        return movement;
+    }
+
+    public void action(ClientHandlerInterface clientHandler) {
+        clientHandler.getController().process(this, clientHandler);
     }
 }

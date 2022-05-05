@@ -11,23 +11,21 @@ import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.Wizard;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameHandler {
     HashMap<String, GameInterface> playertoGameMap = new HashMap<>();//Map that find the game of a player's nickname
     HashMap<String, Integer> playertoPlayerIDMap = new HashMap<>();//Map that find game's idplayer from a player's nickname
 
-
-    //Da vedere se è meglio mettere in ingresso solo il nickname o direttamente il clientHandler del player
-    public void addPlayer(String nickname, GameMode gamemode, int numofplayers){
+    public void addPlayer(String nickname, Wizard wizard, GameMode gamemode, int numofplayers){
         int playerid;
         int found=0;
-
         for(GameInterface game : playertoGameMap.values()){
             if(game.getGameMode()==gamemode)
                     if(game.getNumOfPlayers()==numofplayers){
                         if(game.getState()== GameState.WAITINGFORPLAYERS) {
-                            playerid = game.addPlayer(nickname, null);
+                            playerid = game.addPlayer(nickname, wizard);
                             setGameofPlayer(nickname, game);
                             setPlayeridofPlayer(nickname, playerid);
                             found = 1;
@@ -37,7 +35,7 @@ public class GameHandler {
         }
         if(found==0) {
             GameInterface game = new Game(gamemode,numofplayers);
-            playerid = game.addPlayer(nickname,null);
+            playerid = game.addPlayer(nickname,wizard);
             setGameofPlayer(nickname,game);
             setPlayeridofPlayer(nickname,playerid);
 
@@ -91,22 +89,19 @@ public class GameHandler {
      */
 
 
-    public void chooseAssistant(ClientHandlerInterface clientHandler, Assistant assistant) throws WrongAssistantException, InvalidTurnException {
+    public void chooseAssistant(ClientHandlerInterface clientHandler, Assistant assistant) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
-        int playerid = findPlayeridofPlayer(clientHandler.getNickname());
+        int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
-            game.useAssistant(playerid, assistant);
-
+            game.useAssistant(playerID, assistant);
         } catch (WrongAssistantException e) {
-            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
-            // server.sendMessage(nickname,InvalidPhaseMa);
+            //clientHandler.sendMessageToClient(wrongAssistantMessage);
         } catch (InvalidTurnException e) {
-            //C
+            //clientHandler.sendMessageToClient(invalidTurnMessage);
         }
-
     }
 
-    public void chooseCharacter(ClientHandlerInterface clientHandler, Characters character) throws InvalidStopException, InvalidTurnException, OutOfCoinsException, InvalidCharacterException {
+    public void chooseCharacter(ClientHandlerInterface clientHandler, Characters character) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
@@ -124,7 +119,19 @@ public class GameHandler {
         }
     }
 
-    public void moveMotherNature(ClientHandlerInterface clientHandler, int movement) throws InvalidTurnException, WrongValueException {
+    public void chooseCloud(ClientHandlerInterface clientHandler, int cloudID) {
+        GameInterface game = findGameofPlayer(clientHandler.getNickname());
+        int playerID = findPlayeridofPlayer(clientHandler.getNickname());
+        try {
+            game.selectCloud(playerID,cloudID);
+        } catch (WrongCloudException e) {
+            //clientHandler.sendMessageToClient(wrongAssistantMessage);
+        } catch (InvalidTurnException e) {
+            //clientHandler.sendMessageToClient(invalidTurnMessage);
+        }
+    }
+
+    public void moveMotherNature(ClientHandlerInterface clientHandler, int movement) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
@@ -138,7 +145,7 @@ public class GameHandler {
         }
     }
 
-    public void moveStudentToHall(ClientHandlerInterface clientHandler, Student student) throws InvalidTurnException, WrongStudentException {
+    public void moveStudentToHall(ClientHandlerInterface clientHandler, Student student) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
@@ -152,7 +159,37 @@ public class GameHandler {
         }
     }
 
-    public void moveStudentToIsland(ClientHandlerInterface clientHandler, int islandID, Student student) throws InvalidTurnException, WrongStudentException {
+    public void chooseStudentsEffect(ClientHandlerInterface clientHandler, ArrayList<Student> students) {
+        GameInterface game = findGameofPlayer(clientHandler.getNickname());
+        int playerID = findPlayeridofPlayer(clientHandler.getNickname());
+        try {
+            game.CharacterStudentsPhase(playerID,students);
+
+        } catch (WrongStudentEffectException e) {
+            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
+            // server.sendMessage(nickname,InvalidPhaseMa);
+        } catch (InvalidTurnException e) {
+            //Meesagge to client to notify excepion
+        }
+    }
+
+    public void chooseIslandEffect(ClientHandlerInterface clientHandler, int islandID) {
+        GameInterface game = findGameofPlayer(clientHandler.getNickname());
+        int playerID = findPlayeridofPlayer(clientHandler.getNickname());
+        try {
+            game.CharacterIslandPhase(playerID,islandID);
+
+        } catch (WrongIslandException e) {
+            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
+            // server.sendMessage(nickname,InvalidPhaseMa);
+        } catch (InvalidTurnException e) {
+            //Meesagge to client to notify excepion
+        } catch (WrongStudentEffectException e) {
+            //Message InvalidPhasemessage = new InvalidPhaseMessage(sksjsjw);
+        }
+    }
+
+    public void moveStudentToIsland(ClientHandlerInterface clientHandler, int islandID, Student student) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
