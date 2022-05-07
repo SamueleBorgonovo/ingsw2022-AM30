@@ -25,8 +25,8 @@ class Effect5Test {
         //This test checks effect and also secondparteffect
 
         Game game = new Game(GameMode.EXPERTMODE,2);
-        game.addPlayer("kek",null);
-        game.addPlayer("kek2",null);
+        game.addPlayer("kek");
+        game.addPlayer("kek2");
         game.getPlayer(1).setPlayerState(PlayerState.MOTHERNATUREPHASE);
         int mtpos = game.getBoard().getArchipelago().getMothernature().isOn();
         game.getPlayer(1).setLastassistantplayed(Assistant.CAT);

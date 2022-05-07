@@ -19,38 +19,50 @@ import java.util.HashMap;
 public class GameHandler {
     HashMap<String, GameInterface> playertoGameMap = new HashMap<>();//Map that find the game of a player's nickname
     HashMap<String, Integer> playertoPlayerIDMap = new HashMap<>();//Map that find game's idplayer from a player's nickname
+    ArrayList<String> nicknameChoosen = new ArrayList<>();
 
-    public void addPlayer(String nickname, Wizard wizard, GameMode gamemode, int numofplayers){
+
+    //Manca l'handler del process del messaggio della scelta del wizard
+    public void addPlayer(ClientHandlerInterface clientHandler, GameMode gamemode, int numofplayers){
         int playerid;
         int found=0;
         for(GameInterface game : playertoGameMap.values()){
             if(game.getGameMode()==gamemode)
                     if(game.getNumOfPlayers()==numofplayers){
                         if(game.getState()== GameState.WAITINGFORPLAYERS) {
-                            playerid = game.addPlayer(nickname, wizard);
-                            setGameofPlayer(nickname, game);
-                            setPlayeridofPlayer(nickname, playerid);
+                            playerid = game.addPlayer(clientHandler.getNickname());
+                            setGameofPlayer(clientHandler.getNickname(), game);
+                            setPlayeridofPlayer(clientHandler.getNickname(), playerid);
                             found = 1;
+                            //Possiamo mandare tipo un messaggio di addato ad una partita
+                            WizardsListMessage message = new WizardsListMessage(game.getWizardChoosen());
+                            clientHandler.sendMessageToClient(message);
+
                             break;
                         }
                     }
         }
         if(found==0) {
             GameInterface game = new Game(gamemode,numofplayers);
-            playerid = game.addPlayer(nickname,wizard);
-            setGameofPlayer(nickname,game);
-            setPlayeridofPlayer(nickname,playerid);
-
+            playerid = game.addPlayer(clientHandler.getNickname());
+            setGameofPlayer(clientHandler.getNickname(), game);
+            setPlayeridofPlayer(clientHandler.getNickname(), playerid);
+            //Possiamo mandare un messaggio di creazione nuova partita
+            WizardsListMessage message = new WizardsListMessage(game.getWizardChoosen());
+            clientHandler.sendMessageToClient(message);
         }
 
     }
     public void checkNickname(ClientHandlerInterface clientHandler,String nickname){
-        for (String name : playertoPlayerIDMap.keySet())
+        for (String name : nicknameChoosen)
             if(nickname.equals(name)){
-                //Mandiamo un messaggio di nome già occupato
+                NicknameMessage message = new NicknameMessage(false);
+                clientHandler.sendMessageToClient(message);
                 return;
             }
-        //Mandiamo un messaggio di nome valido
+        nicknameChoosen.add(nickname);
+        NicknameMessage message = new NicknameMessage(true);
+        clientHandler.sendMessageToClient(message);
     }
 
 
@@ -74,7 +86,7 @@ public class GameHandler {
 
 
 
-    public void chooseAssistant(ClientHandlerInterface clientHandler, Assistant assistant){
+    public void chooseAssistant(ClientHandlerInterface clientHandler, Assistant assistant) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {

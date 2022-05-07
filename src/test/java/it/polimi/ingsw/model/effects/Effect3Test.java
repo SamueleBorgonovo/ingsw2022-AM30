@@ -30,7 +30,7 @@ class Effect3Test {
         //This test check effect and also secondparteffect
 
         Game game = new Game(GameMode.EXPERTMODE,2);
-        game.addPlayer("kek",null);
+        game.addPlayer("kek");
         Player player = game.getPlayer(1);
         player.setPlayerState(PlayerState.STUDENTPHASE);
         effect3.effect(game,player.getPlayerID());

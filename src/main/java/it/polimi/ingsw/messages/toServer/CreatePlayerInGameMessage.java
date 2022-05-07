@@ -18,4 +18,15 @@ public class CreatePlayerInGameMessage extends MessageToServer {
         clientHandler.getController().process(this, clientHandler);
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public GameMode getGamemode() {
+        return gamemode;
+    }
+
+    public int getNumofplayers() {
+        return numofplayers;
+    }
 }

@@ -10,22 +10,22 @@ public class Player {
     private int playerID;
     private PlayerState playerState;
     private Plance plance;
-    private final Wizard wizard;
+    private Wizard wizard;
     private int coins;
     private ArrayList<Assistant> assistantCards = new ArrayList<>();
     private Assistant lastassistantplayed;
     private boolean assistantPlayed;
     private boolean characterPlayed=false;
 
-    public Player(String nickname, Wizard wizard){
+    public Player(String nickname){
         this.nickname = nickname;
-        this.wizard = wizard;
         coins = 1;
         lastassistantplayed = null;
         assistantPlayed = false;
         playerState = PlayerState.WAITING;
         Collections.addAll(assistantCards, Assistant.values());
     }
+    public void setWizard(Wizard wizard){this.wizard=wizard;}
 
     public boolean getCharacterPlayed() {return characterPlayed;}
 

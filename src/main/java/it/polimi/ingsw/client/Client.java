@@ -5,6 +5,7 @@ import it.polimi.ingsw.controller.MessageHandler;
 import it.polimi.ingsw.messages.toClient.InvalidAssistantMessage;
 import it.polimi.ingsw.messages.toClient.NicknameMessage;
 import it.polimi.ingsw.messages.toClient.MessageToClient;
+import it.polimi.ingsw.messages.toClient.WizardsListMessage;
 import it.polimi.ingsw.messages.toServer.ChooseNicknameMessage;
 import it.polimi.ingsw.messages.toServer.CreatePlayerInGameMessage;
 import it.polimi.ingsw.messages.toServer.MessageToServer;
@@ -83,7 +84,7 @@ public class Client {
                     setNickname(s);
                 }
             }
-        }while(correct);
+        }while(!correct);
 
         System.out.println("Press s for SimpleMode or e for ExpertMode");
         String choice = stdin.nextLine();
@@ -119,8 +120,16 @@ public class Client {
 
         CreatePlayerInGameMessage message = new CreatePlayerInGameMessage(nickname,gamemode,numofPlayers);
         sendMessage(message);
-
         //Arriva la lista di wizard disponibili e sceglie
+        correct=false;
+        do{
+            Object message2 = input.readObject();
+            if(message2 instanceof WizardsListMessage) {
+                ((WizardsListMessage) message2).action(this);
+                correct=true;
+            }
+        }while(!correct);
+
     }
 
     public void messageListener(){

@@ -43,4 +43,8 @@ public class ClientMessageHandler {
     public void process(InvalidIslandMessage message){
 
     }
+
+    public void process(WizardsListMessage message){
+        //Fa vedere a video/cli la lista del messaggio  //metodo getList()
+    }
 }

@@ -25,17 +25,17 @@ class GameTest {
     @Test
     void getState() {
         // Test 2 Players Game
-        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game2players.addPlayer("Daniele");
         assertEquals(GameState.WAITINGFORPLAYERS,game2players.getState());
-        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game2players.addPlayer("Giuseppe");
         assertEquals(GameState.PLAYING,game2players.getState());
 
         // Test 3 Players Game
-        game3players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game3players.addPlayer("Daniele");
         assertEquals(GameState.WAITINGFORPLAYERS,game3players.getState());
-        game3players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game3players.addPlayer("Giuseppe");
         assertEquals(GameState.WAITINGFORPLAYERS,game3players.getState());
-        game3players.addPlayer("Samuele", Wizard.WIZARDGREEN);
+        game3players.addPlayer("Samuele");
         assertEquals(GameState.PLAYING,game3players.getState());
     }
 
@@ -43,14 +43,14 @@ class GameTest {
     void addPlayer() {
         // Test 2 Players Game
         assertEquals(0,game2players.getListOfPlayers().size());
-        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game2players.addPlayer("Daniele");
         player1 = game2players.getPlayer(1);
         assertTrue(game2players.getListOfPlayers().contains(player1));
         assertEquals(1,game2players.getListOfPlayers().size());
         assertEquals(Tower.WHITE,player1.getPlance().getTower());
         assertEquals(8,player1.getPlance().getNumOfTowers());
         assertEquals(7,player1.getPlance().getEntrance().size());
-        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game2players.addPlayer("Giuseppe");
         player2 = game2players.getPlayer(2);
         assertTrue(game2players.getListOfPlayers().contains(player2));
         assertEquals(2,game2players.getListOfPlayers().size());
@@ -60,21 +60,21 @@ class GameTest {
 
         // Test 3 Players Game
         assertEquals(0,game3players.getListOfPlayers().size());
-        game3players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game3players.addPlayer("Daniele");
         player1 = game3players.getPlayer(1);
         assertTrue(game3players.getListOfPlayers().contains(player1));
         assertEquals(1,game3players.getListOfPlayers().size());
         assertEquals(Tower.WHITE,player1.getPlance().getTower());
         assertEquals(6,player1.getPlance().getNumOfTowers());
         assertEquals(9,player1.getPlance().getEntrance().size());
-        game3players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game3players.addPlayer("Giuseppe");
         player2 = game3players.getPlayer(2);
         assertTrue(game3players.getListOfPlayers().contains(player2));
         assertEquals(2,game3players.getListOfPlayers().size());
         assertEquals(Tower.BLACK,player2.getPlance().getTower());
         assertEquals(6,player2.getPlance().getNumOfTowers());
         assertEquals(9,player2.getPlance().getEntrance().size());
-        game3players.addPlayer("Samuele", Wizard.WIZARDGREEN);
+        game3players.addPlayer("Samuele");
         player3 = game3players.getPlayer(3);
         assertTrue(game3players.getListOfPlayers().contains(player3));
         assertEquals(3,game3players.getListOfPlayers().size());
@@ -103,9 +103,9 @@ class GameTest {
 
     @Test
     void verifyProfessorControl() {
-        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game2players.addPlayer("Daniele");
         player1 = game2players.getPlayer(1);
-        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game2players.addPlayer("Giuseppe");
         player2 = game2players.getPlayer(2);
         player1.getPlance().addStudentEntrance(Student.RED);
         player1.getPlance().addStudentEntrance(Student.RED);
@@ -127,9 +127,9 @@ class GameTest {
 
     @Test
     void moveStudentToHall() throws InvalidTurnException, InvalidStudentException {
-        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game2players.addPlayer("Daniele");
         player1 = game2players.getPlayer(1);
-        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game2players.addPlayer("Giuseppe");
         player2 = game2players.getPlayer(2);
         player1.setPlayerState(PlayerState.STUDENTPHASE);
         player1.getPlance().addStudentEntrance(Student.RED);
@@ -155,9 +155,9 @@ class GameTest {
         students.add(Student.RED);
         students.add(Student.BLUE);
         students.add(Student.YELLOW);
-        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game2players.addPlayer("Daniele");
         player1 = game2players.getPlayer(1);
-        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game2players.addPlayer("Giuseppe");
         player2 = game2players.getPlayer(2);
         player1.setPlayerState(PlayerState.STUDENTPHASE);
         player1.getPlance().addStudentEntrance(Student.RED);
@@ -175,9 +175,9 @@ class GameTest {
         ArrayList<Assistant> wanted2 = new ArrayList<>(Arrays.asList(Assistant.values()));
         wanted1.remove(Assistant.CAT);
         wanted2.remove(Assistant.DOG);
-        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game2players.addPlayer("Daniele");
         player1 = game2players.getPlayer(1);
-        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game2players.addPlayer("Giuseppe");
         player2 = game2players.getPlayer(2);
         ArrayList<Player> playerorder = new ArrayList<>();
         playerorder = game2players.getPlayerorder();
@@ -193,9 +193,9 @@ class GameTest {
 
     @Test
     void moveMotherNature() throws InvalidTurnException, InvalidValueException, InvalidAssistantException {
-        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game2players.addPlayer("Daniele");
         player1 = game2players.getPlayer(1);
-        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game2players.addPlayer("Giuseppe");
         player2 = game2players.getPlayer(2);
         int num=0;
         ArrayList<Player> playerorder = new ArrayList<>();
@@ -233,9 +233,9 @@ class GameTest {
 
     @Test
     void verifyIslandInfluence() {
-        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game2players.addPlayer("Daniele");
         player1 = game2players.getPlayer(1);
-        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game2players.addPlayer("Giuseppe");
         player2 = game2players.getPlayer(2);
         player1.getPlance().addProfessor(Professor.RED_DRAGON);
         player1.getPlance().addProfessor(Professor.RED_DRAGON);
@@ -251,11 +251,11 @@ class GameTest {
 
     @Test
     void verifyPlayerOrder() {
-        game3players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
+        game3players.addPlayer("Daniele");
         player1 = game3players.getPlayer(1);
-        game3players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game3players.addPlayer("Giuseppe");
         player2 = game3players.getPlayer(2);
-        game3players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
+        game3players.addPlayer("Giuseppe");
         player3 = game3players.getPlayer(3);
 
         //Set last played assistant

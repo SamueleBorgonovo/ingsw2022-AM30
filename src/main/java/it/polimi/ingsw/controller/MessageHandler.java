@@ -27,7 +27,7 @@ public class MessageHandler {
     }
 
     public void process(ChooseNicknameMessage message, ClientHandlerInterface clientHandler){
-
+        gameHandler.checkNickname(clientHandler,message.getNickname());
     }
 
     public void process(ChooseStudentsEffectMessage message, ClientHandlerInterface clientHandler){
@@ -39,7 +39,7 @@ public class MessageHandler {
     }
 
     public void process(CreatePlayerInGameMessage message, ClientHandlerInterface clientHandler){
-
+        gameHandler.addPlayer(clientHandler, message.getGamemode(), message.getNumofplayers());
     }
 
     public void process(MoveMotherNatureMessage message, ClientHandlerInterface clientHandler){

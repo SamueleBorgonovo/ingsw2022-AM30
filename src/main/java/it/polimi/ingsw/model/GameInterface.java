@@ -12,7 +12,11 @@ import java.util.ArrayList;
 
 public interface GameInterface {
 
-    public int addPlayer(String nickname, Wizard wizard);
+    public int addPlayer(String nickname);
+
+    public ArrayList<Wizard> getWizardChoosen();
+
+    public void setWizard(int playerID,Wizard wizard) throws InvalidWizardException;
 
     public GameState getState();
 
