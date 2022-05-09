@@ -20,6 +20,7 @@ public class Game implements GameInterface {
     private int movementStudents=0;
     private ArrayList<Player> playerorder = new ArrayList<>();
     private Characters characterInUse = null;
+    private ArrayList<Wizard> wizardChoosen = new ArrayList<>();
 
     public Game(GameMode gameMode, int numofplayers) {
         this.gameMode = gameMode;
@@ -29,6 +30,22 @@ public class Game implements GameInterface {
         effectHandler = new EffectHandler();
         for(Characters character : board.getCharacters())
             character.getEffect().inizialize(this);
+    }
+
+    public ArrayList<Wizard> getWizardChoosen() {
+        return wizardChoosen;
+    }
+
+    public void addWizardChoosen(Wizard wizard){
+        wizardChoosen.add(wizard);
+    }
+
+    public void setWizard(int playerid,Wizard wizard) throws InvalidWizardException {
+        if(!wizardChoosen.contains(wizard)) {
+            getPlayer(playerid).setWizard(wizard);
+            addWizardChoosen(wizard);
+        }
+        else throw new InvalidWizardException();
     }
 
     public void setCharacterInUse(Characters character){characterInUse=character;}
@@ -42,8 +59,8 @@ public class Game implements GameInterface {
         return gameMode;
     }
 
-    public int addPlayer(String nickname, Wizard wizard) {
-        Player player = new Player(nickname, wizard);
+    public int addPlayer(String nickname) {
+        Player player = new Player(nickname);
 
         listOfPlayers.add(player);
         player.setPlayerID(listOfPlayers.size());

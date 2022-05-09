@@ -18,11 +18,11 @@ class BoardTest {
 
     @BeforeEach
     void init() {
-        game2players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
-        game2players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
-        game3players.addPlayer("Daniele", Wizard.WIZARDYELLOW);
-        game3players.addPlayer("Giuseppe", Wizard.WIZARDBLUE);
-        game3players.addPlayer("Samuele", Wizard.WIZARDGREEN);
+        game2players.addPlayer("Daniele");
+        game2players.addPlayer("Giuseppe");
+        game3players.addPlayer("Daniele");
+        game3players.addPlayer("Giuseppe");
+        game3players.addPlayer("Samuele");
     }
 
     @Test
