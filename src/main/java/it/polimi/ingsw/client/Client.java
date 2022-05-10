@@ -42,13 +42,6 @@ public class Client {
         this.socketListener = new Thread(this::messageListener);
     }
     public boolean setupConnection() throws IOException, ClassNotFoundException {
-        Scanner stdin = new Scanner(System.in);
-        String ip;
-        System.out.println("Please insert the ip-addres");
-        ip = stdin.nextLine();
-        System.out.println("Please insert port");
-        int port;
-        port=stdin.nextInt();
         Socket socket;
         try{
             socket = new Socket(ip, port);

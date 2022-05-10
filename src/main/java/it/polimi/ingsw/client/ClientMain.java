@@ -1,5 +1,8 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.View.cli.CLI;
+import it.polimi.ingsw.client.View.GUI;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -9,7 +12,25 @@ public class ClientMain {
 
       Scanner stdin = new Scanner(System.in);
       System.out.println("Do you want use CLI or GUI? c | g");
-      stdin.next();
+      String ris = stdin.nextLine();
+
+      boolean pass=false;
+      char r='a';
+      do {
+          if (ris.toLowerCase().startsWith("c") || ris.toLowerCase().startsWith("g")) {
+              pass = true;
+              r = ris.toLowerCase().charAt(0);
+          }
+      }while(!pass);
+
+      if(r=='c') {
+          CLI cli = new CLI();
+          cli.init();
+      }
+      else{
+          GUI gui = new GUI();
+          gui.init();
+      }
       //To see how to setup CLI and GUI
       /*
         Client client = new Client();

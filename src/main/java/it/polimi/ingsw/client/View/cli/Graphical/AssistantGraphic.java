@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.View.CLI.Graphical;
+package it.polimi.ingsw.client.View.cli.Graphical;
 
 import it.polimi.ingsw.model.player.Assistant;
 
