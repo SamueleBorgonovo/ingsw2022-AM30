@@ -1,7 +1,9 @@
 package it.polimi.ingsw.client.View;
+
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
@@ -14,6 +16,11 @@ public class GUI extends View {
     @Override
     public String chooseNickname(boolean validNickname) {
         return null;
+    }
+
+    @Override
+    public boolean tryToReconnect() {
+        return false;
     }
 
     @Override
@@ -37,12 +44,27 @@ public class GUI extends View {
     }
 
     @Override
-    public PlayerState chooseNextAction(ArrayList<PlayerState> possibleAction) {
+    public PlayerState chooseNextAction(PlayerState playerState) {
         return null;
     }
 
     @Override
     public Student chooseStudentToMove(HashMap<Student, Integer> hall) {
         return null;
+    }
+
+    @Override
+    public int chooseIsland(int numOfIslands) {
+        return 0;
+    }
+
+    @Override
+    public int moveMotherNature(Assistant assistant) {
+        return 0;
+    }
+
+    @Override
+    public int chooseCloud(int numofClouds) {
+        return 0;
     }
 }
