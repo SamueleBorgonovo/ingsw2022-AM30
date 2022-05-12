@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.messages.toClient.PingToClientMessage;
 import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
@@ -27,7 +28,10 @@ public class MessageHandler {
     }
 
     public void process(ChooseNicknameMessage message, ClientHandlerInterface clientHandler){
-        gameHandler.checkNickname(clientHandler,message.getNickname());
+        if(message.getReconnect())
+            gameHandler.reconnectPlayer(clientHandler);
+        else
+            gameHandler.checkNickname(clientHandler,message.getNickname());
     }
 
     public void process(ChooseStudentsEffectMessage message, ClientHandlerInterface clientHandler){
@@ -35,7 +39,7 @@ public class MessageHandler {
     }
 
     public void process(ChooseWizardMessage message, ClientHandlerInterface clientHandler){
-
+        gameHandler.chooseWizard(clientHandler,message.getWizard());
     }
 
     public void process(CreatePlayerInGameMessage message, ClientHandlerInterface clientHandler){
@@ -54,5 +58,11 @@ public class MessageHandler {
         gameHandler.moveStudentToIsland(clientHandler, message.getIslandID(), message.getStudent());
     }
 
+    public void process(PingToServerMessage message, ClientHandlerInterface clientHandler) {
+        if (message.isPing()) {
+            PingToClientMessage message2 = new PingToClientMessage(false);
+            clientHandler.sendMessageToClient(message2);
+        }else clientHandler.stopTimer();
+    }
 
 }

@@ -24,7 +24,7 @@ class Effect4Test {
     @Test
     void effect() throws InvalidStopException, InvalidTurnException, InvalidValueException {
 
-        Game game = new Game(GameMode.EXPERTMODE,2);
+        Game game = new Game(GameMode.EXPERTMODE,2, null);
         game.addPlayer("kek");
         game.getPlayer(1).setPlayerState(PlayerState.MOTHERNATUREPHASE);
         int mtpos = game.getBoard().getArchipelago().getMothernature().isOn();

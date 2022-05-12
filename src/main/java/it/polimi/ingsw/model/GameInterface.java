@@ -24,7 +24,13 @@ public interface GameInterface {
 
     public GameMode getGameMode();
 
+    public void setDisconnectPlayer(int playerID);
+
+    public void setReconnectedPlayer(int playerid) throws ReconnectedException;
+
     public void selectCloud(int playerID, int cloudID) throws InvalidTurnException, InvalidCloudException;
+
+    public boolean checkPlayerState(int playerid);
 
     public void moveStudentToHall(int playerID, Student student) throws InvalidTurnException, InvalidStudentException;
 

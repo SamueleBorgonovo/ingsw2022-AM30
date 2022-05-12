@@ -3,7 +3,6 @@ package it.polimi.ingsw.model.effects;
 import it.polimi.ingsw.exceptions.InvalidStopException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
-import it.polimi.ingsw.model.player.Wizard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +12,8 @@ class Effect8Test {
 
     Effect effect8 = new Effect8();
 
-    Game game2players = new Game(GameMode.EXPERTMODE,2);
-    Game game3players = new Game(GameMode.EXPERTMODE,3);
+    Game game2players = new Game(GameMode.EXPERTMODE,2, null);
+    Game game3players = new Game(GameMode.EXPERTMODE,3, null);
 
     @BeforeEach
     void init() {

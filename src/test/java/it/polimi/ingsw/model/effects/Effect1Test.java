@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model.effects;
-import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.game.*;
-import it.polimi.ingsw.model.player.Player;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,7 +18,7 @@ class Effect1Test {
         int i = 0;
         Game game;
         do {
-            game = new Game(GameMode.EXPERTMODE, 2);
+            game = new Game(GameMode.EXPERTMODE, 2, null);
             for (Characters characters : game.getBoard().getCharacters())
                 if(characters.getEffect().getClass().equals(effect1.getClass()))
                     i = 1;

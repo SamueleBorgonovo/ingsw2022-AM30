@@ -14,4 +14,6 @@ public class ChooseWizardMessage extends MessageToServer {
         clientHandler.getController().process(this, clientHandler);
     }
 
+    public Wizard getWizard(){return wizard;}
+
 }

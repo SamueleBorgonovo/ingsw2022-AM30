@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GameTest {
 
-    Game game2players = new Game(GameMode.SIMPLEMODE,2);
-    Game game3players = new Game(GameMode.SIMPLEMODE,3);
+    Game game2players = new Game(GameMode.SIMPLEMODE,2, null);
+    Game game3players = new Game(GameMode.SIMPLEMODE,3, null);
     Player player1;
     Player player2;
     Player player3;

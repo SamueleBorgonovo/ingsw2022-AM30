@@ -51,9 +51,7 @@ public class Player {
         return playerState;
     }
 
-    public void setPlayerState(PlayerState playerState) {
-        this.playerState = playerState;
-    }
+    public void setPlayerState(PlayerState playerState) { this.playerState = playerState;}
 
     public Plance getPlance() {
         return plance;

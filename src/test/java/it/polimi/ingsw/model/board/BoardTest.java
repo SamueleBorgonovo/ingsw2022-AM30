@@ -4,7 +4,6 @@ import it.polimi.ingsw.exceptions.OutOfCoinsException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.player.Wizard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +12,8 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoardTest {
-    Game game2players = new Game(GameMode.EXPERTMODE,2);
-    Game game3players = new Game(GameMode.EXPERTMODE,3);
+    Game game2players = new Game(GameMode.EXPERTMODE,2, null);
+    Game game3players = new Game(GameMode.EXPERTMODE,3, null);
 
     @BeforeEach
     void init() {

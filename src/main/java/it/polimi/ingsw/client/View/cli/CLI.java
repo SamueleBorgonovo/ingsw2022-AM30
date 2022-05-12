@@ -20,12 +20,13 @@ public class CLI extends View {
 
     private static final int MIN_PORT = 1024;
     private static final int MAX_PORT = 65535;
+    private Client client;
 
     private Graphic graphic;
 
 
     public void init() throws IOException, ClassNotFoundException {
-        boolean check;
+        boolean check=false;
         System.out.println("Welcome to Eriantys");
         Scanner stdin = new Scanner(System.in);
         String ip;
@@ -39,11 +40,13 @@ public class CLI extends View {
                 System.out.println("Port Number is not valid, please insert a new one");
                 port = stdin.nextInt();
             }
-            Client client = new Client(ip, port, this);
+            client = new Client(ip, port, this);
             check = client.setupConnection();
             if(!check)
                 System.out.println("Connection not valid. Please try again");
         }while(!check);
+
+        client.gameSetup();
     }
 
     @Override

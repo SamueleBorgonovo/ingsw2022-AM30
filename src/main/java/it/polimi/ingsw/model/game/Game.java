@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.game;
 
+import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.model.GameInterface;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.*;
@@ -7,9 +8,11 @@ import it.polimi.ingsw.model.player.*;
 import it.polimi.ingsw.exceptions.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class Game implements GameInterface {
+    private final int TIMER = 120000;
     private GameMode gameMode;
     private ArrayList<Player> listOfPlayers = new ArrayList<>();
     private GameState gameState;
@@ -21,9 +24,13 @@ public class Game implements GameInterface {
     private ArrayList<Player> playerorder = new ArrayList<>();
     private Characters characterInUse = null;
     private ArrayList<Wizard> wizardChoosen = new ArrayList<>();
+    private ArrayList<Assistant> usedAssistant = new ArrayList<>();
+    private GameHandler gameHandler;
+    private Thread timer;
 
-    public Game(GameMode gameMode, int numofplayers) {
+    public Game(GameMode gameMode, int numofplayers, GameHandler gameHandler) {
         this.gameMode = gameMode;
+        this.gameHandler = gameHandler;
         this.numOfPlayers = numofplayers;
         gameState = GameState.WAITINGFORPLAYERS;
         board = new Board(gameMode, numofplayers);
@@ -59,6 +66,97 @@ public class Game implements GameInterface {
         return gameMode;
     }
 
+    public void setReconnectedPlayer(int playerid) throws ReconnectedException {
+        if(getPlayer(playerid).getPlayerState() == PlayerState.DISCONNECTED) {
+            getPlayer(playerid).setPlayerState(PlayerState.RECONNECTED);
+            timer.interrupt();
+        }
+        else throw new ReconnectedException();
+    }
+
+    public void setDisconnectPlayer(int playerid){
+
+        if(gameState==GameState.WAITINGFORPLAYERS){
+            Wizard wizardchoose = getPlayer(playerid).getWizard();
+            wizardChoosen.remove(wizardchoose);
+            listOfPlayers.remove(getPlayer(playerid)); //if game not already started, player can't reconnect
+        }
+        else {
+            int counter = 0;
+            for (Player player : listOfPlayers) {
+                if (player.getPlayerState() == PlayerState.DISCONNECTED)
+                    counter++;
+            }
+            if (counter == numOfPlayers - 1) {
+                getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
+                shutdown();
+            } else {
+                if (counter == numOfPlayers - 2) {
+                    startTimer();
+                }
+
+                    if (getPlayer(playerid).getPlayerState() == PlayerState.WAITING) {
+                        getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
+                    } else if (getPlayer(playerid).getPlayerState() == PlayerState.ASSISTANTPHASE) {
+                        numplayerhasplayed++;
+                        getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
+                        if (numplayerhasplayed == numOfPlayers) {
+                            verifyPlayerOrder();
+                            int tmp = searchfisrt();
+                            if (tmp == -1) {
+                                shutdown();
+                            }
+                            playerorder.get(tmp).setPlayerState(PlayerState.STUDENTPHASE);
+                        } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
+                    } else {
+                        numplayerhasplayed++;
+                        getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
+                        if (numplayerhasplayed == numOfPlayers) {
+                            //All players played, ending round
+                            numplayerhasplayed = 0;
+                            for (int count = 0; count < getBoard().getClouds().size(); count++) {
+                                getBoard().getClouds().get(count).setChoosen(false);
+                            }
+
+                            for (Player player : listOfPlayers) {
+                                player.setPlayerState(PlayerState.WAITING);
+                                player.setCharacterPlayed(false);
+                            }
+                            startRound();  //Start the new round
+                        } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
+
+                    }
+            }
+        }
+
+    }
+
+    public void startTimer(){
+        timer = new Thread(()->{
+            try{
+                Thread.sleep(TIMER);
+                winner();
+            } catch (InterruptedException e) { }
+        });
+        timer.start();
+    }
+
+    public void shutdown(){
+        ArrayList<String> nicknames = new ArrayList<>();
+        for(Player player : listOfPlayers)
+            nicknames.add(player.getNickname());
+
+        gameHandler.closeGame(this,nicknames);
+    }
+
+    public int searchfisrt(){
+        for(int count=0;count<playerorder.size();count++){
+            if(playerorder.get(count).getPlayerState() != PlayerState.DISCONNECTED)
+                return count;
+        }
+        return -1;
+    }
+
     public int addPlayer(String nickname) {
         Player player = new Player(nickname);
 
@@ -82,6 +180,11 @@ public class Game implements GameInterface {
         return board;
     }
 
+    public boolean checkPlayerState(int playerid){
+        if(getPlayer(playerid).getPlayerState()==PlayerState.DISCONNECTED)
+            return true;
+        return false;
+    }
     public int getNumOfPlayers() {
         return numOfPlayers;
     }
@@ -91,6 +194,27 @@ public class Game implements GameInterface {
             if(player.getPlayerID() == playerid)
                 return player;
         return null;
+    }
+
+    public void startRound(){
+        for(Player player : listOfPlayers)
+            if(player.getPlayerState() == PlayerState.RECONNECTED)
+                player.setPlayerState(PlayerState.WAITING);
+
+        numplayerhasplayed=0;
+        int tmpplayerid=-1;
+        for (int count=0;count<playerorder.size();count++) {
+            if (playerorder.get(count).getPlayerState() == PlayerState.WAITING) {
+                tmpplayerid=count;
+                break;
+            }
+        }
+        if(tmpplayerid!=-1){
+            numplayerhasplayed=tmpplayerid;
+            getPlayer(tmpplayerid).setPlayerState(PlayerState.ASSISTANTPHASE);
+        }
+        //shutdown del game
+
     }
 
 
@@ -128,6 +252,8 @@ public class Game implements GameInterface {
                 playerChosen = player2;
             }
         }
+        //Invece di fare una return facciamo che chiama un metodo in gameHandler per dire che ha vinto con dentro un
+        //Arraylist di chi ha vinto (Arraylist perchè si può pareggiare)
         return playerChosen;
     }
 
@@ -146,8 +272,28 @@ public class Game implements GameInterface {
                 getPlayer(playerID).setPlayerState(PlayerState.WAITING);
                 if (effectHandler.isProfessorcontroll())
                     effectHandler.setProfessorcontroll(false);
-                playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
-                //Qui possiamo pure mandare un messaggio al server tipo "Tocca al secondo giocatore"
+                if(playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.RECONNECTED)
+                    playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
+                    //Qui possiamo pure mandare un messaggio al server tipo "Tocca al secondo giocatore"
+                else{
+                    numplayerhasplayed++;
+                    if(numplayerhasplayed==numOfPlayers){
+                        //All players played, ending round
+                        numplayerhasplayed=0;
+                        for(int count=0;count<getBoard().getClouds().size();count++){
+                            getBoard().getClouds().get(count).setChoosen(false);
+                        }
+
+                        for (Player player : listOfPlayers) {
+                            player.setPlayerState(PlayerState.WAITING);
+                            player.setCharacterPlayed(false);
+                        }
+                        startRound();  //Start the new round
+                    }
+                    else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
+                    //Qui possiamo pure mandare un messaggio al server tipo "Tocca al secondo giocatore"
+                }
+
             }
             else {
                 //All players played, ending round
@@ -160,7 +306,7 @@ public class Game implements GameInterface {
                     player.setPlayerState(PlayerState.WAITING);
                     player.setCharacterPlayed(false);
                 }
-                playerorder.get(0).setPlayerState(PlayerState.ASSISTANTPHASE);  //Start the new round
+               startRound();  //Start the new round
             }
 
         }
@@ -168,86 +314,77 @@ public class Game implements GameInterface {
     }
 
     public void moveStudentToHall(int playerID, Student student) throws InvalidTurnException, InvalidStudentException {
-        if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
-            if(getPlayer(playerID).getPlance().getEntrance().contains(student)){
-                getPlayer(playerID).getPlance().addStudentHall(student);
-                getPlayer(playerID).getPlance().removeStudentEntrance(student);
-                movementStudents++;
-                verifyProfessorControl();
-                if (getPlayer(playerID).getPlance().getNumberOfStudentHall(student) % 3 == 0)
-                    getPlayer(playerID).addCoins();
-                if (movementStudents == numOfPlayers + 1) {
-                    getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
-                    movementStudents=0;
-                }
-            } else throw new InvalidStudentException();
-        }
-        else throw new InvalidTurnException();
+
+            if (getPlayer(playerID).getPlayerState() == PlayerState.STUDENTPHASE) {
+                if (getPlayer(playerID).getPlance().getEntrance().contains(student)) {
+                    getPlayer(playerID).getPlance().addStudentHall(student);
+                    getPlayer(playerID).getPlance().removeStudentEntrance(student);
+                    movementStudents++;
+                    verifyProfessorControl();
+                    if (getPlayer(playerID).getPlance().getNumberOfStudentHall(student) % 3 == 0)
+                        getPlayer(playerID).addCoins();
+                    if (movementStudents == numOfPlayers + 1) {
+                        getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
+                        movementStudents = 0;
+                    }
+                } else throw new InvalidStudentException();
+            } else throw new InvalidTurnException();
+
     }
 
     public void moveStudentToIsland(int playerID, int islandID, Student student) throws InvalidTurnException, InvalidStudentException {
-        if(getPlayer(playerID).getPlayerState()==PlayerState.STUDENTPHASE) {
-            if(getPlayer(playerID).getPlance().getEntrance().contains(student)){
-                Island island = getBoard().getArchipelago().getSingleIsland(islandID);
-                island.addStudent(student);
-                getPlayer(playerID).getPlance().removeStudentFromHall(student);
-                movementStudents++;
-                if (movementStudents == numOfPlayers + 1) {
-                    getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
-                    movementStudents=0;
-                }
-            } else throw new InvalidStudentException();
-        }  else throw new InvalidTurnException();
+
+            if (getPlayer(playerID).getPlayerState() == PlayerState.STUDENTPHASE) {
+                if (getPlayer(playerID).getPlance().getEntrance().contains(student)) {
+                    Island island = getBoard().getArchipelago().getSingleIsland(islandID);
+                    island.addStudent(student);
+                    getPlayer(playerID).getPlance().removeStudentFromHall(student);
+                    movementStudents++;
+                    if (movementStudents == numOfPlayers + 1) {
+                        getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
+                        movementStudents = 0;
+                    }
+                } else throw new InvalidStudentException();
+            } else throw new InvalidTurnException();
+
     }
 
-    public void useAssistant(int playerID, Assistant assistant) throws InvalidAssistantException, InvalidTurnException {
+    public void useAssistant(int playerID,Assistant assistant) throws InvalidTurnException, InvalidAssistantException{
 
-        if(getPlayer(playerID).getPlayerState() == PlayerState.ASSISTANTPHASE) { //Check that is the right id of the player that has to play
-            if (numplayerhasplayed == 0) {  //First to choose, no controls to do
-                if (getPlayer(playerID).getAssistantCards().contains(assistant)) {
-                    getPlayer(playerID).removeAssistant(assistant);
-                    getPlayer(playerID).setAssistantPlayed(true);
-                    numplayerhasplayed++;
-                    getPlayer(playerID).setPlayerState(PlayerState.WAITING);
-                    playerorder.get(1).setPlayerState(PlayerState.ASSISTANTPHASE);
-                } else
-                    throw new InvalidAssistantException();
-            }
-            else{
-                if(numplayerhasplayed==1){  //Second to choose, control if first has played same assistant
-                    if(getPlayer(playerID).getAssistantCards().contains(assistant)) {
-                            if (assistant != playerorder.get(numplayerhasplayed - 1).getLastassistantplayed() || getPlayer(playerID).getAssistantCards().size() == 1) {
-                                getPlayer(playerID).removeAssistant(assistant);
-                                getPlayer(playerID).setAssistantPlayed(true);
-                                getPlayer(playerID).setPlayerState(PlayerState.WAITING);
-                                if (numOfPlayers == 2) {
-                                    numplayerhasplayed = 0;
-                                    verifyPlayerOrder();
-                                    playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
-                                }
-                                else {
-                                    numplayerhasplayed++;
-                                    playerorder.get(2).setPlayerState(PlayerState.ASSISTANTPHASE);
-                                }
-
-                            } else throw new InvalidAssistantException();
-                        } else throw new InvalidAssistantException();
-                }
-                else {
-                    if(getPlayer(playerID).getAssistantCards().contains(assistant)){ //Third to choose, control first and second assistants played
-                        if((assistant != playerorder.get(numplayerhasplayed-1).getLastassistantplayed() && assistant != playerorder.get(numplayerhasplayed-2).getLastassistantplayed()) || getPlayer(playerID).getAssistantCards().size()==1){
-                            getPlayer(playerID).removeAssistant(assistant);
-                            getPlayer(playerID).setAssistantPlayed(true);
-                            getPlayer(playerID).setPlayerState(PlayerState.WAITING);
+        if(getPlayer(playerID).getPlayerState()== PlayerState.ASSISTANTPHASE){ //Check that is the right id of the player that has to play
+            if(!usedAssistant.contains(assistant) && getPlayer(playerID).getAssistantCards().contains(assistant)){
+                getPlayer(playerID).removeAssistant(assistant);
+                usedAssistant.add(assistant);
+                getPlayer(playerID).setLastassistantplayed(assistant);
+                getPlayer(playerID).setAssistantPlayed(true);
+                numplayerhasplayed++;
+                getPlayer(playerID).setPlayerState(PlayerState.WAITING);
+                if(numplayerhasplayed == numOfPlayers){
+                    //All players has played the assistant
+                    numplayerhasplayed=0;
+                    verifyPlayerOrder();
+                    usedAssistant.clear();
+                    playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
+                }else{
+                    if(playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState()!= PlayerState.RECONNECTED)
+                        playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
+                    else{
+                        numplayerhasplayed++;
+                        if(numplayerhasplayed==numOfPlayers){
+                            //All players has played the assistant
                             numplayerhasplayed=0;
                             verifyPlayerOrder();
+                            usedAssistant.clear();
                             playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
-                        }else throw new InvalidAssistantException();
-                    }else throw new InvalidAssistantException();
+                        }
+                        else
+                            playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
+                    }
+
                 }
             }
-        }
-        else throw new InvalidTurnException();
+            else throw new InvalidAssistantException();
+        }else throw new InvalidTurnException();
     }
 
 
@@ -397,8 +534,9 @@ public class Game implements GameInterface {
     public ArrayList<Player> verifyPlayerOrder() {
         Player minplayer = listOfPlayers.get(0);
         for (int count = 1; count < listOfPlayers.size(); count++) {
-            if (listOfPlayers.get(count).getLastassistantplayed().getValue() < minplayer.getLastassistantplayed().getValue())
-                minplayer = listOfPlayers.get(count);
+            if((listOfPlayers.get(count).getPlayerState()!=PlayerState.DISCONNECTED) && (listOfPlayers.get(count).getPlayerState()!=PlayerState.RECONNECTED))
+                if (listOfPlayers.get(count).getLastassistantplayed().getValue() < minplayer.getLastassistantplayed().getValue())
+                    minplayer = listOfPlayers.get(count);
         }
 
         playerorder.add(0, minplayer);
@@ -417,6 +555,12 @@ public class Game implements GameInterface {
             }
             lasttakenplayer = tempplayer;
             playerorder.add(count, lasttakenplayer);
+        }
+        for(int count=0;count<playerorder.size();count++){
+            if(playerorder.get(count).getPlayerState()==PlayerState.DISCONNECTED || playerorder.get(count).getPlayerState()==PlayerState.RECONNECTED){
+                Collections.swap(playerorder,count,playerorder.size()-1);
+            }
+
         }
         return playerorder;
     }
