@@ -31,6 +31,9 @@ public class Client {
     private ClientMessageHandler messageHandler;
     private boolean pingActive;
 
+
+    boolean characterPlayed = false;
+
     //Cli e gui dopo che vengono scelti ip e porta chiamano il costruttore di client e poi il suo .setup
     public Client(String ip, int port, View view){ //Mettere ip e port come parametri del costruttore
         this.ip = ip;
@@ -202,4 +205,12 @@ public class Client {
         this.numofPlayers = numofPlayers;
     }
 
+
+    public void setCharacterPlayed(boolean characterPlayed) {
+        this.characterPlayed = characterPlayed;
+    }
+
+    public boolean isCharacterPlayed() {
+        return characterPlayed;
+    }
 }

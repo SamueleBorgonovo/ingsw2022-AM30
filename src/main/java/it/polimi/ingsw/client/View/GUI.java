@@ -1,9 +1,10 @@
 package it.polimi.ingsw.client.View;
 
+import it.polimi.ingsw.client.View.cli.PossibleAction;
+import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
@@ -34,37 +35,28 @@ public class GUI extends View {
     }
 
     @Override
-    public Wizard chooseWizard(ArrayList<Wizard> avaiableWizards) {
+    public void chooseWizard(ArrayList<Wizard> avaiableWizards) {}
+
+    @Override
+    public void chooseAssistant(ArrayList<Assistant> avaiableAssistant) {}
+
+    @Override
+    public PossibleAction chooseNextAction(PlayerState playerState) {
         return null;
     }
 
     @Override
-    public Assistant chooseAssistant(ArrayList<Assistant> avaiableAssistant) {
-    return null;
-    }
+    public void moveStudentToHall(HashMap<Student, Integer> hall) {}
 
     @Override
-    public PlayerState chooseNextAction(PlayerState playerState) {
-        return null;
-    }
+    public void moveStudentToIsland (HashMap<Student,Integer> hall,int numOfIslands) {}
 
     @Override
-    public Student chooseStudentToMove(HashMap<Student, Integer> hall) {
-        return null;
-    }
+    public void moveMotherNature(Assistant assistant) {}
 
     @Override
-    public int chooseIsland(int numOfIslands) {
-        return 0;
-    }
+    public void chooseCloud(int numofClouds) {}
 
     @Override
-    public int moveMotherNature(Assistant assistant) {
-        return 0;
-    }
-
-    @Override
-    public int chooseCloud(int numofClouds) {
-        return 0;
-    }
+    public void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCoins) {}
 }
