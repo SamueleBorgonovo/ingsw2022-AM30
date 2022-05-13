@@ -1,19 +1,17 @@
 package it.polimi.ingsw.client.View.cli;
 
 import it.polimi.ingsw.client.Client;
-import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
 import it.polimi.ingsw.client.View.View;
+import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class CLI extends View {
@@ -126,19 +124,19 @@ public class CLI extends View {
         while (!checkwizard) {
             switch (choice) {
                 case ("g") -> {
-                    wizard = Wizard.WIZARDGREEN;
+                    wizard = Wizard.WIZARD_GREEN;
                     checkwizard = true;
                 }
                 case ("y") -> {
-                    wizard = Wizard.WIZARDYELLOW;
+                    wizard = Wizard.WIZARD_YELLOW;
                     checkwizard = true;
                 }
                 case ("p") -> {
-                    wizard = Wizard.WIZARDPINK;
+                    wizard = Wizard.WIZARD_PINK;
                     checkwizard = true;
                 }
                 case ("b") -> {
-                    wizard = Wizard.WIZARDBLUE;
+                    wizard = Wizard.WIZARD_BLUE;
                     checkwizard = true;
                 }
                 default -> {

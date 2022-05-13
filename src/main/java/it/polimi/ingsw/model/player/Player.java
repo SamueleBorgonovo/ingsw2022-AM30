@@ -15,16 +15,18 @@ public class Player {
     private ArrayList<Assistant> assistantCards = new ArrayList<>();
     private Assistant lastassistantplayed;
     private boolean assistantPlayed;
-    private boolean characterPlayed=false;
+    private boolean characterPlayed;
 
     public Player(String nickname){
         this.nickname = nickname;
-        coins = 1;
         lastassistantplayed = null;
+        coins = -1;
         assistantPlayed = false;
         playerState = PlayerState.WAITING;
         Collections.addAll(assistantCards, Assistant.values());
+        characterPlayed = false;
     }
+
     public void setWizard(Wizard wizard){this.wizard=wizard;}
 
     public boolean getCharacterPlayed() {return characterPlayed;}

@@ -171,6 +171,10 @@ public class Game implements GameInterface {
             for(int i = 0; i < 9; i++)
                 player.getPlance().addStudentEntrance(board.getAndRemoveRandomBagStudent(1).get(0));
         }
+        if(gameMode.equals(GameMode.EXPERTMODE)) {
+            player.addCoins();
+            player.addCoins();
+        }
         if (listOfPlayers.size() == numOfPlayers)
             this.startGame();
         return listOfPlayers.size();

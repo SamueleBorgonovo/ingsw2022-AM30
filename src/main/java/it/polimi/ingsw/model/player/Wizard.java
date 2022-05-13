@@ -1,8 +1,12 @@
 package it.polimi.ingsw.model.player;
 
 public enum Wizard {
-    WIZARDGREEN,
-    WIZARDYELLOW,
-    WIZARDPINK,
-    WIZARDBLUE
+    WIZARD_GREEN,
+    WIZARD_YELLOW,
+    WIZARD_PINK,
+    WIZARD_BLUE
 }
+
+
+
+
