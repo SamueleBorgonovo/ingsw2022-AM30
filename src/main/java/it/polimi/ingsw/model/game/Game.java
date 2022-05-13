@@ -89,7 +89,7 @@ public class Game implements GameInterface {
             }
             if (counter == numOfPlayers - 1) {
                 getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
-                shutdown();
+                shutdown(false);
             } else {
                 if (counter == numOfPlayers - 2) {
                     startTimer();
@@ -104,7 +104,7 @@ public class Game implements GameInterface {
                             verifyPlayerOrder();
                             int tmp = searchfisrt();
                             if (tmp == -1) {
-                                shutdown();
+                                shutdown(false);
                             }
                             playerorder.get(tmp).setPlayerState(PlayerState.STUDENTPHASE);
                         } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
@@ -141,13 +141,16 @@ public class Game implements GameInterface {
         timer.start();
     }
 
-    public void shutdown(){
+    public void shutdown(boolean gameEnded){
+
         ArrayList<String> nicknames = new ArrayList<>();
         for(Player player : listOfPlayers)
             nicknames.add(player.getNickname());
 
-        gameHandler.closeGame(this,nicknames);
+        gameHandler.closeGame(nicknames,gameEnded);
+
     }
+
 
     public int searchfisrt(){
         for(int count=0;count<playerorder.size();count++){

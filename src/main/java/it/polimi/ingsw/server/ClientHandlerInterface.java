@@ -15,4 +15,6 @@ public interface ClientHandlerInterface {
     public void stopTimer();
 
     public void setNickname(String nickname);
+
+    public void handleSocketDisconnection(boolean timeout,boolean gameEnded);
 }

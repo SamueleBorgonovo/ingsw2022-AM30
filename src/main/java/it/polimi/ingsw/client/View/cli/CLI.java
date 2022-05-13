@@ -1,8 +1,10 @@
 package it.polimi.ingsw.client.View.cli;
 
 import it.polimi.ingsw.client.Client;
-import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
+import it.polimi.ingsw.client.View.View;
+import it.polimi.ingsw.messages.toServer.*;
+import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
@@ -18,17 +20,18 @@ public class CLI extends View {
 
     private static final int MIN_PORT = 1024;
     private static final int MAX_PORT = 65535;
-    private Client client;
 
     private Graphic graphic;
+    private Client client;
 
 
     public void init() throws IOException, ClassNotFoundException {
         boolean check=false;
+
         System.out.println("Welcome to Eriantys");
         Scanner stdin = new Scanner(System.in);
         String ip;
-        do{
+        while(!check){
             System.out.println("Please insert the ip-addres");
             ip = stdin.nextLine();
             System.out.println("Please insert port");
@@ -38,13 +41,12 @@ public class CLI extends View {
                 System.out.println("Port Number is not valid, please insert a new one");
                 port = stdin.nextInt();
             }
-            client = new Client(ip, port, this);
+            Client client = new Client(ip, port, this);
+            this.client = client;
             check = client.setupConnection();
             if(!check)
                 System.out.println("Connection not valid. Please try again");
-        }while(!check);
-
-        client.gameSetup();
+        }
     }
 
     @Override
@@ -78,16 +80,18 @@ public class CLI extends View {
     @Override
     public GameMode chooseGameMode(){
         Scanner stdin = new Scanner(System.in);
-        System.out.println("Press s for SimpleMode or e for ExpertMode  s|e");
+        System.out.println("Press s for SimpleMode or e for ExpertMode  s | e");
         String choice = stdin.nextLine();
         boolean pass = false;
-        do {
+        while (!pass){
             if (choice.equalsIgnoreCase("s") || choice.equalsIgnoreCase("e")) {
                 pass = true;;
             }
-            else
-                choice=stdin.nextLine();
-        } while (!pass);
+            else {
+                System.out.println("Selection not valid. Please try again");
+                choice = stdin.nextLine();
+            }
+        }
 
         if(choice.equalsIgnoreCase("s"))
             return GameMode.SIMPLEMODE;
@@ -102,41 +106,43 @@ public class CLI extends View {
         String input = stdin.nextLine();
         int choice = Integer.parseInt(input);
         boolean pass = false;
-        do {
+        while (!pass) {
             if (choice==2 || choice==3)
                 pass = true;
-            else
+            else {
+                System.out.println("Selection not valid. Please try again");
                 choice = stdin.nextInt();
-        } while (!pass);
-
+            }
+        }
         return choice;
     }
 
     @Override
-    public Wizard chooseWizard(ArrayList<Wizard> avaiableWizards){
-        Wizard wizard = null;
+    public void chooseWizard(ArrayList<Wizard> avaiableWizards){
+        Wizard wizardChosen = null;
         Scanner stdin = new Scanner(System.in);
         boolean checkwizard=false;
-        System.out.println("Choose your wizard by typing his color ( g | y |p | b )");
-        //this.graphic.draw(avaiableWizards);
+        System.out.println("Choose your wizard by typing his color ( g | y | p | b )");
+        for(Wizard wizard : avaiableWizards)
+            System.out.println(wizard);
         String choice = stdin.nextLine().toLowerCase();
 
         while (!checkwizard) {
             switch (choice) {
                 case ("g") -> {
-                    wizard = Wizard.WIZARD_GREEN;
+                    wizardChosen = Wizard.WIZARDGREEN;
                     checkwizard = true;
                 }
                 case ("y") -> {
-                    wizard = Wizard.WIZARD_YELLOW;
+                    wizardChosen = Wizard.WIZARDYELLOW;
                     checkwizard = true;
                 }
                 case ("p") -> {
-                    wizard = Wizard.WIZARD_PINK;
+                    wizardChosen = Wizard.WIZARDPINK;
                     checkwizard = true;
                 }
                 case ("b") -> {
-                    wizard = Wizard.WIZARD_BLUE;
+                    wizardChosen = Wizard.WIZARDBLUE;
                     checkwizard = true;
                 }
                 default -> {
@@ -145,23 +151,24 @@ public class CLI extends View {
                 }
             }
             }
-        return wizard;
+        ChooseWizardMessage message = new ChooseWizardMessage(wizardChosen);
+        this.client.sendMessage(message);
         }
 
 
     @Override
-    public Assistant chooseAssistant( ArrayList<Assistant> avaiableAssistant){
+    public void chooseAssistant( ArrayList<Assistant> avaiableAssistant){
         Scanner stdin = new Scanner(System.in);
-        Assistant assistant= null;
+        Assistant assistantChosen= null;
         System.out.println("Choose one assistant between this available by typing his number associated");
-        //this.graphic.draw(avaiableAssistant);
+        //graphical.printAssistant
         String input=stdin.nextLine();
-        int assistantInt = Integer.parseInt(input);;
+        int assistantInt = Integer.parseInt(input);
         boolean check = false;
         while(!check) {
-            for (Assistant assistantCheck : Assistant.values())
-                if (assistant.ordinal() == assistantInt && avaiableAssistant.contains(assistant)) {
-                    assistant=assistantCheck;
+            for (Assistant assistantCheck : avaiableAssistant)
+                if (assistantInt== avaiableAssistant.indexOf(assistantCheck)+1) {
+                    assistantChosen=assistantCheck;
                     check=true;
                     break;
                 }
@@ -170,32 +177,95 @@ public class CLI extends View {
                 assistantInt = stdin.nextInt();
             }
         }
-        return assistant;
+        ChooseAssistantMessage message = new ChooseAssistantMessage(assistantChosen);
+        this.client.sendMessage(message);
     }
 
     @Override
-    public PlayerState chooseNextAction(PlayerState playerState) {
+    public PossibleAction chooseNextAction(PlayerState playerState) {
         Scanner stdin = new Scanner(System.in);
         boolean check = false;
-        PlayerState playerStatechoosen = null;
-      /*  System.out.println("Choose your next action by typing the action's number");
-      for(PlayerState playerState : possibleAction)
-            System.out.println(playerState + "num:" + possibleAction.indexOf(playerState)+1);
-        String input = stdin.nextLine();
-        int actionNum = Integer.parseInt(input);;
-        do{
-         if(actionNum >= 1 || actionNum <= possibleAction.size()+1) {
-                  playerStatechoosen = possibleAction.get(actionNum - 1);
-                check = true;
+        PossibleAction actionChosen = null;
+        System.out.println("Choose your next action by typing the action's number");
+        int actionNum = 0 ;
+        while(!check){
+            if(playerState == PlayerState.STUDENTPHASE){
+                    System.out.println("Possible actions:" +
+                            "1) Move one student to the hall" +
+                            "2) Move one student to one island");
+                    if(!client.isCharacterPlayed())
+                        System.out.println("3) Use a character");
+                    actionNum= Integer.parseInt(stdin.nextLine());
+                    if(actionNum==1) {
+                        actionChosen = PossibleAction.MOVESTUDENTTOHALL;
+                        check = true;
+
+                    }
+                    else if(actionNum==2){
+                        actionChosen = PossibleAction.MOVESTUDENTT0ISLAND;
+                        check = true;
+
+                    }
+                    else if(actionNum==3 && !client.isCharacterPlayed()){
+                        actionChosen = PossibleAction.USECHARACTER;
+                        check = true;
+
+                    }
+                    else {
+                        System.out.println("Selection not valid. Try again");
+                        actionNum= Integer.parseInt(stdin.nextLine());
+                    }
+                }
+
+                else if(playerState == PlayerState.MOTHERNATUREPHASE){
+                    System.out.println("Possible actions:" +
+                            "1) Move Mother Nature" +
+                            "2) Use a character") ;
+                    actionNum= Integer.parseInt(stdin.nextLine());
+                    if(actionNum==1) {
+                        actionChosen = PossibleAction.MOVEMOTHERNATURE;
+                        check = true;
+                    }
+                    else if(actionNum==2){
+                        actionChosen = PossibleAction.USECHARACTER;
+                        check = true;
+                    }
+                    else {
+                        System.out.println("Selection not valid. Try again");
+                        actionNum= Integer.parseInt(stdin.nextLine());
+                    }
+                }
+
+                else if(playerState == PlayerState.CLOUDPHASE){
+                    System.out.println("Possible actions:" +
+                            "1) Choose a cloud" +
+                            "2) Use a character") ;
+                actionNum= Integer.parseInt(stdin.nextLine());
+                if(actionNum==1) {
+                    actionChosen = PossibleAction.CHOOSECLOUD;
+                    check = true;
+                }
+                else if(actionNum==2){
+                    actionChosen = PossibleAction.USECHARACTER;
+                    check = true;
+                }
+                else {
+                    System.out.println("Selection not valid. Try again");
+                    actionNum= Integer.parseInt(stdin.nextLine());
+                }
+
             }
-            else
-                System.out.println("Number not valid. Please try again");
-            actionNum = stdin.nextInt();
-        }while(check); */
-        return playerStatechoosen;
-    }
+        }
+            return actionChosen;
+        }
 
     @Override
+    public void moveStudentToHall(HashMap<Student, Integer> hall) {
+        Student studentChosen = this.chooseStudentToMove(hall);
+        MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentChosen);
+        this.client.sendMessage(message);
+    }
+
     public Student chooseStudentToMove(HashMap<Student, Integer> hall) {
         Scanner stdin = new Scanner(System.in);
         boolean check = false;
@@ -207,24 +277,34 @@ public class CLI extends View {
         while(!check){
             switch (input) {
                 case ("g") -> {
-                    studentChosen = Student.GREEN;
-                    check = true;
+                    if(hall.get(Student.GREEN) > 0) {
+                        studentChosen = Student.GREEN;
+                        check = true;
+                    }
                 }
                 case ("r") -> {
-                    studentChosen = Student.RED;
-                    check = true;
+                    if( hall.get(Student.RED) > 0) {
+                        studentChosen = Student.RED;
+                        check = true;
+                    }
                 }
                 case ("y") -> {
-                    studentChosen = Student.YELLOW;
-                    check = true;
+                    if(hall.get(Student.YELLOW) > 0) {
+                        studentChosen = Student.YELLOW;
+                        check = true;
+                    }
                 }
                 case ("p") -> {
-                    studentChosen = Student.PINK;
-                    check = true;
+                    if(hall.get(Student.PINK) > 0) {
+                        studentChosen = Student.PINK;
+                        check = true;
+                    }
                 }
                 case ("b") -> {
-                    studentChosen = Student.BLUE;
-                    check = true;
+                    if(hall.get(Student.BLUE) > 0) {
+                        studentChosen = Student.BLUE;
+                        check = true;
+                    }
                 }
                 default -> {
                     System.out.println("Selection not valid. Try again");
@@ -237,7 +317,8 @@ public class CLI extends View {
     }
 
     @Override
-    public int chooseIsland(int numOfIslands) {
+    public void moveStudentToIsland(HashMap<Student,Integer> hall, int numOfIslands) {
+        Student studentChosen = this.chooseStudentToMove(hall);
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one Island between this available by typing his number associated");
         //this.graphic.draw(Archipelago);
@@ -252,11 +333,12 @@ public class CLI extends View {
                 System.out.println("Selection not valid. Try again");
                 islandID = Integer.parseInt(input);
         }
-        return islandID;
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(islandID, studentChosen);
+        this.client.sendMessage(message);
     }
 
     @Override
-    public int moveMotherNature(Assistant assistant) {
+    public void moveMotherNature(Assistant assistant) {
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one assistant between this available by typing his number associated");
         String input=stdin.nextLine();
@@ -271,11 +353,12 @@ public class CLI extends View {
                 numberOfMovements = Integer.parseInt(input);
             }
         }
-        return numberOfMovements;
+        MoveMotherNatureMessage message = new MoveMotherNatureMessage(numberOfMovements);
+        this.client.sendMessage(message);
     }
 
     @Override
-    public int chooseCloud(int numOfClouds) {
+    public void chooseCloud(int numOfClouds) {
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one cloud between this available by typing his number associated");
         //this.graphic.draw(Clouds);
@@ -291,7 +374,49 @@ public class CLI extends View {
                 cloudChosen = Integer.parseInt(input);
             }
         }
-        return cloudChosen;
+        this.client.setCharacterPlayed(false);
+        ChooseCloudMessage message = new ChooseCloudMessage(cloudChosen);
+        this.client.sendMessage(message);
+    }
+
+    @Override
+    public void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCOins){
+        Scanner stdin = new Scanner(System.in);
+        System.out.println("Choose one character between this available by typing his number associated");
+        Characters character = null;
+        boolean check = false;
+        //graphical.print...
+        String input=stdin.nextLine();
+        int characterChosen = Integer.parseInt(input);
+        while(!check)
+        switch(characterChosen){
+            case(1)->{
+                if(avaiableCharacter.get(0).getCost()<= numOfCOins) {
+                    character = avaiableCharacter.get(0);
+                    check=true;
+                }
+            }
+            case(2)->{
+                if(avaiableCharacter.get(1).getCost()<= numOfCOins) {
+                    character = avaiableCharacter.get(1);
+                    check=true;
+                }
+            }
+            case(3)->{
+                if(avaiableCharacter.get(2).getCost()<= numOfCOins) {
+                    character = avaiableCharacter.get(2);
+                    check = true;
+                }
+            }
+
+            default ->{
+                System.out.println("Selection not valid. Try again");
+                characterChosen = Integer.parseInt(input);
+            }
+        }
+        this.client.setCharacterPlayed(true);
+        ChooseCharacterMessage message = new ChooseCharacterMessage(character);
+        this.client.sendMessage(message);
     }
 
 

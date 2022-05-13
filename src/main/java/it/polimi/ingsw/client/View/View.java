@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client.View;
 
+import it.polimi.ingsw.client.View.cli.PossibleAction;
+import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
@@ -18,17 +20,19 @@ public abstract class View {
 
     public abstract int chooseNumberOfPlayers();
 
-    public abstract Wizard chooseWizard(ArrayList<Wizard> avaiableWizards);
+    public abstract void chooseWizard(ArrayList<Wizard> avaiableWizards);
 
-    public abstract Assistant chooseAssistant(ArrayList<Assistant> avaiableAssistant);
+    public abstract void chooseAssistant(ArrayList<Assistant> avaiableAssistant);
 
-    public abstract PlayerState chooseNextAction(PlayerState playerState);
+    public abstract PossibleAction chooseNextAction(PlayerState playerState);
 
-    public abstract Student chooseStudentToMove(HashMap<Student,Integer> hall);
+    public abstract void moveStudentToHall(HashMap<Student,Integer> hall);
 
-    public abstract int chooseIsland(int numOfIslands);
+    public abstract void moveStudentToIsland(HashMap<Student,Integer> hall, int numOfIslands);
 
-    public abstract int moveMotherNature(Assistant assistant);
+    public abstract void moveMotherNature(Assistant assistant);
 
-    public abstract int chooseCloud(int numOfClouds);
+    public abstract void chooseCloud(int numOfClouds);
+
+    public abstract void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCoins);
 }

@@ -2,10 +2,7 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toClient.*;
-import it.polimi.ingsw.messages.toServer.ChooseNicknameMessage;
-import it.polimi.ingsw.messages.toServer.CreatePlayerInGameMessage;
-import it.polimi.ingsw.messages.toServer.MessageToServer;
-import it.polimi.ingsw.messages.toServer.PingToServerMessage;
+import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Wizard;
 
@@ -33,6 +30,9 @@ public class Client {
     private View view;
     private ClientMessageHandler messageHandler;
     private boolean pingActive;
+
+
+    boolean characterPlayed = false;
 
     //Cli e gui dopo che vengono scelti ip e porta chiamano il costruttore di client e poi il suo .setup
     public Client(String ip, int port, View view){ //Mettere ip e port come parametri del costruttore
@@ -205,4 +205,12 @@ public class Client {
         this.numofPlayers = numofPlayers;
     }
 
+
+    public void setCharacterPlayed(boolean characterPlayed) {
+        this.characterPlayed = characterPlayed;
+    }
+
+    public boolean isCharacterPlayed() {
+        return characterPlayed;
+    }
 }

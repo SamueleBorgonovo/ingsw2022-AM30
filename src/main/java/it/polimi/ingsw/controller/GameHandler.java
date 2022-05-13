@@ -15,13 +15,32 @@ import it.polimi.ingsw.server.ClientHandlerInterface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class GameHandler {
-    HashMap<String, GameInterface> playertoGameMap = new HashMap<>();//Map that find the game of a player's nickname
-    HashMap<String, Integer> playertoPlayerIDMap = new HashMap<>();//Map that find game's idplayer from a player's nickname
-    HashMap<String, ClientHandlerInterface> playertoHandlerMap = new HashMap<>();//Map that find player's handler
-    ArrayList<String> nicknameChoosen = new ArrayList<>();
+    private static ConcurrentHashMap<String, GameInterface> playertoGameMap;//Map that find the game of a player's nickname
+    private static ConcurrentHashMap<String, Integer> playertoPlayerIDMap;//Map that find game's idplayer from a player's nickname
+    private static ConcurrentHashMap<String, ClientHandlerInterface> playertoHandlerMap;//Map that find player's handler
+    private static ArrayList<String> nicknameChoosen;
 
+    public GameHandler(){
+        playertoGameMap = new ConcurrentHashMap<>();//Map that find the game of a player's nickname
+        playertoPlayerIDMap = new ConcurrentHashMap<>();//Map that find game's idplayer from a player's nickname
+        playertoHandlerMap = new ConcurrentHashMap<>();//Map that find player's handler
+        nicknameChoosen = new ArrayList<>();
+    }
+
+    public ConcurrentHashMap<String, GameInterface> getPlayertoGameMap() {
+        return playertoGameMap;
+    }
+
+    public ConcurrentHashMap<String, Integer> getPlayertoPlayerIDMap() {
+        return playertoPlayerIDMap;
+    }
+
+    public ArrayList<String> getNicknameChoosen() {
+        return nicknameChoosen;
+    }
 
     //Manca l'handler del process del messaggio della scelta del wizard
     public void addPlayer(ClientHandlerInterface clientHandler, GameMode gamemode, int numofplayers){
@@ -47,10 +66,10 @@ public class GameHandler {
         if(found==0) {
             GameInterface game = new Game(gamemode,numofplayers, this);
             playerid = game.addPlayer(clientHandler.getNickname());
+
             setGameofPlayer(clientHandler.getNickname(), game);
             setPlayeridofPlayer(clientHandler.getNickname(), playerid);
             setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
-
             //Possiamo mandare un messaggio di creazione nuova partita
             WizardsListMessage message = new WizardsListMessage(game.getWizardChoosen());
             clientHandler.sendMessageToClient(message);
@@ -77,18 +96,22 @@ public class GameHandler {
                 nicknameChoosen.add(nickname);
                 clientHandler.setNickname(nickname);
                 clientHandler.sendMessageToClient(message);
+                System.out.println("sono qui");
             }
         }
     }
 
-    public void disconnectPlayer(ClientHandlerInterface clientHandler){
-        GameInterface game = findGameofPlayer(clientHandler.getNickname());
-        int playerid = findPlayeridofPlayer(clientHandler.getNickname());
+
+
+    public void disconnectPlayer(String nickname){
+        GameInterface game = findGameofPlayer(nickname);
+        int playerid = findPlayeridofPlayer(nickname);
+
         if(game.getState()==GameState.WAITINGFORPLAYERS) {
-            nicknameChoosen.remove(clientHandler.getNickname());
-            playertoGameMap.remove(clientHandler.getNickname());
-            playertoPlayerIDMap.remove(clientHandler.getNickname());
-            playertoHandlerMap.remove(clientHandler.getNickname());
+            nicknameChoosen.remove(nickname);
+            playertoGameMap.remove(nickname);
+            playertoPlayerIDMap.remove(nickname);
+            playertoHandlerMap.remove(nickname);
         }
         game.setDisconnectPlayer(playerid);
     }
@@ -112,13 +135,9 @@ public class GameHandler {
 
     }
 
-    public void closeGame(Game game,ArrayList<String> nicknames){
-        //sendMessagetoAll il game si sta chiudendo
-
+    public void closeGame(ArrayList<String> nicknames,boolean gameEnded){
         for(String nick : nicknames) {
-            playertoGameMap.remove(nick);
-            playertoPlayerIDMap.remove(nick);
-            nicknameChoosen.remove(nick);
+            findHandler(nick).handleSocketDisconnection(false,gameEnded);
         }
     }
 
@@ -295,5 +314,4 @@ public class GameHandler {
            clientHandler.sendMessageToClient(message);
         }
     }
-
 }
