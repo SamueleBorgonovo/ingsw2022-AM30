@@ -130,19 +130,19 @@ public class CLI extends View {
         while (!checkwizard) {
             switch (choice) {
                 case ("g") -> {
-                    wizardChosen = Wizard.WIZARDGREEN;
+                    wizardChosen = Wizard.WIZARD_GREEN;
                     checkwizard = true;
                 }
                 case ("y") -> {
-                    wizardChosen = Wizard.WIZARDYELLOW;
+                    wizardChosen = Wizard.WIZARD_YELLOW;
                     checkwizard = true;
                 }
                 case ("p") -> {
-                    wizardChosen = Wizard.WIZARDPINK;
+                    wizardChosen = Wizard.WIZARD_PINK;
                     checkwizard = true;
                 }
                 case ("b") -> {
-                    wizardChosen = Wizard.WIZARDBLUE;
+                    wizardChosen = Wizard.WIZARD_BLUE;
                     checkwizard = true;
                 }
                 default -> {
