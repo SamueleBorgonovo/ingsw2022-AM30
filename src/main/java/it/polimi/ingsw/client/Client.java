@@ -2,10 +2,7 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toClient.*;
-import it.polimi.ingsw.messages.toServer.ChooseNicknameMessage;
-import it.polimi.ingsw.messages.toServer.CreatePlayerInGameMessage;
-import it.polimi.ingsw.messages.toServer.MessageToServer;
-import it.polimi.ingsw.messages.toServer.PingToServerMessage;
+import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Wizard;
 

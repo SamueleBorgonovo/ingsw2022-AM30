@@ -27,6 +27,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
     private String nickname;
     private GameHandler gameHandler;
     private boolean gameStarted;
+    private boolean disconnectionCalled=false;
 
     public ClientHandler(Socket clientSocket, MessageHandler messageHandler,GameHandler gameHandler) {
         this.gameHandler = gameHandler;
@@ -52,7 +53,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
         timer = new Thread(() -> {
             try{
                 Thread.sleep(TIMEOUT_FOR_RESPONSE);
-                //handleSocketDisconnection(true);
+                handleSocketDisconnection(true,false);
             } catch (InterruptedException e){ }
         });
         timer.start();
@@ -97,8 +98,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
            } catch (ClassNotFoundException ignored) {}
 
         } catch (IOException e) {
-           handleSocketDisconnection(e instanceof SocketTimeoutException);
-
+           handleSocketDisconnection(e instanceof SocketTimeoutException,false);
         }
     }
 
@@ -109,34 +109,42 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
             os.reset();
         }
         catch(IOException e) {
-            handleSocketDisconnection(e instanceof SocketTimeoutException);
+            handleSocketDisconnection(e instanceof SocketTimeoutException,false);
         }
     }
 
     //if timer expired timeout is true(also socketTimerExpire), else is false
-    public void handleSocketDisconnection(boolean timeout){
-        stopTimer();
-        active=false;
-        gameHandler.disconnectPlayer(this);
-        try{
-            if(timeout)
-                os.writeObject(new TimeExpiredMessage());
-            else
-                os.writeObject(new DisconnectMessage());
+    public synchronized void handleSocketDisconnection(boolean timeout,boolean gameEnded) {
+        if (!disconnectionCalled) {
+            disconnectionCalled=true;
+            stopTimer();
+            active = false;
+            this.gameHandler.disconnectPlayer(getNickname());
+            try {
+                if (timeout)
+                    os.writeObject(new TimeExpiredMessage());
+                else if(!gameEnded)
+                    os.writeObject(new DisconnectMessage()); //e anche partita chiusa perchè disconnessi tutti
+                    else //Mando il messaggio di game si sta chiudendo perchè la partita è finita
 
-            os.flush();
-            os.reset();
-        }catch (IOException e) { }
-        try{
-            is.close();
-        } catch (IOException e) { }
-        try{
-            os.close();
-        } catch (IOException e) { }
-        try{
-            clientSocket.close();
-        } catch (IOException e) { }
+                os.flush();
+                os.reset();
+            } catch (IOException e) {
+            }
+            try {
+                is.close();
+            } catch (IOException e) {
+            }
+            try {
+                os.close();
+            } catch (IOException e) {
+            }
+            try {
+                clientSocket.close();
+            } catch (IOException e) {
+            }
 
+        }
     }
 
 
