@@ -47,6 +47,7 @@ public class CLI extends View {
             else
                 System.out.println("Connection not valid. Please try again");
         }
+        client.gameSetup();
     }
 
     @Override

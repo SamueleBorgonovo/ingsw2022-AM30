@@ -96,7 +96,6 @@ public class GameHandler {
                 nicknameChoosen.add(nickname);
                 clientHandler.setNickname(nickname);
                 clientHandler.sendMessageToClient(message);
-                System.out.println("sono qui");
             }
         }
     }

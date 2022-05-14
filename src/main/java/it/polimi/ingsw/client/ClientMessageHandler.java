@@ -1,13 +1,16 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.messages.toServer.PingToServerMessage;
 
 public class ClientMessageHandler {
 
     private Client client;
-    public ClientMessageHandler(Client client){
+    private View view;
+    public ClientMessageHandler(Client client, View view){
         this.client=client;
+        this.view=view;
     }
 
     public void process(PingToClientMessage message) {
@@ -57,7 +60,7 @@ public class ClientMessageHandler {
     }
 
     public void process(WizardsListMessage message){
-        //Fa vedere a video/cli la lista del messaggio  //metodo getList()
+        view.chooseWizard(message.getList());
     }
 
     public void process(TimeExpiredMessage message){
@@ -74,5 +77,9 @@ public class ClientMessageHandler {
 
     public void process(InvalidWizardMessage message){
 
+    }
+
+    public void process(PlayerStateMessage message){
+        client.nextMove(message.getState());
     }
 }

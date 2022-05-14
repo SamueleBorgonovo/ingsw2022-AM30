@@ -4,6 +4,7 @@ import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
 import java.io.IOException;
@@ -35,11 +36,11 @@ public class Client {
     boolean characterPlayed = false;
 
     //Cli e gui dopo che vengono scelti ip e porta chiamano il costruttore di client e poi il suo .setup
-    public Client(String ip, int port, View view){ //Mettere ip e port come parametri del costruttore
+    public Client(String ip, int port, View view){
         this.ip = ip;
         this.port = port;
         this.view = view;
-        messageHandler = new ClientMessageHandler(this);
+        messageHandler = new ClientMessageHandler(this,view);
 
         this.socketListener = new Thread(this::messageListener);
         this.pinger = new Thread(this::startPinger);
@@ -60,7 +61,6 @@ public class Client {
     }
 
     public void gameSetup() throws IOException, ClassNotFoundException {
-        Scanner stdin = new Scanner(System.in);
         //Mettere tutto la scelta delle options in un metodo a parte
         String nick;
         nick = view.chooseNickname(true);
@@ -113,6 +113,10 @@ public class Client {
             } while (!correct);
                */
         }
+    }
+
+    public void nextMove(PlayerState playerState){
+        //chiama choosenextaction in view
     }
 
     public void messageListener(){
