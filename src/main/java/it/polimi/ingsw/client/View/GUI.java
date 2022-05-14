@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.View;
 
 import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.model.board.Characters;
+import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
@@ -55,7 +56,7 @@ public class GUI extends View {
     public void moveMotherNature(Assistant assistant) {}
 
     @Override
-    public void chooseCloud(int numofClouds) {}
+    public void chooseCloud(ArrayList<Cloud> clouds) {}
 
     @Override
     public void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCoins) {}

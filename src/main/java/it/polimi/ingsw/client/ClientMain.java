@@ -17,9 +17,13 @@ public class ClientMain {
       boolean pass=false;
       char r='a';
       do {
-          if (ris.toLowerCase().startsWith("c") || ris.toLowerCase().startsWith("g")) {
+          if (ris.equalsIgnoreCase("c") || ris.equalsIgnoreCase("g")) {
               pass = true;
               r = ris.toLowerCase().charAt(0);
+          }
+          else{
+              System.out.println("Selection not valid. Please try again");
+              ris= stdin.nextLine();
           }
       }while(!pass);
 

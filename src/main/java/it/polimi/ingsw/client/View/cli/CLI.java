@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
 import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.board.Characters;
+import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
@@ -21,30 +22,29 @@ public class CLI extends View {
     private static final int MIN_PORT = 1024;
     private static final int MAX_PORT = 65535;
 
-    private Graphic graphic;
+    private final Graphic graphic = new Graphic();
     private Client client;
 
 
-    public void init() throws IOException, ClassNotFoundException {
+    public void init() throws IOException, ClassNotFoundException, NumberFormatException {
         boolean check=false;
+        this.graphic.printLogo();
 
-        System.out.println("Welcome to Eriantys");
-        Scanner stdin = new Scanner(System.in);
-        String ip;
         while(!check){
-            System.out.println("Please insert the ip-addres");
-            ip = stdin.nextLine();
+            Scanner stdin = new Scanner(System.in);
+            System.out.println("Please insert the ip-address");
+            String ip = stdin.nextLine();
             System.out.println("Please insert port");
-            int port;
-            port = stdin.nextInt();
+            int port = Integer.parseInt(stdin.nextLine());
             while (port < MIN_PORT || port > MAX_PORT) {
                 System.out.println("Port Number is not valid, please insert a new one");
                 port = stdin.nextInt();
             }
             Client client = new Client(ip, port, this);
-            this.client = client;
             check = client.setupConnection();
-            if(!check)
+            if(check)
+                this.client = client;
+            else
                 System.out.println("Connection not valid. Please try again");
         }
     }
@@ -161,7 +161,7 @@ public class CLI extends View {
         Scanner stdin = new Scanner(System.in);
         Assistant assistantChosen= null;
         System.out.println("Choose one assistant between this available by typing his number associated");
-        //graphical.printAssistant
+        this.graphic.printAssistants(avaiableAssistant, this.client.getWizard());
         String input=stdin.nextLine();
         int assistantInt = Integer.parseInt(input);
         boolean check = false;
@@ -271,7 +271,6 @@ public class CLI extends View {
         boolean check = false;
         Student studentChosen=null;
         System.out.println("Choose the student to move by typing his color ( g | r | y | p | b )");
-        //this.graphic.drawPlance;
         String input=stdin.nextLine().toLowerCase();
 
         while(!check){
@@ -321,7 +320,6 @@ public class CLI extends View {
         Student studentChosen = this.chooseStudentToMove(hall);
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one Island between this available by typing his number associated");
-        //this.graphic.draw(Archipelago);
         String input=stdin.nextLine();
         int islandID = Integer.parseInt(input);
         boolean check = false;
@@ -358,15 +356,15 @@ public class CLI extends View {
     }
 
     @Override
-    public void chooseCloud(int numOfClouds) {
+    public void chooseCloud(ArrayList<Cloud> clouds) {
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one cloud between this available by typing his number associated");
-        //this.graphic.draw(Clouds);
+        this.graphic.printClouds(clouds);
         String input=stdin.nextLine();
         int cloudChosen = Integer.parseInt(input);
         boolean check = false;
         while(!check){
-            if(cloudChosen > 0 && cloudChosen<= numOfClouds){
+            if(cloudChosen > 0 && cloudChosen<= clouds.size()){
                 check=true;
             }
             else{
@@ -380,7 +378,7 @@ public class CLI extends View {
     }
 
     @Override
-    public void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCOins){
+    public void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCoins){
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one character between this available by typing his number associated");
         Characters character = null;
@@ -391,19 +389,19 @@ public class CLI extends View {
         while(!check)
         switch(characterChosen){
             case(1)->{
-                if(avaiableCharacter.get(0).getCost()<= numOfCOins) {
+                if(avaiableCharacter.get(0).getCost()<= numOfCoins) {
                     character = avaiableCharacter.get(0);
                     check=true;
                 }
             }
             case(2)->{
-                if(avaiableCharacter.get(1).getCost()<= numOfCOins) {
+                if(avaiableCharacter.get(1).getCost()<= numOfCoins) {
                     character = avaiableCharacter.get(1);
                     check=true;
                 }
             }
             case(3)->{
-                if(avaiableCharacter.get(2).getCost()<= numOfCOins) {
+                if(avaiableCharacter.get(2).getCost()<= numOfCoins) {
                     character = avaiableCharacter.get(2);
                     check = true;
                 }
