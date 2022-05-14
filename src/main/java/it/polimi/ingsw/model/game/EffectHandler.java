@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.game;
 
 import java.util.ArrayList;
 
-public class EffectHandler {
+public class EffectHandler implements EffectHandlerInterface{
     // It contains parameters that Effect6, Effect8 and Effect9 can modify
     // to change the normal operation of the verifyIslandInfluence method.
    private int twopoints;

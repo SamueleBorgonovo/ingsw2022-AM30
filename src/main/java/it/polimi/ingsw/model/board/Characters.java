@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.effects.Effect;
+import it.polimi.ingsw.model.game.Student;
 
 public class Characters {
     private int cost;
