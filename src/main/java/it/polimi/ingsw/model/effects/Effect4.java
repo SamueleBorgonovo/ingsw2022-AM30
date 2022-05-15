@@ -12,6 +12,9 @@ public class Effect4 extends Effect{
     }
 
     @Override
+    public String getName(){ return "POSTMAN";}
+
+    @Override
     public void effect(Game game, int playerID)  throws InvalidStopException {
         game.getEffectHandler().setTwomoremoves(true);
         game.setCharacterInUse(null);

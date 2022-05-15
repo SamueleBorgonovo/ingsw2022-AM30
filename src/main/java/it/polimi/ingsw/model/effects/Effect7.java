@@ -15,6 +15,9 @@ public class Effect7 extends Effect{
     public int getCost(){ return 1;}
 
     @Override
+    public String getName(){ return "JESTER";}
+
+    @Override
     public void effect(Game game, int playerID)  throws InvalidStopException {
        prevPlayerState=game.getPlayer(playerID).getPlayerState();
        game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERSTUDENTSPHASE);
@@ -41,17 +44,17 @@ public class Effect7 extends Effect{
             for (int count = game.getEffectHandler().getStudentschoose().size() / 2; count < game.getEffectHandler().getStudentschoose().size(); count++)
                 toCard.add(game.getEffectHandler().getStudentschoose().get(count));
 
-            for (int count = 0; count < toCard.size(); count++)
-                game.getPlayer(playerID).getPlance().removeStudentEntrance(toCard.get(count));
+            for (Student student : toCard)
+                game.getPlayer(playerID).getPlance().removeStudentEntrance(student);
 
-            for (int count = 0; count < toEntrance.size(); count++)
-                game.getEffectHandler().removeStudentFromEffect7(toEntrance.get(count));
+            for (Student student : toEntrance)
+                game.getEffectHandler().removeStudentFromEffect7(student);
 
-            for (int count = 0; count < toCard.size(); count++)
-                game.getEffectHandler().addStudentInEffect7(toCard.get(count));
+            for (Student student : toCard)
+                game.getEffectHandler().addStudentInEffect7(student);
 
-            for (int count = 0; count < toEntrance.size(); count++)
-                game.getPlayer(playerID).getPlance().addStudentEntrance(toEntrance.get(count));
+            for (Student student : toEntrance)
+                game.getPlayer(playerID).getPlance().addStudentEntrance(student);
 
             game.setCharacterInUse(null);
             game.getPlayer(playerID).setPlayerState(prevPlayerState);

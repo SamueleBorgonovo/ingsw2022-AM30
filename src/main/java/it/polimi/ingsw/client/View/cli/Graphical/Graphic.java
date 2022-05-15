@@ -1,8 +1,10 @@
 package it.polimi.ingsw.client.View.cli.Graphical;
 
 import it.polimi.ingsw.model.board.Archipelago;
+import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.board.Island;
+import it.polimi.ingsw.model.game.EffectHandlerInterface;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.Player;
@@ -133,6 +135,41 @@ public class Graphic {
                         │ ●   │ ● ◯ ◯ ◯ ◯ ◯ ◯ ◯ ◯ ◯ │ □ │     │ │ ●   │ ● ◯ ◯ ◯ ◯ ◯ ◯ ◯ ◯ ◯ │ □ │     │ │ ●   │ ● ◯ ◯ ◯ ◯ ◯ ◯ ◯ ◯ ◯ │ □ │     │
                         ╰─────────────────────────────────────╯ ╰─────────────────────────────────────╯ ╰─────────────────────────────────────╯
                          COINS : 2                               COINS : 2                               COINS : 2
+                        
+                        EFFECT1 = MONK
+                        EFFECT2 = FARMER
+                        EFFECT3 = HERALD
+                        EFFECT4 = POSTMAN
+                        EFFECT5 = GRANDMA
+                        EFFECT6 = CENTAUR
+                        EFFECT7 = JESTER
+                        EFFECT8 = KNIGHT
+                        EFFECT9 = FUNGARO
+                        EFFECT10 = MINSTREL
+                        EFFECT11 = PRINCESS
+                        EFFECT12 = PICAROON
+                        
+                        ╭───────────────╴CHARACTERS╶────────────────╮
+                        │ ╭────╴1╶────╮ ╭────╴3╶────╮ ╭────╴2╶────╮ │
+                        │ │   MONK    │ │  GRANDMA  │ │  JESTER   │ │
+                        │ │  ● ● ● ●  │ │  ✗ ✗ ✗ ✗  │ │   ● ● ●   │ │
+                        │ │           │ │           │ │   ● ● ●   │ │
+                        │ │ COST : 1  │ │ COST : 1  │ │  COST : 1 │ │
+                        │ ╰───────────╯ ╰───────────╯ ╰───────────╯ │
+                        ╰───────────────────────────────────────────╯
+                        ╭────╴2╶────╮
+                        │  JESTER   │
+                        │   ● ● ●   │
+                        │   ● ● ●   │
+                        │  COST : 1 │
+                        ╰───────────╯
+                        ╭────╴3╶────╮ ╭────╴3╶────╮
+                        │  GRANDMA  │ │  GRANDMA  │
+                        │  ✗ ✗ ✗ ✗  │ │           │
+                        │           │ │           │
+                        │ COST : 1  │ │   ✗ ✗ ✗   │
+                        ╰───────────╯ ╰───────────╯
+
                         """);
 
     public void printLogo() {
@@ -361,5 +398,86 @@ public class Graphic {
         for(i=1; i<clouds.size(); i++)
             System.out.print("────────");
         System.out.println("╯");
+    }
+
+    public void printCharacters(ArrayList<Characters> characters, EffectHandlerInterface effectHandler){
+        int i;
+
+        for(i=1; i<= characters.size();i++)
+            System.out.print("╭────╴" + i + "╶────╮ ");
+        System.out.println();
+
+        for(Characters character : characters){
+            System.out.print("│");
+            for(i=0; i<(11-character.getEffect().getName().length())/2;i++)
+                System.out.print(" ");
+            System.out.print(Colors.values()[character.getCost() + 10].getCode() + character.getEffect().getName() + Colors.ANSI_RESET.getCode());
+            for(i=0; i<(11-character.getEffect().getName().length())/2 + (11-character.getEffect().getName().length())%2;i++)
+                System.out.print(" ");
+            System.out.print("│ ");
+        }
+        System.out.println();
+
+        for(Characters character : characters){
+            if("JESTER".equals(character.getEffect().getName())){
+                System.out.print("│   ");
+                for(i=0;i<3;i++)
+                    System.out.print(Colors.values()[effectHandler.getEffect7students().get(i).ordinal()].getCode() + "● " + Colors.ANSI_RESET.getCode());
+                System.out.print("  │ ");
+            } else if("MONK".equals(character.getEffect().getName()) && effectHandler.getEffect1students().size()!=0){
+                System.out.print("│");
+                for(i=0; i<6-effectHandler.getEffect1students().size();i++)
+                    System.out.print(" ");
+                for(Student student : effectHandler.getEffect1students())
+                    System.out.print(Colors.values()[student.ordinal()].getCode() + "● " + Colors.ANSI_RESET.getCode());
+                for(i=0; i<5-effectHandler.getEffect1students().size();i++)
+                    System.out.print(" ");
+                System.out.print("│ ");
+            } else if("PRINCESS".equals(character.getEffect().getName()) && effectHandler.getEffect11students().size()!=0){
+                System.out.print("│");
+                for(i=0; i<6-effectHandler.getEffect11students().size();i++)
+                    System.out.print(" ");
+                for(Student student : effectHandler.getEffect11students())
+                    System.out.print(Colors.values()[student.ordinal()].getCode() + "● " + Colors.ANSI_RESET.getCode());
+                for(i=0; i<5-effectHandler.getEffect11students().size();i++)
+                    System.out.print(" ");
+                System.out.print("│ ");
+            } else if("GRANDMA".equals(character.getEffect().getName()) && effectHandler.getNumofislandstops()!=0){
+                System.out.print("│");
+                for(i=0; i<6-effectHandler.getNumofislandstops();i++)
+                    System.out.print(" ");
+                for(i=0; i<effectHandler.getNumofislandstops();i++)
+                    System.out.print("✗ ");
+                for(i=0; i<5-effectHandler.getNumofislandstops();i++)
+                    System.out.print(" ");
+                System.out.print("│ ");
+            }
+            else
+                System.out.print("│           │ ");
+        }
+        System.out.println();
+
+        for(Characters character : characters){
+            if("JESTER".equals(character.getEffect().getName())){
+                System.out.print("│   ");
+                for(i=3;i<6 && effectHandler.getEffect7students().size()!=0;i++) {
+                    if (i < effectHandler.getEffect7students().size())
+                        System.out.print(Colors.values()[effectHandler.getEffect7students().get(i).ordinal()].getCode() + "● " + Colors.ANSI_RESET.getCode());
+                    else
+                        System.out.print("  ");
+                }
+                System.out.print("  │ ");
+            }
+            else
+                System.out.print("│           │ ");
+        }
+        System.out.println();
+
+        for(Characters character : characters)
+                System.out.print("│  COST : " + character.getCost() + " │ ");
+        System.out.println();
+        for(i=0; i<characters.size();i++)
+            System.out.print("╰───────────╯ ");
+        System.out.println();
     }
 }

@@ -15,6 +15,9 @@ public class Effect12 extends Effect{
     public int getCost(){ return 3;}
 
     @Override
+    public String getName(){ return "PICAROON";}
+
+    @Override
     public void effect(Game game, int playerID)  throws InvalidStopException {
         prevPlayerState = game.getPlayer(playerID).getPlayerState();
         game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERSTUDENTSPHASE);

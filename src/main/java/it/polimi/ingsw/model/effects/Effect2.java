@@ -12,6 +12,9 @@ public class Effect2 extends Effect {
     public int getCost(){ return 2;}
 
     @Override
+    public String getName(){ return "FARMER";}
+
+    @Override
     public void effect(Game game, int playerID)  throws InvalidStopException {
         game.getEffectHandler().setProfessorcontroll(true);
         game.setCharacterInUse(null);

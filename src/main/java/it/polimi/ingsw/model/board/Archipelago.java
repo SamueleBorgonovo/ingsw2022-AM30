@@ -63,10 +63,13 @@ public class Archipelago {
             //I add the students of the island I am going to remove in the other island
             for (Student student : islands.get(indexMax).getStudents())
                 islands.get(indexMin).addStudent(student);
+            if(islands.get(indexMax).isStop())
+                islands.get(indexMin).setStop(true);
             //I remove the island with the bigger ID
             islands.remove(indexMax);
             //I have the island that now I have as the one with mother nature
-            mothernature.setMotherNature(min);
+            if(mothernature.isOn()>=max)
+                mothernature.setMotherNature(mothernature.isOn()-1);
         }
         int i=1;
         for(Island island : islands){

@@ -12,6 +12,9 @@ public class Effect6 extends Effect {
     public int getCost(){ return 3;}
 
     @Override
+    public String getName(){ return "CENTAUR";}
+
+    @Override
     public void effect(Game game, int playerID)  throws InvalidStopException {
         game.getEffectHandler().setNotower(true);
         game.setCharacterInUse(null);

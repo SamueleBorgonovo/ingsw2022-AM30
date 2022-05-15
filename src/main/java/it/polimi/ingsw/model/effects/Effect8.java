@@ -11,6 +11,9 @@ public class Effect8 extends Effect {
     public int getCost(){ return 2;}
 
     @Override
+    public String getName(){ return "KNIGHT";}
+
+    @Override
     public void effect(Game game, int playerID)  throws InvalidStopException {
         game.getEffectHandler().setTwopoints(playerID);
         game.setCharacterInUse(null);

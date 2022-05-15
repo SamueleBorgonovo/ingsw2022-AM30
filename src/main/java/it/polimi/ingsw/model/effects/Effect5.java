@@ -15,6 +15,9 @@ public class Effect5 extends Effect {
     public int getCost(){ return 2;}
 
     @Override
+    public String getName(){ return "GRANDMA";}
+
+    @Override
     public void effect(Game game, int playerID)  throws InvalidStopException{
         if(game.getEffectHandler().getNumofislandstops()>0) {
             prevPlayerState = game.getPlayer(playerID).getPlayerState();
