@@ -7,9 +7,13 @@ import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.Cloud;
+import it.polimi.ingsw.model.game.EffectHandler;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.player.*;
+import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.PlayerInterface;
+import it.polimi.ingsw.model.player.PlayerState;
+import it.polimi.ingsw.model.player.Wizard;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,10 +27,7 @@ public class CLI extends View {
 
     private final Graphic graphic = new Graphic();
     private Client client;
-    private ArrayList<PlayerInterface> players;
-    //Per sapere qual è questo player fare il controllo tra Client.nickname e players.nickname
-    private Board board;
-
+    private InputParser inputParser;
 
 
     public void init() throws IOException, ClassNotFoundException, NumberFormatException {
@@ -38,10 +39,10 @@ public class CLI extends View {
             System.out.println("Please insert the ip-address");
             String ip = stdin.nextLine();
             System.out.println("Please insert port");
-            int port = Integer.parseInt(stdin.nextLine());
+            int port=inputParser.intParser();;
             while (port < MIN_PORT || port > MAX_PORT) {
                 System.out.println("Port Number is not valid, please insert a new one");
-                port = stdin.nextInt();
+                port = inputParser.intParser();
             }
             Client client = new Client(ip, port, this);
             check = client.setupConnection();
@@ -107,15 +108,14 @@ public class CLI extends View {
     public int chooseNumberOfPlayers(){
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose the number of the players ( 2 | 3 )");
-        String input = stdin.nextLine();
-        int choice = Integer.parseInt(input);
+        int choice = inputParser.intParser();
         boolean pass = false;
         while (!pass) {
             if (choice==2 || choice==3)
                 pass = true;
             else {
                 System.out.println("Selection not valid. Please try again");
-                choice = stdin.nextInt();
+                choice = inputParser.intParser();
             }
         }
         return choice;
@@ -167,7 +167,7 @@ public class CLI extends View {
         System.out.println("Choose one assistant between this available by typing his number associated");
         this.graphic.printAssistants(avaiableAssistant, this.client.getWizard());
         String input=stdin.nextLine();
-        int assistantInt = Integer.parseInt(input);
+        int assistantInt = inputParser.intParser();
         boolean check = false;
         while(!check) {
             for (Assistant assistantCheck : avaiableAssistant)
@@ -189,6 +189,7 @@ public class CLI extends View {
     public PossibleAction chooseNextAction(PlayerState playerState) {
         Scanner stdin = new Scanner(System.in);
         boolean check = false;
+        boolean check2=false;
         PossibleAction actionChosen = null;
         System.out.println("Choose your next action by typing the action's number");
         int actionNum = 0 ;
@@ -199,11 +200,10 @@ public class CLI extends View {
                             "2) Move one student to one island");
                     if(!client.isCharacterPlayed())
                         System.out.println("3) Use a character");
-                    actionNum= Integer.parseInt(stdin.nextLine());
+                    actionNum = inputParser.intParser();
                     if(actionNum==1) {
                         actionChosen = PossibleAction.MOVESTUDENTTOHALL;
                         check = true;
-
                     }
                     else if(actionNum==2){
                         actionChosen = PossibleAction.MOVESTUDENTT0ISLAND;
@@ -225,7 +225,7 @@ public class CLI extends View {
                     System.out.println("Possible actions:" +
                             "1) Move Mother Nature" +
                             "2) Use a character") ;
-                    actionNum= Integer.parseInt(stdin.nextLine());
+                    actionNum = inputParser.intParser();
                     if(actionNum==1) {
                         actionChosen = PossibleAction.MOVEMOTHERNATURE;
                         check = true;
@@ -244,7 +244,7 @@ public class CLI extends View {
                     System.out.println("Possible actions:" +
                             "1) Choose a cloud" +
                             "2) Use a character") ;
-                actionNum= Integer.parseInt(stdin.nextLine());
+                    actionNum = inputParser.intParser();
                 if(actionNum==1) {
                     actionChosen = PossibleAction.CHOOSECLOUD;
                     check = true;
@@ -271,80 +271,29 @@ public class CLI extends View {
     }
 
     public Student chooseStudentToMove(HashMap<Student, Integer> hall) {
-        Scanner stdin = new Scanner(System.in);
-        boolean check = false;
-        Student studentChosen=null;
-        System.out.println("Choose the student to move by typing his color ( g | r | y | p | b )");
-        String input=stdin.nextLine().toLowerCase();
-
-        while(!check){
-            switch (input) {
-                case ("g") -> {
-                    if(hall.get(Student.GREEN) > 0) {
-                        studentChosen = Student.GREEN;
-                        check = true;
-                    }
-                }
-                case ("r") -> {
-                    if( hall.get(Student.RED) > 0) {
-                        studentChosen = Student.RED;
-                        check = true;
-                    }
-                }
-                case ("y") -> {
-                    if(hall.get(Student.YELLOW) > 0) {
-                        studentChosen = Student.YELLOW;
-                        check = true;
-                    }
-                }
-                case ("p") -> {
-                    if(hall.get(Student.PINK) > 0) {
-                        studentChosen = Student.PINK;
-                        check = true;
-                    }
-                }
-                case ("b") -> {
-                    if(hall.get(Student.BLUE) > 0) {
-                        studentChosen = Student.BLUE;
-                        check = true;
-                    }
-                }
-                default -> {
-                    System.out.println("Selection not valid. Try again");
-                    input = stdin.nextLine().toLowerCase();
-                }
-            }
-
-        };
+        Student studentChosen=inputParser.studentParser();
+        while(hall.get(studentChosen) == 0) {
+            System.out.println("Student not available. Please try again");
+            studentChosen=inputParser.studentParser();
+        }
         return studentChosen;
     }
 
     @Override
     public void moveStudentToIsland(HashMap<Student,Integer> hall, int numOfIslands) {
         Student studentChosen = this.chooseStudentToMove(hall);
-        Scanner stdin = new Scanner(System.in);
-        System.out.println("Choose one Island between this available by typing his number associated");
-        String input=stdin.nextLine();
-        int islandID = Integer.parseInt(input);
-        boolean check = false;
-        while(!check){
-            if(islandID >= 1 && islandID <= numOfIslands) {
-                check=true;
-            }
-            else
-                System.out.println("Selection not valid. Try again");
-                islandID = Integer.parseInt(input);
-        }
+        int islandID = inputParser.IslandParser(numOfIslands);
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(islandID, studentChosen);
         this.client.sendMessage(message);
     }
+
 
     @Override
     public void moveMotherNature(Assistant assistant) {
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one assistant between this available by typing his number associated");
         String input=stdin.nextLine();
-        int numberOfMovements = Integer.parseInt(input);
+        int numberOfMovements=inputParser.intParser();
         boolean check = false;
         while(!check){
             if(numberOfMovements > 0 && numberOfMovements<=assistant.getMovement()) {
@@ -365,7 +314,7 @@ public class CLI extends View {
         System.out.println("Choose one cloud between this available by typing his number associated");
         this.graphic.printClouds(clouds);
         String input=stdin.nextLine();
-        int cloudChosen = Integer.parseInt(input);
+        int cloudChosen = inputParser.intParser();
         boolean check = false;
         while(!check){
             if(cloudChosen > 0 && cloudChosen<= clouds.size()){
@@ -383,13 +332,14 @@ public class CLI extends View {
 
     @Override
     public void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCoins){
+        EffectHandler effectHandler;
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one character between this available by typing his number associated");
         Characters character = null;
         boolean check = false;
         //graphical.print...
         String input=stdin.nextLine();
-        int characterChosen = Integer.parseInt(input);
+        int characterChosen = inputParser.intParser();
         while(!check)
         switch(characterChosen){
             case(1)->{
@@ -419,13 +369,17 @@ public class CLI extends View {
         this.client.setCharacterPlayed(true);
         ChooseCharacterMessage message = new ChooseCharacterMessage(character);
         this.client.sendMessage(message);
-    }
 
+        }
+
+    @Override
     public void setPlayers(ArrayList<PlayerInterface> players) {
-        this.players = players;
+
     }
 
+    @Override
     public void setBoard(Board board) {
-        this.board = board;
+
     }
 }
+

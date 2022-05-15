@@ -3,7 +3,7 @@ package it.polimi.ingsw.messages.toServer;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
-public class ChooseIslandEffectMessage {
+public class ChooseIslandEffectMessage extends MessageToServer {
     int islandID;
 
     public ChooseIslandEffectMessage(int islandID){

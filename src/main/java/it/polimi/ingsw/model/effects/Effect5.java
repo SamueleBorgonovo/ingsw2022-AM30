@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.effects;
 
 import it.polimi.ingsw.exceptions.InvalidStopException;
 import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
+import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.player.PlayerState;
 
@@ -38,5 +39,10 @@ public class Effect5 extends Effect {
         game.getEffectHandler().removeislandstop();
         game.setCharacterInUse(null);
         game.getPlayer(playerID).setPlayerState(prevPlayerState);
+    }
+
+    @Override
+    public TypeOfInputCharacter getTypeOfInputCharacter() {
+        return TypeOfInputCharacter.ISLAND;
     }
 }

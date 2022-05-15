@@ -12,6 +12,7 @@ public class Island {
     private boolean stop;
     private int islandID;
 
+
     public Island(int islandID) {
         this.islandID = islandID;
         numOfTowers = 0;

@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.effects;
 
 import it.polimi.ingsw.exceptions.InvalidStopException;
 import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
+import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.Game;
 
 public class Effect8 extends Effect {
@@ -24,4 +25,9 @@ public class Effect8 extends Effect {
 
     @Override
     public void secondPartEffect(Game game, int playerID) throws InvalidStudentEffectException {}
+
+    @Override
+    public TypeOfInputCharacter getTypeOfInputCharacter() {
+        return null;
+    }
 }

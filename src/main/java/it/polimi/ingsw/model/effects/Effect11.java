@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.effects;
 
 import it.polimi.ingsw.exceptions.InvalidStopException;
 import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
+import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.PlayerState;
@@ -39,5 +40,10 @@ public class Effect11 extends Effect{
         }
         else
             throw new InvalidStudentEffectException();
+    }
+
+    @Override
+    public TypeOfInputCharacter getTypeOfInputCharacter() {
+        return TypeOfInputCharacter.STUDENTSFROMCARD;
     }
 }

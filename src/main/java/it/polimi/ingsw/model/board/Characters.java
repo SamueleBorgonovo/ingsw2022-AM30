@@ -3,10 +3,12 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.effects.Effect;
 import it.polimi.ingsw.model.game.Student;
 
-public class Characters {
+public class
+Characters {
     private int cost;
     private boolean used = false;
     private final Effect effect;
+    private TypeOfInputCharacter typeOfInputCharacter;
 
     public Characters(Effect effect) {
         cost = effect.getCost();
@@ -28,5 +30,9 @@ public class Characters {
     public void setUsed(boolean used) {
         this.used = used;
         cost++;
+    }
+
+    public TypeOfInputCharacter getTypeOfInputCharacter() {
+        return typeOfInputCharacter;
     }
 }
