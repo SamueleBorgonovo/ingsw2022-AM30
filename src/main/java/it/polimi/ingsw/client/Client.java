@@ -1,9 +1,13 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.View.View;
+import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.messages.toServer.*;
+import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
@@ -11,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client {
@@ -100,23 +105,42 @@ public class Client {
             CreatePlayerInGameMessage message = new CreatePlayerInGameMessage(nickname, gamemode, numofPlayers);
             sendMessage(message);
 
-            /*
-            //Arriva la lista di wizard disponibili e sceglie
-
-            correct = false;
-            do {
-                Object message2 = input.readObject();
-                if (message2 instanceof WizardsListMessage) {
-                    ((WizardsListMessage) message2).action(this);
-                    correct = true;
-                }
-            } while (!correct);
-               */
         }
     }
 
     public void nextMove(PlayerState playerState){
-        //chiama choosenextaction in view
+        PossibleAction action;
+        if(playerState==PlayerState.STUDENTPHASE || playerState==PlayerState.MOTHERNATUREPHASE || playerState==PlayerState.CLOUDPHASE){
+            action=view.chooseNextAction(playerState);
+            switch(action){
+                case MOVESTUDENTT0ISLAND ->{
+                    //view.moveStudentToIsland();
+                }
+                case MOVESTUDENTTOHALL -> {
+                    //view.moveStudentToHall();
+                }
+                case USECHARACTER -> {
+                    //view.useCharacter();
+                }
+                case MOVEMOTHERNATURE -> {
+                    //view.moveMotherNature();
+                }
+                case CHOOSECLOUD -> {
+                    //view.chooseCloud();
+                }
+            }
+        }else if(playerState==PlayerState.ASSISTANTPHASE){
+                    //view.chooseAssistant();
+        }else if(playerState==PlayerState.CHARACTHERISLANDPHASE){
+                    //view.metodoIsland
+        }else if(playerState==PlayerState.CHARACTHERSTUDENTSPHASE){
+                    //view.metodoStudent
+        }
+    }
+
+    public void updateView(ArrayList<PlayerInterface> players, Board board){
+        view.setPlayers(players);
+        view.setBoard(board);
     }
 
     public void messageListener(){

@@ -1,11 +1,13 @@
 package it.polimi.ingsw.client.View;
 
 import it.polimi.ingsw.client.View.cli.PossibleAction;
+import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
@@ -36,4 +38,8 @@ public abstract class View {
     public abstract void chooseCloud(ArrayList<Cloud> clouds);
 
     public abstract void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCoins);
+
+    public abstract void setPlayers(ArrayList<PlayerInterface> players);
+
+    public abstract void setBoard(Board board);
 }
