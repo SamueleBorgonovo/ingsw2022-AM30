@@ -64,12 +64,15 @@ public class GUI extends View {
     public void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCoins) {}
 
     @Override
-    public void setPlayers(ArrayList<PlayerInterface> players) {
+    public void setPlayers(ArrayList<PlayerInterface> players) {}
+
+    @Override
+    public void setBoard(Board board) {
 
     }
 
     @Override
-    public void setBoard(Board board) {
+    public void print() {
 
     }
 }

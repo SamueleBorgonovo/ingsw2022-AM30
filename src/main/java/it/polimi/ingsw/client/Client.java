@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -36,6 +37,7 @@ public class Client {
     private View view;
     private ClientMessageHandler messageHandler;
     private boolean pingActive;
+    private int studentPlayed;
 
 
     boolean characterPlayed = false;
@@ -45,6 +47,7 @@ public class Client {
         this.ip = ip;
         this.port = port;
         this.view = view;
+        studentPlayed=0;
         messageHandler = new ClientMessageHandler(this,view);
 
         this.socketListener = new Thread(this::messageListener);
@@ -110,15 +113,23 @@ public class Client {
 
     public void nextMove(PlayerState playerState){
         PossibleAction action;
-        if(playerState==PlayerState.STUDENTPHASE || playerState==PlayerState.MOTHERNATUREPHASE || playerState==PlayerState.CLOUDPHASE){
+        if(playerState==PlayerState.STUDENTPHASE){
             action=view.chooseNextAction(playerState);
+            studentPlayed++;
             switch(action){
-                case MOVESTUDENTT0ISLAND ->{
-                    //view.moveStudentToIsland();
+                case MOVESTUDENTT0ISLAND -> {
+
                 }
                 case MOVESTUDENTTOHALL -> {
-                    //view.moveStudentToHall();
+
                 }
+                case USECHARACTER -> {
+
+                }
+            }
+        }else if(playerState==PlayerState.MOTHERNATUREPHASE || playerState==PlayerState.CLOUDPHASE){
+            action=view.chooseNextAction(playerState);
+            switch(action){
                 case USECHARACTER -> {
                     //view.useCharacter();
                 }
@@ -138,9 +149,21 @@ public class Client {
         }
     }
 
-    public void updateView(ArrayList<PlayerInterface> players, Board board){
+    public void updateView(ArrayList<PlayerInterface> players, Board board,boolean isAccepted){
         view.setPlayers(players);
         view.setBoard(board);
+        if(isAccepted)
+            view.print();
+
+    }
+
+    public void setTurn(String nickname){
+        if(this.nickname.equals(nickname)){
+            //print è iniziato il mio turno
+        }
+        else {
+            //print è iniziato il turno di "nickname"
+        }
     }
 
     public void messageListener(){
@@ -195,6 +218,10 @@ public class Client {
             timer.interrupt();
             //timer = null;
         }
+    }
+
+    public void changestudentPlayed(){
+        studentPlayed--;
     }
 
     public ClientMessageHandler getMessageHandler() {

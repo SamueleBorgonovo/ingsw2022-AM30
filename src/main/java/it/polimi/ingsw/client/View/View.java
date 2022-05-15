@@ -42,4 +42,6 @@ public abstract class View {
     public abstract void setPlayers(ArrayList<PlayerInterface> players);
 
     public abstract void setBoard(Board board);
+
+    public abstract void print();
 }

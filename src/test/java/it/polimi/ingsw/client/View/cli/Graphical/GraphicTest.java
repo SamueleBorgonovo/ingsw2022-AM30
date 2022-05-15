@@ -7,10 +7,7 @@ import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
-import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.Professor;
-import it.polimi.ingsw.model.player.Wizard;
+import it.polimi.ingsw.model.player.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +19,7 @@ class GraphicTest {
     Player player1;
     Player player2;
     Player player3;
-    ArrayList<Player> players = new ArrayList<>();
+    ArrayList<PlayerInterface> players = new ArrayList<>();
     Archipelago archipelago;
 
     @BeforeEach

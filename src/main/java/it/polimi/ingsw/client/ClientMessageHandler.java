@@ -4,6 +4,8 @@ import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.messages.toServer.PingToServerMessage;
 
+import java.util.Set;
+
 public class ClientMessageHandler {
 
     private Client client;
@@ -48,7 +50,8 @@ public class ClientMessageHandler {
     }
 
     public void process(InvalidStudentMessage message){
-
+        //Mandare messaggio di errore
+        client.changestudentPlayed();
     }
 
     public void process(InvalidStudentEffectMessage message){
@@ -84,6 +87,10 @@ public class ClientMessageHandler {
     }
 
     public void process(UpdateMessage message){
-        client.updateView(message.getPlayers(),message.getBoard());
+        client.updateView(message.getPlayers(),message.getBoard(),message.isActionAccepted());
+    }
+
+    public void process(SetTurnMessage message){
+        client.setTurn(message.getNickname());
     }
 }

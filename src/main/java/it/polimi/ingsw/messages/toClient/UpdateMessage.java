@@ -10,9 +10,11 @@ import java.util.ArrayList;
 public class UpdateMessage extends MessageToClient{
     private ArrayList<PlayerInterface> players;
     private Board board;
-    public UpdateMessage(ArrayList<PlayerInterface> players,Board board){
+    private boolean actionAccepted;
+    public UpdateMessage(ArrayList<PlayerInterface> players, Board board, boolean actionAccepted){
         this.players=players;
         this.board=board;
+        this.actionAccepted=actionAccepted;
     }
 
     public void action(Client client){
@@ -22,5 +24,10 @@ public class UpdateMessage extends MessageToClient{
     public ArrayList<PlayerInterface> getPlayers(){
         return players;
     }
+
     public Board getBoard(){return board;}
+
+    public boolean isActionAccepted() {
+        return actionAccepted;
+    }
 }

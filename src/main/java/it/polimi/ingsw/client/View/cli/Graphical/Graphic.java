@@ -6,10 +6,7 @@ import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.game.EffectHandlerInterface;
 import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.Professor;
-import it.polimi.ingsw.model.player.Wizard;
+import it.polimi.ingsw.model.player.*;
 
 import java.util.ArrayList;
 
@@ -247,11 +244,11 @@ public class Graphic {
         System.out.println("╯");
     }
 
-    public void printPlances(ArrayList<Player> players){
+    public void printPlances(ArrayList<PlayerInterface> players){
         int i;
         int studentEntrance = 0;
 
-        for(Player player : players){
+        for(PlayerInterface player : players){
             System.out.print("╭");
             for(i=0; i<(35 - player.getNickname().length())/2; i++)
                 System.out.print("─");
@@ -265,7 +262,7 @@ public class Graphic {
             System.out.print("│  E             H            P    T  │ ");
         System.out.println();
         for(Student student : Student.values()) {
-            for (Player player : players) {
+            for (PlayerInterface player : players) {
                 System.out.print("│ ");
                 if (studentEntrance < player.getPlance().getEntrance().size())
                     System.out.print(Colors.values()[player.getPlance().getEntrance().get(studentEntrance).ordinal()].getCode() + "● " + Colors.ANSI_RESET.getCode());
@@ -301,10 +298,10 @@ public class Graphic {
             System.out.println();
             studentEntrance += 2;
         }
-        for(Player player : players)
+        for(PlayerInterface player : players)
             System.out.print("╰─────────────────────────────────────╯ ");
         System.out.println();
-        for(Player player : players)
+        for(PlayerInterface player : players)
             if(player.getCoins()>=0)
                 System.out.print("COINS : " + player.getCoins() + "                               ");
         if(players.get(0).getCoins()>=0)

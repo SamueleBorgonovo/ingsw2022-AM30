@@ -66,6 +66,12 @@ public class Game implements GameInterface {
         return gameMode;
     }
 
+    public ArrayList<PlayerInterface> getPlayers(){
+        ArrayList<PlayerInterface> players = new ArrayList<>(listOfPlayers);
+        return players;
+    }
+
+
     public void setReconnectedPlayer(int playerid) throws ReconnectedException {
         if(getPlayer(playerid).getPlayerState() == PlayerState.DISCONNECTED) {
             getPlayer(playerid).setPlayerState(PlayerState.RECONNECTED);

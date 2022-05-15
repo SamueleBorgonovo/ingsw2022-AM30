@@ -28,6 +28,8 @@ public class CLI extends View {
     private final Graphic graphic = new Graphic();
     private Client client;
     private InputParser inputParser;
+    private ArrayList<PlayerInterface> players;
+    private Board board;
 
 
     public void init() throws IOException, ClassNotFoundException, NumberFormatException {
@@ -374,11 +376,17 @@ public class CLI extends View {
 
     @Override
     public void setPlayers(ArrayList<PlayerInterface> players) {
-
+        this.players.clear();
+        this.players.addAll(players);
     }
 
     @Override
     public void setBoard(Board board) {
+        this.board=board;
+    }
+
+    @Override
+    public void print() {
 
     }
 }

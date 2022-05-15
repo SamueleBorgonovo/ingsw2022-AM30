@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
@@ -22,6 +23,7 @@ public class GameHandler {
     private static ConcurrentHashMap<String, Integer> playertoPlayerIDMap;//Map that find game's idplayer from a player's nickname
     private static ConcurrentHashMap<String, ClientHandlerInterface> playertoHandlerMap;//Map that find player's handler
     private static ArrayList<String> nicknameChoosen;
+    private static int studentPlayed=0;
 
     public GameHandler(){
         playertoGameMap = new ConcurrentHashMap<>();//Map that find the game of a player's nickname
@@ -181,13 +183,16 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.useAssistant(playerID, assistant);
+            clientHandler.sendMessageToClient(new UpdateMessage(game.getPlayers(),game.getBoard(),true));
         } catch (InvalidAssistantException e) {
             InvalidAssistantMessage message = new InvalidAssistantMessage();
             clientHandler.sendMessageToClient(message);
+            clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.ASSISTANTPHASE));
         } catch (InvalidTurnException e) {
             InvalidTurnMessage message = new InvalidTurnMessage();
             clientHandler.sendMessageToClient(message);
         }
+
     }
 
     public void chooseCharacter(ClientHandlerInterface clientHandler, Characters character) {
@@ -216,9 +221,11 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.selectCloud(playerID,cloudID);
+            clientHandler.sendMessageToClient(new UpdateMessage(game.getPlayers(),game.getBoard(),true));
         } catch (InvalidCloudException e) {
             InvalidCloudMessage message = new InvalidCloudMessage();
             clientHandler.sendMessageToClient(message);
+            clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.CLOUDPHASE));
         } catch (InvalidTurnException e) {
             InvalidTurnMessage message = new InvalidTurnMessage();
             clientHandler.sendMessageToClient(message);
@@ -230,10 +237,11 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveMotherNature(playerID,movement);
-
+            clientHandler.sendMessageToClient(new UpdateMessage(game.getPlayers(),game.getBoard(),true));
         } catch (InvalidValueException e) {
             InvalidValueMessage message = new InvalidValueMessage();
             clientHandler.sendMessageToClient(message);
+            clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.MOTHERNATUREPHASE));
         } catch (InvalidTurnException e) {
             InvalidTurnMessage message = new InvalidTurnMessage();
             clientHandler.sendMessageToClient(message);
@@ -245,10 +253,15 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveStudentToHall(playerID,student);
-
+            clientHandler.sendMessageToClient(new UpdateMessage(game.getPlayers(),game.getBoard(),true));
+            studentPlayed++;
+            if(studentPlayed<game.getNumOfPlayers()+1)
+                clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
         } catch (InvalidStudentException e) {
             InvalidStudentMessage message = new InvalidStudentMessage();
             clientHandler.sendMessageToClient(message);
+            clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
+            studentPlayed--;
         } catch (InvalidTurnException e) {
             InvalidTurnMessage message = new InvalidTurnMessage();
             clientHandler.sendMessageToClient(message);
@@ -293,10 +306,15 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveStudentToIsland(playerID,islandID,student);
-
+            clientHandler.sendMessageToClient(new UpdateMessage(game.getPlayers(),game.getBoard(),true));
+            studentPlayed++;
+            if(studentPlayed< game.getNumOfPlayers()+1)
+                clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
         } catch (InvalidStudentException e) {
             InvalidStudentMessage message = new InvalidStudentMessage();
             clientHandler.sendMessageToClient(message);
+            clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
+            studentPlayed--;
         } catch (InvalidTurnException e) {
             InvalidTurnMessage message = new InvalidTurnMessage();
             clientHandler.sendMessageToClient(message);
