@@ -4,13 +4,12 @@ import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
 import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toServer.*;
+import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.PlayerState;
-import it.polimi.ingsw.model.player.Wizard;
+import it.polimi.ingsw.model.player.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,6 +23,10 @@ public class CLI extends View {
 
     private final Graphic graphic = new Graphic();
     private Client client;
+    private ArrayList<PlayerInterface> players;
+    //Per sapere qual è questo player fare il controllo tra Client.nickname e players.nickname
+    private Board board;
+
 
 
     public void init() throws IOException, ClassNotFoundException, NumberFormatException {
@@ -418,5 +421,11 @@ public class CLI extends View {
         this.client.sendMessage(message);
     }
 
+    public void setPlayers(ArrayList<PlayerInterface> players) {
+        this.players = players;
+    }
 
+    public void setBoard(Board board) {
+        this.board = board;
+    }
 }

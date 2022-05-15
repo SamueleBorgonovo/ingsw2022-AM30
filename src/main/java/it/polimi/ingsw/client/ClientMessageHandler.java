@@ -82,4 +82,8 @@ public class ClientMessageHandler {
     public void process(PlayerStateMessage message){
         client.nextMove(message.getState());
     }
+
+    public void process(UpdateMessage message){
+        client.updateView(message.getPlayers(),message.getBoard());
+    }
 }

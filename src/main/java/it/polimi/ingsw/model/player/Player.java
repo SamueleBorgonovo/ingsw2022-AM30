@@ -5,7 +5,7 @@ import it.polimi.ingsw.exceptions.OutOfCoinsException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Player {
+public class Player implements PlayerInterface{
     private final String nickname;
     private int playerID;
     private PlayerState playerState;
