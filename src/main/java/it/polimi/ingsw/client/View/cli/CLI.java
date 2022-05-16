@@ -88,11 +88,6 @@ public class CLI extends View {
 
     @Override
     public GameMode chooseGameMode(){
-        //after nickname is set
-    /*    for(PlayerInterface p : players)
-            if(p.getNickname().equals(this.nickname))
-                this.player=p;
-*/
         player= new Player(this.nickname);
         Scanner stdin = new Scanner(System.in);
         System.out.println("Press s for SimpleMode or e for ExpertMode  s | e");
@@ -116,7 +111,6 @@ public class CLI extends View {
 
     @Override
     public int chooseNumberOfPlayers(){
-        Scanner stdin = new Scanner(System.in);
         System.out.println("Choose the number of the players ( 2 | 3 )");
         int choice = inputParser.intParser();
         boolean pass = false;
@@ -137,34 +131,58 @@ public class CLI extends View {
         Scanner stdin = new Scanner(System.in);
         boolean checkwizard=false;
         System.out.println("Choose your wizard by typing his color ( g | y | p | b )");
-        for(Wizard wizard : avaiableWizards)
-            System.out.println(wizard);
+        this.graphic.printWizards(avaiableWizards);
         String choice = stdin.nextLine().toLowerCase();
 
         while (!checkwizard) {
             switch (choice) {
                 case ("g") -> {
-                    wizardChosen = Wizard.WIZARD_GREEN;
-                    checkwizard = true;
+                    if(avaiableWizards.contains(Wizard.WIZARD_GREEN)) {
+                        wizardChosen = Wizard.WIZARD_GREEN;
+                        checkwizard = true;
+                    }
+                    else {
+                        System.out.println("Typing error or invalid wizard: Try again");
+                        choice = stdin.nextLine().toLowerCase();
+                    }
                 }
                 case ("y") -> {
-                    wizardChosen = Wizard.WIZARD_YELLOW;
-                    checkwizard = true;
+                    if(avaiableWizards.contains(Wizard.WIZARD_YELLOW)) {
+                        wizardChosen = Wizard.WIZARD_YELLOW;
+                        checkwizard = true;
+                    }
+                    else{
+                        System.out.println("Typing error or invalid wizard: Try again");
+                        choice = stdin.nextLine().toLowerCase();
+                    }
                 }
                 case ("p") -> {
-                    wizardChosen = Wizard.WIZARD_PINK;
-                    checkwizard = true;
+                    if(avaiableWizards.contains(Wizard.WIZARD_PINK)) {
+                        wizardChosen = Wizard.WIZARD_PINK;
+                        checkwizard = true;
+                    }
+                    else {
+                        System.out.println("Typing error or invalid wizard: Try again");
+                        choice = stdin.nextLine().toLowerCase();
+                    }
                 }
                 case ("b") -> {
-                    wizardChosen = Wizard.WIZARD_BLUE;
-                    checkwizard = true;
+                    if(avaiableWizards.contains(Wizard.WIZARD_BLUE)) {
+                        wizardChosen = Wizard.WIZARD_BLUE;
+                        checkwizard = true;
+                    }
+                    else {
+                        System.out.println("Typing error or invalid wizard: Try again");
+                        choice = stdin.nextLine().toLowerCase();
+                    }
                 }
                 default -> {
                     System.out.println("Typing error or invalid wizard: Try again");
                     choice = stdin.nextLine().toLowerCase();
                 }
+
             }
-            }
+        }
         ChooseWizardMessage message = new ChooseWizardMessage(wizardChosen);
         this.client.sendMessage(message);
         }
@@ -177,7 +195,6 @@ public class CLI extends View {
         Assistant assistantChosen= null;
         System.out.println("Choose one assistant between this available by typing his number associated");
         this.graphic.printAssistants(avaiableAssistant, this.client.getWizard());
-        String input=stdin.nextLine();
         int assistantInt = inputParser.intParser();
         boolean check = false;
         while(!check) {
@@ -200,7 +217,6 @@ public class CLI extends View {
     public PossibleAction chooseNextAction(PlayerState playerState) {
         Scanner stdin = new Scanner(System.in);
         boolean check = false;
-        boolean check2=false;
         PossibleAction actionChosen = null;
         System.out.println("Choose your next action by typing the action's number");
         int actionNum = 0 ;
@@ -347,33 +363,32 @@ public class CLI extends View {
 
     @Override
     public void useCharacter(){
-        ArrayList<Characters> avaiableCharacter = this.board.getCharacters();
+        ArrayList<Characters> availableCharacter = this.board.getCharacters();
         int numOfCoins = this.player.getCoins();
-        EffectHandler effectHandler;
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one character between this available by typing his number associated");
         Characters character = null;
         boolean check = false;
-        //graphical.print...
+        graphic.printCharacters(availableCharacter, this.effectHandler);
         String input=stdin.nextLine();
         int characterChosen = inputParser.intParser();
         while(!check)
         switch(characterChosen){
             case(1)->{
-                if(avaiableCharacter.get(0).getCost()<= numOfCoins) {
-                    character = avaiableCharacter.get(0);
+                if(availableCharacter.get(0).getCost()<= numOfCoins) {
+                    character = availableCharacter.get(0);
                     check=true;
                 }
             }
             case(2)->{
-                if(avaiableCharacter.get(1).getCost()<= numOfCoins) {
-                    character = avaiableCharacter.get(1);
+                if(availableCharacter.get(1).getCost()<= numOfCoins) {
+                    character = availableCharacter.get(1);
                     check=true;
                 }
             }
             case(3)->{
-                if(avaiableCharacter.get(2).getCost()<= numOfCoins) {
-                    character = avaiableCharacter.get(2);
+                if(availableCharacter.get(2).getCost()<= numOfCoins) {
+                    character = availableCharacter.get(2);
                     check = true;
                 }
             }

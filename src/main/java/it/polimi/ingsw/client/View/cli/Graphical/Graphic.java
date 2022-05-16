@@ -477,4 +477,16 @@ public class Graphic {
             System.out.print("╰───────────╯ ");
         System.out.println();
     }
+
+    public void printWizards(ArrayList<Wizard> availableWizards){
+        for(Wizard wizard : availableWizards)
+            switch(wizard){
+                case WIZARD_GREEN -> System.out.println(Colors.ANSI_GREEN.getCode() + wizard + Colors.ANSI_RESET.getCode());
+                case WIZARD_BLUE -> System.out.println(Colors.ANSI_BLUE.getCode() + wizard + Colors.ANSI_RESET.getCode());
+                case WIZARD_PINK -> System.out.println(Colors.ANSI_PURPLE.getCode() + wizard + Colors.ANSI_RESET.getCode());
+                case WIZARD_YELLOW -> System.out.println(Colors.ANSI_YELLOW.getCode() + wizard + Colors.ANSI_RESET.getCode());
+            }
+    }
 }
+
+
