@@ -2,20 +2,15 @@ package it.polimi.ingsw.client.View;
 
 import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.model.board.Board;
-import it.polimi.ingsw.model.board.Characters;
-import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.game.GameMode;
-import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public abstract class View {
-    public abstract String chooseNickname(boolean validNickname);
+    public abstract void chooseNickname(boolean validNickname, boolean reconnect);
 
     public abstract boolean tryToReconnect();
 

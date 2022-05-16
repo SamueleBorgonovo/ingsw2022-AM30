@@ -31,6 +31,7 @@ public class CLI extends View {
     EffectHandler effectHandler = new EffectHandler();
     private String nickname;
     private PlayerInterface player;
+    private boolean isFirst=true;
 
 
     public void init() throws IOException, ClassNotFoundException, NumberFormatException {
@@ -54,17 +55,38 @@ public class CLI extends View {
             else
                 System.out.println("Connection not valid. Please try again");
         }
-        client.gameSetup();
+        chooseNickname(true, false);
     }
 
     @Override
-    public String chooseNickname(boolean validNickname){
-        if(!validNickname)
-            System.out.println("Invalid nickname. Please try again");
-        Scanner stdin = new Scanner(System.in);
-        System.out.println("Choose your nickname");
-        this.nickname=stdin.nextLine();
-        return nickname;
+    public void chooseNickname(boolean validNickname, boolean reconnect) {
+        if (isFirst) {
+            isFirst = false;
+            Scanner stdin = new Scanner(System.in);
+            System.out.println("Choose your nickname");
+            this.nickname = stdin.nextLine();
+            client.sendMessage(new ChooseNicknameMessage(nickname, false));
+        } else {
+            if (validNickname) {
+                client.setNickname(this.nickname);
+                if (reconnect) {
+                    if(tryToReconnect()) {
+                        client.sendMessage(new ChooseNicknameMessage(nickname, true));
+                    }else {
+                        client.sendMessage(new ChooseNicknameMessage(nickname, false));
+                        client.gameSetup();
+                    }
+                }else {
+                    client.gameSetup();
+                }
+            }else {
+                System.out.println("Invalid nickname. Please try again");
+                Scanner stdin = new Scanner(System.in);
+                System.out.println("Choose your nickname");
+                this.nickname = stdin.nextLine();
+                client.sendMessage(new ChooseNicknameMessage(nickname, false));
+            }
+        }
     }
 
     @Override

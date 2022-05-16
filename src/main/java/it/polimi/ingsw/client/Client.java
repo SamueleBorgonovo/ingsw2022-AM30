@@ -6,18 +6,15 @@ import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.game.GameMode;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Client {
     private final int PING_PERIOD = 5000;
@@ -65,50 +62,23 @@ public class Client {
        output = new ObjectOutputStream(socket.getOutputStream());
        input = new ObjectInputStream(socket.getInputStream());
 
-        return true;
-    }
-
-    public void gameSetup() throws IOException, ClassNotFoundException {
-        //Mettere tutto la scelta delle options in un metodo a parte
-        String nick;
-        nick = view.chooseNickname(true);
-        boolean isReconnecting = false;
-        boolean correct = false;
-        do {
-
-            ChooseNicknameMessage message = new ChooseNicknameMessage(nick, false);
-            sendMessage(message);
-            Object message2 = input.readObject();
-            if (message2 instanceof NicknameMessage) {
-                if (((NicknameMessage) message2).getCheck()) {
-                    correct = true;
-                    setNickname(nick);
-                    if (((NicknameMessage) message2).getReconnect()) {
-                        if (view.tryToReconnect()) {
-                            sendMessage(new ChooseNicknameMessage(nick, true));
-                            isReconnecting = true;
-                        }
-                    }
-                } else nick = view.chooseNickname(false);
-
-            }
-        } while (!correct);
-
         active=true;
         socketListener.start();
 
         pingActive = true;
         pinger.start();
 
-        if (!isReconnecting) {
 
-            this.gamemode=view.chooseGameMode();
-            this.numofPlayers=view.chooseNumberOfPlayers();
+        return true;
+    }
 
-            CreatePlayerInGameMessage message = new CreatePlayerInGameMessage(nickname, gamemode, numofPlayers);
-            sendMessage(message);
+    public void gameSetup(){
+        this.gamemode=view.chooseGameMode();
+        this.numofPlayers=view.chooseNumberOfPlayers();
 
-        }
+        CreatePlayerInGameMessage message = new CreatePlayerInGameMessage(nickname, gamemode, numofPlayers);
+        sendMessage(message);
+
     }
 
     public void nextMove(PlayerState playerState){
@@ -180,7 +150,7 @@ public class Client {
 
     public void sendMessage(MessageToServer message){
         try {
-
+            PingToServerMessage ping = new PingToServerMessage(false);
             output.writeObject(message);
             output.reset();
             output.flush();

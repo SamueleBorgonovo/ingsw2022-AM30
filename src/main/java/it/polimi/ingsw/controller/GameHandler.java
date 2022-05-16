@@ -70,17 +70,21 @@ public class GameHandler {
             GameInterface game = findGameofPlayer(nickname);
             int playerid = findPlayeridofPlayer(nickname);
             if(game.checkPlayerState(playerid)){
+                //System.out.println(nickname + " reconnect ok");
                 NicknameMessage message = new NicknameMessage(true,true);
                 clientHandler.sendMessageToClient(message);
             }else{
+                //System.out.println(nickname + " reconnect non ok");
                 NicknameMessage message = new NicknameMessage(false,false);
                 clientHandler.sendMessageToClient(message);
             }
         }else{
             if(nicknameChoosen.contains(nickname)){
+                //System.out.println(nickname + " connect non ok");
                 NicknameMessage message = new NicknameMessage(false,false);
                 clientHandler.sendMessageToClient(message);
             }else{
+                //System.out.println(nickname + " connect ok");
                 NicknameMessage message = new NicknameMessage(true,false);
                 nicknameChoosen.add(nickname);
                 clientHandler.setNickname(nickname);

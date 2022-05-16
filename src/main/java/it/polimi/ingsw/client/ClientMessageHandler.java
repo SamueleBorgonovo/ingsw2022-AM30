@@ -96,5 +96,17 @@ public class ClientMessageHandler {
 
     public void process(StartGameMessage message){
     }
+
+    public void process(NicknameMessage message){
+        view.chooseNickname(message.getCheck(),message.getReconnect());
+    }
+
+    public void process(ConnectMessage message){
+        if(message.getReconnect()){
+            //mi sto riconnettendo alla partita
+        }else{
+            client.gameSetup();
+        }
+    }
 }
 
