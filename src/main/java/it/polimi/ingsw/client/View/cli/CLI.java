@@ -89,10 +89,11 @@ public class CLI extends View {
     @Override
     public GameMode chooseGameMode(){
         //after nickname is set
-        for(PlayerInterface p : players)
+    /*    for(PlayerInterface p : players)
             if(p.getNickname().equals(this.nickname))
                 this.player=p;
-
+*/
+        player= new Player(this.nickname);
         Scanner stdin = new Scanner(System.in);
         System.out.println("Press s for SimpleMode or e for ExpertMode  s | e");
         String choice = stdin.nextLine();
