@@ -96,9 +96,26 @@ public class GameHandler {
     public void startGame(GameInterface game){
         sendMessagetoGame(game,new StartGameMessage());
         game.startGame();
+        turnHandler(game);
     }
 
+    public void turnHandler(GameInterface game){
+        if(game.getState()==GameState.PLAYING) {
+            PlayerInterface playertoplay;
+            PlayerState state;
+            for (PlayerInterface player : game.getPlayers())
+                if (player.getPlayerState() != PlayerState.WAITING && player.getPlayerState() != PlayerState.DISCONNECTED
+                        && player.getPlayerState() != PlayerState.RECONNECTED) {
+                    playertoplay = player;
+                    state = player.getPlayerState();
+                    findHandler(playertoplay.getNickname()).sendMessageToClient(new PlayerStateMessage(state));
+                    break;
+                }
+        }
 
+
+
+    }
 
     public void disconnectPlayer(String nickname){
         GameInterface game = findGameofPlayer(nickname);
@@ -179,6 +196,7 @@ public class GameHandler {
         try {
             game.useAssistant(playerID, assistant);
             clientHandler.sendMessageToClient(new UpdateMessage(game.getPlayers(),game.getBoard(),true));
+            turnHandler(game);
         } catch (InvalidAssistantException e) {
             InvalidAssistantMessage message = new InvalidAssistantMessage();
             clientHandler.sendMessageToClient(message);
@@ -195,7 +213,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.useCharacter(playerID, character);
-
+            turnHandler(game);
         } catch (InvalidStopException e) {
             InvalidStopMessage message = new InvalidStopMessage();
             clientHandler.sendMessageToClient(message);
@@ -217,6 +235,7 @@ public class GameHandler {
         try {
             game.selectCloud(playerID,cloudID);
             clientHandler.sendMessageToClient(new UpdateMessage(game.getPlayers(),game.getBoard(),true));
+            turnHandler(game);
         } catch (InvalidCloudException e) {
             InvalidCloudMessage message = new InvalidCloudMessage();
             clientHandler.sendMessageToClient(message);
@@ -233,6 +252,7 @@ public class GameHandler {
         try {
             game.moveMotherNature(playerID,movement);
             clientHandler.sendMessageToClient(new UpdateMessage(game.getPlayers(),game.getBoard(),true));
+            turnHandler(game);
         } catch (InvalidValueException e) {
             InvalidValueMessage message = new InvalidValueMessage();
             clientHandler.sendMessageToClient(message);
@@ -252,11 +272,14 @@ public class GameHandler {
             studentPlayed++;
             if(studentPlayed<game.getNumOfPlayers()+1)
                 clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
+            else {
+                studentPlayed=0;
+                turnHandler(game);
+            }
         } catch (InvalidStudentException e) {
             InvalidStudentMessage message = new InvalidStudentMessage();
             clientHandler.sendMessageToClient(message);
             clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
-            studentPlayed--;
         } catch (InvalidTurnException e) {
             InvalidTurnMessage message = new InvalidTurnMessage();
             clientHandler.sendMessageToClient(message);
@@ -268,7 +291,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.CharacterStudentsPhase(playerID,students);
-
+            turnHandler(game);
         } catch (InvalidStudentEffectException e) {
             InvalidStudentEffectMessage message = new InvalidStudentEffectMessage();
             clientHandler.sendMessageToClient(message);
@@ -283,7 +306,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.CharacterIslandPhase(playerID,islandID);
-
+            turnHandler(game);
         } catch (InvalidIslandException e) {
             InvalidIslandMessage message = new InvalidIslandMessage();
             clientHandler.sendMessageToClient(message);
@@ -305,11 +328,14 @@ public class GameHandler {
             studentPlayed++;
             if(studentPlayed< game.getNumOfPlayers()+1)
                 clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
+            else {
+                studentPlayed=0;
+                turnHandler(game);
+            }
         } catch (InvalidStudentException e) {
             InvalidStudentMessage message = new InvalidStudentMessage();
             clientHandler.sendMessageToClient(message);
             clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
-            studentPlayed--;
         } catch (InvalidTurnException e) {
             InvalidTurnMessage message = new InvalidTurnMessage();
             clientHandler.sendMessageToClient(message);

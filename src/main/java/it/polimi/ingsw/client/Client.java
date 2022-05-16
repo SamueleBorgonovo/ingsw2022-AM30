@@ -34,7 +34,6 @@ public class Client {
     private View view;
     private ClientMessageHandler messageHandler;
     private boolean pingActive;
-    private int studentPlayed;
 
 
     boolean characterPlayed = false;
@@ -44,7 +43,6 @@ public class Client {
         this.ip = ip;
         this.port = port;
         this.view = view;
-        studentPlayed=0;
         messageHandler = new ClientMessageHandler(this,view);
 
         this.socketListener = new Thread(this::messageListener);
@@ -85,33 +83,32 @@ public class Client {
         PossibleAction action;
         if(playerState==PlayerState.STUDENTPHASE){
             action=view.chooseNextAction(playerState);
-            studentPlayed++;
             switch(action){
                 case MOVESTUDENTT0ISLAND -> {
-
+                    view.moveStudentToIsland();
                 }
                 case MOVESTUDENTTOHALL -> {
-
+                    view.moveStudentToHall();
                 }
                 case USECHARACTER -> {
-
+                    view.useCharacter();
                 }
             }
         }else if(playerState==PlayerState.MOTHERNATUREPHASE || playerState==PlayerState.CLOUDPHASE){
             action=view.chooseNextAction(playerState);
             switch(action){
                 case USECHARACTER -> {
-                    //view.useCharacter();
+                    view.useCharacter();
                 }
                 case MOVEMOTHERNATURE -> {
-                    //view.moveMotherNature();
+                    view.moveMotherNature();
                 }
                 case CHOOSECLOUD -> {
-                    //view.chooseCloud();
+                    view.chooseCloud();
                 }
             }
         }else if(playerState==PlayerState.ASSISTANTPHASE){
-                    //view.chooseAssistant();
+                    view.chooseAssistant();
         }else if(playerState==PlayerState.CHARACTHERISLANDPHASE){
                     //view.metodoIsland
         }else if(playerState==PlayerState.CHARACTHERSTUDENTSPHASE){
@@ -150,7 +147,6 @@ public class Client {
 
     public void sendMessage(MessageToServer message){
         try {
-            PingToServerMessage ping = new PingToServerMessage(false);
             output.writeObject(message);
             output.reset();
             output.flush();
@@ -188,10 +184,6 @@ public class Client {
             timer.interrupt();
             //timer = null;
         }
-    }
-
-    public void changestudentPlayed(){
-        studentPlayed--;
     }
 
     public ClientMessageHandler getMessageHandler() {

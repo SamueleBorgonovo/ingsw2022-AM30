@@ -80,7 +80,14 @@ public class Game implements GameInterface {
     public void setReconnectedPlayer(int playerid) throws ReconnectedException {
         if(getPlayer(playerid).getPlayerState() == PlayerState.DISCONNECTED) {
             getPlayer(playerid).setPlayerState(PlayerState.RECONNECTED);
-            timer.interrupt();
+            int count=0;
+            for(Player player : listOfPlayers)
+                if(player.getPlayerState()!=PlayerState.DISCONNECTED)
+                    count++;
+            if(count==2) {
+                timer.interrupt();
+                gameState=GameState.PLAYING;
+            }
         }
         else throw new ReconnectedException();
     }
@@ -103,6 +110,7 @@ public class Game implements GameInterface {
                 shutdown(false);
             } else {
                 if (counter == numOfPlayers - 2) {
+                    gameState=GameState.WAITINGFORRECONNECTION;
                     startTimer();
                 }
 
@@ -189,8 +197,8 @@ public class Game implements GameInterface {
             player.addCoins();
             player.addCoins();
         }
-        if (listOfPlayers.size() == numOfPlayers)
-            this.startGame();
+        //if (listOfPlayers.size() == numOfPlayers)
+            //this.startGame();
         return listOfPlayers.size();
     }
 

@@ -39,4 +39,6 @@ public abstract class View {
     public abstract void setBoard(Board board);
 
     public abstract void print();
+
+    public abstract void printStartGame();
 }

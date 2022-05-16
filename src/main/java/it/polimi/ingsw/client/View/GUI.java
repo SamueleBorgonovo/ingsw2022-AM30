@@ -71,4 +71,9 @@ public class GUI extends View {
     public void print() {
 
     }
+
+    @Override
+    public void printStartGame() {
+
+    }
 }

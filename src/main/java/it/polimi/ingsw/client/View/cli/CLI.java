@@ -205,6 +205,7 @@ public class CLI extends View {
 
             }
         }
+        client.setWizard(wizardChosen);
         ChooseWizardMessage message = new ChooseWizardMessage(wizardChosen);
         this.client.sendMessage(message);
         }
@@ -232,7 +233,7 @@ public class CLI extends View {
             }
         }
         ChooseAssistantMessage message = new ChooseAssistantMessage(assistantChosen);
-        this.client.sendMessage(message);
+        client.sendMessage(message);
     }
 
     @Override
@@ -457,6 +458,11 @@ public class CLI extends View {
     @Override
     public void print() {
 
+    }
+
+    @Override
+    public void printStartGame() {
+        System.out.println("Game is Starting");
     }
 }
 

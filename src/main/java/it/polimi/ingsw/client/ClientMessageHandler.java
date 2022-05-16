@@ -51,7 +51,6 @@ public class ClientMessageHandler {
 
     public void process(InvalidStudentMessage message){
         //Mandare messaggio di errore
-        client.changestudentPlayed();
     }
 
     public void process(InvalidStudentEffectMessage message){
@@ -95,6 +94,7 @@ public class ClientMessageHandler {
     }
 
     public void process(StartGameMessage message){
+        view.printStartGame();
     }
 
     public void process(NicknameMessage message){
