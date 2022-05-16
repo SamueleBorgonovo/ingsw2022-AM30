@@ -27,7 +27,7 @@ public class CLI extends View {
 
     private final Graphic graphic = new Graphic();
     private Client client;
-    private InputParser inputParser;
+    private InputParser inputParser = new InputParser();
     private ArrayList<PlayerInterface> players;
     private Board board;
 

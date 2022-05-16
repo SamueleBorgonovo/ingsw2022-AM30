@@ -1,6 +1,5 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.model.GameInterface;
@@ -10,12 +9,12 @@ import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class GameHandler {
@@ -32,18 +31,6 @@ public class GameHandler {
         nicknameChoosen = new ArrayList<>();
     }
 
-    public ConcurrentHashMap<String, GameInterface> getPlayertoGameMap() {
-        return playertoGameMap;
-    }
-
-    public ConcurrentHashMap<String, Integer> getPlayertoPlayerIDMap() {
-        return playertoPlayerIDMap;
-    }
-
-    public ArrayList<String> getNicknameChoosen() {
-        return nicknameChoosen;
-    }
-
     //Manca l'handler del process del messaggio della scelta del wizard
     public void addPlayer(ClientHandlerInterface clientHandler, GameMode gamemode, int numofplayers){
         int playerid;
@@ -58,7 +45,7 @@ public class GameHandler {
                             setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
                             found = 1;
                             //Possiamo mandare tipo un messaggio di addato ad una partita
-                            WizardsListMessage message = new WizardsListMessage(game.getWizardChoosen());
+                            WizardsListMessage message = new WizardsListMessage(game.getWizardAvailable());
                             clientHandler.sendMessageToClient(message);
 
                             break;
@@ -73,7 +60,7 @@ public class GameHandler {
             setPlayeridofPlayer(clientHandler.getNickname(), playerid);
             setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
             //Possiamo mandare un messaggio di creazione nuova partita
-            WizardsListMessage message = new WizardsListMessage(game.getWizardChoosen());
+            WizardsListMessage message = new WizardsListMessage(game.getWizardAvailable());
             clientHandler.sendMessageToClient(message);
         }
 
@@ -100,6 +87,11 @@ public class GameHandler {
                 clientHandler.sendMessageToClient(message);
             }
         }
+    }
+
+    public void startGame(GameInterface game){
+        sendMessagetoGame(game,new StartGameMessage());
+        game.startGame();
     }
 
 
@@ -142,11 +134,10 @@ public class GameHandler {
         }
     }
 
-    public void sendMessagetoAll(ArrayList<String> nicknames,MessageToClient message){
-
-        for(String nick : nicknames) {
-            findHandler(nick).sendMessageToClient(message);
-        }
+    //sends message to all client of a game
+    public void sendMessagetoGame(GameInterface game,MessageToClient message){
+        for(int count=0;count<game.getPlayers().size();count++)
+            findHandler(game.getPlayers().get(count).getNickname()).sendMessageToClient(message);
     }
 
 
@@ -326,6 +317,9 @@ public class GameHandler {
         int playerid = findPlayeridofPlayer(clientHandler.getNickname());
         try{
             game.setWizard(playerid,wizard);
+            if(game.getPlayers().size()==game.getNumOfPlayers()){
+                startGame(game);
+            }
         } catch (InvalidWizardException e) {
            InvalidWizardMessage message = new InvalidWizardMessage();
            clientHandler.sendMessageToClient(message);

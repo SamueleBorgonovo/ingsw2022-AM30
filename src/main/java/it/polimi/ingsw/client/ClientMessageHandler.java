@@ -93,4 +93,8 @@ public class ClientMessageHandler {
     public void process(SetTurnMessage message){
         client.setTurn(message.getNickname());
     }
+
+    public void process(StartGameMessage message){
+    }
 }
+

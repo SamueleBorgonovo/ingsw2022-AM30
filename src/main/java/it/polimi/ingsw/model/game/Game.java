@@ -39,8 +39,14 @@ public class Game implements GameInterface {
             character.getEffect().inizialize(this);
     }
 
-    public ArrayList<Wizard> getWizardChoosen() {
-        return wizardChoosen;
+    public ArrayList<Wizard> getWizardAvailable() {
+        ArrayList<Wizard> wizardsAvailable = new ArrayList<>();
+        for(Wizard wizard : Wizard.values())
+            if(!wizardChoosen.contains(wizard))
+                wizardsAvailable.add(wizard);
+
+        return wizardsAvailable;
+
     }
 
     public void addWizardChoosen(Wizard wizard){
@@ -67,8 +73,7 @@ public class Game implements GameInterface {
     }
 
     public ArrayList<PlayerInterface> getPlayers(){
-        ArrayList<PlayerInterface> players = new ArrayList<>(listOfPlayers);
-        return players;
+        return new ArrayList<>(listOfPlayers);
     }
 
 

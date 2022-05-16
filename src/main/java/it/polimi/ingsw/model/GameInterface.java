@@ -7,7 +7,6 @@ import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.Wizard;
 
@@ -17,7 +16,7 @@ public interface GameInterface {
 
     public int addPlayer(String nickname);
 
-    public ArrayList<Wizard> getWizardChoosen();
+    public ArrayList<Wizard> getWizardAvailable();
 
     public void setWizard(int playerID,Wizard wizard) throws InvalidWizardException;
 
@@ -53,4 +52,5 @@ public interface GameInterface {
 
     public Board getBoard();
 
+    public void startGame();
 }
