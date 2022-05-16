@@ -62,7 +62,7 @@ public class Effect10 extends Effect{
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return TypeOfInputCharacter.TWOSTUDENT;
+        return TypeOfInputCharacter.EFFECT10INPUT;
     }
 
 }

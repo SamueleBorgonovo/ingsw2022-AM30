@@ -10,10 +10,7 @@ import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.game.EffectHandler;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.PlayerInterface;
-import it.polimi.ingsw.model.player.PlayerState;
-import it.polimi.ingsw.model.player.Wizard;
+import it.polimi.ingsw.model.player.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +27,10 @@ public class CLI extends View {
     private InputParser inputParser = new InputParser();
     private ArrayList<PlayerInterface> players;
     private Board board;
+    private CharacterInput characterInput;
+    EffectHandler effectHandler = new EffectHandler();
+    private String nickname;
+    private PlayerInterface player;
 
 
     public void init() throws IOException, ClassNotFoundException, NumberFormatException {
@@ -62,7 +63,8 @@ public class CLI extends View {
             System.out.println("Invalid nickname. Please try again");
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose your nickname");
-        return stdin.nextLine();
+        this.nickname=stdin.nextLine();
+        return nickname;
     }
 
     @Override
@@ -86,6 +88,11 @@ public class CLI extends View {
 
     @Override
     public GameMode chooseGameMode(){
+        //after nickname is set
+        for(PlayerInterface p : players)
+            if(p.getNickname().equals(this.nickname))
+                this.player=p;
+
         Scanner stdin = new Scanner(System.in);
         System.out.println("Press s for SimpleMode or e for ExpertMode  s | e");
         String choice = stdin.nextLine();
@@ -163,7 +170,8 @@ public class CLI extends View {
 
 
     @Override
-    public void chooseAssistant( ArrayList<Assistant> avaiableAssistant){
+    public void chooseAssistant(){
+        ArrayList<Assistant> avaiableAssistant = this.player.getAssistantCards();
         Scanner stdin = new Scanner(System.in);
         Assistant assistantChosen= null;
         System.out.println("Choose one assistant between this available by typing his number associated");
@@ -266,13 +274,14 @@ public class CLI extends View {
         }
 
     @Override
-    public void moveStudentToHall(HashMap<Student, Integer> hall) {
-        Student studentChosen = this.chooseStudentToMove(hall);
+    public void moveStudentToHall() {
+        Student studentChosen = this.chooseStudentToMove();
         MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentChosen);
         this.client.sendMessage(message);
     }
 
-    public Student chooseStudentToMove(HashMap<Student, Integer> hall) {
+    public Student chooseStudentToMove() {
+        HashMap<Student,Integer> hall = this.player.getPlance().getHall();
         Student studentChosen=inputParser.studentParser();
         while(hall.get(studentChosen) == 0) {
             System.out.println("Student not available. Please try again");
@@ -282,8 +291,9 @@ public class CLI extends View {
     }
 
     @Override
-    public void moveStudentToIsland(HashMap<Student,Integer> hall, int numOfIslands) {
-        Student studentChosen = this.chooseStudentToMove(hall);
+    public void moveStudentToIsland() {
+        int numOfIslands = this.board.getArchipelago().getNumOfIslands();
+        Student studentChosen = this.chooseStudentToMove();
         int islandID = inputParser.IslandParser(numOfIslands);
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(islandID, studentChosen);
         this.client.sendMessage(message);
@@ -291,7 +301,8 @@ public class CLI extends View {
 
 
     @Override
-    public void moveMotherNature(Assistant assistant) {
+    public void moveMotherNature() {
+        Assistant assistant = this.player.getLastassistantplayed();
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one assistant between this available by typing his number associated");
         String input=stdin.nextLine();
@@ -311,7 +322,8 @@ public class CLI extends View {
     }
 
     @Override
-    public void chooseCloud(ArrayList<Cloud> clouds) {
+    public void chooseCloud() {
+        ArrayList<Cloud> clouds = this.board.getClouds();
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one cloud between this available by typing his number associated");
         this.graphic.printClouds(clouds);
@@ -333,7 +345,9 @@ public class CLI extends View {
     }
 
     @Override
-    public void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCoins){
+    public void useCharacter(){
+        ArrayList<Characters> avaiableCharacter = this.board.getCharacters();
+        int numOfCoins = this.player.getCoins();
         EffectHandler effectHandler;
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one character between this available by typing his number associated");
@@ -372,7 +386,24 @@ public class CLI extends View {
         ChooseCharacterMessage message = new ChooseCharacterMessage(character);
         this.client.sendMessage(message);
 
+
+        switch(character.getTypeOfInputCharacter()){
+            case EFFECT1INPUT ->
+                this.characterInput.monkInput(this.client,this.effectHandler.getEffect1students(),this.board.getArchipelago().getNumOfIslands());
+            case ISLAND ->
+                this.characterInput.islandInput(this.client, this.board.getArchipelago().getNumOfIslands());
+            case INT ->
+                this.characterInput.intInput(this.client);
+            case EFFECT7INPUT ->
+                this.characterInput.jesterInput(this.client,this.effectHandler.getEffect7students(),this.player.getPlance().getEntrance());
+            case STUDENT ->
+                this.characterInput.genericStudentInput(this.client);
+            case EFFECT10INPUT ->
+                this.characterInput.minstrelInput(this.client,this.player.getPlance().getEntrance(), this.player.getPlance().getHall());
+            case EFFECT11INPUT ->
+                this.characterInput.spoiledprincess(this.client, this.effectHandler.getEffect11students());
         }
+    }
 
     @Override
     public void setPlayers(ArrayList<PlayerInterface> players) {

@@ -73,4 +73,8 @@ public class Plance {
         if(hall.get(student).intValue()>0)
             hall.replace(student, Integer.valueOf(hall.get(student).intValue() - 1));
     }
+
+    public HashMap<Student, Integer> getHall() {
+        return hall;
+    }
 }

@@ -5,7 +5,6 @@ import it.polimi.ingsw.messages.toServer.ChooseIslandEffectMessage;
 import it.polimi.ingsw.messages.toServer.ChooseStudentsEffectMessage;
 import it.polimi.ingsw.model.game.Student;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,7 +13,7 @@ public class CharacterInput {
     private final InputParser inputParser = new InputParser();
     //effect2, effect6, effect8 have no input
 
-    public void MonkInput(Client client, ArrayList<Student> students, int numOfIslands){
+    public void monkInput(Client client, ArrayList<Student> students, int numOfIslands){
         //effect1 input
         Student studentChosen = inputParser.studentParser();
         while(!students.contains(studentChosen)){

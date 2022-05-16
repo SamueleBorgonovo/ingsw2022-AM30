@@ -44,6 +44,6 @@ public class Effect11 extends Effect{
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return TypeOfInputCharacter.STUDENTSFROMCARD;
+        return TypeOfInputCharacter.EFFECT11INPUT;
     }
 }

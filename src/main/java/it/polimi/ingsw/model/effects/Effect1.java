@@ -49,6 +49,6 @@ public class Effect1 extends Effect {
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return TypeOfInputCharacter.STUDENTANDISLAND;
+        return TypeOfInputCharacter.EFFECT1INPUT;
     }
 }

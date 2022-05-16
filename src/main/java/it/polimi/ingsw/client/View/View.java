@@ -25,19 +25,19 @@ public abstract class View {
 
     public abstract void chooseWizard(ArrayList<Wizard> avaiableWizards);
 
-    public abstract void chooseAssistant(ArrayList<Assistant> avaiableAssistant);
+    public abstract void chooseAssistant();
 
     public abstract PossibleAction chooseNextAction(PlayerState playerState);
 
-    public abstract void moveStudentToHall(HashMap<Student,Integer> hall);
+    public abstract void moveStudentToHall();
 
-    public abstract void moveStudentToIsland(HashMap<Student,Integer> hall, int numOfIslands);
+    public abstract void moveStudentToIsland();
 
-    public abstract void moveMotherNature(Assistant assistant);
+    public abstract void moveMotherNature();
 
-    public abstract void chooseCloud(ArrayList<Cloud> clouds);
+    public abstract void chooseCloud();
 
-    public abstract void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCoins);
+    public abstract void useCharacter();
 
     public abstract void setPlayers(ArrayList<PlayerInterface> players);
 

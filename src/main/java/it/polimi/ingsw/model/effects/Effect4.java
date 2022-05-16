@@ -29,6 +29,6 @@ public class Effect4 extends Effect{
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return null;
+        return TypeOfInputCharacter.INT;
     }
 }

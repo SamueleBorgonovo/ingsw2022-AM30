@@ -41,7 +41,7 @@ public class GUI extends View {
     public void chooseWizard(ArrayList<Wizard> avaiableWizards) {}
 
     @Override
-    public void chooseAssistant(ArrayList<Assistant> avaiableAssistant) {}
+    public void chooseAssistant() {}
 
     @Override
     public PossibleAction chooseNextAction(PlayerState playerState) {
@@ -49,19 +49,19 @@ public class GUI extends View {
     }
 
     @Override
-    public void moveStudentToHall(HashMap<Student, Integer> hall) {}
+    public void moveStudentToHall() {}
 
     @Override
-    public void moveStudentToIsland (HashMap<Student,Integer> hall,int numOfIslands) {}
+    public void moveStudentToIsland () {}
 
     @Override
-    public void moveMotherNature(Assistant assistant) {}
+    public void moveMotherNature() {}
 
     @Override
-    public void chooseCloud(ArrayList<Cloud> clouds) {}
+    public void chooseCloud() {}
 
     @Override
-    public void useCharacter(ArrayList<Characters> avaiableCharacter, int numOfCoins) {}
+    public void useCharacter() {}
 
     @Override
     public void setPlayers(ArrayList<PlayerInterface> players) {}

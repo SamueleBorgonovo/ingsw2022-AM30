@@ -5,10 +5,7 @@ public enum TypeOfInputCharacter {
     EFFECT7INPUT,
     EFFECT10INPUT,
     EFFECT11INPUT,
-    STUDENTANDISLAND,
     ISLAND,
-    STUDENTSFROMCARD,
-    TWOSTUDENT,
     STUDENT,
     INT
 }
