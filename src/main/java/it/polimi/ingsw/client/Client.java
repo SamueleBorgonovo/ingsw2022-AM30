@@ -6,7 +6,6 @@ import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.game.GameMode;
-import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
@@ -14,10 +13,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class Client {
-    private final int PING_PERIOD = 5000;
+    private final int PING_PERIOD = 10000;
     private final int TIMEOUT_FOR_RESPONSE = 240000;
     private String ip;
     private int port;
@@ -116,12 +114,10 @@ public class Client {
         }
     }
 
-    public void updateView(ArrayList<PlayerInterface> players, Board board,boolean isAccepted){
-        view.setPlayers(players);
+    public void updateBoard(Board board, boolean isAccepted){
         view.setBoard(board);
         if(isAccepted)
             view.print();
-
     }
 
     public void setTurn(String nickname){
@@ -152,7 +148,7 @@ public class Client {
             output.flush();
         } catch (IOException e) {
             System.err.println("Error during send process.");
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -185,6 +181,8 @@ public class Client {
             //timer = null;
         }
     }
+
+
 
     public ClientMessageHandler getMessageHandler() {
         return messageHandler;

@@ -3,8 +3,9 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.effects.Effect;
 import it.polimi.ingsw.model.game.Student;
 
-public class
-Characters {
+import java.io.Serializable;
+
+public class Characters implements Serializable {
     private int cost;
     private boolean used = false;
     private final Effect effect;

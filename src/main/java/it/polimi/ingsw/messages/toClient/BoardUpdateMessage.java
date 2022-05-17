@@ -2,17 +2,14 @@ package it.polimi.ingsw.messages.toClient;
 
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.model.board.Board;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerInterface;
 
 import java.util.ArrayList;
 
-public class UpdateMessage extends MessageToClient{
-    private ArrayList<PlayerInterface> players;
+public class BoardUpdateMessage extends MessageToClient{
     private Board board;
     private boolean actionAccepted;
-    public UpdateMessage(ArrayList<PlayerInterface> players, Board board, boolean actionAccepted){
-        this.players=players;
+    public BoardUpdateMessage(Board board, boolean actionAccepted){
         this.board=board;
         this.actionAccepted=actionAccepted;
     }
@@ -21,9 +18,6 @@ public class UpdateMessage extends MessageToClient{
         client.getMessageHandler().process(this);
     }
 
-    public ArrayList<PlayerInterface> getPlayers(){
-        return players;
-    }
 
     public Board getBoard(){return board;}
 

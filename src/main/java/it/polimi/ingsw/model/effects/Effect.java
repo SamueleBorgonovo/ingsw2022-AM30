@@ -5,7 +5,9 @@ import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
 import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.Game;
 
-public abstract class Effect {
+import java.io.Serializable;
+
+public abstract class Effect implements Serializable {
 
     public abstract int getCost();
     public abstract String getName();

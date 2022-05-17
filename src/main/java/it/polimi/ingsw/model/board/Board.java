@@ -5,9 +5,10 @@ import it.polimi.ingsw.model.effects.*;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Board {
+public class Board implements Serializable {
     private ArrayList<Cloud> clouds = new ArrayList<>();
     private Archipelago archipelago;
     private ArrayList<Student> bag = new ArrayList<>();

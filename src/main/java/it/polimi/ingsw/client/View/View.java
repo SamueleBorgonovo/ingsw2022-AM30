@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
@@ -34,7 +35,7 @@ public abstract class View {
 
     public abstract void useCharacter();
 
-    public abstract void setPlayers(ArrayList<PlayerInterface> players);
+    public abstract void setPlayers(ArrayList<Player> players);
 
     public abstract void setBoard(Board board);
 

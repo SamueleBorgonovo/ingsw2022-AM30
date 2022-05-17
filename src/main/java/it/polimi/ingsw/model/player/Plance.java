@@ -3,10 +3,11 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Plance {
+public class Plance implements Serializable {
     private ArrayList<Student> entrance = new ArrayList<>();
     private ArrayList<Professor> professors = new ArrayList<>();
     private final HashMap<Student,Integer> hall = new HashMap<>();

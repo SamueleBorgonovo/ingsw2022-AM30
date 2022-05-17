@@ -3,10 +3,11 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Archipelago {
+public class Archipelago implements Serializable {
     private final ArrayList<Island> islands = new ArrayList<>();
     private MotherNature mothernature;
 

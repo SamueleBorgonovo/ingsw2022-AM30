@@ -72,7 +72,7 @@ public class Game implements GameInterface {
         return gameMode;
     }
 
-    public ArrayList<PlayerInterface> getPlayers(){
+    public ArrayList<Player> getPlayers(){
         return new ArrayList<>(listOfPlayers);
     }
 

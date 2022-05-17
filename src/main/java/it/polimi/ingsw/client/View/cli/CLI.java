@@ -25,7 +25,7 @@ public class CLI extends View {
     private final Graphic graphic = new Graphic();
     private Client client;
     private InputParser inputParser = new InputParser();
-    private ArrayList<PlayerInterface> players;
+    private ArrayList<PlayerInterface> players= new ArrayList<>();
     private Board board;
     private CharacterInput characterInput;
     EffectHandler effectHandler = new EffectHandler();
@@ -315,15 +315,16 @@ public class CLI extends View {
 
     @Override
     public void moveStudentToHall() {
+        graphic.printPlances(players);
         Student studentChosen = this.chooseStudentToMove();
         MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentChosen);
         this.client.sendMessage(message);
     }
 
     public Student chooseStudentToMove() {
-        HashMap<Student,Integer> hall = this.player.getPlance().getHall();
+        ArrayList<Student> entrance = this.player.getPlance().getEntrance();
         Student studentChosen=inputParser.studentParser();
-        while(hall.get(studentChosen) == 0) {
+        while(!entrance.contains(studentChosen)) {
             System.out.println("Student not available. Please try again");
             studentChosen=inputParser.studentParser();
         }
@@ -445,9 +446,12 @@ public class CLI extends View {
     }
 
     @Override
-    public void setPlayers(ArrayList<PlayerInterface> players) {
+    public void setPlayers(ArrayList<Player> players) {
         this.players.clear();
         this.players.addAll(players);
+        for(PlayerInterface play : players)
+            if(play.getNickname().equals(client.getNickname()))
+                player=play;
     }
 
     @Override
@@ -463,6 +467,11 @@ public class CLI extends View {
     @Override
     public void printStartGame() {
         System.out.println("Game is Starting");
+        graphic.printArchipelago(board.getArchipelago());
+        graphic.printPlances(players);
     }
+
+
+
 }
 

@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.Wizard;
 
@@ -48,7 +49,7 @@ public interface GameInterface {
 
     public void CharacterStudentsPhase(int playerID, ArrayList<Student> students) throws InvalidTurnException, InvalidStudentEffectException;
 
-    public ArrayList<PlayerInterface> getPlayers();
+    public ArrayList<Player> getPlayers();
 
     public Board getBoard();
 

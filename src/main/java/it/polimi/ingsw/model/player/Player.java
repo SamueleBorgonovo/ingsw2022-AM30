@@ -2,10 +2,11 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.exceptions.OutOfCoinsException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Player implements PlayerInterface{
+public class Player implements PlayerInterface, Serializable {
     private final String nickname;
     private int playerID;
     private PlayerState playerState;

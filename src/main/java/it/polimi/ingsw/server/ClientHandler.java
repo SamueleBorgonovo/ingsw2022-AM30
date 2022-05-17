@@ -53,6 +53,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
         timer = new Thread(() -> {
             try{
                 Thread.sleep(TIMEOUT_FOR_RESPONSE);
+                System.out.println("start timer pinger");
                 handleSocketDisconnection(true,false);
             } catch (InterruptedException e){ }
         });
@@ -66,6 +67,8 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
             //timer = null;
         }
     }
+
+
 
     public void setGameStarted(boolean gameStarted) {
         this.gameStarted = gameStarted;
@@ -98,6 +101,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
            } catch (ClassNotFoundException ignored) {}
 
         } catch (IOException e) {
+            System.out.println("run del receive message");
            handleSocketDisconnection(e instanceof SocketTimeoutException,false);
         }
     }
@@ -109,6 +113,8 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
             os.reset();
         }
         catch(IOException e) {
+            System.out.println("sendMessageToClient");
+            e.printStackTrace();
             handleSocketDisconnection(e instanceof SocketTimeoutException,false);
         }
     }
@@ -117,6 +123,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
     public synchronized void handleSocketDisconnection(boolean timeout,boolean gameEnded) {
         if (!disconnectionCalled) {
             disconnectionCalled=true;
+            System.out.println("socketdisconnection nel server");
             stopTimer();
             active = false;
             this.gameHandler.disconnectPlayer(getNickname());

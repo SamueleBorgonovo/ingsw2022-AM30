@@ -4,8 +4,6 @@ import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.messages.toServer.PingToServerMessage;
 
-import java.util.Set;
-
 public class ClientMessageHandler {
 
     private Client client;
@@ -85,8 +83,8 @@ public class ClientMessageHandler {
         client.nextMove(message.getState());
     }
 
-    public void process(UpdateMessage message){
-        client.updateView(message.getPlayers(),message.getBoard(),message.isActionAccepted());
+    public void process(BoardUpdateMessage message){
+        view.setBoard(message.getBoard());
     }
 
     public void process(SetTurnMessage message){
@@ -107,6 +105,10 @@ public class ClientMessageHandler {
         }else{
             client.gameSetup();
         }
+    }
+
+    public void process(PlanceUpdateMessage message){
+            view.setPlayers(message.getPlayers());
     }
 }
 

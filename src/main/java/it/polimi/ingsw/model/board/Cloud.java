@@ -2,9 +2,10 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.game.Student;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cloud {
+public class Cloud implements Serializable{
     private ArrayList<Student> students = new ArrayList<>();
     private boolean choosen = false;
     private int cloudID;

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.board;
 
-    public class MotherNature {
+import java.io.Serializable;
+
+public class MotherNature implements Serializable {
         private int islandID;
 
         //Quando madrenatura viene creata è posizionata in un isola random. Per semplicità preferisco far decidere l'isola prima

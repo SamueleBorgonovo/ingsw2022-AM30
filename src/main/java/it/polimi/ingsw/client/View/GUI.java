@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
@@ -60,7 +61,7 @@ public class GUI extends View {
     public void useCharacter() {}
 
     @Override
-    public void setPlayers(ArrayList<PlayerInterface> players) {}
+    public void setPlayers(ArrayList<Player> players) {}
 
     @Override
     public void setBoard(Board board) {

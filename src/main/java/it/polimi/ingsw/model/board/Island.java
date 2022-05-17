@@ -3,9 +3,10 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Island {
+public class Island implements Serializable {
     private final ArrayList<Student> students = new ArrayList<>();
     private int numOfTowers;
     private Tower tower;

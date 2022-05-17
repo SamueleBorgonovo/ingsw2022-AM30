@@ -2,9 +2,10 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.exceptions.OutOfCoinsException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public interface PlayerInterface {
+public interface PlayerInterface{
     public Plance getPlance();
 
     public int getCoins();
