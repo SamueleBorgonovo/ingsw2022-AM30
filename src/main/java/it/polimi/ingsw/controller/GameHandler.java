@@ -328,10 +328,12 @@ public class GameHandler {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
+            System.out.println("Sono qui");
             game.moveStudentToIsland(playerID,islandID,student);
             sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
             sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
             studentPlayed++;
+
             if(studentPlayed< game.getNumOfPlayers()+1)
                 clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
             else {

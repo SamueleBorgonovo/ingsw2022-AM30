@@ -63,16 +63,16 @@ public class InputParser {
     public int IslandParser(int numOfIslands){
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one Island between this available by typing his number associated");
-        String input=stdin.nextLine();
         int islandID=intParser();
         boolean check = false;
         while(!check){
             if(islandID >= 1 && islandID <= numOfIslands) {
                 check=true;
             }
-            else
+            else {
                 System.out.println("Selection not valid. Try again");
-            islandID = Integer.parseInt(input);
+                islandID = intParser();
+            }
         }
         return islandID;
     }

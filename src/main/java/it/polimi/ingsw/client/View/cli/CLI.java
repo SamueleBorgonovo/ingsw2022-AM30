@@ -336,9 +336,8 @@ public class CLI extends View {
         if(character4played)
             num=2;
         Assistant assistant = this.player.getLastassistantplayed();
-        Scanner stdin = new Scanner(System.in);
-        System.out.println("Choose one assistant between this available by typing his number associated");
-        String input=stdin.nextLine();
+        graphic.printArchipelago(this.board.getArchipelago());
+        System.out.println("Choose the number of movements for Mother Nature");
         int numberOfMovements=inputParser.intParser();
         boolean check = false;
         while(!check){
@@ -347,7 +346,7 @@ public class CLI extends View {
             }
             else {
                 System.out.println("Selection not valid. Try again");
-                numberOfMovements = Integer.parseInt(input);
+                numberOfMovements = inputParser.intParser();
             }
         }
         MoveMotherNatureMessage message = new MoveMotherNatureMessage(numberOfMovements);
@@ -357,10 +356,8 @@ public class CLI extends View {
     @Override
     public void chooseCloud() {
         ArrayList<Cloud> clouds = this.board.getClouds();
-        Scanner stdin = new Scanner(System.in);
-        System.out.println("Choose one cloud between this available by typing his number associated");
         this.graphic.printClouds(clouds);
-        String input=stdin.nextLine();
+        System.out.println("Choose one cloud between this available by typing his number associated");
         int cloudChosen = inputParser.intParser();
         boolean check = false;
         while(!check){
@@ -369,7 +366,7 @@ public class CLI extends View {
             }
             else{
                 System.out.println("Selection not valid. Try again");
-                cloudChosen = Integer.parseInt(input);
+                cloudChosen = inputParser.intParser();
             }
         }
         this.client.setCharacterPlayed(false);
@@ -381,12 +378,10 @@ public class CLI extends View {
     public void useCharacter(){
         ArrayList<Characters> availableCharacter = this.board.getCharacters();
         int numOfCoins = this.player.getCoins();
-        Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one character between this available by typing his number associated");
         Characters character = null;
         boolean check = false;
         graphic.printCharacters(availableCharacter, this.effectHandler);
-        String input=stdin.nextLine();
         int characterChosen = inputParser.intParser();
         while(!check){
             if(characterChosen>=1 && characterChosen<=3 && availableCharacter.get(characterChosen-1).getCost()<= numOfCoins){
@@ -394,7 +389,7 @@ public class CLI extends View {
                 check=true;
             } else {
                 System.out.println("Selection not valid. Try again");
-                characterChosen = Integer.parseInt(input);
+                characterChosen = inputParser.intParser();
             }
         }
         this.client.setCharacterPlayed(true);
