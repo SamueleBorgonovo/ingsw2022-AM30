@@ -6,13 +6,21 @@ import it.polimi.ingsw.model.board.Cloud;
 
 public class CloudChoosedMessage extends MessageToClient {
     private String nickname;
-    private int cloud;
+    private int cloudid;
     public CloudChoosedMessage(String nickname,int cloud){
         this.nickname=nickname;
-        this.cloud=cloud;
+        this.cloudid=cloud;
     }
 
     public void action(Client client){
         client.getMessageHandler().process(this);
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public int getCloud() {
+        return cloudid;
     }
 }

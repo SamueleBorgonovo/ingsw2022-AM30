@@ -15,4 +15,12 @@ public class StudentHallChoosedMessage extends MessageToClient {
     public void action(Client client){
         client.getMessageHandler().process(this);
     }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
 }

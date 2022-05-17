@@ -15,4 +15,12 @@ public class AssistantChoosedMessage extends MessageToClient {
     public void action(Client client){
         client.getMessageHandler().process(this);
     }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public Assistant getAssistant() {
+        return assistant;
+    }
 }

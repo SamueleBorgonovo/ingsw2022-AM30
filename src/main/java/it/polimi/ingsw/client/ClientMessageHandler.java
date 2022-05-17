@@ -113,27 +113,27 @@ public class ClientMessageHandler {
     }
 
     public void process(AssistantChoosedMessage message){
-
+        view.printAssistantChosen(message.getNickname(), message.getAssistant());
     }
 
     public void process(StudentHallChoosedMessage message){
-
+        view.printStudentToHall(message.getNickname(),message.getStudent());
     }
 
     public void process(StudentIslandChoosedMessage message){
-
+        view.printStudentToIsland(message.getNickname(),message.getStudent(),message.getIslandID());
     }
 
     public void process(CharacterChoosedMessage message){
-
+        view.printCharacterChosen(message.getNickname(),message.getCharacter());
     }
 
     public void process(CloudChoosedMessage message){
-
+        view.printCloudChosen(message.getNickname(),message.getCloud());
     }
 
     public void process(MotherNatureMoveMessage message){
-
+        view.printMotherNatureMovement(message.getNickname(), message.getIslandId());
     }
 }
 

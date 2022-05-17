@@ -17,4 +17,16 @@ public class StudentIslandChoosedMessage extends MessageToClient {
     public void action(Client client){
         client.getMessageHandler().process(this);
     }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public int getIslandID() {
+        return islandID;
+    }
 }
