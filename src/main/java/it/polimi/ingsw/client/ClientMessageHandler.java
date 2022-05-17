@@ -2,6 +2,9 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toClient.*;
+import it.polimi.ingsw.messages.toClient.StatesMessages.AssistantChoosedMessage;
+import it.polimi.ingsw.messages.toClient.StatesMessages.SetTurnMessage;
+import it.polimi.ingsw.messages.toClient.StatesMessages.StudentHallChoosedMessage;
 import it.polimi.ingsw.messages.toServer.PingToServerMessage;
 
 public class ClientMessageHandler {
@@ -110,5 +113,15 @@ public class ClientMessageHandler {
     public void process(PlanceUpdateMessage message){
             view.setPlayers(message.getPlayers());
     }
+
+    public void process(AssistantChoosedMessage message){
+
+    }
+
+    public void process(StudentHallChoosedMessage message){
+
+    }
 }
+
+
 

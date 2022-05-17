@@ -32,6 +32,7 @@ public class Client {
     private View view;
     private ClientMessageHandler messageHandler;
     private boolean pingActive;
+    private boolean myTurn=false;
 
 
     boolean characterPlayed = false;
@@ -134,9 +135,11 @@ public class Client {
     public void setTurn(String nickname){
         if(this.nickname.equals(nickname)){
             //print è iniziato il mio turno
+            myTurn=true;
         }
         else {
             //print è iniziato il turno di "nickname"
+            myTurn=false;
         }
     }
 

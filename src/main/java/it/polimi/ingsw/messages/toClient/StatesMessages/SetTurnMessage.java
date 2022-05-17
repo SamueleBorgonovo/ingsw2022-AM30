@@ -1,8 +1,9 @@
-package it.polimi.ingsw.messages.toClient;
+package it.polimi.ingsw.messages.toClient.StatesMessages;
 
 import it.polimi.ingsw.client.Client;
+import it.polimi.ingsw.messages.toClient.MessageToClient;
 
-public class SetTurnMessage extends MessageToClient{
+public class SetTurnMessage extends MessageToClient {
     private String nickname;
 
     public SetTurnMessage(String nickname){
