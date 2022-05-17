@@ -2,11 +2,11 @@ package it.polimi.ingsw.client.View;
 
 import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.model.board.Board;
+import it.polimi.ingsw.model.board.Characters;
+import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.game.GameMode;
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.PlayerInterface;
-import it.polimi.ingsw.model.player.PlayerState;
-import it.polimi.ingsw.model.player.Wizard;
+import it.polimi.ingsw.model.game.Student;
+import it.polimi.ingsw.model.player.*;
 
 import java.util.ArrayList;
 
@@ -42,4 +42,20 @@ public abstract class View {
     public abstract void print();
 
     public abstract void printStartGame();
+
+    public abstract void winner(String nick);
+
+    public abstract void printAssistantChosen(String nick, Assistant assistant);
+
+    public abstract void printTurn(String nick);
+
+    public abstract void printCharacterChosen(String nick, Characters character);
+
+    public abstract void printCloudChosen(String nick, int cloudID);
+
+    public abstract void printStudentToHall(String nick, Student student);
+
+    public abstract void printStudentToIsland(String nick, Student student, int IslandID);
+
+    public abstract void printMotherNatureMovement(String nick, int islandID);
 }
