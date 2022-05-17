@@ -237,7 +237,7 @@ public class Game implements GameInterface {
         }
         if(tmpplayerid!=-1){
             numplayerhasplayed=tmpplayerid;
-            getPlayer(tmpplayerid).setPlayerState(PlayerState.ASSISTANTPHASE);
+            getPlayer(tmpplayerid+1).setPlayerState(PlayerState.ASSISTANTPHASE);
         }
         //shutdown del game
 

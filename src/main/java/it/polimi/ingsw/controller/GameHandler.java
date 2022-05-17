@@ -33,7 +33,6 @@ public class GameHandler {
         nicknameChoosen = new ArrayList<>();
     }
 
-    //Manca l'handler del process del messaggio della scelta del wizard
     public void addPlayer(ClientHandlerInterface clientHandler, GameMode gamemode, int numofplayers){
         int playerid;
         int found=0;
@@ -114,9 +113,6 @@ public class GameHandler {
                     break;
                 }
         }
-
-
-
     }
 
     public void disconnectPlayer(String nickname){
