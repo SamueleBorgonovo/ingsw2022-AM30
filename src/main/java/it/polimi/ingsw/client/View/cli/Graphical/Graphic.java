@@ -166,23 +166,30 @@ public class Graphic {
                         │           │ │           │
                         │ COST : 1  │ │   ✗ ✗ ✗   │
                         ╰───────────╯ ╰───────────╯
+                        ╭────╴2╶────╮
+                        │  WIZARD   │ │  WIZARD   │ │  WIZARD   │ │  WIZARD   │
+                        │  GREEN    │ │   BLUE    │ │  YELLOW   │ │   PINK    │
+                        │           │
+                        │           │
+                        ╰───────────╯
+                        
 
                         """);
 
     public void printLogo() {
         String logo = """
-                           
-                     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄            ▄▄
-                  ▄█▀▀  ▓██    ▀▀██           ▓███                        ▄
-                 ▐█▀   ▓██▌  ▄▄▄  ▀                                      ▓█
-                 ██    ▓██████▀▀█   ▓███▄████ ▓██▌   ▄██▀███ ▄███ ▓███ ▓████▌▄████ ▀███ ▓█▀▀▀██
-                 ▀██   ▓████    ▀    ▓██▀ █▀   ▓█▌  ▓█▌  ███  ▓███▀▓██  ▓██    ▀███  ▓█ ▓███▄▄
-                   ▀█▌ ▓███        ▄ ▓██       ▓█▌ ▓██▌ ▄███  ▓██  ▓██  ▓██     ▀███▄█   ▀█████
-                       ▓██▌      ▄█▌ ▓██       ▓██ ▀████▀███▄ ▓██  ▓██▄ ▓██▄▄     ▓██   ▓▌  ▄██
-                      ▄████▄▄▄▄███▀  ▀▀         ▀▀   ▀▀   ▀▀  ▀▀    ▀▀▀  ▀▀▀      ▓█    ▀▀▀▀▀
-                                                                                ▄██
-                                                                                ███   █
-                                                                                ▀▀███▀▀
+                       
+                 ▄▄▄▄▄▄▄▄▄▄▄▄▄▄            ▄▄
+              ▄█▀▀  ▓██    ▀▀██           ▓███                        ▄
+             ▐█▀   ▓██▌  ▄▄▄  ▀                                      ▓█
+             ██    ▓██████▀▀█   ▓███▄████ ▓██▌   ▄██▀███ ▄███ ▓███ ▓████▌▄████ ▀███ ▓█▀▀▀██
+             ▀██   ▓████    ▀    ▓██▀ █▀   ▓█▌  ▓█▌  ███  ▓███▀▓██  ▓██    ▀███  ▓█ ▓███▄▄
+               ▀█▌ ▓███        ▄ ▓██       ▓█▌ ▓██▌ ▄███  ▓██  ▓██  ▓██     ▀███▄█   ▀█████
+                   ▓██▌      ▄█▌ ▓██       ▓██ ▀████▀███▄ ▓██  ▓██▄ ▓██▄▄     ▓██   ▓▌  ▄██
+                  ▄████▄▄▄▄███▀  ▀▀         ▀▀   ▀▀   ▀▀  ▀▀    ▀▀▀  ▀▀▀      ▓█    ▀▀▀▀▀
+                                                                            ▄██
+                                                                            ███   █
+                                                                            ▀▀███▀▀
         """;
         System.out.println(logo);
     }
@@ -478,14 +485,39 @@ public class Graphic {
         System.out.println();
     }
 
-    public void printWizards(ArrayList<Wizard> availableWizards){
-        for(Wizard wizard : availableWizards)
-            switch(wizard){
-                case WIZARD_GREEN -> System.out.println(Colors.ANSI_GREEN.getCode() + wizard + Colors.ANSI_RESET.getCode());
-                case WIZARD_BLUE -> System.out.println(Colors.ANSI_BLUE.getCode() + wizard + Colors.ANSI_RESET.getCode());
-                case WIZARD_PINK -> System.out.println(Colors.ANSI_PURPLE.getCode() + wizard + Colors.ANSI_RESET.getCode());
-                case WIZARD_YELLOW -> System.out.println(Colors.ANSI_YELLOW.getCode() + wizard + Colors.ANSI_RESET.getCode());
+    public void printWizards(ArrayList<Wizard> wizards){
+        int i;
+
+        for(i=1; i<=wizards.size();i++){
+            if(i<10)
+                System.out.print("╭────╴" + i + "╶────╮ ");
+            else
+                System.out.print("╭───╴" + i + "╶────╮ ");
+        }
+        System.out.println();
+        for(i=1; i<=wizards.size();i++)
+            System.out.print("│  WIZARD   │ ");
+        System.out.println();
+        for(Wizard wizard : wizards) {
+            System.out.print("│");
+            switch (wizard) {
+                case WIZARD_GREEN -> System.out.print(Colors.ANSI_GREEN.getCode() + "   GREEN   " + Colors.ANSI_RESET.getCode());
+                case WIZARD_BLUE -> System.out.print(Colors.ANSI_BLUE.getCode() + "   BLUE    " + Colors.ANSI_RESET.getCode());
+                case WIZARD_PINK -> System.out.print(Colors.ANSI_PURPLE.getCode() + "   PINK    " + Colors.ANSI_RESET.getCode());
+                case WIZARD_YELLOW -> System.out.print(Colors.ANSI_BRIGHT_YELLOW.getCode() + "  YELLOW   " + Colors.ANSI_RESET.getCode());
             }
+            System.out.print("│ ");
+        }
+        System.out.println();
+        for(i=0; i<wizards.size();i++)
+            System.out.print("│           │ ");
+        System.out.println();
+        for(i=0; i<wizards.size();i++)
+            System.out.print("│           │ ");
+        System.out.println();
+        for(i=0; i<wizards.size();i++)
+            System.out.print("╰───────────╯ ");
+        System.out.println();
     }
 }
 

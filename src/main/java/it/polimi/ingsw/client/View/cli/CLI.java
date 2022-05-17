@@ -1,8 +1,8 @@
 package it.polimi.ingsw.client.View.cli;
 
 import it.polimi.ingsw.client.Client;
-import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
 import it.polimi.ingsw.client.View.View;
+import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
 import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Characters;
@@ -14,7 +14,6 @@ import it.polimi.ingsw.model.player.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class CLI extends View {
@@ -158,57 +157,17 @@ public class CLI extends View {
         Wizard wizardChosen = null;
         Scanner stdin = new Scanner(System.in);
         boolean checkwizard=false;
-        System.out.println("Choose your wizard by typing his color ( g | y | p | b )");
+        System.out.println("Choose one Wizard between this available by typing his number associated");
         this.graphic.printWizards(avaiableWizards);
-        String choice = stdin.nextLine().toLowerCase();
-
+        int wizardInt = inputParser.intParser();
         while (!checkwizard) {
-            switch (choice) {
-                case ("g") -> {
-                    if(avaiableWizards.contains(Wizard.WIZARD_GREEN)) {
-                        wizardChosen = Wizard.WIZARD_GREEN;
-                        checkwizard = true;
-                    }
-                    else {
-                        System.out.println("Typing error or invalid wizard: Try again");
-                        choice = stdin.nextLine().toLowerCase();
-                    }
-                }
-                case ("y") -> {
-                    if(avaiableWizards.contains(Wizard.WIZARD_YELLOW)) {
-                        wizardChosen = Wizard.WIZARD_YELLOW;
-                        checkwizard = true;
-                    }
-                    else{
-                        System.out.println("Typing error or invalid wizard: Try again");
-                        choice = stdin.nextLine().toLowerCase();
-                    }
-                }
-                case ("p") -> {
-                    if(avaiableWizards.contains(Wizard.WIZARD_PINK)) {
-                        wizardChosen = Wizard.WIZARD_PINK;
-                        checkwizard = true;
-                    }
-                    else {
-                        System.out.println("Typing error or invalid wizard: Try again");
-                        choice = stdin.nextLine().toLowerCase();
-                    }
-                }
-                case ("b") -> {
-                    if(avaiableWizards.contains(Wizard.WIZARD_BLUE)) {
-                        wizardChosen = Wizard.WIZARD_BLUE;
-                        checkwizard = true;
-                    }
-                    else {
-                        System.out.println("Typing error or invalid wizard: Try again");
-                        choice = stdin.nextLine().toLowerCase();
-                    }
-                }
-                default -> {
-                    System.out.println("Typing error or invalid wizard: Try again");
-                    choice = stdin.nextLine().toLowerCase();
-                }
-
+            if(wizardInt>=1 && wizardInt<= avaiableWizards.size()){
+                wizardChosen=avaiableWizards.get(wizardInt-1);
+                checkwizard=true;
+            }
+            else {
+                System.out.println("Selection not valid. Try again");
+                wizardInt = inputParser.intParser();
             }
         }
         client.setWizard(wizardChosen);
@@ -216,13 +175,12 @@ public class CLI extends View {
         this.client.sendMessage(message);
         }
 
-
     @Override
     public void chooseAssistant(){
         ArrayList<Assistant> avaiableAssistant = this.player.getAssistantCards();
         Scanner stdin = new Scanner(System.in);
         Assistant assistantChosen= null;
-        System.out.println("Choose one assistant between this available by typing his number associated");
+        System.out.println("Choose one Assistant between this available by typing his number associated");
         this.graphic.printAssistants(avaiableAssistant, this.client.getWizard());
         int assistantInt = inputParser.intParser();
         boolean check = false;
@@ -430,28 +388,11 @@ public class CLI extends View {
         graphic.printCharacters(availableCharacter, this.effectHandler);
         String input=stdin.nextLine();
         int characterChosen = inputParser.intParser();
-        while(!check)
-        switch(characterChosen){
-            case(1)->{
-                if(availableCharacter.get(0).getCost()<= numOfCoins) {
-                    character = availableCharacter.get(0);
-                    check=true;
-                }
-            }
-            case(2)->{
-                if(availableCharacter.get(1).getCost()<= numOfCoins) {
-                    character = availableCharacter.get(1);
-                    check=true;
-                }
-            }
-            case(3)->{
-                if(availableCharacter.get(2).getCost()<= numOfCoins) {
-                    character = availableCharacter.get(2);
-                    check = true;
-                }
-            }
-
-            default ->{
+        while(!check){
+            if(characterChosen>=1 && characterChosen<=3 && availableCharacter.get(characterChosen-1).getCost()<= numOfCoins){
+                character = availableCharacter.get(characterChosen-1);
+                check=true;
+            } else {
                 System.out.println("Selection not valid. Try again");
                 characterChosen = Integer.parseInt(input);
             }
