@@ -2,9 +2,7 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toClient.*;
-import it.polimi.ingsw.messages.toClient.StatesMessages.AssistantChoosedMessage;
-import it.polimi.ingsw.messages.toClient.StatesMessages.SetTurnMessage;
-import it.polimi.ingsw.messages.toClient.StatesMessages.StudentHallChoosedMessage;
+import it.polimi.ingsw.messages.toClient.StatesMessages.*;
 import it.polimi.ingsw.messages.toServer.PingToServerMessage;
 
 public class ClientMessageHandler {
@@ -119,6 +117,22 @@ public class ClientMessageHandler {
     }
 
     public void process(StudentHallChoosedMessage message){
+
+    }
+
+    public void process(StudentIslandChoosedMessage message){
+
+    }
+
+    public void process(CharacterChoosedMessage message){
+
+    }
+
+    public void process(CloudChoosedMessage message){
+
+    }
+
+    public void process(MotherNatureMoveMessage message){
 
     }
 }
