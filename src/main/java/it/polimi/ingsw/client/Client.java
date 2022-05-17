@@ -92,25 +92,36 @@ public class Client {
                     view.useCharacter();
                 }
             }
-        }else if(playerState==PlayerState.MOTHERNATUREPHASE || playerState==PlayerState.CLOUDPHASE){
-            action=view.chooseNextAction(playerState);
-            switch(action){
-                case USECHARACTER -> {
-                    view.useCharacter();
+        }else if(playerState==PlayerState.MOTHERNATUREPHASE){
+            if(getGamemode()==GameMode.EXPERTMODE) {
+                action = view.chooseNextAction(playerState);
+                switch (action) {
+                    case USECHARACTER -> {
+                        view.useCharacter();
+                    }
+                    case MOVEMOTHERNATURE -> {
+                        view.moveMotherNature();
+                    }
                 }
-                case MOVEMOTHERNATURE -> {
-                    view.moveMotherNature();
-                }
-                case CHOOSECLOUD -> {
-                    view.chooseCloud();
-                }
-            }
+            }else view.moveMotherNature();
         }else if(playerState==PlayerState.ASSISTANTPHASE){
                     view.chooseAssistant();
         }else if(playerState==PlayerState.CHARACTHERISLANDPHASE){
                     //view.metodoIsland
         }else if(playerState==PlayerState.CHARACTHERSTUDENTSPHASE){
                     //view.metodoStudent
+        }else if(playerState==PlayerState.CLOUDPHASE){
+            if(getGamemode()==GameMode.EXPERTMODE){
+                action=view.chooseNextAction(playerState);
+                switch (action) {
+                    case CHOOSECLOUD -> {
+                        view.chooseCloud();
+                    }
+                    case USECHARACTER -> {
+                        view.useCharacter();
+                    }
+                }
+            }else view.chooseCloud();
         }
     }
 

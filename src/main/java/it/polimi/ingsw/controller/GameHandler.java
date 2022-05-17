@@ -111,7 +111,6 @@ public class GameHandler {
                     playertoplay = player;
                     state = player.getPlayerState();
                     findHandler(playertoplay.getNickname()).sendMessageToClient(new PlayerStateMessage(state));
-                    System.out.println(playertoplay.getNickname()+" "+state);
                     break;
                 }
         }
@@ -197,11 +196,8 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.useAssistant(playerID, assistant);
-            System.out.println("dopo useAssistant");
-            System.out.println("dopo planceupdate");
             clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayers()));
             clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard(),true));
-            System.out.println("dopo boardUpdate");
             turnHandler(game);
         } catch (InvalidAssistantException e) {
             InvalidAssistantMessage message = new InvalidAssistantMessage();
