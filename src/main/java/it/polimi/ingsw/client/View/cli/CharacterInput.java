@@ -38,15 +38,7 @@ public class CharacterInput {
         client.sendMessage(message);
     }
 
-    public void intInput(Client client){
-        //effect4 input
-        System.out.println("How many additional movements do you want to do?");
-        int num = inputParser.intParser();
-        while(num>2){
-            System.out.println("Number not valid. Please try again");
-            num = inputParser.intParser();
-        }
-    }
+
 
     public void genericStudentInput(Client client){
         //effect9, effect12

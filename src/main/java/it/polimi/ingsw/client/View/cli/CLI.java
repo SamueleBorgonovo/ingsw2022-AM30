@@ -32,6 +32,8 @@ public class CLI extends View {
     private String nickname;
     private PlayerInterface player;
     private boolean isFirst=true;
+    private GameMode gameMode;
+    private boolean character4played = false;
 
 
     public void init() throws IOException, ClassNotFoundException, NumberFormatException {
@@ -125,10 +127,14 @@ public class CLI extends View {
             }
         }
 
-        if(choice.equalsIgnoreCase("s"))
+        if(choice.equalsIgnoreCase("s")) {
+            this.gameMode = GameMode.SIMPLEMODE;
             return GameMode.SIMPLEMODE;
-        else
+        }
+        else {
+            this.gameMode = GameMode.EXPERTMODE;
             return GameMode.EXPERTMODE;
+        }
     }
 
     @Override
@@ -244,10 +250,28 @@ public class CLI extends View {
         System.out.println("Choose your next action by typing the action's number");
         int actionNum = 0 ;
         while(!check){
-            if(playerState == PlayerState.STUDENTPHASE){
-                    System.out.println("Possible actions:" +
-                            "1) Move one student to the hall" +
-                            "2) Move one student to one island");
+            if(playerState == PlayerState.STUDENTPHASE && this.gameMode == GameMode.SIMPLEMODE){
+                System.out.println("Possible actions:");
+                System.out.println("1) Move one student to the hall");
+                System.out.println("2) Move one student to one island");
+                actionNum = inputParser.intParser();
+                if(actionNum==1) {
+                    actionChosen = PossibleAction.MOVESTUDENTTOHALL;
+                    check = true;
+                }
+                else if(actionNum==2){
+                    actionChosen = PossibleAction.MOVESTUDENTT0ISLAND;
+                    check = true;
+                }
+                else {
+                    System.out.println("Selection not valid. Try again");
+                    System.out.println("");
+                }
+            }
+            else if(playerState == PlayerState.STUDENTPHASE && this.gameMode == GameMode.EXPERTMODE){
+                    System.out.println("Possible actions:");
+                    System.out.println("1) Move one student to the hall");
+                    System.out.println("2) Move one student to one island");
                     if(!client.isCharacterPlayed())
                         System.out.println("3) Use a character");
                     actionNum = inputParser.intParser();
@@ -267,14 +291,14 @@ public class CLI extends View {
                     }
                     else {
                         System.out.println("Selection not valid. Try again");
-                        actionNum= Integer.parseInt(stdin.nextLine());
+                        System.out.println("");
                     }
                 }
 
                 else if(playerState == PlayerState.MOTHERNATUREPHASE){
-                    System.out.println("Possible actions:" +
-                            "1) Move Mother Nature" +
-                            "2) Use a character") ;
+                    System.out.println("Possible actions:");
+                    System.out.println("1) Move Mother Nature");
+                    System.out.println("2) Use a character");
                     actionNum = inputParser.intParser();
                     if(actionNum==1) {
                         actionChosen = PossibleAction.MOVEMOTHERNATURE;
@@ -286,14 +310,14 @@ public class CLI extends View {
                     }
                     else {
                         System.out.println("Selection not valid. Try again");
-                        actionNum= Integer.parseInt(stdin.nextLine());
+                        System.out.println("");
                     }
                 }
 
                 else if(playerState == PlayerState.CLOUDPHASE){
-                    System.out.println("Possible actions:" +
-                            "1) Choose a cloud" +
-                            "2) Use a character") ;
+                    System.out.println("Possible actions:");
+                    System.out.println("1) Choose a cloud");
+                    System.out.println("2) Use a character");
                     actionNum = inputParser.intParser();
                 if(actionNum==1) {
                     actionChosen = PossibleAction.CHOOSECLOUD;
@@ -305,7 +329,7 @@ public class CLI extends View {
                 }
                 else {
                     System.out.println("Selection not valid. Try again");
-                    actionNum= Integer.parseInt(stdin.nextLine());
+                    System.out.println("");
                 }
 
             }
@@ -343,6 +367,9 @@ public class CLI extends View {
 
     @Override
     public void moveMotherNature() {
+        int num = 0;
+        if(character4played)
+            num=2;
         Assistant assistant = this.player.getLastassistantplayed();
         Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one assistant between this available by typing his number associated");
@@ -350,7 +377,7 @@ public class CLI extends View {
         int numberOfMovements=inputParser.intParser();
         boolean check = false;
         while(!check){
-            if(numberOfMovements > 0 && numberOfMovements<=assistant.getMovement()) {
+            if(numberOfMovements > 0 && numberOfMovements<=assistant.getMovement() + num) {
                 check=true;
             }
             else {
@@ -433,7 +460,7 @@ public class CLI extends View {
             case ISLAND ->
                 this.characterInput.islandInput(this.client, this.board.getArchipelago().getNumOfIslands());
             case INT ->
-                this.characterInput.intInput(this.client);
+                this.setCharacter4played(true);
             case EFFECT7INPUT ->
                 this.characterInput.jesterInput(this.client,this.effectHandler.getEffect7students(),this.player.getPlance().getEntrance());
             case STUDENT ->
@@ -471,7 +498,8 @@ public class CLI extends View {
         graphic.printPlances(players);
     }
 
-
-
+    public void setCharacter4played(boolean character4played) {
+        this.character4played = character4played;
+    }
 }
 
