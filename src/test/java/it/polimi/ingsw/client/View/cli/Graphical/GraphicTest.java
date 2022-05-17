@@ -150,4 +150,9 @@ class GraphicTest {
         characters2.setUsed(true);
         graphic.printCharacters(characters, game.getEffectHandler());
     }
+
+    @Test
+    void printWizards() {
+        graphic.printWizards(game.getWizardAvailable());
+    }
 }
