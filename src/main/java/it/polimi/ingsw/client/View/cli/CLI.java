@@ -339,7 +339,9 @@ public class CLI extends View {
 
     @Override
     public void moveStudentToHall() {
-        graphic.printPlances(players);
+        ArrayList<PlayerInterface> playerP = new ArrayList<>();
+        playerP.add(player);
+        graphic.printPlances(playerP);
         Student studentChosen = this.chooseStudentToMove();
         MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentChosen);
         this.client.sendMessage(message);
@@ -357,11 +359,16 @@ public class CLI extends View {
 
     @Override
     public void moveStudentToIsland() {
+        graphic.printArchipelago(board.getArchipelago());
+        ArrayList<PlayerInterface> playerP = new ArrayList<>();
+        playerP.add(player);
+        graphic.printPlances(playerP);
         int numOfIslands = this.board.getArchipelago().getNumOfIslands();
         Student studentChosen = this.chooseStudentToMove();
         int islandID = inputParser.IslandParser(numOfIslands);
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(islandID, studentChosen);
-        this.client.sendMessage(message);
+        client.sendMessage(message);
+
     }
 
 

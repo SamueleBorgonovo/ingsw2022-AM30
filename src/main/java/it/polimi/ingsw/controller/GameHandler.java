@@ -196,8 +196,8 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.useAssistant(playerID, assistant);
-            clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayers()));
-            clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard(),true));
+            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
+            sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
             turnHandler(game);
         } catch (InvalidAssistantException e) {
             InvalidAssistantMessage message = new InvalidAssistantMessage();
@@ -236,8 +236,8 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.selectCloud(playerID,cloudID);
-            clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayers()));
-            clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard(),true));
+            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
+            sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
             turnHandler(game);
         } catch (InvalidCloudException e) {
             InvalidCloudMessage message = new InvalidCloudMessage();
@@ -254,8 +254,8 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveMotherNature(playerID,movement);
-            clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayers()));
-            clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard(),true));
+            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
+            sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
             turnHandler(game);
         } catch (InvalidValueException e) {
             InvalidValueMessage message = new InvalidValueMessage();
@@ -272,8 +272,8 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveStudentToHall(playerID,student);
-            clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayers()));
-            clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard(),true));
+            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
+            sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
             studentPlayed++;
             if(studentPlayed<game.getNumOfPlayers()+1)
                 clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
@@ -329,8 +329,8 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveStudentToIsland(playerID,islandID,student);
-            clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayers()));
-            clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard(),true));
+            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
+            sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
             studentPlayed++;
             if(studentPlayed< game.getNumOfPlayers()+1)
                 clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
