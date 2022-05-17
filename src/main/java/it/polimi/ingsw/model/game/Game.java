@@ -239,7 +239,7 @@ public class Game implements GameInterface {
             numplayerhasplayed=tmpplayerid;
             getPlayer(tmpplayerid+1).setPlayerState(PlayerState.ASSISTANTPHASE);
         }
-        //shutdown del game
+        //shutdown of game
 
     }
 

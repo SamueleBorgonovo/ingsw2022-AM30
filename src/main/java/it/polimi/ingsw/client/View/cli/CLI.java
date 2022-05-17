@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class CLI extends View {
 
     private static final int MIN_PORT = 1024;
-    private static final int MAX_PORT = 65535;
+    private static final int MAX_PORT = 49151;
 
     private final Graphic graphic = new Graphic();
     private Client client;

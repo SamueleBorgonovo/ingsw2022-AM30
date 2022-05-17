@@ -63,8 +63,8 @@ public class MessageHandler {
             PingToClientMessage message2 = new PingToClientMessage(false);
             clientHandler.sendMessageToClient(message2);
         }else {
-            System.out.println("stop timer");
-            //clientHandler.stopTimer();
+            //System.out.println("stop timer");
+            clientHandler.stopTimer();
         }
     }
 

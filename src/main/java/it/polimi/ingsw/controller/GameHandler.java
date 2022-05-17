@@ -109,6 +109,7 @@ public class GameHandler {
                         && player.getPlayerState() != PlayerState.RECONNECTED) {
                     playertoplay = player;
                     state = player.getPlayerState();
+                    System.out.println(playertoplay.getNickname() + state);
                     findHandler(playertoplay.getNickname()).sendMessageToClient(new PlayerStateMessage(state));
                     break;
                 }
