@@ -104,7 +104,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
         }
     }
 
-    public void sendMessageToClient(MessageToClient message){
+    public synchronized void sendMessageToClient(MessageToClient message){
         try {
             os.writeObject(message);
             os.flush();

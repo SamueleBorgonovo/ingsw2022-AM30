@@ -155,7 +155,7 @@ public class Client {
 
     }
 
-    public void sendMessage(MessageToServer message){
+    public synchronized void sendMessage(MessageToServer message){
         try {
             output.writeObject(message);
             output.reset();
