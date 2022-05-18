@@ -132,15 +132,26 @@ public class Client {
             view.print();
     }
 
-    public void setTurn(String nickname){
+    public void setTurn(String nickname, boolean assistantPhase){
         if(this.nickname.equals(nickname)){
             myTurn=true;
         }
         else {
             myTurn=false;
         }
-        view.printTurn(nickname);
+        if(!assistantPhase)
+            view.printTurn(nickname);
     }
+
+    public void handleDisconnection(String nick,boolean gameEnded){
+        //if gameEnded=true server disconnected all players, else someone is disconnected from game
+        if(gameEnded){
+            //print game finito
+        }else view.printPlayerDisconnection(nick);
+    }
+
+
+
 
     public void messageListener(){
         try{

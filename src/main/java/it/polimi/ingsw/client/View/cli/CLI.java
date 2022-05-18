@@ -452,7 +452,7 @@ public class CLI extends View {
 
     @Override
     public void printAssistantChosen(String nick, Assistant assistant) {
-        if(!client.isMyTurn())
+        if(!nick.equals(client.getNickname()))
             System.out.println(nick + " is playing " + assistant);
 
     }
@@ -461,8 +461,11 @@ public class CLI extends View {
     public void printTurn(String nick) {
         if(!client.isMyTurn())
             System.out.println(nick + " is playing");
-        else
+        else {
             System.out.println("Is your turn");
+            graphic.printArchipelago(board.getArchipelago());
+            graphic.printPlances(players);
+        }
     }
 
     @Override
@@ -499,6 +502,22 @@ public class CLI extends View {
 
     public void setCharacter4played(boolean character4played) {
         this.character4played = character4played;
+    }
+
+    public void printPlayerDisconnection(String nick){
+        System.out.println(nick + " disconnected from game");
+    }
+
+    public void printPlayerConnection(String nick,boolean reconnect){
+        if(!nick.equals(client.getNickname()))
+            if(reconnect)
+                System.out.println(nick + " is reconnecting to the game");
+            else System.out.println(nick + " is connecting to the game");
+
+    }
+
+    public void printInvalidAssistant(){
+        System.out.println("Assistant already chosen. Try again");
     }
 }
 

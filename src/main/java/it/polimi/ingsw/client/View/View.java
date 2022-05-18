@@ -58,4 +58,10 @@ public abstract class View {
     public abstract void printStudentToIsland(String nick, Student student, int IslandID);
 
     public abstract void printMotherNatureMovement(String nick, int islandID);
+
+    public abstract void printPlayerDisconnection(String nick);
+
+    public abstract void printPlayerConnection(String nick,boolean reconnect);
+
+    public abstract void printInvalidAssistant();
 }

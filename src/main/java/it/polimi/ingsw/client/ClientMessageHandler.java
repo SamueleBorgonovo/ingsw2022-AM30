@@ -23,6 +23,7 @@ public class ClientMessageHandler {
     }
 
     public void process(InvalidAssistantMessage message){
+        view.printInvalidAssistant();
     }
 
     public void process(InvalidTurnMessage message){
@@ -69,7 +70,7 @@ public class ClientMessageHandler {
     }
 
     public void process(DisconnectMessage message){
-
+        client.handleDisconnection(message.getNickname(), message.isGameEnded());
     }
 
     public void process(NoGameMessage message){
@@ -89,7 +90,7 @@ public class ClientMessageHandler {
     }
 
     public void process(SetTurnMessage message){
-        client.setTurn(message.getNickname());
+        client.setTurn(message.getNickname(), message.isassistantPhase());
     }
 
     public void process(StartGameMessage message){
@@ -101,11 +102,7 @@ public class ClientMessageHandler {
     }
 
     public void process(ConnectMessage message){
-        if(message.getReconnect()){
-            //mi sto riconnettendo alla partita
-        }else{
-            client.gameSetup();
-        }
+        view.printPlayerConnection(message.getNickname(),message.getReconnect());
     }
 
     public void process(PlanceUpdateMessage message){

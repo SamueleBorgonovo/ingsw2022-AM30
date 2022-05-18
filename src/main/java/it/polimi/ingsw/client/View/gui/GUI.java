@@ -118,4 +118,17 @@ public class GUI extends View {
     public void printMotherNatureMovement(String nick, int islandID) {
 
     }
+
+    @Override
+    public void printPlayerDisconnection(String nick) {
+
+    }
+
+    @Override
+    public void printPlayerConnection(String nick, boolean reconnect) {
+
+    }
+    public void printInvalidAssistant(){
+
+    }
 }

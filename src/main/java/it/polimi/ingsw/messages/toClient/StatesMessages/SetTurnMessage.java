@@ -5,9 +5,11 @@ import it.polimi.ingsw.messages.toClient.MessageToClient;
 
 public class SetTurnMessage extends MessageToClient {
     private String nickname;
+    private boolean assistantPhase;
 
-    public SetTurnMessage(String nickname){
+    public SetTurnMessage(String nickname, boolean assistantPhase){
         this.nickname=nickname;
+        this.assistantPhase=assistantPhase;
     }
 
     public void action(Client client){
@@ -17,4 +19,6 @@ public class SetTurnMessage extends MessageToClient {
     public String getNickname() {
         return nickname;
     }
+
+    public boolean isassistantPhase(){return assistantPhase;}
 }

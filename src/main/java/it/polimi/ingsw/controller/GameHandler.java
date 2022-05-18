@@ -6,7 +6,6 @@ import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.messages.toClient.StatesMessages.*;
 import it.polimi.ingsw.model.GameInterface;
 import it.polimi.ingsw.model.board.Characters;
-import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
@@ -50,6 +49,7 @@ public class GameHandler {
                             //Possiamo mandare tipo un messaggio di addato ad una partita
                             WizardsListMessage message = new WizardsListMessage(game.getWizardAvailable());
                             clientHandler.sendMessageToClient(message);
+                            sendMessagetoGame(game,new ConnectMessage(clientHandler.getNickname(), false));
 
                             break;
                         }
@@ -112,11 +112,10 @@ public class GameHandler {
                     playertoplay = player;
                     state = player.getPlayerState();
                     if(state==PlayerState.STUDENTPHASE && studentPlayed==0)
-                        sendMessagetoGame(game,new SetTurnMessage(playertoplay.getNickname()));
+                        sendMessagetoGame(game,new SetTurnMessage(playertoplay.getNickname(), false));
                     if(state==PlayerState.ASSISTANTPHASE)
-                        sendMessagetoGame(game,new SetTurnMessage(playertoplay.getNickname()));
+                        sendMessagetoGame(game,new SetTurnMessage(playertoplay.getNickname(), true));
 
-                    System.out.println(playertoplay.getNickname() + state);
                     findHandler(playertoplay.getNickname()).sendMessageToClient(new PlayerStateMessage(state));
                     break;
                 }
@@ -142,6 +141,7 @@ public class GameHandler {
             int playerid = findPlayeridofPlayer(clientHandler.getNickname());
             try {
                 game.setReconnectedPlayer(playerid);
+                sendMessagetoGame(game, new ConnectMessage(clientHandler.getNickname(), true));
             }catch(ReconnectedException e){
                 //Fare il messaggio invalidReconnection
                 NicknameMessage message = new NicknameMessage(false,false);
