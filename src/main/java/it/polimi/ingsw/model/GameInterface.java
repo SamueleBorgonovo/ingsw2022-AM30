@@ -27,7 +27,7 @@ public interface GameInterface {
 
     public GameMode getGameMode();
 
-    public void setDisconnectPlayer(int playerID);
+    public boolean setDisconnectPlayer(int playerID);
 
     public void setReconnectedPlayer(int playerid) throws ReconnectedException;
 
@@ -56,4 +56,6 @@ public interface GameInterface {
     public void startGame();
 
     public int getMotherNatureIsland();
+
+    public ArrayList<Player> getPlayerorder();
 }

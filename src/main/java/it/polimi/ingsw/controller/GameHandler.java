@@ -102,7 +102,7 @@ public class GameHandler {
         if(game.getState()==GameState.PLAYING) {
             PlayerInterface playertoplay;
             PlayerState state;
-            for (PlayerInterface player : game.getPlayers())
+            for (PlayerInterface player : game.getPlayerorder())
                 if (player.getPlayerState() != PlayerState.WAITING && player.getPlayerState() != PlayerState.DISCONNECTED
                         && player.getPlayerState() != PlayerState.RECONNECTED) {
                     playertoplay = player;
@@ -119,6 +119,7 @@ public class GameHandler {
     }
 
     public void disconnectPlayer(String nickname){
+        boolean callhandler;
         GameInterface game = findGameofPlayer(nickname);
         int playerid = findPlayeridofPlayer(nickname);
 
@@ -128,7 +129,11 @@ public class GameHandler {
             playertoPlayerIDMap.remove(nickname);
         }
         playertoHandlerMap.remove(nickname);
-        game.setDisconnectPlayer(playerid);
+        callhandler=game.setDisconnectPlayer(playerid);
+        if(callhandler) {
+            studentPlayed=0;
+            turnHandler(game);
+        }
     }
 
     public void reconnectPlayer(ClientHandlerInterface clientHandler){
