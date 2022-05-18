@@ -363,7 +363,7 @@ public class Game implements GameInterface {
                 if (getPlayer(playerID).getPlance().getEntrance().contains(student)) {
                     Island island = getBoard().getArchipelago().getSingleIsland(islandID);
                     island.addStudent(student);
-                    getPlayer(playerID).getPlance().removeStudentFromHall(student);
+                    getPlayer(playerID).getPlance().removeStudentEntrance(student);
                     movementStudents++;
                     if (movementStudents == numOfPlayers + 1) {
                         getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
