@@ -73,21 +73,18 @@ public class GameHandler {
             GameInterface game = findGameofPlayer(nickname);
             int playerid = findPlayeridofPlayer(nickname);
             if(game.checkPlayerState(playerid)){
-                //System.out.println(nickname + " reconnect ok");
+                clientHandler.setNickname(nickname);
                 NicknameMessage message = new NicknameMessage(true,true);
                 clientHandler.sendMessageToClient(message);
             }else{
-                //System.out.println(nickname + " reconnect non ok");
                 NicknameMessage message = new NicknameMessage(false,false);
                 clientHandler.sendMessageToClient(message);
             }
         }else{
             if(nicknameChoosen.contains(nickname)){
-                //System.out.println(nickname + " connect non ok");
                 NicknameMessage message = new NicknameMessage(false,false);
                 clientHandler.sendMessageToClient(message);
             }else{
-                //System.out.println(nickname + " connect ok");
                 NicknameMessage message = new NicknameMessage(true,false);
                 nicknameChoosen.add(nickname);
                 clientHandler.setNickname(nickname);
@@ -130,8 +127,8 @@ public class GameHandler {
             nicknameChoosen.remove(nickname);
             playertoGameMap.remove(nickname);
             playertoPlayerIDMap.remove(nickname);
-            playertoHandlerMap.remove(nickname);
         }
+        playertoHandlerMap.remove(nickname);
         game.setDisconnectPlayer(playerid);
     }
 
@@ -141,6 +138,9 @@ public class GameHandler {
             int playerid = findPlayeridofPlayer(clientHandler.getNickname());
             try {
                 game.setReconnectedPlayer(playerid);
+                setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
+                clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayers()));
+                clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard(),true));
                 sendMessagetoGame(game, new ConnectMessage(clientHandler.getNickname(), true));
             }catch(ReconnectedException e){
                 //Fare il messaggio invalidReconnection
@@ -164,7 +164,9 @@ public class GameHandler {
     //sends message to all client of a game
     public void sendMessagetoGame(GameInterface game,MessageToClient message){
         for(int count=0;count<game.getPlayers().size();count++)
-            findHandler(game.getPlayers().get(count).getNickname()).sendMessageToClient(message);
+            if(game.getPlayers().get(count).getPlayerState()!=PlayerState.DISCONNECTED) {
+                findHandler(game.getPlayers().get(count).getNickname()).sendMessageToClient(message);
+            }
     }
 
 

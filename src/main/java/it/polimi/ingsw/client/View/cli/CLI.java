@@ -172,7 +172,7 @@ public class CLI extends View {
         }
         client.setWizard(wizardChosen);
         ChooseWizardMessage message = new ChooseWizardMessage(wizardChosen);
-        this.client.sendMessage(message);
+        client.sendMessage(message);
         }
 
     @Override
@@ -509,11 +509,16 @@ public class CLI extends View {
     }
 
     public void printPlayerConnection(String nick,boolean reconnect){
-        if(!nick.equals(client.getNickname()))
+        if(nick.equals(client.getNickname())) {
+            if (reconnect) {
+                client.setWizard(player.getWizard());
+                System.out.println("Reconnecting to the game");
+            }
+        }else{
             if(reconnect)
-                System.out.println(nick + " is reconnecting to the game");
-            else System.out.println(nick + " is connecting to the game");
-
+                System.out.println(nick+" is reconnecting to the game");
+            else System.out.println(nick+" is connecting to the game");
+        }
     }
 
     public void printInvalidAssistant(){

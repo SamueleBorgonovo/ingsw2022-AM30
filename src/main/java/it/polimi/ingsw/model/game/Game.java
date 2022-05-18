@@ -222,9 +222,18 @@ public class Game implements GameInterface {
     }
 
     public void startRound(){
-        for(Player player : listOfPlayers)
-            if(player.getPlayerState() == PlayerState.RECONNECTED)
+
+        for(Player player : listOfPlayers) {
+            System.out.println(player.getNickname()+" "+player.getPlayerState()); //--
+            if (player.getPlayerState() != PlayerState.DISCONNECTED)
                 player.setPlayerState(PlayerState.WAITING);
+        }
+        for(Player player : listOfPlayers)//--
+            System.out.println(player.getNickname()+" "+player.getPlayerState());//--
+
+
+        for(Player player : playerorder)//--
+            System.out.println(player.getNickname()+" "+player.getPlayerState());//--
 
         numplayerhasplayed=0;
         int tmpplayerid=-1;
@@ -236,6 +245,7 @@ public class Game implements GameInterface {
         }
         if(tmpplayerid!=-1){
             numplayerhasplayed=tmpplayerid;
+            System.out.println(getPlayer(tmpplayerid+1).getNickname()+" messo in assistantPhase");//---
             getPlayer(tmpplayerid+1).setPlayerState(PlayerState.ASSISTANTPHASE);
         }
         //shutdown of game
@@ -310,7 +320,6 @@ public class Game implements GameInterface {
                         }
 
                         for (Player player : listOfPlayers) {
-                            player.setPlayerState(PlayerState.WAITING);
                             player.setCharacterPlayed(false);
                         }
                         startRound();  //Start the new round
@@ -328,7 +337,6 @@ public class Game implements GameInterface {
                 }
 
                 for (Player player : listOfPlayers) {
-                    player.setPlayerState(PlayerState.WAITING);
                     player.setCharacterPlayed(false);
                 }
                startRound();  //Start the new round
