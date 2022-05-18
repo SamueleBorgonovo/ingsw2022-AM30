@@ -390,10 +390,13 @@ public class Game implements GameInterface {
                     numplayerhasplayed=0;
                     verifyPlayerOrder();
                     usedAssistant.clear();
+
                     playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
                 }else{
-                    if(playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState()!= PlayerState.RECONNECTED)
+                    if(playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState()!= PlayerState.RECONNECTED){
+                        System.out.println("Metto "+playerorder.get(numplayerhasplayed).getNickname()+" in assistantPhase");
                         playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
+                    }
                     else{
                         numplayerhasplayed++;
                         if(numplayerhasplayed==numOfPlayers){
@@ -608,6 +611,8 @@ public class Game implements GameInterface {
     public ArrayList<Player> getPlayerorder(){
         return playerorder;
     }
+
+    public int getMotherNatureIsland(){ return board.getArchipelago().getMothernature().isOn();}
 
 }
 

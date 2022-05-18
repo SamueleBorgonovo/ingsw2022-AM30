@@ -54,4 +54,6 @@ public interface GameInterface {
     public Board getBoard();
 
     public void startGame();
+
+    public int getMotherNatureIsland();
 }

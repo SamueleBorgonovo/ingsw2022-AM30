@@ -452,14 +452,14 @@ public class CLI extends View {
 
     @Override
     public void printAssistantChosen(String nick, Assistant assistant) {
-        if(this.player.getPlayerState().equals(PlayerState.WAITING))
+        if(!client.isMyTurn())
             System.out.println(nick + " is playing " + assistant);
 
     }
 
     @Override
     public void printTurn(String nick) {
-        if(this.player.getPlayerState().equals(PlayerState.WAITING))
+        if(!client.isMyTurn())
             System.out.println(nick + " is playing");
         else
             System.out.println("Is your turn");
@@ -467,32 +467,32 @@ public class CLI extends View {
 
     @Override
     public void printCharacterChosen(String nick, Characters character) {
-        if(this.player.getPlayerState().equals(PlayerState.WAITING))
+        if(!client.isMyTurn())
             System.out.println(nick + " is playing " + character.getEffect().getName());
     }
 
     @Override
     public void printCloudChosen(String nick, int cloudID) {
-        if(this.player.getPlayerState().equals(PlayerState.WAITING))
+        if(!client.isMyTurn())
             System.out.println(nick + " has chosen cloud number " + cloudID);
 
     }
 
     @Override
     public void printStudentToHall(String nick, Student student) {
-        if(this.player.getPlayerState().equals(PlayerState.WAITING))
+        if(!client.isMyTurn())
             System.out.println(nick + " moved " + student + " to hall");
     }
 
     @Override
     public void printStudentToIsland(String nick, Student student, int islandID) {
-        if(this.player.getPlayerState().equals(PlayerState.WAITING))
+        if(!client.isMyTurn())
             System.out.println(nick + " moved " + student + " to island number " + islandID);
     }
 
     @Override
     public void printMotherNatureMovement(String nick, int islandID) {
-        if(this.player.getPlayerState().equals(PlayerState.WAITING))
+        if(!client.isMyTurn())
             System.out.println(nick + " moved mother nature to island number  " + islandID);
     }
 

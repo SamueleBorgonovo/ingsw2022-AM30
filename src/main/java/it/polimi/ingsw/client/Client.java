@@ -134,13 +134,12 @@ public class Client {
 
     public void setTurn(String nickname){
         if(this.nickname.equals(nickname)){
-            //print è iniziato il mio turno
             myTurn=true;
         }
         else {
-            //print è iniziato il turno di "nickname"
             myTurn=false;
         }
+        view.printTurn(nickname);
     }
 
     public void messageListener(){
@@ -241,5 +240,9 @@ public class Client {
 
     public boolean isCharacterPlayed() {
         return characterPlayed;
+    }
+
+    public boolean isMyTurn() {
+        return myTurn;
     }
 }

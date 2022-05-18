@@ -3,8 +3,10 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.controller.virtualView.PlayersView;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.messages.toClient.*;
+import it.polimi.ingsw.messages.toClient.StatesMessages.*;
 import it.polimi.ingsw.model.GameInterface;
 import it.polimi.ingsw.model.board.Characters;
+import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
@@ -109,6 +111,11 @@ public class GameHandler {
                         && player.getPlayerState() != PlayerState.RECONNECTED) {
                     playertoplay = player;
                     state = player.getPlayerState();
+                    if(state==PlayerState.STUDENTPHASE && studentPlayed==0)
+                        sendMessagetoGame(game,new SetTurnMessage(playertoplay.getNickname()));
+                    if(state==PlayerState.ASSISTANTPHASE)
+                        sendMessagetoGame(game,new SetTurnMessage(playertoplay.getNickname()));
+
                     System.out.println(playertoplay.getNickname() + state);
                     findHandler(playertoplay.getNickname()).sendMessageToClient(new PlayerStateMessage(state));
                     break;
@@ -195,6 +202,7 @@ public class GameHandler {
             game.useAssistant(playerID, assistant);
             sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
             sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
+            sendMessagetoGame(game,new AssistantChoosedMessage(clientHandler.getNickname(),assistant));
             turnHandler(game);
         } catch (InvalidAssistantException e) {
             InvalidAssistantMessage message = new InvalidAssistantMessage();
@@ -235,6 +243,7 @@ public class GameHandler {
             game.selectCloud(playerID,cloudID);
             sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
             sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
+            sendMessagetoGame(game,new CloudChoosedMessage(clientHandler.getNickname(), cloudID));
             turnHandler(game);
         } catch (InvalidCloudException e) {
             InvalidCloudMessage message = new InvalidCloudMessage();
@@ -253,6 +262,7 @@ public class GameHandler {
             game.moveMotherNature(playerID,movement);
             sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
             sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
+            sendMessagetoGame(game,new MotherNatureMoveMessage(clientHandler.getNickname(), game.getMotherNatureIsland()));
             turnHandler(game);
         } catch (InvalidValueException e) {
             InvalidValueMessage message = new InvalidValueMessage();
@@ -271,6 +281,7 @@ public class GameHandler {
             game.moveStudentToHall(playerID,student);
             sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
             sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
+            sendMessagetoGame(game,new StudentHallChoosedMessage(clientHandler.getNickname(),student));
             studentPlayed++;
             if(studentPlayed<game.getNumOfPlayers()+1)
                 clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
@@ -325,10 +336,10 @@ public class GameHandler {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
-            System.out.println("Sono qui");
             game.moveStudentToIsland(playerID,islandID,student);
             sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
             sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
+            sendMessagetoGame(game,new StudentIslandChoosedMessage(clientHandler.getNickname(),student,islandID));
             studentPlayed++;
 
             if(studentPlayed< game.getNumOfPlayers()+1)

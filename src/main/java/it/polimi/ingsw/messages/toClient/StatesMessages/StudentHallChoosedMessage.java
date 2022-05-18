@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.game.Student;
 public class StudentHallChoosedMessage extends MessageToClient {
     private Student student;
     private String nickname;
-    public StudentHallChoosedMessage(Student student,String nickname){
+    public StudentHallChoosedMessage(String nickname,Student student){
         this.student=student;
         this.nickname=nickname;
     }
