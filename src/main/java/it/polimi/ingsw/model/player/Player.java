@@ -28,6 +28,10 @@ public class Player implements PlayerInterface, Serializable {
         characterPlayed = false;
     }
 
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
     public void setWizard(Wizard wizard){this.wizard=wizard;}
 
     public boolean getCharacterPlayed() {return characterPlayed;}

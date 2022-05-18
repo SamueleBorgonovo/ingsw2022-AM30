@@ -194,8 +194,7 @@ public class Game implements GameInterface {
                 player.getPlance().addStudentEntrance(board.getAndRemoveRandomBagStudent(1).get(0));
         }
         if(gameMode.equals(GameMode.EXPERTMODE)) {
-            player.setCoins();
-            player.addCoins();
+            player.setCoins(1);
         }
         //if (listOfPlayers.size() == numOfPlayers)
             //this.startGame();
@@ -235,10 +234,9 @@ public class Game implements GameInterface {
                 break;
             }
         }
-        System.out.println("playerid di chi giocherà "+tmpplayerid+" nome di chi giocherà "+getPlayer(tmpplayerid));
         if(tmpplayerid!=-1){
             numplayerhasplayed=tmpplayerid;
-            playerorder.get(tmpplayerid).setPlayerState(PlayerState.ASSISTANTPHASE);
+            getPlayer(tmpplayerid+1).setPlayerState(PlayerState.ASSISTANTPHASE);
         }
         //shutdown of game
 
@@ -291,12 +289,12 @@ public class Game implements GameInterface {
                         getPlayer(playerID).getPlance().addStudentEntrance(getBoard().getCloud(cloudID).getStudents().get(count));
                     getBoard().getCloud(cloudID).setChoosen(true);
                     numplayerhasplayed++;
-                getPlayer(playerID).setPlayerState(PlayerState.WAITING);
                 }
             else throw new InvalidCloudException();
 
             if(numplayerhasplayed < numOfPlayers) {
                 //Set next player to play
+                getPlayer(playerID).setPlayerState(PlayerState.WAITING);
                 if (effectHandler.isProfessorcontroll())
                     effectHandler.setProfessorcontroll(false);
                 if(playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.RECONNECTED)
@@ -312,6 +310,7 @@ public class Game implements GameInterface {
                         }
 
                         for (Player player : listOfPlayers) {
+                            player.setPlayerState(PlayerState.WAITING);
                             player.setCharacterPlayed(false);
                         }
                         startRound();  //Start the new round
@@ -329,6 +328,7 @@ public class Game implements GameInterface {
                 }
 
                 for (Player player : listOfPlayers) {
+                    player.setPlayerState(PlayerState.WAITING);
                     player.setCharacterPlayed(false);
                 }
                startRound();  //Start the new round
@@ -363,7 +363,7 @@ public class Game implements GameInterface {
                 if (getPlayer(playerID).getPlance().getEntrance().contains(student)) {
                     Island island = getBoard().getArchipelago().getSingleIsland(islandID);
                     island.addStudent(student);
-                    getPlayer(playerID).getPlance().removeStudentEntrance(student);
+                    getPlayer(playerID).getPlance().removeStudentFromHall(student);
                     movementStudents++;
                     if (movementStudents == numOfPlayers + 1) {
                         getPlayer(playerID).setPlayerState(PlayerState.MOTHERNATUREPHASE);
@@ -389,13 +389,10 @@ public class Game implements GameInterface {
                     numplayerhasplayed=0;
                     verifyPlayerOrder();
                     usedAssistant.clear();
-                    System.out.println("Playerorder ha size: "+playerorder.size());
                     playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
                 }else{
-                    if(playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState()!= PlayerState.RECONNECTED){
-                        System.out.println("Metto "+playerorder.get(numplayerhasplayed).getNickname()+" in assistantPhase");
+                    if(playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState()!= PlayerState.RECONNECTED)
                         playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
-                    }
                     else{
                         numplayerhasplayed++;
                         if(numplayerhasplayed==numOfPlayers){
@@ -536,11 +533,15 @@ public class Game implements GameInterface {
 
     void verifyProfessorControl() {
         // Controll and check Professors.
-        int numofstudentcolorhall = 0;
-        int numofstudentcolorhallmax = 0;
+        int numofstudentcolorhall;
+        int numofstudentcolorhallmax;
         Player playermax = null;
 
         for (int i = 0; i < Professor.values().length; i++) {
+            numofstudentcolorhallmax = 0;
+            for (Player player : listOfPlayers)
+                if(player.getPlance().getProfessors().contains(Professor.values()[i]))
+                    numofstudentcolorhallmax=player.getPlance().getNumberOfStudentHall(Student.values()[i]);
             for (Player player : listOfPlayers) {
                 numofstudentcolorhall = player.getPlance().getNumberOfStudentHall(Student.values()[i]);
                 if (numofstudentcolorhall > numofstudentcolorhallmax || (effectHandler.isProfessorcontroll() && numofstudentcolorhall >= numofstudentcolorhallmax)) {
@@ -554,45 +555,41 @@ public class Game implements GameInterface {
                         player.getPlance().removeProfessor(Professor.values()[i]);
                 playermax.getPlance().addProfessor(Professor.values()[i]);
             }
-            numofstudentcolorhallmax = 0;
             playermax = null;
         }
     }
 
     public ArrayList<Player> verifyPlayerOrder() {
+        Player minplayer = listOfPlayers.get(0);
+        for (int count = 1; count < listOfPlayers.size(); count++) {
+            if((listOfPlayers.get(count).getPlayerState()!=PlayerState.DISCONNECTED) && (listOfPlayers.get(count).getPlayerState()!=PlayerState.RECONNECTED))
+                if (listOfPlayers.get(count).getLastassistantplayed().getValue() < minplayer.getLastassistantplayed().getValue())
+                    minplayer = listOfPlayers.get(count);
+        }
 
-        Player minplayer=playerorder.get(0);
-        for(int count=0;count<playerorder.size();count++)
-            if(playerorder.get(count).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(count).getPlayerState()!=PlayerState.RECONNECTED)
-                if(playerorder.get(count).getLastassistantplayed().getValue()<minplayer.getLastassistantplayed().getValue())
-                    minplayer=playerorder.get(count);
-
-        ArrayList<Player> temporder = new ArrayList<>();
-        temporder.add(0, minplayer);
+        playerorder.add(0, minplayer);
         Player lasttakenplayer = minplayer;
         Player tempplayer = null;
-        for (int count = 1; count < playerorder.size(); count++) {
-            for (int counter = 0; counter < playerorder.size(); counter++) {
+        for (int count = 1; count < listOfPlayers.size(); count++) {
+            for (int counter = 0; counter < listOfPlayers.size(); counter++) {
                 if (lasttakenplayer.getPlayerID() == getNumOfPlayers()) {
-                    if (playerorder.get(counter).getPlayerID() == 1)
-                        tempplayer = playerorder.get(counter);
+                    if (listOfPlayers.get(counter).getPlayerID() == 1)
+                        tempplayer = listOfPlayers.get(counter);
                 } else {
-                    if (playerorder.get(counter).getPlayerID() == lasttakenplayer.getPlayerID() + 1) {
-                        tempplayer = playerorder.get(counter);
+                    if (listOfPlayers.get(counter).getPlayerID() == lasttakenplayer.getPlayerID() + 1) {
+                        tempplayer = listOfPlayers.get(counter);
                     }
                 }
             }
             lasttakenplayer = tempplayer;
-            temporder.add(count, lasttakenplayer);
+            playerorder.add(count, lasttakenplayer);
         }
         for(int count=0;count<playerorder.size();count++){
-            if(temporder.get(count).getPlayerState()==PlayerState.DISCONNECTED || temporder.get(count).getPlayerState()==PlayerState.RECONNECTED){
-                Collections.swap(temporder,count,temporder.size()-1);
+            if(playerorder.get(count).getPlayerState()==PlayerState.DISCONNECTED || playerorder.get(count).getPlayerState()==PlayerState.RECONNECTED){
+                Collections.swap(playerorder,count,playerorder.size()-1);
             }
 
         }
-        playerorder.clear();
-        playerorder.addAll(temporder);
         return playerorder;
     }
 
@@ -610,11 +607,14 @@ public class Game implements GameInterface {
         playerorder.get(0).setPlayerState(PlayerState.ASSISTANTPHASE);
     }
 
+    @Override
+    public int getMotherNatureIsland() {
+        return board.getArchipelago().getMothernature().isOn();
+    }
+
     public ArrayList<Player> getPlayerorder(){
         return playerorder;
     }
-
-    public int getMotherNatureIsland(){ return board.getArchipelago().getMothernature().isOn();}
 
 }
 
