@@ -519,5 +519,27 @@ public class CLI extends View {
     public void printInvalidAssistant(){
         System.out.println("Assistant already chosen. Try again");
     }
+
+    public void printInvalidCloud(){
+        System.out.println("Cloud not available. Try again");
+    }
+
+    public void printInvalidIsland(){
+        System.out.println("Iisland number not available. Try again");
+    }
+
+    public void printInvalidStudent(){
+        System.out.println("Student not available. Try again");
+    }
+
+    public void printInvalidTurn(){
+        System.out.println("Action not available. Is not your turn");
+    }
+
+    public void printInvalidStop(){
+        System.out.println("Character GRANDMA doens't have enough stop");
+    }
+
+
 }
 

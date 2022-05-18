@@ -131,4 +131,29 @@ public class GUI extends View {
     public void printInvalidAssistant(){
 
     }
+
+    @Override
+    public void printInvalidCloud() {
+
+    }
+
+    @Override
+    public void printInvalidIsland() {
+
+    }
+
+    @Override
+    public void printInvalidStudent() {
+
+    }
+
+    @Override
+    public void printInvalidTurn() {
+
+    }
+
+    @Override
+    public void printInvalidStop() {
+
+    }
 }

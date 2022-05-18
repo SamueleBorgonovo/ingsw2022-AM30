@@ -27,10 +27,11 @@ public class ClientMessageHandler {
     }
 
     public void process(InvalidTurnMessage message){
+        view.printInvalidTurn();
     }
 
     public void process(InvalidStopMessage message){
-
+        view.printInvalidStop();
     }
 
     public void process(OutOfCoinsMessage message){
@@ -42,7 +43,7 @@ public class ClientMessageHandler {
     }
 
     public void process(InvalidCloudMessage message){
-
+        view.printInvalidCloud();
     }
 
     public void process(InvalidValueMessage message){
@@ -50,7 +51,7 @@ public class ClientMessageHandler {
     }
 
     public void process(InvalidStudentMessage message){
-        //Mandare messaggio di errore
+        view.printInvalidStudent();
     }
 
     public void process(InvalidStudentEffectMessage message){
@@ -58,7 +59,7 @@ public class ClientMessageHandler {
     }
 
     public void process(InvalidIslandMessage message){
-
+        view.printInvalidIsland();
     }
 
     public void process(WizardsListMessage message){

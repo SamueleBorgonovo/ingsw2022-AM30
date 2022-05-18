@@ -64,4 +64,14 @@ public abstract class View {
     public abstract void printPlayerConnection(String nick,boolean reconnect);
 
     public abstract void printInvalidAssistant();
+
+    public abstract void printInvalidCloud();
+
+    public abstract void printInvalidIsland();
+
+    public abstract void printInvalidStudent();
+
+    public abstract void printInvalidTurn();
+
+    public abstract void printInvalidStop();
 }
