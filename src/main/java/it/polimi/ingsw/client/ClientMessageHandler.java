@@ -79,7 +79,7 @@ public class ClientMessageHandler {
     }
 
     public void process(InvalidWizardMessage message){
-
+        view.printInvalidWizard();
     }
 
     public void process(PlayerStateMessage message){

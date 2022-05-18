@@ -46,7 +46,6 @@ public class GameHandler {
                             setPlayeridofPlayer(clientHandler.getNickname(), playerid);
                             setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
                             found = 1;
-                            //Possiamo mandare tipo un messaggio di addato ad una partita
                             WizardsListMessage message = new WizardsListMessage(game.getWizardAvailable());
                             clientHandler.sendMessageToClient(message);
                             sendMessagetoGame(game,new ConnectMessage(clientHandler.getNickname(), false));
@@ -365,7 +364,7 @@ public class GameHandler {
         int playerid = findPlayeridofPlayer(clientHandler.getNickname());
         try{
             game.setWizard(playerid,wizard);
-            if(game.getPlayers().size()==game.getNumOfPlayers()){
+            if(4-game.getWizardAvailable().size()==game.getNumOfPlayers()){
                 sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
                 sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
                 startGame(game);
@@ -373,6 +372,7 @@ public class GameHandler {
         } catch (InvalidWizardException e) {
            InvalidWizardMessage message = new InvalidWizardMessage();
            clientHandler.sendMessageToClient(message);
+           clientHandler.sendMessageToClient(new WizardsListMessage(game.getWizardAvailable()));
         }
     }
 }

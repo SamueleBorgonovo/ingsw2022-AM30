@@ -74,4 +74,6 @@ public abstract class View {
     public abstract void printInvalidTurn();
 
     public abstract void printInvalidStop();
+
+    public abstract void printInvalidWizard();
 }

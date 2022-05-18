@@ -156,4 +156,9 @@ public class GUI extends View {
     public void printInvalidStop() {
 
     }
+
+    @Override
+    public void printInvalidWizard() {
+
+    }
 }

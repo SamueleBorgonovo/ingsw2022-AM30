@@ -545,6 +545,10 @@ public class CLI extends View {
         System.out.println("Character GRANDMA doens't have enough stop");
     }
 
+    public void printInvalidWizard(){
+        System.out.println("Wizard is not more available.");
+    }
+
 
 }
 
