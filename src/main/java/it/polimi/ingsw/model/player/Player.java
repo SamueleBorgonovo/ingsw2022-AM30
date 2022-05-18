@@ -21,7 +21,7 @@ public class Player implements PlayerInterface, Serializable {
     public Player(String nickname){
         this.nickname = nickname;
         lastassistantplayed = null;
-        coins = -1;
+        coins = -100;
         assistantPlayed = false;
         playerState = PlayerState.WAITING;
         Collections.addAll(assistantCards, Assistant.values());
@@ -76,6 +76,10 @@ public class Player implements PlayerInterface, Serializable {
         if(coins>=numOfCoins)
             coins = coins - numOfCoins;
         else throw new OutOfCoinsException();
+    }
+
+    public void setCoins(){
+        coins=0;
     }
 
     public ArrayList<Assistant> getAssistantCards() {return assistantCards; }
