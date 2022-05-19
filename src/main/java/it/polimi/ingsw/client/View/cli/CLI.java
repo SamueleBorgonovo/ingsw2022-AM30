@@ -3,6 +3,8 @@ package it.polimi.ingsw.client.View.cli;
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
+import it.polimi.ingsw.controller.virtualView.BoardView;
+import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Characters;
@@ -25,8 +27,8 @@ public class CLI extends View {
     private final Graphic graphic = new Graphic();
     private Client client;
     private InputParser inputParser = new InputParser();
-    private ArrayList<PlayerInterface> players= new ArrayList<>();
-    private Board board;
+    private ArrayList<PlayerView> players= new ArrayList<>();
+    private BoardView board;
     private CharacterInput characterInput;
     EffectHandler effectHandler = new EffectHandler();
     private String nickname;
@@ -430,7 +432,7 @@ public class CLI extends View {
     }
 
     @Override
-    public void setPlayers(ArrayList<Player> players) {
+    public void setPlayers(ArrayList<PlayerView> players) {
         this.players.clear();
         this.players.addAll(players);
         for(PlayerInterface play : players)
@@ -439,7 +441,7 @@ public class CLI extends View {
     }
 
     @Override
-    public void setBoard(Board board) {
+    public void setBoard(BoardView board) {
         this.board=board;
     }
 

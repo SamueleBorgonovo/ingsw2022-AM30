@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.controller.virtualView.BoardView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.messages.toClient.*;
@@ -143,8 +144,8 @@ public class GameHandler {
             try {
                 game.setReconnectedPlayer(playerid);
                 setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
-                clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayers()));
-                clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard(),true));
+                clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayersView()));
+                clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard().getBoardView(),true));
                 sendMessagetoGame(game, new ConnectMessage(clientHandler.getNickname(), true));
             }catch(ReconnectedException e){
                 //Fare il messaggio invalidReconnection
@@ -163,6 +164,11 @@ public class GameHandler {
         for(String nick : nicknames) {
             findHandler(nick).handleSocketDisconnection(false,gameEnded);
         }
+    }
+
+    public void updateClient(GameInterface game, BoardView boardView, ArrayList<PlayerView> playerView){
+        sendMessagetoGame(game,new BoardUpdateMessage(boardView,true));
+        sendMessagetoGame(game,new PlanceUpdateMessage(playerView));
     }
 
     //sends message to all client of a game
@@ -206,8 +212,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.useAssistant(playerID, assistant);
-            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayerorder()));
-            sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
             sendMessagetoGame(game,new AssistantChoosedMessage(clientHandler.getNickname(),assistant));
             turnHandler(game);
         } catch (InvalidAssistantException e) {
@@ -251,8 +256,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.selectCloud(playerID,cloudID);
-            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
-            sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
             sendMessagetoGame(game,new CloudChoosedMessage(clientHandler.getNickname(), cloudID));
             turnHandler(game);
         } catch (InvalidCloudException e) {
@@ -270,8 +274,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveMotherNature(playerID,movement);
-            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
-            sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
             sendMessagetoGame(game,new MotherNatureMoveMessage(clientHandler.getNickname(), game.getMotherNatureIsland()));
             turnHandler(game);
         } catch (InvalidValueException e) {
@@ -289,8 +292,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveStudentToHall(playerID,student);
-            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
-            sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
             sendMessagetoGame(game,new StudentHallChoosedMessage(clientHandler.getNickname(),student));
             studentPlayed++;
             if(studentPlayed<game.getNumOfPlayers()+1)
@@ -347,8 +349,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveStudentToIsland(playerID,islandID,student);
-            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
-            sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
             sendMessagetoGame(game,new StudentIslandChoosedMessage(clientHandler.getNickname(),student,islandID));
             studentPlayed++;
 
@@ -374,8 +375,7 @@ public class GameHandler {
         try{
             game.setWizard(playerid,wizard);
             if(4-game.getWizardAvailable().size()==game.getNumOfPlayers()){
-                sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
-                sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
+                updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
                 startGame(game);
             }
         } catch (InvalidWizardException e) {

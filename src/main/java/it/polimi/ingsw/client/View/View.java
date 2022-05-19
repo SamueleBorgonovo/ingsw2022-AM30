@@ -1,6 +1,8 @@
 package it.polimi.ingsw.client.View;
 
 import it.polimi.ingsw.client.View.cli.PossibleAction;
+import it.polimi.ingsw.controller.virtualView.BoardView;
+import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.Cloud;
@@ -39,9 +41,9 @@ public abstract class View {
 
     public abstract void InputIslandCharacter();
 
-    public abstract void setPlayers(ArrayList<Player> players);
+    public abstract void setPlayers(ArrayList<PlayerView> players);
 
-    public abstract void setBoard(Board board);
+    public abstract void setBoard(BoardView board);
 
     public abstract void print();
 

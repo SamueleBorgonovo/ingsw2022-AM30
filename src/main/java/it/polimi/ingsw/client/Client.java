@@ -126,12 +126,6 @@ public class Client {
         }
     }
 
-    public void updateBoard(Board board, boolean isAccepted){
-        view.setBoard(board);
-        if(isAccepted)
-            view.print();
-    }
-
     public void setTurn(String nickname, boolean assistantPhase){
         if(this.nickname.equals(nickname)){
             myTurn=true;

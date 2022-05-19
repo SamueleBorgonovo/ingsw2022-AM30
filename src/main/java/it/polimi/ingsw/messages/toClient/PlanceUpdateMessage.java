@@ -1,6 +1,7 @@
 package it.polimi.ingsw.messages.toClient;
 
 import it.polimi.ingsw.client.Client;
+import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.player.Plance;
 import it.polimi.ingsw.model.player.Player;
 
@@ -8,9 +9,9 @@ import java.util.ArrayList;
 
 
 public class PlanceUpdateMessage extends MessageToClient{
-    ArrayList<Player> players;
+    ArrayList<PlayerView> players;
 
-    public PlanceUpdateMessage(ArrayList<Player> players){
+    public PlanceUpdateMessage(ArrayList<PlayerView> players){
         this.players=players;
     }
 
@@ -18,7 +19,7 @@ public class PlanceUpdateMessage extends MessageToClient{
         client.getMessageHandler().process(this);
     }
 
-    public ArrayList<Player> getPlayers() {
+    public ArrayList<PlayerView> getPlayers() {
         return players;
     }
 }

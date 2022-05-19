@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Characters;
@@ -58,4 +59,6 @@ public interface GameInterface {
     public int getMotherNatureIsland();
 
     public ArrayList<Player> getPlayerorder();
+
+    public ArrayList<PlayerView> getPlayersView();
 }

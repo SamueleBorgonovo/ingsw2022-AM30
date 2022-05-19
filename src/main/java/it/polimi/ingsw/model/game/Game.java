@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.game;
 
 import it.polimi.ingsw.controller.GameHandler;
+import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.GameInterface;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.*;
@@ -627,6 +628,13 @@ public class Game implements GameInterface {
 
     public void setPlayerorder(ArrayList<Player> playerorder) {
         this.playerorder = playerorder;
+    }
+
+    public ArrayList<PlayerView> getPlayersView(){
+        ArrayList<PlayerView> tempplayerview = new ArrayList<>();
+        for(Player player : listOfPlayers)
+            tempplayerview.add(player.getPlayerView());
+        return tempplayerview;
     }
 }
 
