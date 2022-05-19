@@ -2,13 +2,16 @@ package it.polimi.ingsw.client.View;
 
 import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.controller.virtualView.BoardView;
+import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
-import it.polimi.ingsw.model.board.Board;
-import it.polimi.ingsw.model.board.Characters;
-import it.polimi.ingsw.model.board.Cloud;
+
+
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.player.*;
+import it.polimi.ingsw.model.player.Wizard;
+import it.polimi.ingsw.model.player.PlayerState;
+import it.polimi.ingsw.model.player.Assistant;
+
 
 import java.util.ArrayList;
 
@@ -55,7 +58,7 @@ public abstract class View {
 
     public abstract void printTurn(String nick);
 
-    public abstract void printCharacterChosen(String nick, Characters character);
+    public abstract void printCharacterChosen(String nick, CharacterView character);
 
     public abstract void printCloudChosen(String nick, int cloudID);
 

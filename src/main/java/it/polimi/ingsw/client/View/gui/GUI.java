@@ -2,6 +2,9 @@ package it.polimi.ingsw.client.View.gui;
 
 import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.client.View.cli.PossibleAction;
+import it.polimi.ingsw.controller.virtualView.BoardView;
+import it.polimi.ingsw.controller.virtualView.CharacterView;
+import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.Cloud;
@@ -72,10 +75,10 @@ public class GUI extends View {
     }
 
     @Override
-    public void setPlayers(ArrayList<Player> players) {}
+    public void setPlayers(ArrayList<PlayerView> players) {}
 
     @Override
-    public void setBoard(Board board) {
+    public void setBoard(BoardView board) {
 
     }
 
@@ -105,7 +108,7 @@ public class GUI extends View {
     }
 
     @Override
-    public void printCharacterChosen(String nick, Characters character) {
+    public void printCharacterChosen(String nick, CharacterView character) {
 
     }
 

@@ -3,17 +3,15 @@ package it.polimi.ingsw.client.View.cli;
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
-import it.polimi.ingsw.controller.virtualView.BoardView;
-import it.polimi.ingsw.controller.virtualView.PlayerView;
+import it.polimi.ingsw.controller.virtualView.*;
 import it.polimi.ingsw.messages.toServer.*;
-import it.polimi.ingsw.model.board.Board;
-import it.polimi.ingsw.model.board.Characters;
-import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.EffectHandler;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.player.*;
+import it.polimi.ingsw.model.player.Wizard;
+import it.polimi.ingsw.model.player.PlayerState;
+import it.polimi.ingsw.model.player.Assistant;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,13 +28,13 @@ public class CLI extends View {
     private ArrayList<PlayerView> players= new ArrayList<>();
     private BoardView board;
     private CharacterInput characterInput;
-    EffectHandler effectHandler = new EffectHandler();
+    private EffectHandler effectHandler = new EffectHandler();
     private String nickname;
-    private PlayerInterface player;
+    private PlayerView player;
     private boolean isFirst=true;
     private GameMode gameMode;
     private boolean character4played = false;
-    Characters characterPlayed;
+    private CharacterView characterPlayed;
 
 
     public void init() throws IOException, ClassNotFoundException, NumberFormatException {
@@ -115,7 +113,7 @@ public class CLI extends View {
 
     @Override
     public GameMode chooseGameMode(){
-        player= new Player(this.nickname);
+        //this.player = new Player(this.nickname)
         Scanner stdin = new Scanner(System.in);
         System.out.println("Press s for SimpleMode or e for ExpertMode  s | e");
         String choice = stdin.nextLine();
@@ -174,6 +172,10 @@ public class CLI extends View {
                 wizardInt = inputParser.intParser();
             }
         }
+        if(this.gameMode==GameMode.SIMPLEMODE)
+            this.player = new PlayerView(this.nickname,wizardChosen,null, null,0,null);
+        else
+            this.player = new PlayerView(this.nickname,wizardChosen,null, null,1,null);
         client.setWizard(wizardChosen);
         ChooseWizardMessage message = new ChooseWizardMessage(wizardChosen);
         client.sendMessage(message);
@@ -301,9 +303,9 @@ public class CLI extends View {
 
     @Override
     public void moveStudentToHall() {
-        ArrayList<PlayerInterface> playerP = new ArrayList<>();
-        playerP.add(player);
-        graphic.printPlances(playerP);
+        ArrayList<PlayerView> playerList = new ArrayList<>();
+        playerList.add(player);
+        graphic.printPlances(playerList);
         Student studentChosen = this.chooseStudentToMove();
         MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentChosen);
         this.client.sendMessage(message);
@@ -321,11 +323,11 @@ public class CLI extends View {
 
     @Override
     public void moveStudentToIsland() {
-        graphic.printArchipelago(board.getArchipelago());
-        ArrayList<PlayerInterface> playerP = new ArrayList<>();
+        graphic.printArchipelago(this.board.getIslandViews(), this.board.getMotherNature());
+        ArrayList<PlayerView> playerP = new ArrayList<>();
         playerP.add(player);
         graphic.printPlances(playerP);
-        int numOfIslands = this.board.getArchipelago().getNumOfIslands();
+        int numOfIslands = this.board.getIslandViews().size();
         Student studentChosen = this.chooseStudentToMove();
         int islandID = inputParser.IslandParser(numOfIslands);
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(islandID, studentChosen);
@@ -340,7 +342,7 @@ public class CLI extends View {
         if(character4played)
             num=2;
         Assistant assistant = this.player.getLastassistantplayed();
-        graphic.printArchipelago(this.board.getArchipelago());
+        graphic.printArchipelago(this.board.getIslandViews(),this.board.getMotherNature());
         System.out.println("Choose the number of movements for Mother Nature");
         int numberOfMovements=inputParser.intParser();
         boolean check = false;
@@ -360,7 +362,7 @@ public class CLI extends View {
 
     @Override
     public void chooseCloud() {
-        ArrayList<Cloud> clouds = this.board.getClouds();
+        ArrayList<CloudView> clouds = this.board.getClouds();
         this.graphic.printClouds(clouds);
         System.out.println("Choose one cloud between this available by typing his number associated");
         int cloudChosen = inputParser.intParser();
@@ -381,10 +383,10 @@ public class CLI extends View {
 
     @Override
     public void useCharacter(){
-        ArrayList<Characters> availableCharacter = this.board.getCharacters();
+        ArrayList<CharacterView> availableCharacter = this.board.getCharacters();
         int numOfCoins = this.player.getCoins();
         System.out.println("Choose one character between this available by typing his number associated");
-        Characters character = null;
+        CharacterView character = null;
         boolean check = false;
         graphic.printCharacters(availableCharacter, this.effectHandler);
         int characterChosen = inputParser.intParser();
@@ -427,7 +429,7 @@ public class CLI extends View {
 
     @Override
     public void InputIslandCharacter() {
-        this.characterInput.islandInput(this.client, this.board.getArchipelago().getNumOfIslands());
+        this.characterInput.islandInput(this.client, this.board.getIslandViews().size());
         this.characterPlayed=null;
     }
 
@@ -435,7 +437,7 @@ public class CLI extends View {
     public void setPlayers(ArrayList<PlayerView> players) {
         this.players.clear();
         this.players.addAll(players);
-        for(PlayerInterface play : players)
+        for(PlayerView play : players)
             if(play.getNickname().equals(client.getNickname()))
                 player=play;
     }
@@ -454,7 +456,7 @@ public class CLI extends View {
     @Override
     public void printStartGame() {
         System.out.println("Game is Starting");
-        graphic.printArchipelago(board.getArchipelago());
+        graphic.printArchipelago(board.getIslandViews(),board.getMotherNature());
         graphic.printPlances(players);
     }
 
@@ -479,15 +481,15 @@ public class CLI extends View {
             System.out.println(nick + " is playing");
         else {
             System.out.println("Is your turn");
-            graphic.printArchipelago(board.getArchipelago());
+            graphic.printArchipelago(board.getIslandViews(),board.getMotherNature());
             graphic.printPlances(players);
         }
     }
 
     @Override
-    public void printCharacterChosen(String nick, Characters character) {
+    public void printCharacterChosen(String nick, CharacterView character) {
         if(!client.isMyTurn())
-            System.out.println(nick + " is playing " + character.getEffect().getName());
+            System.out.println(nick + " is playing " + character.getName());
     }
 
     @Override
