@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.Plance;
 import it.polimi.ingsw.model.player.Wizard;
 
+import java.awt.event.WindowAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -13,34 +14,23 @@ public class PlayersView implements Serializable {
     private Assistant lastassistantplayed;
     private ArrayList<Assistant> assistantCards = new ArrayList<>();
     private int coins;
-    private Plance plance;
+    private PlanceView plance;
 
-    public Plance getPlance() {
+    public PlayersView(String nickname, Wizard wizard,Assistant lastassistantplayed,ArrayList<Assistant> assistantCards,int coins,PlanceView plance){
+        this.nickname=nickname;
+        this.wizard=wizard;
+        this.lastassistantplayed=lastassistantplayed;
+        this.assistantCards=assistantCards;
+        this.coins=coins;
+        this.plance=plance;
+    }
+
+    public PlanceView getPlance() {
         return plance;
-    }
-
-    public void setPlance(Plance plance) {
-        this.plance = plance;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public void setWizard(Wizard wizard) {
         this.wizard = wizard;
-    }
-
-    public void setLastassistantplayed(Assistant lastassistantplayed) {
-        this.lastassistantplayed = lastassistantplayed;
-    }
-
-    public void setAssistantCards(ArrayList<Assistant> assistantCards) {
-        this.assistantCards = assistantCards;
-    }
-
-    public void setCoins(int coins) {
-        this.coins = coins;
     }
 
     public String getNickname() {
