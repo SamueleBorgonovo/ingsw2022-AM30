@@ -13,26 +13,9 @@ public class CharacterInput {
     private final InputParser inputParser = new InputParser();
     //effect2, effect6, effect8 have no input
 
-    public void monkInput(Client client, ArrayList<Student> students, int numOfIslands){
-        //effect1 input
-        Student studentChosen = inputParser.studentParser();
-        while(!students.contains(studentChosen)){
-            System.out.println("Student not available. Please try again");
-            studentChosen = inputParser.studentParser();
-        }
-
-        ArrayList<Student> listStudent = new ArrayList<>();
-        listStudent.add(studentChosen);
-        ChooseStudentsEffectMessage messageStudent = new ChooseStudentsEffectMessage(listStudent);
-        client.sendMessage(messageStudent);
-
-        int islandID = inputParser.IslandParser(numOfIslands);
-        ChooseIslandEffectMessage messageIsland = new ChooseIslandEffectMessage(islandID);
-        client.sendMessage(messageIsland);
-    }
 
     public void islandInput(Client client, int numOfIslands){
-        //effect3, effect5 input
+        //effect3, effect5, effect1 part 2 input
         int islandID = inputParser.IslandParser(numOfIslands);
         ChooseIslandEffectMessage message = new ChooseIslandEffectMessage(islandID);
         client.sendMessage(message);
@@ -122,7 +105,8 @@ public class CharacterInput {
     }
 
 
-    public void spoiledprincess(Client client, ArrayList<Student> studentsCard) {
+    public void studentFromCard(Client client, ArrayList<Student> studentsCard) {
+        //effect 11, effect 1 part 2
         ArrayList<Student> studentsList = new ArrayList<>();
         Student studentChosen = inputParser.studentParser();
         while (!studentsCard.contains(studentChosen)) {
@@ -131,6 +115,7 @@ public class CharacterInput {
         }
         studentsList.add(studentChosen);
         ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(studentsList);
+        client.sendMessage(message);
     }
 }
 

@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.game.Tower;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Island implements Serializable {
+public class Island {
     private final ArrayList<Student> students = new ArrayList<>();
     private int numOfTowers;
     private Tower tower;

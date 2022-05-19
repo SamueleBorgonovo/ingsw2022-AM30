@@ -62,6 +62,16 @@ public class GUI extends View {
     public void useCharacter() {}
 
     @Override
+    public void InputStudentCharacter() {
+
+    }
+
+    @Override
+    public void InputIslandCharacter() {
+
+    }
+
+    @Override
     public void setPlayers(ArrayList<Player> players) {}
 
     @Override

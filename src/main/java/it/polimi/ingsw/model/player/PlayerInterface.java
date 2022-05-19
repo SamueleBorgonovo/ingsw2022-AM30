@@ -24,4 +24,5 @@ public interface PlayerInterface{
 
     public Assistant getLastassistantplayed();
 
+
 }

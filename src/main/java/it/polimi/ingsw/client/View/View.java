@@ -35,6 +35,10 @@ public abstract class View {
 
     public abstract void useCharacter();
 
+    public abstract void InputStudentCharacter();
+
+    public abstract void InputIslandCharacter();
+
     public abstract void setPlayers(ArrayList<Player> players);
 
     public abstract void setBoard(Board board);

@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.model.effects.Effect;
 import it.polimi.ingsw.model.game.Student;
 
 import java.io.Serializable;
 
-public class Characters implements Serializable {
+public class Characters{
     private int cost;
     private boolean used = false;
     private final Effect effect;
@@ -35,5 +36,9 @@ public class Characters implements Serializable {
 
     public TypeOfInputCharacter getTypeOfInputCharacter() {
         return typeOfInputCharacter;
+    }
+
+    public CharacterView getCharacterView(){
+        return new CharacterView(this.cost, this.typeOfInputCharacter, this.effect.getName());
     }
 }

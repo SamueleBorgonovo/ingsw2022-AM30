@@ -240,6 +240,10 @@ public class GameHandler {
             InvalidCharacterMessage message = new InvalidCharacterMessage();
             clientHandler.sendMessageToClient(message);
         }
+
+
+
+
     }
 
     public void chooseCloud(ClientHandlerInterface clientHandler, int cloudID) {

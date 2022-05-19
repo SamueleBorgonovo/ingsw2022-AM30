@@ -1,6 +1,11 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.controller.virtualView.BoardView;
+import it.polimi.ingsw.controller.virtualView.CharacterView;
+import it.polimi.ingsw.controller.virtualView.CloudView;
+import it.polimi.ingsw.controller.virtualView.IslandView;
 import it.polimi.ingsw.exceptions.OutOfCoinsException;
+import it.polimi.ingsw.messages.toClient.BoardUpdateMessage;
 import it.polimi.ingsw.model.effects.*;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
@@ -8,7 +13,7 @@ import it.polimi.ingsw.model.game.Student;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Board implements Serializable {
+public class Board {
     private ArrayList<Cloud> clouds = new ArrayList<>();
     private Archipelago archipelago;
     private ArrayList<Student> bag = new ArrayList<>();
@@ -111,5 +116,19 @@ public class Board implements Serializable {
         return tempcloud;
     }
 
+    public BoardView getBoardView(){
+        ArrayList<CloudView> cloudsViews = new ArrayList<>();
+        for(Cloud cloud : this.clouds)
+            cloudsViews.add(cloud.getCloudView());
+        ArrayList<IslandView> islandsView = new ArrayList<>();
+        for(Island island : this.getArchipelago().getIslands()) {
+             islandsView.add(island.getIslandView());
+        }
+        ArrayList<CharacterView> characterViews = new ArrayList<>();
+        for(Characters charac : this.getCharacters())
+            characterViews.add(charac.getCharacterView());
+
+        return new BoardView(cloudsViews, islandsView,this.getArchipelago().getMothernature().isOn(),characterViews);
+    }
 
 }

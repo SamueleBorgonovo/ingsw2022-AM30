@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Plance implements Serializable {
+public class Plance {
     private ArrayList<Student> entrance = new ArrayList<>();
     private ArrayList<Professor> professors = new ArrayList<>();
     private final HashMap<Student,Integer> hall = new HashMap<>();

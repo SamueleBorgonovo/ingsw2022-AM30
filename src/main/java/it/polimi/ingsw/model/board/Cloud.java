@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.controller.virtualView.CloudView;
 import it.polimi.ingsw.model.game.Student;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cloud implements Serializable{
+public class Cloud{
     private ArrayList<Student> students = new ArrayList<>();
     private boolean choosen = false;
     private int cloudID;
@@ -32,6 +33,10 @@ public class Cloud implements Serializable{
 
     public int getCloudID() {
         return cloudID;
+    }
+
+    public CloudView getCloudView(){
+        return new CloudView(this.students,this.choosen, this.cloudID);
     }
 
 }

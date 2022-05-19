@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Player implements PlayerInterface, Serializable {
+public class Player implements PlayerInterface{
     private final String nickname;
     private int playerID;
     private PlayerState playerState;

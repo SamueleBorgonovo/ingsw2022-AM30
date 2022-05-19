@@ -7,6 +7,7 @@ import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.board.Cloud;
+import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.EffectHandler;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
@@ -33,6 +34,7 @@ public class CLI extends View {
     private boolean isFirst=true;
     private GameMode gameMode;
     private boolean character4played = false;
+    Characters characterPlayed;
 
 
     public void init() throws IOException, ClassNotFoundException, NumberFormatException {
@@ -308,8 +310,8 @@ public class CLI extends View {
     public Student chooseStudentToMove() {
         ArrayList<Student> entrance = this.player.getPlance().getEntrance();
         Student studentChosen=inputParser.studentParser();
-        while(!entrance.contains(studentChosen)) {
-            System.out.println("Student not available. Please try again");
+        while(!entrance.contains(studentChosen) || this.player.getPlance().getHall().get(studentChosen) == 10) {
+            System.out.println("Student not available or max of students. Please try again");
             studentChosen=inputParser.studentParser();
         }
         return studentChosen;
@@ -351,6 +353,7 @@ public class CLI extends View {
         }
         MoveMotherNatureMessage message = new MoveMotherNatureMessage(numberOfMovements);
         this.client.sendMessage(message);
+        this.character4played=false;
     }
 
     @Override
@@ -392,27 +395,38 @@ public class CLI extends View {
                 characterChosen = inputParser.intParser();
             }
         }
+        this.characterPlayed=character;
         this.client.setCharacterPlayed(true);
         ChooseCharacterMessage message = new ChooseCharacterMessage(character);
         this.client.sendMessage(message);
 
-
-        switch(character.getTypeOfInputCharacter()){
-            case EFFECT1INPUT ->
-                this.characterInput.monkInput(this.client,this.effectHandler.getEffect1students(),this.board.getArchipelago().getNumOfIslands());
-            case ISLAND ->
-                this.characterInput.islandInput(this.client, this.board.getArchipelago().getNumOfIslands());
-            case INT ->
+        if(character.getTypeOfInputCharacter()== TypeOfInputCharacter.INT)
                 this.setCharacter4played(true);
+
+    }
+
+    @Override
+    public void InputStudentCharacter() {
+        switch(this.characterPlayed.getTypeOfInputCharacter()){
+            case EFFECT1INPUT ->
+                    this.characterInput.studentFromCard(this.client,this.effectHandler.getEffect1students());
             case EFFECT7INPUT ->
-                this.characterInput.jesterInput(this.client,this.effectHandler.getEffect7students(),this.player.getPlance().getEntrance());
+                    this.characterInput.jesterInput(this.client,this.effectHandler.getEffect7students(),this.player.getPlance().getEntrance());
             case STUDENT ->
-                this.characterInput.genericStudentInput(this.client);
+                    this.characterInput.genericStudentInput(this.client);
             case EFFECT10INPUT ->
-                this.characterInput.minstrelInput(this.client,this.player.getPlance().getEntrance(), this.player.getPlance().getHall());
+                    this.characterInput.minstrelInput(this.client,this.player.getPlance().getEntrance(), this.player.getPlance().getHall());
             case EFFECT11INPUT ->
-                this.characterInput.spoiledprincess(this.client, this.effectHandler.getEffect11students());
+                    this.characterInput.studentFromCard(this.client, this.effectHandler.getEffect11students());
         }
+        if(this.characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT1INPUT)
+            this.characterPlayed=null;
+    }
+
+    @Override
+    public void InputIslandCharacter() {
+        this.characterInput.islandInput(this.client, this.board.getArchipelago().getNumOfIslands());
+        this.characterPlayed=null;
     }
 
     @Override
