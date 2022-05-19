@@ -1,5 +1,8 @@
 package it.polimi.ingsw.client.View.cli.Graphical;
 
+import it.polimi.ingsw.controller.virtualView.CharacterView;
+import it.polimi.ingsw.controller.virtualView.IslandView;
+import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.board.Archipelago;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.effects.*;
@@ -16,11 +19,13 @@ import java.util.ArrayList;
 class GraphicTest {
     Game game = new Game(GameMode.EXPERTMODE,3, null);
     Graphic graphic = new Graphic();
-    Player player1;
-    Player player2;
-    Player player3;
-    ArrayList<PlayerInterface> players = new ArrayList<>();
-    Archipelago archipelago;
+    Player playerGame1;
+    PlayerView player1;
+    PlayerView player2;
+    PlayerView player3;
+    ArrayList<PlayerView> players = new ArrayList<>();
+    ArrayList<IslandView> islands;
+    int motherNature;
 
     @BeforeEach
     void init(){
@@ -149,22 +154,22 @@ class GraphicTest {
                          COINS : 2                               COINS : 2                               COINS : 2
                          
                          NEW DASHBOARD GRAPHICS :
-                        ────────────────────────────────────────╴ISLANDS╶────────────────────────────────────────
-                        ╭──────╴1╶──────╮ ╭──────╴2╶──────╮ ╭──────╴3╶──────╮ ╭──────╴4╶──────╮ ╭──────╴5╶──────╮
-                        │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │
-                        │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │
-                        │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │
-                        ╰───────────────╯ ╰───────────────╯ ╰───────────────╯ ╰───────────────╯ ╰───────────────╯
-                        ╭─────╴12╶──────╮                                                       ╭──────╴6╶──────╮
-                        │ 0 : △ │ 0 : ● │                                                       │ 0 : △ │ 0 : ● │
-                        │ 0 : ● │ 0 : ● │                                                       │ 0 : ● │ 0 : ● │
-                        │ 0 : ● │ 0 : ● │                                                       │ 0 : ● │ 0 : ● │
-                        ╰───────────────╯                                                       ╰───────────────╯
-                        ╭─────╴11╶──────╮ ╭─────╴10╶──────╮ ╭──────╴9╶──────╮ ╭──────╴8╶──────╮ ╭──────╴7╶──────╮
-                        │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │
-                        │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │
-                        │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │
-                        ╰───────────────╯ ╰───────────────╯ ╰───────────────╯ ╰───────────────╯ ╰───────────────╯
+                        ────────────────────────────────────────╴ISLANDS╶────────────────────────────────────────             ────╴CLOUDS╶─────
+                        ╭──────╴1╶──────╮ ╭──────╴2╶──────╮ ╭──────╴3╶──────╮ ╭──────╴4╶──────╮ ╭──────╴5╶──────╮             ╭──────╴1╶──────╮
+                        │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │             │     0 : ●     │
+                        │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │             │ 0 : ● │ 0 : ● │
+                        │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │             │ 0 : ● │ 0 : ● │
+                        ╰───────────────╯ ╰───────────────╯ ╰───────────────╯ ╰───────────────╯ ╰───────────────╯             ╰───────────────╯
+                        ╭─────╴12╶──────╮                                                       ╭──────╴6╶──────╮             ╭──────╴2╶──────╮
+                        │ 0 : △ │ 0 : ● │                                                       │ 0 : △ │ 0 : ● │             │     0 : ●     │
+                        │ 0 : ● │ 0 : ● │                                                       │ 0 : ● │ 0 : ● │             │ 0 : ● │ 0 : ● │
+                        │ 0 : ● │ 0 : ● │                                                       │ 0 : ● │ 0 : ● │             │ 0 : ● │ 0 : ● │
+                        ╰───────────────╯                                                       ╰───────────────╯             ╰───────────────╯
+                        ╭─────╴11╶──────╮ ╭─────╴10╶──────╮ ╭──────╴9╶──────╮ ╭──────╴8╶──────╮ ╭──────╴7╶──────╮             ╭──────╴3╶──────╮
+                        │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │ │ 0 : △ │ 0 : ● │             │     0 : ●     │
+                        │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │             │ 0 : ● │ 0 : ● │
+                        │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │             │ 0 : ● │ 0 : ● │
+                        ╰───────────────╯ ╰───────────────╯ ╰───────────────╯ ╰───────────────╯ ╰───────────────╯             ╰───────────────╯
                         ────────────────────────────────────────────────────────╴BOARDS╶───────────────────────────────────────────────────────
                         ╭──────────────╴Giuseppe╶─────────────╮ ╭──────────────╴Giuseppe╶─────────────╮ ╭──────────────╴Giuseppe╶─────────────╮
                         │  E             H            P    T  │ │  E             H            P    T  │ │  E             H            P    T  │
@@ -216,11 +221,11 @@ class GraphicTest {
                         │           │
                         ╰───────────╯
                         NEW CLOUD GRAPHICS
-                        ╭──────╴1╶──────╮
-                        │     0 : ●     │
-                        │ 0 : ● │ 0 : ● │
-                        │ 0 : ● │ 0 : ● │
-                        ╰───────────────╯
+                        ╭──────╴1╶──────╮ ╭──────╴1╶──────╮
+                        │     0 : ●     │ │       │ 0 : ● │
+                        │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │
+                        │ 0 : ● │ 0 : ● │ │ 0 : ● │ 0 : ● │
+                        ╰───────────────╯ ╰───────────────╯
                         NEW ISLAND GRAPHICS
                         ╭──────╴1╶──────╮
                         │ 0 : △ │ 0 : ● │
@@ -380,13 +385,16 @@ class GraphicTest {
         game.addPlayer("Giuseppe");
         game.addPlayer("Daniele");
         game.addPlayer("Samuele");
-        player1 = game.getPlayer(1);
-        player2 = game.getPlayer(2);
-        player3 = game.getPlayer(3);
+        playerGame1 = game.getPlayer(1);
+        player1 = game.getPlayer(1).getPlayerView();
+        player2 = game.getPlayer(2).getPlayerView();
+        player3 = game.getPlayer(3).getPlayerView();
         players.add(player1);
         players.add(player2);
         players.add(player3);
-        archipelago = game.getBoard().getArchipelago();
+        islands = game.getBoard().getBoardView().getIslandViews();
+        motherNature = game.getBoard().getBoardView().getMotherNature();
+
     }
 
     @Test
@@ -396,66 +404,79 @@ class GraphicTest {
 
     @Test
     void printArchipelago() {
-        graphic.printArchipelago(archipelago);
-        archipelago.getSingleIsland(3).setTowerColor(Tower.BLACK);
-        archipelago.getSingleIsland(3).addStudent(Student.BLUE);
-        graphic.printArchipelago(archipelago);
-        archipelago.getSingleIsland(4).setTowerColor(Tower.BLACK);
-        archipelago.getSingleIsland(8).setTowerColor(Tower.WHITE);
-        archipelago.getSingleIsland(4).addStudent(Student.BLUE);
-        graphic.printArchipelago(archipelago);
-        archipelago.mergeIslands(3,4);
-        graphic.printArchipelago(archipelago);
-        archipelago.getSingleIsland(4).setTowerColor(Tower.BLACK);
-        archipelago.getSingleIsland(4).addStudent(Student.BLUE);
-        archipelago.getSingleIsland(4).setStop(true);
-        graphic.printArchipelago(archipelago);
-        archipelago.mergeIslands(3,4);
-        archipelago.getSingleIsland(1).setTowerColor(Tower.GREY);
-        graphic.printArchipelago(archipelago);
-        archipelago.mergeIslands(3,4);
-        graphic.printArchipelago(archipelago);
+        graphic.printArchipelago(islands,motherNature);
+        game.getBoard().getArchipelago().getSingleIsland(3).setTowerColor(Tower.BLACK);
+        game.getBoard().getArchipelago().getSingleIsland(3).addStudent(Student.BLUE);
+        islands = game.getBoard().getBoardView().getIslandViews();
+        motherNature = game.getBoard().getBoardView().getMotherNature();
+        graphic.printArchipelago(islands,motherNature);
+        game.getBoard().getArchipelago().getSingleIsland(4).setTowerColor(Tower.BLACK);
+        game.getBoard().getArchipelago().getSingleIsland(8).setTowerColor(Tower.WHITE);
+        game.getBoard().getArchipelago().getSingleIsland(4).addStudent(Student.BLUE);
+        islands = game.getBoard().getBoardView().getIslandViews();
+        motherNature = game.getBoard().getBoardView().getMotherNature();
+        graphic.printArchipelago(islands,motherNature);
+        game.getBoard().getArchipelago().mergeIslands(3,4);
+        islands = game.getBoard().getBoardView().getIslandViews();
+        motherNature = game.getBoard().getBoardView().getMotherNature();
+        graphic.printArchipelago(islands,motherNature);
+        game.getBoard().getArchipelago().getSingleIsland(4).setTowerColor(Tower.BLACK);
+        game.getBoard().getArchipelago().getSingleIsland(4).addStudent(Student.BLUE);
+        game.getBoard().getArchipelago().getSingleIsland(4).setStop(true);
+        islands = game.getBoard().getBoardView().getIslandViews();
+        motherNature = game.getBoard().getBoardView().getMotherNature();
+        graphic.printArchipelago(islands,motherNature);
+        game.getBoard().getArchipelago().mergeIslands(3,4);
+        game.getBoard().getArchipelago().getSingleIsland(1).setTowerColor(Tower.GREY);
+        islands = game.getBoard().getBoardView().getIslandViews();
+        motherNature = game.getBoard().getBoardView().getMotherNature();
+        graphic.printArchipelago(islands,motherNature);
+        game.getBoard().getArchipelago().mergeIslands(3,4);
+        islands = game.getBoard().getBoardView().getIslandViews();
+        motherNature = game.getBoard().getBoardView().getMotherNature();
+        graphic.printArchipelago(islands,motherNature);
     }
 
     @Test
     void printPlances() {
         graphic.printPlances(players);
         for(Student student : Student.values())
-            player1.getPlance().addStudentHall(student);
-        player1.getPlance().addStudentHall(Student.YELLOW);
-        player1.getPlance().addStudentHall(Student.RED);
-        player1.getPlance().addStudentHall(Student.BLUE);
-        player1.getPlance().addStudentHall(Student.BLUE);
-        player1.getPlance().addProfessor(Professor.BLUE_UNICORN);
-        player1.getPlance().removeStudentEntrance(player1.getPlance().getEntrance().get(1));
-        player1.addCoins();
-        player1.getPlance().removeTower();
+            playerGame1.getPlance().addStudentHall(student);
+        playerGame1.getPlance().addStudentHall(Student.YELLOW);
+        playerGame1.getPlance().addStudentHall(Student.RED);
+        playerGame1.getPlance().addStudentHall(Student.BLUE);
+        playerGame1.getPlance().addStudentHall(Student.BLUE);
+        playerGame1.getPlance().addProfessor(Professor.BLUE_UNICORN);
+        playerGame1.getPlance().removeStudentEntrance(player1.getPlance().getEntrance().get(1));
+        playerGame1.addCoins();
+        playerGame1.getPlance().removeTower();
+        player1 = game.getPlayer(1).getPlayerView();
         graphic.printPlances(players);
     }
 
     @Test
     void printAssistants() {
-        graphic.printAssistants(player1.getAssistantCards(), Wizard.WIZARD_GREEN);
-        player1.removeAssistant(Assistant.EAGLE);
-        graphic.printAssistants(player1.getAssistantCards(), Wizard.WIZARD_YELLOW);
-        player1.removeAssistant(Assistant.OSTRICH);
-        graphic.printAssistants(player1.getAssistantCards(), Wizard.WIZARD_PINK);
-        player1.removeAssistant(Assistant.DOG);
-        graphic.printAssistants(player1.getAssistantCards(), Wizard.WIZARD_BLUE);
+        graphic.printAssistants(game.getPlayer(1).getPlayerView().getAssistantCards(), Wizard.WIZARD_GREEN);
+        playerGame1.removeAssistant(Assistant.EAGLE);
+        graphic.printAssistants(game.getPlayer(1).getPlayerView().getAssistantCards(), Wizard.WIZARD_YELLOW);
+        playerGame1.removeAssistant(Assistant.OSTRICH);
+        graphic.printAssistants(game.getPlayer(1).getPlayerView().getAssistantCards(), Wizard.WIZARD_PINK);
+        playerGame1.removeAssistant(Assistant.DOG);
+        graphic.printAssistants(game.getPlayer(1).getPlayerView().getAssistantCards(), Wizard.WIZARD_BLUE);
     }
 
     @Test
     void printClouds() {
-        graphic.printClouds(game.getBoard().getClouds());
+        graphic.printClouds(game.getBoard().getBoardView().getClouds());
         game.getBoard().getClouds().get(1).setChoosen(true);
-        graphic.printClouds(game.getBoard().getClouds());
+        graphic.printClouds(game.getBoard().getBoardView().getClouds());
         game.getBoard().getClouds().get(0).setChoosen(true);
-        graphic.printClouds(game.getBoard().getClouds());
+        graphic.printClouds(game.getBoard().getBoardView().getClouds());
     }
 
     @Test
     void printCharacters() {
-        ArrayList<Characters> characters = new ArrayList<>();
+        ArrayList<Characters> charactersGame = new ArrayList<>();
         Effect1 effect1 = new Effect1();
         Characters characters1 = new Characters(effect1);
         Effect2 effect2 = new Effect2();
@@ -465,13 +486,14 @@ class GraphicTest {
         Effect11 effect11 = new Effect11();
         Effect12 effect12 = new Effect12();
         Characters characters12 = new Characters(effect12);
+        ArrayList<CharacterView> characters = new ArrayList<>();
 
-        characters.add(characters1);
-        characters.add(characters2);
-        characters.add(new Characters(effect5));
-        characters.add(new Characters(effect7));
-        characters.add(new Characters(effect11));
-        characters.add(characters12);
+        charactersGame.add(characters1);
+        charactersGame.add(characters2);
+        charactersGame.add(new Characters(effect5));
+        charactersGame.add(new Characters(effect7));
+        charactersGame.add(new Characters(effect11));
+        charactersGame.add(characters12);
         if(!game.getBoard().getCharacters().get(0).getEffect().getName().equals(effect1.getName()))
             effect1.inizialize(game);
         if(!game.getBoard().getCharacters().get(0).getEffect().getName().equals(effect7.getName()))
@@ -479,28 +501,38 @@ class GraphicTest {
         if(!game.getBoard().getCharacters().get(0).getEffect().getName().equals(effect11.getName()))
             effect11.inizialize(game);
 
+        for(Characters character : charactersGame)
+            characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
         game.getEffectHandler().removeislandstop();
         game.getEffectHandler().removeStudentFromEffect1students(game.getEffectHandler().getEffect1students().get(1));
         game.getEffectHandler().removeStudentFromEffect7(game.getEffectHandler().getEffect7students().get(1));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(1));
         characters1.setUsed(true);
+        for(Characters character : charactersGame)
+            characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
         game.getEffectHandler().removeislandstop();
         game.getEffectHandler().removeStudentFromEffect1students(game.getEffectHandler().getEffect1students().get(1));
         game.getEffectHandler().removeStudentFromEffect7(game.getEffectHandler().getEffect7students().get(1));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(1));
+        for(Characters character : charactersGame)
+            characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
         game.getEffectHandler().removeislandstop();
         game.getEffectHandler().removeStudentFromEffect1students(game.getEffectHandler().getEffect1students().get(1));
         game.getEffectHandler().removeStudentFromEffect7(game.getEffectHandler().getEffect7students().get(1));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(1));
         characters12.setUsed(true);
+        for(Characters character : charactersGame)
+            characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
         game.getEffectHandler().removeislandstop();
         game.getEffectHandler().removeStudentFromEffect1students(game.getEffectHandler().getEffect1students().get(0));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(0));
         characters2.setUsed(true);
+        for(Characters character : charactersGame)
+            characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
     }
 
