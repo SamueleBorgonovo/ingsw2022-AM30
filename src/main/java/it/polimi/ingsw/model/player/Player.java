@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.player;
 
+import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.exceptions.OutOfCoinsException;
 
 import java.io.Serializable;
@@ -106,6 +107,9 @@ public class Player implements PlayerInterface, Serializable {
 
     public void setLastassistantplayed(Assistant assistant){ lastassistantplayed=assistant;} //Only used for tests
 
+    public PlayerView getPlayerView(){
+        return new PlayerView(nickname,wizard,lastassistantplayed,assistantCards,coins,plance.getPlanceView());
+    }
     }
 
 

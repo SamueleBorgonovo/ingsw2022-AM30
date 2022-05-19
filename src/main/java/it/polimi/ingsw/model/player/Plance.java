@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.player;
 
+import it.polimi.ingsw.controller.virtualView.PlanceView;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 
@@ -77,5 +78,9 @@ public class Plance implements Serializable {
 
     public HashMap<Student, Integer> getHall() {
         return hall;
+    }
+
+    public PlanceView getPlanceView(){
+        return new PlanceView(entrance,professors,hall,numoftowers,tower);
     }
 }

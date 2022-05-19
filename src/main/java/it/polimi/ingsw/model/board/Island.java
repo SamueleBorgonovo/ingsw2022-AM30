@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.controller.virtualView.IslandView;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 
@@ -67,6 +68,10 @@ public class Island implements Serializable {
 
     public void removeAllTowers() {
         numOfTowers = 0;
+    }
+
+    public IslandView getIslandView(){
+        return new IslandView(students,numOfTowers,tower,stop,islandID);
     }
 
 }

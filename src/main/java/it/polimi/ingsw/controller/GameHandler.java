@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.controller.virtualView.PlayersView;
+import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.messages.toClient.StatesMessages.*;
@@ -24,7 +24,7 @@ public class GameHandler {
     private static ConcurrentHashMap<String, Integer> playertoPlayerIDMap;//Map that find game's idplayer from a player's nickname
     private static ConcurrentHashMap<String, ClientHandlerInterface> playertoHandlerMap;//Map that find player's handler
     private static ArrayList<String> nicknameChoosen;
-    private ArrayList<PlayersView> playerViews;
+    private ArrayList<PlayerView> playerViews;
     private static int studentPlayed=0;
 
     public GameHandler(){
