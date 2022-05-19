@@ -266,6 +266,7 @@ class GameTest {
         player3.removeAssistant(Assistant.CAT);
 
         ArrayList<Player> playerorder = new ArrayList<>();
+        game3players.setPlayerorder(game3players.getPlayers());
         playerorder.addAll(game3players.verifyPlayerOrder());
 
         int var=1;

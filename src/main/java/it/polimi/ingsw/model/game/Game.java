@@ -620,6 +620,9 @@ public class Game implements GameInterface {
         return playerorder;
     }
 
+    public void setPlayerorder(ArrayList<Player> playerorder) {
+        this.playerorder = playerorder;
+    }
 }
 
 
