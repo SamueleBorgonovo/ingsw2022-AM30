@@ -1,13 +1,14 @@
 package it.polimi.ingsw.messages.toClient.StatesMessages;
 
 import it.polimi.ingsw.client.Client;
+import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.messages.toClient.MessageToClient;
 import it.polimi.ingsw.model.board.Characters;
 
 public class CharacterChoosedMessage extends MessageToClient {
     private String nickname;
-    private Characters character;
-    public CharacterChoosedMessage(String nickname,Characters character){
+    private CharacterView character;
+    public CharacterChoosedMessage(String nickname,CharacterView character){
         this.nickname=nickname;
         this.character=character;
     }
@@ -20,7 +21,7 @@ public class CharacterChoosedMessage extends MessageToClient {
         return nickname;
     }
 
-    public Characters getCharacter() {
+    public CharacterView getCharacter() {
         return character;
     }
 }

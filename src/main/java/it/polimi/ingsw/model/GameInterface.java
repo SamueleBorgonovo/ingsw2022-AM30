@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.board.Board;
@@ -61,4 +62,6 @@ public interface GameInterface {
     public ArrayList<Player> getPlayerorder();
 
     public ArrayList<PlayerView> getPlayersView();
+
+    public Characters searchCharacter(CharacterView characterView);
 }

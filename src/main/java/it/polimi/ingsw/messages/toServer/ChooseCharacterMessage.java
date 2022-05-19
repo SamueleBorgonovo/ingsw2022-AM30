@@ -1,16 +1,17 @@
 package it.polimi.ingsw.messages.toServer;
 
+import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
 public class ChooseCharacterMessage extends MessageToServer {
-    Characters character;
+    CharacterView character;
 
-    public ChooseCharacterMessage(Characters character){
+    public ChooseCharacterMessage(CharacterView character){
         this.character = character;
     }
 
-    public Characters getCharacter() {
+    public CharacterView getCharacter() {
         return character;
     }
 

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.virtualView.BoardView;
+import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.messages.toClient.*;
@@ -226,29 +227,33 @@ public class GameHandler {
 
     }
 
-    public void chooseCharacter(ClientHandlerInterface clientHandler, Characters character) {
+    public void chooseCharacter(ClientHandlerInterface clientHandler, CharacterView characterview) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
-        try {
-            game.useCharacter(playerID, character);
-            turnHandler(game);
-        } catch (InvalidStopException e) {
-            InvalidStopMessage message = new InvalidStopMessage();
-            clientHandler.sendMessageToClient(message);
-        } catch (InvalidTurnException e) {
-            InvalidTurnMessage message = new InvalidTurnMessage();
-            clientHandler.sendMessageToClient(message);
-        } catch (OutOfCoinsException e) {
-            OutOfCoinsMessage message = new OutOfCoinsMessage();
-            clientHandler.sendMessageToClient(message);
-        } catch (InvalidCharacterException e) {
+        Characters character = game.searchCharacter(characterview);
+        if(character==null){
             InvalidCharacterMessage message = new InvalidCharacterMessage();
             clientHandler.sendMessageToClient(message);
+        }else {
+            try {
+                game.useCharacter(playerID, character);
+                updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
+                sendMessagetoGame(game,new CharacterChoosedMessage(clientHandler.getNickname(),characterview));
+                turnHandler(game);
+            } catch (InvalidStopException e) {
+                InvalidStopMessage message = new InvalidStopMessage();
+                clientHandler.sendMessageToClient(message);
+            } catch (InvalidTurnException e) {
+                InvalidTurnMessage message = new InvalidTurnMessage();
+                clientHandler.sendMessageToClient(message);
+            } catch (OutOfCoinsException e) {
+                OutOfCoinsMessage message = new OutOfCoinsMessage();
+                clientHandler.sendMessageToClient(message);
+            } catch (InvalidCharacterException e) {
+                InvalidCharacterMessage message = new InvalidCharacterMessage();
+                clientHandler.sendMessageToClient(message);
+            }
         }
-
-
-
-
     }
 
     public void chooseCloud(ClientHandlerInterface clientHandler, int cloudID) {

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.game;
 
 import it.polimi.ingsw.controller.GameHandler;
+import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.GameInterface;
 import it.polimi.ingsw.model.board.Characters;
@@ -635,6 +636,13 @@ public class Game implements GameInterface {
         for(Player player : listOfPlayers)
             tempplayerview.add(player.getPlayerView());
         return tempplayerview;
+    }
+
+    public Characters searchCharacter(CharacterView characterView){
+        for(Characters character : getBoard().getCharacters())
+            if(character.getEffect().getName().equals(characterView.getName()))
+                return character;
+        return null;
     }
 }
 
