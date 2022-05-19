@@ -223,11 +223,16 @@ public class Game implements GameInterface {
     }
 
     public void startRound(){
+        for(Player player : playerorder)
+            System.out.println("player: "+player.getNickname()+" in fase "+player.getPlayerState());
 
-        for(Player player : listOfPlayers) {
+        for(Player player : playerorder) {
             if (player.getPlayerState() != PlayerState.DISCONNECTED)
                 player.setPlayerState(PlayerState.WAITING);
         }
+
+        for(Player player : playerorder)
+            System.out.println("player: "+player.getNickname()+" in fase "+player.getPlayerState());
 
         numplayerhasplayed=0;
         int tmpplayerid=-1;
@@ -239,7 +244,7 @@ public class Game implements GameInterface {
         }
         if(tmpplayerid!=-1){
             numplayerhasplayed=tmpplayerid;
-            getPlayer(tmpplayerid+1).setPlayerState(PlayerState.ASSISTANTPHASE);
+            playerorder.get(tmpplayerid).setPlayerState(PlayerState.ASSISTANTPHASE);
         }
         //shutdown of game
 
