@@ -206,7 +206,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.useAssistant(playerID, assistant);
-            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayers()));
+            sendMessagetoGame(game,new PlanceUpdateMessage(game.getPlayerorder()));
             sendMessagetoGame(game,new BoardUpdateMessage(game.getBoard(),true));
             sendMessagetoGame(game,new AssistantChoosedMessage(clientHandler.getNickname(),assistant));
             turnHandler(game);
