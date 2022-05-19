@@ -108,9 +108,9 @@ public class Client {
         }else if(playerState==PlayerState.ASSISTANTPHASE){
                     view.chooseAssistant();
         }else if(playerState==PlayerState.CHARACTHERISLANDPHASE){
-                    //view.metodoIsland
+                    view.InputIslandCharacter();
         }else if(playerState==PlayerState.CHARACTHERSTUDENTSPHASE){
-                    //view.metodoStudent
+                    view.InputStudentCharacter();
         }else if(playerState==PlayerState.CLOUDPHASE){
             if(getGamemode()==GameMode.EXPERTMODE){
                 action=view.chooseNextAction(playerState);
