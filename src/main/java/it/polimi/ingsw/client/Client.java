@@ -4,7 +4,6 @@ import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.messages.toServer.*;
-import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
@@ -90,7 +89,7 @@ public class Client {
                     view.moveStudentToHall();
                 }
                 case USECHARACTER -> {
-                    view.useCharacter();
+                    view.useCharacter(playerState);
                 }
             }
         }else if(playerState==PlayerState.MOTHERNATUREPHASE){
@@ -98,7 +97,7 @@ public class Client {
                 action = view.chooseNextAction(playerState);
                 switch (action) {
                     case USECHARACTER -> {
-                        view.useCharacter();
+                        view.useCharacter(playerState);
                     }
                     case MOVEMOTHERNATURE -> {
                         view.moveMotherNature();
@@ -108,9 +107,9 @@ public class Client {
         }else if(playerState==PlayerState.ASSISTANTPHASE){
                     view.chooseAssistant();
         }else if(playerState==PlayerState.CHARACTHERISLANDPHASE){
-                    view.InputIslandCharacter();
+                    view.inputIslandCharacter();
         }else if(playerState==PlayerState.CHARACTHERSTUDENTSPHASE){
-                    view.InputStudentCharacter();
+                    view.inputStudentCharacter();
         }else if(playerState==PlayerState.CLOUDPHASE){
             if(getGamemode()==GameMode.EXPERTMODE){
                 action=view.chooseNextAction(playerState);
@@ -119,7 +118,7 @@ public class Client {
                         view.chooseCloud();
                     }
                     case USECHARACTER -> {
-                        view.useCharacter();
+                        view.useCharacter(playerState);
                     }
                 }
             }else view.chooseCloud();

@@ -382,35 +382,44 @@ public class CLI extends View {
     }
 
     @Override
-    public void useCharacter(){
+    public void useCharacter(PlayerState playerState){
         ArrayList<CharacterView> availableCharacter = this.board.getCharacters();
         int numOfCoins = this.player.getCoins();
-        System.out.println("Choose one character between this available by typing his number associated");
-        CharacterView character = null;
-        boolean check = false;
-        graphic.printCharacters(availableCharacter, this.effectHandler);
-        int characterChosen = inputParser.intParser();
-        while(!check){
-            if(characterChosen>=1 && characterChosen<=3 && availableCharacter.get(characterChosen-1).getCost()<= numOfCoins){
-                character = availableCharacter.get(characterChosen-1);
-                check=true;
-            } else {
-                System.out.println("Selection not valid. Try again");
-                characterChosen = inputParser.intParser();
+        int count=0;
+        for(CharacterView character : availableCharacter)
+            if(numOfCoins >= character.getCost())
+                count++;
+        if(count>0) {
+            System.out.println("Choose one character between this available by typing his number associated");
+            CharacterView character = null;
+            boolean check = false;
+            graphic.printCharacters(availableCharacter, this.effectHandler);
+            int characterChosen = inputParser.intParser();
+            while (!check) {
+                if (characterChosen >= 1 && characterChosen <= 3 && availableCharacter.get(characterChosen - 1).getCost() <= numOfCoins) {
+                    character = availableCharacter.get(characterChosen - 1);
+                    check = true;
+                } else {
+                    System.out.println("Selection not valid. Try again");
+                    characterChosen = inputParser.intParser();
+                }
             }
-        }
-        this.characterPlayed=character;
-        this.client.setCharacterPlayed(true);
-        ChooseCharacterMessage message = new ChooseCharacterMessage(character);
-        this.client.sendMessage(message);
+            this.characterPlayed = character;
+            this.client.setCharacterPlayed(true);
+            ChooseCharacterMessage message = new ChooseCharacterMessage(character);
+            this.client.sendMessage(message);
 
-        if(character.getTypeOfInputCharacter()== TypeOfInputCharacter.INT)
+            if (character.getTypeOfInputCharacter() == TypeOfInputCharacter.INT)
                 this.setCharacter4played(true);
+        }else{
+            System.out.println("You don't have enough coins. Please change your move");
+            client.nextMove(playerState);
+        }
 
     }
 
     @Override
-    public void InputStudentCharacter() {
+    public void inputStudentCharacter() {
         switch(this.characterPlayed.getTypeOfInputCharacter()){
             case EFFECT1INPUT ->
                     this.characterInput.studentFromCard(this.client,this.effectHandler.getEffect1students());
@@ -428,7 +437,7 @@ public class CLI extends View {
     }
 
     @Override
-    public void InputIslandCharacter() {
+    public void inputIslandCharacter() {
         this.characterInput.islandInput(this.client, this.board.getIslandViews().size());
         this.characterPlayed=null;
     }

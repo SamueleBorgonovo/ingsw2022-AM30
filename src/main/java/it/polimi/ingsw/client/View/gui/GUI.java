@@ -5,9 +5,6 @@ import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.controller.virtualView.BoardView;
 import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
-import it.polimi.ingsw.model.board.Board;
-import it.polimi.ingsw.model.board.Characters;
-import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.*;
@@ -62,15 +59,15 @@ public class GUI extends View {
     public void chooseCloud() {}
 
     @Override
-    public void useCharacter() {}
+    public void useCharacter(PlayerState playerState) {}
 
     @Override
-    public void InputStudentCharacter() {
+    public void inputStudentCharacter() {
 
     }
 
     @Override
-    public void InputIslandCharacter() {
+    public void inputIslandCharacter() {
 
     }
 

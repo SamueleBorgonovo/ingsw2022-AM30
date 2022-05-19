@@ -38,11 +38,11 @@ public abstract class View {
 
     public abstract void chooseCloud();
 
-    public abstract void useCharacter();
+    public abstract void useCharacter(PlayerState playerState);
 
-    public abstract void InputStudentCharacter();
+    public abstract void inputStudentCharacter();
 
-    public abstract void InputIslandCharacter();
+    public abstract void inputIslandCharacter();
 
     public abstract void setPlayers(ArrayList<PlayerView> players);
 
