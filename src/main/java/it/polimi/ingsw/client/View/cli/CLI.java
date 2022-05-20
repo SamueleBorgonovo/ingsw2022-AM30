@@ -27,7 +27,7 @@ public class CLI extends View {
     private InputParser inputParser = new InputParser();
     private ArrayList<PlayerView> players= new ArrayList<>();
     private BoardView board;
-    private CharacterInput characterInput;
+    private CharacterInput characterInput = new CharacterInput();
     private EffectHandler effectHandler = new EffectHandler();
     private String nickname;
     private PlayerView player;
@@ -219,7 +219,7 @@ public class CLI extends View {
                 System.out.println("1) Move one student to the hall");
                 System.out.println("2) Move one student to one island");
                 actionNum = inputParser.intParser();
-                if(actionNum==1) {
+                if(actionNum==1 && moveToHallPossible()) {
                     actionChosen = PossibleAction.MOVESTUDENTTOHALL;
                     check = true;
                 }
@@ -239,7 +239,7 @@ public class CLI extends View {
                     if(!client.isCharacterPlayed())
                         System.out.println("3) Use a character");
                     actionNum = inputParser.intParser();
-                    if(actionNum==1) {
+                    if(actionNum==1 && moveToHallPossible()) {
                         actionChosen = PossibleAction.MOVESTUDENTTOHALL;
                         check = true;
                     }
@@ -300,6 +300,14 @@ public class CLI extends View {
         }
             return actionChosen;
         }
+
+    public boolean moveToHallPossible(){
+        boolean check=false;
+        for(Student student : player.getPlance().getEntrance())
+            if(player.getPlance().getHall().get(student) < 10)
+                check=true;
+        return check;
+    }
 
     @Override
     public void moveStudentToHall() {
