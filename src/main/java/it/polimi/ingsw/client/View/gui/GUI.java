@@ -90,7 +90,7 @@ public class GUI extends View {
     }
 
     @Override
-    public void winner(String nick) {
+    public void winner(ArrayList<String> nicknamesWinner) {
 
     }
 

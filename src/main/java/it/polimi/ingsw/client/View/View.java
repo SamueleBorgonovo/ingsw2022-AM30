@@ -52,7 +52,7 @@ public abstract class View {
 
     public abstract void printStartGame();
 
-    public abstract void winner(String nick);
+    public abstract void winner(ArrayList<String> nicknamesWinner);
 
     public abstract void printAssistantChosen(String nick, Assistant assistant);
 

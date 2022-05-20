@@ -470,11 +470,13 @@ public class CLI extends View {
     }
 
     @Override
-    public void winner(String nick) {
-        if(nick.equals(this.nickname))
-            System.out.println("YOU ARE THE WINNER");
-        else
-            System.out.println(nick + " win the game. Try again, you'll be luckier");
+    public void winner(ArrayList<String> nicknamesWinner) {
+        for(String nick : nicknamesWinner) {
+            if (nick.equals(this.nickname))
+                System.out.println("YOU ARE THE WINNER");
+            else
+                System.out.println(nick + " win the game. Try again, you'll be luckier");
+        }
     }
 
     @Override

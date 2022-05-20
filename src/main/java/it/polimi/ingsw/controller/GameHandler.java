@@ -387,12 +387,12 @@ public class GameHandler {
         }
     }
 
-    public void checkWinner(GameInterface game){
+   /* public void checkWinner(GameInterface game){
         ArrayList<Player> check = game.winner();
         if(check!=null){
             //mando messaggio a tutti che il game è finito e check hanno vinto
             //mando messaggio di disconnessione a tutti
             //shutdown del game
         }
-    }
+    } */
 }

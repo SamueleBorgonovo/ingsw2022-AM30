@@ -157,7 +157,7 @@ public class Game implements GameInterface {
         timer = new Thread(()->{
             try{
                 Thread.sleep(TIMER);
-                winner();
+                //winner();
             } catch (InterruptedException e) { }
         });
         timer.start();
@@ -255,42 +255,57 @@ public class Game implements GameInterface {
 
 
 
-    public ArrayList<Player> winner() {
-        ArrayList<Player> playersCandidate = new ArrayList<>();
-        ArrayList<Player> playersWinner = new ArrayList<>();
-        int minTowers = 8;
-        int maxProfessor = 0;
+    public boolean winnerEndRound() {
         boolean gameIsFinished = false;
 
-        if(board.getArchipelago().getNumOfIslands() == 3 ||
-                board.getNumOfStudentsBag() == 0)
+        if (board.getNumOfStudentsBag() == 0)
             gameIsFinished = true;
 
         for (Player player : listOfPlayers)
-            if (player.getPlance().getNumOfTowers() == 0 ||
-                    player.getAssistantCards().size() == 0)
+            if (player.getAssistantCards().size() == 0)
                 gameIsFinished = true;
+        return gameIsFinished;
 
+        //Invece di fare una return facciamo che chiama un metodo in gameHandler per dire che ha vinto con dentro un
+        //Arraylist di chi ha vinto (Arraylist perchè si può pareggiare)
 
-        if (gameIsFinished) {
+    }
+
+    public boolean winnerIstantly(){
+        boolean gameIsFinished = false;
+        if (board.getArchipelago().getNumOfIslands() == 3)
+            gameIsFinished = true;
+        for (Player player : listOfPlayers)
+            if (player.getPlance().getNumOfTowers() == 0)
+                gameIsFinished = true;
+        return gameIsFinished;
+    }
+
+    public ArrayList<Player> verifyWinner(){
+
+        ArrayList<Player> playersCandidate = new ArrayList<>();
+        ArrayList<Player> playersChosen = null;
+        int minTowers = 8;
+        int maxProfessor = 0;
+
             for (Player player1 : listOfPlayers)
                 if (player1.getPlance().getNumOfTowers() < minTowers)
                     minTowers = player1.getPlance().getNumOfTowers();
             for (Player player1 : listOfPlayers)
                 if (player1.getPlance().getNumOfTowers() == minTowers)
                     playersCandidate.add(player1);
-        }
-        for (Player player2 : playersCandidate)
-            if (player2.getPlance().getProfessors().size() > maxProfessor)
+
+        for (Player player2 : playersCandidate) {
+            if (player2.getPlance().getProfessors().size() > maxProfessor) {
                 maxProfessor = player2.getPlance().getProfessors().size();
+                playersChosen.clear();
+                playersChosen.add(player2);
+            }
+            else if( player2.getPlance().getProfessors().size() == maxProfessor)
+                playersChosen.add(player2);
+        }
 
-        for(Player player2 : playersCandidate)
-            if(player2.getPlance().getProfessors().size() == maxProfessor)
-                playersWinner.add(player2);
-
-        //Invece di fare una return facciamo che chiama un metodo in gameHandler per dire che ha vinto con dentro un
-        //Arraylist di chi ha vinto (Arraylist perchè si può pareggiare)
-        return playersWinner;
+        return playersChosen;
     }
 
     public void selectCloud(int playerID, int cloudID) throws InvalidTurnException, InvalidCloudException {

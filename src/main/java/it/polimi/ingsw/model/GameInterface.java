@@ -65,5 +65,9 @@ public interface GameInterface {
 
     public Characters searchCharacter(CharacterView characterView);
 
-    public ArrayList<Player> winner();
+    public boolean winnerIstantly();
+
+    public boolean winnerEndRound();
+
+    public ArrayList<Player> verifyWinner();
 }
