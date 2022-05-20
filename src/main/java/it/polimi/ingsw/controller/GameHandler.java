@@ -12,10 +12,7 @@ import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.PlayerInterface;
-import it.polimi.ingsw.model.player.PlayerState;
-import it.polimi.ingsw.model.player.Wizard;
+import it.polimi.ingsw.model.player.*;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
 import java.util.ArrayList;
@@ -387,6 +384,15 @@ public class GameHandler {
            InvalidWizardMessage message = new InvalidWizardMessage();
            clientHandler.sendMessageToClient(message);
            clientHandler.sendMessageToClient(new WizardsListMessage(game.getWizardAvailable()));
+        }
+    }
+
+    public void checkWinner(GameInterface game){
+        ArrayList<Player> check = game.winner();
+        if(check!=null){
+            //mando messaggio a tutti che il game è finito e check hanno vinto
+            //mando messaggio di disconnessione a tutti
+            //shutdown del game
         }
     }
 }

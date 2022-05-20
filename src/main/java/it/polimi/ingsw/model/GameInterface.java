@@ -64,4 +64,6 @@ public interface GameInterface {
     public ArrayList<PlayerView> getPlayersView();
 
     public Characters searchCharacter(CharacterView characterView);
+
+    public ArrayList<Player> winner();
 }
