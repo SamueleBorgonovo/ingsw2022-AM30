@@ -1,6 +1,7 @@
-package it.polimi.ingsw.messages.toClient;
+package it.polimi.ingsw.messages.toClient.InvalidMoveMessages;
 
 import it.polimi.ingsw.client.Client;
+import it.polimi.ingsw.messages.toClient.MessageToClient;
 
 public class InvalidTurnMessage extends MessageToClient {
 

@@ -4,10 +4,10 @@ import it.polimi.ingsw.client.Client;
 
 public class DisconnectMessage extends MessageToClient{
     private String nickname;
-    private boolean gameEnded;
-    public DisconnectMessage(String nickname,boolean gameEnded){
+    private boolean timeout;
+    public DisconnectMessage(String nickname,boolean timeout){
         this.nickname=nickname;
-        this.gameEnded=gameEnded;
+        this.timeout=timeout;
     }
 
     public void action(Client client){
@@ -19,6 +19,6 @@ public class DisconnectMessage extends MessageToClient{
     }
 
     public boolean isGameEnded() {
-        return gameEnded;
+        return timeout;
     }
 }

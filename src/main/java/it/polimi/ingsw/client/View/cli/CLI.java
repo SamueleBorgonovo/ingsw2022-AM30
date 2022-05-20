@@ -13,6 +13,7 @@ import it.polimi.ingsw.model.player.Wizard;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Assistant;
 
+import java.awt.desktop.SystemSleepEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -584,6 +585,39 @@ public class CLI extends View {
 
     public void printInvalidWizard(){
         System.out.println("Wizard is not more available.");
+    }
+
+    public void printWinnerInstantly(ArrayList<String> nickname, int type){
+        if(nickname.contains(client.getNickname()))
+            System.out.println("YOU WON");
+        else {
+            if (type == 1)
+                System.out.println(nickname + " won because only 3 islands remained");
+            if(type == 2)
+                System.out.println(nickname + " won because built his last tower");
+        }
+    }
+
+    public void printWinnerEndRound(ArrayList<String> nickname, int type){
+        if(nickname.contains(client.getNickname()))
+            System.out.println("YOU WON");
+        else{
+            if(type==1)
+                System.out.println("Game ended because bag is empty. \n" + nickname + " won");
+            if(type==2)
+                System.out.println("Game ended because all assistant cards has been used.\n" + nickname + " won");
+        }
+    }
+
+    public void printWaitingForPlayers(boolean lobby){
+        if(lobby)
+            System.out.println("Waiting for players to start the game");
+        else
+            System.out.println("Waiting for players to reconnection to the game. Timer to win started");
+    }
+
+    public void printGameEndedTimeout(){
+        System.out.println("You won. Game ended because players did not reconnect");
     }
 
 

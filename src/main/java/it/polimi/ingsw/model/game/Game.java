@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.game;
 
-import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.GameInterface;
@@ -27,12 +26,10 @@ public class Game implements GameInterface {
     private Characters characterInUse = null;
     private ArrayList<Wizard> wizardChoosen = new ArrayList<>();
     private ArrayList<Assistant> usedAssistant = new ArrayList<>();
-    private GameHandler gameHandler;
     private Thread timer;
 
-    public Game(GameMode gameMode, int numofplayers, GameHandler gameHandler) {
+    public Game(GameMode gameMode, int numofplayers) {
         this.gameMode = gameMode;
-        this.gameHandler = gameHandler;
         this.numOfPlayers = numofplayers;
         gameState = GameState.WAITINGFORPLAYERS;
         board = new Board(gameMode, numofplayers);
@@ -109,11 +106,11 @@ public class Game implements GameInterface {
             }
             if (counter == numOfPlayers - 1) {
                 getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
-                shutdown(false);
+                //shutdown(false);
             } else {
                 if (counter == numOfPlayers - 2) {
                     gameState=GameState.WAITINGFORRECONNECTION;
-                    startTimer();
+                    //startTimer();
                 }
 
                     if (getPlayer(playerid).getPlayerState() == PlayerState.WAITING) {
@@ -126,7 +123,7 @@ public class Game implements GameInterface {
                             verifyPlayerOrder();
                             int tmp = searchfisrt();
                             if (tmp == -1) {
-                                shutdown(false);
+                                //shutdown(false);
                             }
                             playerorder.get(tmp).setPlayerState(PlayerState.STUDENTPHASE);
                         } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
@@ -161,16 +158,6 @@ public class Game implements GameInterface {
             } catch (InterruptedException e) { }
         });
         timer.start();
-    }
-
-    public void shutdown(boolean gameEnded){
-
-        ArrayList<String> nicknames = new ArrayList<>();
-        for(Player player : listOfPlayers)
-            nicknames.add(player.getNickname());
-
-        gameHandler.closeGame(nicknames,gameEnded);
-
     }
 
 
@@ -225,16 +212,10 @@ public class Game implements GameInterface {
     }
 
     public void startRound(){
-        for(Player player : playerorder)
-            System.out.println("player: "+player.getNickname()+" in fase "+player.getPlayerState());
-
         for(Player player : playerorder) {
             if (player.getPlayerState() != PlayerState.DISCONNECTED)
                 player.setPlayerState(PlayerState.WAITING);
         }
-
-        for(Player player : playerorder)
-            System.out.println("player: "+player.getNickname()+" in fase "+player.getPlayerState());
 
         numplayerhasplayed=0;
         int tmpplayerid=-1;
@@ -248,22 +229,21 @@ public class Game implements GameInterface {
             numplayerhasplayed=tmpplayerid;
             playerorder.get(tmpplayerid).setPlayerState(PlayerState.ASSISTANTPHASE);
         }
-        //shutdown of game
 
     }
 
 
 
 
-    public boolean winnerEndRound() {
-        boolean gameIsFinished = false;
+    public int winnerEndRound() {
+        int gameIsFinished=0;
 
         if (board.getNumOfStudentsBag() == 0)
-            gameIsFinished = true;
+            gameIsFinished = 1;
 
         for (Player player : listOfPlayers)
             if (player.getAssistantCards().size() == 0)
-                gameIsFinished = true;
+                gameIsFinished = 2;
         return gameIsFinished;
 
         //Invece di fare una return facciamo che chiama un metodo in gameHandler per dire che ha vinto con dentro un
@@ -271,13 +251,13 @@ public class Game implements GameInterface {
 
     }
 
-    public boolean winnerIstantly(){
-        boolean gameIsFinished = false;
+    public int winnerIstantly(){
+        int gameIsFinished=0;
         if (board.getArchipelago().getNumOfIslands() == 3)
-            gameIsFinished = true;
+            gameIsFinished = 1;
         for (Player player : listOfPlayers)
             if (player.getPlance().getNumOfTowers() == 0)
-                gameIsFinished = true;
+                gameIsFinished = 2;
         return gameIsFinished;
     }
 
@@ -307,8 +287,8 @@ public class Game implements GameInterface {
 
         return playersChosen;
     }
-
-    public void selectCloud(int playerID, int cloudID) throws InvalidTurnException, InvalidCloudException {
+    //Return true if is the last cloud of the round
+    public boolean selectCloud(int playerID, int cloudID) throws InvalidTurnException, InvalidCloudException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.CLOUDPHASE) {
             if(!getBoard().getCloud(cloudID).isChoosen()){
                     for(int count=0;count<getBoard().getCloud(cloudID).getStudents().size();count++)
@@ -323,9 +303,9 @@ public class Game implements GameInterface {
                 getPlayer(playerID).setPlayerState(PlayerState.WAITING);
                 if (effectHandler.isProfessorcontroll())
                     effectHandler.setProfessorcontroll(false);
-                if(playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.RECONNECTED)
+                if(playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.RECONNECTED) {
                     playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
-                    //Qui possiamo pure mandare un messaggio al server tipo "Tocca al secondo giocatore"
+                }
                 else{
                     numplayerhasplayed++;
                     if(numplayerhasplayed==numOfPlayers){
@@ -339,10 +319,12 @@ public class Game implements GameInterface {
                             player.setCharacterPlayed(false);
                         }
                         startRound();  //Start the new round
+                        return true;
                     }
                     else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
-                    //Qui possiamo pure mandare un messaggio al server tipo "Tocca al secondo giocatore"
+
                 }
+                return false;
 
             }
             else {
@@ -356,6 +338,7 @@ public class Game implements GameInterface {
                     player.setCharacterPlayed(false);
                 }
                startRound();  //Start the new round
+                return true;
             }
 
         }
@@ -659,6 +642,14 @@ public class Game implements GameInterface {
             if(character.getEffect().getName().equals(characterView.getName()))
                 return character;
         return null;
+    }
+
+    public int getNumPlayerDisconnected(){
+        int num=0;
+        for(Player player : listOfPlayers)
+            if(player.getPlayerState()==PlayerState.DISCONNECTED)
+                num++;
+        return num;
     }
 }
 

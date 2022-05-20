@@ -12,8 +12,8 @@ class Effect8Test {
 
     Effect effect8 = new Effect8();
 
-    Game game2players = new Game(GameMode.EXPERTMODE,2, null);
-    Game game3players = new Game(GameMode.EXPERTMODE,3, null);
+    Game game2players = new Game(GameMode.EXPERTMODE,2);
+    Game game3players = new Game(GameMode.EXPERTMODE,3);
 
     @BeforeEach
     void init() {

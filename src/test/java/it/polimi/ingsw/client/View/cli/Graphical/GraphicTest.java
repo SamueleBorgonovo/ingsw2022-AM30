@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 class GraphicTest {
-    Game game = new Game(GameMode.EXPERTMODE,3, null);
+    Game game = new Game(GameMode.EXPERTMODE,3);
     Graphic graphic = new Graphic();
     Player playerGame1;
     PlayerView player1;

@@ -85,4 +85,12 @@ public abstract class View {
     public abstract void printInvalidStop();
 
     public abstract void printInvalidWizard();
+
+    public abstract void printWinnerInstantly(ArrayList<String> nickname,int type);
+
+    public abstract void printWinnerEndRound(ArrayList<String> nickname, int type);
+
+    public abstract void printWaitingForPlayers(boolean lobby);
+
+    public abstract void printGameEndedTimeout();
 }

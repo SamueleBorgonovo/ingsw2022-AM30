@@ -171,4 +171,24 @@ public class GUI extends View {
     public void printInvalidWizard() {
 
     }
+
+    @Override
+    public void printWinnerInstantly(ArrayList<String> nickname, int type) {
+
+    }
+
+    @Override
+    public void printWinnerEndRound(ArrayList<String> nickname, int type) {
+
+    }
+
+    @Override
+    public void printWaitingForPlayers(boolean lobby) {
+
+    }
+
+    @Override
+    public void printGameEndedTimeout() {
+
+    }
 }

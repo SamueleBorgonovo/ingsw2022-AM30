@@ -29,7 +29,7 @@ class Effect3Test {
     void effect() throws InvalidStopException, InvalidStudentEffectException, InvalidTurnException, InvalidIslandException {
         //This test check effect and also secondparteffect
 
-        Game game = new Game(GameMode.EXPERTMODE,2, null);
+        Game game = new Game(GameMode.EXPERTMODE,2);
         game.addPlayer("kek");
         Player player = game.getPlayer(1);
         player.setPlayerState(PlayerState.STUDENTPHASE);

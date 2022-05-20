@@ -2,6 +2,7 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.messages.toClient.*;
+import it.polimi.ingsw.messages.toClient.InvalidMoveMessages.*;
 import it.polimi.ingsw.messages.toClient.StatesMessages.*;
 import it.polimi.ingsw.messages.toServer.PingToServerMessage;
 
@@ -132,6 +133,18 @@ public class ClientMessageHandler {
 
     public void process(MotherNatureMoveMessage message){
         view.printMotherNatureMovement(message.getNickname(), message.getIslandId());
+    }
+
+    public void process(WinIstantlyMessage message){
+        view.printWinnerInstantly(message.getNickname(),message.getWinType());
+    }
+
+    public void process(WinEndRoundMessage message){
+        view.printWinnerEndRound(message.getNickname(),message.getWinType());
+    }
+
+    public void process(WaitingForPlayersMessage message){
+        view.printWaitingForPlayers(message.isLobby());
     }
 }
 

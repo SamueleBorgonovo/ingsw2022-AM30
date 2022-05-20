@@ -24,7 +24,7 @@ class Effect5Test {
     void effect() throws InvalidStopException, InvalidStudentEffectException, InvalidTurnException, InvalidIslandException, InvalidValueException {
         //This test checks effect and also secondparteffect
 
-        Game game = new Game(GameMode.EXPERTMODE,2, null);
+        Game game = new Game(GameMode.EXPERTMODE,2);
         game.addPlayer("kek");
         game.addPlayer("kek2");
         game.getPlayer(1).setPlayerState(PlayerState.MOTHERNATUREPHASE);

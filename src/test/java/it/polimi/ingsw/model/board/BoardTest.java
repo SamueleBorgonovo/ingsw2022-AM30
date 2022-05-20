@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoardTest {
-    Game game2players = new Game(GameMode.EXPERTMODE,2, null);
-    Game game3players = new Game(GameMode.EXPERTMODE,3, null);
+    Game game2players = new Game(GameMode.EXPERTMODE,2);
+    Game game3players = new Game(GameMode.EXPERTMODE,3);
 
     @BeforeEach
     void init() {

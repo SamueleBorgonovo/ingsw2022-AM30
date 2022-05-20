@@ -18,7 +18,7 @@ class Effect1Test {
         int i = 0;
         Game game;
         do {
-            game = new Game(GameMode.EXPERTMODE, 2, null);
+            game = new Game(GameMode.EXPERTMODE, 2);
             for (Characters characters : game.getBoard().getCharacters())
                 if(characters.getEffect().getClass().equals(effect1.getClass()))
                     i = 1;

@@ -121,18 +121,16 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
             disconnectionCalled=true;
             stopTimer();
             active = false;
-            this.gameHandler.disconnectPlayer(getNickname());
+            if(!gameEnded) {
+                gameHandler.disconnectPlayer(getNickname());
 
-            try {
-                if (timeout)
-                    os.writeObject(new TimeExpiredMessage());
-                else gameHandler.sendMessagetoGame(gameHandler.findGameofPlayer(getNickname()), new DisconnectMessage(getNickname(),gameEnded));
-                     //e anche partita chiusa perchè disconnessi tutti
-                // Mando il messaggio di game si sta chiudendo perchè la partita è finita
-
-                os.flush();
-                os.reset();
-            } catch (IOException e) {
+                try {
+                    if (timeout)
+                        os.writeObject(new TimeExpiredMessage());
+                    os.flush();
+                    os.reset();
+                } catch (IOException e) {
+                }
             }
             try {
                 is.close();

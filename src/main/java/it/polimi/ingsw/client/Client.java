@@ -136,10 +136,10 @@ public class Client {
             view.printTurn(nickname);
     }
 
-    public void handleDisconnection(String nick,boolean gameEnded){
+    public void handleDisconnection(String nick,boolean timeout){
         //if gameEnded=true server disconnected all players, else someone is disconnected from game
-        if(gameEnded){
-            //print game finito
+        if(timeout){
+            disconnectGame();
         }else view.printPlayerDisconnection(nick);
     }
 
@@ -180,6 +180,10 @@ public class Client {
                 break;
             }
         }
+    }
+
+    public void disconnectGame(){
+        view.printGameEndedTimeout();
     }
 
     public void startTimer(){

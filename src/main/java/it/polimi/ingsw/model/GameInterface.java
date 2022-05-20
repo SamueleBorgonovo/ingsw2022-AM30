@@ -10,7 +10,6 @@ import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.PlayerInterface;
 import it.polimi.ingsw.model.player.Wizard;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public interface GameInterface {
 
     public void setReconnectedPlayer(int playerid) throws ReconnectedException;
 
-    public void selectCloud(int playerID, int cloudID) throws InvalidTurnException, InvalidCloudException;
+    public boolean selectCloud(int playerID, int cloudID) throws InvalidTurnException, InvalidCloudException;
 
     public boolean checkPlayerState(int playerid);
 
@@ -65,9 +64,11 @@ public interface GameInterface {
 
     public Characters searchCharacter(CharacterView characterView);
 
-    public boolean winnerIstantly();
+    public int winnerIstantly();
 
-    public boolean winnerEndRound();
+    public int winnerEndRound();
 
     public ArrayList<Player> verifyWinner();
+
+    public int getNumPlayerDisconnected();
 }
