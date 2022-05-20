@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.resources.fxml.WizardDashboardController">
+   <children>
+      <Label layoutX="363.0" layoutY="202.0" text="SELECT ONE WIZARD">
+         <font>
+            <Font name="Futura Medium" size="45.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="76.0" layoutY="336.0" prefHeight="329.0" prefWidth="984.0" spacing="50.0" styleClass="box" stylesheets="@../Style.css">
+         <children>
+            <ImageView id="wizardGreen" fx:id="wizardGreen" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardGreen">
+               <image>
+                  <Image url="@../img/wizardGreen.png" />
+               </image>
+            </ImageView>
+            <ImageView id="wizardYellow" fx:id="wizardYellow" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardYellow">
+               <image>
+                  <Image url="@../img/wizardYellow.png" />
+               </image>
+            </ImageView>
+            <ImageView id="wizardBlue" fx:id="wizardBlue" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardBlue">
+               <image>
+                  <Image url="@../img/wizardBlue.png" />
+               </image>
+            </ImageView>
+            <ImageView id="wizardPink" fx:id="wizardPink" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardPink">
+               <image>
+                  <Image url="@../img/wizardPink.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</Pane>

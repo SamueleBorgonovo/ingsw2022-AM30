@@ -3,14 +3,16 @@ package it.polimi.ingsw.client.View.cli.Graphical;
 import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.IslandView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
-import it.polimi.ingsw.model.board.Archipelago;
 import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.model.effects.*;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
-import it.polimi.ingsw.model.player.*;
+import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Professor;
+import it.polimi.ingsw.model.player.Wizard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -398,9 +400,11 @@ class GraphicTest {
     }
 
     @Test
-    void printLogo() {
+    void printLogo() throws Exception {
         graphic.printLogo();
     }
+
+
 
     @Test
     void printArchipelago() {
@@ -509,6 +513,7 @@ class GraphicTest {
         game.getEffectHandler().removeStudentFromEffect7(game.getEffectHandler().getEffect7students().get(1));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(1));
         characters1.setUsed(true);
+        characters.clear();
         for(Characters character : charactersGame)
             characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
@@ -516,6 +521,7 @@ class GraphicTest {
         game.getEffectHandler().removeStudentFromEffect1students(game.getEffectHandler().getEffect1students().get(1));
         game.getEffectHandler().removeStudentFromEffect7(game.getEffectHandler().getEffect7students().get(1));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(1));
+        characters.clear();
         for(Characters character : charactersGame)
             characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
@@ -524,6 +530,7 @@ class GraphicTest {
         game.getEffectHandler().removeStudentFromEffect7(game.getEffectHandler().getEffect7students().get(1));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(1));
         characters12.setUsed(true);
+        characters.clear();
         for(Characters character : charactersGame)
             characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
@@ -531,6 +538,7 @@ class GraphicTest {
         game.getEffectHandler().removeStudentFromEffect1students(game.getEffectHandler().getEffect1students().get(0));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(0));
         characters2.setUsed(true);
+        characters.clear();
         for(Characters character : charactersGame)
             characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
