@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public interface EffectHandlerInterface {

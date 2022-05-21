@@ -13,7 +13,6 @@ import it.polimi.ingsw.model.player.Wizard;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Assistant;
 
-import java.awt.desktop.SystemSleepEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -29,7 +28,7 @@ public class CLI extends View {
     private ArrayList<PlayerView> players= new ArrayList<>();
     private BoardView board;
     private CharacterInput characterInput = new CharacterInput();
-    private EffectHandler effectHandler = new EffectHandler();
+    private EffectHandler effectHandler;
     private String nickname;
     private PlayerView player;
     private boolean isFirst=true;
@@ -463,6 +462,10 @@ public class CLI extends View {
         this.board=board;
     }
 
+    public  void setEffectHandler(EffectHandler effectHandler){
+        this.effectHandler=effectHandler;
+    }
+
     @Override
     public void print() {
 
@@ -618,6 +621,16 @@ public class CLI extends View {
 
     public void printGameEndedTimeout(){
         System.out.println("You won. Game ended because players did not reconnect");
+    }
+
+    public void printWinClose(){
+        System.out.println("Game Ended. Disconnection from server");
+    }
+
+    public void printConnectionClosed(boolean timeout){
+        if(timeout)
+            System.out.println("Connection with server closed. Time expired");
+            else System.out.println("Connection with server closed");
     }
 
 }

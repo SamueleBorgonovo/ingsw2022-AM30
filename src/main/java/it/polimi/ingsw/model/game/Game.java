@@ -171,7 +171,6 @@ public class Game implements GameInterface {
 
     public int addPlayer(String nickname) {
         Player player = new Player(nickname);
-
         listOfPlayers.add(player);
         player.setPlayerID(listOfPlayers.size());
         if (numOfPlayers == 2) {
@@ -186,8 +185,6 @@ public class Game implements GameInterface {
         if(gameMode.equals(GameMode.EXPERTMODE)) {
             player.setCoins(1);
         }
-        //if (listOfPlayers.size() == numOfPlayers)
-            //this.startGame();
         return listOfPlayers.size();
     }
 
@@ -264,7 +261,7 @@ public class Game implements GameInterface {
     public ArrayList<Player> verifyWinner(){
 
         ArrayList<Player> playersCandidate = new ArrayList<>();
-        ArrayList<Player> playersChosen = null;
+        ArrayList<Player> playersChosen = new ArrayList<>();
         int minTowers = 8;
         int maxProfessor = 0;
 
@@ -382,38 +379,46 @@ public class Game implements GameInterface {
     }
 
     public void useAssistant(int playerID,Assistant assistant) throws InvalidTurnException, InvalidAssistantException{
-
+        boolean ok=false;
         if(getPlayer(playerID).getPlayerState()== PlayerState.ASSISTANTPHASE){ //Check that is the right id of the player that has to play
-            if(!usedAssistant.contains(assistant) && getPlayer(playerID).getAssistantCards().contains(assistant)){
-                getPlayer(playerID).removeAssistant(assistant);
-                usedAssistant.add(assistant);
-                getPlayer(playerID).setLastassistantplayed(assistant);
-                getPlayer(playerID).setAssistantPlayed(true);
-                numplayerhasplayed++;
-                getPlayer(playerID).setPlayerState(PlayerState.WAITING);
-                if(numplayerhasplayed == numOfPlayers){
-                    //All players has played the assistant
-                    numplayerhasplayed=0;
-                    verifyPlayerOrder();
-                    usedAssistant.clear();
-                    playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
-                }else{
-                    if(playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState()!= PlayerState.RECONNECTED)
-                        playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
-                    else{
-                        numplayerhasplayed++;
-                        if(numplayerhasplayed==numOfPlayers){
-                            //All players has played the assistant
-                            numplayerhasplayed=0;
-                            verifyPlayerOrder();
-                            usedAssistant.clear();
-                            playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
-                        }
-                        else
-                            playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
+            if(getPlayer(playerID).getAssistantCards().contains(assistant)){
+                if(numOfPlayers==2)
+                    if(!usedAssistant.contains(assistant) || getPlayer(playerID).getAssistantCards().size()==1){
+                     ok=true;
                     }
+                if(numOfPlayers==3)
+                    if(!usedAssistant.contains(assistant) || (usedAssistant.size()==2 && getPlayer(playerID).getAssistantCards().size()==2))
+                        ok=true;
+                if(ok) {
+                    getPlayer(playerID).removeAssistant(assistant);
+                    usedAssistant.add(assistant);
+                    getPlayer(playerID).setLastassistantplayed(assistant);
+                    getPlayer(playerID).setAssistantPlayed(true);
+                    numplayerhasplayed++;
+                    getPlayer(playerID).setPlayerState(PlayerState.WAITING);
+                    if (numplayerhasplayed == numOfPlayers) {
+                        //All players has played the assistant
+                        numplayerhasplayed = 0;
+                        verifyPlayerOrder();
+                        usedAssistant.clear();
+                        playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
+                    } else {
+                        if (playerorder.get(numplayerhasplayed).getPlayerState() != PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState() != PlayerState.RECONNECTED)
+                            playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
+                        else {
+                            numplayerhasplayed++;
+                            if (numplayerhasplayed == numOfPlayers) {
+                                //All players has played the assistant
+                                numplayerhasplayed = 0;
+                                verifyPlayerOrder();
+                                usedAssistant.clear();
+                                playerorder.get(0).setPlayerState(PlayerState.STUDENTPHASE);
+                            } else
+                                playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
+                        }
 
-                }
+                    }
+                } else throw new InvalidAssistantException();
             }
             else throw new InvalidAssistantException();
         }else throw new InvalidTurnException();

@@ -9,10 +9,7 @@ import it.polimi.ingsw.messages.toClient.InvalidMoveMessages.*;
 import it.polimi.ingsw.messages.toClient.StatesMessages.*;
 import it.polimi.ingsw.model.GameInterface;
 import it.polimi.ingsw.model.board.Characters;
-import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.model.game.GameMode;
-import it.polimi.ingsw.model.game.GameState;
-import it.polimi.ingsw.model.game.Student;
+import it.polimi.ingsw.model.game.*;
 import it.polimi.ingsw.model.player.*;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
@@ -26,7 +23,7 @@ public class GameHandler {
     private static ConcurrentHashMap<GameInterface, Thread> gameToTimerMap;//Map to find WinningTimer of a game
     private static ConcurrentHashMap<GameInterface, Integer> gameToStudentPlayed;
     private static ArrayList<String> nicknameChoosen;
-    private final int WINNING_TIMER = 15000;
+    private final int WINNING_TIMER = 60000;
 
     public GameHandler(){
         playertoGameMap = new ConcurrentHashMap<>();//Map that find the game of a player's nickname
@@ -136,10 +133,10 @@ public class GameHandler {
         callhandler = game.setDisconnectPlayer(playerid);
         int numPlayerDisconnected = game.getNumPlayerDisconnected();
         if (numPlayerDisconnected == game.getNumOfPlayers()) {
-            gameShutdown(game,true);
+            gameShutdown(game,true,false);
         }
         if (numPlayerDisconnected <= game.getNumOfPlayers() - 1) {
-            sendMessagetoGame(game, new DisconnectMessage(nickname, false));
+            sendMessagetoGame(game, new DisconnectMessage(nickname, false,false));
             if (numPlayerDisconnected == game.getNumOfPlayers() - 1) {
                 sendMessagetoGame(game, new WaitingForPlayersMessage(false));
                 startWinnerTimer(game);
@@ -178,9 +175,10 @@ public class GameHandler {
 
     }
 
-    public void updateClient(GameInterface game, BoardView boardView, ArrayList<PlayerView> playerView){
+    public void updateClient(GameInterface game, BoardView boardView, ArrayList<PlayerView> playerView, EffectHandler effectHandler){
         sendMessagetoGame(game,new BoardUpdateMessage(boardView,true));
         sendMessagetoGame(game,new PlanceUpdateMessage(playerView));
+        sendMessagetoGame(game,new EffectHandlerUpdateMessage(effectHandler));
     }
 
     //sends message to all client of a game
@@ -240,7 +238,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.useAssistant(playerID, assistant);
-            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler());
             sendMessagetoGame(game,new AssistantChoosedMessage(clientHandler.getNickname(),assistant));
             turnHandler(game);
         } catch (InvalidAssistantException e) {
@@ -264,7 +262,7 @@ public class GameHandler {
         }else {
             try {
                 game.useCharacter(playerID, character);
-                updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
+                updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
                 sendMessagetoGame(game,new CharacterChoosedMessage(clientHandler.getNickname(),characterview));
                 turnHandler(game);
             } catch (InvalidStopException e) {
@@ -288,7 +286,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             boolean last = game.selectCloud(playerID,cloudID);
-            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
             sendMessagetoGame(game,new CloudChoosedMessage(clientHandler.getNickname(), cloudID));
             if(last) {
                 if (!checkWinner(game, true)) {
@@ -310,7 +308,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveMotherNature(playerID,movement);
-            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
             sendMessagetoGame(game,new MotherNatureMoveMessage(clientHandler.getNickname(), game.getMotherNatureIsland()));
             if(!checkWinner(game,false))
                 turnHandler(game);
@@ -329,7 +327,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveStudentToHall(playerID,student);
-            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
             sendMessagetoGame(game,new StudentHallChoosedMessage(clientHandler.getNickname(),student));
             addGameToStudentPlayed(game);
             if(getGameToStudentPlayed(game)<game.getNumOfPlayers()+1)
@@ -386,7 +384,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.moveStudentToIsland(playerID,islandID,student);
-            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
             sendMessagetoGame(game,new StudentIslandChoosedMessage(clientHandler.getNickname(),student,islandID));
             addGameToStudentPlayed(game);
             if(getGameToStudentPlayed(game)< game.getNumOfPlayers()+1)
@@ -411,7 +409,7 @@ public class GameHandler {
         try{
             game.setWizard(playerid,wizard);
             if(4-game.getWizardAvailable().size()==game.getNumOfPlayers()){
-                updateClient(game,game.getBoard().getBoardView(), game.getPlayersView());
+                updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
                 startGame(game);
             }else clientHandler.sendMessageToClient(new WaitingForPlayersMessage(true));
         } catch (InvalidWizardException e) {
@@ -444,17 +442,17 @@ public class GameHandler {
             }
         }
         if(check!=0){
-            gameShutdown(game,false);
+            gameShutdown(game,false,true);
             return true;
         }
         return false;
     }
 
-    public void gameShutdown(GameInterface game,boolean timeout){
-        sendMessagetoGame(game,new DisconnectMessage("win",true));
+    public void gameShutdown(GameInterface game,boolean timeout,boolean win){
+        sendMessagetoGame(game,new DisconnectMessage("win",timeout,win));
         for(Player player : game.getPlayers())
             if(player.getPlayerState()!=PlayerState.DISCONNECTED)
-                findHandler(player.getNickname()).handleSocketDisconnection(false, true);
+                findHandler(player.getNickname()).handleSocketDisconnection(timeout, true);
 
 
         for(Player player : game.getPlayers()){
@@ -470,7 +468,7 @@ public class GameHandler {
         Thread timer = new Thread(() ->{
             try {
                 Thread.sleep(WINNING_TIMER);
-                gameShutdown(game,true);
+                gameShutdown(game,true,false);
             } catch (InterruptedException e) { }
 
         });

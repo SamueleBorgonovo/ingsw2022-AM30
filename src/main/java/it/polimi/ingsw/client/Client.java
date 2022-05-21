@@ -20,6 +20,7 @@ public class Client {
     private int port;
     private ObjectOutputStream output;
     private ObjectInputStream input;
+    private Socket socket;
     boolean active=false;
     private String nickname;
     private Wizard wizard;
@@ -47,7 +48,6 @@ public class Client {
         this.pinger = new Thread(this::startPinger);
     }
     public boolean setupConnection() throws IOException, ClassNotFoundException {
-        Socket socket;
         try{
             socket = new Socket(ip, port);
         } catch (IOException e) {
@@ -136,10 +136,14 @@ public class Client {
             view.printTurn(nickname);
     }
 
-    public void handleDisconnection(String nick,boolean timeout){
+    public void handleDisconnection(String nick,boolean timeout,boolean win){
         //if gameEnded=true server disconnected all players, else someone is disconnected from game
+        if(win){
+            view.printWinClose();
+            handleSocketDisconnection(false);
+        }
         if(timeout){
-            disconnectGame();
+            view.printGameEndedTimeout();
         }else view.printPlayerDisconnection(nick);
     }
 
@@ -153,7 +157,7 @@ public class Client {
             ((MessageToClient) messageFromServer).action(this);
         }
         }catch(IOException | ClassNotFoundException e) {
-            //Da scrivere cosa fare in questi casi
+            handleSocketDisconnection(false);
         }
 
     }
@@ -164,9 +168,12 @@ public class Client {
             output.reset();
             output.flush();
         } catch (IOException e) {
-            System.err.println("Error during send process.");
+            handleSocketDisconnection(false);
+            /*System.err.println("Error during send process.");
             e.printStackTrace();
+             */
         }
+
     }
 
     public void startPinger() {
@@ -182,15 +189,29 @@ public class Client {
         }
     }
 
-    public void disconnectGame(){
-        view.printGameEndedTimeout();
+    public void handleSocketDisconnection(boolean timeout){
+        pingActive=false;
+        stopTimer();
+        try {
+            input.close();
+        } catch (IOException e) {
+        }
+        try {
+            output.close();
+        } catch (IOException e) {
+        }
+        try {
+            socket.close();
+        } catch (IOException e) {
+        }
+        view.printConnectionClosed(timeout);
     }
 
     public void startTimer(){
         timer = new Thread(() -> {
             try{
                 Thread.sleep(TIMEOUT_FOR_RESPONSE);
-                //handleSocketDisconnection(true);
+                handleSocketDisconnection(true);
             } catch (InterruptedException e){ }
         });
         timer.start();

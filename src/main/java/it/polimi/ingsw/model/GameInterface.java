@@ -5,6 +5,7 @@ import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Characters;
+import it.polimi.ingsw.model.game.EffectHandler;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.GameState;
 import it.polimi.ingsw.model.game.Student;
@@ -71,4 +72,6 @@ public interface GameInterface {
     public ArrayList<Player> verifyWinner();
 
     public int getNumPlayerDisconnected();
+
+    public EffectHandler getEffectHandler();
 }

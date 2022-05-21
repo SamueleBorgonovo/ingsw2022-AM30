@@ -6,6 +6,7 @@ import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 
 
+import it.polimi.ingsw.model.game.EffectHandler;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Wizard;
@@ -47,6 +48,8 @@ public abstract class View {
     public abstract void setPlayers(ArrayList<PlayerView> players);
 
     public abstract void setBoard(BoardView board);
+
+    public abstract void setEffectHandler(EffectHandler effectHandler);
 
     public abstract void print();
 
@@ -93,4 +96,8 @@ public abstract class View {
     public abstract void printWaitingForPlayers(boolean lobby);
 
     public abstract void printGameEndedTimeout();
+
+    public abstract void printWinClose();
+
+    public abstract void printConnectionClosed(boolean timeout);
 }

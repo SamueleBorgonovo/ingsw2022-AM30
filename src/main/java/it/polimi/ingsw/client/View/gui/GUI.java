@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.controller.virtualView.BoardView;
 import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
+import it.polimi.ingsw.model.game.EffectHandler;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.*;
@@ -76,6 +77,11 @@ public class GUI extends View {
 
     @Override
     public void setBoard(BoardView board) {
+
+    }
+
+    @Override
+    public void setEffectHandler(EffectHandler effectHandler) {
 
     }
 
@@ -189,6 +195,16 @@ public class GUI extends View {
 
     @Override
     public void printGameEndedTimeout() {
+
+    }
+
+    @Override
+    public void printWinClose() {
+
+    }
+
+    @Override
+    public void printConnectionClosed(boolean timeout) {
 
     }
 }

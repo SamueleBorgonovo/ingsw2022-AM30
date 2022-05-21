@@ -72,7 +72,7 @@ public class ClientMessageHandler {
     }
 
     public void process(DisconnectMessage message){
-        client.handleDisconnection(message.getNickname(), message.isGameEnded());
+        client.handleDisconnection(message.getNickname(), message.isTimeout(),message.isWin());
     }
 
     public void process(NoGameMessage message){
@@ -145,6 +145,10 @@ public class ClientMessageHandler {
 
     public void process(WaitingForPlayersMessage message){
         view.printWaitingForPlayers(message.isLobby());
+    }
+
+    public void process(EffectHandlerUpdateMessage message){
+        view.setEffectHandler(message.getEffectHandler());
     }
 }
 
