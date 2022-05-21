@@ -35,7 +35,7 @@ public class CLI extends View {
     private boolean isFirst=true;
     private GameMode gameMode;
     private boolean character4played = false;
-    private CharacterView characterPlayed;
+    private CharacterView characterPlayed  = new CharacterView(0,null,"");
 
 
     public void init() throws IOException, ClassNotFoundException, NumberFormatException {
@@ -568,7 +568,7 @@ public class CLI extends View {
     }
 
     public void printInvalidIsland(){
-        System.out.println("Iisland number not available. Try again");
+        System.out.println("Island number not available. Try again");
     }
 
     public void printInvalidStudent(){
@@ -580,7 +580,7 @@ public class CLI extends View {
     }
 
     public void printInvalidStop(){
-        System.out.println("Character GRANDMA doens't have enough stop");
+        System.out.println("Character GRANDMA doesn't have enough stop");
     }
 
     public void printInvalidWizard(){
@@ -619,7 +619,6 @@ public class CLI extends View {
     public void printGameEndedTimeout(){
         System.out.println("You won. Game ended because players did not reconnect");
     }
-
 
 }
 
