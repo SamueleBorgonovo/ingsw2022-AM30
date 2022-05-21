@@ -10,6 +10,7 @@ public class Effect3 extends Effect {
     // Choose an island and calculate the influence as if
     // Mother Nature had finished her movement there.
     private PlayerState prevPlayerState;
+    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.ISLAND;
 
     @Override
     public int getCost(){ return 3;}
@@ -35,6 +36,6 @@ public class Effect3 extends Effect {
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return TypeOfInputCharacter.ISLAND;
+        return this.typeOfInputCharacter;
     }
 }

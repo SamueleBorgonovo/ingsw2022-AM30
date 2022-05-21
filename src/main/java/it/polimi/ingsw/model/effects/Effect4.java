@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.Game;
 
 public class Effect4 extends Effect{
+    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.INT;
 
     @Override
     public int getCost() {
@@ -29,6 +30,6 @@ public class Effect4 extends Effect{
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return TypeOfInputCharacter.INT;
+        return typeOfInputCharacter;
     }
 }

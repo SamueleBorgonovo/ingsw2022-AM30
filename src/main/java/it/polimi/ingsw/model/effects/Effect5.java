@@ -11,6 +11,7 @@ public class Effect5 extends Effect {
     // The first time Mother Nature moves there the ban falls and does not calculate the influence there.
     // The bans can be a maximum of 4.
     private PlayerState prevPlayerState;
+    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.ISLAND;
 
     @Override
     public int getCost(){ return 2;}
@@ -43,6 +44,6 @@ public class Effect5 extends Effect {
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return TypeOfInputCharacter.ISLAND;
+        return this.typeOfInputCharacter;
     }
 }

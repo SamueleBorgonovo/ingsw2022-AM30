@@ -10,6 +10,7 @@ public class Effect9 extends Effect {
     // Once a student color has been chosen, that color does not provide influence
     // in the influence calculation on the current turn.
     private PlayerState prevPlayerState;
+    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.STUDENT;
 
     @Override
     public int getCost() { return 3;}
@@ -36,6 +37,6 @@ public class Effect9 extends Effect {
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return TypeOfInputCharacter.STUDENT;
+        return this.typeOfInputCharacter;
     }
 }

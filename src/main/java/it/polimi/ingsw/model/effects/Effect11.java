@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.player.PlayerState;
 
 public class Effect11 extends Effect{
     private PlayerState prevPlayerState;
+    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.EFFECT11INPUT;
 
     @Override
     public int getCost(){ return 2;}
@@ -44,6 +45,6 @@ public class Effect11 extends Effect{
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return TypeOfInputCharacter.EFFECT11INPUT;
+        return this.typeOfInputCharacter;
     }
 }

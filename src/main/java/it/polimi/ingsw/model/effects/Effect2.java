@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.game.Game;
 public class Effect2 extends Effect {
     // Take control of the professors even if you have the same number of students
     // in the hall as the player currently controlling them.
+    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.NOTHING;
 
     @Override
     public int getCost(){ return 2;}
@@ -29,6 +30,6 @@ public class Effect2 extends Effect {
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return null;
+        return this.typeOfInputCharacter;
     }
 }

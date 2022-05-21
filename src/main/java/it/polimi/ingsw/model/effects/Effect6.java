@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.game.Game;
 public class Effect6 extends Effect {
     // When counting the influence on an Island (or group of Islands),
     // the Towers present are not counted.
-
+    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.NOTHING;
     @Override
     public int getCost(){ return 3;}
 
@@ -29,6 +29,6 @@ public class Effect6 extends Effect {
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return null;
+        return this.typeOfInputCharacter;
     }
 }

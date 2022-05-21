@@ -158,7 +158,6 @@ public class CLI extends View {
     @Override
     public void chooseWizard(ArrayList<Wizard> avaiableWizards){
         Wizard wizardChosen = null;
-        Scanner stdin = new Scanner(System.in);
         boolean checkwizard=false;
         System.out.println("Choose one Wizard between this available by typing his number associated");
         this.graphic.printWizards(avaiableWizards);
@@ -209,7 +208,6 @@ public class CLI extends View {
 
     @Override
     public PossibleAction chooseNextAction(PlayerState playerState) {
-        Scanner stdin = new Scanner(System.in);
         boolean check = false;
         PossibleAction actionChosen = null;
         System.out.println("Choose your next action by typing the action's number");
@@ -323,7 +321,7 @@ public class CLI extends View {
     public Student chooseStudentToMove() {
         ArrayList<Student> entrance = this.player.getPlance().getEntrance();
         Student studentChosen=inputParser.studentParser();
-        while(!entrance.contains(studentChosen) || this.player.getPlance().getHall().get(studentChosen) == 10) {
+        while(!entrance.contains(studentChosen)) {
             System.out.println("Student not available or max of students. Please try again");
             studentChosen=inputParser.studentParser();
         }
@@ -476,6 +474,8 @@ public class CLI extends View {
         System.out.println("Game is Starting");
         graphic.printArchipelago(board.getIslandViews(),board.getMotherNature());
         graphic.printPlances(players);
+        if(this.gameMode == GameMode.EXPERTMODE)
+            this.graphic.printCharacters(this.board.getCharacters(),this.effectHandler);
     }
 
     @Override

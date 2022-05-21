@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.player.PlayerState;
 import java.util.ArrayList;
 public class Effect12 extends Effect{
     private PlayerState prevPlayerState;
+    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.STUDENT;
 
     @Override
     public int getCost(){ return 3;}
@@ -44,6 +45,6 @@ public class Effect12 extends Effect{
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return TypeOfInputCharacter.STUDENT;
+        return this.typeOfInputCharacter;
     }
 }

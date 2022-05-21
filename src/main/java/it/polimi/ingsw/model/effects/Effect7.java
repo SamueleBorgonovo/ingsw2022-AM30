@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class Effect7 extends Effect{
     private PlayerState prevPlayerState;
+    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.EFFECT7INPUT;
 
     @Override
     public int getCost(){ return 1;}
@@ -66,6 +67,6 @@ public class Effect7 extends Effect{
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return TypeOfInputCharacter.EFFECT7INPUT;
+        return this.typeOfInputCharacter;
     }
 }

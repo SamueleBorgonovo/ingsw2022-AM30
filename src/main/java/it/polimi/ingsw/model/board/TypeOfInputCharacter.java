@@ -7,5 +7,6 @@ public enum TypeOfInputCharacter {
     EFFECT11INPUT,
     ISLAND,
     STUDENT,
-    INT
+    INT,
+    NOTHING
 }
