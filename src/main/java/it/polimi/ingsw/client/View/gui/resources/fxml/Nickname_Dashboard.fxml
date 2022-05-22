@@ -43,7 +43,7 @@
             </CheckBox>
          </children>
       </Pane>
-      <Button fx:id="loginButtobn" layoutX="535.0" layoutY="493.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@../Style.css" text="Login">
+      <Button fx:id="loginButton" layoutX="535.0" layoutY="493.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@../Style.css" text="Login">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>

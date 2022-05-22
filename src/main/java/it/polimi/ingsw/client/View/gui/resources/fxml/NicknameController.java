@@ -18,7 +18,7 @@ public class NicknameController {
     @FXML
     public CheckBox reconnectField;
     @FXML
-    public Button loginButtobn;
+    public Button loginButton;
 
     public void login(ActionEvent actionEvent) {
 
