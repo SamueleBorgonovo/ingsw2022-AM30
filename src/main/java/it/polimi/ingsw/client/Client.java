@@ -77,6 +77,12 @@ public class Client {
 
     }
 
+    public void setSettings(GameMode gamemode,int numofPlayers){
+        this.gamemode=gamemode;
+        this.numofPlayers=numofPlayers;
+
+    }
+
     public void nextMove(PlayerState playerState){
         PossibleAction action;
         if(playerState==PlayerState.STUDENTPHASE){

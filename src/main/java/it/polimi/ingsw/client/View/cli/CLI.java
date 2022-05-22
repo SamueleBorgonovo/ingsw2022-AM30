@@ -32,7 +32,6 @@ public class CLI extends View {
     private String nickname;
     private PlayerView player;
     private boolean isFirst=true;
-    private GameMode gameMode;
     private boolean character4played = false;
     private CharacterView characterPlayed  = new CharacterView(0,null,"");
 
@@ -129,11 +128,11 @@ public class CLI extends View {
         }
 
         if(choice.equalsIgnoreCase("s")) {
-            this.gameMode = GameMode.SIMPLEMODE;
+            client.setGamemode(GameMode.SIMPLEMODE);
             return GameMode.SIMPLEMODE;
         }
         else {
-            this.gameMode = GameMode.EXPERTMODE;
+            client.setGamemode(GameMode.EXPERTMODE);
             return GameMode.EXPERTMODE;
         }
     }
@@ -171,7 +170,7 @@ public class CLI extends View {
                 wizardInt = inputParser.intParser();
             }
         }
-        if(this.gameMode==GameMode.SIMPLEMODE)
+        if(client.getGamemode()==GameMode.SIMPLEMODE)
             this.player = new PlayerView(this.nickname,wizardChosen,null, null,0,null);
         else
             this.player = new PlayerView(this.nickname,wizardChosen,null, null,1,null);
@@ -212,7 +211,7 @@ public class CLI extends View {
         System.out.println("Choose your next action by typing the action's number");
         int actionNum = 0 ;
         while(!check){
-            if(playerState == PlayerState.STUDENTPHASE && this.gameMode == GameMode.SIMPLEMODE){
+            if(playerState == PlayerState.STUDENTPHASE && client.getGamemode() == GameMode.SIMPLEMODE){
                 System.out.println("Possible actions:");
                 System.out.println("1) Move one student to the hall");
                 System.out.println("2) Move one student to one island");
@@ -230,7 +229,7 @@ public class CLI extends View {
                     System.out.println("");
                 }
             }
-            else if(playerState == PlayerState.STUDENTPHASE && this.gameMode == GameMode.EXPERTMODE){
+            else if(playerState == PlayerState.STUDENTPHASE && client.getGamemode() == GameMode.EXPERTMODE){
                     System.out.println("Possible actions:");
                     System.out.println("1) Move one student to the hall");
                     System.out.println("2) Move one student to one island");
@@ -477,7 +476,7 @@ public class CLI extends View {
         System.out.println("Game is Starting");
         graphic.printArchipelago(board.getIslandViews(),board.getMotherNature());
         graphic.printPlances(players);
-        if(this.gameMode == GameMode.EXPERTMODE)
+        if(client.getGamemode() == GameMode.EXPERTMODE)
             this.graphic.printCharacters(this.board.getCharacters(),this.effectHandler);
     }
 

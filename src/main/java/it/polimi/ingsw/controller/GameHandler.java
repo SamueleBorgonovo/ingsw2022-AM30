@@ -161,6 +161,8 @@ public class GameHandler {
                 }
                 clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayersView()));
                 clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard().getBoardView(),true));
+                clientHandler.sendMessageToClient(new EffectHandlerUpdateMessage(game.getEffectHandler()));
+                clientHandler.sendMessageToClient(new SettingReconnectMessage(game.getGameMode(),game.getNumOfPlayers()));
                 sendMessagetoGame(game, new ConnectMessage(clientHandler.getNickname(), true));
             }catch(ReconnectedException e){
                 //Fare il messaggio invalidReconnection
@@ -222,9 +224,10 @@ public class GameHandler {
    }
 
    public void addGameToStudentPlayed(GameInterface game){
-        int num = gameToStudentPlayed.get(game)+1;
+
+        int num = gameToStudentPlayed.get(game);
         gameToStudentPlayed.remove(game);
-        gameToStudentPlayed.put(game,num);
+        gameToStudentPlayed.put(game,num+1);
    }
 
    public int getGameToStudentPlayed(GameInterface game){

@@ -150,6 +150,10 @@ public class ClientMessageHandler {
     public void process(EffectHandlerUpdateMessage message){
         view.setEffectHandler(message.getEffectHandler());
     }
+
+    public void process(SettingReconnectMessage message){
+        client.setSettings(message.getGameMode(),message.getNumOfPlayers());
+    }
 }
 
 

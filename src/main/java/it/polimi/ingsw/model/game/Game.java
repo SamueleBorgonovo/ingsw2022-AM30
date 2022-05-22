@@ -128,6 +128,7 @@ public class Game implements GameInterface {
                             playerorder.get(tmp).setPlayerState(PlayerState.STUDENTPHASE);
                         } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
                     } else {
+                        movementStudents=0;
                         callhandler=true;
                         numplayerhasplayed++;
                         getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
@@ -209,6 +210,46 @@ public class Game implements GameInterface {
     }
 
     public void startRound(){
+        if(numOfPlayers==2) {
+            for (Player player : playerorder)
+                if (player.getPlance().getEntrance().size() != 7) {
+                    int cloudid = -1;
+                    for (Cloud cloud : board.getClouds())
+                        if (!cloud.isChoosen()) {
+                            cloudid = cloud.getCloudID();
+                            cloud.setChoosen(true);
+                            break;
+                        }
+                    int count = 0;
+                    while (player.getPlance().getEntrance().size() != 7) {
+                        player.getPlance().addStudentEntrance(board.getCloud(cloudid).getStudents().get(count));
+                        count++;
+
+                    }
+                }
+        }
+        if(numOfPlayers==3) {
+            for (Player player : playerorder)
+                if (player.getPlance().getEntrance().size() != 9) {
+                    int cloudid = -1;
+                    for (Cloud cloud : board.getClouds())
+                        if (!cloud.isChoosen()) {
+                            cloudid = cloud.getCloudID();
+                            cloud.setChoosen((true));
+                            break;
+                        }
+                    int count = 0;
+                    while (player.getPlance().getEntrance().size() != 9) {
+                        player.getPlance().addStudentEntrance(board.getCloud(cloudid).getStudents().get(count));
+                        count++;
+                    }
+                }
+        }
+
+        for(int count=0;count<getBoard().getClouds().size();count++){
+            getBoard().getClouds().get(count).setChoosen(false);
+        }
+
         for(Player player : playerorder) {
             if (player.getPlayerState() != PlayerState.DISCONNECTED)
                 player.setPlayerState(PlayerState.WAITING);
@@ -308,10 +349,6 @@ public class Game implements GameInterface {
                     if(numplayerhasplayed==numOfPlayers){
                         //All players played, ending round
                         numplayerhasplayed=0;
-                        for(int count=0;count<getBoard().getClouds().size();count++){
-                            getBoard().getClouds().get(count).setChoosen(false);
-                        }
-
                         for (Player player : listOfPlayers) {
                             player.setCharacterPlayed(false);
                         }
@@ -327,10 +364,6 @@ public class Game implements GameInterface {
             else {
                 //All players played, ending round
                 numplayerhasplayed=0;
-                for(int count=0;count<getBoard().getClouds().size();count++){
-                    getBoard().getClouds().get(count).setChoosen(false);
-                }
-
                 for (Player player : listOfPlayers) {
                     player.setCharacterPlayed(false);
                 }
