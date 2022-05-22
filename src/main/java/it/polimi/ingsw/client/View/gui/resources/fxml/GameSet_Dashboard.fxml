@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.resources.fxml.GameSettingsController">
+   <children>
+      <Label alignment="CENTER" layoutY="204.0" prefHeight="60.0" prefWidth="1128.0" text="GAME SETTINGS">
+         <font>
+            <Font name="Futura Medium" size="45.0" />
+         </font>
+      </Label>
+      <Pane layoutX="-4.0" layoutY="313.0" prefHeight="126.0" prefWidth="1142.0">
+         <children>
+            <Label alignment="CENTER" layoutX="-3.0" layoutY="1.0" prefHeight="60.0" prefWidth="1147.0" text="Select Game Mode">
+               <font>
+                  <Font name="Futura Medium" size="36.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="simpleField" layoutX="365.0" layoutY="90.0" mnemonicParsing="false" text="Simple">
+               <font>
+                  <Font name="Futura Medium" size="18.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="715.0" layoutY="86.0" mnemonicParsing="false" text="Expert">
+               <font>
+                  <Font name="Futura Medium" size="18.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </Pane>
+      <Button fx:id="gameSettingsButton" layoutX="534.0" layoutY="672.0" mnemonicParsing="false" onAction="#createGame" styleClass="box" stylesheets="@../Style.css" text="Create">
+         <font>
+            <Font name="Futura Medium" size="18.0" />
+         </font>
+      </Button>
+      <Pane layoutX="1.0" layoutY="488.0" prefHeight="126.0" prefWidth="1142.0">
+         <children>
+            <Label alignment="CENTER" layoutX="-3.0" layoutY="1.0" prefHeight="60.0" prefWidth="1147.0" text="Select the number of players">
+               <font>
+                  <Font name="Futura Medium" size="36.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="twoField" layoutX="365.0" layoutY="90.0" mnemonicParsing="false" text="2">
+               <font>
+                  <Font name="Futura Medium" size="18.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="715.0" layoutY="86.0" mnemonicParsing="false" text="3">
+               <font>
+                  <Font name="Futura Medium" size="18.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </Pane>
+   </children>
+</Pane>

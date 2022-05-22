@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public class WizardDashboardController {
+public class WizardDController {
     @FXML
     ImageView wizardGreen;
 
