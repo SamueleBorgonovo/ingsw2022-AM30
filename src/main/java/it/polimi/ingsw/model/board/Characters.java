@@ -36,7 +36,7 @@ public class Characters{
     }
 
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return typeOfInputCharacter;
+        return this.typeOfInputCharacter;
     }
 
     public CharacterView getCharacterView(){

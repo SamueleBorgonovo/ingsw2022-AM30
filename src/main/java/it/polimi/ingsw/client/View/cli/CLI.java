@@ -396,7 +396,7 @@ public class CLI implements View {
                 count++;
         if(count>0) {
             System.out.println("Choose one character between this available by typing his number associated");
-            CharacterView character = null;
+            CharacterView character = new CharacterView(0,null,"");
             boolean check = false;
             graphic.printCharacters(availableCharacter, this.effectHandler);
             int characterChosen = inputParser.intParser();
@@ -408,10 +408,21 @@ public class CLI implements View {
                     System.out.println("Selection not valid. Try again");
                     characterChosen = inputParser.intParser();
                 }
+
+               if(character.getTypeOfInputCharacter() == TypeOfInputCharacter.EFFECT10INPUT){
+                   int counter=0;
+                   for(Student s : Student.values())
+                       counter= counter + this.player.getPlance().getHall().get(s);
+                   if(counter < 2) {
+                       check = false;
+                       System.out.println("You don't have enough students in the hall");
+                   }
+               }
+
             }
             this.characterPlayed = character;
             this.client.setCharacterPlayed(true);
-            ChooseCharacterMessage message = new ChooseCharacterMessage(character);
+            ChooseCharacterMessage message = new ChooseCharacterMessage(characterPlayed);
             this.client.sendMessage(message);
             System.out.println(character.getName());
 

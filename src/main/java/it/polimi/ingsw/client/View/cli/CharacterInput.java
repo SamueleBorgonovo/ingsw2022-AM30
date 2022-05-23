@@ -106,7 +106,7 @@ public class CharacterInput {
 
 
     public void studentFromCard(Client client, ArrayList<Student> studentsCard) {
-        //effect 11, effect 1 part 2
+        //effect 11, effect 1 part 1
         ArrayList<Student> studentsList = new ArrayList<>();
         Student studentChosen = inputParser.studentParser();
         while (!studentsCard.contains(studentChosen)) {
