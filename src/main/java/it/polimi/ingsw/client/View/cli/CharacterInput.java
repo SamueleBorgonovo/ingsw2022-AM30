@@ -51,6 +51,9 @@ public class CharacterInput {
                 studentsCard.remove(student);
                 studentList.add(student);
             }
+            else{
+                System.out.println("Student non available");
+            }
         }
 
         System.out.println("Choose the students to move from the entrance to the card");
@@ -62,6 +65,9 @@ public class CharacterInput {
                 j++;
                 studentsCard.remove(student);
                 studentList.add(student);
+            }
+            else{
+                System.out.println("Student non available");
             }
         }
         ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(studentList);
@@ -87,6 +93,9 @@ public class CharacterInput {
                 entrance.remove(student);
                 studentList.add(student);
             }
+            else{
+                System.out.println("Student non available");
+            }
         }
 
         System.out.println("Choose the students to move from the hall to the entrance");
@@ -98,6 +107,9 @@ public class CharacterInput {
                 j++;
                 hall.replace(student, hall.get(student) - 1);
                 studentList.add(student);
+            }
+            else{
+                System.out.println("Student non available");
             }
         }
         ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(studentList);

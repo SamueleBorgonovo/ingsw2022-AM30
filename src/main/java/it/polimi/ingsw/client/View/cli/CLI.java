@@ -415,7 +415,8 @@ public class CLI implements View {
                        counter= counter + this.player.getPlance().getHall().get(s);
                    if(counter < 2) {
                        check = false;
-                       System.out.println("You don't have enough students in the hall");
+                       System.out.println("You don't have enough students in the hall. Please repeat your choice");
+                       characterChosen = inputParser.intParser();
                    }
                }
 
