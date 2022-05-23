@@ -45,6 +45,8 @@ public class CharacterInput {
         int i=0;
         while(i<num)
         {
+            int k=i+1;
+            System.out.println("Student number " + k + " :");
             Student student = inputParser.studentParser();
             if(studentsCard.contains(student)){
                 i++;
@@ -60,8 +62,10 @@ public class CharacterInput {
         int j=0;
         while(j<num)
         {
+            int k=i+1;
+            System.out.println("Student number " + k + " :");
             Student student = inputParser.studentParser();
-            if(studentsCard.contains(student)){
+            if(studentsEntrance.contains(student)){
                 j++;
                 studentsCard.remove(student);
                 studentList.add(student);
@@ -87,6 +91,8 @@ public class CharacterInput {
         int i=0;
         while(i<num)
         {
+            int k = i+1;
+            System.out.println("Student number " + k + " :");
             Student student = inputParser.studentParser();
             if(entrance.contains(student)){
                 i++;
@@ -102,6 +108,8 @@ public class CharacterInput {
         int j=0;
         while(j<num)
         {
+            int k=j+1;
+            System.out.println("Student number " + k + " :");
             Student student = inputParser.studentParser();
             if(hall.get(student) >0){
                 j++;

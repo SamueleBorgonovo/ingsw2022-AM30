@@ -1,11 +1,16 @@
 package it.polimi.ingsw.client.View.cli;
 
+import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
+import it.polimi.ingsw.controller.virtualView.BoardView;
 import it.polimi.ingsw.model.game.Student;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputParser {
+    Graphic graphic = new Graphic();
+    BoardView board;
+
     public int intParser() {
         Scanner stdin = new Scanner(System.in);
         boolean check = false;
@@ -61,8 +66,8 @@ public class InputParser {
     }
 
     public int IslandParser(int numOfIslands){
-        Scanner stdin = new Scanner(System.in);
         System.out.println("Choose one Island between this available by typing his number associated");
+        this.graphic.printArchipelago(board.getIslandViews(),board.getMotherNature());
         int islandID=intParser();
         boolean check = false;
         while(!check){
