@@ -2,9 +2,6 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.model.effects.Effect;
-import it.polimi.ingsw.model.game.Student;
-
-import java.io.Serializable;
 
 public class Characters{
     private int cost;
