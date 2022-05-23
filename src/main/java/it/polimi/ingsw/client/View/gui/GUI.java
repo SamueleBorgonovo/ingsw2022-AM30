@@ -15,6 +15,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -23,7 +24,11 @@ public class GUI extends Application implements View{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/resources/Nickname_Dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Nickname_Dashboard.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Nickname_Dashboard.fxml"));
+        loader.setRoot(new AnchorPane());
+        Parent root = loader.load();
         primaryStage.setTitle("Eriantys");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
@@ -50,7 +55,7 @@ public class GUI extends Application implements View{
     }
 
     @Override
-    public void chooseWizard(ArrayList<Wizard> avaiableWizards) {}
+    public void chooseWizard(ArrayList<Wizard> availableWizards) {}
 
     @Override
     public void chooseAssistant() {}

@@ -2,6 +2,7 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.View.cli.CLI;
 import it.polimi.ingsw.client.View.gui.GUI;
+import javafx.application.Application;
 
 import java.util.Scanner;
 
@@ -32,7 +33,7 @@ public class ClientMain {
       }
       else{
           GUI gui = new GUI();
-          gui.init();
+          Application.launch(GUI.class, args);
       }
     }
 
