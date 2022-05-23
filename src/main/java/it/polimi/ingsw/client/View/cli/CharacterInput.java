@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.View.cli;
 
 import it.polimi.ingsw.client.Client;
+import it.polimi.ingsw.controller.virtualView.IslandView;
 import it.polimi.ingsw.messages.toServer.ChooseIslandEffectMessage;
 import it.polimi.ingsw.messages.toServer.ChooseStudentsEffectMessage;
 import it.polimi.ingsw.model.game.Student;
@@ -14,9 +15,9 @@ public class CharacterInput {
     //effect2, effect6, effect8 have no input
 
 
-    public void islandInput(Client client, int numOfIslands){
+    public void islandInput(Client client, ArrayList<IslandView> archipelago, int motherNature){
         //effect3, effect5, effect1 part 2 input
-        int islandID = inputParser.IslandParser(numOfIslands);
+        int islandID = inputParser.IslandParser(archipelago,motherNature);
         ChooseIslandEffectMessage message = new ChooseIslandEffectMessage(islandID);
         client.sendMessage(message);
     }

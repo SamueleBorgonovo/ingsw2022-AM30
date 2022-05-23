@@ -2,14 +2,15 @@ package it.polimi.ingsw.client.View.cli;
 
 import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
 import it.polimi.ingsw.controller.virtualView.BoardView;
+import it.polimi.ingsw.controller.virtualView.IslandView;
 import it.polimi.ingsw.model.game.Student;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputParser {
     Graphic graphic = new Graphic();
-    BoardView board;
 
     public int intParser() {
         Scanner stdin = new Scanner(System.in);
@@ -65,13 +66,13 @@ public class InputParser {
         return studentChosen;
     }
 
-    public int IslandParser(int numOfIslands){
+    public int IslandParser(ArrayList<IslandView> archipelago, int motherNature){
         System.out.println("Choose one Island between this available by typing his number associated");
-        this.graphic.printArchipelago(board.getIslandViews(),board.getMotherNature());
+        this.graphic.printArchipelago(archipelago,motherNature);
         int islandID=intParser();
         boolean check = false;
         while(!check){
-            if(islandID >= 1 && islandID <= numOfIslands) {
+            if(islandID >= 1 && islandID <= archipelago.size()) {
                 check=true;
             }
             else {

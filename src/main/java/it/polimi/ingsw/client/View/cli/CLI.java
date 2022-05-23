@@ -315,7 +315,7 @@ public class CLI implements View {
         graphic.printPlances(playerP);
         int numOfIslands = this.board.getIslandViews().size();
         Student studentChosen = this.chooseStudentToMove();
-        int islandID = inputParser.IslandParser(numOfIslands);
+        int islandID = inputParser.IslandParser(this.board.getIslandViews(),this.board.getMotherNature());
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(islandID, studentChosen);
         client.sendMessage(message);
 
@@ -435,7 +435,7 @@ public class CLI implements View {
 
     @Override
     public void inputIslandCharacter() {
-        this.characterInput.islandInput(this.client, this.board.getIslandViews().size());
+        this.characterInput.islandInput(this.client, this.board.getIslandViews(),this.board.getMotherNature());
         this.characterPlayed = null;
     }
 
