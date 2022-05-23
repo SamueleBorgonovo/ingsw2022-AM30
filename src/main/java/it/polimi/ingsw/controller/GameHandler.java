@@ -256,6 +256,7 @@ public class GameHandler {
     }
 
     public void chooseCharacter(ClientHandlerInterface clientHandler, CharacterView characterview) {
+        System.out.println(characterview.getName());
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         Characters character = game.searchCharacter(characterview);
@@ -354,6 +355,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.CharacterStudentsPhase(playerID,students);
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
             turnHandler(game);
         } catch (InvalidStudentEffectException e) {
             InvalidStudentEffectMessage message = new InvalidStudentEffectMessage();
@@ -369,6 +371,7 @@ public class GameHandler {
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         try {
             game.CharacterIslandPhase(playerID,islandID);
+            updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
             turnHandler(game);
         } catch (InvalidIslandException e) {
             InvalidIslandMessage message = new InvalidIslandMessage();

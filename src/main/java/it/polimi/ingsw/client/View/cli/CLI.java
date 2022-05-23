@@ -413,6 +413,7 @@ public class CLI implements View {
             this.client.setCharacterPlayed(true);
             ChooseCharacterMessage message = new ChooseCharacterMessage(character);
             this.client.sendMessage(message);
+            System.out.println(character.getName());
 
             if (character.getTypeOfInputCharacter() == TypeOfInputCharacter.INT)
                 this.setCharacter4played(true);
@@ -425,6 +426,7 @@ public class CLI implements View {
 
     @Override
     public void inputStudentCharacter() {
+        System.out.println(characterPlayed.getName());
         switch(this.characterPlayed.getTypeOfInputCharacter()){
             case EFFECT1INPUT ->
                     this.characterInput.studentFromCard(this.client,this.effectHandler.getEffect1students());

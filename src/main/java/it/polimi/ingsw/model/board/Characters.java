@@ -15,6 +15,7 @@ public class Characters{
     public Characters(Effect effect) {
         cost = effect.getCost();
         this.effect = effect;
+        this.typeOfInputCharacter=effect.getTypeOfInputCharacter();
     }
 
     public int getCost() {
