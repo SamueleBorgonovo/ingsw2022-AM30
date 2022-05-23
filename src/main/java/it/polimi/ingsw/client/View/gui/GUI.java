@@ -8,13 +8,26 @@ import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.game.EffectHandler;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.player.*;
+import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.PlayerState;
+import it.polimi.ingsw.model.player.Wizard;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class GUI extends View {
-    public void init(){}
+public class GUI extends Application implements View{
 
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/resources/Nickname_Dashboard.fxml"));
+        primaryStage.setTitle("Eriantys");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+    }
 
     @Override
     public void chooseNickname(boolean validNickname, boolean reconnect) {

@@ -1,15 +1,13 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.ClientMain;
 import it.polimi.ingsw.server.ServerMain;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class EriantysMain {
 
-    public static void main(String args[]) throws IOException, ClassNotFoundException {
+    public static void main(String args[]) throws Exception {
 
         System.out.println("Welcome to Eriantys Game");
         Scanner scanner = new Scanner(System.in);

@@ -3,12 +3,11 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.client.View.cli.CLI;
 import it.polimi.ingsw.client.View.gui.GUI;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class ClientMain {
 
-  public static void main(String[] args) throws IOException, ClassNotFoundException {
+  public static void main(String[] args) throws Exception {
 
       Scanner stdin = new Scanner(System.in);
       System.out.println("Do you want use CLI or GUI? c | g");

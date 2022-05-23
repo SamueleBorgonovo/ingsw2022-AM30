@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.View.gui.resources.fxml;
+package it.polimi.ingsw.client.View.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

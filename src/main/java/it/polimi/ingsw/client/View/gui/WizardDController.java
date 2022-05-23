@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.View.gui.resources.fxml;
+package it.polimi.ingsw.client.View.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;

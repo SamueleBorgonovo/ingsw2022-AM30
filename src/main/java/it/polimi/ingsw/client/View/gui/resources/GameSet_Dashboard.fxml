@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.resources.fxml.GameSettingsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.GameSettingsController">
    <children>
       <Label alignment="CENTER" layoutY="204.0" prefHeight="60.0" prefWidth="1128.0" text="GAME SETTINGS">
          <font>
@@ -32,7 +32,7 @@
             </CheckBox>
          </children>
       </Pane>
-      <Button fx:id="gameSettingsButton" layoutX="534.0" layoutY="672.0" mnemonicParsing="false" onAction="#createGame" styleClass="box" stylesheets="@../Style.css" text="Create">
+      <Button fx:id="gameSettingsButton" layoutX="534.0" layoutY="672.0" mnemonicParsing="false" onAction="#createGame" styleClass="box" stylesheets="@Style.css" text="Create">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>

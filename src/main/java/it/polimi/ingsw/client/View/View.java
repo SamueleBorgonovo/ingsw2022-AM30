@@ -16,88 +16,88 @@ import it.polimi.ingsw.model.player.Assistant;
 
 import java.util.ArrayList;
 
-public abstract class View {
-    public abstract void chooseNickname(boolean validNickname, boolean reconnect);
+public interface View {
+    public void chooseNickname(boolean validNickname, boolean reconnect);
 
-    public abstract boolean tryToReconnect();
+    public boolean tryToReconnect();
 
-    public abstract GameMode chooseGameMode();
+    public GameMode chooseGameMode();
 
-    public abstract int chooseNumberOfPlayers();
+    public int chooseNumberOfPlayers();
 
-    public abstract void chooseWizard(ArrayList<Wizard> avaiableWizards);
+    public void chooseWizard(ArrayList<Wizard> avaiableWizards);
 
-    public abstract void chooseAssistant();
+    public void chooseAssistant();
 
-    public abstract PossibleAction chooseNextAction(PlayerState playerState);
+    public PossibleAction chooseNextAction(PlayerState playerState);
 
-    public abstract void moveStudentToHall();
+    public void moveStudentToHall();
 
-    public abstract void moveStudentToIsland();
+    public void moveStudentToIsland();
 
-    public abstract void moveMotherNature();
+    public void moveMotherNature();
 
-    public abstract void chooseCloud();
+    public void chooseCloud();
 
-    public abstract void useCharacter(PlayerState playerState);
+    public void useCharacter(PlayerState playerState);
 
-    public abstract void inputStudentCharacter();
+    public void inputStudentCharacter();
 
-    public abstract void inputIslandCharacter();
+    public void inputIslandCharacter();
 
-    public abstract void setPlayers(ArrayList<PlayerView> players);
+    public void setPlayers(ArrayList<PlayerView> players);
 
-    public abstract void setBoard(BoardView board);
+    public void setBoard(BoardView board);
 
-    public abstract void setEffectHandler(EffectHandler effectHandler);
+    public void setEffectHandler(EffectHandler effectHandler);
 
-    public abstract void print();
+    public void print();
 
-    public abstract void printStartGame();
+    public void printStartGame();
 
-    public abstract void winner(ArrayList<String> nicknamesWinner);
+    public void winner(ArrayList<String> nicknamesWinner);
 
-    public abstract void printAssistantChosen(String nick, Assistant assistant);
+    public void printAssistantChosen(String nick, Assistant assistant);
 
-    public abstract void printTurn(String nick);
+    public void printTurn(String nick);
 
-    public abstract void printCharacterChosen(String nick, CharacterView character);
+    public void printCharacterChosen(String nick, CharacterView character);
 
-    public abstract void printCloudChosen(String nick, int cloudID);
+    public void printCloudChosen(String nick, int cloudID);
 
-    public abstract void printStudentToHall(String nick, Student student);
+    public void printStudentToHall(String nick, Student student);
 
-    public abstract void printStudentToIsland(String nick, Student student, int IslandID);
+    public void printStudentToIsland(String nick, Student student, int IslandID);
 
-    public abstract void printMotherNatureMovement(String nick, int islandID);
+    public void printMotherNatureMovement(String nick, int islandID);
 
-    public abstract void printPlayerDisconnection(String nick);
+    public void printPlayerDisconnection(String nick);
 
-    public abstract void printPlayerConnection(String nick,boolean reconnect);
+    public void printPlayerConnection(String nick,boolean reconnect);
 
-    public abstract void printInvalidAssistant();
+    public void printInvalidAssistant();
 
-    public abstract void printInvalidCloud();
+    public void printInvalidCloud();
 
-    public abstract void printInvalidIsland();
+    public void printInvalidIsland();
 
-    public abstract void printInvalidStudent();
+    public void printInvalidStudent();
 
-    public abstract void printInvalidTurn();
+    public void printInvalidTurn();
 
-    public abstract void printInvalidStop();
+    public void printInvalidStop();
 
-    public abstract void printInvalidWizard();
+    public void printInvalidWizard();
 
-    public abstract void printWinnerInstantly(ArrayList<String> nickname,int type);
+    public void printWinnerInstantly(ArrayList<String> nickname,int type);
 
-    public abstract void printWinnerEndRound(ArrayList<String> nickname, int type);
+    public void printWinnerEndRound(ArrayList<String> nickname, int type);
 
-    public abstract void printWaitingForPlayers(boolean lobby);
+    public void printWaitingForPlayers(boolean lobby);
 
-    public abstract void printGameEndedTimeout();
+    public void printGameEndedTimeout();
 
-    public abstract void printWinClose();
+    public void printWinClose();
 
-    public abstract void printConnectionClosed(boolean timeout);
+    public void printConnectionClosed(boolean timeout);
 }

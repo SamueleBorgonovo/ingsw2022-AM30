@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CLI extends View {
+public class CLI implements View {
 
     private static final int MIN_PORT = 1024;
     private static final int MAX_PORT = 49151;

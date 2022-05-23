@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.resources.fxml.NicknameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.NicknameController">
    <children>
       <Label alignment="CENTER" layoutY="204.0" prefHeight="60.0" prefWidth="1128.0" text="CHOOSE A NICKNAME">
          <font>
@@ -43,7 +43,7 @@
             </CheckBox>
          </children>
       </Pane>
-      <Button fx:id="loginButton" layoutX="535.0" layoutY="493.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@../Style.css" text="Login">
+      <Button fx:id="loginButton" layoutX="535.0" layoutY="493.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@Style.css" text="Login">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>
