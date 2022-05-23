@@ -33,8 +33,6 @@ public class Client {
     private ClientMessageHandler messageHandler;
     private boolean pingActive;
     private boolean myTurn=false;
-
-
     boolean characterPlayed = false;
 
     //Cli e gui dopo che vengono scelti ip e porta chiamano il costruttore di client e poi il suo .setup
