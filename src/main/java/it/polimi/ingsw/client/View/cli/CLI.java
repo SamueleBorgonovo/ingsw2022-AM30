@@ -396,7 +396,7 @@ public class CLI implements View {
                     int counter = 0;
                     for (Student s : Student.values())
                         counter = counter + this.player.getPlance().getHall().get(s);
-                    if (counter < 2) {
+                    if (counter < 1) {
                         check = false;
                         System.out.println("You don't have enough students in the hall. Please repeat your choice");
                         characterChosen = inputParser.intParser();
@@ -627,19 +627,19 @@ public class CLI implements View {
     public boolean checkMinstrel() {
         ArrayList<CharacterView> availableCharacter = this.board.getCharacters();
         int numOfCoins = this.player.getCoins();
-        boolean check = false;
+        boolean check;
         int count = 0;
 
         for (CharacterView character : availableCharacter)
             if (numOfCoins >= character.getCost() && character.getTypeOfInputCharacter() != TypeOfInputCharacter.EFFECT10INPUT)
                 count++;
-        if (count != 0)
+        if (count > 0)
             check = true;
         else {
             int counter = 0;
             for (Student s : Student.values())
                 counter = counter + this.player.getPlance().getHall().get(s);
-            check = counter >= 2; //if counter>=2 check is true, else check is false
+            check = counter >= 1; //if counter>=1 check is true, else check is false
         }
         return check;
     }

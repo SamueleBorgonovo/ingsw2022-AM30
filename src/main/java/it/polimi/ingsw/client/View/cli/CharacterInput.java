@@ -63,7 +63,7 @@ public class CharacterInput {
         int j=0;
         while(j<num)
         {
-            int k=i+1;
+            int k=j+1;
             System.out.println("Student number " + k + " :");
             Student student = inputParser.studentParser();
             if(studentsEntrance.contains(student)){
@@ -83,9 +83,12 @@ public class CharacterInput {
         //effect10
         System.out.println("How many students do you want to move? 1 | 2");
         ArrayList<Student> studentList = new ArrayList<>();
+        int count=0;
+        for (Student student: Student.values())
+            count = count + hall.get(student).intValue();
         int num = inputParser.intParser();
-        while(num<1 || num>2){
-            System.out.println("Number not valid. Please try again");
+        while(num<1 || num>2 || num>count){
+            System.out.println("Number not valid or you don't have enough students in the hall. Please try again");
             num = inputParser.intParser();
         }
         System.out.println("Choose the students to move from entrance to the hall");
