@@ -16,7 +16,7 @@ public class EriantysMain {
         do {
             System.out.println("Do you want to start a client or server? c | s");
             String choice = scanner.nextLine();
-            if (choice.toLowerCase().startsWith("c") || choice.toLowerCase().startsWith("s")) {
+            if (choice.equalsIgnoreCase("c")|| choice.equalsIgnoreCase("s")) {
                 pass=true;
                 cho = choice.toLowerCase().charAt(0);
             }
