@@ -203,10 +203,10 @@ public class CLI implements View {
     public PossibleAction chooseNextAction(PlayerState playerState) {
         boolean check = false;
         PossibleAction actionChosen = null;
-        System.out.println("Choose your next action by typing the action's number");
         int actionNum = 0;
         while (!check) {
             if (playerState == PlayerState.STUDENTPHASE && client.getGamemode() == GameMode.SIMPLEMODE) {
+                System.out.println("Choose your next action by typing the action's number");
                 System.out.println("Possible actions:");
                 System.out.println("1) Move one student to the hall");
                 System.out.println("2) Move one student to one island");
@@ -222,6 +222,7 @@ public class CLI implements View {
                     System.out.println("");
                 }
             } else if (playerState == PlayerState.STUDENTPHASE && client.getGamemode() == GameMode.EXPERTMODE) {
+                System.out.println("Choose your next action by typing the action's number");
                 System.out.println("Possible actions:");
                 System.out.println("1) Move one student to the hall");
                 System.out.println("2) Move one student to one island");
@@ -244,37 +245,50 @@ public class CLI implements View {
                     System.out.println("");
                 }
             } else if (playerState == PlayerState.MOTHERNATUREPHASE) {
-                System.out.println("Possible actions:");
-                System.out.println("1) Move Mother Nature");
-                System.out.println("2) Use a character");
-                actionNum = inputParser.intParser();
-                if (actionNum == 1) {
+                if(client.isCharacterPlayed()) {
                     actionChosen = PossibleAction.MOVEMOTHERNATURE;
-                    check = true;
-                } else if (actionNum == 2) {
-                    actionChosen = PossibleAction.USECHARACTER;
-                    check = true;
-                } else {
-                    System.out.println("Selection not valid. Try again");
-                    System.out.println("");
+                    check=true;
+                }else {
+                    System.out.println("Choose your next action by typing the action's number");
+                    System.out.println("Possible actions:");
+                    System.out.println("1) Move Mother Nature");
+                    System.out.println("2) Use a character");
+                    actionNum = inputParser.intParser();
+                    if (actionNum == 1) {
+                        actionChosen = PossibleAction.MOVEMOTHERNATURE;
+                        check = true;
+                    } else if (actionNum == 2) {
+                        actionChosen = PossibleAction.USECHARACTER;
+                        check = true;
+                    } else {
+                        System.out.println("Selection not valid. Try again");
+                        System.out.println("");
+                    }
                 }
             } else if (playerState == PlayerState.CLOUDPHASE) {
-                System.out.println("Possible actions:");
-                System.out.println("1) Choose a cloud");
-                System.out.println("2) Use a character");
-                actionNum = inputParser.intParser();
-                if (actionNum == 1) {
+                if(client.isCharacterPlayed()) {
                     actionChosen = PossibleAction.CHOOSECLOUD;
-                    check = true;
-                } else if (actionNum == 2) {
-                    actionChosen = PossibleAction.USECHARACTER;
-                    check = true;
+                    check=true;
                 } else {
-                    System.out.println("Selection not valid. Try again");
-                    System.out.println("");
+                    System.out.println("Choose your next action by typing the action's number");
+                    System.out.println("Possible actions:");
+                    System.out.println("1) Choose a cloud");
+                    System.out.println("2) Use a character");
+                    actionNum = inputParser.intParser();
+                    if (actionNum == 1) {
+                        actionChosen = PossibleAction.CHOOSECLOUD;
+                        check = true;
+                    } else if (actionNum == 2) {
+                        actionChosen = PossibleAction.USECHARACTER;
+                        check = true;
+                    } else {
+                        System.out.println("Selection not valid. Try again");
+                        System.out.println("");
+                    }
                 }
 
             }
+            System.out.println(actionChosen);
         }
         return actionChosen;
     }
