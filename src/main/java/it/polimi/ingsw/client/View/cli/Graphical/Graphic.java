@@ -197,13 +197,13 @@ public class Graphic {
     public void printClouds(ArrayList<CloudView> clouds){
         int i;
 
-        System.out.print("╭────");
+        System.out.print(Symbols.CORNER_TOP_LEFT.getCode() + "────");
         for(i=0; i<clouds.size()-2; i++)
             System.out.print("────");
-        System.out.print("╴CLOUDS╶");
+        System.out.print(Symbols.HALF_DASH_LEFT.getCode() + "CLOUDS" + Symbols.HALF_DASH_RIGHT.getCode());
         for(i=0; i<clouds.size()-2; i++)
             System.out.print("────");
-        System.out.println("───╮");
+        System.out.println("───" + Symbols.CORNER_TOP_RIGHT.getCode());
         System.out.print("│");
         for(CloudView cloud : clouds) {
             if(cloud.isChoosen()) {
@@ -223,22 +223,22 @@ public class Graphic {
             for(CloudView cloud : clouds) {
                 if(cloud.isChoosen()) {
                     System.out.print("│");
-                    System.out.print(Colors.ANSI_WHITE.getCode() + " 0 : ● " + Colors.ANSI_RESET.getCode());
+                    System.out.print(Colors.ANSI_WHITE.getCode() + " 0 :" + " "  + Symbols.STUDENT_FULL.getCode() + " " + Colors.ANSI_RESET.getCode());
                 } else {
                     i = 0;
                     for (Student s : cloud.getStudents())
                         if (s.ordinal() == student.ordinal())
                             i++;
                     System.out.print("│ " + i + " :");
-                    System.out.print(Colors.values()[student.ordinal()].getCode() + " ● " + Colors.ANSI_RESET.getCode());
+                    System.out.print(Colors.values()[student.ordinal()].getCode() + " "  + Symbols.STUDENT_FULL.getCode() + " " + Colors.ANSI_RESET.getCode());
                 }
             }
             System.out.println("│");
         }
-        System.out.print("╰───────");
+        System.out.print(Symbols.CORNER_DOWN_LEFT.getCode() + "───────");
         for(i=1; i<clouds.size(); i++)
             System.out.print("────────");
-        System.out.println("╯");
+        System.out.println(Symbols.CORNER_DOWN_RIGHT.getCode());
     }
 
     public void printCharacters(ArrayList<CharacterView> characters, EffectHandlerInterface effectHandler){
