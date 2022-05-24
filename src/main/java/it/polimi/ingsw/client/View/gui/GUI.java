@@ -12,30 +12,21 @@ import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class GUI extends Application implements View{
+    Stage primaryStage;
+    NicknameController nicknameScene = new NicknameController();
+    GameSettingsController gameSettingsScene = new GameSettingsController();
+    WizardDController wizardScene = new WizardDController();
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/Nickname_Dashboard.fxml"));
-        //loader.setLocation(getClass().getResource("/Nickname_Dashboard.fxml"));
-        //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Nickname_Dashboard.fxml"));
-        //loader.setRoot(new AnchorPane());
-        //Parent root = loader.load();
-        //
-        //primaryStage.setScene(new Scene(root));
-        //primaryStage.show();
-        Scene scene = new Scene(loader.load());
-        primaryStage.setTitle("Eriantys");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        this.primaryStage=primaryStage;
+        nicknameScene.showNicknameScene(primaryStage);
     }
 
     @Override
