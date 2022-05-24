@@ -158,9 +158,9 @@ public class Graphic {
 
         for(i=1; i<=assistants.size();i++){
             if(i<10)
-                System.out.print("╭────╴" + i + "╶────╮ ");
+                System.out.print(Symbols.CORNER_TOP_LEFT.getCode() + "────╴" + i + "╶────" + Symbols.CORNER_TOP_RIGHT.getCode() + " ");
             else
-                System.out.print("╭───╴" + i + "╶────╮ ");
+                System.out.print(Symbols.CORNER_TOP_LEFT.getCode() + "───╴" + i + "╶────" + Symbols.CORNER_TOP_RIGHT.getCode() + " ");
         }
         System.out.println();
         for(Assistant assistant : assistants){
@@ -190,7 +190,7 @@ public class Graphic {
             System.out.print("│  MOV : " + assistant.getMovement() + "  │ ");
         System.out.println();
         for(i=0; i<assistants.size();i++)
-            System.out.print("╰───────────╯ ");
+            System.out.print(Symbols.CORNER_DOWN_LEFT.getCode() + "───────────" + Symbols.CORNER_DOWN_RIGHT.getCode() + " ");
         System.out.println();
     }
 
