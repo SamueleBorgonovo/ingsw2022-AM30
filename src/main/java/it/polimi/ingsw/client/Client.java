@@ -194,6 +194,7 @@ public class Client {
     }
 
     public void handleSocketDisconnection(boolean timeout){
+        active=false;
         pingActive=false;
         stopTimer();
         try {

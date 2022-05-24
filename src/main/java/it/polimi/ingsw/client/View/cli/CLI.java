@@ -46,7 +46,6 @@ public class CLI implements View {
             String ip = stdin.nextLine();
             System.out.println("Please insert port");
             int port = inputParser.intParser();
-            ;
             while (port < MIN_PORT || port > MAX_PORT) {
                 System.out.println("Port Number is not valid, please insert a new one");
                 port = inputParser.intParser();

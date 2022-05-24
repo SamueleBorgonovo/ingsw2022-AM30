@@ -31,7 +31,7 @@ public class NicknameController {
         primaryStage.show();
     }
 
-    public void login(ActionEvent actionEvent) {
-
+    public String login(ActionEvent actionEvent) {
+        return nicknameWindows.toString();
     }
 }

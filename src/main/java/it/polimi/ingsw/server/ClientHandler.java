@@ -117,6 +117,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
 
     //if timer expired timeout is true(also socketTimerExpire), else is false
     public synchronized void handleSocketDisconnection(boolean timeout,boolean gameEnded) {
+        System.out.println("qui");
         if (!disconnectionCalled) {
             disconnectionCalled=true;
             stopTimer();

@@ -1,8 +1,13 @@
 package it.polimi.ingsw.client.View.gui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class WizardDController {
     @FXML
@@ -16,6 +21,14 @@ public class WizardDController {
 
     @FXML
     ImageView wizardPink;
+
+    public void showWizardScene(Stage primaryStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/Wizard_Dashboard.fxml"));
+        Scene scene = new Scene(loader.load());
+        primaryStage.setTitle("Eriantys");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 
     public void choosenWizardGreen(MouseEvent mouseEvent) {
 

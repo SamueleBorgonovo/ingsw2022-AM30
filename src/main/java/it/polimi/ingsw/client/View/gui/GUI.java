@@ -22,11 +22,13 @@ public class GUI extends Application implements View{
     GameSettingsController gameSettingsScene = new GameSettingsController();
     WizardDController wizardScene = new WizardDController();
 
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage=primaryStage;
-        nicknameScene.showNicknameScene(primaryStage);
+            nicknameScene.showNicknameScene(primaryStage);
+       // if(a==1)
+         //   wizardScene.showWizardScene(primaryStage);
+
     }
 
     @Override
