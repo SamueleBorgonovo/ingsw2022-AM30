@@ -24,13 +24,17 @@ public class GUI extends Application implements View{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Nickname_Dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/Nickname_Dashboard.fxml"));
+        //loader.setLocation(getClass().getResource("/Nickname_Dashboard.fxml"));
         //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Nickname_Dashboard.fxml"));
-        loader.setRoot(new AnchorPane());
-        Parent root = loader.load();
+        //loader.setRoot(new AnchorPane());
+        //Parent root = loader.load();
+        //
+        //primaryStage.setScene(new Scene(root));
+        //primaryStage.show();
+        Scene scene = new Scene(loader.load());
         primaryStage.setTitle("Eriantys");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
