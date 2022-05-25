@@ -17,8 +17,7 @@ public class ConnectController {
     @FXML
     public Label connectionFailed;
 
-
-    public ConnectController(GUI gui) {
+    public void setGui(GUI gui) {
         this.gui = gui;
     }
 

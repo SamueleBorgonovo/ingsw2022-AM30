@@ -23,14 +23,14 @@ public class GUI extends Application implements View{
     NicknameController nicknameScene = new NicknameController();
     GameSettingsController gameSettingsScene = new GameSettingsController();
     WizardDController wizardScene = new WizardDController();
-    ConnectController connectScene = new ConnectController(this);
+    ConnectController connectScene = new ConnectController();
 
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage=primaryStage;
+        connectScene.setGui(this);
         connectScene.showConnectScene(primaryStage);
-        //nicknameScene.showNicknameScene(primaryStage,true, false);
     }
 
     public boolean createClient(String ip, int port) {

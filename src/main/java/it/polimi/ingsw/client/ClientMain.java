@@ -32,7 +32,6 @@ public class ClientMain {
           cli.init();
       }
       else{
-          GUI gui = new GUI();
           Application.launch(GUI.class, args);
       }
     }

@@ -15,7 +15,7 @@ public class NicknameController {
     public Label wrongNickname;
 
 
-    public void showNicknameScene(Stage primaryStage,boolean validNickname, boolean reconnect){
+    public void showNicknameScene(Stage primaryStage, boolean validNickname, boolean reconnect){
         try {
             FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/Nickname_Dashboard.fxml"));
             Scene scene = new Scene(loader.load());
