@@ -13,25 +13,89 @@ import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GUI extends Application implements View{
     Stage primaryStage;
     Client client;
-    NicknameController nicknameScene = new NicknameController();
-    GameSettingsController gameSettingsScene = new GameSettingsController();
-    WizardDController wizardScene = new WizardDController();
-    ConnectController connectScene = new ConnectController();
+    NicknameController nicknameScene;
+    GameSettingsController gameSettingsScene;
+    WizardDController wizardScene;
+    ConnectController connectScene;
+    FXMLLoader fxmlLoader;
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage){
         this.primaryStage=primaryStage;
-        connectScene.setGui(this);
-        connectScene.showConnectScene(primaryStage);
+        instantiateConnectionScene();
     }
+
+    private void createConnectionScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
+        Platform.runLater(() -> {
+            fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource(pathOfFxmlFile));
+            Scene scene;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+                scene = new Scene(new Label("Error loading the scene"));
+            }
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            functionInterface.executeFunction();
+        });
+    }
+
+    private void instantiateConnectionScene(){
+        createConnectionScene("/Connect_Dashboard.fxml", () -> {
+            primaryStage.setTitle("Eriantys");
+            primaryStage.setResizable(false);
+            primaryStage.show();
+            connectScene = fxmlLoader.getController();
+            connectScene.setGui(this);
+
+
+        });
+    }
+
+    private void createNicknameScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
+        Platform.runLater(() -> {
+            fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource(pathOfFxmlFile));
+            Scene scene;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+                scene = new Scene(new Label("Error loading the scene"));
+            }
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            functionInterface.executeFunction();
+        });
+    }
+
+    public void instantiateNicknameScene(){
+        createNicknameScene("/Nickname_Dashboard.fxml", () -> {
+            primaryStage.setTitle("Eriantys");
+            primaryStage.setResizable(false);
+            primaryStage.show();
+            connectScene = fxmlLoader.getController();
+            connectScene.setGui(this);
+
+
+        });
+    }
+
 
     public boolean createClient(String ip, int port) {
         client = new Client(ip,port,this);
