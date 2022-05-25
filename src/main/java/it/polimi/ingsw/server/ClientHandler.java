@@ -53,6 +53,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
         timer = new Thread(() -> {
             try{
                 Thread.sleep(TIMEOUT_FOR_RESPONSE);
+                System.out.println("Timer del pinger scattato");
                 handleSocketDisconnection(true,false);
             } catch (InterruptedException e){ }
         });
@@ -100,6 +101,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
            } catch (ClassNotFoundException ignored) {}
 
         } catch (IOException e) {
+            System.out.println("IOException nel metodo che riceve i messaggi dal client");
            handleSocketDisconnection(e instanceof SocketTimeoutException,false);
         }
     }
@@ -111,13 +113,13 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
             os.reset();
         }
         catch(IOException e) {
+            System.out.println("Exception di sendMessage del clientHandler");
             handleSocketDisconnection(e instanceof SocketTimeoutException,false);
         }
     }
 
     //if timer expired timeout is true(also socketTimerExpire), else is false
     public synchronized void handleSocketDisconnection(boolean timeout,boolean gameEnded) {
-        System.out.println("qui");
         if (!disconnectionCalled) {
             disconnectionCalled=true;
             stopTimer();

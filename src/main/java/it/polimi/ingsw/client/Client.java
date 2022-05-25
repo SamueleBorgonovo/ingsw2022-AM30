@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Client {
     private final int PING_PERIOD = 10000;
@@ -34,6 +35,7 @@ public class Client {
     private boolean pingActive;
     private boolean myTurn=false;
     boolean characterPlayed = false;
+    private ArrayList<Thread> timerThreads = new ArrayList<>();
 
     //Cli e gui dopo che vengono scelti ip e porta chiamano il costruttore di client e poi il suo .setup
     public Client(String ip, int port, View view){
@@ -144,6 +146,7 @@ public class Client {
         //if gameEnded=true server disconnected all players, else someone is disconnected from game
         if(win){
             view.printWinClose();
+            System.out.println("Nell'handleDisconnection quando qualcuno ha vinto");
             handleSocketDisconnection(false);
         }
         if(timeout){
@@ -161,6 +164,7 @@ public class Client {
             ((MessageToClient) messageFromServer).action(this);
         }
         }catch(IOException | ClassNotFoundException e) {
+            System.out.println("Exception del metodo che riceve i messaggi dal server");
             handleSocketDisconnection(false);
         }
 
@@ -168,10 +172,11 @@ public class Client {
 
     public synchronized void sendMessage(MessageToServer message){
         try {
-            output.writeObject(message);
             output.reset();
+            output.writeObject(message);
             output.flush();
         } catch (IOException e) {
+            System.out.println("Exception nel sendMessage del client");
             handleSocketDisconnection(false);
             /*System.err.println("Error during send process.");
             e.printStackTrace();
@@ -212,19 +217,25 @@ public class Client {
         view.printConnectionClosed(timeout);
     }
 
-    public void startTimer(){
+    public synchronized void startTimer(){
         timer = new Thread(() -> {
             try{
                 Thread.sleep(TIMEOUT_FOR_RESPONSE);
+                System.out.println("Timeout del pinger lato client scattato");
                 handleSocketDisconnection(true);
-            } catch (InterruptedException e){ }
+            } catch (InterruptedException e){
+            }
         });
+        timerThreads.add(timer);
         timer.start();
     }
 
-    public void stopTimer(){
+    public synchronized void stopTimer(){
         if (timer != null && timer.isAlive()){
-            timer.interrupt();
+            for(Thread timer : timerThreads) {
+                timer.interrupt();
+            }
+            timerThreads.clear();
             //timer = null;
         }
     }

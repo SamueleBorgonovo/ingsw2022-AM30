@@ -427,7 +427,7 @@ public class GameHandler {
 
    public boolean checkWinner(GameInterface game,boolean endRound){
        int check;
-       ArrayList<Player> playerswinner = new ArrayList<>();
+       ArrayList<Player> playerswinner;
         if(endRound) {
             check=game.winnerEndRound();
             if(check!=0) {

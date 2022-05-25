@@ -184,7 +184,6 @@ public class GUI extends Application implements View{
 
     @Override
     public void chooseWizard(ArrayList<Wizard> availableWizards) {
-        wizardScene.showWizardScene(primaryStage, availableWizards);
     }
 
     @Override
