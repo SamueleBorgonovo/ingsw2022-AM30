@@ -23,6 +23,11 @@ public class WizardDController {
     @FXML
     ImageView wizardPink;
 
+    private GUI gui;
+    public void setGui(GUI gui){
+        this.gui=gui;
+    }
+
     public void choosenWizardGreen(MouseEvent mouseEvent) {
 
     }
@@ -37,18 +42,5 @@ public class WizardDController {
 
     public void choosenWizardPink(MouseEvent mouseEvent) {
 
-    }
-
-    public void showWizardScene(Stage primaryStage, ArrayList<Wizard> availableWizards){
-        try {
-            FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/Wizard_Dashboard.fxml"));
-            Scene scene = new Scene(loader.load());
-            primaryStage.setTitle("Eriantys");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        }
-        catch (Exception e) {
-
-        }
     }
 }

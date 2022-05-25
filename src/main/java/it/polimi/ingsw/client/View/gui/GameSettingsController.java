@@ -13,6 +13,12 @@ public class GameSettingsController {
     @FXML
     public CheckBox twoField;
 
+    private GUI gui;
+
+    public void setGui(GUI gui){
+        this.gui=gui;
+    }
+
     public void createGame(ActionEvent actionEvent) {
 
     }

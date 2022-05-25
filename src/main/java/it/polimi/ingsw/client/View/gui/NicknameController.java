@@ -13,19 +13,10 @@ public class NicknameController {
     public TextField nicknameWindows;
     @FXML
     public Label wrongNickname;
+    private GUI gui;
 
-
-    public void showNicknameScene(Stage primaryStage, boolean validNickname, boolean reconnect){
-        try {
-            FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/Nickname_Dashboard.fxml"));
-            Scene scene = new Scene(loader.load());
-            primaryStage.setTitle("Eriantys");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        }
-        catch (Exception e) {
-
-        }
+    public void setGui(GUI gui){
+        this.gui=gui;
     }
 
     public void login(ActionEvent actionEvent) {
