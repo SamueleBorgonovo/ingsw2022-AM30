@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
@@ -24,26 +23,12 @@
             <Font name="Futura Medium" size="18.0" />
          </font>
       </Label>
-      <Pane fx:id="reconnectPane" layoutX="-4.0" layoutY="553.0" prefHeight="193.0" prefWidth="1142.0" visible="false">
-         <children>
-            <Label alignment="CENTER" layoutX="-3.0" layoutY="61.0" prefHeight="60.0" prefWidth="1147.0" text="Do you want to reconnect?">
-               <font>
-                  <Font name="Futura Medium" size="36.0" />
-               </font>
-            </Label>
-            <CheckBox fx:id="reconnectField" layoutX="365.0" layoutY="139.0" mnemonicParsing="false" text="Yes">
-               <font>
-                  <Font name="Futura Medium" size="18.0" />
-               </font>
-            </CheckBox>
-            <CheckBox layoutX="715.0" layoutY="135.0" mnemonicParsing="false" text="No">
-               <font>
-                  <Font name="Futura Medium" size="18.0" />
-               </font>
-            </CheckBox>
-         </children>
-      </Pane>
-      <Button fx:id="loginButton" layoutX="535.0" layoutY="493.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@Style.css" text="Login">
+      <Button layoutX="380.0" layoutY="497.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@Style.css" text="    Login    ">
+         <font>
+            <Font name="Futura Medium" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="640.0" layoutY="498.0" mnemonicParsing="false" onAction="#reconnect" styleClass="box" stylesheets="@Style.css" text="Reconnect">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>

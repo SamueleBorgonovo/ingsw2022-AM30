@@ -4,11 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class NicknameController {
@@ -16,22 +13,27 @@ public class NicknameController {
     public TextField nicknameWindows;
     @FXML
     public Label wrongNickname;
-    @FXML
-    public Pane reconnectPane;
-    @FXML
-    public CheckBox reconnectField;
-    @FXML
-    public Button loginButton;
 
-    public void showNicknameScene(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/Nickname_Dashboard.fxml"));
-        Scene scene = new Scene(loader.load());
-        primaryStage.setTitle("Eriantys");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+
+    public void showNicknameScene(Stage primaryStage,boolean validNickname, boolean reconnect){
+        try {
+            FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/Nickname_Dashboard.fxml"));
+            Scene scene = new Scene(loader.load());
+            primaryStage.setTitle("Eriantys");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        catch (Exception e) {
+
+        }
     }
 
-    public String login(ActionEvent actionEvent) {
-        return nicknameWindows.toString();
+    public void login(ActionEvent actionEvent) {
+        String nickname;
+        nickname = nicknameWindows.getText();
+    }
+
+    public void reconnect(ActionEvent actionEvent) {
+
     }
 }

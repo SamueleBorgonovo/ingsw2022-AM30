@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.View.gui;
 
+import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.controller.virtualView.BoardView;
@@ -18,21 +19,35 @@ import java.util.ArrayList;
 
 public class GUI extends Application implements View{
     Stage primaryStage;
+    Client client;
     NicknameController nicknameScene = new NicknameController();
     GameSettingsController gameSettingsScene = new GameSettingsController();
     WizardDController wizardScene = new WizardDController();
+    ConnectController connectScene = new ConnectController(this);
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage=primaryStage;
-            nicknameScene.showNicknameScene(primaryStage);
-       // if(a==1)
-         //   wizardScene.showWizardScene(primaryStage);
-
+        connectScene.showConnectScene(primaryStage);
+        //nicknameScene.showNicknameScene(primaryStage,true, false);
     }
+
+    public boolean createClient(String ip, int port) {
+        client = new Client(ip,port,this);
+        try {
+            return client.setupConnection();
+        }
+        catch (Exception e){
+
+        }
+        return false;
+    }
+
 
     @Override
     public void chooseNickname(boolean validNickname, boolean reconnect) {
+        nicknameScene.showNicknameScene(primaryStage, validNickname, reconnect);
 
     }
 
@@ -52,7 +67,9 @@ public class GUI extends Application implements View{
     }
 
     @Override
-    public void chooseWizard(ArrayList<Wizard> availableWizards) {}
+    public void chooseWizard(ArrayList<Wizard> availableWizards) {
+        wizardScene.showWizardScene(primaryStage, availableWizards);
+    }
 
     @Override
     public void chooseAssistant() {}
