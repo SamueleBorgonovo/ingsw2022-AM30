@@ -7,7 +7,6 @@ import it.polimi.ingsw.controller.virtualView.BoardView;
 import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.game.EffectHandler;
-import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.PlayerState;
@@ -27,10 +26,10 @@ public class GUI extends Application implements View{
     Client client;
     NicknameController nicknameScene;
     GameSettingsController gameSettingsScene;
-    WizardDController wizardScene;
+    WizardController wizardScene;
     ConnectController connectScene;
     FXMLLoader fxmlLoader;
-
+    String nickname;
 
     @Override
     public void start(Stage primaryStage){
@@ -40,6 +39,15 @@ public class GUI extends Application implements View{
 
     public Client getClient() {
         return client;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+        client.setNickname(nickname);
+    }
+
+    public String getNickname() {
+        return nickname;
     }
 
     private void createConnectionScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
@@ -124,17 +132,18 @@ public class GUI extends Application implements View{
         });
     }
 
-    public void instantiateWizardDScene(){
-        createGameSettingsScene("/Wizard_Dashboard.fxml", () -> {
+    public void instantiateWizardScene(ArrayList<Wizard> availableWizards){
+        createWizardScene("/Wizard_Dashboard.fxml", () -> {
             primaryStage.setTitle("Eriantys");
             primaryStage.setResizable(false);
             primaryStage.show();
             wizardScene = fxmlLoader.getController();
             wizardScene.setGui(this);
+            wizardScene.setWizards(availableWizards);
         });
     }
 
-    private void createWizardDScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
+    private void createWizardScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
         Platform.runLater(() -> {
             fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource(pathOfFxmlFile));
@@ -184,11 +193,12 @@ public class GUI extends Application implements View{
     }
 
     public void chooseSettings(){
-
+        instantiateGameSettingsScene();
     }
 
     @Override
     public void chooseWizard(ArrayList<Wizard> availableWizards) {
+        instantiateWizardScene(availableWizards);
     }
 
     @Override

@@ -29,11 +29,13 @@ public class NicknameController {
         String nickname;
         nickname = nicknameWindows.getText();
         gui.getClient().sendMessage(new ChooseNicknameMessage(nickname,false));
+        gui.setNickname(nickname);
     }
 
     public void reconnect(ActionEvent actionEvent) {
         String nickname = nicknameWindows.getText();
         gui.getClient().sendMessage(new ChooseNicknameMessage(nickname,true));
+        gui.setNickname(nickname);
     }
 
 
