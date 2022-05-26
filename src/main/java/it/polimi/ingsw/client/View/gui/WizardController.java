@@ -1,17 +1,10 @@
 package it.polimi.ingsw.client.View.gui;
 
-import it.polimi.ingsw.client.Client;
-import it.polimi.ingsw.model.player.Wizard;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
-public class WizardDController {
+public class WizardController {
     @FXML
     ImageView wizardGreen;
 
