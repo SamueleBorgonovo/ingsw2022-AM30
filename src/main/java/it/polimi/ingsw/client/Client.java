@@ -69,11 +69,7 @@ public class Client {
     }
 
     public void gameSetup(){
-        this.gamemode=view.chooseGameMode();
-        this.numofPlayers=view.chooseNumberOfPlayers();
-
-        CreatePlayerInGameMessage message = new CreatePlayerInGameMessage(nickname, gamemode, numofPlayers);
-        sendMessage(message);
+        view.chooseSettings();
 
     }
 

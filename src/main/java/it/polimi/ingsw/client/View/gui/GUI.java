@@ -38,6 +38,10 @@ public class GUI extends Application implements View{
         instantiateConnectionScene();
     }
 
+    public Client getClient() {
+        return client;
+    }
+
     private void createConnectionScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
         Platform.runLater(() -> {
             fxmlLoader = new FXMLLoader();
@@ -55,7 +59,7 @@ public class GUI extends Application implements View{
         });
     }
 
-    private void instantiateConnectionScene(){
+    public void instantiateConnectionScene(){
         createConnectionScene("/Connect_Dashboard.fxml", () -> {
             primaryStage.setTitle("Eriantys");
             primaryStage.setResizable(false);
@@ -88,6 +92,7 @@ public class GUI extends Application implements View{
             primaryStage.setResizable(false);
             primaryStage.show();
             nicknameScene = fxmlLoader.getController();
+            nicknameScene.setReconnectButton(false);
             nicknameScene.setGui(this);
         });
     }
@@ -165,6 +170,12 @@ public class GUI extends Application implements View{
     ///////////////////////////////////////////////////////////////////
     @Override
     public void chooseNickname(boolean validNickname, boolean reconnect) {
+        if(!validNickname)
+            nicknameScene.setWrongNickname(true);
+        else if(reconnect)
+                nicknameScene.setReconnectButton(true);
+            else
+                client.gameSetup();
     }
 
     @Override
@@ -172,14 +183,8 @@ public class GUI extends Application implements View{
         return false;
     }
 
-    @Override
-    public GameMode chooseGameMode() {
-        return null;
-    }
+    public void chooseSettings(){
 
-    @Override
-    public int chooseNumberOfPlayers() {
-        return 0;
     }
 
     @Override

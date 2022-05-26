@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.View.gui;
 
+import it.polimi.ingsw.client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ public class ConnectController {
     public void setGui(GUI gui) {
         this.gui = gui;
     }
+
 
     public void connect(ActionEvent actionEvent) {
         if(!gui.createClient(ipWindows.getText(), Integer.parseInt(portWindows.getText())))

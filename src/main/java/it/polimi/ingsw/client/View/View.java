@@ -21,9 +21,7 @@ public interface View {
 
     public boolean tryToReconnect();
 
-    public GameMode chooseGameMode();
-
-    public int chooseNumberOfPlayers();
+    public void chooseSettings();
 
     public void chooseWizard(ArrayList<Wizard> avaiableWizards);
 

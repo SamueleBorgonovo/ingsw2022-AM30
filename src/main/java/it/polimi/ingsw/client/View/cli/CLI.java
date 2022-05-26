@@ -110,8 +110,8 @@ public class CLI implements View {
     }
 
 
-    @Override
-    public GameMode chooseGameMode() {
+    public void chooseSettings(){
+        GameMode gamemode;
         Scanner stdin = new Scanner(System.in);
         System.out.println("Press s for SimpleMode or e for ExpertMode  s | e");
         String choice = stdin.nextLine();
@@ -128,29 +128,28 @@ public class CLI implements View {
 
         if (choice.equalsIgnoreCase("s")) {
             client.setGamemode(GameMode.SIMPLEMODE);
-            return GameMode.SIMPLEMODE;
+            gamemode=GameMode.SIMPLEMODE;
         } else {
             client.setGamemode(GameMode.EXPERTMODE);
-            return GameMode.EXPERTMODE;
+            gamemode=GameMode.EXPERTMODE;
         }
-    }
 
-    @Override
-    public int chooseNumberOfPlayers() {
         System.out.println("Choose the number of the players ( 2 | 3 )");
-        int choice = inputParser.intParser();
-        boolean pass = false;
-        while (!pass) {
-            if (choice == 2 || choice == 3)
-                pass = true;
+        int choice1 = inputParser.intParser();
+        boolean pass1 = false;
+        while (!pass1) {
+            if (choice1 == 2 || choice1 == 3)
+                pass1 = true;
             else {
                 System.out.println("Selection not valid. Please try again");
-                choice = inputParser.intParser();
+                choice1 = inputParser.intParser();
             }
         }
-        return choice;
-    }
+        client.setNumofPlayers(choice1);
 
+        CreatePlayerInGameMessage message = new CreatePlayerInGameMessage(nickname,gamemode,choice1);
+        client.sendMessage(message);
+    }
     @Override
     public void chooseWizard(ArrayList<Wizard> avaiableWizards) {
         Wizard wizardChosen = null;

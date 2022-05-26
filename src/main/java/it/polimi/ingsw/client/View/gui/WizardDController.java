@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.View.gui;
 
+import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.model.player.Wizard;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +25,7 @@ public class WizardDController {
     ImageView wizardPink;
 
     private GUI gui;
+
     public void setGui(GUI gui){
         this.gui=gui;
     }

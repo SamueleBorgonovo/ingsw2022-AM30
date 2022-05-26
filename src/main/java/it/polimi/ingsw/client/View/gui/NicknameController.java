@@ -1,18 +1,24 @@
 package it.polimi.ingsw.client.View.gui;
 
+import it.polimi.ingsw.messages.toServer.ChooseNicknameMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 public class NicknameController {
     @FXML
-    public TextField nicknameWindows;
+    private TextField nicknameWindows;
     @FXML
-    public Label wrongNickname;
+    private Label wrongNickname;
+
+    @FXML
+    private Button loginButton;
+
+    @FXML
+    private Button reconnectButton;
+
     private GUI gui;
 
     public void setGui(GUI gui){
@@ -22,9 +28,28 @@ public class NicknameController {
     public void login(ActionEvent actionEvent) {
         String nickname;
         nickname = nicknameWindows.getText();
+        gui.getClient().sendMessage(new ChooseNicknameMessage(nickname,false));
     }
 
     public void reconnect(ActionEvent actionEvent) {
-
+        String nickname = nicknameWindows.getText();
+        gui.getClient().sendMessage(new ChooseNicknameMessage(nickname,true));
     }
+
+
+    public void setReconnectButton(boolean visible){
+        reconnectButton.setVisible(visible);
+    }
+
+    public void setWrongNickname(boolean visible){
+        wrongNickname.setVisible(visible);
+    }
+
+    public void setLoginButton(boolean visible){
+        loginButton.setVisible(visible);
+    }
+
+
+
+
 }

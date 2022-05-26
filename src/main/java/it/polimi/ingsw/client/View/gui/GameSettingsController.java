@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.View.gui;
 
+import it.polimi.ingsw.client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ public class GameSettingsController {
     public CheckBox twoField;
 
     private GUI gui;
+
 
     public void setGui(GUI gui){
         this.gui=gui;

@@ -23,12 +23,12 @@
             <Font name="Futura Medium" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="380.0" layoutY="497.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@Style.css" text="    Login    ">
+      <Button fx:id="loginButton" layoutX="380.0" layoutY="497.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@Style.css" text="    Login    ">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="640.0" layoutY="498.0" mnemonicParsing="false" onAction="#reconnect" styleClass="box" stylesheets="@Style.css" text="Reconnect">
+      <Button fx:id="reconnectButton" layoutX="640.0" layoutY="498.0" mnemonicParsing="false" onAction="#reconnect" styleClass="box" stylesheets="@Style.css" text="Reconnect">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>
