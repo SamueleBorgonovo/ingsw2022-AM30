@@ -39,6 +39,7 @@ public class GUI extends Application implements View{
     private PlayerView player;
     private int numOfPlayers;
     private GameMode gameMode;
+    private boolean firstUpdate=true;
 
     @Override
     public void start(Stage primaryStage){
@@ -182,7 +183,7 @@ public class GUI extends Application implements View{
     }
 
     public void instantiateDashBoardScene(){
-        createWizardScene("/Eriantys_Dashboard.fxml", () -> {
+        createDashboardScene("/Eriantys_Dashboard.fxml", () -> {
             primaryStage.setTitle("Eriantys");
             primaryStage.setResizable(false);
             primaryStage.show();
@@ -313,7 +314,11 @@ public class GUI extends Application implements View{
 
     @Override
     public void setBoard(BoardView board) {
-        this.board=board;
+        if(firstUpdate) {
+            this.board = board;
+            firstUpdate=false;
+        }else this.board=board;
+
     }
 
     @Override
@@ -426,7 +431,11 @@ public class GUI extends Application implements View{
 
     @Override
     public void printWaitingForPlayers(boolean lobby) {
-
+        if(lobby){
+            instantiateDashBoardScene();
+        }else{
+            //Farà qualcosa che scopriamo
+        }
     }
 
     @Override

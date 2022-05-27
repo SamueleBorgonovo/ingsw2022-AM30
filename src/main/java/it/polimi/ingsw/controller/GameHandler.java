@@ -46,6 +46,7 @@ public class GameHandler {
                             setPlayeridofPlayer(clientHandler.getNickname(), playerid);
                             setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
                             found = 1;
+                            clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard().getBoardView()));
                             WizardsListMessage message = new WizardsListMessage(game.getWizardAvailable());
                             clientHandler.sendMessageToClient(message);
                             sendMessagetoGame(game,new ConnectMessage(clientHandler.getNickname(), false));
@@ -57,7 +58,7 @@ public class GameHandler {
         if(found==0) {
             GameInterface game = new Game(gamemode,numofplayers);
             playerid = game.addPlayer(clientHandler.getNickname());
-
+            clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard().getBoardView()));
             setGameofPlayer(clientHandler.getNickname(), game);
             setPlayeridofPlayer(clientHandler.getNickname(), playerid);
             setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
@@ -160,7 +161,7 @@ public class GameHandler {
                     gameToTimerMap.remove(game);
                 }
                 clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayersView()));
-                clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard().getBoardView(),true));
+                clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard().getBoardView()));
                 clientHandler.sendMessageToClient(new EffectHandlerUpdateMessage(game.getEffectHandler()));
                 clientHandler.sendMessageToClient(new SettingReconnectMessage(game.getGameMode(),game.getNumOfPlayers()));
                 sendMessagetoGame(game, new ConnectMessage(clientHandler.getNickname(), true));
@@ -180,7 +181,7 @@ public class GameHandler {
     }
 
     public void updateClient(GameInterface game, BoardView boardView, ArrayList<PlayerView> playerView, EffectHandler effectHandler){
-        sendMessagetoGame(game,new BoardUpdateMessage(boardView,true));
+        sendMessagetoGame(game,new BoardUpdateMessage(boardView));
         sendMessagetoGame(game,new PlanceUpdateMessage(playerView));
         sendMessagetoGame(game,new EffectHandlerUpdateMessage(effectHandler));
     }

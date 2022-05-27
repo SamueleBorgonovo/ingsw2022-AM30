@@ -58,7 +58,6 @@ public class WizardController {
         wizardYellow.setDisable(true);
         wizardBlue.setDisable(true);
         wizardPink.setDisable(true);
-        System.out.println("sciao");
     }
 
     public void choosenWizardYellow(MouseEvent mouseEvent) {
@@ -67,7 +66,6 @@ public class WizardController {
         wizardGreen.setDisable(true);
         wizardBlue.setDisable(true);
         wizardPink.setDisable(true);
-        System.out.println("sciao");
     }
 
     public void choosenWizardBlue(MouseEvent mouseEvent) {
@@ -76,7 +74,6 @@ public class WizardController {
         wizardYellow.setDisable(true);
         wizardGreen.setDisable(true);
         wizardPink.setDisable(true);
-        System.out.println("sciao");
     }
 
     public void choosenWizardPink(MouseEvent mouseEvent) {
@@ -85,6 +82,5 @@ public class WizardController {
         wizardYellow.setDisable(true);
         wizardBlue.setDisable(true);
         wizardGreen.setDisable(true);
-        System.out.println("sciao");
     }
 }
