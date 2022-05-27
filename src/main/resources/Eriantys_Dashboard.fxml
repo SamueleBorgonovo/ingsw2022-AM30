@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:controller="it.polimi.ingsw.client.View.gui.DashboardController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane id="islandsPane" layoutX="22.0" layoutY="47.0" prefHeight="527.0" prefWidth="857.0" styleClass="box" stylesheets="@Style.css">
+         <children>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="172.0" layoutY="11.0">
+               <image>
+                  <Image url="@img/island2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="338.0" layoutY="12.0">
+               <image>
+                  <Image url="@img/island3.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="499.0" layoutY="7.0">
+               <image>
+                  <Image url="@img/island1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="659.0" layoutY="8.0">
+               <image>
+                  <Image url="@img/island2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="657.0" layoutY="168.0">
+               <image>
+                  <Image url="@img/island3.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="664.0" layoutY="332.0">
+               <image>
+                  <Image url="@img/island1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="499.0" layoutY="334.0">
+               <image>
+                  <Image url="@img/island2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="334.0" layoutY="328.0">
+               <image>
+                  <Image url="@img/island3.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="174.0" layoutY="330.0">
+               <image>
+                  <Image url="@img/island1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="1.0" layoutY="329.0">
+               <image>
+                  <Image url="@img/island2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutY="165.0">
+               <image>
+                  <Image url="@img/island3.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="34.0" layoutY="32.0" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="-26.0" layoutY="-22.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="48.0" layoutY="58.0" prefHeight="31.0" prefWidth="50.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="20.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="-1.0" layoutY="66.0" prefHeight="31.0" prefWidth="50.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="20.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="98.0" prefHeight="31.0" prefWidth="50.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="20.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="97.0" layoutY="69.0" prefHeight="31.0" prefWidth="50.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="20.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="73.0" layoutY="99.0" prefHeight="31.0" prefWidth="50.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="20.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane id="cloudsPane" layoutX="920.0" layoutY="47.0" prefHeight="525.0" prefWidth="184.0" styleClass="box" stylesheets="@Style.css">
+         <children>
+            <Pane fx:id="cloud1Pane" layoutX="10.0" layoutY="14.0" onMouseClicked="#chosenCloud1" prefHeight="165.0" prefWidth="165.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="2.0" layoutY="3.0">
+                     <image>
+                        <Image url="@img/cloud.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud1Student2" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="71.0">
+                     <image>
+                        <Image url="@img/STUDENT_BLUE.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud1Student4" fitHeight="30.0" fitWidth="30.0" layoutX="69.0" layoutY="102.0">
+                     <image>
+                        <Image url="@img/STUDENT_YELLOW.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud1Student3" fitHeight="30.0" fitWidth="30.0" layoutX="99.0" layoutY="70.0">
+                     <image>
+                        <Image url="@img/STUDENT_RED.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud1Student1" fitHeight="30.0" fitWidth="30.0" layoutX="65.0" layoutY="38.0">
+                     <image>
+                        <Image url="@img/STUDENT_PINK.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="cloud3Pane" layoutX="10.0" layoutY="179.0" onMouseClicked="#chosenCloud3" prefHeight="165.0" prefWidth="165.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="2.0" layoutY="3.0">
+                     <image>
+                        <Image url="@img/cloud.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud3Student2" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="71.0">
+                     <image>
+                        <Image url="@img/STUDENT_BLUE.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud3Student4" fitHeight="30.0" fitWidth="30.0" layoutX="69.0" layoutY="102.0">
+                     <image>
+                        <Image url="@img/STUDENT_YELLOW.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud3Student3" fitHeight="30.0" fitWidth="30.0" layoutX="99.0" layoutY="70.0">
+                     <image>
+                        <Image url="@img/STUDENT_RED.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud3Student1" fitHeight="30.0" fitWidth="30.0" layoutX="65.0" layoutY="38.0">
+                     <image>
+                        <Image url="@img/STUDENT_PINK.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="cloud2Pane" layoutX="9.0" layoutY="346.0" onMouseClicked="#chosenCloud2" prefHeight="165.0" prefWidth="165.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="2.0" layoutY="3.0">
+                     <image>
+                        <Image url="@img/cloud.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud2Student2" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="71.0">
+                     <image>
+                        <Image url="@img/STUDENT_BLUE.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud2Student4" fitHeight="30.0" fitWidth="30.0" layoutX="69.0" layoutY="102.0">
+                     <image>
+                        <Image url="@img/STUDENT_YELLOW.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud2Student3" fitHeight="30.0" fitWidth="30.0" layoutX="99.0" layoutY="70.0">
+                     <image>
+                        <Image url="@img/STUDENT_RED.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cloud2Student1" fitHeight="30.0" fitWidth="30.0" layoutX="65.0" layoutY="38.0">
+                     <image>
+                        <Image url="@img/STUDENT_PINK.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="assistantsPane" layoutX="487.0" layoutY="603.0" prefHeight="241.0" prefWidth="620.0" styleClass="box" stylesheets="@Style.css" visible="false">
+         <children>
+            <ScrollPane layoutY="-2.0" prefHeight="245.0" prefWidth="622.0" styleClass="box" stylesheets="@Style.css">
+               <content>
+                  <HBox prefHeight="226.0" prefWidth="1690.0" spacing="10.0">
+                     <children>
+                        <ImageView fx:id="lion" fitHeight="226.0" fitWidth="155.0" onMouseClicked="#chosenAssistantLion">
+                           <image>
+                              <Image url="@img/LION.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="ostrich" fitHeight="226.0" fitWidth="155.0" onMouseClicked="#chosenAssistantOstrich">
+                           <image>
+                              <Image url="@img/OSTRICH.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cat" fitHeight="226.0" fitWidth="155.0" onMouseClicked="#chosenAssistantCat">
+                           <image>
+                              <Image url="@img/CAT.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="eagle" fitHeight="226.0" fitWidth="155.0" onMouseClicked="#chosenAssistantEagle">
+                           <image>
+                              <Image url="@img/EAGLE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="fox" fitHeight="226.0" fitWidth="155.0" onMouseClicked="#chosenAssistantFox">
+                           <image>
+                              <Image url="@img/FOX.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="snake" fitHeight="226.0" fitWidth="155.0" onMouseClicked="#chosenAssistantSnake">
+                           <image>
+                              <Image url="@img/SNAKE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="octopus" fitHeight="226.0" fitWidth="155.0" onMouseClicked="#chosenAssistantOctopus">
+                           <image>
+                              <Image url="@img/OCTOPUS.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="dog" fitHeight="226.0" fitWidth="155.0" onMouseClicked="#chosenAssistantDog">
+                           <image>
+                              <Image url="@img/DOG.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="elephants" fitHeight="226.0" fitWidth="155.0" onMouseClicked="#chosenAssistantElephants">
+                           <image>
+                              <Image url="@img/ELEPHANTS.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="turtle" fitHeight="226.0" fitWidth="155.0" onMouseClicked="#chosenAssistantTurtle">
+                           <image>
+                              <Image url="@img/TURTLE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </Pane>
+      <Pane fx:id="plancePane" layoutX="486.0" layoutY="604.0" prefHeight="237.0" prefWidth="618.0">
+         <children>
+            <ImageView fitHeight="240.0" fitWidth="621.0" layoutY="-1.0">
+               <image>
+                  <Image url="@img/plance.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="entranceStudent9" fitHeight="30.0" fitWidth="30.0" layoutX="56.0" layoutY="184.0" onMouseClicked="#chosenEntranceStudent9">
+               <image>
+                  <Image url="@img/STUDENT_BLUE.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="entranceStudent6" fitHeight="30.0" fitWidth="30.0" layoutX="19.0" layoutY="145.0" onMouseClicked="#chosenEntranceStudent6">
+               <image>
+                  <Image url="@img/STUDENT_YELLOW.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="entranceStudent4" fitHeight="30.0" fitWidth="30.0" layoutX="18.0" layoutY="107.0" onMouseClicked="#chosenEntranceStudent4">
+               <image>
+                  <Image url="@img/STUDENT_RED.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="entranceStudent2" fitHeight="30.0" fitWidth="30.0" layoutX="18.0" layoutY="66.0" onMouseClicked="#chosenEntranceStudent2">
+               <image>
+                  <Image url="@img/STUDENT_PINK.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="entranceStudent1" fitHeight="30.0" fitWidth="30.0" layoutX="56.0" layoutY="26.0" onMouseClicked="#chosenEntranceStudent1">
+               <image>
+                  <Image url="@img/STUDENT_GREEN.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="entranceStudent5" fitHeight="30.0" fitWidth="30.0" layoutX="56.0" layoutY="104.0" onMouseClicked="#chosenEntranceStudent5">
+               <image>
+                  <Image url="@img/STUDENT_BLUE.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="entranceStudent3" fitHeight="30.0" fitWidth="30.0" layoutX="56.0" layoutY="65.0" onMouseClicked="#chosenEntranceStudent3">
+               <image>
+                  <Image url="@img/STUDENT_BLUE.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="entranceStudent7" fitHeight="30.0" fitWidth="30.0" layoutX="56.0" layoutY="145.0" onMouseClicked="#chosenEntranceStudent7">
+               <image>
+                  <Image url="@img/STUDENT_YELLOW.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="entranceStudent8" fitHeight="30.0" fitWidth="30.0" layoutX="19.0" layoutY="185.0" onMouseClicked="#chosenEntranceStudent8">
+               <image>
+                  <Image url="@img/STUDENT_GREEN.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="101.0" layoutY="4.0" prefHeight="230.0" prefWidth="329.0">
+               <children>
+                  <HBox fx:id="hallGreen" layoutX="11.0" layoutY="23.0" onMouseClicked="#chosenHallGreen" prefHeight="34.0" prefWidth="309.0">
+                     <children>
+                        <ImageView fx:id="hall1Student1" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall1Student2" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall1Student3" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall1Student4" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall1Student5" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall1Student6" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall1Student7" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall1Student8" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall1Student9" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall1Student10" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hallRed" layoutX="11.0" layoutY="60.0" onMouseClicked="#chosenHallRed" prefHeight="34.0" prefWidth="309.0">
+                     <children>
+                        <ImageView fx:id="hall2Student1" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall2Student2" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall2Student3" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall2Student4" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall2Student5" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall2Student6" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall2Student7" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall2Student8" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall2Student9" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall2Student10" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hallYellow" layoutX="12.0" layoutY="99.0" onMouseClicked="#chosenHallYellow" prefHeight="34.0" prefWidth="309.0">
+                     <children>
+                        <ImageView fx:id="hall3Student1" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall3Student2" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall3Student3" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall3Student4" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall3Student5" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall3Student6" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall3Student7" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall3Student8" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall3Student9" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall3Student10" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hallPink" layoutX="11.0" layoutY="138.0" onMouseClicked="#chosenHallPink" prefHeight="34.0" prefWidth="309.0">
+                     <children>
+                        <ImageView fx:id="hall4Student1" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall4Student2" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall4Student3" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall4Student4" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall4Student5" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall4Student6" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall4Student7" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall4Student8" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall4Student9" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall4Student10" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hallBlue" layoutX="11.0" layoutY="177.0" onMouseClicked="#chosenHallBlue" prefHeight="34.0" prefWidth="309.0">
+                     <children>
+                        <ImageView fx:id="hall5Student1" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall5Student2" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall5Student3" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall5Student4" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall5Student5" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall5Student6" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall5Student7" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall5Student8" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall5Student9" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hall5Student10" fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <ImageView fx:id="professorBlue" fitHeight="30.0" fitWidth="31.0" layoutX="438.0" layoutY="182.0">
+               <image>
+                  <Image url="@img/PROFESSOR_BLUE.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="professorGreen" fitHeight="30.0" fitWidth="31.0" layoutX="438.0" layoutY="26.0">
+               <image>
+                  <Image url="@img/PROFESSOR_GREEN.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="professorRed" fitHeight="30.0" fitWidth="31.0" layoutX="437.0" layoutY="66.0">
+               <image>
+                  <Image url="@img/PROFESSOR_RED.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="professorYellow" fitHeight="30.0" fitWidth="31.0" layoutX="438.0" layoutY="103.0">
+               <image>
+                  <Image url="@img/PROFESSOR_YELLOW.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="professorPink" fitHeight="30.0" fitWidth="31.0" layoutX="437.0" layoutY="144.0">
+               <image>
+                  <Image url="@img/PROFESSOR_PINK.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="20.0" layoutY="602.0" prefHeight="243.0" prefWidth="441.0" styleClass="box" stylesheets="@Style.css">
+         <children>
+            <VBox layoutX="20.0" layoutY="7.0" prefHeight="168.0" prefWidth="394.0" stylesheets="@Style.css">
+               <children>
+                  <Label id="nickname" fx:id="nicknameLabel" prefHeight="60.0" prefWidth="349.0" text="GIUSEPPE">
+                     <font>
+                        <Font name="Futura Medium" size="45.0" />
+                     </font>
+                  </Label>
+                  <Label id="playerStatus" fx:id="playerStateLabel" prefHeight="16.0" prefWidth="394.0" text="  WAITING">
+                     <font>
+                        <Font name="Futura Medium" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label id="gameStatus" fx:id="gameUpdateLabel" alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="95.0" prefHeight="71.0" prefWidth="391.0" text="  GAME : Samu is playing Assistant CAT">
+                     <font>
+                        <Font name="Futura Medium" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Pane fx:id="characterButtor" layoutX="232.0" layoutY="184.0" onMouseClicked="#clickCharacetrButton" prefHeight="40.0" prefWidth="184.0" styleClass="boxwhite" stylesheets="@Style.css">
+               <children>
+                  <Label fx:id="characterButtonLabel" alignment="CENTER" layoutX="-2.0" layoutY="-2.0" prefHeight="46.0" prefWidth="188.0" text="PLAY CHARACTER">
+                     <font>
+                        <Font name="Futura Medium" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="26.0" layoutY="184.0" onMouseClicked="#clickAssistabtButton" prefHeight="40.0" prefWidth="184.0" styleClass="boxwhite" stylesheets="@Style.css">
+               <children>
+                  <Label alignment="CENTER" layoutX="-3.0" layoutY="-3.0" prefHeight="46.0" prefWidth="190.0" text="PLAY ASSISTANT">
+                     <font>
+                        <Font name="Futura Medium" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <HBox fx:id="coinPane" layoutX="370.0" layoutY="18.0" prefHeight="31.0" prefWidth="50.0">
+               <children>
+                  <Label fx:id="coinLabel" alignment="CENTER" prefHeight="33.0" prefWidth="20.0" text="10">
+                     <font>
+                        <Font name="Futura Medium" size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="@img/COIN.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <Pane fx:id="charactersPane" layoutX="486.0" layoutY="602.0" prefHeight="241.0" prefWidth="621.0" styleClass="box" stylesheets="@Style.css" visible="false">
+         <children>
+            <ImageView fitHeight="226.0" fitWidth="155.0" layoutX="33.0" layoutY="7.0">
+               <image>
+                  <Image url="@img/CENTAUR.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="226.0" fitWidth="155.0" layoutX="436.0" layoutY="7.0">
+               <image>
+                  <Image url="@img/FARMER.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="226.0" fitWidth="155.0" layoutX="240.0" layoutY="10.0">
+               <image>
+                  <Image url="@img/HERALD.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1030.0" layoutY="4.0">
+         <image>
+            <Image url="@img/STUDENT_GREEN.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="965.0" layoutY="8.0">
+         <image>
+            <Image url="@img/STUDENT_PINK.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="905.0" layoutY="8.0">
+         <image>
+            <Image url="@img/STUDENT_RED.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="864.0" layoutY="8.0">
+         <image>
+            <Image url="@img/STUDENT_YELLOW.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="818.0" layoutY="14.0">
+         <image>
+            <Image url="@img/STUDENT_BLUE.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
