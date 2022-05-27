@@ -164,6 +164,8 @@ public class GameHandler {
                 clientHandler.sendMessageToClient(new EffectHandlerUpdateMessage(game.getEffectHandler()));
                 clientHandler.sendMessageToClient(new SettingReconnectMessage(game.getGameMode(),game.getNumOfPlayers()));
                 sendMessagetoGame(game, new ConnectMessage(clientHandler.getNickname(), true));
+                if(game.getNumOfPlayers()-game.getNumPlayerDisconnected()==2)
+                    turnHandler(game);
             }catch(ReconnectedException e){
                 //Fare il messaggio invalidReconnection
                 NicknameMessage message = new NicknameMessage(false,false);

@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Game implements GameInterface {
-    private final int TIMER = 120000;
     private GameMode gameMode;
     private ArrayList<Player> listOfPlayers = new ArrayList<>();
     private GameState gameState;
@@ -26,7 +25,6 @@ public class Game implements GameInterface {
     private Characters characterInUse = null;
     private ArrayList<Wizard> wizardChoosen = new ArrayList<>();
     private ArrayList<Assistant> usedAssistant = new ArrayList<>();
-    private Thread timer;
 
     public Game(GameMode gameMode, int numofplayers) {
         this.gameMode = gameMode;
@@ -84,7 +82,6 @@ public class Game implements GameInterface {
                 if(player.getPlayerState()!=PlayerState.DISCONNECTED)
                     count++;
             if(count==2) {
-                timer.interrupt();
                 gameState=GameState.PLAYING;
             }
         }
@@ -150,17 +147,6 @@ public class Game implements GameInterface {
         }
     return callhandler;
     }
-
-    public void startTimer(){
-        timer = new Thread(()->{
-            try{
-                Thread.sleep(TIMER);
-                //winner();
-            } catch (InterruptedException e) { }
-        });
-        timer.start();
-    }
-
 
     public int searchfisrt(){
         for(int count=0;count<playerorder.size();count++){

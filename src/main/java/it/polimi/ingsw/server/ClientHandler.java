@@ -2,7 +2,6 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.controller.MessageHandler;
-import it.polimi.ingsw.messages.toClient.DisconnectMessage;
 import it.polimi.ingsw.messages.toClient.MessageToClient;
 import it.polimi.ingsw.messages.toClient.PingToClientMessage;
 import it.polimi.ingsw.messages.toClient.TimeExpiredMessage;
