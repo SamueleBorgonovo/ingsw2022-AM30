@@ -39,7 +39,6 @@ public class GUI extends Application implements View{
     private PlayerView player;
     private int numOfPlayers;
     private GameMode gameMode;
-    private boolean firstUpdate=true;
 
     @Override
     public void start(Stage primaryStage){
@@ -314,11 +313,7 @@ public class GUI extends Application implements View{
 
     @Override
     public void setBoard(BoardView board) {
-        if(firstUpdate) {
             this.board = board;
-            firstUpdate=false;
-        }else this.board=board;
-
     }
 
     @Override
