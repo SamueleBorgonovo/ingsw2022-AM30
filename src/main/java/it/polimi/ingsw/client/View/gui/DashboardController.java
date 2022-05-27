@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.View.gui;
 
 import it.polimi.ingsw.controller.virtualView.CloudView;
+import it.polimi.ingsw.messages.toServer.ChooseCloudMessage;
 import it.polimi.ingsw.model.game.Student;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -329,16 +330,21 @@ public class DashboardController {
     public Pane charactersPane;
 
     public void chosenCloud1(MouseEvent mouseEvent) {
-        cloud2Pane.setDisable(true);
-        cloud3Pane.setDisable(true);
-
-    }
-
-    public void chosenCloud3(MouseEvent mouseEvent) {
+        ChooseCloudMessage message = new ChooseCloudMessage(1);
+        gui.getClient().sendMessage(message);
     }
 
     public void chosenCloud2(MouseEvent mouseEvent) {
+        ChooseCloudMessage message = new ChooseCloudMessage(2);
+        gui.getClient().sendMessage(message);
     }
+
+    public void chosenCloud3(MouseEvent mouseEvent) {
+        ChooseCloudMessage message = new ChooseCloudMessage(3);
+        gui.getClient().sendMessage(message);
+    }
+
+
 
     public void chosenAssistantLion(MouseEvent mouseEvent) {
     }
@@ -424,24 +430,18 @@ public class DashboardController {
         this.clouds = clouds;
     }
 
-    public void showClouds(ArrayList<CloudView> clouds){
-        cloud1Pane.setDisable(false);
-        cloud1Pane.setOpacity(1);
-        cloud2Pane.setDisable(false);
-        cloud2Pane.setOpacity(1);
-        cloud3Pane.setDisable(false);
-        cloud3Pane.setOpacity(1);
+    public void showClouds() {
 
-        ImageView [][] matImageView= new ImageView[3][4];
+        ImageView[][] matImageView = new ImageView[3][4];
 
-        matImageView[0][0]=cloud1Student1;
-        matImageView[0][1]=cloud1Student2;
-        matImageView[0][2]=cloud1Student3;
-        matImageView[1][0]=cloud2Student1;
-        matImageView[1][1]=cloud2Student2;
-        matImageView[1][2]=cloud2Student3;
+        matImageView[0][0] = cloud1Student1;
+        matImageView[0][1] = cloud1Student2;
+        matImageView[0][2] = cloud1Student3;
+        matImageView[1][0] = cloud2Student1;
+        matImageView[1][1] = cloud2Student2;
+        matImageView[1][2] = cloud2Student3;
 
-        if(gui.getNumOfPlayers()==3) {
+        if (gui.getNumOfPlayers() == 3) {
             matImageView[0][3] = cloud1Student4;
             matImageView[1][3] = cloud2Student4;
             matImageView[2][0] = cloud3Student1;
@@ -450,8 +450,8 @@ public class DashboardController {
             matImageView[2][3] = cloud3Student4;
         }
 
-        int i=0;
-        for(CloudView  cloud: clouds) {
+        int i = 0;
+        for (CloudView cloud : clouds) {
             int j = 0;
             for (Student student : cloud.getStudents()) {
                 matImageView[i][j].setImage(this.getImageFromStudent(student));
@@ -459,10 +459,10 @@ public class DashboardController {
             }
             i++;
         }
-        
-        for(CloudView cloud2 : clouds)
-            if(cloud2.isChoosen()){
-                switch (cloud2.getCloudID()){
+
+        for (CloudView cloud : clouds) {
+            if (cloud.isChoosen()) {
+                switch (cloud.getCloudID()) {
                     case (1) -> {
                         cloud1Pane.setDisable(true);
                         cloud1Pane.setOpacity(0.3);
@@ -476,12 +476,28 @@ public class DashboardController {
                         cloud3Pane.setOpacity(0.3);
                     }
                 }
+            } else {
+                switch (cloud.getCloudID()) {
+                    case (1) -> {
+                        cloud1Pane.setDisable(false);
+                        cloud1Pane.setOpacity(1);
+                    }
+                    case (2) -> {
+                        cloud2Pane.setDisable(false);
+                        cloud2Pane.setOpacity(1);
+                    }
+                    case(3) ->{
+                        cloud3Pane.setDisable(false);
+                        cloud3Pane.setOpacity(1);
+                    }
+                }
             }
-
+        }
     }
 
     public Image getImageFromStudent(Student student){
         Image studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("")));
+
         if (student==Student.GREEN)
             studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img.STUDENT_GREEN.png")));
         else if (student==Student.RED)
