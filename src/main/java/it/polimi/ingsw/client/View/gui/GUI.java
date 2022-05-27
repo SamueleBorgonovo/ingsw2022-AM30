@@ -33,7 +33,10 @@ public class GUI extends Application implements View{
     private DashboardController dashboardController;
     private FXMLLoader fxmlLoader;
     private String nickname;
-    private ArrayList<CloudView> clouds;
+    private BoardView board;
+    private ArrayList<PlayerView> players = new ArrayList<>();
+    private EffectHandler effectHandler;
+    private PlayerView player;
     private int numOfPlayers;
     private GameMode gameMode;
 
@@ -240,8 +243,8 @@ public class GUI extends Application implements View{
 
     @Override
     public void chooseCloud() {
-        dashboardController.setClouds(this.clouds);
-        dashboardController.showClouds(this.clouds);
+        dashboardController.setClouds(board.getClouds());
+        dashboardController.showClouds(board.getClouds());
     }
 
     @Override
@@ -258,16 +261,23 @@ public class GUI extends Application implements View{
     }
 
     @Override
-    public void setPlayers(ArrayList<PlayerView> players) {}
-
-    @Override
-    public void setBoard(BoardView board) {
+    public void setPlayers(ArrayList<PlayerView> players) {
+        this.players.clear();
+        this.players.addAll(players);
+        for (PlayerView play : players)
+            if (play.getNickname().equals(client.getNickname()))
+                player = play;
 
     }
 
     @Override
-    public void setEffectHandler(EffectHandler effectHandler) {
+    public void setBoard(BoardView board) {
+        this.board=board;
+    }
 
+    @Override
+    public void setEffectHandler(EffectHandler effectHandler) {
+        this.effectHandler=effectHandler;
     }
 
     @Override
