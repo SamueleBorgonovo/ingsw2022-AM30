@@ -59,6 +59,18 @@ public class GUI extends Application implements View{
         return nickname;
     }
 
+    public BoardView getBoard() {
+        return board;
+    }
+
+    public ArrayList<PlayerView> getPlayers() {
+        return players;
+    }
+
+    public PlayerView getPlayer() {
+        return player;
+    }
+
     private void createConnectionScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
         Platform.runLater(() -> {
             fxmlLoader = new FXMLLoader();
@@ -169,6 +181,33 @@ public class GUI extends Application implements View{
         });
     }
 
+    public void instantiateDashBoardScene(){
+        createWizardScene("/Eriantys_Dashboard.fxml", () -> {
+            primaryStage.setTitle("Eriantys");
+            primaryStage.setResizable(false);
+            primaryStage.show();
+            dashboardController = fxmlLoader.getController();
+            dashboardController.setGui(this);
+        });
+    }
+
+    private void createDashboardScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
+        Platform.runLater(() -> {
+            fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource(pathOfFxmlFile));
+            Scene scene;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+                scene = new Scene(new Label("Error loading the scene"));
+            }
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            functionInterface.executeFunction();
+        });
+    }
+
 
     public boolean createClient(String ip, int port) {
         client = new Client(ip,port,this);
@@ -225,7 +264,9 @@ public class GUI extends Application implements View{
     }
 
     @Override
-    public void chooseAssistant() {}
+    public void chooseAssistant() {
+        dashboardController.setAssistantView();
+    }
 
     @Override
     public PossibleAction chooseNextAction(PlayerState playerState) {

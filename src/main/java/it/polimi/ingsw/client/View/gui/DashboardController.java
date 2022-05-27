@@ -1,8 +1,10 @@
 package it.polimi.ingsw.client.View.gui;
 
 import it.polimi.ingsw.controller.virtualView.CloudView;
+import it.polimi.ingsw.messages.toServer.ChooseAssistantMessage;
 import it.polimi.ingsw.messages.toServer.ChooseCloudMessage;
 import it.polimi.ingsw.model.game.Student;
+import it.polimi.ingsw.model.player.Assistant;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,6 +19,10 @@ import java.util.Objects;
 public class DashboardController {
     private ArrayList<CloudView> clouds;
     private GUI gui;
+
+    public void setGui(GUI gui){
+        this.gui=gui;
+    }
     @FXML
     public Pane cloud1Pane;
 
@@ -347,33 +353,63 @@ public class DashboardController {
 
 
     public void chosenAssistantLion(MouseEvent mouseEvent) {
+        plancePane.setVisible(true);
+        assistantsPane.setVisible(false);
+        gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.LION));
     }
 
     public void chosenAssistantOstrich(MouseEvent mouseEvent) {
+        plancePane.setVisible(true);
+        assistantsPane.setVisible(false);
+        gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.OSTRICH));
     }
 
     public void chosenAssistantCat(MouseEvent mouseEvent) {
+        plancePane.setVisible(true);
+        assistantsPane.setVisible(false);
+        gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.CAT));
     }
 
     public void chosenAssistantEagle(MouseEvent mouseEvent) {
+        plancePane.setVisible(true);
+        assistantsPane.setVisible(false);
+        gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.EAGLE));
     }
 
     public void chosenAssistantFox(MouseEvent mouseEvent) {
+        plancePane.setVisible(true);
+        assistantsPane.setVisible(false);
+        gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.FOX));
     }
 
     public void chosenAssistantSnake(MouseEvent mouseEvent) {
+        plancePane.setVisible(true);
+        assistantsPane.setVisible(false);
+        gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.SNAKE));
     }
 
     public void chosenAssistantOctopus(MouseEvent mouseEvent) {
+        plancePane.setVisible(true);
+        assistantsPane.setVisible(false);
+        gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.OCTOPUS));
     }
 
     public void chosenAssistantDog(MouseEvent mouseEvent) {
+        plancePane.setVisible(true);
+        assistantsPane.setVisible(false);
+        gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.DOG));
     }
 
     public void chosenAssistantElephants(MouseEvent mouseEvent) {
+        plancePane.setVisible(true);
+        assistantsPane.setVisible(false);
+        gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.ELEPHANTS));
     }
 
     public void chosenAssistantTurtle(MouseEvent mouseEvent) {
+        plancePane.setVisible(true);
+        assistantsPane.setVisible(false);
+        gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.TURTLE));
     }
 
     public void chosenEntranceStudent9(MouseEvent mouseEvent) {
@@ -426,6 +462,76 @@ public class DashboardController {
 
     //////////////////////////////////////////////////////////////
 
+    public void setAssistantView(){
+        plancePane.setVisible(false);
+        assistantsPane.setVisible(true);
+        ArrayList<ImageView> assistantsImage = new ArrayList<>();
+        lion.setDisable(true);
+        lion.setOpacity(0.3);
+        ostrich.setDisable(true);
+        ostrich.setOpacity(0.3);
+        cat.setDisable(true);
+        cat.setOpacity(0.3);
+        eagle.setDisable(true);
+        eagle.setOpacity(0.3);
+        fox.setDisable(true);
+        fox.setOpacity(0.3);
+        snake.setDisable(true);
+        snake.setOpacity(0.3);
+        octopus.setDisable(true);
+        octopus.setOpacity(0.3);
+        dog.setDisable(true);
+        dog.setOpacity(0.3);
+        elephants.setDisable(true);
+        elephants.setOpacity(0.3);
+        turtle.setDisable(true);
+        turtle.setOpacity(0.3);
+
+        for(Assistant assistant : gui.getPlayer().getAssistantCards()){
+            switch (assistant){
+                case LION -> {
+                    lion.setVisible(true);
+                    lion.setOpacity(1);
+                }
+                case OSTRICH -> {
+                    ostrich.setVisible(true);
+                    ostrich.setOpacity(1);
+                }
+                case CAT -> {
+                    cat.setVisible(true);
+                    cat.setOpacity(1);
+                }
+                case EAGLE -> {
+                    eagle.setVisible(true);
+                    eagle.setOpacity(1);
+                }
+                case FOX -> {
+                    fox.setVisible(true);
+                    fox.setOpacity(1);
+                }
+                case SNAKE -> {
+                    snake.setVisible(true);
+                    snake.setOpacity(1);
+                }
+                case OCTOPUS -> {
+                    octopus.setVisible(true);
+                    octopus.setOpacity(1);
+                }
+                case DOG -> {
+                    dog.setVisible(true);
+                    dog.setOpacity(1);
+                }
+                case ELEPHANTS -> {
+                    elephants.setVisible(true);
+                    elephants.setOpacity(1);
+                }
+                case TURTLE -> {
+                    turtle.setVisible(true);
+                    turtle.setOpacity(1);
+                }
+            }
+        }
+    }
     public void setClouds(ArrayList<CloudView> clouds) {
         this.clouds = clouds;
     }
