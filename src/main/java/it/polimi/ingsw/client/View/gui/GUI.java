@@ -5,8 +5,10 @@ import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.controller.virtualView.BoardView;
 import it.polimi.ingsw.controller.virtualView.CharacterView;
+import it.polimi.ingsw.controller.virtualView.CloudView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.game.EffectHandler;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.PlayerState;
@@ -28,8 +30,12 @@ public class GUI extends Application implements View{
     GameSettingsController gameSettingsScene;
     WizardController wizardScene;
     ConnectController connectScene;
+    DashboardController dashboardController;
     FXMLLoader fxmlLoader;
     String nickname;
+    ArrayList<CloudView> clouds;
+    int numOfPlayers;
+    GameMode gameMode;
 
     @Override
     public void start(Stage primaryStage){
@@ -172,7 +178,21 @@ public class GUI extends Application implements View{
         return false;
     }
 
+    public int getNumOfPlayers() {
+        return numOfPlayers;
+    }
 
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    public void setNumOfPlayers(int numOfPlayers) {
+        this.numOfPlayers = numOfPlayers;
+    }
+
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
+    }
 
     ///////////////////////////////////////////////////////////////////
     //View methods
@@ -219,7 +239,10 @@ public class GUI extends Application implements View{
     public void moveMotherNature() {}
 
     @Override
-    public void chooseCloud() {}
+    public void chooseCloud() {
+        dashboardController.setClouds(this.clouds);
+        dashboardController.showClouds(this.clouds);
+    }
 
     @Override
     public void useCharacter(PlayerState playerState) {}
