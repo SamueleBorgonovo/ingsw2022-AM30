@@ -24,18 +24,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class GUI extends Application implements View{
-    Stage primaryStage;
-    Client client;
-    NicknameController nicknameScene;
-    GameSettingsController gameSettingsScene;
-    WizardController wizardScene;
-    ConnectController connectScene;
-    DashboardController dashboardController;
-    FXMLLoader fxmlLoader;
-    String nickname;
-    ArrayList<CloudView> clouds;
-    int numOfPlayers;
-    GameMode gameMode;
+    private Stage primaryStage;
+    private Client client;
+    private NicknameController nicknameScene;
+    private GameSettingsController gameSettingsScene;
+    private WizardController wizardScene;
+    private ConnectController connectScene;
+    private DashboardController dashboardController;
+    private FXMLLoader fxmlLoader;
+    private String nickname;
+    private ArrayList<CloudView> clouds;
+    private int numOfPlayers;
+    private GameMode gameMode;
 
     @Override
     public void start(Stage primaryStage){
