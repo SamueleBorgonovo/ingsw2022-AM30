@@ -6,6 +6,7 @@ import it.polimi.ingsw.messages.toServer.ChooseAssistantMessage;
 import it.polimi.ingsw.messages.toServer.ChooseCloudMessage;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.Professor;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -18,12 +19,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class DashboardController {
-    private ArrayList<CloudView> clouds;
     private GUI gui;
     private ImageView[][] hallView = new ImageView[5][10];
     private ArrayList<ImageView> entranceView = new ArrayList<>();
     private ImageView[][] matImageView = new ImageView[3][4];
     private Student studentToMove;
+
 
     public void setup() {
         entranceView.add(entranceStudent1);
@@ -600,6 +601,8 @@ public class DashboardController {
 
     //////////////////////////////////////////////////////////////
 
+
+    //It changes only plance
     public void setupPlayerView(PlayerView player){
 
         nicknameLabel.setText(player.getNickname());
@@ -609,9 +612,98 @@ public class DashboardController {
         assistantsPane.setDisable(true);
         for(int count=0;count<player.getPlance().getEntrance().size();count++){
             entranceView.get(count).setImage(getImageFromStudent(player.getPlance().getEntrance().get(count)));
+            entranceView.get(count).setVisible(true);
+            entranceView.get(count).setDisable(false);
         }
 
+        for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.GREEN);count++){
+            hallView[0][count].setVisible(true);
+            hallView[0][count].setDisable(false);
+        }
+        for(int count=player.getPlance().getNumberOfStudentHall(Student.GREEN);count<10;count++){
+            hallView[0][count].setVisible(false);
+            hallView[0][count].setDisable(true);
+        }
 
+        for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.RED);count++){
+            hallView[1][count].setVisible(true);
+            hallView[1][count].setDisable(false);
+        }
+        for(int count=player.getPlance().getNumberOfStudentHall(Student.RED);count<10;count++){
+            hallView[1][count].setVisible(false);
+            hallView[1][count].setDisable(true);
+        }
+
+        for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.YELLOW);count++){
+            hallView[2][count].setVisible(true);
+            hallView[2][count].setDisable(false);
+        }
+        for(int count=player.getPlance().getNumberOfStudentHall(Student.YELLOW);count<10;count++){
+            hallView[2][count].setVisible(false);
+            hallView[2][count].setDisable(true);
+        }
+
+        for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.PINK);count++){
+            hallView[3][count].setVisible(true);
+            hallView[3][count].setDisable(false);
+        }
+        for(int count=player.getPlance().getNumberOfStudentHall(Student.PINK);count<10;count++){
+            hallView[3][count].setVisible(false);
+            hallView[3][count].setDisable(true);
+        }
+
+        for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.BLUE);count++){
+            hallView[4][count].setVisible(true);
+            hallView[4][count].setDisable(false);
+        }
+        for(int count=player.getPlance().getNumberOfStudentHall(Student.BLUE);count<10;count++){
+            hallView[4][count].setVisible(false);
+            hallView[4][count].setDisable(true);
+        }
+
+        professorBlue.setDisable(true);
+        professorBlue.setVisible(false);
+        professorGreen.setDisable(true);
+        professorGreen.setVisible(false);
+        professorPink.setDisable(true);
+        professorPink.setVisible(false);
+        professorRed.setDisable(true);
+        professorRed.setVisible(false);
+        professorYellow.setDisable(true);
+        professorYellow.setVisible(false);
+
+        for(Professor prof : player.getPlance().getProfessors()){
+            switch (prof){
+                case RED_DRAGON -> {
+                    professorRed.setDisable(false);
+                    professorRed.setVisible(true);
+                }
+                case BLUE_UNICORN -> {
+                    professorBlue.setDisable(false);
+                    professorBlue.setVisible(true);
+                }
+                case GREEN_FROG -> {
+                    professorGreen.setDisable(false);
+                    professorGreen.setVisible(true);
+                }
+                case PINK_FAIRY -> {
+                    professorPink.setDisable(false);
+                    professorPink.setVisible(true);
+                }
+                case YELLOW_ELF -> {
+                    professorYellow.setDisable(false);
+                    professorYellow.setVisible(true);
+                }
+            }
+        }
+
+        //MANCANO LE TOWER NELLA PLANCIA ED è FINITO
+    }
+
+    public void setupArchipelago(){
+
+        //MANCA LA PARTE DELLE ISOLE
+        showClouds();
     }
 
 
@@ -696,34 +788,10 @@ public class DashboardController {
         }
     }
 
-
-
-    public void setClouds(ArrayList<CloudView> clouds) {
-        this.clouds = clouds;
-    }
-
     public void showClouds() {
 
-        /*
-        matImageView[0][0] = cloud1Student1;
-        matImageView[0][1] = cloud1Student2;
-        matImageView[0][2] = cloud1Student3;
-        matImageView[1][0] = cloud2Student1;
-        matImageView[1][1] = cloud2Student2;
-        matImageView[1][2] = cloud2Student3;
-
-        if (gui.getNumOfPlayers() == 3) {
-            matImageView[0][3] = cloud1Student4;
-            matImageView[1][3] = cloud2Student4;
-            matImageView[2][0] = cloud3Student1;
-            matImageView[2][1] = cloud3Student2;
-            matImageView[2][2] = cloud3Student3;
-            matImageView[2][3] = cloud3Student4;
-        }
-        */
-
         int i = 0;
-        for (CloudView cloud : clouds) {
+        for (CloudView cloud : gui.getBoard().getClouds()) {
             int j = 0;
             for (Student student : cloud.getStudents()) {
                 matImageView[i][j].setImage(this.getImageFromStudent(student));
@@ -732,7 +800,7 @@ public class DashboardController {
             i++;
         }
 
-        for (CloudView cloud : clouds) {
+        for (CloudView cloud : gui.getBoard().getClouds()) {
             if (cloud.isChoosen()) {
                 switch (cloud.getCloudID()) {
                     case (1) -> {

@@ -306,7 +306,6 @@ public class GUI extends Application implements View{
 
     @Override
     public void chooseCloud() {
-        dashboardController.setClouds(board.getClouds());
         dashboardController.showClouds();
     }
 
@@ -474,6 +473,8 @@ public class GUI extends Application implements View{
             @Override
             public void run() {
                 dashboardController.setup(); ////////////////////////////////////////////////////////////////////////////////////////////////////
+                dashboardController.setupArchipelago();
+                dashboardController.setupPlayerView(player);
             }
         });
 
