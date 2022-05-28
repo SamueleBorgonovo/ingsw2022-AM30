@@ -464,7 +464,26 @@ public class GUI extends Application implements View{
 
     @Override
     public void nextMove(PlayerState playerState) {
+        switch (playerState){
+            case STUDENTPHASE -> {
 
+            }
+            case ASSISTANTPHASE -> {
+                chooseAssistant();
+            }
+            case MOTHERNATUREPHASE -> {
+
+            }
+            case CLOUDPHASE -> {
+
+            }
+            case CHARACTHERSTUDENTSPHASE -> {
+
+            }
+            case CHARACTHERISLANDPHASE -> {
+
+            }
+        }
     }
 
 }
