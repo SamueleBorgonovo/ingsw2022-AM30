@@ -64,6 +64,7 @@ public class GameHandler {
             setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
             setGameToStudentPlayed(game,0);
             //Possiamo mandare un messaggio di creazione nuova partita
+            clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard().getBoardView()));
             WizardsListMessage message = new WizardsListMessage(game.getWizardAvailable());
             clientHandler.sendMessageToClient(message);
         }

@@ -462,10 +462,11 @@ public class DashboardController {
 
     //////////////////////////////////////////////////////////////
 
+
     public void setAssistantView(){
         plancePane.setVisible(false);
         assistantsPane.setVisible(true);
-        ArrayList<ImageView> assistantsImage = new ArrayList<>();
+
         lion.setDisable(true);
         lion.setOpacity(0.3);
         ostrich.setDisable(true);
@@ -491,47 +492,60 @@ public class DashboardController {
             switch (assistant){
                 case LION -> {
                     lion.setVisible(true);
+                    lion.setDisable(false);
                     lion.setOpacity(1);
                 }
                 case OSTRICH -> {
                     ostrich.setVisible(true);
+                    ostrich.setDisable(false);
                     ostrich.setOpacity(1);
                 }
                 case CAT -> {
                     cat.setVisible(true);
+                    cat.setDisable(false);
                     cat.setOpacity(1);
                 }
                 case EAGLE -> {
                     eagle.setVisible(true);
+                    eagle.setDisable(false);
                     eagle.setOpacity(1);
                 }
                 case FOX -> {
                     fox.setVisible(true);
+                    fox.setDisable(false);
                     fox.setOpacity(1);
                 }
                 case SNAKE -> {
                     snake.setVisible(true);
+                    snake.setDisable(false);
                     snake.setOpacity(1);
                 }
                 case OCTOPUS -> {
                     octopus.setVisible(true);
+                    octopus.setDisable(false);
                     octopus.setOpacity(1);
                 }
                 case DOG -> {
                     dog.setVisible(true);
+                    dog.setDisable(false);
                     dog.setOpacity(1);
                 }
                 case ELEPHANTS -> {
                     elephants.setVisible(true);
+                    elephants.setDisable(false);
                     elephants.setOpacity(1);
                 }
                 case TURTLE -> {
                     turtle.setVisible(true);
+                    turtle.setDisable(false);
                     turtle.setOpacity(1);
                 }
             }
         }
     }
+
+
+
     public void setClouds(ArrayList<CloudView> clouds) {
         this.clouds = clouds;
     }

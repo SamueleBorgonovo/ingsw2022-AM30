@@ -5,7 +5,6 @@ import it.polimi.ingsw.client.View.View;
 import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.controller.virtualView.BoardView;
 import it.polimi.ingsw.controller.virtualView.CharacterView;
-import it.polimi.ingsw.controller.virtualView.CloudView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.game.EffectHandler;
 import it.polimi.ingsw.model.game.GameMode;
@@ -69,6 +68,14 @@ public class GUI extends Application implements View{
 
     public PlayerView getPlayer() {
         return player;
+    }
+
+    public void resetControllers(){
+        nicknameScene=null;
+        wizardScene=null;
+        connectScene=null;
+        dashboardController=null;
+        gameSettingsScene=null;
     }
 
     private void createConnectionScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
@@ -265,7 +272,12 @@ public class GUI extends Application implements View{
 
     @Override
     public void chooseAssistant() {
-        dashboardController.setAssistantView();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setAssistantView();
+            }
+        });
     }
 
     @Override
@@ -446,6 +458,92 @@ public class GUI extends Application implements View{
 
     @Override
     public void correctlyConnected() {
+        resetControllers();
         instantiateDashBoardScene();
     }
+
+
+    /*
+    public void setAssistantView(){
+        dashboardController.plancePane.setVisible(false);
+        dashboardController.assistantsPane.setVisible(true);
+
+        dashboardController.lion.setDisable(true);
+        dashboardController.lion.setOpacity(0.3);
+        dashboardController.ostrich.setDisable(true);
+        dashboardController.ostrich.setOpacity(0.3);
+        dashboardController.cat.setDisable(true);
+        dashboardController.cat.setOpacity(0.3);
+        dashboardController.eagle.setDisable(true);
+        dashboardController.eagle.setOpacity(0.3);
+        dashboardController.fox.setDisable(true);
+        dashboardController.fox.setOpacity(0.3);
+        dashboardController.snake.setDisable(true);
+        dashboardController.snake.setOpacity(0.3);
+        dashboardController.octopus.setDisable(true);
+        dashboardController.octopus.setOpacity(0.3);
+        dashboardController.dog.setDisable(true);
+        dashboardController.dog.setOpacity(0.3);
+        dashboardController.elephants.setDisable(true);
+        dashboardController.elephants.setOpacity(0.3);
+        dashboardController.turtle.setDisable(true);
+        dashboardController.turtle.setOpacity(0.3);
+
+        for(Assistant assistant : getPlayer().getAssistantCards()){
+            switch (assistant){
+                case LION -> {
+                    dashboardController.lion.setVisible(true);
+                    dashboardController.lion.setDisable(false);
+                    dashboardController.lion.setOpacity(1);
+                }
+                case OSTRICH -> {
+                    dashboardController.ostrich.setVisible(true);
+                    dashboardController.ostrich.setDisable(false);
+                    dashboardController.ostrich.setOpacity(1);
+                }
+                case CAT -> {
+                    dashboardController.cat.setVisible(true);
+                    dashboardController.cat.setDisable(false);
+                    dashboardController.cat.setOpacity(1);
+                }
+                case EAGLE -> {
+                    dashboardController.eagle.setVisible(true);
+                    dashboardController.eagle.setDisable(false);
+                    dashboardController.eagle.setOpacity(1);
+                }
+                case FOX -> {
+                    dashboardController.fox.setVisible(true);
+                    dashboardController.fox.setDisable(false);
+                    dashboardController.fox.setOpacity(1);
+                }
+                case SNAKE -> {
+                    dashboardController.snake.setVisible(true);
+                    dashboardController.snake.setDisable(false);
+                    dashboardController.snake.setOpacity(1);
+                }
+                case OCTOPUS -> {
+                    dashboardController.octopus.setVisible(true);
+                    dashboardController.octopus.setDisable(false);
+                    dashboardController.octopus.setOpacity(1);
+                }
+                case DOG -> {
+                    dashboardController.dog.setVisible(true);
+                    dashboardController.dog.setDisable(false);
+                    dashboardController.dog.setOpacity(1);
+                }
+                case ELEPHANTS -> {
+                    dashboardController.elephants.setVisible(true);
+                    dashboardController.elephants.setDisable(false);
+                    dashboardController.elephants.setOpacity(1);
+                }
+                case TURTLE -> {
+                    dashboardController.turtle.setVisible(true);
+                    dashboardController.turtle.setDisable(false);
+                    dashboardController.turtle.setOpacity(1);
+                }
+            }
+        }
+    }
+
+     */
 }
