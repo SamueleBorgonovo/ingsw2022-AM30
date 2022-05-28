@@ -417,6 +417,7 @@ public class GameHandler {
         int playerid = findPlayeridofPlayer(clientHandler.getNickname());
         try{
             game.setWizard(playerid,wizard);
+            clientHandler.sendMessageToClient(new CorrectlyConnectedMessage());
             if(4-game.getWizardAvailable().size()==game.getNumOfPlayers()){
                 updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
                 startGame(game);

@@ -98,4 +98,6 @@ public interface View {
     public void printWinClose();
 
     public void printConnectionClosed(boolean timeout);
+
+    public void correctlyConnected();
 }

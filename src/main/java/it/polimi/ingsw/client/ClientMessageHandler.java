@@ -154,6 +154,10 @@ public class ClientMessageHandler {
     public void process(SettingReconnectMessage message){
         client.setSettings(message.getGameMode(),message.getNumOfPlayers());
     }
+
+    public void process(CorrectlyConnectedMessage message){
+        view.correctlyConnected();
+    }
 }
 
 

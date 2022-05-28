@@ -636,6 +636,10 @@ public class CLI implements View {
         else System.out.println("Connection with server closed");
     }
 
+    //correctlyConnected it's only for GUI
+    @Override
+    public void correctlyConnected() {}
+
     public boolean checkMinstrel() {
         ArrayList<CharacterView> availableCharacter = this.board.getCharacters();
         int numOfCoins = this.player.getCoins();

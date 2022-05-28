@@ -426,11 +426,7 @@ public class GUI extends Application implements View{
 
     @Override
     public void printWaitingForPlayers(boolean lobby) {
-        if(lobby){
-            instantiateDashBoardScene();
-        }else{
-            //Farà qualcosa che scopriamo
-        }
+
     }
 
     @Override
@@ -446,5 +442,10 @@ public class GUI extends Application implements View{
     @Override
     public void printConnectionClosed(boolean timeout) {
 
+    }
+
+    @Override
+    public void correctlyConnected() {
+        instantiateDashBoardScene();
     }
 }
