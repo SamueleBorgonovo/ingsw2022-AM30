@@ -243,6 +243,16 @@ public class GUI extends Application implements View{
         this.gameMode = gameMode;
     }
 
+    public void chooseStudentToMove(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setEntranceStudentClickable();
+            }
+        });
+
+    }
+
     ///////////////////////////////////////////////////////////////////
     //View methods
     ///////////////////////////////////////////////////////////////////
@@ -460,13 +470,20 @@ public class GUI extends Application implements View{
     public void correctlyConnected() {
         resetControllers();
         instantiateDashBoardScene();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setup(); ////////////////////////////////////////////////////////////////////////////////////////////////////
+            }
+        });
+
     }
 
     @Override
     public void nextMove(PlayerState playerState) {
         switch (playerState){
             case STUDENTPHASE -> {
-
+                chooseStudentToMove();
             }
             case ASSISTANTPHASE -> {
                 chooseAssistant();
