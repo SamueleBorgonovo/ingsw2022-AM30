@@ -4,6 +4,7 @@ import it.polimi.ingsw.controller.virtualView.CloudView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.messages.toServer.ChooseAssistantMessage;
 import it.polimi.ingsw.messages.toServer.ChooseCloudMessage;
+import it.polimi.ingsw.messages.toServer.MoveStudentToHallMessage;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.Professor;
@@ -24,6 +25,7 @@ public class DashboardController {
     private ArrayList<ImageView> entranceView = new ArrayList<>();
     private ImageView[][] matImageView = new ImageView[3][4];
     private Student studentToMove;
+    private int numOfStudentChosen;
 
 
     public void setup() {
@@ -34,9 +36,10 @@ public class DashboardController {
         entranceView.add(entranceStudent5);
         entranceView.add(entranceStudent6);
         entranceView.add(entranceStudent7);
-        entranceView.add(entranceStudent8);
-        entranceView.add(entranceStudent9);
-
+        if(gui.getNumOfPlayers()==3) {
+            entranceView.add(entranceStudent8);
+            entranceView.add(entranceStudent9);
+        }
         hallView[0][0] = hall1Student1;
         hallView[0][1] = hall1Student2;
         hallView[0][2] = hall1Student3;
@@ -527,6 +530,7 @@ public class DashboardController {
         setEntranceStudentNotClickable();
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
+        numOfStudentChosen=8;
         //settare le isole cliccabili
     }
 
@@ -535,6 +539,7 @@ public class DashboardController {
         setEntranceStudentNotClickable();
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
+        numOfStudentChosen=5;
         //settare le isole cliccabili
     }
 
@@ -543,6 +548,7 @@ public class DashboardController {
         setEntranceStudentNotClickable();
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
+        numOfStudentChosen=3;
         //settare le isole cliccabili
     }
 
@@ -551,6 +557,7 @@ public class DashboardController {
         setEntranceStudentNotClickable();
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
+        numOfStudentChosen=1;
         //settare le isole cliccabili
     }
 
@@ -559,6 +566,7 @@ public class DashboardController {
         setEntranceStudentNotClickable();
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
+        numOfStudentChosen=0;
         //settare le isole cliccabili
     }
 
@@ -566,6 +574,7 @@ public class DashboardController {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(4);
         setEntranceStudentNotClickable();
         hallPane.setDisable(false);
+        numOfStudentChosen=4;
         //settare le isole cliccabili
     }
 
@@ -574,6 +583,7 @@ public class DashboardController {
         setEntranceStudentNotClickable();
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
+        numOfStudentChosen=2;
         //settare le isole cliccabili
     }
 
@@ -582,6 +592,7 @@ public class DashboardController {
         setEntranceStudentNotClickable();
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
+        numOfStudentChosen=6;
         //settare le isole cliccabili
     }
 
@@ -590,12 +601,53 @@ public class DashboardController {
         setEntranceStudentNotClickable();
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
+        numOfStudentChosen=7;
         //settare le isole cliccabili
     }
 
     public void chosenHall(MouseEvent mouseEvent) {
         int numInPlanceColor = gui.getPlayer().getPlance().getHall().get(studentToMove).intValue();
         hallView[studentToMove.ordinal()][numInPlanceColor].setVisible(true);
+        switch (numOfStudentChosen) {
+            case (0) -> {
+                entranceStudent1.setVisible(false);
+                entranceStudent1.setDisable(true);
+            }
+            case (1) -> {
+                entranceStudent2.setVisible(false);
+                entranceStudent2.setDisable(true);
+            }
+            case (2) -> {
+                entranceStudent3.setVisible(false);
+                entranceStudent3.setDisable(true);
+            }
+            case (3) -> {
+                entranceStudent4.setVisible(false);
+                entranceStudent4.setDisable(true);
+            }
+            case (4) -> {
+                entranceStudent5.setVisible(false);
+                entranceStudent5.setDisable(true);
+            }
+            case (5) -> {
+                entranceStudent6.setVisible(false);
+                entranceStudent6.setDisable(true);
+            }
+            case (6) -> {
+                entranceStudent7.setVisible(false);
+                entranceStudent7.setDisable(true);
+            }
+            case (7) -> {
+                entranceStudent8.setVisible(false);
+                entranceStudent8.setDisable(true);
+            }
+            case (8) -> {
+                entranceStudent9.setVisible(false);
+                entranceStudent9.setDisable(true);
+            }
+        }
+        MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentToMove);
+        gui.getClient().sendMessage(message);
     }
 
     public void chosenHallGreen(MouseEvent mouseEvent) {
@@ -892,11 +944,37 @@ public class DashboardController {
 
 
     public void setEntranceStudentClickable(){
-        for(ImageView imageView : entranceView) {
-            int i=0;
-            imageView.setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(i))));
-            imageView.setVisible(true);
-            imageView.setDisable(false);
+        int i=0;
+        //System.out.println(gui.getPlayer().getPlance().getEntrance());
+        //System.out.println(entranceView);
+        for(int j=0 ; j<gui.getPlayer().getPlance().getEntrance().size(); j++) {
+            entranceView.get(j).setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(j))));
+            entranceView.get(j).setVisible(true);
+            entranceView.get(j).setDisable(false);
+        }
+        if(gui.getNumOfPlayers()==2 && gui.getPlayer().getPlance().getEntrance().size()== 6 ) {
+            entranceStudent7.setDisable(true);
+            entranceStudent7.setVisible(false);
+        }
+        if(gui.getNumOfPlayers()==2 && gui.getPlayer().getPlance().getEntrance().size()== 5 ) {
+            entranceStudent6.setDisable(true);
+            entranceStudent6.setVisible(false);
+            entranceStudent7.setDisable(true);
+            entranceStudent7.setVisible(false);
+        }
+        if(gui.getNumOfPlayers()==2 && gui.getPlayer().getPlance().getEntrance().size()== 4 ) {
+            entranceStudent5.setDisable(true);
+            entranceStudent5.setVisible(false);
+            entranceStudent6.setDisable(true);
+            entranceStudent6.setVisible(false);
+            entranceStudent7.setDisable(true);
+            entranceStudent7.setVisible(false);
+        }
+        if(gui.getNumOfPlayers()==2) {
+            entranceStudent8.setDisable(true);
+            entranceStudent8.setVisible(false);
+            entranceStudent9.setDisable(true);
+            entranceStudent9.setVisible(false);
         }
     }
 
