@@ -611,7 +611,7 @@ public class DashboardController {
         assistantsPane.setVisible(false);
         assistantsPane.setDisable(true);
         for(int count=0;count<player.getPlance().getEntrance().size();count++){
-            entranceView.get(count).setImage(getImageFromStudent(player.getPlance().getEntrance().get(count)));
+            entranceView.get(count).setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(count))));
             entranceView.get(count).setVisible(true);
             entranceView.get(count).setDisable(false);
         }
@@ -794,7 +794,7 @@ public class DashboardController {
         for (CloudView cloud : gui.getBoard().getClouds()) {
             int j = 0;
             for (Student student : cloud.getStudents()) {
-                matImageView[i][j].setImage(this.getImageFromStudent(student));
+                matImageView[i][j].setImage(new Image(getImageFromStudent(student)));
                 j++;
             }
             i++;
@@ -835,11 +835,12 @@ public class DashboardController {
         }
     }
 
-    public Image getImageFromStudent(Student student){
-        Image studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("")));
+   /* public ImageView getImageFromStudent(Student student){
+        ImageView studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("")));
 
+        studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_GREEN.png")));
         if (student==Student.GREEN)
-            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_GREEN.png")));
+            studentImage.
         else if (student==Student.RED)
             studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_RED.png")));
         else if (student==Student.YELLOW)
@@ -852,11 +853,35 @@ public class DashboardController {
         return studentImage;
     }
 
+    */
+
+    public String getImageFromStudent(Student student){
+        String s="";
+        switch (student){
+            case GREEN -> {
+                s="img/STUDENT_GREEN.png";
+            }
+            case RED -> {
+                s="img/STUDENT_RED.png";
+            }
+            case YELLOW -> {
+                s="img/STUDENT_YELLOW.png";
+            }
+            case BLUE -> {
+                s="img/STUDENT_BLUE.png";
+            }
+            case PINK -> {
+                s="img/STUDENT_PINK.png";
+            }
+        }
+        return s;
+    }
+
 
     public void setEntranceStudentClickable(){
         for(ImageView imageView : entranceView) {
             int i=0;
-            imageView.setImage(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(i)));
+            imageView.setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(i))));
             imageView.setVisible(true);
             imageView.setDisable(false);
         }

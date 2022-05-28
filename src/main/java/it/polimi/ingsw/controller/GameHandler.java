@@ -47,6 +47,7 @@ public class GameHandler {
                             setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
                             found = 1;
                             clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard().getBoardView()));
+                            clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayersView()));
                             WizardsListMessage message = new WizardsListMessage(game.getWizardAvailable());
                             clientHandler.sendMessageToClient(message);
                             sendMessagetoGame(game,new ConnectMessage(clientHandler.getNickname(), false));
@@ -59,6 +60,7 @@ public class GameHandler {
             GameInterface game = new Game(gamemode,numofplayers);
             playerid = game.addPlayer(clientHandler.getNickname());
             clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard().getBoardView()));
+            clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayersView()));
             setGameofPlayer(clientHandler.getNickname(), game);
             setPlayeridofPlayer(clientHandler.getNickname(), playerid);
             setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
