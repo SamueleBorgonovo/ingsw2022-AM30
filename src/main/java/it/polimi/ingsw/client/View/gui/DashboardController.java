@@ -23,6 +23,7 @@ public class DashboardController {
     private ImageView[][] hallView = new ImageView[5][10];
     private ArrayList<ImageView> entranceView = new ArrayList<>();
     private ImageView[][] matImageView = new ImageView[3][4];
+    private Student studentToMove;
 
     public void setup() {
         entranceView.add(entranceStudent1);
@@ -440,8 +441,6 @@ public class DashboardController {
         gui.getClient().sendMessage(message);
     }
 
-
-
     public void chosenAssistantLion(MouseEvent mouseEvent) {
         plancePane.setVisible(true);
         assistantsPane.setVisible(false);
@@ -503,30 +502,79 @@ public class DashboardController {
     }
 
     public void chosenEntranceStudent9(MouseEvent mouseEvent) {
+        studentToMove = gui.getPlayer().getPlance().getEntrance().get(8);
+        setEntranceStudentNotClickable();
+        hallPane.setDisable(false);
+        System.out.println("Scelto studente di colore" + studentToMove);
+        //settare le isole cliccabili
     }
 
     public void chosenEntranceStudent6(MouseEvent mouseEvent) {
+        studentToMove = gui.getPlayer().getPlance().getEntrance().get(5);
+        setEntranceStudentNotClickable();
+        hallPane.setDisable(false);
+        System.out.println("Scelto studente di colore" + studentToMove);
+        //settare le isole cliccabili
     }
 
     public void chosenEntranceStudent4(MouseEvent mouseEvent) {
+        studentToMove = gui.getPlayer().getPlance().getEntrance().get(3);
+        setEntranceStudentNotClickable();
+        hallPane.setDisable(false);
+        System.out.println("Scelto studente di colore" + studentToMove);
+        //settare le isole cliccabili
     }
 
     public void chosenEntranceStudent2(MouseEvent mouseEvent) {
+        studentToMove = gui.getPlayer().getPlance().getEntrance().get(1);
+        setEntranceStudentNotClickable();
+        hallPane.setDisable(false);
+        System.out.println("Scelto studente di colore" + studentToMove);
+        //settare le isole cliccabili
     }
 
     public void chosenEntranceStudent1(MouseEvent mouseEvent) {
+        studentToMove = gui.getPlayer().getPlance().getEntrance().get(0);
+        setEntranceStudentNotClickable();
+        hallPane.setDisable(false);
+        System.out.println("Scelto studente di colore" + studentToMove);
+        //settare le isole cliccabili
     }
 
     public void chosenEntranceStudent5(MouseEvent mouseEvent) {
+        studentToMove = gui.getPlayer().getPlance().getEntrance().get(4);
+        setEntranceStudentNotClickable();
+        hallPane.setDisable(false);
+        //settare le isole cliccabili
     }
 
     public void chosenEntranceStudent3(MouseEvent mouseEvent) {
+        studentToMove = gui.getPlayer().getPlance().getEntrance().get(2);
+        setEntranceStudentNotClickable();
+        hallPane.setDisable(false);
+        System.out.println("Scelto studente di colore" + studentToMove);
+        //settare le isole cliccabili
     }
 
     public void chosenEntranceStudent7(MouseEvent mouseEvent) {
+        studentToMove = gui.getPlayer().getPlance().getEntrance().get(6);
+        setEntranceStudentNotClickable();
+        hallPane.setDisable(false);
+        System.out.println("Scelto studente di colore" + studentToMove);
+        //settare le isole cliccabili
     }
 
     public void chosenEntranceStudent8(MouseEvent mouseEvent) {
+        studentToMove = gui.getPlayer().getPlance().getEntrance().get(7);
+        setEntranceStudentNotClickable();
+        hallPane.setDisable(false);
+        System.out.println("Scelto studente di colore" + studentToMove);
+        //settare le isole cliccabili
+    }
+
+    public void chosenHall(MouseEvent mouseEvent) {
+        int numInPlanceColor = gui.getPlayer().getPlance().getHall().get(studentToMove).intValue();
+        hallView[studentToMove.ordinal()][numInPlanceColor].setVisible(true);
     }
 
     public void chosenHallGreen(MouseEvent mouseEvent) {
@@ -723,19 +771,34 @@ public class DashboardController {
         Image studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("")));
 
         if (student==Student.GREEN)
-            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img.STUDENT_GREEN.png")));
+            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_GREEN.png")));
         else if (student==Student.RED)
-            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img.STUDENT_RED.png")));
+            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_RED.png")));
         else if (student==Student.YELLOW)
-            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img.STUDENT_YELLOW.png")));
+            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_YELLOW.png")));
         else if (student==Student.BLUE)
-            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img.STUDENT_BLUE.png")));
+            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_BLUE.png")));
         else if (student==Student.PINK)
-            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img.STUDENT_PINK.png")));
+            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_PINK.png")));
 
         return studentImage;
     }
 
-    public void chosenHall(MouseEvent mouseEvent) {
+
+    public void setEntranceStudentClickable(){
+        for(ImageView imageView : entranceView) {
+            int i=0;
+            imageView.setImage(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(i)));
+            imageView.setVisible(true);
+            imageView.setDisable(false);
+        }
     }
+
+    public void setEntranceStudentNotClickable(){
+        for(ImageView imageView : entranceView) {
+            imageView.setVisible(true);
+            imageView.setDisable(true);
+        }
+    }
+
 }
