@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.View.gui;
 
 import it.polimi.ingsw.controller.virtualView.CloudView;
+import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.messages.toServer.ChooseAssistantMessage;
 import it.polimi.ingsw.messages.toServer.ChooseCloudMessage;
 import it.polimi.ingsw.model.game.Student;
@@ -19,6 +20,92 @@ import java.util.Objects;
 public class DashboardController {
     private ArrayList<CloudView> clouds;
     private GUI gui;
+    private ImageView[][] hallView = new ImageView[5][10];
+    private ArrayList<ImageView> entranceView = new ArrayList<>();
+    private ImageView[][] matImageView = new ImageView[3][4];
+
+    public void setup() {
+        entranceView.add(entranceStudent1);
+        entranceView.add(entranceStudent2);
+        entranceView.add(entranceStudent3);
+        entranceView.add(entranceStudent4);
+        entranceView.add(entranceStudent5);
+        entranceView.add(entranceStudent6);
+        entranceView.add(entranceStudent7);
+        entranceView.add(entranceStudent8);
+        entranceView.add(entranceStudent9);
+
+        hallView[0][0] = hall1Student1;
+        hallView[0][1] = hall1Student2;
+        hallView[0][2] = hall1Student3;
+        hallView[0][3] = hall1Student4;
+        hallView[0][4] = hall1Student5;
+        hallView[0][5] = hall1Student6;
+        hallView[0][6] = hall1Student7;
+        hallView[0][7] = hall1Student8;
+        hallView[0][8] = hall1Student9;
+        hallView[0][9] = hall1Student10;
+
+        hallView[1][0] = hall2Student1;
+        hallView[1][1] = hall2Student2;
+        hallView[1][2] = hall2Student3;
+        hallView[1][3] = hall2Student4;
+        hallView[1][4] = hall2Student5;
+        hallView[1][5] = hall2Student6;
+        hallView[1][6] = hall2Student7;
+        hallView[1][7] = hall2Student8;
+        hallView[1][8] = hall2Student9;
+        hallView[1][9] = hall2Student10;
+
+        hallView[2][0] = hall3Student1;
+        hallView[2][1] = hall3Student2;
+        hallView[2][2] = hall3Student3;
+        hallView[2][3] = hall3Student4;
+        hallView[2][4] = hall3Student5;
+        hallView[2][5] = hall3Student6;
+        hallView[2][6] = hall3Student7;
+        hallView[2][7] = hall3Student8;
+        hallView[2][8] = hall3Student9;
+        hallView[2][9] = hall3Student10;
+
+        hallView[3][0] = hall4Student1;
+        hallView[3][1] = hall4Student2;
+        hallView[3][2] = hall4Student3;
+        hallView[3][3] = hall4Student4;
+        hallView[3][4] = hall4Student5;
+        hallView[3][5] = hall4Student6;
+        hallView[3][6] = hall4Student7;
+        hallView[3][7] = hall4Student8;
+        hallView[3][8] = hall4Student9;
+        hallView[3][9] = hall4Student10;
+
+        hallView[4][0] = hall5Student1;
+        hallView[4][1] = hall5Student2;
+        hallView[4][2] = hall5Student3;
+        hallView[4][3] = hall5Student4;
+        hallView[4][4] = hall5Student5;
+        hallView[4][5] = hall5Student6;
+        hallView[4][6] = hall5Student7;
+        hallView[4][7] = hall5Student8;
+        hallView[4][8] = hall5Student9;
+        hallView[4][9] = hall5Student10;
+
+        matImageView[0][0] = cloud1Student1;
+        matImageView[0][1] = cloud1Student2;
+        matImageView[0][2] = cloud1Student3;
+        matImageView[1][0] = cloud2Student1;
+        matImageView[1][1] = cloud2Student2;
+        matImageView[1][2] = cloud2Student3;
+
+        if (gui.getNumOfPlayers() == 3) {
+            matImageView[0][3] = cloud1Student4;
+            matImageView[1][3] = cloud2Student4;
+            matImageView[2][0] = cloud3Student1;
+            matImageView[2][1] = cloud3Student2;
+            matImageView[2][2] = cloud3Student3;
+            matImageView[2][3] = cloud3Student4;
+        }
+    }
 
     public void setGui(GUI gui){
         this.gui=gui;
@@ -462,6 +549,20 @@ public class DashboardController {
 
     //////////////////////////////////////////////////////////////
 
+    public void setupPlayerView(PlayerView player){
+
+        nicknameLabel.setText(player.getNickname());
+        plancePane.setVisible(true);
+        plancePane.setDisable(true);
+        assistantsPane.setVisible(false);
+        assistantsPane.setDisable(true);
+        for(int count=0;count<player.getPlance().getEntrance().size();count++){
+            entranceView.get(count).setImage(getImageFromStudent(player.getPlance().getEntrance().get(count)));
+        }
+
+
+    }
+
 
     public void setAssistantView(){
         plancePane.setVisible(false);
@@ -552,8 +653,7 @@ public class DashboardController {
 
     public void showClouds() {
 
-        ImageView[][] matImageView = new ImageView[3][4];
-
+        /*
         matImageView[0][0] = cloud1Student1;
         matImageView[0][1] = cloud1Student2;
         matImageView[0][2] = cloud1Student3;
@@ -569,6 +669,7 @@ public class DashboardController {
             matImageView[2][2] = cloud3Student3;
             matImageView[2][3] = cloud3Student4;
         }
+        */
 
         int i = 0;
         for (CloudView cloud : clouds) {
