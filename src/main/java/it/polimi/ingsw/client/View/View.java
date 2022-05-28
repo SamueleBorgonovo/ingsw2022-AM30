@@ -100,4 +100,6 @@ public interface View {
     public void printConnectionClosed(boolean timeout);
 
     public void correctlyConnected();
+
+    public void nextMove(PlayerState playerState);
 }

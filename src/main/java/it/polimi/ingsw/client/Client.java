@@ -79,53 +79,6 @@ public class Client {
 
     }
 
-    public void nextMove(PlayerState playerState){
-        PossibleAction action;
-        if(playerState==PlayerState.STUDENTPHASE){
-            action=view.chooseNextAction(playerState);
-            switch(action){
-                case MOVESTUDENTT0ISLAND -> {
-                    view.moveStudentToIsland();
-                }
-                case MOVESTUDENTTOHALL -> {
-                    view.moveStudentToHall();
-                }
-                case USECHARACTER -> {
-                    view.useCharacter(playerState);
-                }
-            }
-        }else if(playerState==PlayerState.MOTHERNATUREPHASE){
-            if(getGamemode()==GameMode.EXPERTMODE) {
-                action = view.chooseNextAction(playerState);
-                switch (action) {
-                    case USECHARACTER -> {
-                        view.useCharacter(playerState);
-                    }
-                    case MOVEMOTHERNATURE -> {
-                        view.moveMotherNature();
-                    }
-                }
-            }else view.moveMotherNature();
-        }else if(playerState==PlayerState.ASSISTANTPHASE){
-                    view.chooseAssistant();
-        }else if(playerState==PlayerState.CHARACTHERISLANDPHASE){
-                    view.inputIslandCharacter();
-        }else if(playerState==PlayerState.CHARACTHERSTUDENTSPHASE){
-                    view.inputStudentCharacter();
-        }else if(playerState==PlayerState.CLOUDPHASE){
-            if(getGamemode()==GameMode.EXPERTMODE){
-                action=view.chooseNextAction(playerState);
-                switch (action) {
-                    case CHOOSECLOUD -> {
-                        view.chooseCloud();
-                    }
-                    case USECHARACTER -> {
-                        view.useCharacter(playerState);
-                    }
-                }
-            }else view.chooseCloud();
-        }
-    }
 
     public void setTurn(String nickname, boolean assistantPhase){
         if(this.nickname.equals(nickname)){

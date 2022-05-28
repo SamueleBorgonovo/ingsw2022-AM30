@@ -426,7 +426,7 @@ public class CLI implements View {
                 this.setCharacter4played(true);
         } else {
             System.out.println("You don't have enough coins  or you can't use some characters yet. Please change your move");
-            client.nextMove(playerState);
+            nextMove(playerState);
         }
 
     }
@@ -658,6 +658,54 @@ public class CLI implements View {
             check = counter >= 1; //if counter>=1 check is true, else check is false
         }
         return check;
+    }
+
+    public void nextMove(PlayerState playerState){
+        PossibleAction action;
+        if(playerState==PlayerState.STUDENTPHASE){
+            action=chooseNextAction(playerState);
+            switch(action){
+                case MOVESTUDENTT0ISLAND -> {
+                    moveStudentToIsland();
+                }
+                case MOVESTUDENTTOHALL -> {
+                    moveStudentToHall();
+                }
+                case USECHARACTER -> {
+                    useCharacter(playerState);
+                }
+            }
+        }else if(playerState==PlayerState.MOTHERNATUREPHASE){
+            if(client.getGamemode()==GameMode.EXPERTMODE) {
+                action = chooseNextAction(playerState);
+                switch (action) {
+                    case USECHARACTER -> {
+                        useCharacter(playerState);
+                    }
+                    case MOVEMOTHERNATURE -> {
+                        moveMotherNature();
+                    }
+                }
+            }else moveMotherNature();
+        }else if(playerState==PlayerState.ASSISTANTPHASE){
+            chooseAssistant();
+        }else if(playerState==PlayerState.CHARACTHERISLANDPHASE){
+            inputIslandCharacter();
+        }else if(playerState==PlayerState.CHARACTHERSTUDENTSPHASE){
+            inputStudentCharacter();
+        }else if(playerState==PlayerState.CLOUDPHASE){
+            if(client.getGamemode()==GameMode.EXPERTMODE){
+                action=chooseNextAction(playerState);
+                switch (action) {
+                    case CHOOSECLOUD -> {
+                        chooseCloud();
+                    }
+                    case USECHARACTER -> {
+                        useCharacter(playerState);
+                    }
+                }
+            }else chooseCloud();
+        }
     }
 
 }
