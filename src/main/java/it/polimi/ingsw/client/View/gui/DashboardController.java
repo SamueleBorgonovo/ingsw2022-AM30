@@ -422,6 +422,9 @@ public class DashboardController {
     @FXML
     public Pane charactersPane;
 
+    @FXML
+    public Pane hallPane;
+
     public void chosenCloud1(MouseEvent mouseEvent) {
         ChooseCloudMessage message = new ChooseCloudMessage(1);
         gui.getClient().sendMessage(message);
@@ -731,5 +734,8 @@ public class DashboardController {
             studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img.STUDENT_PINK.png")));
 
         return studentImage;
+    }
+
+    public void chosenHall(MouseEvent mouseEvent) {
     }
 }

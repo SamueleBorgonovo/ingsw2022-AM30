@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:controller="it.polimi.ingsw.client.View.gui.DashboardController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.DashboardController">
    <children>
       <Pane id="islandsPane" layoutX="22.0" layoutY="47.0" prefHeight="527.0" prefWidth="857.0" styleClass="box" stylesheets="@Style.css">
          <children>
@@ -354,7 +354,7 @@
                   <Image url="@img/STUDENT_GREEN.png" />
                </image>
             </ImageView>
-            <Pane layoutX="101.0" layoutY="4.0" prefHeight="230.0" prefWidth="329.0">
+            <Pane fx:id="hallPane" layoutX="101.0" layoutY="4.0" onMouseClicked="#chosenHall" prefHeight="230.0" prefWidth="329.0">
                <children>
                   <HBox fx:id="hallGreen" layoutX="11.0" layoutY="23.0" onMouseClicked="#chosenHallGreen" prefHeight="34.0" prefWidth="309.0">
                      <children>
