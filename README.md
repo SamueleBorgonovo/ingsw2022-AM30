@@ -10,14 +10,14 @@ Progetto di Ingegneria del Software AA 2021/2022. Partecipanti: Anzillotti Giuse
 |:------------------------------|:--------------------------------------------------:|
 | Basic rules                   | 🟢 |
 | Complete rules                | 🟢 |
-| Socket                        | 🔴 |
-| GUI                           | 🔴 |
-| CLI                           | 🔴 |
-| Multiple games                | 🔴 |
+| Socket                        | 🟢 |
+| GUI                           | 🟡 |
+| CLI                           | 🟢 |
+| Multiple games                | 🟢 |
 | Persistence                   | 🔴 |
-| Character Cards               | 🟡 |
+| Character Cards               | 🟢 |
 | 4 Players Game                | 🔴 |
-| Disconnections<br/>Resilience | 🔴 |
+| Disconnections<br/>Resilience | 🟢 |
 
 🔴
 🟢
