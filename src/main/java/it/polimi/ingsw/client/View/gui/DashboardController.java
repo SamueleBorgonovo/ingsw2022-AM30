@@ -1215,7 +1215,6 @@ public class DashboardController {
 
     public void setupArchipelago(){
 
-        Object island;
         int i=0;
         for(i=1;i<=gui.getBoard().getIslandViews().size();i++){
             getPaneFromString("island"+i+"Pane").setVisible(true);
