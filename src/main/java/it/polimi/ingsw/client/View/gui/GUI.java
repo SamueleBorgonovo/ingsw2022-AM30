@@ -381,6 +381,7 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                dashboardController.setupPlayerView(player);
                 dashboardController.setGameUpdateLabel("GAME: "+nick+" started his turn");
             }
         });
@@ -560,6 +561,12 @@ public class GUI extends Application implements View{
 
     @Override
     public void nextMove(PlayerState playerState) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setupPlayerView(player);
+            }
+        });
         switch (playerState){
             case STUDENTPHASE -> {
                 chooseStudentToMove();
