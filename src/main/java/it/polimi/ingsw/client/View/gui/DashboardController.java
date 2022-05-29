@@ -678,6 +678,7 @@ public class DashboardController {
     public void setupPlayerView(PlayerView player){
 
         nicknameLabel.setText(player.getNickname());
+        //playerStateLabel.setText(player.getPlayerState); MANCA
         plancePane.setVisible(true);
         plancePane.setDisable(true);
         assistantsPane.setVisible(false);
@@ -685,52 +686,42 @@ public class DashboardController {
         for(int count=0;count<player.getPlance().getEntrance().size();count++){
             entranceView.get(count).setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(count))));
             entranceView.get(count).setVisible(true);
-            entranceView.get(count).setDisable(false);
+            entranceView.get(count).setDisable(true);
         }
 
         for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.GREEN);count++){
             hallView[0][count].setVisible(true);
-            hallView[0][count].setDisable(false);
         }
         for(int count=player.getPlance().getNumberOfStudentHall(Student.GREEN);count<10;count++){
             hallView[0][count].setVisible(false);
-            hallView[0][count].setDisable(true);
         }
 
         for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.RED);count++){
             hallView[1][count].setVisible(true);
-            hallView[1][count].setDisable(false);
         }
         for(int count=player.getPlance().getNumberOfStudentHall(Student.RED);count<10;count++){
             hallView[1][count].setVisible(false);
-            hallView[1][count].setDisable(true);
         }
 
         for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.YELLOW);count++){
             hallView[2][count].setVisible(true);
-            hallView[2][count].setDisable(false);
         }
         for(int count=player.getPlance().getNumberOfStudentHall(Student.YELLOW);count<10;count++){
             hallView[2][count].setVisible(false);
-            hallView[2][count].setDisable(true);
         }
 
         for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.PINK);count++){
             hallView[3][count].setVisible(true);
-            hallView[3][count].setDisable(false);
         }
         for(int count=player.getPlance().getNumberOfStudentHall(Student.PINK);count<10;count++){
             hallView[3][count].setVisible(false);
-            hallView[3][count].setDisable(true);
         }
 
         for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.BLUE);count++){
             hallView[4][count].setVisible(true);
-            hallView[4][count].setDisable(false);
         }
         for(int count=player.getPlance().getNumberOfStudentHall(Student.BLUE);count<10;count++){
             hallView[4][count].setVisible(false);
-            hallView[4][count].setDisable(true);
         }
 
         professorBlue.setDisable(true);
@@ -900,26 +891,6 @@ public class DashboardController {
         }
     }
 
-   /* public ImageView getImageFromStudent(Student student){
-        ImageView studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("")));
-
-        studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_GREEN.png")));
-        if (student==Student.GREEN)
-            studentImage.
-        else if (student==Student.RED)
-            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_RED.png")));
-        else if (student==Student.YELLOW)
-            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_YELLOW.png")));
-        else if (student==Student.BLUE)
-            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_BLUE.png")));
-        else if (student==Student.PINK)
-            studentImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/STUDENT_PINK.png")));
-
-        return studentImage;
-    }
-
-    */
-
     public String getImageFromStudent(Student student){
         String s="";
         switch (student){
@@ -983,6 +954,10 @@ public class DashboardController {
             imageView.setVisible(true);
             imageView.setDisable(true);
         }
+    }
+
+    public void setGameUpdateLabel(String s){
+        gameUpdateLabel.setText(s);
     }
 
 }

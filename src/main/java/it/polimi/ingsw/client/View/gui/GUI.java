@@ -38,6 +38,7 @@ public class GUI extends Application implements View{
     private PlayerView player;
     private int numOfPlayers;
     private GameMode gameMode;
+    private boolean correctlyConnected=false;
 
     @Override
     public void start(Stage primaryStage){
@@ -129,6 +130,7 @@ public class GUI extends Application implements View{
             primaryStage.show();
             nicknameScene = fxmlLoader.getController();
             nicknameScene.setReconnectButton(false);
+            nicknameScene.moveLoginButtonX(110);
             nicknameScene.setGui(this);
         });
     }
@@ -254,14 +256,16 @@ public class GUI extends Application implements View{
     }
 
     ///////////////////////////////////////////////////////////////////
-    //View methods
+    //View methods                                                   //
     ///////////////////////////////////////////////////////////////////
     @Override
     public void chooseNickname(boolean validNickname, boolean reconnect) {
         if(!validNickname)
             nicknameScene.setWrongNickname(true);
-        else if(reconnect)
-                nicknameScene.setReconnectButton(true);
+        else if(reconnect) {
+            nicknameScene.setReconnectButton(true);
+            nicknameScene.moveLoginButtonX(-10);
+        }
             else
                 client.gameSetup();
     }
@@ -349,7 +353,12 @@ public class GUI extends Application implements View{
 
     @Override
     public void printStartGame() {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: Game is starting!");
+            }
+        });
     }
 
     @Override
@@ -359,12 +368,22 @@ public class GUI extends Application implements View{
 
     @Override
     public void printAssistantChosen(String nick, Assistant assistant) {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: "+nick+" choosed assistant "+assistant);
+            }
+        });
     }
 
     @Override
     public void printTurn(String nick) {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: "+nick+" started his turn");
+            }
+        });
     }
 
     @Override
@@ -374,55 +393,114 @@ public class GUI extends Application implements View{
 
     @Override
     public void printCloudChosen(String nick, int cloudID) {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: "+nick+" choosed cloud "+cloudID);
+            }
+        });
     }
 
     @Override
     public void printStudentToHall(String nick, Student student) {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: "+nick+" moved student "+student+" in his hall");
+            }
+        });
     }
 
     @Override
     public void printStudentToIsland(String nick, Student student, int IslandID) {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: "+nick+" moved student "+student+" on island "+IslandID);
+            }
+        });
     }
 
     @Override
     public void printMotherNatureMovement(String nick, int islandID) {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: "+nick+" moved MotherNature on island "+islandID);
+            }
+        });
     }
 
     @Override
     public void printPlayerDisconnection(String nick) {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: "+nick+" disconnected");
+            }
+        });
     }
 
     @Override
     public void printPlayerConnection(String nick, boolean reconnect) {
-
+        if(correctlyConnected) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    if (reconnect)
+                        dashboardController.setGameUpdateLabel("GAME: " + nick + " reconnected");
+                    else dashboardController.setGameUpdateLabel("GAME: " + nick + " connected to the game");
+                }
+            });
+        }
     }
     public void printInvalidAssistant(){
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: Invalid assistant");
+            }
+        });
     }
 
     @Override
     public void printInvalidCloud() {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: Invalid cloud");
+            }
+        });
     }
 
     @Override
     public void printInvalidIsland() {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: Invalid island");
+            }
+        });
     }
 
     @Override
     public void printInvalidStudent() {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: Invalid student");
+            }
+        });
     }
 
     @Override
     public void printInvalidTurn() {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: Is not your turn!");
+            }
+        });
     }
 
     @Override
@@ -432,7 +510,6 @@ public class GUI extends Application implements View{
 
     @Override
     public void printInvalidWizard() {
-
     }
 
     @Override
@@ -469,6 +546,7 @@ public class GUI extends Application implements View{
     public void correctlyConnected() {
         resetControllers();
         instantiateDashBoardScene();
+        correctlyConnected=true;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

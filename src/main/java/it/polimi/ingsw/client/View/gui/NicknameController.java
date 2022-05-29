@@ -51,6 +51,10 @@ public class NicknameController {
         loginButton.setVisible(visible);
     }
 
+    public void moveLoginButtonX(double x){
+        loginButton.setTranslateX(x);
+    }
+
 
 
 
