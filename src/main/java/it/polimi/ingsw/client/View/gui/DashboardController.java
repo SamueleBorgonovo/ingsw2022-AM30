@@ -17,9 +17,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class DashboardController {
+
     private GUI gui;
     private ImageView[][] hallView = new ImageView[5][10];
     private ArrayList<ImageView> entranceView = new ArrayList<>();
@@ -429,6 +429,391 @@ public class DashboardController {
 
     @FXML
     public Pane hallPane;
+
+    @FXML
+    public Pane island1Pane;
+
+    @FXML
+    public Label island1RedStudentLabel;
+
+    @FXML
+    public Label island1GreenStudentLabel;
+
+    @FXML
+    public Label island1PinkStudentLabel;
+
+    @FXML
+    public Label island1YellowStudentLabel;
+
+    @FXML
+    public Label island1BlueStudentLabel;
+
+    @FXML
+    public ImageView island1MotherNature;
+
+    @FXML
+    public Label island1TowerLabel;
+
+    @FXML
+    public ImageView island1TowerImage;
+
+    @FXML
+    public ImageView island1Stop;
+
+    @FXML
+    public Pane island2Pane;
+
+    @FXML
+    public Label island2RedStudentLabel;
+
+    @FXML
+    public Label island2GreenStudentLabel;
+
+    @FXML
+    public Label island2PinkStudentLabel;
+
+    @FXML
+    public Label island2YellowStudentLabel;
+
+    @FXML
+    public Label island2BlueStudentLabel;
+
+    @FXML
+    public ImageView island2MotherNature;
+
+    @FXML
+    public Label island2TowerLabel;
+
+    @FXML
+    public ImageView island2TowerImage;
+
+    @FXML
+    public ImageView island2Stop;
+
+    @FXML
+    public Pane island3Pane;
+
+    @FXML
+    public Label island3RedStudentLabel;
+
+    @FXML
+    public Label island3GreenStudentLabel;
+
+    @FXML
+    public Label island3PinkStudentLabel;
+
+    @FXML
+    public Label island3YellowStudentLabel;
+
+    @FXML
+    public Label island3BlueStudentLabel;
+
+    @FXML
+    public ImageView island3MotherNature;
+
+    @FXML
+    public Label island3TowerLabel;
+
+    @FXML
+    public ImageView island3TowerImage;
+
+    @FXML
+    public ImageView island3Stop;
+
+    @FXML
+    public Pane island4Pane;
+
+    @FXML
+    public Label island4RedStudentLabel;
+
+    @FXML
+    public Label island4GreenStudentLabel;
+
+    @FXML
+    public Label island4PinkStudentLabel;
+
+    @FXML
+    public Label island4YellowStudentLabel;
+
+    @FXML
+    public Label island4BlueStudentLabel;
+
+    @FXML
+    public ImageView island4MotherNature;
+
+    @FXML
+    public Label island4TowerLabel;
+
+    @FXML
+    public ImageView island4TowerImage;
+
+    @FXML
+    public ImageView island4Stop;
+
+    @FXML
+    public Pane island5Pane;
+
+    @FXML
+    public Label island5RedStudentLabel;
+
+    @FXML
+    public Label island5GreenStudentLabel;
+
+    @FXML
+    public Label island5PinkStudentLabel;
+
+    @FXML
+    public Label island5YellowStudentLabel;
+
+    @FXML
+    public Label island5BlueStudentLabel;
+
+    @FXML
+    public ImageView island5MotherNature;
+
+    @FXML
+    public Label island5TowerLabel;
+
+    @FXML
+    public ImageView island5TowerImage;
+
+    @FXML
+    public ImageView island5Stop;
+
+    @FXML
+    public Pane island6Pane;
+
+    @FXML
+    public Label island6RedStudentLabel;
+
+    @FXML
+    public Label island6GreenStudentLabel;
+
+    @FXML
+    public Label island6PinkStudentLabel;
+
+    @FXML
+    public Label island6YellowStudentLabel;
+
+    @FXML
+    public Label island6BlueStudentLabel;
+
+    @FXML
+    public ImageView island6MotherNature;
+
+    @FXML
+    public Label island6TowerLabel;
+
+    @FXML
+    public ImageView island6TowerImage;
+
+    @FXML
+    public ImageView island6Stop;
+
+    @FXML
+    public Pane island7Pane;
+
+    @FXML
+    public Label island7RedStudentLabel;
+
+    @FXML
+    public Label island7GreenStudentLabel;
+
+    @FXML
+    public Label island7PinkStudentLabel;
+
+    @FXML
+    public Label island7YellowStudentLabel;
+
+    @FXML
+    public Label island7BlueStudentLabel;
+
+    @FXML
+    public ImageView island7MotherNature;
+
+    @FXML
+    public Label island7TowerLabel;
+
+    @FXML
+    public ImageView island7TowerImage;
+
+    @FXML
+    public ImageView island7Stop;
+
+    @FXML
+    public Pane island8Pane;
+
+    @FXML
+    public Label island8RedStudentLabel;
+
+    @FXML
+    public Label island8GreenStudentLabel;
+
+    @FXML
+    public Label island8PinkStudentLabel;
+
+    @FXML
+    public Label island8YellowStudentLabel;
+
+    @FXML
+    public Label island8BlueStudentLabel;
+
+    @FXML
+    public ImageView island8MotherNature;
+
+    @FXML
+    public Label island8TowerLabel;
+
+    @FXML
+    public ImageView island8TowerImage;
+
+    @FXML
+    public ImageView island8Stop;
+
+    @FXML
+    public Pane island9Pane;
+
+    @FXML
+    public Label island9RedStudentLabel;
+
+    @FXML
+    public Label island9GreenStudentLabel;
+
+    @FXML
+    public Label island9PinkStudentLabel;
+
+    @FXML
+    public Label island9YellowStudentLabel;
+
+    @FXML
+    public Label island9BlueStudentLabel;
+
+    @FXML
+    public ImageView island9MotherNature;
+
+    @FXML
+    public Label island9TowerLabel;
+
+    @FXML
+    public ImageView island9TowerImage;
+
+    @FXML
+    public ImageView island9Stop;
+
+    @FXML
+    public Pane island10Pane;
+
+    @FXML
+    public Label island10RedStudentLabel;
+
+    @FXML
+    public Label island10GreenStudentLabel;
+
+    @FXML
+    public Label island10PinkStudentLabel;
+
+    @FXML
+    public Label island10YellowStudentLabel;
+
+    @FXML
+    public Label island10BlueStudentLabel;
+
+    @FXML
+    public ImageView island10MotherNature;
+
+    @FXML
+    public Label island10TowerLabel;
+
+    @FXML
+    public ImageView island10TowerImage;
+
+    @FXML
+    public ImageView island10Stop;
+
+    @FXML
+    public Pane island11Pane;
+
+    @FXML
+    public Label island11RedStudentLabel;
+
+    @FXML
+    public Label island11GreenStudentLabel;
+
+    @FXML
+    public Label island11PinkStudentLabel;
+
+    @FXML
+    public Label island11YellowStudentLabel;
+
+    @FXML
+    public Label island11BlueStudentLabel;
+
+    @FXML
+    public ImageView island11MotherNature;
+
+    @FXML
+    public Label island11TowerLabel;
+
+    @FXML
+    public ImageView island11TowerImage;
+
+    @FXML
+    public ImageView island11Stop;
+
+    @FXML
+    public Pane island12Pane;
+
+    @FXML
+    public Label island12RedStudentLabel;
+
+    @FXML
+    public Label island12GreenStudentLabel;
+
+    @FXML
+    public Label island12PinkStudentLabel;
+
+    @FXML
+    public Label island12YellowStudentLabel;
+
+    @FXML
+    public Label island12BlueStudentLabel;
+
+    @FXML
+    public ImageView island12MotherNature;
+
+    @FXML
+    public Label island12TowerLabel;
+
+    @FXML
+    public ImageView island12TowerImage;
+
+    @FXML
+    public ImageView island12Stop;
+
+    @FXML
+    public ImageView planceTower1;
+
+    @FXML
+    public ImageView planceTower2;
+
+    @FXML
+    public ImageView planceTower3;
+
+    @FXML
+    public ImageView planceTower4;
+
+    @FXML
+    public ImageView planceTower5;
+
+    @FXML
+    public ImageView planceTower6;
+
+    @FXML
+    public ImageView planceTower7;
+
+    @FXML
+    public ImageView planceTower8;
+
 
     public void chosenCloud1(MouseEvent mouseEvent) {
         ChooseCloudMessage message = new ChooseCloudMessage(1);
@@ -960,4 +1345,39 @@ public class DashboardController {
         gameUpdateLabel.setText(s);
     }
 
+    public void chosenIsland1(MouseEvent mouseEvent) {
+    }
+
+    public void chosenIsland2(MouseEvent mouseEvent) {
+    }
+
+    public void chosenIsland3(MouseEvent mouseEvent) {
+    }
+
+    public void chosenIsland9(MouseEvent mouseEvent) {
+    }
+
+    public void chosenIsland4(MouseEvent mouseEvent) {
+    }
+
+    public void chosenIsland7(MouseEvent mouseEvent) {
+    }
+
+    public void chosenIsland8(MouseEvent mouseEvent) {
+    }
+
+    public void chosenIsland10(MouseEvent mouseEvent) {
+    }
+
+    public void chosenIsland11(MouseEvent mouseEvent) {
+    }
+
+    public void chosenIsland5(MouseEvent mouseEvent) {
+    }
+
+    public void chosenIsland12(MouseEvent mouseEvent) {
+    }
+
+    public void chosenIsland6(MouseEvent mouseEvent) {
+    }
 }

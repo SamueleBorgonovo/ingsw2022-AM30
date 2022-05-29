@@ -11,85 +11,1242 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.DashboardController">
    <children>
-      <Pane id="islandsPane" layoutX="38.0" layoutY="35.0" prefHeight="424.0" prefWidth="722.0" styleClass="box" stylesheets="@Style.css">
+      <Pane id="islandsPane" layoutX="38.0" layoutY="35.0" prefHeight="424.0" prefWidth="737.0" styleClass="box" stylesheets="@Style.css">
          <children>
-            <Pane layoutX="34.0" layoutY="32.0" prefHeight="150.0" prefWidth="150.0">
+            <Pane fx:id="island1Pane" layoutX="3.0" layoutY="5.0" onMouseClicked="#chosenIsland1" prefHeight="150.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="-26.0" layoutY="-22.0">
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
                      <image>
                         <Image url="@img/island1.png" />
                      </image>
                   </ImageView>
-                  <HBox layoutX="48.0" layoutY="58.0" prefHeight="31.0" prefWidth="50.0">
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="20.0" text="10">
+                        <Label fx:id="island1RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
                            <font>
-                              <Font name="Futura Medium" size="14.0" />
+                              <Font name="Futura Medium" size="11.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
                            <image>
                               <Image url="@img/STUDENT_RED.png" />
                            </image>
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox layoutX="-1.0" layoutY="66.0" prefHeight="31.0" prefWidth="50.0">
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="20.0" text="10">
+                        <Label fx:id="island1GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
                            <font>
-                              <Font name="Futura Medium" size="14.0" />
+                              <Font name="Futura Medium" size="11.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
                            <image>
                               <Image url="@img/STUDENT_GREEN.png" />
                            </image>
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox layoutX="15.0" layoutY="98.0" prefHeight="31.0" prefWidth="50.0">
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="20.0" text="10">
+                        <Label fx:id="island1PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
                            <font>
-                              <Font name="Futura Medium" size="14.0" />
+                              <Font name="Futura Medium" size="11.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
                            <image>
                               <Image url="@img/STUDENT_PINK.png" />
                            </image>
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox layoutX="97.0" layoutY="69.0" prefHeight="31.0" prefWidth="50.0">
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="20.0" text="10">
+                        <Label fx:id="island1YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
                            <font>
-                              <Font name="Futura Medium" size="14.0" />
+                              <Font name="Futura Medium" size="11.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
                            <image>
                               <Image url="@img/STUDENT_YELLOW.png" />
                            </image>
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox layoutX="73.0" layoutY="99.0" prefHeight="31.0" prefWidth="50.0">
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="20.0" text="10">
+                        <Label fx:id="island1BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
                            <font>
-                              <Font name="Futura Medium" size="14.0" />
+                              <Font name="Futura Medium" size="11.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
                            <image>
                               <Image url="@img/STUDENT_BLUE.png" />
                            </image>
                         </ImageView>
                      </children>
                   </HBox>
+                  <ImageView fx:id="island1MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island1TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island1TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island1Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="island2Pane" layoutX="152.0" layoutY="5.0" onMouseClicked="#chosenIsland2" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island2RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island2GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island2PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island2YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island2BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="island2MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island2TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island2TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island2Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="island3Pane" layoutX="298.0" layoutY="5.0" onMouseClicked="#chosenIsland3" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island3RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island3GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island3PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island3YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island3BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="island3MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island3TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island3TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island3Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="island9Pane" layoutX="298.0" layoutY="280.0" onMouseClicked="#chosenIsland9" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island9RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island9GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island9PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island9YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island9BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="island9MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island9TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island9TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island9Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="island4Pane" layoutX="444.0" layoutY="5.0" onMouseClicked="#chosenIsland4" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island4RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island4GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island4PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island4YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island4BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="island4MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island4TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island4TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island4Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="island7Pane" layoutX="588.0" layoutY="280.0" onMouseClicked="#chosenIsland7" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island7RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island7GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island7PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island7YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island7BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="island7MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island7TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island7TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island7Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="island8Pane" layoutX="444.0" layoutY="280.0" onMouseClicked="#chosenIsland8" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island8RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island8GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island8PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island8YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island8BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="island8MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island8TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island8TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island8Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="island10Pane" layoutX="152.0" layoutY="280.0" onMouseClicked="#chosenIsland10" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island10RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island10GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island10PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island10YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island10BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="island10MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island10TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island10TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island10Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="island11Pane" layoutX="3.0" layoutY="281.0" onMouseClicked="#chosenIsland11" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island11RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island11GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island11PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island11YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island11BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="island11MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island11TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island11TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island11Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="island5Pane" layoutX="588.0" layoutY="5.0" onMouseClicked="#chosenIsland5" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island5RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island5GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island5PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island5YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island5BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="island5MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island5TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island5TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island5Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="island12Pane" layoutX="3.0" layoutY="142.0" onMouseClicked="#chosenIsland12" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island12RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island12GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island12PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island12YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island12BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="island12MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island12TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island12TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island12Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="island6Pane" layoutX="588.0" layoutY="142.0" onMouseClicked="#chosenIsland6" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@img/island1.png" />
+                     </image>
+                  </ImageView>
+                  <HBox layoutX="10.0" layoutY="35.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island6RedStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island6GreenStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_GREEN.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island6PinkStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="101.0" layoutY="71.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island6YellowStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="77.0" layoutY="98.0" prefHeight="25.0" prefWidth="39.0">
+                     <children>
+                        <Label fx:id="island6BlueStudentLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="island6MotherNature" fitHeight="32.0" fitWidth="30.0" layoutX="57.0" layoutY="5.0">
+                     <image>
+                        <Image url="@img/MOTHER_NATURE.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="98.0" layoutY="11.0" prefHeight="39.0" prefWidth="30.0">
+                     <children>
+                        <Label fx:id="island6TowerLabel" alignment="CENTER" prefHeight="15.0" prefWidth="35.0" text="10">
+                           <font>
+                              <Font name="Futura Medium" size="11.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="island6TowerImage" fitHeight="32.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@img/TOWER_WHITE.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="island6Stop" fitHeight="32.0" fitWidth="32.0" layoutX="61.0" layoutY="55.0">
+                     <image>
+                        <Image url="@img/STOP.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </children>
@@ -125,7 +1282,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="cloud3Pane" layoutX="21.0" layoutY="143.0" onMouseClicked="#chosenCloud3" prefHeight="131.0" prefWidth="131.0">
+            <Pane fx:id="cloud3Pane" layoutX="20.0" layoutY="143.0" onMouseClicked="#chosenCloud3" prefHeight="131.0" prefWidth="131.0">
                <children>
                   <ImageView fitHeight="127.0" fitWidth="127.0" layoutX="2.0" layoutY="3.0">
                      <image>
@@ -254,22 +1411,22 @@
                   <Image url="@img/plance.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="entranceStudent9" fitHeight="24.0" fitWidth="24.0" layoutX="43.0" layoutY="145.0" onMouseClicked="#chosenEntranceStudent9">
+            <ImageView fx:id="entranceStudent9" fitHeight="24.0" fitWidth="24.0" layoutX="44.0" layoutY="143.0" onMouseClicked="#chosenEntranceStudent9">
                <image>
                   <Image url="@img/STUDENT_BLUE.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="entranceStudent6" fitHeight="24.0" fitWidth="24.0" layoutX="15.0" layoutY="115.0" onMouseClicked="#chosenEntranceStudent6">
+            <ImageView fx:id="entranceStudent6" fitHeight="24.0" fitWidth="24.0" layoutX="15.0" layoutY="113.0" onMouseClicked="#chosenEntranceStudent6">
                <image>
                   <Image url="@img/STUDENT_YELLOW.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="entranceStudent4" fitHeight="24.0" fitWidth="24.0" layoutX="14.0" layoutY="84.0" onMouseClicked="#chosenEntranceStudent4">
+            <ImageView fx:id="entranceStudent4" fitHeight="24.0" fitWidth="24.0" layoutX="15.0" layoutY="83.0" onMouseClicked="#chosenEntranceStudent4">
                <image>
                   <Image url="@img/STUDENT_RED.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="entranceStudent2" fitHeight="24.0" fitWidth="24.0" layoutX="15.0" layoutY="54.0" onMouseClicked="#chosenEntranceStudent2">
+            <ImageView fx:id="entranceStudent2" fitHeight="24.0" fitWidth="24.0" layoutX="15.0" layoutY="53.0" onMouseClicked="#chosenEntranceStudent2">
                <image>
                   <Image url="@img/STUDENT_PINK.png" />
                </image>
@@ -279,22 +1436,22 @@
                   <Image url="@img/STUDENT_GREEN.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="entranceStudent5" fitHeight="24.0" fitWidth="24.0" layoutX="43.0" layoutY="83.0" onMouseClicked="#chosenEntranceStudent5">
+            <ImageView fx:id="entranceStudent5" fitHeight="24.0" fitWidth="24.0" layoutX="44.0" layoutY="83.0" onMouseClicked="#chosenEntranceStudent5">
                <image>
                   <Image url="@img/STUDENT_BLUE.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="entranceStudent3" fitHeight="24.0" fitWidth="24.0" layoutX="43.0" layoutY="53.0" onMouseClicked="#chosenEntranceStudent3">
+            <ImageView fx:id="entranceStudent3" fitHeight="24.0" fitWidth="24.0" layoutX="44.0" layoutY="53.0" onMouseClicked="#chosenEntranceStudent3">
                <image>
                   <Image url="@img/STUDENT_BLUE.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="entranceStudent7" fitHeight="24.0" fitWidth="24.0" layoutX="45.0" layoutY="114.0" onMouseClicked="#chosenEntranceStudent7">
+            <ImageView fx:id="entranceStudent7" fitHeight="24.0" fitWidth="24.0" layoutX="44.0" layoutY="113.0" onMouseClicked="#chosenEntranceStudent7">
                <image>
                   <Image url="@img/STUDENT_YELLOW.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="entranceStudent8" fitHeight="24.0" fitWidth="24.0" layoutX="14.0" layoutY="143.0" onMouseClicked="#chosenEntranceStudent8">
+            <ImageView fx:id="entranceStudent8" fitHeight="24.0" fitWidth="24.0" layoutX="15.0" layoutY="143.0" onMouseClicked="#chosenEntranceStudent8">
                <image>
                   <Image url="@img/STUDENT_GREEN.png" />
                </image>
@@ -355,7 +1512,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox fx:id="hallRed" layoutX="8.0" layoutY="49.0" onMouseClicked="#chosenHallRed" prefHeight="27.0" prefWidth="245.0">
+                  <HBox fx:id="hallRed" layoutX="9.0" layoutY="49.0" onMouseClicked="#chosenHallRed" prefHeight="27.0" prefWidth="245.0">
                      <children>
                         <ImageView fx:id="hall2Student1" fitHeight="24.0" fitWidth="24.0">
                            <image>
@@ -409,7 +1566,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox fx:id="hallYellow" layoutX="8.0" layoutY="80.0" onMouseClicked="#chosenHallYellow" prefHeight="27.0" prefWidth="245.0">
+                  <HBox fx:id="hallYellow" layoutX="9.0" layoutY="80.0" onMouseClicked="#chosenHallYellow" prefHeight="27.0" prefWidth="245.0">
                      <children>
                         <ImageView fx:id="hall3Student1" fitHeight="24.0" fitWidth="24.0">
                            <image>
@@ -463,7 +1620,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox fx:id="hallPink" layoutX="8.0" layoutY="111.0" onMouseClicked="#chosenHallPink" prefHeight="27.0" prefWidth="245.0">
+                  <HBox fx:id="hallPink" layoutX="9.0" layoutY="111.0" onMouseClicked="#chosenHallPink" prefHeight="27.0" prefWidth="245.0">
                      <children>
                         <ImageView fx:id="hall4Student1" fitHeight="24.0" fitWidth="24.0">
                            <image>
@@ -517,7 +1674,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox fx:id="hallBlue" layoutX="8.0" layoutY="142.0" onMouseClicked="#chosenHallBlue" prefHeight="27.0" prefWidth="245.0">
+                  <HBox fx:id="hallBlue" layoutX="9.0" layoutY="142.0" onMouseClicked="#chosenHallBlue" prefHeight="27.0" prefWidth="245.0">
                      <children>
                         <ImageView fx:id="hall5Student1" fitHeight="24.0" fitWidth="24.0">
                            <image>
@@ -598,13 +1755,53 @@
                   <Image url="@img/PROFESSOR_PINK.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="planceTower1" fitHeight="32.0" fitWidth="30.0" layoutX="398.0" layoutY="29.0">
+               <image>
+                  <Image url="@img/TOWER_WHITE.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planceTower3" fitHeight="32.0" fitWidth="30.0" layoutX="398.0" layoutY="62.0">
+               <image>
+                  <Image url="@img/TOWER_WHITE.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planceTower2" fitHeight="32.0" fitWidth="30.0" layoutX="437.0" layoutY="29.0">
+               <image>
+                  <Image url="@img/TOWER_WHITE.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planceTower4" fitHeight="32.0" fitWidth="30.0" layoutX="437.0" layoutY="62.0">
+               <image>
+                  <Image url="@img/TOWER_WHITE.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planceTower6" fitHeight="32.0" fitWidth="30.0" layoutX="437.0" layoutY="94.0">
+               <image>
+                  <Image url="@img/TOWER_WHITE.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planceTower5" fitHeight="32.0" fitWidth="30.0" layoutX="398.0" layoutY="94.0">
+               <image>
+                  <Image url="@img/TOWER_WHITE.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planceTower7" fitHeight="32.0" fitWidth="30.0" layoutX="398.0" layoutY="126.0">
+               <image>
+                  <Image url="@img/TOWER_WHITE.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planceTower8" fitHeight="32.0" fitWidth="30.0" layoutX="437.0" layoutY="126.0">
+               <image>
+                  <Image url="@img/TOWER_WHITE.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="38.0" layoutY="483.0" prefHeight="188.0" prefWidth="396.0" styleClass="box" stylesheets="@Style.css">
+      <Pane layoutX="38.0" layoutY="483.0" prefHeight="188.0" prefWidth="409.0" styleClass="box" stylesheets="@Style.css">
          <children>
-            <VBox layoutX="20.0" layoutY="7.0" prefHeight="133.0" prefWidth="313.0" stylesheets="@Style.css">
+            <VBox layoutX="20.0" layoutY="7.0" prefHeight="133.0" prefWidth="326.0" stylesheets="@Style.css">
                <children>
-                  <Label id="nickname" fx:id="nicknameLabel" prefHeight="49.0" prefWidth="304.0" text="GIUSEPPE">
+                  <Label id="nickname" fx:id="nicknameLabel" prefHeight="49.0" prefWidth="312.0" text="GIUSEPPE">
                      <font>
                         <Font name="Futura Medium" size="36.0" />
                      </font>
@@ -614,14 +1811,14 @@
                         <Font name="Futura Medium" size="10.0" />
                      </font>
                   </Label>
-                  <Label id="gameStatus" fx:id="gameUpdateLabel" alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="95.0" prefHeight="56.0" prefWidth="310.0" text="  GAME : Samu is playing Assistant CAT">
+                  <Label id="gameStatus" fx:id="gameUpdateLabel" alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="95.0" prefHeight="56.0" prefWidth="328.0" text="  GAME : Samu is playing Assistant CAT">
                      <font>
                         <Font name="Futura Medium" size="10.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <Pane fx:id="characterButtor" layoutX="211.0" layoutY="143.0" onMouseClicked="#clickCharacetrButton" prefHeight="32.0" prefWidth="165.0" styleClass="boxwhite" stylesheets="@Style.css">
+            <Pane fx:id="characterButtor" layoutX="223.0" layoutY="143.0" onMouseClicked="#clickCharacetrButton" prefHeight="32.0" prefWidth="165.0" styleClass="boxwhite" stylesheets="@Style.css">
                <children>
                   <Label fx:id="characterButtonLabel" alignment="CENTER" layoutX="-2.0" layoutY="-3.0" prefHeight="37.0" prefWidth="169.0" text="PLAY CHARACTER">
                      <font>
@@ -639,7 +1836,7 @@
                   </Label>
                </children>
             </Pane>
-            <HBox fx:id="coinPane" layoutX="336.0" layoutY="15.0" prefHeight="25.0" prefWidth="39.0">
+            <HBox fx:id="coinPane" layoutX="347.0" layoutY="15.0" prefHeight="25.0" prefWidth="39.0">
                <children>
                   <Label fx:id="coinLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
                      <font>
@@ -697,6 +1894,11 @@
       <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="810.0" layoutY="2.0">
          <image>
             <Image url="@img/STUDENT_BLUE.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="30.0" layoutX="736.0">
+         <image>
+            <Image url="@img/TOWER_WHITE.png" />
          </image>
       </ImageView>
    </children>
