@@ -5,5 +5,20 @@ public enum Student {
     RED,
     YELLOW,
     PINK,
-    BLUE
+    BLUE;
+
+    public String getText(Student student){
+        String s;
+        if(student==Student.GREEN)
+            s="Green";
+        else if(student==Student.RED)
+            s="Red";
+        else if(student==Student.YELLOW)
+            s="Yellow";
+        else if(student==Student.PINK)
+            s="Pink";
+        else
+            s="Blue";
+        return s;
+    }
 }

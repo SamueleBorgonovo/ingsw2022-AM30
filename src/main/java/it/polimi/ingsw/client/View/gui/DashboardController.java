@@ -5,6 +5,7 @@ import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.messages.toServer.ChooseAssistantMessage;
 import it.polimi.ingsw.messages.toServer.ChooseCloudMessage;
 import it.polimi.ingsw.messages.toServer.MoveStudentToHallMessage;
+import it.polimi.ingsw.messages.toServer.MoveStudentToIslandMessage;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 import it.polimi.ingsw.model.player.Assistant;
@@ -122,6 +123,8 @@ public class DashboardController {
         planceTowerView.add(planceTower6);
         planceTowerView.add(planceTower7);
         planceTowerView.add(planceTower8);
+
+        setupPlayerView(gui.getPlayer());
     }
 
 
@@ -930,7 +933,7 @@ public class DashboardController {
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=8;
-        //settare le isole cliccabili
+        setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent6(MouseEvent mouseEvent) {
@@ -939,7 +942,7 @@ public class DashboardController {
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=5;
-        //settare le isole cliccabili
+        setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent4(MouseEvent mouseEvent) {
@@ -948,7 +951,7 @@ public class DashboardController {
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=3;
-        //settare le isole cliccabili
+        setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent2(MouseEvent mouseEvent) {
@@ -957,7 +960,7 @@ public class DashboardController {
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=1;
-        //settare le isole cliccabili
+        setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent1(MouseEvent mouseEvent) {
@@ -966,7 +969,7 @@ public class DashboardController {
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=0;
-        //settare le isole cliccabili
+        setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent5(MouseEvent mouseEvent) {
@@ -974,7 +977,7 @@ public class DashboardController {
         setEntranceStudentNotClickable();
         hallPane.setDisable(false);
         numOfStudentChosen=4;
-        //settare le isole cliccabili
+        setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent3(MouseEvent mouseEvent) {
@@ -983,7 +986,7 @@ public class DashboardController {
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=2;
-        //settare le isole cliccabili
+        setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent7(MouseEvent mouseEvent) {
@@ -992,7 +995,7 @@ public class DashboardController {
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=6;
-        //settare le isole cliccabili
+        setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent8(MouseEvent mouseEvent) {
@@ -1001,13 +1004,16 @@ public class DashboardController {
         hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=7;
-        //settare le isole cliccabili
+        setArchipelagoClickable();
     }
 
     public void chosenHall(MouseEvent mouseEvent) {
         int numInPlanceColor = gui.getPlayer().getPlance().getHall().get(studentToMove).intValue();
         hallView[studentToMove.ordinal()][numInPlanceColor].setVisible(true);
-        switch (numOfStudentChosen) {
+        numOfStudentChosen++;
+        getImageViewFromString("entranceStudent" + String.valueOf(numOfStudentChosen)).setVisible(false);
+        getImageViewFromString("entranceStudent" + String.valueOf(numOfStudentChosen)).setDisable(true);
+       /* switch (numOfStudentChosen) {
             case (0) -> {
                 entranceStudent1.setVisible(false);
                 entranceStudent1.setDisable(true);
@@ -1044,7 +1050,8 @@ public class DashboardController {
                 entranceStudent9.setVisible(false);
                 entranceStudent9.setDisable(true);
             }
-        }
+
+        */
         MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentToMove);
         gui.getClient().sendMessage(message);
     }
@@ -1070,6 +1077,113 @@ public class DashboardController {
     public void clickAssistabtButton(MouseEvent mouseEvent) {
     }
 
+    public void chosenIsland1(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(0).getStudents());
+        num++;
+        getLabelFromString("island1"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(1,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
+
+    public void chosenIsland2(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(1).getStudents());
+        num++;
+        getLabelFromString("island2"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(2,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
+
+    public void chosenIsland3(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(2).getStudents());
+        num++;
+        getLabelFromString("island3"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(3,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
+
+    public void chosenIsland9(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(8).getStudents());
+        num++;
+        getLabelFromString("island9"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(9,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
+
+    public void chosenIsland4(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(3).getStudents());
+        num++;
+        getLabelFromString("island4"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(4,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
+
+    public void chosenIsland7(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(6).getStudents());
+        num++;
+        getLabelFromString("island7"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(7,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
+
+    public void chosenIsland8(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(7).getStudents());
+        num++;
+        getLabelFromString("island8"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(8,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
+
+    public void chosenIsland10(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(9).getStudents());
+        num++;
+        getLabelFromString("island10"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(10,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
+
+    public void chosenIsland11(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(10).getStudents());
+        num++;
+        getLabelFromString("island11"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(11,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
+
+    public void chosenIsland5(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(4).getStudents());
+        num++;
+        getLabelFromString("island5"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(5,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
+
+    public void chosenIsland12(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(11).getStudents());
+        num++;
+        getLabelFromString("island12"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(12,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
+
+    public void chosenIsland6(MouseEvent mouseEvent) {
+        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(5).getStudents());
+        num++;
+        getLabelFromString("island6"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
+        System.out.println("Sei qui");
+        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(6,studentToMove);
+        gui.getClient().sendMessage(message);
+    }
     //////////////////////////////////////////////////////////////
 
 
@@ -1084,8 +1198,8 @@ public class DashboardController {
         assistantsPane.setDisable(true);
 
         //Set entrance
-        System.out.println(gui.getPlayer().getPlance().getEntrance());
-        System.out.println(entranceView);
+       // System.out.println(gui.getPlayer().getPlance().getEntrance());
+       // System.out.println(entranceView);
         for(int count=0;count<player.getPlance().getEntrance().size();count++){
             entranceView.get(count).setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(count))));
             entranceView.get(count).setVisible(true);
@@ -1340,7 +1454,9 @@ public class DashboardController {
 
         for (CloudView cloud : gui.getBoard().getClouds()) {
             if (cloud.isChoosen()) {
-                switch (cloud.getCloudID()) {
+                getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setDisable(true);
+                getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setOpacity(0.3);
+               /* switch (cloud.getCloudID()) {
                     case (1) -> {
                         cloud1Pane.setDisable(true);
                         cloud1Pane.setOpacity(0.3);
@@ -1354,7 +1470,12 @@ public class DashboardController {
                         cloud3Pane.setOpacity(0.3);
                     }
                 }
+
+                */
             } else {
+                getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setDisable(false);
+                getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setOpacity(1);
+                /*
                 switch (cloud.getCloudID()) {
                     case (1) -> {
                         cloud1Pane.setDisable(false);
@@ -1368,10 +1489,11 @@ public class DashboardController {
                         cloud3Pane.setDisable(false);
                         cloud3Pane.setOpacity(1);
                     }
+
+                 */
                 }
             }
         }
-    }
 
     public String getImageFromStudent(Student student){
         String s="";
@@ -1442,6 +1564,8 @@ public class DashboardController {
     }
 
 
+
+
     public void setEntranceStudentClickable(){
         plancePane.setDisable(false);
         for(int j=0 ; j<gui.getPlayer().getPlance().getEntrance().size(); j++) {
@@ -1476,41 +1600,6 @@ public class DashboardController {
         else playerStateLabel.setText("PLAYING");
     }
 
-    public void chosenIsland1(MouseEvent mouseEvent) {
-    }
-
-    public void chosenIsland2(MouseEvent mouseEvent) {
-    }
-
-    public void chosenIsland3(MouseEvent mouseEvent) {
-    }
-
-    public void chosenIsland9(MouseEvent mouseEvent) {
-    }
-
-    public void chosenIsland4(MouseEvent mouseEvent) {
-    }
-
-    public void chosenIsland7(MouseEvent mouseEvent) {
-    }
-
-    public void chosenIsland8(MouseEvent mouseEvent) {
-    }
-
-    public void chosenIsland10(MouseEvent mouseEvent) {
-    }
-
-    public void chosenIsland11(MouseEvent mouseEvent) {
-    }
-
-    public void chosenIsland5(MouseEvent mouseEvent) {
-    }
-
-    public void chosenIsland12(MouseEvent mouseEvent) {
-    }
-
-    public void chosenIsland6(MouseEvent mouseEvent) {
-    }
 
 
     public int numOfColorStudent(Student student,ArrayList<Student> students){
@@ -1519,5 +1608,10 @@ public class DashboardController {
             if(stud.equals(student))
                 i++;
         return i;
+    }
+
+    public void setArchipelagoClickable(){
+        for(int i=1; i<=gui.getBoard().getIslandViews().size();i++)
+            getPaneFromString("island"+i+"Pane").setDisable(false);
     }
 }
