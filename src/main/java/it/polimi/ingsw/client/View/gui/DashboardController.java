@@ -2,10 +2,7 @@ package it.polimi.ingsw.client.View.gui;
 
 import it.polimi.ingsw.controller.virtualView.CloudView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
-import it.polimi.ingsw.messages.toServer.ChooseAssistantMessage;
-import it.polimi.ingsw.messages.toServer.ChooseCloudMessage;
-import it.polimi.ingsw.messages.toServer.MoveStudentToHallMessage;
-import it.polimi.ingsw.messages.toServer.MoveStudentToIslandMessage;
+import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 import it.polimi.ingsw.model.player.Assistant;
@@ -18,9 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-
-import java.awt.image.ImagingOpException;
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class DashboardController {
 
@@ -36,98 +32,7 @@ public class DashboardController {
 
 
     public void setup() {
-        /*
-        entranceView.add(entranceStudent1);
-        entranceView.add(entranceStudent2);
-        entranceView.add(entranceStudent3);
-        entranceView.add(entranceStudent4);
-        entranceView.add(entranceStudent5);
-        entranceView.add(entranceStudent6);
-        entranceView.add(entranceStudent7);
-        entranceView.add(entranceStudent8);
-        entranceView.add(entranceStudent9);
 
-        hallView[0][0] = hall1Student1;
-        hallView[0][1] = hall1Student2;
-        hallView[0][2] = hall1Student3;
-        hallView[0][3] = hall1Student4;
-        hallView[0][4] = hall1Student5;
-        hallView[0][5] = hall1Student6;
-        hallView[0][6] = hall1Student7;
-        hallView[0][7] = hall1Student8;
-        hallView[0][8] = hall1Student9;
-        hallView[0][9] = hall1Student10;
-
-        hallView[1][0] = hall2Student1;
-        hallView[1][1] = hall2Student2;
-        hallView[1][2] = hall2Student3;
-        hallView[1][3] = hall2Student4;
-        hallView[1][4] = hall2Student5;
-        hallView[1][5] = hall2Student6;
-        hallView[1][6] = hall2Student7;
-        hallView[1][7] = hall2Student8;
-        hallView[1][8] = hall2Student9;
-        hallView[1][9] = hall2Student10;
-
-        hallView[2][0] = hall3Student1;
-        hallView[2][1] = hall3Student2;
-        hallView[2][2] = hall3Student3;
-        hallView[2][3] = hall3Student4;
-        hallView[2][4] = hall3Student5;
-        hallView[2][5] = hall3Student6;
-        hallView[2][6] = hall3Student7;
-        hallView[2][7] = hall3Student8;
-        hallView[2][8] = hall3Student9;
-        hallView[2][9] = hall3Student10;
-
-        hallView[3][0] = hall4Student1;
-        hallView[3][1] = hall4Student2;
-        hallView[3][2] = hall4Student3;
-        hallView[3][3] = hall4Student4;
-        hallView[3][4] = hall4Student5;
-        hallView[3][5] = hall4Student6;
-        hallView[3][6] = hall4Student7;
-        hallView[3][7] = hall4Student8;
-        hallView[3][8] = hall4Student9;
-        hallView[3][9] = hall4Student10;
-
-        hallView[4][0] = hall5Student1;
-        hallView[4][1] = hall5Student2;
-        hallView[4][2] = hall5Student3;
-        hallView[4][3] = hall5Student4;
-        hallView[4][4] = hall5Student5;
-        hallView[4][5] = hall5Student6;
-        hallView[4][6] = hall5Student7;
-        hallView[4][7] = hall5Student8;
-        hallView[4][8] = hall5Student9;
-        hallView[4][9] = hall5Student10;
-
-        matImageView[0][0] = cloud1Student1;
-        matImageView[0][1] = cloud1Student2;
-        matImageView[0][2] = cloud1Student3;
-        matImageView[1][0] = cloud2Student1;
-        matImageView[1][1] = cloud2Student2;
-        matImageView[1][2] = cloud2Student3;
-
-        if (gui.getNumOfPlayers() == 3) {
-            matImageView[0][3] = cloud1Student4;
-            matImageView[1][3] = cloud2Student4;
-            matImageView[2][0] = cloud3Student1;
-            matImageView[2][1] = cloud3Student2;
-            matImageView[2][2] = cloud3Student3;
-            matImageView[2][3] = cloud3Student4;
-        }
-
-        planceTowerView.add(planceTower1);
-        planceTowerView.add(planceTower2);
-        planceTowerView.add(planceTower3);
-        planceTowerView.add(planceTower4);
-        planceTowerView.add(planceTower5);
-        planceTowerView.add(planceTower6);
-        planceTowerView.add(planceTower7);
-        planceTowerView.add(planceTower8);
-
-         */
         getImageViewFromString("entranceStudent8").setVisible(false);
         getImageViewFromString("entranceStudent8").setDisable(true);
         getImageViewFromString("entranceStudent9").setVisible(false);
@@ -138,10 +43,10 @@ public class DashboardController {
     }
 
 
-
-    public void setGui(GUI gui){
-        this.gui=gui;
+    public void setGui(GUI gui) {
+        this.gui = gui;
     }
+
     @FXML
     public Pane cloud1Pane;
 
@@ -940,95 +845,93 @@ public class DashboardController {
     public void chosenEntranceStudent9(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(8);
         setEntranceStudentNotClickable();
-        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+        if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
             hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
-        numOfStudentChosen=8;
+        numOfStudentChosen = 8;
         setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent6(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(5);
         setEntranceStudentNotClickable();
-        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+        if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
             hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
-        numOfStudentChosen=5;
+        numOfStudentChosen = 5;
         setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent4(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(3);
         setEntranceStudentNotClickable();
-        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+        if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
             hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
-        numOfStudentChosen=3;
+        numOfStudentChosen = 3;
         setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent2(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(1);
         setEntranceStudentNotClickable();
-        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+        if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
             hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
-        numOfStudentChosen=1;
+        numOfStudentChosen = 1;
         setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent1(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(0);
         setEntranceStudentNotClickable();
-        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+        if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
             hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
-        numOfStudentChosen=0;
+        numOfStudentChosen = 0;
         setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent5(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(4);
         setEntranceStudentNotClickable();
-        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+        if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
             hallPane.setDisable(false);
-        numOfStudentChosen=4;
+        numOfStudentChosen = 4;
         setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent3(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(2);
         setEntranceStudentNotClickable();
-        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+        if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
             hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
-        numOfStudentChosen=2;
+        numOfStudentChosen = 2;
         setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent7(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(6);
         setEntranceStudentNotClickable();
-        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+        if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
             hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
-        numOfStudentChosen=6;
+        numOfStudentChosen = 6;
         setArchipelagoClickable();
     }
 
     public void chosenEntranceStudent8(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(7);
         setEntranceStudentNotClickable();
-        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+        if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
             hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
-        numOfStudentChosen=7;
+        numOfStudentChosen = 7;
         setArchipelagoClickable();
     }
 
     public void chosenHall(MouseEvent mouseEvent) {
-        //int numInPlanceColor = gui.getPlayer().getPlance().getHall().get(studentToMove).intValue();
-        //hallView[studentToMove.ordinal()][numInPlanceColor].setVisible(true);
         numOfStudentChosen++;
         getImageViewFromString("entranceStudent" + numOfStudentChosen).setVisible(false);
         getImageViewFromString("entranceStudent" + numOfStudentChosen).setDisable(true);
@@ -1058,99 +961,209 @@ public class DashboardController {
     }
 
     public void chosenIsland1(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(0).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(1,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(0).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(1, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(1-gui.getBoard().getMotherNature()>0){
+                num=1-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(1-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
 
     public void chosenIsland2(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(1).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(2,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(1).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(2, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(2-gui.getBoard().getMotherNature()>0){
+                num=2-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(2-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
 
     public void chosenIsland3(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(2).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(3,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(2).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(3, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(3-gui.getBoard().getMotherNature()>0){
+                num=3-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(3-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
 
     public void chosenIsland9(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(8).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(9,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(8).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(9, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(9-gui.getBoard().getMotherNature()>0){
+                num=9-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(9-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
 
     public void chosenIsland4(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(3).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(4,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(3).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(4, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(4-gui.getBoard().getMotherNature()>0){
+                num=4-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(4-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
 
+
+
     public void chosenIsland7(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(6).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(7,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(6).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(7, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(7-gui.getBoard().getMotherNature()>0){
+                num=7-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(7-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
 
     public void chosenIsland8(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(7).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(8,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(7).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(8, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(8-gui.getBoard().getMotherNature()>0){
+                num=8-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(8-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
 
     public void chosenIsland10(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(9).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(10,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(9).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(10, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(10-gui.getBoard().getMotherNature()>0){
+                num=10-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(10-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
 
     public void chosenIsland11(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(10).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(11,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(10).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(11, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(11-gui.getBoard().getMotherNature()>0){
+                num=11-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(11-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
 
     public void chosenIsland5(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(4).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(5,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(4).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(5, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(5-gui.getBoard().getMotherNature()>0){
+                num=5-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(5-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
 
     public void chosenIsland12(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(11).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(12,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(11).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(12, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(12-gui.getBoard().getMotherNature()>0){
+                num=12-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(12-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
 
     public void chosenIsland6(MouseEvent mouseEvent) {
-        int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(5).getStudents());
-        num++;
-        System.out.println("Sei qui");
-        MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(6,studentToMove);
-        gui.getClient().sendMessage(message);
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(5).getStudents());
+            num++;
+            System.out.println("Sei qui");
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(6, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        if(gui.getCurrentPlayerState()==PlayerState.MOTHERNATUREPHASE){
+            int num;
+            if(6-gui.getBoard().getMotherNature()>0){
+                num=6-gui.getBoard().getMotherNature();
+            }else num=gui.getBoard().getIslandViews().size()-Math.abs(6-gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
     }
     //////////////////////////////////////////////////////////////
 
@@ -1174,52 +1187,11 @@ public class DashboardController {
             getImageViewFromString("entranceStudent"+i).setVisible(true);
             getImageViewFromString("entranceStudent"+i).setDisable(true);
         }
-        /*for(int count=0;count<player.getPlance().getEntrance().size();count++){
-            entranceView.get(count).setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(count))));
-            entranceView.get(count).setVisible(true);
-            entranceView.get(count).setDisable(true);
-        }
-        if(gui.getNumOfPlayers()==2){
-            entranceStudent8.setDisable(true);
-            entranceStudent8.setVisible(false);
-            entranceStudent9.setDisable(true);
-            entranceStudent9.setVisible(false);
-        }
-         */
 
         for(int count=i+1;count<=9;count++){
             getImageViewFromString("entranceStudent"+i).setVisible(false);
             getImageViewFromString("entranceStudent"+i).setDisable(true);
         }
-        /*if(gui.getPlayer().getPlance().getEntrance().size()== 6) {
-            entranceStudent7.setDisable(true);
-            entranceStudent7.setVisible(false);
-        }
-        if(gui.getPlayer().getPlance().getEntrance().size()== 5 ) {
-            entranceStudent6.setDisable(true);
-            entranceStudent6.setVisible(false);
-           // entranceStudent7.setDisable(true);
-            // entranceStudent7.setVisible(false);
-        }
-        if(gui.getNumOfPlayers()==2 && gui.getPlayer().getPlance().getEntrance().size()== 4 ) {
-            entranceStudent5.setDisable(true);
-            entranceStudent5.setVisible(false);
-          //  entranceStudent6.setDisable(true);
-          //  entranceStudent6.setVisible(false);
-           // entranceStudent7.setDisable(true);
-           // entranceStudent7.setVisible(false);
-        }
-        if(gui.getNumOfPlayers()==3 && gui.getPlayer().getPlance().getEntrance().size()== 8){
-            entranceStudent9.setDisable(true);
-            entranceStudent9.setVisible(false);
-        }
-        if(gui.getNumOfPlayers()==3 && gui.getPlayer().getPlance().getEntrance().size()== 7){
-            entranceStudent8.setDisable(true);
-            entranceStudent8.setVisible(false);
-        }
-
-         */
-
 
         //Set hall
         for(int count=1;count<=player.getPlance().getNumberOfStudentHall(Student.GREEN);count++){
@@ -1268,44 +1240,6 @@ public class DashboardController {
         for(Professor prof: player.getPlance().getProfessors()){
             getImageViewFromString("professor"+prof.getText(prof)).setVisible(true);
         }
-
-      /*  professorBlue.setDisable(true);
-        professorBlue.setVisible(false);
-        professorGreen.setDisable(true);
-        professorGreen.setVisible(false);
-        professorPink.setDisable(true);
-        professorPink.setVisible(false);
-        professorRed.setDisable(true);
-        professorRed.setVisible(false);
-        professorYellow.setDisable(true);
-        professorYellow.setVisible(false);
-
-        for(Professor prof : player.getPlance().getProfessors()){
-            switch (prof){
-                case RED_DRAGON -> {
-                    professorRed.setDisable(false);
-                    professorRed.setVisible(true);
-                }
-                case BLUE_UNICORN -> {
-                    professorBlue.setDisable(false);
-                    professorBlue.setVisible(true);
-                }
-                case GREEN_FROG -> {
-                    professorGreen.setDisable(false);
-                    professorGreen.setVisible(true);
-                }
-                case PINK_FAIRY -> {
-                    professorPink.setDisable(false);
-                    professorPink.setVisible(true);
-                }
-                case YELLOW_ELF -> {
-                    professorYellow.setDisable(false);
-                    professorYellow.setVisible(true);
-                }
-            }
-        }
-
-       */
 
         //Set towers
         int count;
@@ -1451,6 +1385,16 @@ public class DashboardController {
                 getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setOpacity(1);
             }
         }
+    }
+
+    public void setMotherNatureView(int num,int motherNatureIsland){
+        int j=0;
+        for(int i=motherNatureIsland;i<=gui.getBoard().getIslandViews().size() && i<=num;i++){
+            getPaneFromString("island"+i+"Pane").setDisable(false);
+            j++;
+        }
+        for(int k=1;k<=num-j;k++)
+            getPaneFromString("island"+k+"Pane").setDisable(false);
     }
 
     public String getImageFromStudent(Student student){

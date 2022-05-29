@@ -40,6 +40,8 @@ public class GUI extends Application implements View{
     private GameMode gameMode;
     private boolean correctlyConnected=false;
     private PlayerView currentPlayerView;
+    private boolean character4played=false;
+    private PlayerState currentPlayerState;
 
     @Override
     public void start(Stage primaryStage){
@@ -54,6 +56,10 @@ public class GUI extends Application implements View{
     public void setNickname(String nickname) {
         this.nickname = nickname;
         client.setNickname(nickname);
+    }
+
+    public PlayerState getCurrentPlayerState() {
+        return currentPlayerState;
     }
 
     public void setCurrentPlayerView(PlayerView player){currentPlayerView=player;}
@@ -311,7 +317,18 @@ public class GUI extends Application implements View{
     public void moveStudentToIsland () {}
 
     @Override
-    public void moveMotherNature() {}
+    public void moveMotherNature() {
+        int num=0;
+        if(character4played)
+            num=2;
+        int finalNum = num+player.getLastassistantplayed().getValue();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setMotherNatureView(finalNum,getBoard().getMotherNature());
+            }
+        });
+    }
 
     @Override
     public void chooseCloud() {
@@ -589,22 +606,25 @@ public class GUI extends Application implements View{
         });
         switch (playerState){
             case STUDENTPHASE -> {
+                playerState=PlayerState.STUDENTPHASE;
                 chooseStudentToMove();
             }
             case ASSISTANTPHASE -> {
+                playerState=PlayerState.ASSISTANTPHASE;
                 chooseAssistant();
             }
             case MOTHERNATUREPHASE -> {
-
+                playerState=PlayerState.MOTHERNATUREPHASE;
+                moveMotherNature();
             }
             case CLOUDPHASE -> {
-
+                playerState=PlayerState.CLOUDPHASE;
             }
             case CHARACTHERSTUDENTSPHASE -> {
-
+                playerState=PlayerState.CHARACTHERSTUDENTSPHASE;
             }
             case CHARACTHERISLANDPHASE -> {
-
+                playerState=PlayerState.CHARACTHERISLANDPHASE;
             }
         }
     }
