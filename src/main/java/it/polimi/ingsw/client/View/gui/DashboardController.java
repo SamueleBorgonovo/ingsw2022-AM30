@@ -1257,8 +1257,16 @@ public class DashboardController {
 
         //Set professors
 
+        getImageViewFromString("professorGreen").setVisible(false);
+        getImageViewFromString("professorRed").setVisible(false);
+        getImageViewFromString("professorYellow").setVisible(false);
+        getImageViewFromString("professorPink").setVisible(false);
+        getImageViewFromString("professorBlue").setVisible(false);
+        for(Professor prof: player.getPlance().getProfessors()){
+            getImageViewFromString("professor"+prof.getText(prof)).setVisible(true);
+        }
 
-        professorBlue.setDisable(true);
+      /*  professorBlue.setDisable(true);
         professorBlue.setVisible(false);
         professorGreen.setDisable(true);
         professorGreen.setVisible(false);
@@ -1293,6 +1301,8 @@ public class DashboardController {
                 }
             }
         }
+
+       */
 
         //Set towers
         int count;
