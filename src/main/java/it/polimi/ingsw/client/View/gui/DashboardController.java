@@ -1019,7 +1019,7 @@ public class DashboardController {
 
     public void chosenHall(MouseEvent mouseEvent) {
         int numInPlanceColor = gui.getPlayer().getPlance().getHall().get(studentToMove).intValue();
-        hallView[studentToMove.ordinal()][numInPlanceColor].setVisible(true);
+        //hallView[studentToMove.ordinal()][numInPlanceColor].setVisible(true);
         numOfStudentChosen++;
         getImageViewFromString("entranceStudent" + String.valueOf(numOfStudentChosen)).setVisible(false);
         getImageViewFromString("entranceStudent" + String.valueOf(numOfStudentChosen)).setDisable(true);
@@ -1051,7 +1051,6 @@ public class DashboardController {
     public void chosenIsland1(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(0).getStudents());
         num++;
-        getLabelFromString("island1"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(1,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1060,7 +1059,6 @@ public class DashboardController {
     public void chosenIsland2(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(1).getStudents());
         num++;
-        getLabelFromString("island2"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(2,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1069,7 +1067,6 @@ public class DashboardController {
     public void chosenIsland3(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(2).getStudents());
         num++;
-        getLabelFromString("island3"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(3,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1078,7 +1075,6 @@ public class DashboardController {
     public void chosenIsland9(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(8).getStudents());
         num++;
-        getLabelFromString("island9"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(9,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1087,7 +1083,6 @@ public class DashboardController {
     public void chosenIsland4(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(3).getStudents());
         num++;
-        getLabelFromString("island4"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(4,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1096,7 +1091,6 @@ public class DashboardController {
     public void chosenIsland7(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(6).getStudents());
         num++;
-        getLabelFromString("island7"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(7,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1105,7 +1099,6 @@ public class DashboardController {
     public void chosenIsland8(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(7).getStudents());
         num++;
-        getLabelFromString("island8"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(8,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1114,7 +1107,6 @@ public class DashboardController {
     public void chosenIsland10(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(9).getStudents());
         num++;
-        getLabelFromString("island10"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(10,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1123,7 +1115,6 @@ public class DashboardController {
     public void chosenIsland11(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(10).getStudents());
         num++;
-        getLabelFromString("island11"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(11,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1132,7 +1123,6 @@ public class DashboardController {
     public void chosenIsland5(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(4).getStudents());
         num++;
-        getLabelFromString("island5"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(5,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1141,7 +1131,6 @@ public class DashboardController {
     public void chosenIsland12(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(11).getStudents());
         num++;
-        getLabelFromString("island12"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(12,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1150,7 +1139,6 @@ public class DashboardController {
     public void chosenIsland6(MouseEvent mouseEvent) {
         int num = numOfColorStudent(studentToMove,gui.getBoard().getIslandViews().get(5).getStudents());
         num++;
-        getLabelFromString("island6"+ studentToMove.getText(studentToMove) +"StudentLabel").setText(String.valueOf(num));
         System.out.println("Sei qui");
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(6,studentToMove);
         gui.getClient().sendMessage(message);
@@ -1527,17 +1515,20 @@ public class DashboardController {
 
     public void setEntranceStudentClickable(){
         plancePane.setDisable(false);
-        for(int j=0 ; j<gui.getPlayer().getPlance().getEntrance().size(); j++) {
+        for(int j=1 ; j<=gui.getPlayer().getPlance().getEntrance().size(); j++) {
+            getImageViewFromString("entranceStudent" + j).setDisable(false);
             //entranceView.get(j).setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(j))));
             //entranceView.get(j).setVisible(true);
-            entranceView.get(j).setDisable(false);
+            //entranceView.get(j).setDisable(false);
+
         }
     }
 
     public void setEntranceStudentNotClickable(){
-        for(int j=0 ; j<gui.getPlayer().getPlance().getEntrance().size(); j++) {
-            entranceView.get(j).setVisible(true);
-            entranceView.get(j).setDisable(true);
+        for(int j=1 ; j<=gui.getPlayer().getPlance().getEntrance().size(); j++) {
+            //entranceView.get(j).setVisible(true);
+            //entranceView.get(j).setDisable(true);
+            getImageViewFromString("entranceStudent" + j).setDisable(true);
         }
     }
 
