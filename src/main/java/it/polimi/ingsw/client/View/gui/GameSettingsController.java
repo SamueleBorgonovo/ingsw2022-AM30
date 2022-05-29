@@ -44,7 +44,7 @@ public class GameSettingsController {
 
                 if (twoField.isSelected() && !threeField.isSelected()) {
                     this.numberOfPlayers = 2;
-                } else if (expertField.isSelected() && !twoField.isSelected()) {
+                } else if (threeField.isSelected() && !twoField.isSelected()) {
                     this.numberOfPlayers = 3;
                 }
             }

@@ -197,6 +197,7 @@ public class GUI extends Application implements View{
             primaryStage.show();
             dashboardController = fxmlLoader.getController();
             dashboardController.setGui(this);
+            dashboardController.setup(); ////////////////////////////////////////////////////////////////////////////////////////////////////
         });
     }
 
@@ -249,6 +250,7 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                dashboardController.setupPlayerView(player);
                 dashboardController.setEntranceStudentClickable();
             }
         });
@@ -551,9 +553,8 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                dashboardController.setup(); ////////////////////////////////////////////////////////////////////////////////////////////////////
                 dashboardController.setupArchipelago();
-                dashboardController.setupPlayerView(player);
+               // dashboardController.setupPlayerView(player);
             }
         });
 

@@ -37,10 +37,9 @@ public class DashboardController {
         entranceView.add(entranceStudent5);
         entranceView.add(entranceStudent6);
         entranceView.add(entranceStudent7);
-        if(gui.getNumOfPlayers()==3) {
-            entranceView.add(entranceStudent8);
-            entranceView.add(entranceStudent9);
-        }
+        entranceView.add(entranceStudent8);
+        entranceView.add(entranceStudent9);
+
         hallView[0][0] = hall1Student1;
         hallView[0][1] = hall1Student2;
         hallView[0][2] = hall1Student3;
@@ -1069,10 +1068,44 @@ public class DashboardController {
         plancePane.setDisable(true);
         assistantsPane.setVisible(false);
         assistantsPane.setDisable(true);
+        System.out.println(gui.getPlayer().getPlance().getEntrance());
+        System.out.println(entranceView);
         for(int count=0;count<player.getPlance().getEntrance().size();count++){
             entranceView.get(count).setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(count))));
             entranceView.get(count).setVisible(true);
             entranceView.get(count).setDisable(true);
+        }
+        if(gui.getNumOfPlayers()==2){
+            entranceStudent8.setDisable(true);
+            entranceStudent8.setVisible(false);
+            entranceStudent9.setDisable(true);
+            entranceStudent9.setVisible(false);
+        }
+        if(gui.getPlayer().getPlance().getEntrance().size()== 6) {
+            entranceStudent7.setDisable(true);
+            entranceStudent7.setVisible(false);
+        }
+        if(gui.getPlayer().getPlance().getEntrance().size()== 5 ) {
+            entranceStudent6.setDisable(true);
+            entranceStudent6.setVisible(false);
+           // entranceStudent7.setDisable(true);
+            // entranceStudent7.setVisible(false);
+        }
+        if(gui.getNumOfPlayers()==2 && gui.getPlayer().getPlance().getEntrance().size()== 4 ) {
+            entranceStudent5.setDisable(true);
+            entranceStudent5.setVisible(false);
+          //  entranceStudent6.setDisable(true);
+          //  entranceStudent6.setVisible(false);
+           // entranceStudent7.setDisable(true);
+           // entranceStudent7.setVisible(false);
+        }
+        if(gui.getNumOfPlayers()==3 && gui.getPlayer().getPlance().getEntrance().size()== 8){
+            entranceStudent9.setDisable(true);
+            entranceStudent9.setVisible(false);
+        }
+        if(gui.getNumOfPlayers()==3 && gui.getPlayer().getPlance().getEntrance().size()== 7){
+            entranceStudent8.setDisable(true);
+            entranceStudent8.setVisible(false);
         }
 
         for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.GREEN);count++){
@@ -1301,44 +1334,26 @@ public class DashboardController {
 
 
     public void setEntranceStudentClickable(){
-        int i=0;
-        //System.out.println(gui.getPlayer().getPlance().getEntrance());
-        //System.out.println(entranceView);
+        plancePane.setDisable(false);
         for(int j=0 ; j<gui.getPlayer().getPlance().getEntrance().size(); j++) {
-            entranceView.get(j).setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(j))));
-            entranceView.get(j).setVisible(true);
+            //entranceView.get(j).setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(j))));
+            //entranceView.get(j).setVisible(true);
             entranceView.get(j).setDisable(false);
         }
-        if(gui.getNumOfPlayers()==2 && gui.getPlayer().getPlance().getEntrance().size()== 6 ) {
-            entranceStudent7.setDisable(true);
-            entranceStudent7.setVisible(false);
-        }
-        if(gui.getNumOfPlayers()==2 && gui.getPlayer().getPlance().getEntrance().size()== 5 ) {
-            entranceStudent6.setDisable(true);
-            entranceStudent6.setVisible(false);
-            entranceStudent7.setDisable(true);
-            entranceStudent7.setVisible(false);
-        }
-        if(gui.getNumOfPlayers()==2 && gui.getPlayer().getPlance().getEntrance().size()== 4 ) {
-            entranceStudent5.setDisable(true);
-            entranceStudent5.setVisible(false);
-            entranceStudent6.setDisable(true);
-            entranceStudent6.setVisible(false);
-            entranceStudent7.setDisable(true);
-            entranceStudent7.setVisible(false);
-        }
-        if(gui.getNumOfPlayers()==2) {
+       /* if(gui.getNumOfPlayers()==2) {
             entranceStudent8.setDisable(true);
             entranceStudent8.setVisible(false);
             entranceStudent9.setDisable(true);
             entranceStudent9.setVisible(false);
         }
+
+        */
     }
 
     public void setEntranceStudentNotClickable(){
-        for(ImageView imageView : entranceView) {
-            imageView.setVisible(true);
-            imageView.setDisable(true);
+        for(int j=0 ; j<gui.getPlayer().getPlance().getEntrance().size(); j++) {
+            entranceView.get(j).setVisible(true);
+            entranceView.get(j).setDisable(true);
         }
     }
 
