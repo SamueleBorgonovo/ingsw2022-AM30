@@ -166,7 +166,7 @@ public class CLI implements View {
                 wizardInt = inputParser.intParser();
             }
         }
-        this.player = new PlayerView(this.nickname, wizardChosen, null, null, 1, null);
+        this.player = new PlayerView(this.nickname, wizardChosen, null, null, 1, null,null);
         client.setWizard(wizardChosen);
         ChooseWizardMessage message = new ChooseWizardMessage(wizardChosen);
         client.sendMessage(message);

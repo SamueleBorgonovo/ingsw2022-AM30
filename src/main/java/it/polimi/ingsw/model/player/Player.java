@@ -108,7 +108,7 @@ public class Player implements PlayerInterface{
     public void setLastassistantplayed(Assistant assistant){ lastassistantplayed=assistant;} //Only used for tests
 
     public PlayerView getPlayerView(){
-        return new PlayerView(nickname,wizard,lastassistantplayed,assistantCards,coins,plance.getPlanceView());
+        return new PlayerView(nickname,wizard,lastassistantplayed,assistantCards,coins,plance.getPlanceView(),playerState);
     }
     }
 

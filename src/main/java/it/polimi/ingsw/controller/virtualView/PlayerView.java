@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.virtualView;
 
 import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
 import java.io.Serializable;
@@ -13,14 +14,16 @@ public class PlayerView implements Serializable {
     private ArrayList<Assistant> assistantCards = new ArrayList<>();
     private int coins;
     private PlanceView plance;
+    private PlayerState playerState;
 
-    public PlayerView(String nickname, Wizard wizard, Assistant lastassistantplayed, ArrayList<Assistant> assistantCards, int coins, PlanceView plance){
+    public PlayerView(String nickname, Wizard wizard, Assistant lastassistantplayed, ArrayList<Assistant> assistantCards, int coins, PlanceView plance,PlayerState playerState){
         this.nickname=nickname;
         this.wizard=wizard;
         this.lastassistantplayed=lastassistantplayed;
         this.assistantCards=assistantCards;
         this.coins=coins;
         this.plance=plance;
+        this.playerState=playerState;
     }
 
     public PlanceView getPlance() {
@@ -50,4 +53,6 @@ public class PlayerView implements Serializable {
     public int getCoins() {
         return coins;
     }
+
+    public PlayerState getPlayerState() { return playerState; }
 }

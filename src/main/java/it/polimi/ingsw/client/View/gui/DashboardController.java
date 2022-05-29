@@ -7,6 +7,7 @@ import it.polimi.ingsw.messages.toServer.ChooseCloudMessage;
 import it.polimi.ingsw.messages.toServer.MoveStudentToHallMessage;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Professor;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -678,7 +679,7 @@ public class DashboardController {
     public void setupPlayerView(PlayerView player){
 
         nicknameLabel.setText(player.getNickname());
-        //playerStateLabel.setText(player.getPlayerState); MANCA
+        setPlayerStateLabel(player.getPlayerState());
         plancePane.setVisible(true);
         plancePane.setDisable(true);
         assistantsPane.setVisible(false);
@@ -958,6 +959,12 @@ public class DashboardController {
 
     public void setGameUpdateLabel(String s){
         gameUpdateLabel.setText(s);
+    }
+
+    public void setPlayerStateLabel(PlayerState playerState){
+        if(playerState==PlayerState.WAITING || playerState==PlayerState.RECONNECTED || playerState==PlayerState.DISCONNECTED)
+            playerStateLabel.setText(playerState.toString());
+        else playerStateLabel.setText("PLAYING");
     }
 
 }
