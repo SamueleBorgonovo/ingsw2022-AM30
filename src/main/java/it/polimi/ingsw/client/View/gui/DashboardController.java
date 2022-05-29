@@ -6,6 +6,7 @@ import it.polimi.ingsw.messages.toServer.ChooseAssistantMessage;
 import it.polimi.ingsw.messages.toServer.ChooseCloudMessage;
 import it.polimi.ingsw.messages.toServer.MoveStudentToHallMessage;
 import it.polimi.ingsw.model.game.Student;
+import it.polimi.ingsw.model.game.Tower;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Professor;
@@ -17,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+import java.awt.image.ImagingOpException;
 import java.util.ArrayList;
 
 public class DashboardController {
@@ -25,6 +27,7 @@ public class DashboardController {
     private ImageView[][] hallView = new ImageView[5][10];
     private ArrayList<ImageView> entranceView = new ArrayList<>();
     private ImageView[][] matImageView = new ImageView[3][4];
+    private ArrayList<ImageView> planceTowerView = new ArrayList<>();
     private Student studentToMove;
     private int numOfStudentChosen;
 
@@ -110,7 +113,18 @@ public class DashboardController {
             matImageView[2][2] = cloud3Student3;
             matImageView[2][3] = cloud3Student4;
         }
+
+        planceTowerView.add(planceTower1);
+        planceTowerView.add(planceTower2);
+        planceTowerView.add(planceTower3);
+        planceTowerView.add(planceTower4);
+        planceTowerView.add(planceTower5);
+        planceTowerView.add(planceTower6);
+        planceTowerView.add(planceTower7);
+        planceTowerView.add(planceTower8);
     }
+
+
 
     public void setGui(GUI gui){
         this.gui=gui;
@@ -1068,6 +1082,8 @@ public class DashboardController {
         plancePane.setDisable(true);
         assistantsPane.setVisible(false);
         assistantsPane.setDisable(true);
+
+        //Set entrance
         System.out.println(gui.getPlayer().getPlance().getEntrance());
         System.out.println(entranceView);
         for(int count=0;count<player.getPlance().getEntrance().size();count++){
@@ -1108,6 +1124,8 @@ public class DashboardController {
             entranceStudent8.setVisible(false);
         }
 
+
+        //Set hall
         for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.GREEN);count++){
             hallView[0][count].setVisible(true);
         }
@@ -1143,6 +1161,7 @@ public class DashboardController {
             hallView[4][count].setVisible(false);
         }
 
+        //Set professors
         professorBlue.setDisable(true);
         professorBlue.setVisible(false);
         professorGreen.setDisable(true);
@@ -1179,12 +1198,57 @@ public class DashboardController {
             }
         }
 
-        //MANCANO LE TOWER NELLA PLANCIA ED è FINITO
+        //Set towers
+        int count;
+        for(count=1;count<=player.getPlance().getNumoftowers();count++)
+            getImageViewFromString("planceTower"+count).setVisible(true);
+
+        int num=0;
+        if(gui.getNumOfPlayers()==2)
+            num=8;
+        if(gui.getNumOfPlayers()==3)
+            num=6;
+        for(int i=count;count<=num;count++){
+           getImageViewFromString("planceTower"+i).setVisible(false);
+        }
     }
 
     public void setupArchipelago(){
 
-        //MANCA LA PARTE DELLE ISOLE
+        Object island;
+        int i=0;
+        for(i=1;i<=gui.getBoard().getIslandViews().size();i++){
+            getPaneFromString("island"+i+"Pane").setVisible(true);
+            if(gui.getBoard().getMotherNature()==i)
+                getImageViewFromString("island"+i+"MotherNature").setVisible(true);
+            else getImageViewFromString("island"+i+"MotherNature").setVisible(false);
+
+            if(gui.getBoard().getIslandViews().get(i-1).isStop())
+                getImageViewFromString("island"+i+"Stop").setVisible(true);
+            else getImageViewFromString("island"+i+"Stop").setVisible(false);
+
+            getLabelFromString("island"+i+"BlueStudentLabel").setText(Integer.toString(numOfColorStudent(Student.BLUE,gui.getBoard().getIslandViews().get(i-1).getStudents())));
+            getLabelFromString("island"+i+"RedStudentLabel").setText(Integer.toString(numOfColorStudent(Student.RED,gui.getBoard().getIslandViews().get(i-1).getStudents())));
+            getLabelFromString("island"+i+"PinkStudentLabel").setText(Integer.toString(numOfColorStudent(Student.PINK,gui.getBoard().getIslandViews().get(i-1).getStudents())));
+            getLabelFromString("island"+i+"YellowStudentLabel").setText(Integer.toString(numOfColorStudent(Student.YELLOW,gui.getBoard().getIslandViews().get(i-1).getStudents())));
+            getLabelFromString("island"+i+"GreenStudentLabel").setText(Integer.toString(numOfColorStudent(Student.GREEN,gui.getBoard().getIslandViews().get(i-1).getStudents())));
+
+            if(gui.getBoard().getIslandViews().get(i-1).getNumOfTowers()==0){
+                getLabelFromString("island"+i+"TowerLabel").setVisible(false);
+                getImageViewFromString("island"+i+"TowerImage").setVisible(false);
+            }else {
+                getLabelFromString("island"+i+"TowerLabel").setText(Integer.toString(gui.getBoard().getIslandViews().get(i-1).getNumOfTowers()));
+                getImageViewFromString("island" + i + "TowerImage").setImage(new Image(getImageFromTower(gui.getBoard().getIslandViews().get(i - 1).getTower())));
+                getLabelFromString("island"+i+"TowerLabel").setVisible(true);
+                getImageViewFromString("island"+i+"TowerImage").setVisible(true);
+            }
+        }
+
+        for(int count=i;count<=12;count++){
+            getPaneFromString("island"+count+"Pane").setVisible(false);
+        }
+
+
         showClouds();
     }
 
@@ -1332,6 +1396,52 @@ public class DashboardController {
         return s;
     }
 
+    public String getImageFromTower(Tower tower){
+        String s="";
+        switch (tower){
+            case WHITE -> {
+                s="img/TOWER_WHITE.png";
+            }
+            case BLACK -> {
+                s="img/TOWER_BLACK.png";
+            }
+            case GREY -> {
+                s="img/TOWER_GEY.png";
+            }
+        }
+        return s;
+    }
+
+    public ImageView getImageViewFromString(String s){
+        Object imageview = null;
+        try{
+            imageview=getClass().getDeclaredField(s).get(this);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return ((ImageView) imageview); 
+    }
+
+    public Pane getPaneFromString(String s){
+        Object imageview = null;
+        try{
+            imageview=getClass().getDeclaredField(s).get(this);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return ((Pane) imageview);
+    }
+
+    public Label getLabelFromString(String s){
+        Object imageview = null;
+        try{
+            imageview=getClass().getDeclaredField(s).get(this);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return ((Label) imageview);
+    }
+
 
     public void setEntranceStudentClickable(){
         plancePane.setDisable(false);
@@ -1401,5 +1511,14 @@ public class DashboardController {
     }
 
     public void chosenIsland6(MouseEvent mouseEvent) {
+    }
+
+
+    public int numOfColorStudent(Student student,ArrayList<Student> students){
+        int i=0;
+        for(Student stud : students)
+            if(stud.equals(student))
+                i++;
+        return i;
     }
 }
