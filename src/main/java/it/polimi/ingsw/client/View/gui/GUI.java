@@ -39,6 +39,7 @@ public class GUI extends Application implements View{
     private int numOfPlayers;
     private GameMode gameMode;
     private boolean correctlyConnected=false;
+    private PlayerView currentPlayerView;
 
     @Override
     public void start(Stage primaryStage){
@@ -54,6 +55,8 @@ public class GUI extends Application implements View{
         this.nickname = nickname;
         client.setNickname(nickname);
     }
+
+    public void setCurrentPlayerView(PlayerView player){currentPlayerView=player;}
 
     public String getNickname() {
         return nickname;
@@ -399,7 +402,11 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                dashboardController.setGameUpdateLabel("GAME: "+nick+" choosed cloud "+cloudID);
+                if (!nick.equals(nickname)) {
+                    dashboardController.setGameUpdateLabel("GAME: " + nick + " choosed cloud " + cloudID);
+                    dashboardController.setupPlayerView(currentPlayerView);
+                    dashboardController.setupArchipelago();
+                }
             }
         });
     }
@@ -409,7 +416,10 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                dashboardController.setGameUpdateLabel("GAME: "+nick+" moved student "+student+" in his hall");
+                if(!nick.equals(nickname)) {
+                    dashboardController.setGameUpdateLabel("GAME: " + nick + " moved student " + student + " in his hall");
+                    dashboardController.setupPlayerView(currentPlayerView);
+                }
             }
         });
     }
@@ -419,7 +429,11 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                dashboardController.setGameUpdateLabel("GAME: "+nick+" moved student "+student+" on island "+IslandID);
+                if (!nick.equals(nickname)) {
+                    dashboardController.setGameUpdateLabel("GAME: " + nick + " moved student " + student + " on island " + IslandID);
+                    dashboardController.setupPlayerView(currentPlayerView);
+                    dashboardController.setupArchipelago();
+                }
             }
         });
     }
@@ -429,7 +443,11 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                dashboardController.setGameUpdateLabel("GAME: "+nick+" moved MotherNature on island "+islandID);
+                if (!nick.equals(nickname)) {
+                    dashboardController.setGameUpdateLabel("GAME: " + nick + " moved MotherNature on island " + islandID);
+                    dashboardController.setupArchipelago();
+                    dashboardController.setupPlayerView(currentPlayerView);
+                }
             }
         });
     }
@@ -566,6 +584,7 @@ public class GUI extends Application implements View{
             @Override
             public void run() {
                 dashboardController.setupPlayerView(player);
+                dashboardController.setupArchipelago();
             }
         });
         switch (playerState){

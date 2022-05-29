@@ -29,11 +29,14 @@ public class DashboardController {
     private ArrayList<ImageView> entranceView = new ArrayList<>();
     private ImageView[][] matImageView = new ImageView[3][4];
     private ArrayList<ImageView> planceTowerView = new ArrayList<>();
+
+
     private Student studentToMove;
     private int numOfStudentChosen;
 
 
     public void setup() {
+        /*
         entranceView.add(entranceStudent1);
         entranceView.add(entranceStudent2);
         entranceView.add(entranceStudent3);
@@ -124,6 +127,9 @@ public class DashboardController {
         planceTowerView.add(planceTower7);
         planceTowerView.add(planceTower8);
 
+         */
+
+        gui.setCurrentPlayerView(gui.getPlayer());
         setupPlayerView(gui.getPlayer());
     }
 
@@ -1013,45 +1019,6 @@ public class DashboardController {
         numOfStudentChosen++;
         getImageViewFromString("entranceStudent" + String.valueOf(numOfStudentChosen)).setVisible(false);
         getImageViewFromString("entranceStudent" + String.valueOf(numOfStudentChosen)).setDisable(true);
-       /* switch (numOfStudentChosen) {
-            case (0) -> {
-                entranceStudent1.setVisible(false);
-                entranceStudent1.setDisable(true);
-            }
-            case (1) -> {
-                entranceStudent2.setVisible(false);
-                entranceStudent2.setDisable(true);
-            }
-            case (2) -> {
-                entranceStudent3.setVisible(false);
-                entranceStudent3.setDisable(true);
-            }
-            case (3) -> {
-                entranceStudent4.setVisible(false);
-                entranceStudent4.setDisable(true);
-            }
-            case (4) -> {
-                entranceStudent5.setVisible(false);
-                entranceStudent5.setDisable(true);
-            }
-            case (5) -> {
-                entranceStudent6.setVisible(false);
-                entranceStudent6.setDisable(true);
-            }
-            case (6) -> {
-                entranceStudent7.setVisible(false);
-                entranceStudent7.setDisable(true);
-            }
-            case (7) -> {
-                entranceStudent8.setVisible(false);
-                entranceStudent8.setDisable(true);
-            }
-            case (8) -> {
-                entranceStudent9.setVisible(false);
-                entranceStudent9.setDisable(true);
-            }
-
-        */
         MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentToMove);
         gui.getClient().sendMessage(message);
     }
@@ -1198,9 +1165,13 @@ public class DashboardController {
         assistantsPane.setDisable(true);
 
         //Set entrance
-       // System.out.println(gui.getPlayer().getPlance().getEntrance());
-       // System.out.println(entranceView);
-        for(int count=0;count<player.getPlance().getEntrance().size();count++){
+        int i=0;
+        for(i=1;i<=player.getPlance().getEntrance().size();i++){
+            getImageViewFromString("entranceStudent"+i).setImage(new Image(getImageFromStudent(player.getPlance().getEntrance().get(i-1))));
+            getImageViewFromString("entranceStudent"+i).setVisible(true);
+            getImageViewFromString("entranceStudent"+i).setDisable(true);
+        }
+        /*for(int count=0;count<player.getPlance().getEntrance().size();count++){
             entranceView.get(count).setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(count))));
             entranceView.get(count).setVisible(true);
             entranceView.get(count).setDisable(true);
@@ -1211,7 +1182,13 @@ public class DashboardController {
             entranceStudent9.setDisable(true);
             entranceStudent9.setVisible(false);
         }
-        if(gui.getPlayer().getPlance().getEntrance().size()== 6) {
+         */
+
+        for(int count=i+1;count<=9;count++){
+            getImageViewFromString("entranceStudent"+i).setVisible(false);
+            getImageViewFromString("entranceStudent"+i).setDisable(true);
+        }
+        /*if(gui.getPlayer().getPlance().getEntrance().size()== 6) {
             entranceStudent7.setDisable(true);
             entranceStudent7.setVisible(false);
         }
@@ -1238,44 +1215,49 @@ public class DashboardController {
             entranceStudent8.setVisible(false);
         }
 
+         */
+
 
         //Set hall
-        for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.GREEN);count++){
-            hallView[0][count].setVisible(true);
+        for(int count=1;count<=player.getPlance().getNumberOfStudentHall(Student.GREEN);count++){
+            getImageViewFromString("hall1Student"+count).setVisible(true);
         }
-        for(int count=player.getPlance().getNumberOfStudentHall(Student.GREEN);count<10;count++){
-            hallView[0][count].setVisible(false);
-        }
-
-        for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.RED);count++){
-            hallView[1][count].setVisible(true);
-        }
-        for(int count=player.getPlance().getNumberOfStudentHall(Student.RED);count<10;count++){
-            hallView[1][count].setVisible(false);
+        for(int count=player.getPlance().getNumberOfStudentHall(Student.GREEN)+1;count<=10;count++){
+            getImageViewFromString("hall1Student"+count).setVisible(false);
         }
 
-        for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.YELLOW);count++){
-            hallView[2][count].setVisible(true);
+        for(int count=1;count<=player.getPlance().getNumberOfStudentHall(Student.RED);count++){
+            getImageViewFromString("hall2Student"+count).setVisible(true);
         }
-        for(int count=player.getPlance().getNumberOfStudentHall(Student.YELLOW);count<10;count++){
-            hallView[2][count].setVisible(false);
-        }
-
-        for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.PINK);count++){
-            hallView[3][count].setVisible(true);
-        }
-        for(int count=player.getPlance().getNumberOfStudentHall(Student.PINK);count<10;count++){
-            hallView[3][count].setVisible(false);
+        for(int count=player.getPlance().getNumberOfStudentHall(Student.RED)+1;count<=10;count++){
+            getImageViewFromString("hall2Student"+count).setVisible(false);
         }
 
-        for(int count=0;count<player.getPlance().getNumberOfStudentHall(Student.BLUE);count++){
-            hallView[4][count].setVisible(true);
+        for(int count=1;count<=player.getPlance().getNumberOfStudentHall(Student.YELLOW);count++){
+            getImageViewFromString("hall3Student"+count).setVisible(true);
         }
-        for(int count=player.getPlance().getNumberOfStudentHall(Student.BLUE);count<10;count++){
-            hallView[4][count].setVisible(false);
+        for(int count=player.getPlance().getNumberOfStudentHall(Student.YELLOW)+1;count<=10;count++){
+            getImageViewFromString("hall3Student"+count).setVisible(false);
         }
+
+        for(int count=1;count<=player.getPlance().getNumberOfStudentHall(Student.PINK);count++){
+            getImageViewFromString("hall4Student"+count).setVisible(true);
+        }
+        for(int count=player.getPlance().getNumberOfStudentHall(Student.PINK)+1;count<=10;count++){
+            getImageViewFromString("hall4Student"+count).setVisible(false);
+        }
+
+        for(int count=1;count<=player.getPlance().getNumberOfStudentHall(Student.BLUE);count++){
+            getImageViewFromString("hall5Student"+count).setVisible(true);
+        }
+        for(int count=player.getPlance().getNumberOfStudentHall(Student.BLUE)+1;count<=10;count++){
+            getImageViewFromString("hall5Student"+count).setVisible(false);
+        }
+
 
         //Set professors
+
+
         professorBlue.setDisable(true);
         professorBlue.setVisible(false);
         professorGreen.setDisable(true);
@@ -1322,7 +1304,7 @@ public class DashboardController {
             num=8;
         if(gui.getNumOfPlayers()==3)
             num=6;
-        for(int i=count;count<=num;count++){
+        for(i=count;count<=num;count++){
            getImageViewFromString("planceTower"+i).setVisible(false);
         }
     }
@@ -1442,58 +1424,21 @@ public class DashboardController {
 
     public void showClouds() {
 
-        int i = 0;
-        for (CloudView cloud : gui.getBoard().getClouds()) {
-            int j = 0;
-            for (Student student : cloud.getStudents()) {
-                matImageView[i][j].setImage(new Image(getImageFromStudent(student)));
-                j++;
+        for(int i=1;i<=gui.getBoard().getClouds().size();i++)
+            for(int j=1;j<=gui.getBoard().getClouds().get(i-1).getStudents().size();j++){
+                getImageViewFromString("cloud"+i+"Student"+j).setImage(new Image(getImageFromStudent(gui.getBoard().getClouds().get(i-1).getStudents().get(j-1))));
             }
-            i++;
-        }
 
         for (CloudView cloud : gui.getBoard().getClouds()) {
             if (cloud.isChoosen()) {
                 getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setDisable(true);
                 getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setOpacity(0.3);
-               /* switch (cloud.getCloudID()) {
-                    case (1) -> {
-                        cloud1Pane.setDisable(true);
-                        cloud1Pane.setOpacity(0.3);
-                    }
-                    case (2) -> {
-                        cloud2Pane.setDisable(true);
-                        cloud2Pane.setOpacity(0.3);
-                    }
-                    case (3) -> {
-                        cloud3Pane.setDisable(true);
-                        cloud3Pane.setOpacity(0.3);
-                    }
-                }
-
-                */
             } else {
                 getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setDisable(false);
                 getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setOpacity(1);
-                /*
-                switch (cloud.getCloudID()) {
-                    case (1) -> {
-                        cloud1Pane.setDisable(false);
-                        cloud1Pane.setOpacity(1);
-                    }
-                    case (2) -> {
-                        cloud2Pane.setDisable(false);
-                        cloud2Pane.setOpacity(1);
-                    }
-                    case(3) ->{
-                        cloud3Pane.setDisable(false);
-                        cloud3Pane.setOpacity(1);
-                    }
-
-                 */
-                }
             }
         }
+    }
 
     public String getImageFromStudent(Student student){
         String s="";
@@ -1573,14 +1518,6 @@ public class DashboardController {
             //entranceView.get(j).setVisible(true);
             entranceView.get(j).setDisable(false);
         }
-       /* if(gui.getNumOfPlayers()==2) {
-            entranceStudent8.setDisable(true);
-            entranceStudent8.setVisible(false);
-            entranceStudent9.setDisable(true);
-            entranceStudent9.setVisible(false);
-        }
-
-        */
     }
 
     public void setEntranceStudentNotClickable(){
