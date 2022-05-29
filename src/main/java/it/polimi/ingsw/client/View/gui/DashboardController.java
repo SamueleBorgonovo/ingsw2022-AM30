@@ -940,7 +940,8 @@ public class DashboardController {
     public void chosenEntranceStudent9(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(8);
         setEntranceStudentNotClickable();
-        hallPane.setDisable(false);
+        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+            hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=8;
         setArchipelagoClickable();
@@ -949,7 +950,8 @@ public class DashboardController {
     public void chosenEntranceStudent6(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(5);
         setEntranceStudentNotClickable();
-        hallPane.setDisable(false);
+        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+            hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=5;
         setArchipelagoClickable();
@@ -958,7 +960,8 @@ public class DashboardController {
     public void chosenEntranceStudent4(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(3);
         setEntranceStudentNotClickable();
-        hallPane.setDisable(false);
+        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+            hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=3;
         setArchipelagoClickable();
@@ -967,7 +970,8 @@ public class DashboardController {
     public void chosenEntranceStudent2(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(1);
         setEntranceStudentNotClickable();
-        hallPane.setDisable(false);
+        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+            hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=1;
         setArchipelagoClickable();
@@ -976,7 +980,8 @@ public class DashboardController {
     public void chosenEntranceStudent1(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(0);
         setEntranceStudentNotClickable();
-        hallPane.setDisable(false);
+        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+            hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=0;
         setArchipelagoClickable();
@@ -985,7 +990,8 @@ public class DashboardController {
     public void chosenEntranceStudent5(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(4);
         setEntranceStudentNotClickable();
-        hallPane.setDisable(false);
+        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+            hallPane.setDisable(false);
         numOfStudentChosen=4;
         setArchipelagoClickable();
     }
@@ -993,7 +999,8 @@ public class DashboardController {
     public void chosenEntranceStudent3(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(2);
         setEntranceStudentNotClickable();
-        hallPane.setDisable(false);
+        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+            hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=2;
         setArchipelagoClickable();
@@ -1002,7 +1009,8 @@ public class DashboardController {
     public void chosenEntranceStudent7(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(6);
         setEntranceStudentNotClickable();
-        hallPane.setDisable(false);
+        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+            hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=6;
         setArchipelagoClickable();
@@ -1011,18 +1019,19 @@ public class DashboardController {
     public void chosenEntranceStudent8(MouseEvent mouseEvent) {
         studentToMove = gui.getPlayer().getPlance().getEntrance().get(7);
         setEntranceStudentNotClickable();
-        hallPane.setDisable(false);
+        if(gui.getPlayer().getPlance().getHall().get(studentToMove).intValue()<10)
+            hallPane.setDisable(false);
         System.out.println("Scelto studente di colore" + studentToMove);
         numOfStudentChosen=7;
         setArchipelagoClickable();
     }
 
     public void chosenHall(MouseEvent mouseEvent) {
-        int numInPlanceColor = gui.getPlayer().getPlance().getHall().get(studentToMove).intValue();
+        //int numInPlanceColor = gui.getPlayer().getPlance().getHall().get(studentToMove).intValue();
         //hallView[studentToMove.ordinal()][numInPlanceColor].setVisible(true);
         numOfStudentChosen++;
-        getImageViewFromString("entranceStudent" + String.valueOf(numOfStudentChosen)).setVisible(false);
-        getImageViewFromString("entranceStudent" + String.valueOf(numOfStudentChosen)).setDisable(true);
+        getImageViewFromString("entranceStudent" + numOfStudentChosen).setVisible(false);
+        getImageViewFromString("entranceStudent" + numOfStudentChosen).setDisable(true);
         MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentToMove);
         gui.getClient().sendMessage(message);
     }
@@ -1153,6 +1162,8 @@ public class DashboardController {
         setPlayerStateLabel(player.getPlayerState());
         plancePane.setVisible(true);
         plancePane.setDisable(true);
+        setEntranceStudentNotClickable();
+        hallPane.setDisable(true);
         assistantsPane.setVisible(false);
         assistantsPane.setDisable(true);
 
