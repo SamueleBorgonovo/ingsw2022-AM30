@@ -128,6 +128,10 @@ public class DashboardController {
         planceTowerView.add(planceTower8);
 
          */
+        getImageViewFromString("entranceStudent8").setVisible(false);
+        getImageViewFromString("entranceStudent8").setDisable(true);
+        getImageViewFromString("entranceStudent9").setVisible(false);
+        getImageViewFromString("entranceStudent9").setDisable(true);
 
         gui.setCurrentPlayerView(gui.getPlayer());
         setupPlayerView(gui.getPlayer());
