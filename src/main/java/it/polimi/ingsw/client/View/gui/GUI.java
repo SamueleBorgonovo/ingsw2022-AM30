@@ -332,7 +332,12 @@ public class GUI extends Application implements View{
 
     @Override
     public void chooseCloud() {
-        dashboardController.showClouds();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setCloudsClickable();
+            }
+        });
     }
 
     @Override
@@ -399,12 +404,14 @@ public class GUI extends Application implements View{
     }
 
     @Override
-    public void printTurn(String nick) {
+    public void printTurn(String nick,boolean isAssistantPhase) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 dashboardController.setupPlayerView(player);
-                dashboardController.setGameUpdateLabel("GAME: "+nick+" started his turn");
+                if(isAssistantPhase)
+                    dashboardController.setGameUpdateLabel("GAME: "+nick+" is choosing an assistant");
+                else dashboardController.setGameUpdateLabel("GAME: "+nick+" started his turn");
             }
         });
     }
@@ -419,10 +426,10 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                dashboardController.setupPlayerView(currentPlayerView);
+                dashboardController.setupArchipelago();
                 if (!nick.equals(nickname)) {
                     dashboardController.setGameUpdateLabel("GAME: " + nick + " choosed cloud " + cloudID);
-                    dashboardController.setupPlayerView(currentPlayerView);
-                    dashboardController.setupArchipelago();
                 }
             }
         });
@@ -643,6 +650,7 @@ public class GUI extends Application implements View{
                         dashboardController.setGameUpdateLabel("GAME: Choose one cloud!");
                     }
                 });
+                chooseCloud();
             }
             case CHARACTHERSTUDENTSPHASE -> {
                 currentPlayerState=PlayerState.CHARACTHERSTUDENTSPHASE;

@@ -57,7 +57,7 @@ public interface View {
 
     public void printAssistantChosen(String nick, Assistant assistant);
 
-    public void printTurn(String nick);
+    public void printTurn(String nick,boolean isAssistantPhase);
 
     public void printCharacterChosen(String nick, CharacterView character);
 

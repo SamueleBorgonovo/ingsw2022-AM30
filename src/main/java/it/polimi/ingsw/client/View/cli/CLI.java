@@ -502,9 +502,11 @@ public class CLI implements View {
     }
 
     @Override
-    public void printTurn(String nick) {
+    public void printTurn(String nick,boolean isAssistantPhase) {
         if (!client.isMyTurn())
-            System.out.println(nick + " is playing");
+            if(isAssistantPhase)
+                System.out.println(nick + " is choosing an assistant");
+            else System.out.println(nick+" is playing");
         else {
             System.out.println("Is your turn");
             graphic.printArchipelago(board.getIslandViews(), board.getMotherNature());

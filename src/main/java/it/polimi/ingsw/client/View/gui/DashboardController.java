@@ -1288,7 +1288,7 @@ public class DashboardController {
         }
 
 
-        showClouds();
+        setupClouds();
     }
 
 
@@ -1366,19 +1366,22 @@ public class DashboardController {
         }
     }
 
-    public void showClouds() {
+    public void setupClouds() {
 
         for(int i=1;i<=gui.getBoard().getClouds().size();i++)
             for(int j=1;j<=gui.getBoard().getClouds().get(i-1).getStudents().size();j++){
                 getImageViewFromString("cloud"+i+"Student"+j).setImage(new Image(getImageFromStudent(gui.getBoard().getClouds().get(i-1).getStudents().get(j-1))));
             }
-
+        if(gui.getBoard().getClouds().size()==2) {
+            getPaneFromString("cloud" + 3 + "Pane").setVisible(false);
+            getPaneFromString("cloud"+3+"Pane").setDisable(true);
+        }
         for (CloudView cloud : gui.getBoard().getClouds()) {
             if (cloud.isChoosen()) {
                 getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setDisable(true);
                 getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setOpacity(0.3);
             } else {
-                getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setDisable(false);
+                getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setDisable(true);
                 getPaneFromString("cloud"+ cloud.getCloudID() + "Pane").setOpacity(1);
             }
         }
@@ -1507,5 +1510,12 @@ public class DashboardController {
     public void setArchipelagoClickable(){
         for(int i=1; i<=gui.getBoard().getIslandViews().size();i++)
             getPaneFromString("island"+i+"Pane").setDisable(false);
+    }
+
+    public void setCloudsClickable(){
+        for(int count=1;count<=gui.getBoard().getClouds().size();count++){
+            if(!gui.getBoard().getClouds().get(count-1).isChoosen())
+                getPaneFromString("cloud"+count+"Pane").setDisable(false);
+        }
     }
 }

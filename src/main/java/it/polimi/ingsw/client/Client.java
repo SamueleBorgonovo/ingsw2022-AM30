@@ -87,8 +87,7 @@ public class Client {
         else {
             myTurn=false;
         }
-        if(!assistantPhase)
-            view.printTurn(nickname);
+        view.printTurn(nickname,assistantPhase);
     }
 
     public void handleDisconnection(String nick,boolean timeout,boolean win){
