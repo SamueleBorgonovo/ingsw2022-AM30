@@ -234,6 +234,8 @@ public class Game implements GameInterface {
 
         for(int count=0;count<getBoard().getClouds().size();count++){
             getBoard().getClouds().get(count).setChoosen(false);
+            getBoard().getClouds().get(count).getStudents().clear();
+            getBoard().getClouds().get(count).setStudents(getBoard().getAndRemoveRandomBagStudent(numOfPlayers+1));
         }
 
         for(Player player : playerorder) {

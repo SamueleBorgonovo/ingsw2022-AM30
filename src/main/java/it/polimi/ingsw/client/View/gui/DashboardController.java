@@ -36,6 +36,7 @@ public class DashboardController {
 
         gui.setCurrentPlayerView(gui.getPlayer());
         setupPlayerView(gui.getPlayer());
+        setupArchipelago();
     }
 
 
@@ -1169,6 +1170,7 @@ public class DashboardController {
 
         nicknameLabel.setText(player.getNickname());
         setPlayerStateLabel(player.getPlayerState());
+        setGameUpdateLabel("GAME: Waiting for players");
         plancePane.setVisible(true);
         plancePane.setDisable(true);
         setEntranceStudentNotClickable();
@@ -1257,6 +1259,7 @@ public class DashboardController {
 
     public void setupArchipelago(){
 
+        //Set islands
         int i=0;
         for(i=1;i<=gui.getBoard().getIslandViews().size();i++){
             getPaneFromString("island"+i+"Pane").setVisible(true);
@@ -1290,7 +1293,7 @@ public class DashboardController {
             getPaneFromString("island"+count+"Pane").setVisible(false);
         }
 
-
+        //Set clouds
         setupClouds();
     }
 
@@ -1371,6 +1374,10 @@ public class DashboardController {
 
     public void setupClouds() {
 
+        if(gui.getBoard().getClouds().size()==2){
+            for(int count=1;count<=gui.getBoard().getClouds().size();count++)
+                getImageViewFromString("cloud"+count+"Student"+4).setVisible(false);
+        }
         for(int i=1;i<=gui.getBoard().getClouds().size();i++)
             for(int j=1;j<=gui.getBoard().getClouds().get(i-1).getStudents().size();j++){
                 getImageViewFromString("cloud"+i+"Student"+j).setImage(new Image(getImageFromStudent(gui.getBoard().getClouds().get(i-1).getStudents().get(j-1))));
