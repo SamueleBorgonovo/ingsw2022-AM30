@@ -1173,6 +1173,7 @@ public class DashboardController {
         plancePane.setDisable(true);
         setEntranceStudentNotClickable();
         hallPane.setDisable(true);
+        hallPane.setVisible(true);
         assistantsPane.setVisible(false);
         assistantsPane.setDisable(true);
 
@@ -1224,6 +1225,7 @@ public class DashboardController {
         for(int count=player.getPlance().getNumberOfStudentHall(Student.BLUE)+1;count<=10;count++){
             getImageViewFromString("hall5Student"+count).setVisible(false);
         }
+        //System.out.println("Ciaooooooooooooooooooooooooo");
 
 
         //Set professors
@@ -1258,6 +1260,7 @@ public class DashboardController {
         int i=0;
         for(i=1;i<=gui.getBoard().getIslandViews().size();i++){
             getPaneFromString("island"+i+"Pane").setVisible(true);
+            getPaneFromString("island"+i+"Pane").setDisable(true); //<------------------------------------------------------------------------------------------
             if(gui.getBoard().getMotherNature()==i)
                 getImageViewFromString("island"+i+"MotherNature").setVisible(true);
             else getImageViewFromString("island"+i+"MotherNature").setVisible(false);
@@ -1388,13 +1391,21 @@ public class DashboardController {
     }
 
     public void setMotherNatureView(int num,int motherNatureIsland){
-        int j=0;
-        for(int i=motherNatureIsland;i<=gui.getBoard().getIslandViews().size() && i<=num;i++){
+        //int j=0;
+        int k;
+        //System.out.println("Sono qua amico");
+        for(int i=0; i<num ; i++) {
+            k = ((motherNatureIsland + i) % 12) + 1;
+            getPaneFromString("island"+k+"Pane").setDisable(false);
+        }
+        /*for(int i=motherNatureIsland;i<=gui.getBoard().getIslandViews().size() && i<=num;i++){
             getPaneFromString("island"+i+"Pane").setDisable(false);
             j++;
         }
         for(int k=1;k<=num-j;k++)
             getPaneFromString("island"+k+"Pane").setDisable(false);
+
+         */
     }
 
     public String getImageFromStudent(Student student){
@@ -1465,9 +1476,6 @@ public class DashboardController {
         return ((Label) imageview);
     }
 
-
-
-
     public void setEntranceStudentClickable(){
         plancePane.setDisable(false);
         for(int j=1 ; j<=gui.getPlayer().getPlance().getEntrance().size(); j++) {
@@ -1496,8 +1504,6 @@ public class DashboardController {
             playerStateLabel.setText(playerState.toString());
         else playerStateLabel.setText("PLAYING");
     }
-
-
 
     public int numOfColorStudent(Student student,ArrayList<Student> students){
         int i=0;

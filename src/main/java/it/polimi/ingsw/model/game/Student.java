@@ -7,7 +7,7 @@ public enum Student {
     PINK,
     BLUE;
 
-    public String getText(Student student){
+   /* public String getText(Student student){
         String s;
         if(student==Student.GREEN)
             s="Green";
@@ -21,4 +21,6 @@ public enum Student {
             s="Blue";
         return s;
     }
+
+    */
 }
