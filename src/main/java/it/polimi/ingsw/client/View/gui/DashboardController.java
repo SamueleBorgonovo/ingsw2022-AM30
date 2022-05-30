@@ -21,10 +21,6 @@ import java.lang.Math;
 public class DashboardController {
 
     private GUI gui;
-    private ImageView[][] hallView = new ImageView[5][10];
-    private ArrayList<ImageView> entranceView = new ArrayList<>();
-    private ImageView[][] matImageView = new ImageView[3][4];
-    private ArrayList<ImageView> planceTowerView = new ArrayList<>();
 
 
     private Student studentToMove;
@@ -1243,9 +1239,10 @@ public class DashboardController {
 
         //Set towers
         int count;
-        for(count=1;count<=player.getPlance().getNumoftowers();count++)
-            getImageViewFromString("planceTower"+count).setVisible(true);
-
+        for(count=1;count<=player.getPlance().getNumoftowers();count++) {
+            getImageViewFromString("planceTower"+count).setImage(new Image(getImageFromTower(player.getPlance().getTower())));
+            getImageViewFromString("planceTower" + count).setVisible(true);
+        }
         int num=0;
         if(gui.getNumOfPlayers()==2)
             num=8;

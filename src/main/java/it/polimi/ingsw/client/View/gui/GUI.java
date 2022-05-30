@@ -447,9 +447,9 @@ public class GUI extends Application implements View{
             @Override
             public void run() {
                 if (!nick.equals(nickname)) {
-                    dashboardController.setGameUpdateLabel("GAME: " + nick + " moved student " + student + " on island " + IslandID);
                     dashboardController.setupPlayerView(currentPlayerView);
                     dashboardController.setupArchipelago();
+                    dashboardController.setGameUpdateLabel("GAME: " + nick + " moved student " + student + " on island " + IslandID);
                 }
             }
         });
@@ -461,9 +461,9 @@ public class GUI extends Application implements View{
             @Override
             public void run() {
                 if (!nick.equals(nickname)) {
-                    dashboardController.setGameUpdateLabel("GAME: " + nick + " moved MotherNature on island " + islandID);
                     dashboardController.setupArchipelago();
                     dashboardController.setupPlayerView(currentPlayerView);
+                    dashboardController.setGameUpdateLabel("GAME: " + nick + " moved MotherNature on island " + islandID);
                 }
             }
         });
@@ -606,25 +606,49 @@ public class GUI extends Application implements View{
         });
         switch (playerState){
             case STUDENTPHASE -> {
-                playerState=PlayerState.STUDENTPHASE;
+                currentPlayerState=PlayerState.STUDENTPHASE;
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dashboardController.setGameUpdateLabel("GAME: Move one student from entrance!");
+                    }
+                });
                 chooseStudentToMove();
             }
             case ASSISTANTPHASE -> {
-                playerState=PlayerState.ASSISTANTPHASE;
+                currentPlayerState=PlayerState.ASSISTANTPHASE;
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dashboardController.setGameUpdateLabel("GAME: Choose one assistant!");
+                    }
+                });
                 chooseAssistant();
             }
             case MOTHERNATUREPHASE -> {
-                playerState=PlayerState.MOTHERNATUREPHASE;
+                currentPlayerState=PlayerState.MOTHERNATUREPHASE;
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dashboardController.setGameUpdateLabel("GAME: Move MotherNature to an island! MAX:"+player.getLastassistantplayed().getValue());
+                    }
+                });
                 moveMotherNature();
             }
             case CLOUDPHASE -> {
-                playerState=PlayerState.CLOUDPHASE;
+                currentPlayerState=PlayerState.CLOUDPHASE;
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dashboardController.setGameUpdateLabel("GAME: Choose one cloud!");
+                    }
+                });
             }
             case CHARACTHERSTUDENTSPHASE -> {
-                playerState=PlayerState.CHARACTHERSTUDENTSPHASE;
+                currentPlayerState=PlayerState.CHARACTHERSTUDENTSPHASE;
             }
             case CHARACTHERISLANDPHASE -> {
-                playerState=PlayerState.CHARACTHERISLANDPHASE;
+                currentPlayerState=PlayerState.CHARACTHERISLANDPHASE;
             }
         }
     }
