@@ -9,14 +9,15 @@ import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Professor;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+
 import java.util.ArrayList;
-import java.lang.Math;
 
 public class DashboardController {
 
@@ -742,6 +743,12 @@ public class DashboardController {
 
     @FXML
     public ImageView planceTower8;
+
+    @FXML
+    public ChoiceBox showPlanceChoiceBox;
+
+    @FXML
+    public Label showPlanceLabel;
 
 
     public void chosenCloud1(MouseEvent mouseEvent) {
