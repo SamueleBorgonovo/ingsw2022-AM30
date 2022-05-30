@@ -357,9 +357,13 @@ public class GUI extends Application implements View{
     public void setPlayers(ArrayList<PlayerView> players) {
         this.players.clear();
         this.players.addAll(players);
-        for (PlayerView play : players)
+        for (PlayerView play : players) {
             if (play.getNickname().equals(client.getNickname()))
                 player = play;
+            if(currentPlayerView!=null)
+                if(play.getNickname().equals(currentPlayerView.getNickname()))
+                     currentPlayerView=play;
+        }
 
     }
 
