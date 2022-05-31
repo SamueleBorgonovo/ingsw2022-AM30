@@ -38,6 +38,40 @@ public class DashboardController {
         gui.setCurrentPlayerView(gui.getPlayer());
         setupPlayerView(gui.getPlayer());
         setupArchipelago();
+        showPlanceChoiceBox.setDisable(true);
+        showPlanceChoiceBox.setOpacity(0.3);
+    }
+
+    public void setupChoiceBox(PlayerView player){
+        if(player==null) {
+            showPlanceChoiceBox.getItems().add(gui.getPlayers().get(0).getNickname() + " plance");
+            showPlanceChoiceBox.getItems().add(gui.getPlayers().get(1).getNickname() + " plance");
+            if (gui.getNumOfPlayers() == 3)
+                showPlanceChoiceBox.getItems().add(gui.getPlayers().get(2).getNickname() + " plance");
+
+            showPlanceChoiceBox.setOnAction((event) -> {
+                if(gui.getCurrentPlayerState()!=PlayerState.ASSISTANTPHASE) {
+                    int selectedIndex = showPlanceChoiceBox.getSelectionModel().getSelectedIndex();
+                    gui.setCurrentPlayerView(gui.getPlayers().get(selectedIndex));
+                    setupPlayerView(gui.getPlayers().get(selectedIndex));
+                }
+                showPlanceLabel.setText("");
+            });
+
+            showPlanceChoiceBox.setDisable(false);
+            showPlanceChoiceBox.setOpacity(1);
+
+        }
+    }
+
+    public void setupChoiceBoxAssistantPhase(boolean isPhase) {
+        if (isPhase) {
+            showPlanceChoiceBox.setDisable(true);
+            showPlanceChoiceBox.setOpacity(0.3);
+        }else {
+            showPlanceChoiceBox.setDisable(false);
+            showPlanceChoiceBox.setOpacity(1);
+        }
     }
 
 
@@ -771,6 +805,7 @@ public class DashboardController {
         assistantsPane.setVisible(false);
         plancePane.setDisable(false);
         assistantsPane.setDisable(true);
+        setupChoiceBoxAssistantPhase(false);
         gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.LION));
     }
 
@@ -779,6 +814,7 @@ public class DashboardController {
         assistantsPane.setVisible(false);
         plancePane.setDisable(false);
         assistantsPane.setDisable(true);
+        setupChoiceBoxAssistantPhase(false);
         gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.OSTRICH));
     }
 
@@ -787,6 +823,7 @@ public class DashboardController {
         assistantsPane.setVisible(false);
         plancePane.setDisable(false);
         assistantsPane.setDisable(true);
+        setupChoiceBoxAssistantPhase(false);
         gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.CAT));
     }
 
@@ -795,6 +832,7 @@ public class DashboardController {
         assistantsPane.setVisible(false);
         plancePane.setDisable(false);
         assistantsPane.setDisable(true);
+        setupChoiceBoxAssistantPhase(false);
         gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.EAGLE));
     }
 
@@ -803,6 +841,7 @@ public class DashboardController {
         assistantsPane.setVisible(false);
         plancePane.setDisable(false);
         assistantsPane.setDisable(true);
+        setupChoiceBoxAssistantPhase(false);
         gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.FOX));
     }
 
@@ -811,6 +850,7 @@ public class DashboardController {
         assistantsPane.setVisible(false);
         plancePane.setDisable(false);
         assistantsPane.setDisable(true);
+        setupChoiceBoxAssistantPhase(false);
         gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.SNAKE));
     }
 
@@ -819,6 +859,7 @@ public class DashboardController {
         assistantsPane.setVisible(false);
         plancePane.setDisable(false);
         assistantsPane.setDisable(true);
+        setupChoiceBoxAssistantPhase(false);
         gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.OCTOPUS));
     }
 
@@ -827,6 +868,7 @@ public class DashboardController {
         assistantsPane.setVisible(false);
         plancePane.setDisable(false);
         assistantsPane.setDisable(true);
+        setupChoiceBoxAssistantPhase(false);
         gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.DOG));
     }
 
@@ -835,6 +877,7 @@ public class DashboardController {
         assistantsPane.setVisible(false);
         plancePane.setDisable(false);
         assistantsPane.setDisable(true);
+        setupChoiceBoxAssistantPhase(false);
         gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.ELEPHANTS));
     }
 
@@ -843,6 +886,7 @@ public class DashboardController {
         assistantsPane.setVisible(false);
         plancePane.setDisable(false);
         assistantsPane.setDisable(true);
+        setupChoiceBoxAssistantPhase(false);
         gui.getClient().sendMessage(new ChooseAssistantMessage(Assistant.TURTLE));
     }
 

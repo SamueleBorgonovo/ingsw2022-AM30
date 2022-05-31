@@ -388,6 +388,7 @@ public class GUI extends Application implements View{
             @Override
             public void run() {
                 dashboardController.setGameUpdateLabel("GAME: Game is starting!");
+                dashboardController.setupChoiceBox(null);
             }
         });
     }
@@ -409,6 +410,8 @@ public class GUI extends Application implements View{
 
     @Override
     public void printTurn(String nick,boolean isAssistantPhase) {
+        if(!nick.equals(nickname))
+            currentPlayerState=PlayerState.WAITING;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -631,6 +634,7 @@ public class GUI extends Application implements View{
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.setupChoiceBoxAssistantPhase(true);
                         dashboardController.setGameUpdateLabel("GAME: Choose one assistant!");
                     }
                 });
