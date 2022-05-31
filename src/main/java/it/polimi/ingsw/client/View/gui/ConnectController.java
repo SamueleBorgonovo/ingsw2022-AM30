@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.InputMismatchException;
+
 public class ConnectController {
     private GUI gui=null;
     @FXML
@@ -24,10 +26,17 @@ public class ConnectController {
 
 
     public void connect(ActionEvent actionEvent) {
-        if(!gui.createClient(ipWindows.getText(), Integer.parseInt(portWindows.getText())))
-            connectionFailed.setVisible(true);
-        else{
-            gui.instantiateNicknameScene();
-        }
+        int a;
+            try{
+                a = Integer.parseInt(portWindows.getText());
+                if(!gui.createClient(ipWindows.getText(), a))
+                    connectionFailed.setVisible(true);
+                else{
+                    gui.instantiateNicknameScene();
+                }
+            }catch (NumberFormatException | InputMismatchException e) {
+                connectionFailed.setVisible(true);
+            }
+
     }
 }
