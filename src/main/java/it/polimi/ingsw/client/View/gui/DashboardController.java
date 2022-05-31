@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -791,6 +792,122 @@ public class DashboardController {
     @FXML
     public Label showPlanceLabel;
 
+    @FXML
+    public ImageView character1Image;
+
+    @FXML
+    public ImageView character2Image;
+
+    @FXML
+    public ImageView character3Image;
+
+    @FXML
+    public GridPane character1StudentsPane;
+
+    @FXML
+    public GridPane character2StudentsPane;
+
+    @FXML
+    public GridPane character3StudentsPane;
+
+    @FXML
+    public ImageView character1Student1;
+
+    @FXML
+    public ImageView character1Student2;
+
+    @FXML
+    public ImageView character1Student3;
+
+    @FXML
+    public ImageView character1Student4;
+
+    @FXML
+    public ImageView character1Student5;
+
+    @FXML
+    public ImageView character1Student6;
+
+    @FXML
+    public ImageView character2Student1;
+
+    @FXML
+    public ImageView character2Student2;
+
+    @FXML
+    public ImageView character2Student3;
+
+    @FXML
+    public ImageView character2Student4;
+
+    @FXML
+    public ImageView character2Student5;
+
+    @FXML
+    public ImageView character2Student6;
+
+    @FXML
+    public ImageView character3Student1;
+
+    @FXML
+    public ImageView character3Student2;
+
+    @FXML
+    public ImageView character3Student3;
+
+    @FXML
+    public ImageView character3Student4;
+
+    @FXML
+    public ImageView character3Student5;
+
+    @FXML
+    public ImageView character3Student6;
+
+    @FXML
+    public GridPane character1StopsPane;
+
+    @FXML
+    public GridPane character2StopsPane;
+
+    @FXML
+    public GridPane character3StopsPane;
+
+    @FXML
+    public ImageView character1Stop1;
+
+    @FXML
+    public ImageView character1Stop2;
+
+    @FXML
+    public ImageView character1Stop3;
+
+    @FXML
+    public ImageView character1Stop4;
+
+    @FXML
+    public ImageView character2Stop1;
+
+    @FXML
+    public ImageView character2Stop2;
+
+    @FXML
+    public ImageView character2Stop3;
+
+    @FXML
+    public ImageView character2Stop4;
+
+    @FXML
+    public ImageView character3Stop1;
+
+    @FXML
+    public ImageView character3Stop2;
+
+    @FXML
+    public ImageView character3Stop3;
+
+    @FXML
+    public ImageView character3Stop4;
 
     public void chosenCloud1(MouseEvent mouseEvent) {
         ChooseCloudMessage message = new ChooseCloudMessage(1);
@@ -1599,5 +1716,68 @@ public class DashboardController {
             if(!gui.getBoard().getClouds().get(count-1).isChoosen())
                 getPaneFromString("cloud"+count+"Pane").setDisable(false);
         }
+    }
+
+    public void choseCharacter1Student1(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter1Student2(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter1Student3(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter1Student4(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter1Student5(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter1Student6(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter2Student1(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter2Student2(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter2Student3(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter2Student4(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter2Student5(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter2Student6(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter3Student1(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter3Student2(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter3Student3(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter3Student4(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter3Student5(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter3Student6(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter1(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter2(MouseEvent mouseEvent) {
+    }
+
+    public void choseCharacter3(MouseEvent mouseEvent) {
     }
 }
