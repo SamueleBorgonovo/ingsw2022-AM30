@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.View.gui;
 import it.polimi.ingsw.controller.virtualView.CloudView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.messages.toServer.*;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 import it.polimi.ingsw.model.player.Assistant;
@@ -35,6 +36,8 @@ public class DashboardController {
         getImageViewFromString("entranceStudent9").setVisible(false);
         getImageViewFromString("entranceStudent9").setDisable(true);
 
+        if(gui.getClient().getGamemode()!= GameMode.EXPERTMODE)
+            coinPane.setVisible(false);
         gui.setCurrentPlayerView(gui.getPlayer());
         setupPlayerView(gui.getPlayer());
         setupArchipelago();
