@@ -37,11 +37,14 @@ public class DashboardController {
         getImageViewFromString("entranceStudent9").setVisible(false);
         getImageViewFromString("entranceStudent9").setDisable(true);
 
-        if(gui.getClient().getGamemode()!= GameMode.EXPERTMODE)
+        if(gui.getClient().getGamemode()!= GameMode.EXPERTMODE) {
             coinPane.setVisible(false);
+            characterButtor.setVisible(false);
+        }
         gui.setCurrentPlayerView(gui.getPlayer());
         setupPlayerView(gui.getPlayer());
         setupArchipelago();
+        setupPlance(gui.getPlayer());
         showPlanceChoiceBox.setDisable(true);
         showPlanceChoiceBox.setOpacity(0.3);
     }

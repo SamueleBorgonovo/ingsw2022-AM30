@@ -206,7 +206,7 @@ public class GUI extends Application implements View{
             primaryStage.show();
             dashboardController = fxmlLoader.getController();
             dashboardController.setGui(this);
-            dashboardController.setup(); ////////////////////////////////////////////////////////////////////////////////////////////////////
+            dashboardController.setup();
         });
     }
 
@@ -233,9 +233,7 @@ public class GUI extends Application implements View{
         try {
             return client.setupConnection();
         }
-        catch (Exception e){
-
-        }
+        catch (Exception e){}
         return false;
     }
 

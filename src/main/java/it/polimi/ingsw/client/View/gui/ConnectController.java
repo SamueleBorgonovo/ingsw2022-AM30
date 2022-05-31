@@ -1,13 +1,9 @@
 package it.polimi.ingsw.client.View.gui;
 
-import it.polimi.ingsw.client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.util.InputMismatchException;
 
