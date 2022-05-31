@@ -6,29 +6,29 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.NicknameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.NicknameController">
    <children>
-      <Label alignment="CENTER" layoutY="204.0" prefHeight="60.0" prefWidth="1128.0" text="CHOOSE A NICKNAME">
+      <Label alignment="CENTER" layoutY="121.0" prefHeight="60.0" prefWidth="1000.0" text="CHOOSE A NICKNAME">
          <font>
             <Font name="Futura Medium" size="45.0" />
          </font>
       </Label>
-      <TextField fx:id="nicknameWindows" layoutX="348.0" layoutY="355.0" prefHeight="36.0" prefWidth="437.0" promptText="Insert Nickname">
+      <TextField fx:id="nicknameWindows" layoutX="282.0" layoutY="325.0" prefHeight="36.0" prefWidth="437.0" promptText="Insert Nickname">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>
       </TextField>
-      <Label fx:id="wrongNickname" alignment="CENTER" layoutX="1.0" layoutY="402.0" prefHeight="24.0" prefWidth="1129.0" text="Ops!  This nickname is already in use, please try again" visible="false">
+      <Label fx:id="wrongNickname" alignment="CENTER" layoutY="372.0" prefHeight="24.0" prefWidth="1000.0" text="Ops!  This nickname is already in use, please try again" visible="false">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="loginButton" layoutX="380.0" layoutY="497.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@Style.css" text="    Login    ">
+      <Button fx:id="loginButton" layoutX="304.0" layoutY="456.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@Style.css" text="    Login    ">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="reconnectButton" layoutX="640.0" layoutY="498.0" mnemonicParsing="false" onAction="#reconnect" styleClass="box" stylesheets="@Style.css" text="Reconnect">
+      <Button fx:id="reconnectButton" layoutX="586.0" layoutY="460.0" mnemonicParsing="false" onAction="#reconnect" styleClass="box" stylesheets="@Style.css" text="Reconnect">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>

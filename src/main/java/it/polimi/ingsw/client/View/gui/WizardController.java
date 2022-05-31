@@ -3,13 +3,20 @@ package it.polimi.ingsw.client.View.gui;
 import it.polimi.ingsw.messages.toServer.ChooseWizardMessage;
 import it.polimi.ingsw.model.player.Wizard;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
 public class WizardController {
+    private GUI gui;
+
     private ArrayList<Wizard> wizards;
+
+    @FXML
+    public Label wrongWizard;
+
     @FXML
     ImageView wizardGreen;
 
@@ -22,7 +29,6 @@ public class WizardController {
     @FXML
     ImageView wizardPink;
 
-    private GUI gui;
 
     public void setWizards(ArrayList<Wizard> wizards) {
         this.wizards = wizards;

@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.WizardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.WizardController">
    <children>
-      <Label layoutX="363.0" layoutY="202.0" text="SELECT ONE WIZARD">
+      <Label alignment="CENTER" layoutY="121.0" prefHeight="60.0" prefWidth="1000.0" text="SELECT ONE WIZARD">
          <font>
             <Font name="Futura Medium" size="45.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" layoutX="76.0" layoutY="336.0" prefHeight="329.0" prefWidth="984.0" spacing="50.0" styleClass="box" stylesheets="@Style.css">
+      <HBox alignment="CENTER" layoutX="76.0" layoutY="225.0" prefHeight="328.0" prefWidth="332.0" spacing="50.0" styleClass="box" stylesheets="@Style.css">
          <children>
             <ImageView id="wizardGreen" fx:id="wizardGreen" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardGreen">
                <image>
@@ -38,5 +38,10 @@
             </ImageView>
          </children>
       </HBox>
+      <Label fx:id="wrongWizard" alignment="CENTER" layoutY="570.0" prefHeight="24.0" prefWidth="1000.0" text="Ops!  This Wizard is already in use, please try again " visible="false">
+         <font>
+            <Font name="Futura Medium" size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

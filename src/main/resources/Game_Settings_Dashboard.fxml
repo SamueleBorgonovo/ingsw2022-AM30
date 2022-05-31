@@ -6,55 +6,60 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1130.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.GameSettingsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.GameSettingsController">
    <children>
-      <Label alignment="CENTER" layoutY="204.0" prefHeight="60.0" prefWidth="1128.0" text="GAME SETTINGS">
+      <Label alignment="CENTER" layoutY="121.0" prefHeight="60.0" prefWidth="1000.0" text="GAME SETTINGS">
          <font>
             <Font name="Futura Medium" size="45.0" />
          </font>
       </Label>
-      <Pane layoutX="-4.0" layoutY="313.0" prefHeight="126.0" prefWidth="1142.0">
+      <Pane layoutY="230.0" prefHeight="126.0" prefWidth="1000.0">
          <children>
-            <Label alignment="CENTER" layoutX="-3.0" layoutY="1.0" prefHeight="60.0" prefWidth="1147.0" text="Select Game Mode">
+            <Label alignment="CENTER" layoutY="1.0" prefHeight="60.0" prefWidth="1000.0" text="Select Game Mode">
                <font>
                   <Font name="Futura Medium" size="36.0" />
                </font>
             </Label>
-            <CheckBox fx:id="simpleField" layoutX="365.0" layoutY="90.0" mnemonicParsing="false" text="Simple">
+            <CheckBox fx:id="simpleField" layoutX="344.0" layoutY="90.0" mnemonicParsing="false" text="Simple">
                <font>
                   <Font name="Futura Medium" size="18.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="expertField" layoutX="715.0" layoutY="86.0" mnemonicParsing="false" text="Expert">
+            <CheckBox fx:id="expertField" layoutX="575.0" layoutY="86.0" mnemonicParsing="false" text="Expert">
                <font>
                   <Font name="Futura Medium" size="18.0" />
                </font>
             </CheckBox>
          </children>
       </Pane>
-      <Button fx:id="gameSettingsButton" layoutX="534.0" layoutY="672.0" mnemonicParsing="false" onAction="#createGame" styleClass="box" stylesheets="@Style.css" text="Create">
+      <Button fx:id="gameSettingsButton" layoutX="470.0" layoutY="593.0" mnemonicParsing="false" onAction="#createGame" styleClass="box" stylesheets="@Style.css" text="Create">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>
       </Button>
-      <Pane layoutX="1.0" layoutY="488.0" prefHeight="126.0" prefWidth="1142.0">
+      <Pane layoutY="382.0" prefHeight="126.0" prefWidth="1000.0">
          <children>
-            <Label alignment="CENTER" layoutX="-3.0" layoutY="1.0" prefHeight="60.0" prefWidth="1147.0" text="Select the number of players">
+            <Label alignment="CENTER" layoutY="1.0" prefHeight="60.0" prefWidth="1000.0" text="Select the number of players">
                <font>
                   <Font name="Futura Medium" size="36.0" />
                </font>
             </Label>
-            <CheckBox fx:id="twoField" layoutX="365.0" layoutY="90.0" mnemonicParsing="false" text="2">
+            <CheckBox fx:id="twoField" layoutX="344.0" layoutY="90.0" mnemonicParsing="false" text="2">
                <font>
                   <Font name="Futura Medium" size="18.0" />
                </font>
             </CheckBox>
-            <CheckBox  fx:id="threeField" layoutX="715.0" layoutY="86.0" mnemonicParsing="false" text="3">
+            <CheckBox fx:id="threeField" layoutX="575.0" layoutY="86.0" mnemonicParsing="false" text="3">
                <font>
                   <Font name="Futura Medium" size="18.0" />
                </font>
             </CheckBox>
          </children>
       </Pane>
+      <Label fx:id="wrongGameSettings" alignment="CENTER" layoutY="553.0" prefHeight="24.0" prefWidth="1000.0" text="This choices are incorrect, please try again" visible="false">
+         <font>
+            <Font name="Futura Medium" size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
