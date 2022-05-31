@@ -72,6 +72,8 @@ public class GUI extends Application implements View{
         return board;
     }
 
+    public EffectHandler getEffectHandler(){return effectHandler;}
+
     public ArrayList<PlayerView> getPlayers() {
         return players;
     }
@@ -622,7 +624,9 @@ public class GUI extends Application implements View{
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.setCharacterButtonClicked();
                         dashboardController.setGameUpdateLabel("GAME: Move one student from entrance!");
+
                     }
                 });
                 chooseStudentToMove();
@@ -632,6 +636,7 @@ public class GUI extends Application implements View{
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.setCharacterButtonNotClicked();
                         dashboardController.setupChoiceBoxAssistantPhase(true);
                         dashboardController.setGameUpdateLabel("GAME: Choose one assistant!");
                     }
@@ -643,6 +648,7 @@ public class GUI extends Application implements View{
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.setCharacterButtonClicked();
                         dashboardController.setGameUpdateLabel("GAME: Move MotherNature to an island! MAX:"+player.getLastassistantplayed().getValue());
                     }
                 });
@@ -653,15 +659,18 @@ public class GUI extends Application implements View{
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.setCharacterButtonClicked();
                         dashboardController.setGameUpdateLabel("GAME: Choose one cloud!");
                     }
                 });
                 chooseCloud();
             }
             case CHARACTHERSTUDENTSPHASE -> {
+                dashboardController.setCharacterButtonClicked();
                 currentPlayerState=PlayerState.CHARACTHERSTUDENTSPHASE;
             }
             case CHARACTHERISLANDPHASE -> {
+                dashboardController.setCharacterButtonClicked();
                 currentPlayerState=PlayerState.CHARACTHERISLANDPHASE;
             }
         }

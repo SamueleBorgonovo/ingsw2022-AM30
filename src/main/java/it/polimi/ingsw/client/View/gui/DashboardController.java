@@ -1,8 +1,10 @@
 package it.polimi.ingsw.client.View.gui;
 
+import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.CloudView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.messages.toServer.*;
+import it.polimi.ingsw.model.game.EffectHandler;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
@@ -28,6 +30,7 @@ public class DashboardController {
 
     private Student studentToMove;
     private int numOfStudentChosen;
+    private boolean characterButtonClicked=false;
 
 
     public void setup() {
@@ -37,14 +40,20 @@ public class DashboardController {
         getImageViewFromString("entranceStudent9").setVisible(false);
         getImageViewFromString("entranceStudent9").setDisable(true);
 
-        if(gui.getClient().getGamemode()!= GameMode.EXPERTMODE) {
-            coinPane.setVisible(false);
-            characterButtor.setVisible(false);
+        coinPane.setVisible(false);
+        characterButtor.setVisible(false);
+        if(gui.getGameMode()== GameMode.EXPERTMODE) {
+            coinPane.setVisible(true);
+            characterButtor.setVisible(true);
+            characterButtor.setDisable(true);
+            characterButtor.setOpacity(0.3);
+            characterButtonLabel.setOpacity(1);
         }
         gui.setCurrentPlayerView(gui.getPlayer());
         setupPlayerView(gui.getPlayer());
         setupArchipelago();
         setupPlance(gui.getPlayer());
+        charactersPane.setVisible(false);
         showPlanceChoiceBox.setDisable(true);
         showPlanceChoiceBox.setOpacity(0.3);
     }
@@ -1130,6 +1139,21 @@ public class DashboardController {
     }
 
     public void clickCharacetrButton(MouseEvent mouseEvent) {
+        if (!characterButtonClicked) {
+            characterButtonClicked=true;
+            charactersPane.setVisible(true);
+            plancePane.setVisible(false);
+            characterButtonLabel.setText("RETURN TO PLANCE");
+            characterButtor.setDisable(false);
+            setupCharacterView();
+        }else{
+            characterButtonClicked=false;
+            charactersPane.setVisible(false);
+            plancePane.setVisible(true);
+            characterButtonLabel.setText("PLAY CHARACTER");
+            characterButtor.setDisable(false);
+            setupPlance(gui.getPlayer());
+        }
     }
 
     public void clickAssistabtButton(MouseEvent mouseEvent) {
@@ -1586,6 +1610,74 @@ public class DashboardController {
         }
     }
 
+    public void setupCharacterView(){
+        for(int i=1;i<=gui.getBoard().getCharacters().size();i++){
+            getImageViewFromString("character"+i+"Image").setImage(new Image("img/"+gui.getBoard().getCharacters().get(i-1).getName()+".jpg"));
+            getImageViewFromString("character"+i+"Image").setVisible(true);
+            getImageViewFromString("character"+i+"Image").setDisable(false);
+            setStudentsOnCharacter(i);
+        }
+    }
+
+    public void setStudentsOnCharacter(int index){
+        EffectHandler handler=gui.getEffectHandler();
+        switch (gui.getBoard().getCharacters().get(index-1).getName()){
+            case "MONK" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(true);
+                for(int i=0;i<handler.getEffect1students().size();i++){
+                    getImageViewFromString("character"+index+"Student"+(i+1)).setImage(new Image(getImageFromStudent(handler.getEffect1students().get(i))));
+                }
+            }
+            case "FARMER" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
+            }
+            case "HERALD" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
+            }
+            case "POSTMAN" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
+            }
+            case "GRANDMA" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
+                getGridPaneFromString("character"+index+"StopsPane").setVisible(true);
+                int i;
+                for(i=1;i<=handler.getNumofislandstops();i++){
+                    getImageViewFromString("character"+index+"Stop"+i).setVisible(true);
+                }
+                for(int j=i;j<=4;j++){
+                    getImageViewFromString("character"+index+"Stop"+j).setVisible(false);
+                }
+            }
+            case "CENTAUR" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
+            }
+            case "JESTER" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(true);
+                for(int i=0;i<handler.getEffect7students().size();i++){
+                    getImageViewFromString("character"+index+"Student"+(i+1)).setImage(new Image(getImageFromStudent(handler.getEffect7students().get(i))));
+                }
+            }
+            case "KNIGHT" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
+            }
+            case "FUNGARO" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
+            }
+            case "MINSTREL" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
+            }
+            case "PRINCESS" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(true);
+                for(int i=0;i<handler.getEffect11students().size();i++){
+                    getImageViewFromString("character"+index+"Student"+(i+1)).setImage(new Image(getImageFromStudent(handler.getEffect11students().get(i))));
+                }
+            }
+            case "PICAROON" ->{
+                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
+            }
+        }
+    }
+
     public void setMotherNatureView(int num,int motherNatureIsland){
         //int j=0;
         int k;
@@ -1672,6 +1764,16 @@ public class DashboardController {
         return ((Label) imageview);
     }
 
+    public GridPane getGridPaneFromString(String s){
+        Object gridPane = null;
+        try{
+            gridPane=getClass().getDeclaredField(s).get(this);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return ((GridPane) gridPane);
+    }
+
     public void setEntranceStudentClickable(){
         plancePane.setDisable(false);
         for(int j=1 ; j<=gui.getPlayer().getPlance().getEntrance().size(); j++) {
@@ -1719,6 +1821,16 @@ public class DashboardController {
             if(!gui.getBoard().getClouds().get(count-1).isChoosen())
                 getPaneFromString("cloud"+count+"Pane").setDisable(false);
         }
+    }
+
+    public void setCharacterButtonClicked(){
+        characterButtor.setDisable(false);
+        characterButtonLabel.setOpacity(1);
+    }
+
+    public void setCharacterButtonNotClicked(){
+        characterButtor.setDisable(true);
+        characterButtonLabel.setOpacity(0.3);
     }
 
     public void choseCharacter1Student1(MouseEvent mouseEvent) {
