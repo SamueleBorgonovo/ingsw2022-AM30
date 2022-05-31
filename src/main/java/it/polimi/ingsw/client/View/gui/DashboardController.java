@@ -54,6 +54,10 @@ public class DashboardController {
                     int selectedIndex = showPlanceChoiceBox.getSelectionModel().getSelectedIndex();
                     gui.setCurrentPlayerView(gui.getPlayers().get(selectedIndex));
                     setupPlayerView(gui.getPlayers().get(selectedIndex));
+                    if(gui.getPlayer().getNickname().equals(gui.getPlayers().get(selectedIndex).getNickname()) && gui.getCurrentPlayerState()!=PlayerState.WAITING
+                       && gui.getCurrentPlayerState()!=PlayerState.RECONNECTED){
+                        gui.nextMove(gui.getCurrentPlayerState());
+                    }
                 }
                 showPlanceLabel.setText("");
             });
