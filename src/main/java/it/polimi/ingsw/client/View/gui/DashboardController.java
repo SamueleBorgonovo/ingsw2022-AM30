@@ -53,7 +53,7 @@ public class DashboardController {
                 if(gui.getCurrentPlayerState()!=PlayerState.ASSISTANTPHASE) {
                     int selectedIndex = showPlanceChoiceBox.getSelectionModel().getSelectedIndex();
                     gui.setCurrentPlayerView(gui.getPlayers().get(selectedIndex));
-                    setupPlayerView(gui.getPlayers().get(selectedIndex));
+                    setupPlance(gui.getPlayers().get(selectedIndex));
                     if(gui.getPlayer().getNickname().equals(gui.getPlayers().get(selectedIndex).getNickname()) && gui.getCurrentPlayerState()!=PlayerState.WAITING
                        && gui.getCurrentPlayerState()!=PlayerState.RECONNECTED){
                         gui.nextMove(gui.getCurrentPlayerState());
@@ -1220,7 +1220,7 @@ public class DashboardController {
     //////////////////////////////////////////////////////////////
 
 
-    //It changes only plance
+    //First setup of the player
     public void setupPlayerView(PlayerView player){
 
         nicknameLabel.setText(player.getNickname());
@@ -1233,83 +1233,6 @@ public class DashboardController {
         hallPane.setVisible(true);
         assistantsPane.setVisible(false);
         assistantsPane.setDisable(true);
-
-        //Set entrance
-        int i=0;
-        for(i=1;i<=player.getPlance().getEntrance().size();i++){
-            getImageViewFromString("entranceStudent"+i).setImage(new Image(getImageFromStudent(player.getPlance().getEntrance().get(i-1))));
-            getImageViewFromString("entranceStudent"+i).setVisible(true);
-            getImageViewFromString("entranceStudent"+i).setDisable(true);
-        }
-
-        for(int count=i+1;count<=9;count++){
-            getImageViewFromString("entranceStudent"+i).setVisible(false);
-            getImageViewFromString("entranceStudent"+i).setDisable(true);
-        }
-
-        //Set hall
-        for(int count=1;count<=player.getPlance().getNumberOfStudentHall(Student.GREEN);count++){
-            getImageViewFromString("hall1Student"+count).setVisible(true);
-        }
-        for(int count=player.getPlance().getNumberOfStudentHall(Student.GREEN)+1;count<=10;count++){
-            getImageViewFromString("hall1Student"+count).setVisible(false);
-        }
-
-        for(int count=1;count<=player.getPlance().getNumberOfStudentHall(Student.RED);count++){
-            getImageViewFromString("hall2Student"+count).setVisible(true);
-        }
-        for(int count=player.getPlance().getNumberOfStudentHall(Student.RED)+1;count<=10;count++){
-            getImageViewFromString("hall2Student"+count).setVisible(false);
-        }
-
-        for(int count=1;count<=player.getPlance().getNumberOfStudentHall(Student.YELLOW);count++){
-            getImageViewFromString("hall3Student"+count).setVisible(true);
-        }
-        for(int count=player.getPlance().getNumberOfStudentHall(Student.YELLOW)+1;count<=10;count++){
-            getImageViewFromString("hall3Student"+count).setVisible(false);
-        }
-
-        for(int count=1;count<=player.getPlance().getNumberOfStudentHall(Student.PINK);count++){
-            getImageViewFromString("hall4Student"+count).setVisible(true);
-        }
-        for(int count=player.getPlance().getNumberOfStudentHall(Student.PINK)+1;count<=10;count++){
-            getImageViewFromString("hall4Student"+count).setVisible(false);
-        }
-
-        for(int count=1;count<=player.getPlance().getNumberOfStudentHall(Student.BLUE);count++){
-            getImageViewFromString("hall5Student"+count).setVisible(true);
-        }
-        for(int count=player.getPlance().getNumberOfStudentHall(Student.BLUE)+1;count<=10;count++){
-            getImageViewFromString("hall5Student"+count).setVisible(false);
-        }
-        //System.out.println("Ciaooooooooooooooooooooooooo");
-
-
-        //Set professors
-
-        getImageViewFromString("professorGreen").setVisible(false);
-        getImageViewFromString("professorRed").setVisible(false);
-        getImageViewFromString("professorYellow").setVisible(false);
-        getImageViewFromString("professorPink").setVisible(false);
-        getImageViewFromString("professorBlue").setVisible(false);
-        for(Professor prof: player.getPlance().getProfessors()){
-            getImageViewFromString("professor"+prof.getText(prof)).setVisible(true);
-        }
-
-        //Set towers
-        int count;
-        for(count=1;count<=player.getPlance().getNumoftowers();count++) {
-            getImageViewFromString("planceTower"+count).setImage(new Image(getImageFromTower(player.getPlance().getTower())));
-            getImageViewFromString("planceTower" + count).setVisible(true);
-        }
-        int num=0;
-        if(gui.getNumOfPlayers()==2)
-            num=8;
-        if(gui.getNumOfPlayers()==3)
-            num=6;
-        for(i=count;count<=num;count++){
-           getImageViewFromString("planceTower"+i).setVisible(false);
-        }
     }
 
     public void setupArchipelago(){
@@ -1350,6 +1273,94 @@ public class DashboardController {
 
         //Set clouds
         setupClouds();
+    }
+
+    public void setupPlance(PlayerView player){
+        //Set entrance
+            int i = 0;
+            for (i = 1; i <= player.getPlance().getEntrance().size(); i++) {
+                getImageViewFromString("entranceStudent" + i).setImage(new Image(getImageFromStudent(player.getPlance().getEntrance().get(i - 1))));
+                getImageViewFromString("entranceStudent" + i).setVisible(true);
+                getImageViewFromString("entranceStudent" + i).setDisable(true);
+            }
+
+            for (int count = i + 1; count <= 9; count++) {
+                getImageViewFromString("entranceStudent" + i).setVisible(false);
+                getImageViewFromString("entranceStudent" + i).setDisable(true);
+            }
+
+            //Set hall
+            for (int count = 1; count <= player.getPlance().getNumberOfStudentHall(Student.GREEN); count++) {
+                getImageViewFromString("hall1Student" + count).setVisible(true);
+            }
+            for (int count = player.getPlance().getNumberOfStudentHall(Student.GREEN) + 1; count <= 10; count++) {
+                getImageViewFromString("hall1Student" + count).setVisible(false);
+            }
+
+            for (int count = 1; count <= player.getPlance().getNumberOfStudentHall(Student.RED); count++) {
+                getImageViewFromString("hall2Student" + count).setVisible(true);
+            }
+            for (int count = player.getPlance().getNumberOfStudentHall(Student.RED) + 1; count <= 10; count++) {
+                getImageViewFromString("hall2Student" + count).setVisible(false);
+            }
+
+            for (int count = 1; count <= player.getPlance().getNumberOfStudentHall(Student.YELLOW); count++) {
+                getImageViewFromString("hall3Student" + count).setVisible(true);
+            }
+            for (int count = player.getPlance().getNumberOfStudentHall(Student.YELLOW) + 1; count <= 10; count++) {
+                getImageViewFromString("hall3Student" + count).setVisible(false);
+            }
+
+            for (int count = 1; count <= player.getPlance().getNumberOfStudentHall(Student.PINK); count++) {
+                getImageViewFromString("hall4Student" + count).setVisible(true);
+            }
+            for (int count = player.getPlance().getNumberOfStudentHall(Student.PINK) + 1; count <= 10; count++) {
+                getImageViewFromString("hall4Student" + count).setVisible(false);
+            }
+
+            for (int count = 1; count <= player.getPlance().getNumberOfStudentHall(Student.BLUE); count++) {
+                getImageViewFromString("hall5Student" + count).setVisible(true);
+            }
+            for (int count = player.getPlance().getNumberOfStudentHall(Student.BLUE) + 1; count <= 10; count++) {
+                getImageViewFromString("hall5Student" + count).setVisible(false);
+            }
+            //System.out.println("Ciaooooooooooooooooooooooooo");
+
+
+            //Set professors
+
+            getImageViewFromString("professorGreen").setVisible(false);
+            getImageViewFromString("professorRed").setVisible(false);
+            getImageViewFromString("professorYellow").setVisible(false);
+            getImageViewFromString("professorPink").setVisible(false);
+            getImageViewFromString("professorBlue").setVisible(false);
+            for (Professor prof : player.getPlance().getProfessors()) {
+                getImageViewFromString("professor" + prof.getText(prof)).setVisible(true);
+            }
+
+            //Set towers
+            int count;
+            for (count = 1; count <= player.getPlance().getNumoftowers(); count++) {
+                getImageViewFromString("planceTower" + count).setImage(new Image(getImageFromTower(player.getPlance().getTower())));
+                getImageViewFromString("planceTower" + count).setVisible(true);
+            }
+            int num = 0;
+            if (gui.getNumOfPlayers() == 2)
+                num = 8;
+            if (gui.getNumOfPlayers() == 3)
+                num = 6;
+            for (i = count; count <= num; count++) {
+                getImageViewFromString("planceTower" + i).setVisible(false);
+            }
+
+        plancePane.setVisible(true);
+        plancePane.setDisable(true);
+        setEntranceStudentNotClickable();
+        hallPane.setDisable(true);
+        hallPane.setVisible(true);
+        assistantsPane.setVisible(false);
+        assistantsPane.setDisable(true);
+
     }
 
 

@@ -259,7 +259,7 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                dashboardController.setupPlayerView(player);
+                dashboardController.setupPlance(player);
                 dashboardController.setEntranceStudentClickable();
             }
         });
@@ -415,7 +415,7 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                dashboardController.setupPlayerView(player);
+                dashboardController.setupPlance(player);
                 if(isAssistantPhase)
                     dashboardController.setGameUpdateLabel("GAME: "+nick+" is choosing an assistant");
                 else dashboardController.setGameUpdateLabel("GAME: "+nick+" started his turn");
@@ -433,7 +433,7 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                dashboardController.setupPlayerView(currentPlayerView);
+                dashboardController.setupPlance(currentPlayerView);
                 dashboardController.setupArchipelago();
                 if (!nick.equals(nickname)) {
                     dashboardController.setGameUpdateLabel("GAME: " + nick + " choosed cloud " + cloudID);
@@ -449,7 +449,7 @@ public class GUI extends Application implements View{
             public void run() {
                 if(!nick.equals(nickname)) {
                     dashboardController.setGameUpdateLabel("GAME: " + nick + " moved student " + student + " in his hall");
-                    dashboardController.setupPlayerView(currentPlayerView);
+                    dashboardController.setupPlance(currentPlayerView);
                 }
             }
         });
@@ -461,7 +461,7 @@ public class GUI extends Application implements View{
             @Override
             public void run() {
                 if (!nick.equals(nickname)) {
-                    dashboardController.setupPlayerView(currentPlayerView);
+                    dashboardController.setupPlance(currentPlayerView);
                     dashboardController.setupArchipelago();
                     dashboardController.setGameUpdateLabel("GAME: " + nick + " moved student " + student + " on island " + IslandID);
                 }
@@ -476,7 +476,7 @@ public class GUI extends Application implements View{
             public void run() {
                 if (!nick.equals(nickname)) {
                     dashboardController.setupArchipelago();
-                    dashboardController.setupPlayerView(currentPlayerView);
+                    dashboardController.setupPlance(currentPlayerView);
                     dashboardController.setGameUpdateLabel("GAME: " + nick + " moved MotherNature on island " + islandID);
                 }
             }
@@ -614,7 +614,7 @@ public class GUI extends Application implements View{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                dashboardController.setupPlayerView(player);
+                dashboardController.setupPlance(player);
                 dashboardController.setupArchipelago();
             }
         });
