@@ -1628,13 +1628,7 @@ public class DashboardController {
                     getImageViewFromString("character"+index+"Student"+(i+1)).setImage(new Image(getImageFromStudent(handler.getEffect1students().get(i))));
                 }
             }
-            case "FARMER" ->{
-                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
-            }
-            case "HERALD" ->{
-                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
-            }
-            case "POSTMAN" ->{
+            case "FARMER", "HERALD", "POSTMAN", "CENTAUR", "KNIGHT", "FUNGARO", "MINSTREL", "PICAROON" ->{
                 getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
             }
             case "GRANDMA" ->{
@@ -1648,32 +1642,17 @@ public class DashboardController {
                     getImageViewFromString("character"+index+"Stop"+j).setVisible(false);
                 }
             }
-            case "CENTAUR" ->{
-                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
-            }
             case "JESTER" ->{
                 getGridPaneFromString("character"+index+"StudentsPane").setVisible(true);
                 for(int i=0;i<handler.getEffect7students().size();i++){
                     getImageViewFromString("character"+index+"Student"+(i+1)).setImage(new Image(getImageFromStudent(handler.getEffect7students().get(i))));
                 }
             }
-            case "KNIGHT" ->{
-                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
-            }
-            case "FUNGARO" ->{
-                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
-            }
-            case "MINSTREL" ->{
-                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
-            }
             case "PRINCESS" ->{
                 getGridPaneFromString("character"+index+"StudentsPane").setVisible(true);
                 for(int i=0;i<handler.getEffect11students().size();i++){
                     getImageViewFromString("character"+index+"Student"+(i+1)).setImage(new Image(getImageFromStudent(handler.getEffect11students().get(i))));
                 }
-            }
-            case "PICAROON" ->{
-                getGridPaneFromString("character"+index+"StudentsPane").setVisible(false);
             }
         }
     }
