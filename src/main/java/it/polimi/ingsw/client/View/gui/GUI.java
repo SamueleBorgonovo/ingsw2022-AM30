@@ -316,6 +316,10 @@ public class GUI extends Application implements View{
     @Override
     public void moveStudentToIsland () {}
 
+    public void setCharacter4played(boolean character4played) {
+        this.character4played = character4played;
+    }
+
     @Override
     public void moveMotherNature() {
         int num=0;
@@ -328,6 +332,7 @@ public class GUI extends Application implements View{
                 dashboardController.setMotherNatureView(finalNum,getBoard().getMotherNature());
             }
         });
+        character4played = false;//////////////////////////////////////////
     }
 
     @Override
@@ -668,10 +673,22 @@ public class GUI extends Application implements View{
             case CHARACTHERSTUDENTSPHASE -> {
                 dashboardController.setCharacterButtonClicked();
                 currentPlayerState=PlayerState.CHARACTHERSTUDENTSPHASE;
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dashboardController.inputStudentCharacter();
+                    }
+                });
             }
             case CHARACTHERISLANDPHASE -> {
                 dashboardController.setCharacterButtonClicked();
                 currentPlayerState=PlayerState.CHARACTHERISLANDPHASE;
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dashboardController.inputIslandCharacter();
+                    }
+                });
             }
         }
     }
