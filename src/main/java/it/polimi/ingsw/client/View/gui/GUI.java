@@ -277,14 +277,19 @@ public class GUI extends Application implements View{
     ///////////////////////////////////////////////////////////////////
     @Override
     public void chooseNickname(boolean validNickname, boolean reconnect) {
-        if(!validNickname)
-            nicknameScene.setWrongNickname(true);
-        else if(reconnect) {
-            nicknameScene.setReconnectButton(true);
-            nicknameScene.moveLoginButtonX(-10);
-        }
-            else
-                client.gameSetup();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if(!validNickname)
+                    nicknameScene.setWrongNickname(true);
+                else if(reconnect) {
+                    nicknameScene.setReconnectButton(true);
+                    nicknameScene.moveLoginButtonX(-10);
+                }
+                else
+                    client.gameSetup();
+            }
+        });
     }
 
     @Override
