@@ -632,13 +632,15 @@ public class GUI extends Application implements View{
 
     @Override
     public void nextMove(PlayerState playerState) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setupPlance(player);
-                dashboardController.setupArchipelago();
-            }
-        });
+        //if (playerState != PlayerState.CHARACTHERISLANDPHASE && playerState != PlayerState.CHARACTHERSTUDENTSPHASE){
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    dashboardController.setupPlance(player);
+                    dashboardController.setupArchipelago();
+                }
+            });
+       // }
         switch (playerState){
             case STUDENTPHASE -> {
                 currentPlayerState=PlayerState.STUDENTPHASE;
@@ -687,6 +689,7 @@ public class GUI extends Application implements View{
                 chooseCloud();
             }
             case CHARACTHERSTUDENTSPHASE -> {
+                System.out.println("Fino a qui ci sei poi non so");
                 dashboardController.setCharacterButtonClicked();
                 currentPlayerState=PlayerState.CHARACTHERSTUDENTSPHASE;
                 Platform.runLater(new Runnable() {
@@ -697,6 +700,7 @@ public class GUI extends Application implements View{
                 });
             }
             case CHARACTHERISLANDPHASE -> {
+                System.out.println("Fino a qui ci sei poi non so");
                 dashboardController.setCharacterButtonClicked();
                 currentPlayerState=PlayerState.CHARACTHERISLANDPHASE;
                 Platform.runLater(new Runnable() {

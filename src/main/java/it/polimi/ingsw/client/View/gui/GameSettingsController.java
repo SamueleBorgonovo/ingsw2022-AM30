@@ -63,5 +63,9 @@ public class GameSettingsController {
                 gui.setNumOfPlayers(numberOfPlayers);
                 gui.getClient().sendMessage(message);
             }
+            else {
+                wrongGameSettings.setText("You must select one option for each question");
+                wrongGameSettings.setVisible(true);
+            }
     }
 }
