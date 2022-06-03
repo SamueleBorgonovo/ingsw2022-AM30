@@ -42,11 +42,16 @@ public class GUI extends Application implements View{
     private PlayerView currentPlayerView;
     private boolean character4played=false;
     private PlayerState currentPlayerState;
+    private Wizard wizard;
 
     @Override
     public void start(Stage primaryStage){
         this.primaryStage=primaryStage;
         instantiateConnectionScene();
+    }
+
+    public void setWizard(Wizard wizard){
+        this.wizard=wizard;
     }
 
     public Client getClient() {
@@ -208,6 +213,7 @@ public class GUI extends Application implements View{
             primaryStage.show();
             dashboardController = fxmlLoader.getController();
             dashboardController.setGui(this);
+            dashboardController.setBackgroundImage(getClient().getWizard());
             dashboardController.setup();
         });
     }
@@ -581,7 +587,12 @@ public class GUI extends Application implements View{
 
     @Override
     public void printWaitingForPlayers(boolean lobby) {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dashboardController.setGameUpdateLabel("GAME: You are the only remained, timer to win started");
+            }
+        });
     }
 
     @Override

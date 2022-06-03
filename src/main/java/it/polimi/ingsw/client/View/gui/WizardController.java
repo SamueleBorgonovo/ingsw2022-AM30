@@ -59,6 +59,7 @@ public class WizardController {
     }
 
     public void choosenWizardGreen(MouseEvent mouseEvent) {
+        gui.getClient().setWizard(Wizard.WIZARD_GREEN);
         ChooseWizardMessage message = new ChooseWizardMessage(Wizard.WIZARD_GREEN);
         gui.getClient().sendMessage(message);
         wizardYellow.setDisable(true);
@@ -67,6 +68,7 @@ public class WizardController {
     }
 
     public void choosenWizardYellow(MouseEvent mouseEvent) {
+        gui.getClient().setWizard(Wizard.WIZARD_YELLOW);
         ChooseWizardMessage message = new ChooseWizardMessage(Wizard.WIZARD_YELLOW);
         gui.getClient().sendMessage(message);
         wizardGreen.setDisable(true);
@@ -75,6 +77,7 @@ public class WizardController {
     }
 
     public void choosenWizardBlue(MouseEvent mouseEvent) {
+        gui.getClient().setWizard(Wizard.WIZARD_BLUE);
         ChooseWizardMessage message = new ChooseWizardMessage(Wizard.WIZARD_BLUE);
         gui.getClient().sendMessage(message);
         wizardYellow.setDisable(true);
@@ -83,6 +86,7 @@ public class WizardController {
     }
 
     public void choosenWizardPink(MouseEvent mouseEvent) {
+        gui.getClient().setWizard(Wizard.WIZARD_PINK);
         ChooseWizardMessage message = new ChooseWizardMessage(Wizard.WIZARD_PINK);
         gui.getClient().sendMessage(message);
         wizardYellow.setDisable(true);

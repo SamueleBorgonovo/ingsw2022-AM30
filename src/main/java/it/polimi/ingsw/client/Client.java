@@ -73,10 +73,10 @@ public class Client {
 
     }
 
-    public void setSettings(GameMode gamemode,int numofPlayers){
+    public void setSettings(GameMode gamemode,int numofPlayers,Wizard wizard){
         this.gamemode=gamemode;
         this.numofPlayers=numofPlayers;
-
+        this.wizard=wizard;
     }
 
 

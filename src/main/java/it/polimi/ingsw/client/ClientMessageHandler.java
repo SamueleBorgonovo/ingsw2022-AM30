@@ -152,7 +152,7 @@ public class ClientMessageHandler {
     }
 
     public void process(SettingReconnectMessage message){
-        client.setSettings(message.getGameMode(),message.getNumOfPlayers());
+        client.setSettings(message.getGameMode(),message.getNumOfPlayers(),message.getWizard());
     }
 
     public void process(CorrectlyConnectedMessage message){

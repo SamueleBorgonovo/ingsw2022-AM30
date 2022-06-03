@@ -36,10 +36,13 @@ public class NicknameController {
         String nickname = nicknameWindows.getText();
         gui.getClient().sendMessage(new ChooseNicknameMessage(nickname,true));
         gui.setNickname(nickname);
+        gui.instantiateDashBoardScene();
     }
 
 
     public void setReconnectButton(boolean visible){
+        wrongNickname.setVisible(true);
+        wrongNickname.setText("Press 'reconnect' if you want to reconnect to the game");
         reconnectButton.setVisible(visible);
     }
 

@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class ClientMain {
 
   public static void main(String[] args) throws Exception {
-
+      System.out.println(System.getProperty("file.encoding"));
       Scanner stdin = new Scanner(System.in);
       System.out.println("Do you want use CLI or GUI? c | g");
       String ris = stdin.nextLine();

@@ -12,6 +12,7 @@ import it.polimi.ingsw.model.game.Tower;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Professor;
+import it.polimi.ingsw.model.player.Wizard;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -98,6 +99,23 @@ public class DashboardController {
         } else {
             showPlanceChoiceBox.setDisable(false);
             showPlanceChoiceBox.setOpacity(1);
+        }
+    }
+
+    public void setBackgroundImage(Wizard wizard){
+        switch (wizard){
+            case WIZARD_BLUE -> {
+                backgroundImage.setImage(new Image("img/wizardBlueBackground.jpg"));
+            }
+            case WIZARD_PINK -> {
+                backgroundImage.setImage(new Image("img/wizardPinkBackground.jpg"));
+            }
+            case WIZARD_YELLOW -> {
+                backgroundImage.setImage(new Image("img/wizardYellowBackground.jpg"));
+            }
+            case WIZARD_GREEN -> {
+                backgroundImage.setImage(new Image("img/wizardGreenBackground.jpg"));
+            }
         }
     }
 

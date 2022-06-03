@@ -166,7 +166,12 @@ public class GameHandler {
                 clientHandler.sendMessageToClient(new PlanceUpdateMessage(game.getPlayersView()));
                 clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard().getBoardView()));
                 clientHandler.sendMessageToClient(new EffectHandlerUpdateMessage(game.getEffectHandler()));
-                clientHandler.sendMessageToClient(new SettingReconnectMessage(game.getGameMode(),game.getNumOfPlayers()));
+                Wizard wizardToSend=null;
+                for(Player player : game.getPlayers())
+                    if(playerid==player.getPlayerID()){
+                        wizardToSend=player.getWizard();
+                    }
+                clientHandler.sendMessageToClient(new SettingReconnectMessage(game.getGameMode(),game.getNumOfPlayers(),wizardToSend));
                 sendMessagetoGame(game, new ConnectMessage(clientHandler.getNickname(), true));
                 if(game.getNumOfPlayers()-game.getNumPlayerDisconnected()==2)
                     turnHandler(game);
