@@ -1,13 +1,8 @@
 .box{
-    -fx-background-color: #d1cabe;
     -fx-background-radius: 35;
 }
 
 .boxwhite{
     -fx-background-color: #f8f5f1;
     -fx-background-radius: 35;
-}
-
-.background{
-    -fx-background-color: #dad2c7;
 }

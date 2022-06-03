@@ -107,6 +107,9 @@ public class DashboardController {
     }
 
     @FXML
+    public ImageView backgroundImage;
+
+    @FXML
     public Pane cloud1Pane;
 
     @FXML

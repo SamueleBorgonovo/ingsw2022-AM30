@@ -15,6 +15,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.DashboardController">
    <children>
+      <ImageView fx:id="backgroundImage" fitHeight="700.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/wizardGreenBackground.jpg" />
+         </image>
+      </ImageView>
       <Pane id="islandsPane" layoutX="38.0" layoutY="35.0" prefHeight="424.0" prefWidth="737.0" styleClass="box" stylesheets="@Style.css">
          <children>
             <Pane fx:id="island1Pane" layoutX="3.0" layoutY="5.0" onMouseClicked="#chosenIsland1" prefHeight="150.0" prefWidth="150.0">
@@ -1408,9 +1413,9 @@
             </ScrollPane>
          </children>
       </Pane>
-      <Pane fx:id="plancePane" layoutX="477.0" layoutY="483.0" prefHeight="188.0" prefWidth="490.0" visible="false">
+      <Pane fx:id="plancePane" layoutX="477.0" layoutY="483.0" prefHeight="188.0" prefWidth="490.0" styleClass="box" stylesheets="@Style.css">
          <children>
-            <ImageView fitHeight="190.0" fitWidth="493.0" layoutY="-1.0">
+            <ImageView fitHeight="188.0" fitWidth="490.0">
                <image>
                   <Image url="@img/plance.png" />
                </image>
@@ -1853,7 +1858,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="charactersPane" layoutX="477.0" layoutY="483.0" prefHeight="188.0" prefWidth="490.0" styleClass="box" stylesheets="@Style.css">
+      <Pane fx:id="charactersPane" layoutX="477.0" layoutY="483.0" prefHeight="188.0" prefWidth="490.0" styleClass="box" stylesheets="@Style.css" visible="false">
          <children>
             <Pane layoutX="29.0" layoutY="8.0" prefHeight="171.0" prefWidth="117.0">
                <children>
