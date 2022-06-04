@@ -2222,6 +2222,8 @@ public class DashboardController {
                setGameUpdateLabel("EFFECT: Choose un to 3 students from the card and then from the entrance");
            }
            case STUDENT -> {
+               plancePane.setDisable(false);
+               hallPane.setDisable(false);
                hallBlue.setDisable(false);
                hallGreen.setDisable(false);
                hallPink.setDisable(false);
@@ -2233,9 +2235,7 @@ public class DashboardController {
                setEntranceStudentClickable();
                 setGameUpdateLabel("EFFECT: Choose up two students from the entrance and then from the hall");
             }
-
         }
-
     }
 
 
