@@ -39,6 +39,10 @@ public class WizardController {
         this.gui=gui;
     }
 
+    public void setWrongWizard(){
+        wrongWizard.setVisible(true);
+    }
+
     public void visibleWizards(ArrayList<Wizard> wizards){
         if(!wizards.contains(Wizard.WIZARD_GREEN)){
             wizardGreen.setDisable(true);

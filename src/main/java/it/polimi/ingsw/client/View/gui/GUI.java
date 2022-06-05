@@ -578,6 +578,12 @@ public class GUI extends Application implements View{
 
     @Override
     public void printInvalidWizard() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                wizardScene.setWrongWizard();
+            }
+        });
     }
 
     @Override
