@@ -49,8 +49,6 @@ public interface View {
 
     public void setEffectHandler(EffectHandler effectHandler);
 
-    public void print();
-
     public void printStartGame();
 
     public void winner(ArrayList<String> nicknamesWinner);

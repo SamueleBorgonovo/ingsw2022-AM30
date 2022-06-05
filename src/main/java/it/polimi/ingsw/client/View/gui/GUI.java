@@ -393,10 +393,6 @@ public class GUI extends Application implements View{
         this.effectHandler=effectHandler;
     }
 
-    @Override
-    public void print() {
-
-    }
 
     @Override
     public void printStartGame() {
@@ -639,13 +635,13 @@ public class GUI extends Application implements View{
     @Override
     public void nextMove(PlayerState playerState) {
         currentPlayerState=playerState;
-        System.out.println(currentPlayerState);
         //if (playerState != PlayerState.CHARACTHERISLANDPHASE && playerState != PlayerState.CHARACTHERSTUDENTSPHASE){
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     dashboardController.setupPlance(player);
                     dashboardController.setupArchipelago();
+                    dashboardController.setPlayerStateLabel(currentPlayerState);
                 }
             });
        // }
@@ -655,6 +651,7 @@ public class GUI extends Application implements View{
                     @Override
                     public void run() {
                         dashboardController.setEntranceStudentClickable();
+                        dashboardController.setCharacterButtonClicked();
                         dashboardController.setGameUpdateLabel("GAME: Move one student from entrance!");
 
                     }

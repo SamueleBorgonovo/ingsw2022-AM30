@@ -469,10 +469,7 @@ public class CLI implements View {
         this.effectHandler = effectHandler;
     }
 
-    @Override
-    public void print() {
 
-    }
 
 
     @Override

@@ -91,10 +91,9 @@ public class Client {
     }
 
     public void handleDisconnection(String nick,boolean timeout,boolean win){
-        //if gameEnded=true server disconnected all players, else someone is disconnected from game
+        //if timeout=true server disconnected all players, else someone is disconnected from game
         if(win){
             view.printWinClose();
-            System.out.println("Nell'handleDisconnection quando qualcuno ha vinto");
             handleSocketDisconnection(false);
         }
         if(timeout){
