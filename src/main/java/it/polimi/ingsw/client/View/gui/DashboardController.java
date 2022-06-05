@@ -50,12 +50,15 @@ public class DashboardController {
 
         coinPane.setVisible(false);
         characterButtor.setVisible(false);
+        characterButtonLabel.setVisible(false);
         if (gui.getGameMode() == GameMode.EXPERTMODE) {
             coinLabel.setText(String.valueOf(gui.getPlayer().getCoins()));
             coinPane.setVisible(true);
             characterButtor.setVisible(true);
             characterButtor.setDisable(true);
             characterButtor.setOpacity(0.3);
+            characterButtonLabel.setVisible(true);
+            characterButtonLabel.setDisable(true);
             characterButtonLabel.setOpacity(1);
         }
         gui.setCurrentPlayerView(gui.getPlayer());
@@ -2203,12 +2206,14 @@ public class DashboardController {
 
     public void setCharacterButtonClicked() {
         characterButtor.setDisable(false);
-        characterButtonLabel.setOpacity(1);
+        characterButtor.setOpacity(1);
+        characterButtonLabel.setDisable(false);
     }
 
     public void setCharacterButtonNotClicked() {
         characterButtor.setDisable(true);
-        characterButtonLabel.setOpacity(0.3);
+        characterButtor.setOpacity(0.3);
+        characterButtonLabel.setDisable(true);
     }
 
     public void inputStudentCharacter() {

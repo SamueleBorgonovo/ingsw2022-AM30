@@ -422,8 +422,15 @@ public class GUI extends Application implements View{
 
     @Override
     public void printTurn(String nick,boolean isAssistantPhase) {
-        if(!nick.equals(nickname))
-            currentPlayerState=PlayerState.WAITING;
+        if(!nick.equals(nickname)) {
+            currentPlayerState = PlayerState.WAITING;
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    dashboardController.setCharacterButtonNotClicked();
+                }
+            });
+        }
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
