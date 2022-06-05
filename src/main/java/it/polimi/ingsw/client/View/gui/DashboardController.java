@@ -1059,7 +1059,7 @@ public class DashboardController {
     }
 
     public void chosenEntranceStudent9(MouseEvent mouseEvent) {
-        if(gui.getPlayer().getPlayerState()==PlayerState.STUDENTPHASE) {
+        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
             studentToMove = gui.getPlayer().getPlance().getEntrance().get(8);
             setEntranceStudentNotClickable();
             if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
@@ -1094,7 +1094,7 @@ public class DashboardController {
     }
 
     public void chosenEntranceStudent6(MouseEvent mouseEvent) {
-        if(gui.getPlayer().getPlayerState()==PlayerState.STUDENTPHASE) {
+        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
             studentToMove = gui.getPlayer().getPlance().getEntrance().get(5);
             setEntranceStudentNotClickable();
             if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
@@ -1129,7 +1129,7 @@ public class DashboardController {
     }
 
     public void chosenEntranceStudent4(MouseEvent mouseEvent) {
-        if(gui.getPlayer().getPlayerState()==PlayerState.STUDENTPHASE) {
+        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
             studentToMove = gui.getPlayer().getPlance().getEntrance().get(3);
             setEntranceStudentNotClickable();
             if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
@@ -1164,7 +1164,7 @@ public class DashboardController {
     }
 
     public void chosenEntranceStudent2(MouseEvent mouseEvent) {
-        if(gui.getPlayer().getPlayerState()==PlayerState.STUDENTPHASE) {
+        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
             studentToMove = gui.getPlayer().getPlance().getEntrance().get(1);
             setEntranceStudentNotClickable();
             if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
@@ -1199,7 +1199,7 @@ public class DashboardController {
     }
 
     public void chosenEntranceStudent1(MouseEvent mouseEvent) {
-        if(gui.getPlayer().getPlayerState()==PlayerState.STUDENTPHASE) {
+        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
             studentToMove = gui.getPlayer().getPlance().getEntrance().get(0);
             setEntranceStudentNotClickable();
             if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
@@ -1234,7 +1234,7 @@ public class DashboardController {
     }
 
     public void chosenEntranceStudent5(MouseEvent mouseEvent) {
-        if(gui.getPlayer().getPlayerState()==PlayerState.STUDENTPHASE) {
+        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
             studentToMove = gui.getPlayer().getPlance().getEntrance().get(4);
             setEntranceStudentNotClickable();
             if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
@@ -1268,7 +1268,7 @@ public class DashboardController {
     }
 
     public void chosenEntranceStudent3(MouseEvent mouseEvent) {
-        if(gui.getPlayer().getPlayerState()==PlayerState.STUDENTPHASE) {
+        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
             studentToMove = gui.getPlayer().getPlance().getEntrance().get(2);
             setEntranceStudentNotClickable();
             if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
@@ -1303,7 +1303,7 @@ public class DashboardController {
     }
 
     public void chosenEntranceStudent7(MouseEvent mouseEvent) {
-        if(gui.getPlayer().getPlayerState()==PlayerState.STUDENTPHASE) {
+        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
             studentToMove = gui.getPlayer().getPlance().getEntrance().get(6);
             setEntranceStudentNotClickable();
             if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
@@ -1338,7 +1338,7 @@ public class DashboardController {
     }
 
     public void chosenEntranceStudent8(MouseEvent mouseEvent) {
-        if(gui.getPlayer().getPlayerState()==PlayerState.STUDENTPHASE) {
+        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
             studentToMove = gui.getPlayer().getPlance().getEntrance().get(7);
             setEntranceStudentNotClickable();
             if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
@@ -1896,6 +1896,8 @@ public class DashboardController {
         hallPane.setVisible(true);
         assistantsPane.setVisible(false);
         assistantsPane.setDisable(true);
+        charactersPane.setVisible(false);
+        charactersPane.setDisable(true);
 
         //set Characters //////////////////////////////////////////////////////////////////////////
         for(int k=1; k<=3; k++)

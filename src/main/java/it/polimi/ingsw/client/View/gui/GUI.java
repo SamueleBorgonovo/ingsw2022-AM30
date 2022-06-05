@@ -632,6 +632,8 @@ public class GUI extends Application implements View{
 
     @Override
     public void nextMove(PlayerState playerState) {
+        currentPlayerState=playerState;
+        System.out.println(currentPlayerState);
         //if (playerState != PlayerState.CHARACTHERISLANDPHASE && playerState != PlayerState.CHARACTHERSTUDENTSPHASE){
             Platform.runLater(new Runnable() {
                 @Override
@@ -643,11 +645,10 @@ public class GUI extends Application implements View{
        // }
         switch (playerState){
             case STUDENTPHASE -> {
-                currentPlayerState=PlayerState.STUDENTPHASE;
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        dashboardController.setCharacterButtonClicked();
+                        dashboardController.setEntranceStudentClickable();
                         dashboardController.setGameUpdateLabel("GAME: Move one student from entrance!");
 
                     }
@@ -655,7 +656,6 @@ public class GUI extends Application implements View{
                 chooseStudentToMove();
             }
             case ASSISTANTPHASE -> {
-                currentPlayerState=PlayerState.ASSISTANTPHASE;
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -667,7 +667,6 @@ public class GUI extends Application implements View{
                 chooseAssistant();
             }
             case MOTHERNATUREPHASE -> {
-                currentPlayerState=PlayerState.MOTHERNATUREPHASE;
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -678,7 +677,6 @@ public class GUI extends Application implements View{
                 moveMotherNature();
             }
             case CLOUDPHASE -> {
-                currentPlayerState=PlayerState.CLOUDPHASE;
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -690,22 +688,20 @@ public class GUI extends Application implements View{
             }
             case CHARACTHERSTUDENTSPHASE -> {
                 System.out.println("Fino a qui ci sei poi non so");
-                dashboardController.setCharacterButtonClicked();
-                currentPlayerState=PlayerState.CHARACTHERSTUDENTSPHASE;
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.setCharacterButtonClicked();
                         dashboardController.inputStudentCharacter();
                     }
                 });
             }
             case CHARACTHERISLANDPHASE -> {
                 System.out.println("Fino a qui ci sei poi non so");
-                dashboardController.setCharacterButtonClicked();
-                currentPlayerState=PlayerState.CHARACTHERISLANDPHASE;
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.setCharacterButtonClicked();
                         dashboardController.inputIslandCharacter();
                     }
                 });
