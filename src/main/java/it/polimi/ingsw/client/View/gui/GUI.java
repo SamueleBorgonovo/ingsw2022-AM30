@@ -336,7 +336,7 @@ public class GUI extends Application implements View{
         int num=0;
         if(character4played)
             num=2;
-        int finalNum = num+player.getLastassistantplayed().getValue();
+        int finalNum = num+player.getLastassistantplayed().getMovement();
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
