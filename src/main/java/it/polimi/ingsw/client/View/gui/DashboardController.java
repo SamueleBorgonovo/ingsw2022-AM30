@@ -2336,9 +2336,13 @@ public class DashboardController {
             gui.getClient().sendMessage(message);
         }
         else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT11INPUT){
-            students.add(gui.getEffectHandler().getEffect11students().get(0));
-            ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
-            gui.getClient().sendMessage(message);
+            if(gui.getPlayer().getPlance().getNumberOfStudentHall(gui.getEffectHandler().getEffect11students().get(0)) < 10) {
+                students.add(gui.getEffectHandler().getEffect11students().get(0));
+                ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
+                gui.getClient().sendMessage(message);
+            }
+            else
+                gameUpdateLabel.setText("You can't use this one");
         }
         else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT7INPUT){
             effect7Students.add(gui.getEffectHandler().getEffect7students().get(0));
@@ -2357,9 +2361,13 @@ public class DashboardController {
             gui.getClient().sendMessage(message);
         }
         else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT11INPUT){
-            students.add(gui.getEffectHandler().getEffect11students().get(1));
-            ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
-            gui.getClient().sendMessage(message);
+            if(gui.getPlayer().getPlance().getNumberOfStudentHall(gui.getEffectHandler().getEffect11students().get(0)) < 10) {
+                students.add(gui.getEffectHandler().getEffect11students().get(1));
+                ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
+                gui.getClient().sendMessage(message);
+            }
+            else
+                gameUpdateLabel.setText("You can't use this one");
         }
         else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT7INPUT){
             effect7Students.add(gui.getEffectHandler().getEffect7students().get(1));
@@ -2378,9 +2386,13 @@ public class DashboardController {
             gui.getClient().sendMessage(message);
         }
         else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT11INPUT){
-            students.add(gui.getEffectHandler().getEffect11students().get(2));
-            ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
-            gui.getClient().sendMessage(message);
+            if(gui.getPlayer().getPlance().getNumberOfStudentHall(gui.getEffectHandler().getEffect11students().get(0)) < 10) {
+                students.add(gui.getEffectHandler().getEffect11students().get(2));
+                ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
+                gui.getClient().sendMessage(message);
+            }
+            else
+                gameUpdateLabel.setText("You can't use this one");
         }
         else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT7INPUT){
             effect7Students.add(gui.getEffectHandler().getEffect7students().get(2));
@@ -2399,9 +2411,13 @@ public class DashboardController {
             gui.getClient().sendMessage(message);
         }
         else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT11INPUT){
-            students.add(gui.getEffectHandler().getEffect11students().get(3));
-            ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
-            gui.getClient().sendMessage(message);
+            if(gui.getPlayer().getPlance().getNumberOfStudentHall(gui.getEffectHandler().getEffect11students().get(0)) < 10) {
+                students.add(gui.getEffectHandler().getEffect11students().get(3));
+                ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
+                gui.getClient().sendMessage(message);
+            }
+            else
+                gameUpdateLabel.setText("You can't use this one");
         }
         else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT7INPUT){
             effect7Students.add(gui.getEffectHandler().getEffect7students().get(3));
