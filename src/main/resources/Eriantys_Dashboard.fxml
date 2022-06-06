@@ -17,10 +17,10 @@
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="700.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/wizardGreenBackground.jpg" />
+            <Image url="@img/wizardGreenBackgroung.jpg" />
          </image>
       </ImageView>
-      <Pane id="islandsPane" layoutX="38.0" layoutY="35.0" prefHeight="424.0" prefWidth="737.0" styleClass="box" stylesheets="@Style.css">
+      <Pane id="islandsPane" layoutX="230.0" layoutY="35.0" prefHeight="424.0" prefWidth="737.0" styleClass="box" stylesheets="@Style.css">
          <children>
             <Pane fx:id="island1Pane" layoutX="3.0" layoutY="5.0" onMouseClicked="#chosenIsland1" prefHeight="150.0" prefWidth="150.0">
                <children>
@@ -1258,11 +1258,7 @@
                   </ImageView>
                </children>
             </Pane>
-         </children>
-      </Pane>
-      <Pane id="cloudsPane" layoutX="803.0" layoutY="35.0" prefHeight="424.0" prefWidth="169.0" styleClass="box" stylesheets="@Style.css">
-         <children>
-            <Pane fx:id="cloud1Pane" layoutX="20.0" layoutY="7.0" onMouseClicked="#chosenCloud1" prefHeight="131.0" prefWidth="131.0">
+            <Pane fx:id="cloud1Pane" layoutX="161.0" layoutY="148.0" onMouseClicked="#chosenCloud1" prefHeight="131.0" prefWidth="131.0">
                <children>
                   <ImageView fitHeight="127.0" fitWidth="127.0" layoutX="2.0" layoutY="3.0">
                      <image>
@@ -1291,7 +1287,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="cloud3Pane" layoutX="20.0" layoutY="143.0" onMouseClicked="#chosenCloud3" prefHeight="131.0" prefWidth="131.0">
+            <Pane fx:id="cloud3Pane" layoutX="310.0" layoutY="148.0" onMouseClicked="#chosenCloud3" prefHeight="131.0" prefWidth="131.0">
                <children>
                   <ImageView fitHeight="127.0" fitWidth="127.0" layoutX="2.0" layoutY="3.0">
                      <image>
@@ -1320,7 +1316,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="cloud2Pane" layoutX="20.0" layoutY="281.0" onMouseClicked="#chosenCloud2" prefHeight="131.0" prefWidth="131.0">
+            <Pane fx:id="cloud2Pane" layoutX="455.0" layoutY="148.0" onMouseClicked="#chosenCloud2" prefHeight="131.0" prefWidth="131.0">
                <children>
                   <ImageView fitHeight="127.0" fitWidth="127.0" layoutX="2.0" layoutY="3.0">
                      <image>
@@ -1355,7 +1351,7 @@
          <children>
             <ScrollPane layoutY="-2.0" prefHeight="188.0" prefWidth="490.0" styleClass="box" stylesheets="@Style.css">
                <content>
-                  <HBox prefHeight="171.0" prefWidth="1341.0" spacing="10.0" styleClass="box" stylesheets="@Style.css">
+                  <HBox prefHeight="171.0" spacing="10.0" styleClass="box" stylesheets="@Style.css">
                      <children>
                         <ImageView fx:id="lion" fitHeight="171.0" fitWidth="117.0" onMouseClicked="#chosenAssistantLion">
                            <image>
