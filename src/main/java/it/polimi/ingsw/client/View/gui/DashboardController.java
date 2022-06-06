@@ -957,18 +957,21 @@ public class DashboardController {
         ChooseCloudMessage message = new ChooseCloudMessage(1);
         gui.getClient().sendMessage(message);
         this.characterPlayed=null;
+        gui.setCharacter4played(false);
     }
 
     public void chosenCloud2(MouseEvent mouseEvent) {
         ChooseCloudMessage message = new ChooseCloudMessage(2);
         gui.getClient().sendMessage(message);
         this.characterPlayed=null;
+        gui.setCharacter4played(false);
     }
 
     public void chosenCloud3(MouseEvent mouseEvent) {
         ChooseCloudMessage message = new ChooseCloudMessage(3);
         gui.getClient().sendMessage(message);
         this.characterPlayed=null;
+        gui.setCharacter4played(false);
     }
 
     public void chosenAssistantLion(MouseEvent mouseEvent) {
