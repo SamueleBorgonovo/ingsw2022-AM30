@@ -660,7 +660,6 @@ public class GUI extends Application implements View{
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    dashboardController.setupPlance(player);
                     dashboardController.setupArchipelago();
                     dashboardController.setPlayerStateLabel(currentPlayerState);
                 }
@@ -671,6 +670,7 @@ public class GUI extends Application implements View{
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.setupPlance(player);
                         dashboardController.setEntranceStudentClickable();
                         dashboardController.setCharacterButtonClicked();
                         dashboardController.setGameUpdateLabel("GAME: Move one student from entrance!");
@@ -683,6 +683,7 @@ public class GUI extends Application implements View{
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.setupPlance(player);
                         dashboardController.setCharacterButtonNotClicked();
                         dashboardController.setupChoiceBoxAssistantPhase(true);
                         dashboardController.setGameUpdateLabel("GAME: Choose one assistant!");
@@ -694,6 +695,7 @@ public class GUI extends Application implements View{
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.setupPlance(player);
                         dashboardController.setCharacterButtonClicked();
                         dashboardController.setGameUpdateLabel("GAME: Move MotherNature to an island! MAX:"+player.getLastassistantplayed().getValue());
                     }
@@ -704,6 +706,7 @@ public class GUI extends Application implements View{
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.setupPlance(player);
                         dashboardController.setCharacterButtonClicked();
                         dashboardController.setGameUpdateLabel("GAME: Choose one cloud!");
                     }
@@ -715,6 +718,7 @@ public class GUI extends Application implements View{
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.clickCharacetrButton(null);
                         dashboardController.setCharacterButtonClicked();
                         dashboardController.inputStudentCharacter();
                     }
@@ -725,6 +729,7 @@ public class GUI extends Application implements View{
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
+                        dashboardController.clickCharacetrButton(null);
                         dashboardController.setCharacterButtonClicked();
                         dashboardController.inputIslandCharacter();
                     }
