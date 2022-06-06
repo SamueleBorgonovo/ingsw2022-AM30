@@ -2216,6 +2216,11 @@ public class DashboardController {
         characterButtonLabel.setDisable(true);
     }
 
+    public void resetCharacterButton(){
+        characterButtonLabel.setText("PLAY CHARACTER");
+        characterButtonClicked=false;
+    }
+
     public void inputStudentCharacter() {
        switch (this.characterPlayed.getTypeOfInputCharacter()) {
            case EFFECT1INPUT, EFFECT11INPUT -> {

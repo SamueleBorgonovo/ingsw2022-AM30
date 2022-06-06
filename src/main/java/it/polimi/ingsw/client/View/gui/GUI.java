@@ -444,7 +444,21 @@ public class GUI extends Application implements View{
 
     @Override
     public void printCharacterChosen(String nick, CharacterView character) {
-
+        if(!nick.equals(nickname)){
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    dashboardController.setGameUpdateLabel("GAME: "+nick+" played character "+character.getName());
+                }
+            });
+        }else{
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    dashboardController.resetCharacterButton();
+                }
+            });
+        }
     }
 
     @Override
