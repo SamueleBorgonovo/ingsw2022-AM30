@@ -16,6 +16,13 @@ class ArchipelagoTest {
   //  Archipelago archipelago = new Archipelago();
 
     @Test
+    void getMothernature(){
+        Archipelago archipelago=board2Players.getArchipelago();
+        archipelago.getMothernature().setMotherNature(1);
+        assertEquals(1,archipelago.getMothernature().isOn());
+    }
+
+    @Test
     void getIslands() {
         Archipelago archipelago2= new Archipelago();
         archipelago2= board2Players.getArchipelago();
@@ -48,6 +55,45 @@ class ArchipelagoTest {
         assertEquals(Tower.WHITE, board2Players.getArchipelago().getTowerTypeIsland(2));
     }
 
+    @Test
+    void mergeIslands(){
+        Archipelago archipelago=board2Players.getArchipelago();
+        archipelago.getIslands().get(0).getStudents().clear();
+        archipelago.getIslands().get(1).getStudents().clear();
+        archipelago.getIslands().get(0).addStudent(Student.RED);
+        archipelago.getIslands().get(1).addStudent(Student.BLUE);
+        archipelago.getIslands().get(0).setStop(true);
+        archipelago.getIslands().get(1).setTowerColor(Tower.BLACK);
+        archipelago.getIslands().get(0).setTowerColor(Tower.BLACK);
+        archipelago.getIslands().get(1).addTower();
+        archipelago.getIslands().get(1).addTower();
+        archipelago.getIslands().get(0).addTower();
+        archipelago.mergeIslands(1,2);
+
+        int value=1;
+        if(archipelago.getIslands().size()!=11)
+            value=-1;
+        if(!archipelago.getIslands().get(0).isStop())
+            value=-2;
+        int redcount=0;
+        int bluecount=0;
+        for(Student student : archipelago.getIslands().get(0).getStudents()){
+            if(student==Student.RED)
+                redcount++;
+            if(student==Student.BLUE)
+                bluecount++;
+        }
+        if(redcount!=1)
+            value=-3;
+        if(bluecount!=1)
+            value=-4;
+        if(archipelago.getIslands().get(0).getTowerColor()!=Tower.BLACK)
+            value=-5;
+        if(archipelago.getIslands().get(0).getNumOfTowers()!=5)
+            value=-6;
+
+        assertEquals(1,value);
+    }
 
     @Test
     void getNumOfIslands() {
@@ -56,6 +102,37 @@ class ArchipelagoTest {
         assertEquals(11, board2Players.getArchipelago().getNumOfIslands());
         board2Players.getArchipelago().mergeIslands(1,11);
         assertEquals(10,board2Players.getArchipelago().getNumOfIslands());
+    }
+
+    @Test
+    void getSingleIlsnad(){
+        Archipelago archipelago=board2Players.getArchipelago();
+        archipelago.getIslands().get(0).getStudents().clear();
+        archipelago.getIslands().get(0).addStudent(Student.BLUE);
+        archipelago.getIslands().get(0).addStudent(Student.BLUE);
+        archipelago.getIslands().get(0).addStudent(Student.BLUE);
+        archipelago.getIslands().get(0).addStudent(Student.BLUE);
+        archipelago.getIslands().get(0).setStop(true);
+        Island island=archipelago.getIslands().get(0);
+
+        int value=1;
+        int bluecount1=0;
+        int bluecount2=0;
+        for(Student student: archipelago.getIslands().get(0).getStudents())
+            if(student==Student.BLUE)
+                bluecount1++;
+        for(Student student: island.getStudents())
+            if(student==Student.BLUE)
+                bluecount2++;
+
+        if(bluecount1!=bluecount2)
+            value=-1;
+        if(archipelago.getIslands().get(0).getIslandID()!=island.getIslandID())
+            value=-2;
+        if(island.isStop()!=archipelago.getIslands().get(0).isStop())
+            value=-3;
+
+        assertEquals(1,value);
     }
 
     @Test
