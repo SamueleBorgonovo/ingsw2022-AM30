@@ -1476,7 +1476,7 @@ public class DashboardController {
             characterButtonLabel.setText("RETURN TO PLANCE");
             characterButtor.setDisable(false);
             setupCharacterView();
-
+            charactersPane.setDisable(false);
             character1Image.setDisable(false);
             character2Image.setDisable(false);
             character3Image.setDisable(false);
@@ -1487,7 +1487,7 @@ public class DashboardController {
             characterButtonLabel.setText("PLAY CHARACTER");
             characterButtor.setDisable(false);
             //setupPlance(gui.getPlayer());
-
+            charactersPane.setDisable(true);
             character1Image.setDisable(true);
             character2Image.setDisable(true);
             character3Image.setDisable(true);
