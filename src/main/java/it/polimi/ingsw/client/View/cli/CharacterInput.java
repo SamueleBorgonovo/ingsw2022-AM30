@@ -129,13 +129,17 @@ public class CharacterInput {
     }
 
 
-    public void studentFromCard(Client client, ArrayList<Student> studentsCard) {
+    public void studentFromCard(Client client, ArrayList<Student> studentsCard, HashMap<Student,Integer> hall) {
         //effect 11, effect 1 part 1
+        boolean check=true;
         ArrayList<Student> studentsList = new ArrayList<>();
         Student studentChosen = inputParser.studentParser();
-        while (!studentsCard.contains(studentChosen)) {
+        while (!studentsCard.contains(studentChosen) && check) {
             System.out.println("Student not available. Please try again");
             studentChosen = inputParser.studentParser();
+            if (hall != null && hall.get(studentChosen).intValue() == 10)
+                System.out.println("Max students. Please try again");
+                check=false;
         }
         studentsList.add(studentChosen);
         ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(studentsList);

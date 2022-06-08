@@ -383,13 +383,17 @@ public class CLI implements View {
         int numOfCoins = this.player.getCoins();
         int count = 0;
         boolean checkMinstrelpossible = true;
+        boolean checkPrincessPossible = true;
         for (CharacterView character : availableCharacter)
             if (numOfCoins >= character.getCost())
                 count++;
         for (CharacterView character2 : availableCharacter)
             if (character2.getTypeOfInputCharacter() == TypeOfInputCharacter.EFFECT10INPUT)
                 checkMinstrelpossible = this.checkMinstrel();
-        if (count > 0 && checkMinstrelpossible) {
+        for (CharacterView character2 : availableCharacter)
+            if (character2.getTypeOfInputCharacter() == TypeOfInputCharacter.EFFECT11INPUT)
+                checkPrincessPossible = this.checkPrincess();
+        if (count > 0 && checkMinstrelpossible && checkPrincessPossible) {
             System.out.println("Choose one character between this available by typing his number associated");
             CharacterView character = new CharacterView(0, null, "",false);
             boolean check = false;
@@ -415,6 +419,18 @@ public class CLI implements View {
                     }
                 }
 
+                if (character.getTypeOfInputCharacter() == TypeOfInputCharacter.EFFECT11INPUT) {
+                    boolean check2 = false;
+                    for (Student s : Student.values())
+                        if(player.getPlance().getNumberOfStudentHall(s) < 10)
+                            check2=true;
+                    if (!check2) {
+                        check = false;
+                        System.out.println("You have max of students in hall. Please repeat your choice");
+                        characterChosen = inputParser.intParser();
+                    }
+                }
+
             }
             this.characterPlayed = character;
             this.client.setCharacterPlayed(true);
@@ -435,11 +451,11 @@ public class CLI implements View {
     public void inputStudentCharacter() {
         System.out.println(characterPlayed.getName());
         switch (this.characterPlayed.getTypeOfInputCharacter()) {
-            case EFFECT1INPUT -> this.characterInput.studentFromCard(this.client, this.effectHandler.getEffect1students());
+            case EFFECT1INPUT -> this.characterInput.studentFromCard(this.client, this.effectHandler.getEffect1students(),null);
             case EFFECT7INPUT -> this.characterInput.jesterInput(this.client, this.effectHandler.getEffect7students(), this.player.getPlance().getEntrance());
             case STUDENT -> this.characterInput.genericStudentInput(this.client);
             case EFFECT10INPUT -> this.characterInput.minstrelInput(this.client, this.player.getPlance().getEntrance(), this.player.getPlance().getHall());
-            case EFFECT11INPUT -> this.characterInput.studentFromCard(this.client, this.effectHandler.getEffect11students());
+            case EFFECT11INPUT -> this.characterInput.studentFromCard(this.client, this.effectHandler.getEffect11students(),this.player.getPlance().getHall());
         }
         if (this.characterPlayed.getTypeOfInputCharacter() == TypeOfInputCharacter.EFFECT1INPUT)
             this.characterPlayed = null;
@@ -656,6 +672,24 @@ public class CLI implements View {
                 counter = counter + this.player.getPlance().getHall().get(s);
             check = counter >= 1; //if counter>=1 check is true, else check is false
         }
+        return check;
+    }
+
+    public boolean checkPrincess(){
+        ArrayList<CharacterView> availableCharacter = this.board.getCharacters();
+        int numOfCoins = this.player.getCoins();
+        boolean check = false;
+        int count = 0;
+
+        for (CharacterView character : availableCharacter)
+            if (numOfCoins >= character.getCost() && character.getTypeOfInputCharacter() != TypeOfInputCharacter.EFFECT11INPUT)
+                count++;
+        if (count > 0)
+            check = true;
+        else {
+            for (Student s : Student.values())
+                if(player.getPlance().getNumberOfStudentHall(s) < 10)
+                    check=true;}
         return check;
     }
 
