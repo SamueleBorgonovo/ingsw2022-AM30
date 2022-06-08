@@ -95,7 +95,7 @@ public class GUI extends Application implements View{
         gameSettingsScene=null;
     }
 
-    private void createConnectionScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
+    private void createScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
         Platform.runLater(() -> {
             fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource(pathOfFxmlFile));
@@ -113,7 +113,7 @@ public class GUI extends Application implements View{
     }
 
     public void instantiateConnectionScene(){
-        createConnectionScene("/Connect_Dashboard.fxml", () -> {
+        createScene("/Connect_Dashboard.fxml", () -> {
             primaryStage.setTitle("Eriantys");
             primaryStage.setResizable(false);
             primaryStage.show();
@@ -122,25 +122,8 @@ public class GUI extends Application implements View{
         });
     }
 
-    private void createNicknameScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
-        Platform.runLater(() -> {
-            fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource(pathOfFxmlFile));
-            Scene scene;
-            try {
-                scene = new Scene(fxmlLoader.load());
-            } catch (IOException e) {
-                e.printStackTrace();
-                scene = new Scene(new Label("Error loading the scene"));
-            }
-            primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
-            functionInterface.executeFunction();
-        });
-    }
-
     public void instantiateNicknameScene(){
-        createNicknameScene("/Nickname_Dashboard.fxml", () -> {
+        createScene("/Nickname_Dashboard.fxml", () -> {
             primaryStage.setTitle("Eriantys");
             primaryStage.setResizable(false);
             primaryStage.show();
@@ -152,7 +135,7 @@ public class GUI extends Application implements View{
     }
 
     public void instantiateGameSettingsScene(){
-        createGameSettingsScene("/Game_Settings_Dashboard.fxml", () -> {
+        createScene("/Game_Settings_Dashboard.fxml", () -> {
             primaryStage.setTitle("Eriantys");
             primaryStage.setResizable(false);
             primaryStage.show();
@@ -161,25 +144,8 @@ public class GUI extends Application implements View{
         });
     }
 
-    private void createGameSettingsScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
-        Platform.runLater(() -> {
-            fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource(pathOfFxmlFile));
-            Scene scene;
-            try {
-                scene = new Scene(fxmlLoader.load());
-            } catch (IOException e) {
-                e.printStackTrace();
-                scene = new Scene(new Label("Error loading the scene"));
-            }
-            primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
-            functionInterface.executeFunction();
-        });
-    }
-
     public void instantiateWizardScene(ArrayList<Wizard> availableWizards){
-        createWizardScene("/Wizard_Dashboard.fxml", () -> {
+        createScene("/Wizard_Dashboard.fxml", () -> {
             primaryStage.setTitle("Eriantys");
             primaryStage.setResizable(false);
             primaryStage.show();
@@ -189,25 +155,8 @@ public class GUI extends Application implements View{
         });
     }
 
-    private void createWizardScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
-        Platform.runLater(() -> {
-            fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource(pathOfFxmlFile));
-            Scene scene;
-            try {
-                scene = new Scene(fxmlLoader.load());
-            } catch (IOException e) {
-                e.printStackTrace();
-                scene = new Scene(new Label("Error loading the scene"));
-            }
-            primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
-            functionInterface.executeFunction();
-        });
-    }
-
     public void instantiateDashBoardScene(){
-        createDashboardScene("/Eriantys_Dashboard.fxml", () -> {
+        createScene("/Eriantys_Dashboard.fxml", () -> {
             primaryStage.setTitle("Eriantys");
             primaryStage.setResizable(false);
             primaryStage.show();
@@ -217,24 +166,6 @@ public class GUI extends Application implements View{
             dashboardController.setup();
         });
     }
-
-    private void createDashboardScene(String pathOfFxmlFile, FunctionInterface functionInterface) {
-        Platform.runLater(() -> {
-            fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource(pathOfFxmlFile));
-            Scene scene;
-            try {
-                scene = new Scene(fxmlLoader.load());
-            } catch (IOException e) {
-                e.printStackTrace();
-                scene = new Scene(new Label("Error loading the scene"));
-            }
-            primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
-            functionInterface.executeFunction();
-        });
-    }
-
 
     public boolean createClient(String ip, int port) {
         client = new Client(ip,port,this);
@@ -266,7 +197,6 @@ public class GUI extends Application implements View{
             dashboardController.setupPlance(player);
             dashboardController.setEntranceStudentClickable();
         });
-
     }
 
     ///////////////////////////////////////////////////////////////////
