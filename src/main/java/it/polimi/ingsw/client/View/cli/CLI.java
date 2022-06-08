@@ -91,7 +91,6 @@ public class CLI implements View {
         }
     }
 
-    @Override
     public boolean tryToReconnect() {
         System.out.println("Do you want to reconnect to the last game?   y | n");
         Scanner stdin = new Scanner(System.in);
@@ -197,7 +196,6 @@ public class CLI implements View {
         client.sendMessage(message);
     }
 
-    @Override
     public PossibleAction chooseNextAction(PlayerState playerState) {
         boolean check = false;
         PossibleAction actionChosen = null;
@@ -299,7 +297,6 @@ public class CLI implements View {
         return check;
     }
 
-    @Override
     public void moveStudentToHall() {
         ArrayList<PlayerView> playerList = new ArrayList<>();
         playerList.add(player);
@@ -319,7 +316,6 @@ public class CLI implements View {
         return studentChosen;
     }
 
-    @Override
     public void moveStudentToIsland() {
         graphic.printArchipelago(this.board.getIslandViews(), this.board.getMotherNature());
         ArrayList<PlayerView> playerP = new ArrayList<>();
@@ -377,7 +373,6 @@ public class CLI implements View {
         this.client.sendMessage(message);
     }
 
-    @Override
     public void useCharacter(PlayerState playerState) {
         ArrayList<CharacterView> availableCharacter = this.board.getCharacters();
         int numOfCoins = this.player.getCoins();
@@ -447,7 +442,6 @@ public class CLI implements View {
 
     }
 
-    @Override
     public void inputStudentCharacter() {
         System.out.println(characterPlayed.getName());
         switch (this.characterPlayed.getTypeOfInputCharacter()) {
@@ -461,7 +455,6 @@ public class CLI implements View {
             this.characterPlayed = null;
     }
 
-    @Override
     public void inputIslandCharacter() {
         this.characterInput.islandInput(this.client, this.board.getIslandViews(),this.board.getMotherNature());
         this.characterPlayed = null;

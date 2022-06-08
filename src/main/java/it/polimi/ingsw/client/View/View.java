@@ -19,29 +19,15 @@ import java.util.ArrayList;
 public interface View {
     public void chooseNickname(boolean validNickname, boolean reconnect);
 
-    public boolean tryToReconnect();
-
     public void chooseSettings();
 
     public void chooseWizard(ArrayList<Wizard> avaiableWizards);
 
     public void chooseAssistant();
 
-    public PossibleAction chooseNextAction(PlayerState playerState);
-
-    public void moveStudentToHall();
-
-    public void moveStudentToIsland();
-
     public void moveMotherNature();
 
     public void chooseCloud();
-
-    public void useCharacter(PlayerState playerState);
-
-    public void inputStudentCharacter();
-
-    public void inputIslandCharacter();
 
     public void setPlayers(ArrayList<PlayerView> players);
 

@@ -262,12 +262,9 @@ public class GUI extends Application implements View{
     }
 
     public void chooseStudentToMove(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setupPlance(player);
-                dashboardController.setEntranceStudentClickable();
-            }
+        Platform.runLater(() -> {
+            dashboardController.setupPlance(player);
+            dashboardController.setEntranceStudentClickable();
         });
 
     }
@@ -277,24 +274,16 @@ public class GUI extends Application implements View{
     ///////////////////////////////////////////////////////////////////
     @Override
     public void chooseNickname(boolean validNickname, boolean reconnect) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if(!validNickname)
-                    nicknameScene.setWrongNickname(true);
-                else if(reconnect) {
-                    nicknameScene.setReconnectButton(true);
-                    nicknameScene.moveLoginButtonX(-10);
-                }
-                else
-                    client.gameSetup();
+        Platform.runLater(() -> {
+            if(!validNickname)
+                nicknameScene.setWrongNickname(true);
+            else if(reconnect) {
+                nicknameScene.setReconnectButton(true);
+                nicknameScene.moveLoginButtonX(-10);
             }
+            else
+                client.gameSetup();
         });
-    }
-
-    @Override
-    public boolean tryToReconnect() {
-        return false;
     }
 
     public void chooseSettings(){
@@ -308,24 +297,8 @@ public class GUI extends Application implements View{
 
     @Override
     public void chooseAssistant() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setAssistantView();
-            }
-        });
+        Platform.runLater(() -> dashboardController.setAssistantView());
     }
-
-    @Override
-    public PossibleAction chooseNextAction(PlayerState playerState) {
-        return null;
-    }
-
-    @Override
-    public void moveStudentToHall() {}
-
-    @Override
-    public void moveStudentToIsland () {}
 
     public void setCharacter4played(boolean character4played) {
         this.character4played = character4played;
@@ -337,37 +310,15 @@ public class GUI extends Application implements View{
         if(character4played)
             num=2;
         int finalNum = num+player.getLastassistantplayed().getMovement();
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setMotherNatureView(finalNum,getBoard().getMotherNature());
-            }
-        });
+        Platform.runLater(() -> dashboardController.setMotherNatureView(finalNum,getBoard().getMotherNature()));
         character4played = false;//////////////////////////////////////////
     }
 
     @Override
     public void chooseCloud() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setCloudsClickable();
-            }
-        });
+        Platform.runLater(() -> dashboardController.setCloudsClickable());
     }
 
-    @Override
-    public void useCharacter(PlayerState playerState) {}
-
-    @Override
-    public void inputStudentCharacter() {
-
-    }
-
-    @Override
-    public void inputIslandCharacter() {
-
-    }
 
     @Override
     public void setPlayers(ArrayList<PlayerView> players) {
@@ -396,12 +347,9 @@ public class GUI extends Application implements View{
 
     @Override
     public void printStartGame() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setGameUpdateLabel("GAME: Game is starting!");
-                dashboardController.setupChoiceBox(null);
-            }
+        Platform.runLater(() -> {
+            dashboardController.setGameUpdateLabel("GAME: Game is starting!");
+            dashboardController.setupChoiceBox(null);
         });
     }
 
@@ -412,180 +360,112 @@ public class GUI extends Application implements View{
 
     @Override
     public void printAssistantChosen(String nick, Assistant assistant) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setGameUpdateLabel("GAME: "+nick+" choosed assistant "+assistant);
-            }
-        });
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: "+nick+" choosed assistant "+assistant));
     }
 
     @Override
     public void printTurn(String nick,boolean isAssistantPhase) {
         if(!nick.equals(nickname)) {
             currentPlayerState = PlayerState.WAITING;
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    dashboardController.setCharacterButtonNotClicked();
-                }
-            });
+            Platform.runLater(() -> dashboardController.setCharacterButtonNotClicked());
         }
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setupPlance(player);
-                if(isAssistantPhase)
-                    dashboardController.setGameUpdateLabel("GAME: "+nick+" is choosing an assistant");
-                else dashboardController.setGameUpdateLabel("GAME: "+nick+" started his turn");
-            }
+        Platform.runLater(() -> {
+            dashboardController.setupPlance(player);
+            if(isAssistantPhase)
+                dashboardController.setGameUpdateLabel("GAME: "+nick+" is choosing an assistant");
+            else dashboardController.setGameUpdateLabel("GAME: "+nick+" started his turn");
         });
     }
 
     @Override
     public void printCharacterChosen(String nick, CharacterView character) {
         if(!nick.equals(nickname)){
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    dashboardController.setGameUpdateLabel("GAME: "+nick+" played character "+character.getName());
-                }
-            });
+            Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: "+nick+" played character "+character.getName()));
         }else{
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    dashboardController.resetCharacterButton();
-                }
-            });
+            Platform.runLater(() -> dashboardController.resetCharacterButton());
         }
     }
 
     @Override
     public void printCloudChosen(String nick, int cloudID) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setupPlance(currentPlayerView);
-                dashboardController.setupArchipelago();
-                if (!nick.equals(nickname)) {
-                    dashboardController.setGameUpdateLabel("GAME: " + nick + " choosed cloud " + cloudID);
-                }
+        Platform.runLater(() -> {
+            dashboardController.setupPlance(currentPlayerView);
+            dashboardController.setupArchipelago();
+            if (!nick.equals(nickname)) {
+                dashboardController.setGameUpdateLabel("GAME: " + nick + " choosed cloud " + cloudID);
             }
         });
     }
 
     @Override
     public void printStudentToHall(String nick, Student student) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if(!nick.equals(nickname)) {
-                    dashboardController.setGameUpdateLabel("GAME: " + nick + " moved student " + student + " in his hall");
-                    dashboardController.setupPlance(currentPlayerView);
-                }
+        Platform.runLater(() -> {
+            if(!nick.equals(nickname)) {
+                dashboardController.setGameUpdateLabel("GAME: " + nick + " moved student " + student + " in his hall");
+                dashboardController.setupPlance(currentPlayerView);
             }
         });
     }
 
     @Override
     public void printStudentToIsland(String nick, Student student, int IslandID) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if (!nick.equals(nickname)) {
-                    dashboardController.setupPlance(currentPlayerView);
-                    dashboardController.setupArchipelago();
-                    dashboardController.setGameUpdateLabel("GAME: " + nick + " moved student " + student + " on island " + IslandID);
-                }
+        Platform.runLater(() -> {
+            if (!nick.equals(nickname)) {
+                dashboardController.setupPlance(currentPlayerView);
+                dashboardController.setupArchipelago();
+                dashboardController.setGameUpdateLabel("GAME: " + nick + " moved student " + student + " on island " + IslandID);
             }
         });
     }
 
     @Override
     public void printMotherNatureMovement(String nick, int islandID) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if (!nick.equals(nickname)) {
-                    dashboardController.setupArchipelago();
-                    dashboardController.setupPlance(currentPlayerView);
-                    dashboardController.setGameUpdateLabel("GAME: " + nick + " moved MotherNature on island " + islandID);
-                }
+        Platform.runLater(() -> {
+            if (!nick.equals(nickname)) {
+                dashboardController.setupArchipelago();
+                dashboardController.setupPlance(currentPlayerView);
+                dashboardController.setGameUpdateLabel("GAME: " + nick + " moved MotherNature on island " + islandID);
             }
         });
     }
 
     @Override
     public void printPlayerDisconnection(String nick) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setGameUpdateLabel("GAME: "+nick+" disconnected");
-            }
-        });
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: "+nick+" disconnected"));
     }
 
     @Override
     public void printPlayerConnection(String nick, boolean reconnect) {
         if(correctlyConnected) {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    if (reconnect)
-                        dashboardController.setGameUpdateLabel("GAME: " + nick + " reconnected");
-                    else dashboardController.setGameUpdateLabel("GAME: " + nick + " connected to the game");
-                }
+            Platform.runLater(() -> {
+                if (reconnect)
+                    dashboardController.setGameUpdateLabel("GAME: " + nick + " reconnected");
+                else dashboardController.setGameUpdateLabel("GAME: " + nick + " connected to the game");
             });
         }
     }
     public void printInvalidAssistant(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setGameUpdateLabel("GAME: Invalid assistant");
-            }
-        });
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Invalid assistant"));
     }
 
     @Override
     public void printInvalidCloud() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setGameUpdateLabel("GAME: Invalid cloud");
-            }
-        });
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Invalid cloud"));
     }
 
     @Override
     public void printInvalidIsland() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setGameUpdateLabel("GAME: Invalid island");
-            }
-        });
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Invalid island"));
     }
 
     @Override
     public void printInvalidStudent() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setGameUpdateLabel("GAME: Invalid student");
-            }
-        });
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Invalid student"));
     }
 
     @Override
     public void printInvalidTurn() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setGameUpdateLabel("GAME: Is not your turn!");
-            }
-        });
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Is not your turn!"));
     }
 
     @Override
@@ -595,12 +475,7 @@ public class GUI extends Application implements View{
 
     @Override
     public void printInvalidWizard() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                wizardScene.setWrongWizard();
-            }
-        });
+        Platform.runLater(() -> wizardScene.setWrongWizard());
     }
 
     @Override
@@ -615,12 +490,7 @@ public class GUI extends Application implements View{
 
     @Override
     public void printWaitingForPlayers(boolean lobby) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setGameUpdateLabel("GAME: You are the only remained, timer to win started");
-            }
-        });
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: You are the only remained, timer to win started"));
     }
 
     @Override
@@ -643,12 +513,8 @@ public class GUI extends Application implements View{
         resetControllers();
         instantiateDashBoardScene();
         correctlyConnected=true;
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                dashboardController.setupArchipelago();
-               // dashboardController.setupPlayerView(player);
-            }
+        Platform.runLater(() -> {
+            dashboardController.setupArchipelago();
         });
 
     }
@@ -656,83 +522,60 @@ public class GUI extends Application implements View{
     @Override
     public void nextMove(PlayerState playerState) {
         currentPlayerState=playerState;
-        //if (playerState != PlayerState.CHARACTHERISLANDPHASE && playerState != PlayerState.CHARACTHERSTUDENTSPHASE){
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    dashboardController.setupArchipelago();
-                    dashboardController.setPlayerStateLabel(currentPlayerState);
-                }
+            Platform.runLater(() -> {
+                dashboardController.setupArchipelago();
+                dashboardController.setPlayerStateLabel(currentPlayerState);
             });
-       // }
         switch (playerState){
             case STUDENTPHASE -> {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        dashboardController.setupPlance(player);
-                        dashboardController.setEntranceStudentClickable();
-                        dashboardController.setCharacterButtonClicked();
-                        dashboardController.setGameUpdateLabel("GAME: Move one student from entrance!");
+                Platform.runLater(() -> {
+                    dashboardController.setupPlance(player);
+                    dashboardController.setEntranceStudentClickable();
+                    dashboardController.setCharacterButtonClicked();
+                    dashboardController.setGameUpdateLabel("GAME: Move one student from entrance!");
 
-                    }
                 });
                 chooseStudentToMove();
             }
             case ASSISTANTPHASE -> {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        dashboardController.setupPlance(player);
-                        dashboardController.setCharacterButtonNotClicked();
-                        dashboardController.setupChoiceBoxAssistantPhase(true);
-                        dashboardController.setGameUpdateLabel("GAME: Choose one assistant!");
-                    }
+                Platform.runLater(() -> {
+                    dashboardController.setupPlance(player);
+                    dashboardController.setCharacterButtonNotClicked();
+                    dashboardController.setupChoiceBoxAssistantPhase(true);
+                    dashboardController.setGameUpdateLabel("GAME: Choose one assistant!");
                 });
                 chooseAssistant();
             }
             case MOTHERNATUREPHASE -> {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        dashboardController.setupPlance(player);
-                        dashboardController.setCharacterButtonClicked();
-                        dashboardController.setGameUpdateLabel("GAME: Move MotherNature to an island! MAX:"+player.getLastassistantplayed().getMovement());
-                    }
+                Platform.runLater(() -> {
+                    dashboardController.setupPlance(player);
+                    dashboardController.setCharacterButtonClicked();
+                    dashboardController.setGameUpdateLabel("GAME: Move MotherNature to an island! MAX:"+player.getLastassistantplayed().getMovement());
                 });
                 moveMotherNature();
             }
             case CLOUDPHASE -> {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        dashboardController.setupPlance(player);
-                        dashboardController.setCharacterButtonClicked();
-                        dashboardController.setGameUpdateLabel("GAME: Choose one cloud!");
-                    }
+                Platform.runLater(() -> {
+                    dashboardController.setupPlance(player);
+                    dashboardController.setCharacterButtonClicked();
+                    dashboardController.setGameUpdateLabel("GAME: Choose one cloud!");
                 });
                 chooseCloud();
             }
             case CHARACTHERSTUDENTSPHASE -> {
                 System.out.println("Fino a qui ci sei poi non so");
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        dashboardController.clickCharacetrButton(null);
-                        dashboardController.setCharacterButtonClicked();
-                        dashboardController.inputStudentCharacter();
-                    }
+                Platform.runLater(() -> {
+                    dashboardController.clickCharacetrButton(null);
+                    dashboardController.setCharacterButtonClicked();
+                    dashboardController.inputStudentCharacter();
                 });
             }
             case CHARACTHERISLANDPHASE -> {
                 System.out.println("Fino a qui ci sei poi non so");
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        dashboardController.clickCharacetrButton(null);
-                        dashboardController.setCharacterButtonClicked();
-                        dashboardController.inputIslandCharacter();
-                    }
+                Platform.runLater(() -> {
+                    dashboardController.clickCharacetrButton(null);
+                    dashboardController.setCharacterButtonClicked();
+                    dashboardController.inputIslandCharacter();
                 });
             }
         }
