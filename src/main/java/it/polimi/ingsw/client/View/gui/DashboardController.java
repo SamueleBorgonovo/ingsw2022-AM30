@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DashboardController {
 
@@ -1073,7 +1074,7 @@ public class DashboardController {
             if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
                 hallPane.setDisable(false);
             System.out.println("Scelto studente di colore" + studentToMove);
-            numOfStudentChosen = 8;
+            numOfStudentChosen = studentNumber;
             setArchipelagoClickable();
         }
         else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT7INPUT){
@@ -1164,15 +1165,11 @@ public class DashboardController {
             plancePane.setVisible(true);
             characterButtonLabel.setText("PLAY CHARACTER");
             characterButtor.setDisable(false);
-            //setupPlance(gui.getPlayer());
             charactersPane.setDisable(true);
             character1Image.setDisable(true);
             character2Image.setDisable(true);
             character3Image.setDisable(true);
         }
-    }
-
-    public void clickAssistabtButton(MouseEvent mouseEvent) {
     }
 
     public void chosenIsland1(MouseEvent mouseEvent) {
@@ -1324,53 +1321,24 @@ public class DashboardController {
         hallRed.setDisable(true);
         hallYellow.setDisable(true);
 
-        for (int count = 1; count <= player.getPlance().getNumberOfStudentHall(Student.GREEN); count++) {
-            getImageViewFromString("hall1Student" + count).setVisible(true);
+        int c=0;
+        for(Student student : Student.values()){
+            c++;
+            for (int count = 1; count <= player.getPlance().getNumberOfStudentHall(student); count++) {
+                getImageViewFromString("hall"+c+"Student" + count).setVisible(true);
+            }
+            for (int count = player.getPlance().getNumberOfStudentHall(student) + 1; count <= 10; count++) {
+                getImageViewFromString("hall"+c+"Student" + count).setVisible(false);
+            }
         }
-        for (int count = player.getPlance().getNumberOfStudentHall(Student.GREEN) + 1; count <= 10; count++) {
-            getImageViewFromString("hall1Student" + count).setVisible(false);
-        }
-
-        for (int count = 1; count <= player.getPlance().getNumberOfStudentHall(Student.RED); count++) {
-            getImageViewFromString("hall2Student" + count).setVisible(true);
-        }
-        for (int count = player.getPlance().getNumberOfStudentHall(Student.RED) + 1; count <= 10; count++) {
-            getImageViewFromString("hall2Student" + count).setVisible(false);
-        }
-
-        for (int count = 1; count <= player.getPlance().getNumberOfStudentHall(Student.YELLOW); count++) {
-            getImageViewFromString("hall3Student" + count).setVisible(true);
-        }
-        for (int count = player.getPlance().getNumberOfStudentHall(Student.YELLOW) + 1; count <= 10; count++) {
-            getImageViewFromString("hall3Student" + count).setVisible(false);
-        }
-
-        for (int count = 1; count <= player.getPlance().getNumberOfStudentHall(Student.PINK); count++) {
-            getImageViewFromString("hall4Student" + count).setVisible(true);
-        }
-        for (int count = player.getPlance().getNumberOfStudentHall(Student.PINK) + 1; count <= 10; count++) {
-            getImageViewFromString("hall4Student" + count).setVisible(false);
-        }
-
-        for (int count = 1; count <= player.getPlance().getNumberOfStudentHall(Student.BLUE); count++) {
-            getImageViewFromString("hall5Student" + count).setVisible(true);
-        }
-        for (int count = player.getPlance().getNumberOfStudentHall(Student.BLUE) + 1; count <= 10; count++) {
-            getImageViewFromString("hall5Student" + count).setVisible(false);
-        }
-        //System.out.println("Ciaooooooooooooooooooooooooo");
-
 
         //Set professors
+        for(Student color : Student.values())
+            getImageViewFromString("professor"+color.getText(color)).setVisible(false);
 
-        getImageViewFromString("professorGreen").setVisible(false);
-        getImageViewFromString("professorRed").setVisible(false);
-        getImageViewFromString("professorYellow").setVisible(false);
-        getImageViewFromString("professorPink").setVisible(false);
-        getImageViewFromString("professorBlue").setVisible(false);
-        for (Professor prof : player.getPlance().getProfessors()) {
+        for (Professor prof : player.getPlance().getProfessors())
             getImageViewFromString("professor" + prof.getText(prof)).setVisible(true);
-        }
+
 
         //Set towers
         int count;
@@ -1414,71 +1382,14 @@ public class DashboardController {
         assistantsPane.setVisible(true);
         assistantsPane.setDisable(false);
 
-
-        lion.setDisable(true);
-        lion.setOpacity(0.3);
-        ostrich.setDisable(true);
-        ostrich.setOpacity(0.3);
-        cat.setDisable(true);
-        cat.setOpacity(0.3);
-        eagle.setDisable(true);
-        eagle.setOpacity(0.3);
-        fox.setDisable(true);
-        fox.setOpacity(0.3);
-        snake.setDisable(true);
-        snake.setOpacity(0.3);
-        octopus.setDisable(true);
-        octopus.setOpacity(0.3);
-        dog.setDisable(true);
-        dog.setOpacity(0.3);
-        elephants.setDisable(true);
-        elephants.setOpacity(0.3);
-        turtle.setDisable(true);
-        turtle.setOpacity(0.3);
+        for(Assistant assistant: Assistant.values()){
+            getImageViewFromString(assistant.getText(assistant)).setDisable(true);
+            getImageViewFromString(assistant.getText(assistant)).setOpacity(0.3);
+        }
 
         for (Assistant assistant : gui.getPlayer().getAssistantCards()) {
-            switch (assistant) {
-                case LION -> {
-                    lion.setDisable(false);
-                    lion.setOpacity(1);
-                }
-                case OSTRICH -> {
-                    ostrich.setDisable(false);
-                    ostrich.setOpacity(1);
-                }
-                case CAT -> {
-                    cat.setDisable(false);
-                    cat.setOpacity(1);
-                }
-                case EAGLE -> {
-                    eagle.setDisable(false);
-                    eagle.setOpacity(1);
-                }
-                case FOX -> {
-                    fox.setDisable(false);
-                    fox.setOpacity(1);
-                }
-                case SNAKE -> {
-                    snake.setDisable(false);
-                    snake.setOpacity(1);
-                }
-                case OCTOPUS -> {
-                    octopus.setDisable(false);
-                    octopus.setOpacity(1);
-                }
-                case DOG -> {
-                    dog.setDisable(false);
-                    dog.setOpacity(1);
-                }
-                case ELEPHANTS -> {
-                    elephants.setDisable(false);
-                    elephants.setOpacity(1);
-                }
-                case TURTLE -> {
-                    turtle.setDisable(false);
-                    turtle.setOpacity(1);
-                }
-            }
+            getImageViewFromString(assistant.getText(assistant)).setDisable(false);
+            getImageViewFromString(assistant.getText(assistant)).setOpacity(1);
         }
     }
 
@@ -1557,59 +1468,19 @@ public class DashboardController {
     }
 
     public void setMotherNatureView(int num, int motherNatureIsland) {
-        //int j=0;
         int k;
-        //System.out.println("Sono qua amico");
         for (int i = 0; i < num; i++) {
             k = ((motherNatureIsland + i) % 12) + 1;
             getPaneFromString("island" + k + "Pane").setDisable(false);
         }
-        /*for(int i=motherNatureIsland;i<=gui.getBoard().getIslandViews().size() && i<=num;i++){
-            getPaneFromString("island"+i+"Pane").setDisable(false);
-            j++;
-        }
-        for(int k=1;k<=num-j;k++)
-            getPaneFromString("island"+k+"Pane").setDisable(false);
-
-         */
     }
 
     public String getImageFromStudent(Student student) {
-        String s = "";
-        switch (student) {
-            case GREEN -> {
-                s = "img/STUDENT_GREEN.png";
-            }
-            case RED -> {
-                s = "img/STUDENT_RED.png";
-            }
-            case YELLOW -> {
-                s = "img/STUDENT_YELLOW.png";
-            }
-            case BLUE -> {
-                s = "img/STUDENT_BLUE.png";
-            }
-            case PINK -> {
-                s = "img/STUDENT_PINK.png";
-            }
-        }
-        return s;
+        return "img/STUDENT_"+student.getText(student).toUpperCase()+".png";
     }
 
     public String getImageFromTower(Tower tower) {
-        String s = "";
-        switch (tower) {
-            case WHITE -> {
-                s = "img/TOWER_WHITE.png";
-            }
-            case BLACK -> {
-                s = "img/TOWER_BLACK.png";
-            }
-            case GREY -> {
-                s = "img/TOWER_GEY.png";
-            }
-        }
-        return s;
+        return "img/TOWER_"+tower.getText(tower)+".png";
     }
 
     public ImageView getImageViewFromString(String s) {
@@ -1654,21 +1525,13 @@ public class DashboardController {
 
     public void setEntranceStudentClickable() {
         plancePane.setDisable(false);
-        for (int j = 1; j <= gui.getPlayer().getPlance().getEntrance().size(); j++) {
+        for (int j = 1; j <= gui.getPlayer().getPlance().getEntrance().size(); j++)
             getImageViewFromString("entranceStudent" + j).setDisable(false);
-            //entranceView.get(j).setImage(new Image(getImageFromStudent(gui.getPlayer().getPlance().getEntrance().get(j))));
-            //entranceView.get(j).setVisible(true);
-            //entranceView.get(j).setDisable(false);
-
-        }
     }
 
     public void setEntranceStudentNotClickable() {
-        for (int j = 1; j <= gui.getPlayer().getPlance().getEntrance().size(); j++) {
-            //entranceView.get(j).setVisible(true);
-            //entranceView.get(j).setDisable(true);
+        for (int j = 1; j <= gui.getPlayer().getPlance().getEntrance().size(); j++)
             getImageViewFromString("entranceStudent" + j).setDisable(true);
-        }
     }
 
     public void setGameUpdateLabel(String s) {
@@ -1747,7 +1610,6 @@ public class DashboardController {
         }
     }
 
-
     public void inputIslandCharacter(){
         setArchipelagoClickable();
         setGameUpdateLabel("EFFECT: Choose one island");
@@ -1825,7 +1687,6 @@ public class DashboardController {
         choseStudent5or6(5);
     }
 
-
     public void choseStudentCard1to4 (int numOfStudent){
         ArrayList<Student> students =new ArrayList<>();
         if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT1INPUT){
@@ -1887,7 +1748,6 @@ public class DashboardController {
         numOfCharacterPlayed = characterNumber;
         if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.INT)
             gui.setCharacter4played(true);
-        //setGameUpdateLabel("selected: "+ gui.getBoard().getCharacters().get(1).getName() );
         gui.getClient().setCharacterPlayed(true);
     }
 
@@ -1913,6 +1773,4 @@ public class DashboardController {
                 check=true;
         return check;
     }
-
-
 }

@@ -28,4 +28,8 @@ public enum Assistant {
         return movement;
     }
 
+    public String getText(Assistant assistant){
+        return assistant.toString().toLowerCase();
+    }
+
 }
