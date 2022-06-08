@@ -33,7 +33,7 @@ public class CLI implements View {
     private PlayerView player;
     private boolean isFirst = true;
     private boolean character4played = false;
-    private CharacterView characterPlayed = new CharacterView(0, null, "");
+    private CharacterView characterPlayed = new CharacterView(0, null, "",false);
 
 
     public void init() throws IOException, ClassNotFoundException, NumberFormatException {
@@ -391,7 +391,7 @@ public class CLI implements View {
                 checkMinstrelpossible = this.checkMinstrel();
         if (count > 0 && checkMinstrelpossible) {
             System.out.println("Choose one character between this available by typing his number associated");
-            CharacterView character = new CharacterView(0, null, "");
+            CharacterView character = new CharacterView(0, null, "",false);
             boolean check = false;
             graphic.printCharacters(availableCharacter, this.effectHandler);
             int characterChosen = inputParser.intParser();

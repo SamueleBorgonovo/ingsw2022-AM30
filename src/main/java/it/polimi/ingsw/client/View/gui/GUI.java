@@ -697,7 +697,7 @@ public class GUI extends Application implements View{
                     public void run() {
                         dashboardController.setupPlance(player);
                         dashboardController.setCharacterButtonClicked();
-                        dashboardController.setGameUpdateLabel("GAME: Move MotherNature to an island! MAX:"+player.getLastassistantplayed().getValue());
+                        dashboardController.setGameUpdateLabel("GAME: Move MotherNature to an island! MAX:"+player.getLastassistantplayed().getMovement());
                     }
                 });
                 moveMotherNature();

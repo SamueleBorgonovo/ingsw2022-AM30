@@ -37,6 +37,6 @@ public class Characters{
     }
 
     public CharacterView getCharacterView(){
-        return new CharacterView(this.cost, this.typeOfInputCharacter, this.effect.getName());
+        return new CharacterView(this.cost, this.typeOfInputCharacter, this.effect.getName(),used);
     }
 }

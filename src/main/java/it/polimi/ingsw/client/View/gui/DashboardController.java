@@ -2029,6 +2029,8 @@ public class DashboardController {
             getImageViewFromString("character" + i + "Image").setImage(new Image("img/" + gui.getBoard().getCharacters().get(i - 1).getName() + ".jpg"));
             getImageViewFromString("character" + i + "Image").setVisible(true);
             getImageViewFromString("character" + i + "Image").setDisable(false);
+            if(gui.getBoard().getCharacters().get(i-1).isUsed())
+                getImageViewFromString("character"+i+"CoinImage").setVisible(true);
             setStudentsOnCharacter(i);
         }
     }
