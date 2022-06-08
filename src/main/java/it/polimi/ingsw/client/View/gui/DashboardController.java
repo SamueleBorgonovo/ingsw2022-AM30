@@ -953,6 +953,15 @@ public class DashboardController {
     @FXML
     public ImageView character3Stop4;
 
+    @FXML
+    public ImageView character1CoinImage;
+
+    @FXML
+    public ImageView character2CoinImage;
+
+    @FXML
+    public ImageView character3CoinImage;
+
     public void chosenCloud1(MouseEvent mouseEvent) {
         ChooseCloudMessage message = new ChooseCloudMessage(1);
         gui.getClient().sendMessage(message);

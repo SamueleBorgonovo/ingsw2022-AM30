@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.DashboardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.View.gui.DashboardController">
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="700.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -1936,6 +1936,11 @@
                         </ImageView>
                      </children>
                   </GridPane>
+                  <ImageView fx:id="character1CoinImage" fitHeight="22.0" fitWidth="23.0" layoutX="87.0" layoutY="6.0" visible="false">
+                     <image>
+                        <Image url="@img/COIN.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane layoutX="185.0" layoutY="8.0" prefHeight="171.0" prefWidth="117.0">
@@ -2020,6 +2025,11 @@
                         </ImageView>
                      </children>
                   </GridPane>
+                  <ImageView fx:id="character2CoinImage" fitHeight="22.0" fitWidth="23.0" layoutX="87.0" layoutY="6.0" visible="false">
+                     <image>
+                        <Image url="@img/COIN.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane layoutX="340.0" layoutY="8.0" prefHeight="171.0" prefWidth="117.0">
@@ -2104,6 +2114,11 @@
                         </ImageView>
                      </children>
                   </GridPane>
+                  <ImageView fx:id="character3CoinImage" fitHeight="22.0" fitWidth="23.0" layoutX="87.0" layoutY="6.0" visible="false">
+                     <image>
+                        <Image url="@img/COIN.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </children>
