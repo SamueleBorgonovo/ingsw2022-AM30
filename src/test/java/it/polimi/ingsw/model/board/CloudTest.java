@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.controller.virtualView.CloudView;
 import it.polimi.ingsw.model.game.Student;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,13 +41,30 @@ class CloudTest {
     @Test
     void isChoosen() {
         //tests also setChoosen
-        assertEquals(false,cloud.isChoosen());
+        assertFalse(cloud.isChoosen());
         cloud.setChoosen(true);
-        assertEquals(true, cloud.isChoosen());
+        assertTrue(cloud.isChoosen());
+    }
+
+    @Test
+    void setChoosen(){
+        cloud.setChoosen(true);
+        assertTrue(cloud.isChoosen());
     }
 
     @Test
     void getCloudID() {
         assertEquals(3,cloud.getCloudID());
+    }
+
+    @Test
+    void getCloudView(){
+        cloud.setChoosen(true);
+        CloudView cloudView=cloud.getCloudView();
+        assertEquals(3,cloudView.getStudents().size());
+        assertTrue(cloudView.getStudents().containsAll(students));
+
+        assertTrue(cloudView.isChoosen());
+        assertEquals(3,cloudView.getCloudID());
     }
 }

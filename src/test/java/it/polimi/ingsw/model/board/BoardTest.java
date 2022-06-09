@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BoardTest {
     Game game2players = new Game(GameMode.EXPERTMODE,2);
@@ -49,6 +50,32 @@ class BoardTest {
     }
 
     @Test
+    void getAndRemoveRandomBagStudent(){
+        ArrayList<Student> students=new ArrayList<>();
+        students=game2players.getBoard().getAndRemoveRandomBagStudent(5);
+        assertEquals(5,students.size());
+
+        game2players.getBoard().getAndRemoveRandomBagStudent(game2players.getBoard().getNumOfStudentsBag());
+        assertEquals(0,game2players.getBoard().getNumOfStudentsBag());
+
+        students.clear();
+        students.add(Student.RED);
+        students.add(Student.GREEN);
+        students.add(Student.RED);
+        game2players.getBoard().addStudentBag(students);
+        assertEquals(3,game2players.getBoard().getNumOfStudentsBag());
+        assertTrue(game2players.getBoard().getAndRemoveRandomBagStudent(3).containsAll(students));
+    }
+
+    @Test
+    void getClouds() {
+        ArrayList<Cloud> clouds2Player = game2players.getBoard().getClouds();
+        ArrayList<Cloud> clouds3Player = game3players.getBoard().getClouds();
+        assertEquals(clouds2Player,game2players.getBoard().getClouds());
+        assertEquals(clouds3Player,game3players.getBoard().getClouds());
+    }
+
+    @Test
     void getCoinReserve() throws OutOfCoinsException {
         // Also tests addCoinToReserve and removeCoinsFromReserve
 
@@ -74,15 +101,6 @@ class BoardTest {
         assertEquals(19,game3players.getBoard().getCoinReserve());
         game3players.getBoard().removeCoinsFromReserve(3);
         assertEquals(16,game3players.getBoard().getCoinReserve());
-    }
-
-
-    @Test
-    void getClouds() {
-        ArrayList<Cloud> clouds2Player = game2players.getBoard().getClouds();
-        ArrayList<Cloud> clouds3Player = game3players.getBoard().getClouds();
-        assertEquals(clouds2Player,game2players.getBoard().getClouds());
-        assertEquals(clouds3Player,game3players.getBoard().getClouds());
     }
 
     @Test
