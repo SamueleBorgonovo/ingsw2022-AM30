@@ -28,8 +28,10 @@ public class Characters{
     }
 
     public void setUsed(boolean used) {
-        this.used = used;
-        cost++;
+        if(!this.used) {
+            this.used = true;
+            cost++;
+        }
     }
 
     public TypeOfInputCharacter getTypeOfInputCharacter() {
