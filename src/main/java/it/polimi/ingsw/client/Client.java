@@ -112,6 +112,7 @@ public class Client {
         }
         }catch(IOException | ClassNotFoundException e) {
             System.out.println("Exception del metodo che riceve i messaggi dal server");
+            e.printStackTrace();
             handleSocketDisconnection(false);
         }
 
@@ -124,10 +125,8 @@ public class Client {
             output.flush();
         } catch (IOException e) {
             System.out.println("Exception nel sendMessage del client");
-            handleSocketDisconnection(false);
-            /*System.err.println("Error during send process.");
             e.printStackTrace();
-             */
+            handleSocketDisconnection(false);
         }
 
     }
@@ -179,8 +178,8 @@ public class Client {
 
     public synchronized void stopTimer(){
         if (timer != null && timer.isAlive()){
-            for(Thread timer : timerThreads) {
-                timer.interrupt();
+            for(Thread time : timerThreads) {
+                time.interrupt();
             }
             timerThreads.clear();
             //timer = null;

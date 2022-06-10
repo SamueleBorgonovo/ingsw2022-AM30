@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 
 public class ClientHandler implements Runnable, ClientHandlerInterface {
     private final int PING_PERIOD = 5000;
@@ -27,6 +28,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
     private GameHandler gameHandler;
     private boolean gameStarted;
     private boolean disconnectionCalled=false;
+    private ArrayList<Thread> timerThreads = new ArrayList<>();
 
     public ClientHandler(Socket clientSocket, MessageHandler messageHandler,GameHandler gameHandler) {
         this.gameHandler = gameHandler;
@@ -52,17 +54,21 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
         timer = new Thread(() -> {
             try{
                 Thread.sleep(TIMEOUT_FOR_RESPONSE);
-                System.out.println("Timer del pinger scattato");
+                System.out.println("Timer del pinger scattato "+getNickname());
                 handleSocketDisconnection(true,false);
             } catch (InterruptedException e){ }
         });
+        timerThreads.add(timer);
         timer.start();
     }
 
 
     public void stopTimer(){
         if (timer != null && timer.isAlive()){
-            timer.interrupt();
+            for(Thread time : timerThreads) {
+                time.interrupt();
+            }
+            timerThreads.clear();
             //timer = null;
         }
     }
