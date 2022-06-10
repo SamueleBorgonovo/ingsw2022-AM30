@@ -63,7 +63,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
     }
 
 
-    public void stopTimer(){
+    public synchronized void stopTimer(){
         if (timer != null && timer.isAlive()){
             for(Thread time : timerThreads) {
                 time.interrupt();
