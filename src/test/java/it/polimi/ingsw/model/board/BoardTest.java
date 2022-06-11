@@ -1,5 +1,9 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.controller.virtualView.BoardView;
+import it.polimi.ingsw.controller.virtualView.CharacterView;
+import it.polimi.ingsw.controller.virtualView.CloudView;
+import it.polimi.ingsw.controller.virtualView.IslandView;
 import it.polimi.ingsw.exceptions.OutOfCoinsException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
@@ -104,6 +108,26 @@ class BoardTest {
     }
 
     @Test
+    void removeCoinsFromReserve(){
+        Board board=game2players.getBoard();
+        assertEquals(18,board.getCoinReserve());
+        try {
+            board.removeCoinsFromReserve(16);
+        }catch (OutOfCoinsException e){}
+        assertEquals(2,board.getCoinReserve());
+        boolean catched=false;
+        try{
+            board.removeCoinsFromReserve(4);
+        }catch (OutOfCoinsException e){
+            catched=true;
+        }
+        finally {
+            assertTrue(catched);
+            assertEquals(2,board.getCoinReserve());
+        }
+    }
+
+    @Test
     void getCharacters() {
         ArrayList<Characters> characters = game3players.getBoard().getCharacters();
         assertEquals(characters,game3players.getBoard().getCharacters());
@@ -126,5 +150,30 @@ class BoardTest {
         Archipelago archipelago=new Archipelago();
         archipelago=game2players.getBoard().getArchipelago();
         assertEquals(archipelago,game2players.getBoard().getArchipelago());
+    }
+
+    @Test
+    void getCloud(){
+        Board board=game2players.getBoard();
+        ArrayList<Student> students=new ArrayList<>();
+        students.add(Student.RED);
+        students.add(Student.GREEN);
+        board.getCloud(2).setStudents(students);
+        board.getCloud(2).setChoosen(true);
+
+        Cloud cloud=board.getCloud(2);
+        assertTrue(cloud.isChoosen());
+        assertTrue(cloud.getStudents().containsAll(students));
+    }
+
+    @Test
+    void getBoardView(){
+        // check only size because other tests check if all attributes are equals
+        Board board=game2players.getBoard();
+
+        BoardView boardView=board.getBoardView();
+        assertEquals(2,boardView.getClouds().size());
+        assertEquals(12,boardView.getIslandViews().size());
+        assertEquals(3,boardView.getCharacters().size());
     }
 }

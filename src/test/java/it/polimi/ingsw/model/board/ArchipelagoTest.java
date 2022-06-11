@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ArchipelagoTest {
     Board board2Players = new Board(GameMode.EXPERTMODE,2);
@@ -47,12 +48,19 @@ class ArchipelagoTest {
         board2Players.getArchipelago().getSingleIsland(num+1).addStudent(Student.BLUE);
         student=board2Players.getArchipelago().getStudentIslands(num+1);
         assertEquals(student, studentWanted);
+
+        student=board2Players.getArchipelago().getStudentIslands(13);
+        assertNull(student);
     }
 
     @Test
     void getTowersTypeIsland() {
         board2Players.getArchipelago().getIslands().get(1).setTowerColor(Tower.WHITE);
         assertEquals(Tower.WHITE, board2Players.getArchipelago().getTowerTypeIsland(2));
+
+        Tower tower;
+        tower=board2Players.getArchipelago().getTowerTypeIsland(13);
+        assertNull(tower);
     }
 
     @Test
@@ -133,6 +141,9 @@ class ArchipelagoTest {
             value=-3;
 
         assertEquals(1,value);
+
+        island=board2Players.getArchipelago().getSingleIsland(13);
+        assertNull(island);
     }
 
     @Test
