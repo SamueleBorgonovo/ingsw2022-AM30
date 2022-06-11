@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.game.EffectHandler;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
+import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 import javafx.application.Application;
@@ -410,12 +411,21 @@ public class GUI extends Application implements View{
 
     @Override
     public void printWinnerInstantly(ArrayList<String> nickname, int type) {
+        Platform.runLater(() -> dashboardController.winner(nickname));
+        if(type == 1)
+            Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Only 3 islands remained"));
+        if(type==2)
+            Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Last tower built"));
 
     }
 
     @Override
     public void printWinnerEndRound(ArrayList<String> nickname, int type) {
-
+        Platform.runLater(() -> dashboardController.winner(nickname));
+        if(type == 1)
+            Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Coins bag empty!"));
+        if(type==2)
+            Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: All assistant cards has been played"));
     }
 
     @Override

@@ -1817,4 +1817,11 @@ public class DashboardController {
                 check=true;
         return check;
     }
+
+    public void winner(ArrayList<String> nickname){
+        cloudsPane.setVisible(false);
+        cloudsPane.setDisable(true);
+        winnerPane.setVisible(true);
+        winnerNicknameLabel.setText(nickname.get(0));
+    }
 }
