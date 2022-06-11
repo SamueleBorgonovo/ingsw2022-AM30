@@ -25,7 +25,7 @@ public class Effect3 extends Effect {
     }
 
     @Override
-    public void inizialize(Game game) {}
+    public void initialize(Game game) {}
 
     @Override
     public void secondPartEffect(Game game, int playerID)  throws InvalidStudentEffectException {

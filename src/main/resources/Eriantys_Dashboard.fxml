@@ -22,6 +22,97 @@
       </ImageView>
       <Pane id="islandsPane" layoutX="230.0" layoutY="35.0" prefHeight="424.0" prefWidth="737.0" styleClass="box" stylesheets="@Style.css">
          <children>
+            <Pane fx:id="cloudsPane" layoutX="161.0" layoutY="148.0" prefHeight="131.0" prefWidth="424.0">
+               <children>
+                  <Pane fx:id="cloud1Pane" onMouseClicked="#chosenCloud1" prefHeight="131.0" prefWidth="131.0">
+                     <children>
+                        <ImageView fitHeight="127.0" fitWidth="127.0" layoutX="2.0" layoutY="3.0">
+                           <image>
+                              <Image url="@img/cloud.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud1Student2" fitHeight="24.0" fitWidth="24.0" layoutX="28.0" layoutY="54.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud1Student4" fitHeight="24.0" fitWidth="24.0" layoutX="53.0" layoutY="82.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud1Student3" fitHeight="24.0" fitWidth="24.0" layoutX="77.0" layoutY="54.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud1Student1" fitHeight="24.0" fitWidth="24.0" layoutX="57.0" layoutY="23.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="cloud2Pane" layoutX="293.0" onMouseClicked="#chosenCloud2" prefHeight="131.0" prefWidth="131.0">
+                     <children>
+                        <ImageView fitHeight="127.0" fitWidth="127.0" layoutX="2.0" layoutY="3.0">
+                           <image>
+                              <Image url="@img/cloud.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud2Student2" fitHeight="24.0" fitWidth="24.0" layoutX="27.0" layoutY="54.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud2Student4" fitHeight="24.0" fitWidth="24.0" layoutX="53.0" layoutY="82.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud2Student3" fitHeight="24.0" fitWidth="24.0" layoutX="87.0" layoutY="56.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud2Student1" fitHeight="24.0" fitWidth="24.0" layoutX="54.0" layoutY="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="cloud3Pane" layoutX="149.0" onMouseClicked="#chosenCloud3" prefHeight="131.0" prefWidth="131.0">
+                     <children>
+                        <ImageView fitHeight="127.0" fitWidth="127.0" layoutX="2.0" layoutY="3.0">
+                           <image>
+                              <Image url="@img/cloud.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud3Student2" fitHeight="24.0" fitWidth="24.0" layoutX="25.0" layoutY="54.0">
+                           <image>
+                              <Image url="@img/STUDENT_BLUE.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud3Student4" fitHeight="24.0" fitWidth="24.0" layoutX="53.0" layoutY="81.0">
+                           <image>
+                              <Image url="@img/STUDENT_YELLOW.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud3Student3" fitHeight="24.0" fitWidth="24.0" layoutX="81.0" layoutY="54.0">
+                           <image>
+                              <Image url="@img/STUDENT_RED.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cloud3Student1" fitHeight="24.0" fitWidth="24.0" layoutX="53.0" layoutY="24.0">
+                           <image>
+                              <Image url="@img/STUDENT_PINK.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
             <Pane fx:id="island1Pane" layoutX="3.0" layoutY="5.0" onMouseClicked="#chosenIsland1" prefHeight="150.0" prefWidth="150.0">
                <children>
                   <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="-4.0" layoutY="-3.0">
@@ -1258,91 +1349,18 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="cloud1Pane" layoutX="161.0" layoutY="148.0" onMouseClicked="#chosenCloud1" prefHeight="131.0" prefWidth="131.0">
+            <Pane fx:id="winnerPane" layoutX="161.0" layoutY="148.0" prefHeight="131.0" prefWidth="424.0" visible="false">
                <children>
-                  <ImageView fitHeight="127.0" fitWidth="127.0" layoutX="2.0" layoutY="3.0">
-                     <image>
-                        <Image url="@img/cloud.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud1Student2" fitHeight="24.0" fitWidth="24.0" layoutX="28.0" layoutY="54.0">
-                     <image>
-                        <Image url="@img/STUDENT_BLUE.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud1Student4" fitHeight="24.0" fitWidth="24.0" layoutX="53.0" layoutY="82.0">
-                     <image>
-                        <Image url="@img/STUDENT_YELLOW.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud1Student3" fitHeight="24.0" fitWidth="24.0" layoutX="77.0" layoutY="54.0">
-                     <image>
-                        <Image url="@img/STUDENT_RED.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud1Student1" fitHeight="24.0" fitWidth="24.0" layoutX="57.0" layoutY="23.0">
-                     <image>
-                        <Image url="@img/STUDENT_PINK.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-            <Pane fx:id="cloud3Pane" layoutX="310.0" layoutY="148.0" onMouseClicked="#chosenCloud3" prefHeight="131.0" prefWidth="131.0">
-               <children>
-                  <ImageView fitHeight="127.0" fitWidth="127.0" layoutX="2.0" layoutY="3.0">
-                     <image>
-                        <Image url="@img/cloud.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud3Student2" fitHeight="24.0" fitWidth="24.0" layoutX="25.0" layoutY="54.0">
-                     <image>
-                        <Image url="@img/STUDENT_BLUE.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud3Student4" fitHeight="24.0" fitWidth="24.0" layoutX="53.0" layoutY="81.0">
-                     <image>
-                        <Image url="@img/STUDENT_YELLOW.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud3Student3" fitHeight="24.0" fitWidth="24.0" layoutX="81.0" layoutY="54.0">
-                     <image>
-                        <Image url="@img/STUDENT_RED.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud3Student1" fitHeight="24.0" fitWidth="24.0" layoutX="53.0" layoutY="24.0">
-                     <image>
-                        <Image url="@img/STUDENT_PINK.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-            <Pane fx:id="cloud2Pane" layoutX="455.0" layoutY="148.0" onMouseClicked="#chosenCloud2" prefHeight="131.0" prefWidth="131.0">
-               <children>
-                  <ImageView fitHeight="127.0" fitWidth="127.0" layoutX="2.0" layoutY="3.0">
-                     <image>
-                        <Image url="@img/cloud.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud2Student2" fitHeight="24.0" fitWidth="24.0" layoutX="27.0" layoutY="54.0">
-                     <image>
-                        <Image url="@img/STUDENT_BLUE.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud2Student4" fitHeight="24.0" fitWidth="24.0" layoutX="53.0" layoutY="82.0">
-                     <image>
-                        <Image url="@img/STUDENT_YELLOW.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud2Student3" fitHeight="24.0" fitWidth="24.0" layoutX="87.0" layoutY="56.0">
-                     <image>
-                        <Image url="@img/STUDENT_RED.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cloud2Student1" fitHeight="24.0" fitWidth="24.0" layoutX="54.0" layoutY="24.0">
-                     <image>
-                        <Image url="@img/STUDENT_PINK.png" />
-                     </image>
-                  </ImageView>
+                  <Label fx:id="winnerNicknameLabel" alignment="CENTER" layoutY="-2.0" prefHeight="61.0" prefWidth="424.0" text="GIUSEPPE">
+                     <font>
+                        <Font name="Futura Medium" size="65.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutY="73.0" prefHeight="18.0" prefWidth="424.0" text="WINS">
+                     <font>
+                        <Font name="Futura Medium" size="33.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children>

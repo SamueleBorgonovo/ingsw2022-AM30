@@ -30,7 +30,7 @@ public class Effect5 extends Effect {
     }
 
     @Override
-    public void inizialize(Game game) {
+    public void initialize(Game game) {
 
     }
 

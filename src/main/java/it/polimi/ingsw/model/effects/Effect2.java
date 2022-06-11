@@ -19,11 +19,12 @@ public class Effect2 extends Effect {
     @Override
     public void effect(Game game, int playerID)  throws InvalidStopException {
         game.getEffectHandler().setProfessorcontroll(true);
+        game.verifyProfessorControl();
         game.setCharacterInUse(null);
     }
 
     @Override
-    public void inizialize(Game game) {}
+    public void initialize(Game game) {}
 
     @Override
     public void secondPartEffect(Game game, int playerID)  throws InvalidStudentEffectException {}

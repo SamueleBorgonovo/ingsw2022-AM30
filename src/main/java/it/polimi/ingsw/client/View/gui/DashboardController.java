@@ -24,13 +24,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class DashboardController {
 
     private GUI gui;
-
-
     private Student studentToMove;
     private int numOfStudentChosen;
     private boolean characterButtonClicked = false;
@@ -962,6 +959,15 @@ public class DashboardController {
 
     @FXML
     public ImageView character3CoinImage;
+
+    @FXML
+    public Pane cloudsPane;
+
+    @FXML
+    public Pane winnerPane;
+
+    @FXML
+    public Label winnerNicknameLabel;
 
     public void chosenCloud1(MouseEvent mouseEvent) {
         chosenCluod(1);

@@ -33,7 +33,7 @@ public class Game implements GameInterface {
         board = new Board(gameMode, numofplayers);
         effectHandler = new EffectHandler();
         for(Characters character : board.getCharacters())
-            character.getEffect().inizialize(this);
+            character.getEffect().initialize(this);
     }
 
     public ArrayList<Wizard> getWizardAvailable() {
@@ -60,7 +60,6 @@ public class Game implements GameInterface {
 
     public void setCharacterInUse(Characters character){characterInUse=character;}
 
-
     public GameState getState() {
         return gameState;
     }
@@ -72,7 +71,6 @@ public class Game implements GameInterface {
     public ArrayList<Player> getPlayers(){
         return new ArrayList<>(listOfPlayers);
     }
-
 
     public void setReconnectedPlayer(int playerid) throws ReconnectedException {
         if(getPlayer(playerid).getPlayerState() == PlayerState.DISCONNECTED) {
@@ -358,7 +356,6 @@ public class Game implements GameInterface {
                startRound();  //Start the new round
                 return true;
             }
-
         }
         else throw new InvalidTurnException();
     }
@@ -520,10 +517,11 @@ public class Game implements GameInterface {
 
     public void verifyIslandInfluence(int islandID) {
         // Check which Player has the most influence on an Island and arrange the towers appropriately.
-        int maxscore = 0;
+        int maxScore = 0;
         int score;
-        Player playermaxscore = null;
+        Player playerMaxScore = null;
         Island island = this.getBoard().getArchipelago().getSingleIsland(islandID);
+
         if (island.isStop()) {
             island.setStop(false);
             effectHandler.addislandstop();
@@ -541,54 +539,54 @@ public class Game implements GameInterface {
                     score = score + 2;
                     effectHandler.setTwopoints(0);
                 }
-                if (score > maxscore) {
-                    maxscore = score;
-                    playermaxscore = player;
+                if (score > maxScore) {
+                    maxScore = score;
+                    playerMaxScore = player;
                 }
             }
             effectHandler.setNocolor(false);
             effectHandler.setNotower(false);
-            if (playermaxscore != null && !playermaxscore.getPlance().getTower().equals(island.getTowerColor()) && maxscore != 0) {
+            if (playerMaxScore != null && !playerMaxScore.getPlance().getTower().equals(island.getTowerColor()) && maxScore != 0) {
                 if (island.getNumOfTowers()==0)
-                    island.setTowerColor(playermaxscore.getPlance().getTower());
+                    island.setTowerColor(playerMaxScore.getPlance().getTower());
                 else {
                     for (Player player : listOfPlayers)
                         if (player.getPlance().getTower().equals(island.getTowerColor()))
                             for (int i = 0; i<island.getNumOfTowers();i++)
                                 player.getPlance().addTower();
-                    island.setTowerColor(playermaxscore.getPlance().getTower());
+                    island.setTowerColor(playerMaxScore.getPlance().getTower());
                 }
                 for (int i = 0; i<island.getNumOfTowers();i++)
-                    playermaxscore.getPlance().removeTower();
+                    playerMaxScore.getPlance().removeTower();
             }
         }
     }
 
-    void verifyProfessorControl() {
+    public void verifyProfessorControl() {
         // Controll and check Professors.
-        int numofstudentcolorhall;
-        int numofstudentcolorhallmax;
-        Player playermax = null;
+        int numOfStudentColorHall;
+        int numOfStudentColorHallMax;
+        Player playerMax;
 
         for (int i = 0; i < Professor.values().length; i++) {
-            numofstudentcolorhallmax = 0;
+            playerMax = null;
+            numOfStudentColorHallMax = 0;
             for (Player player : listOfPlayers)
                 if(player.getPlance().getProfessors().contains(Professor.values()[i]))
-                    numofstudentcolorhallmax=player.getPlance().getNumberOfStudentHall(Student.values()[i]);
+                    numOfStudentColorHallMax=player.getPlance().getNumberOfStudentHall(Student.values()[i]);
             for (Player player : listOfPlayers) {
-                numofstudentcolorhall = player.getPlance().getNumberOfStudentHall(Student.values()[i]);
-                if (numofstudentcolorhall > numofstudentcolorhallmax || (effectHandler.isProfessorcontroll() && numofstudentcolorhall >= numofstudentcolorhallmax)) {
-                    numofstudentcolorhallmax = numofstudentcolorhall;
-                    playermax = player;
+                numOfStudentColorHall = player.getPlance().getNumberOfStudentHall(Student.values()[i]);
+                if (numOfStudentColorHall > numOfStudentColorHallMax || (effectHandler.isProfessorcontroll() && numOfStudentColorHall >= numOfStudentColorHallMax)) {
+                    numOfStudentColorHallMax = numOfStudentColorHall;
+                    playerMax = player;
                 }
             }
-            if (playermax != null && !playermax.getPlance().getProfessors().contains(Professor.values()[i])) {
+            if (playerMax != null && !playerMax.getPlance().getProfessors().contains(Professor.values()[i])) {
                 for (Player player : listOfPlayers)
                     if (player.getPlance().getProfessors().contains(Professor.values()[i]))
                         player.getPlance().removeProfessor(Professor.values()[i]);
-                playermax.getPlance().addProfessor(Professor.values()[i]);
+                playerMax.getPlance().addProfessor(Professor.values()[i]);
             }
-            playermax = null;
         }
     }
 

@@ -24,7 +24,7 @@ public class Effect1 extends Effect {
     }
 
     @Override
-    public void inizialize(Game game) {
+    public void initialize(Game game) {
         game.getEffectHandler().setEffect1students(game.getBoard().getAndRemoveRandomBagStudent(4));
     }
 

@@ -499,11 +499,11 @@ class GraphicTest {
         charactersGame.add(new Characters(effect11));
         charactersGame.add(characters12);
         if(!game.getBoard().getCharacters().get(0).getEffect().getName().equals(effect1.getName()))
-            effect1.inizialize(game);
+            effect1.initialize(game);
         if(!game.getBoard().getCharacters().get(0).getEffect().getName().equals(effect7.getName()))
-            effect7.inizialize(game);
+            effect7.initialize(game);
         if(!game.getBoard().getCharacters().get(0).getEffect().getName().equals(effect11.getName()))
-            effect11.inizialize(game);
+            effect11.initialize(game);
 
         for(Characters character : charactersGame)
             characters.add(character.getCharacterView());

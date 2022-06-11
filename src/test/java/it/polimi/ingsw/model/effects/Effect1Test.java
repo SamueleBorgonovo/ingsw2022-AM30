@@ -23,7 +23,7 @@ class Effect1Test {
                 if(characters.getEffect().getClass().equals(effect1.getClass()))
                     i = 1;
         } while (i != 1);
-        effect1.inizialize(game);
+        effect1.initialize(game);
         int var=1;
         if(game.getEffectHandler().getEffect1students().size()!=4)
             var=-1;
