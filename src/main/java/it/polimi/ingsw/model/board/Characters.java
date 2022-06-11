@@ -30,7 +30,8 @@ public class Characters{
     public void setUsed(boolean used) {
         if(!this.used) {
             this.used = true;
-            cost++;
+            if(cost== effect.getCost())
+                cost++;
         }
     }
 
