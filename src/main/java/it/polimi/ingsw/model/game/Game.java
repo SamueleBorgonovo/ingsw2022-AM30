@@ -94,53 +94,44 @@ public class Game implements GameInterface {
             listOfPlayers.remove(getPlayer(playerid)); //if game not already started, player can't reconnect
         }
         else {
-            int counter = 0;
-            for (Player player : listOfPlayers) {
-                if (player.getPlayerState() == PlayerState.DISCONNECTED)
-                    counter++;
-            }
+            int counter = getNumPlayerDisconnected();
             if (counter == numOfPlayers - 1) {
                 getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
-                //shutdown(false);
             } else {
                 if (counter == numOfPlayers - 2) {
                     gameState=GameState.WAITINGFORRECONNECTION;
-                    //startTimer();
                 }
 
-                    if (getPlayer(playerid).getPlayerState() == PlayerState.WAITING) {
-                        getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
-                    } else if (getPlayer(playerid).getPlayerState() == PlayerState.ASSISTANTPHASE) {
-                        callhandler=true;
-                        numplayerhasplayed++;
-                        getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
-                        if (numplayerhasplayed == numOfPlayers) {
-                            verifyPlayerOrder();
-                            int tmp = searchfisrt();
-                            if (tmp == -1) {
-                                //shutdown(false);
-                            }
-                            playerorder.get(tmp).setPlayerState(PlayerState.STUDENTPHASE);
-                        } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
-                    } else {
-                        movementStudents=0;
-                        callhandler=true;
-                        numplayerhasplayed++;
-                        getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
-                        if (numplayerhasplayed == numOfPlayers) {
-                            //All players played, ending round
-                            numplayerhasplayed = 0;
-                            for (int count = 0; count < getBoard().getClouds().size(); count++) {
-                                getBoard().getClouds().get(count).setChoosen(false);
-                            }
+                if (getPlayer(playerid).getPlayerState() == PlayerState.WAITING) {
+                    getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
+                } else if (getPlayer(playerid).getPlayerState() == PlayerState.ASSISTANTPHASE) {
+                    callhandler=true;
+                    numplayerhasplayed++;
+                    getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
+                    if (numplayerhasplayed == numOfPlayers) {
+                        verifyPlayerOrder();
+                        int tmp = searchfisrt();
+                        playerorder.get(tmp).setPlayerState(PlayerState.STUDENTPHASE);
+                    } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
+                } else {
+                    movementStudents=0;
+                    callhandler=true;
+                    numplayerhasplayed++;
+                    getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
+                    if (numplayerhasplayed == numOfPlayers) {
+                        //All players played, ending round
+                        numplayerhasplayed = 0;
+                        for (int count = 0; count < getBoard().getClouds().size(); count++) {
+                            getBoard().getClouds().get(count).setChoosen(false);
+                        }
 
-                            for (Player player : listOfPlayers) {
-                                player.setCharacterPlayed(false);
-                            }
-                            startRound();  //Start the new round
-                        } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
+                        for (Player player : listOfPlayers) {
+                            player.setCharacterPlayed(false);
+                        }
+                        startRound();  //Start the new round
+                    } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
 
-                    }
+                }
             }
         }
     return callhandler;
