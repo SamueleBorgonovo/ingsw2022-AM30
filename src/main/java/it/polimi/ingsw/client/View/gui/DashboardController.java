@@ -105,22 +105,8 @@ public class DashboardController {
     }
 
     public void setBackgroundImage(Wizard wizard){
-        switch (wizard){
-            case WIZARD_BLUE -> {
-                backgroundImage.setImage(new Image("img/wizardBlueBackground.jpg"));
-            }
-            case WIZARD_PINK -> {
-                backgroundImage.setImage(new Image("img/wizardPinkBackground.jpg"));
-            }
-            case WIZARD_YELLOW -> {
-                backgroundImage.setImage(new Image("img/wizardYellowBackground.jpg"));
-            }
-            case WIZARD_GREEN -> {
-                backgroundImage.setImage(new Image("img/wizardGreenBackground.jpg"));
-            }
-        }
+        backgroundImage.setImage(new Image("img/" + wizard.toString() + "_BACKGROUND.jpg"));
     }
-
 
     public void setGui(GUI gui) {
         this.gui = gui;

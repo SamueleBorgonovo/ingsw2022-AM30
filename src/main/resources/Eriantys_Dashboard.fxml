@@ -17,7 +17,7 @@
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="700.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/wizardGreenBackground.jpg" />
+            <Image url="@img/WIZARD_GREEN_BACKGROUND.jpg" />
          </image>
       </ImageView>
       <Pane id="islandsPane" layoutX="230.0" layoutY="35.0" prefHeight="424.0" prefWidth="737.0" styleClass="box" stylesheets="@Style.css">

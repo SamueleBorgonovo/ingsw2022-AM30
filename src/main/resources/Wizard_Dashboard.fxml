@@ -18,22 +18,22 @@
          <children>
             <ImageView id="wizardGreen" fx:id="wizardGreen" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardGreen">
                <image>
-                  <Image url="@img/wizardGreen.png" />
+                  <Image url="@img/WIZARD_GREEN.png" />
                </image>
             </ImageView>
             <ImageView id="wizardYellow" fx:id="wizardYellow" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardYellow">
                <image>
-                  <Image url="@img/wizardYellow.png" />
+                  <Image url="@img/WIZARD_YELLOW.png" />
                </image>
             </ImageView>
             <ImageView id="wizardBlue" fx:id="wizardBlue" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardBlue">
                <image>
-                  <Image url="@img/wizardBlue.png" />
+                  <Image url="@img/WIZARD_BLUE.png" />
                </image>
             </ImageView>
             <ImageView id="wizardPink" fx:id="wizardPink" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardPink">
                <image>
-                  <Image url="@img/wizardPink.png" />
+                  <Image url="@img/WIZARD_PINK.png" />
                </image>
             </ImageView>
          </children>
