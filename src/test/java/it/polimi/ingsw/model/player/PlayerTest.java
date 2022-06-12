@@ -2,8 +2,6 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.exceptions.OutOfCoinsException;
-import it.polimi.ingsw.model.game.Game;
-import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Tower;
 import org.junit.jupiter.api.Test;
 
