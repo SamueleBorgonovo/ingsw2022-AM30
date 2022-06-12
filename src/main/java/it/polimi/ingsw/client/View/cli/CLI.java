@@ -482,8 +482,10 @@ public class CLI implements View {
 
 
     @Override
-    public void printStartGame() {
-        System.out.println("Game is Starting");
+    public void printStartGame(boolean restart) {
+        if(!restart)
+            System.out.println("Game is Starting");
+        else System.out.println("Game is re-starting");
         graphic.printArchipelago(board.getIslandViews(), board.getMotherNature());
         graphic.printPlances(players);
         if (client.getGamemode() == GameMode.EXPERTMODE)

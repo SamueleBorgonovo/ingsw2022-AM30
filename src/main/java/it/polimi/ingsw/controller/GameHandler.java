@@ -98,7 +98,7 @@ public class GameHandler {
     }
 
     public void startGame(GameInterface game){
-        sendMessagetoGame(game,new StartGameMessage());
+        sendMessagetoGame(game,new StartGameMessage(false));
         game.startGame();
         turnHandler(game);
     }
@@ -173,8 +173,10 @@ public class GameHandler {
                     }
                 clientHandler.sendMessageToClient(new SettingReconnectMessage(game.getGameMode(),game.getNumOfPlayers(),wizardToSend));
                 sendMessagetoGame(game, new ConnectMessage(clientHandler.getNickname(), true));
-                if(game.getNumOfPlayers()-game.getNumPlayerDisconnected()==2)
+                if(game.getNumOfPlayers()-game.getNumPlayerDisconnected()==2) {
+                    sendMessagetoGame(game,new StartGameMessage(true));
                     turnHandler(game);
+                }
             }catch(ReconnectedException e){
                 //Fare il messaggio invalidReconnection
                 NicknameMessage message = new NicknameMessage(false,false);

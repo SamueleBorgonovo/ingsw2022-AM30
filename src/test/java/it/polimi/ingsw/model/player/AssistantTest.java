@@ -25,4 +25,9 @@ class AssistantTest {
             movement++;
         }
     }
+
+    @Test
+    void getText(){
+        assertEquals("lion",Assistant.LION.getText(Assistant.LION));
+    }
 }

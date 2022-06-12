@@ -96,7 +96,7 @@ public class ClientMessageHandler {
     }
 
     public void process(StartGameMessage message){
-        view.printStartGame();
+        view.printStartGame(message.isRestart());
     }
 
     public void process(NicknameMessage message){

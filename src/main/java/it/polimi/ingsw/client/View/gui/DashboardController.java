@@ -49,7 +49,7 @@ public class DashboardController {
         coinPane.setVisible(false);
         characterButtor.setVisible(false);
         characterButtonLabel.setVisible(false);
-        if (gui.getGameMode() == GameMode.EXPERTMODE) {
+        if (gui.getClient().getGamemode() == GameMode.EXPERTMODE) {
             coinLabel.setText(String.valueOf(gui.getPlayer().getCoins()));
             coinPane.setVisible(true);
             characterButtor.setVisible(true);
@@ -72,7 +72,7 @@ public class DashboardController {
         if (player == null) {
             showPlanceChoiceBox.getItems().add(gui.getPlayers().get(0).getNickname() + " plance");
             showPlanceChoiceBox.getItems().add(gui.getPlayers().get(1).getNickname() + " plance");
-            if (gui.getNumOfPlayers() == 3)
+            if (gui.getClient().getNumofPlayers() == 3)
                 showPlanceChoiceBox.getItems().add(gui.getPlayers().get(2).getNickname() + " plance");
 
             showPlanceChoiceBox.setOnAction((event) -> {
@@ -1362,9 +1362,9 @@ public class DashboardController {
             getImageViewFromString("planceTower" + count).setVisible(true);
         }
         int num = 0;
-        if (gui.getNumOfPlayers() == 2)
+        if (gui.getClient().getNumofPlayers() == 2)
             num = 8;
-        if (gui.getNumOfPlayers() == 3)
+        if (gui.getClient().getNumofPlayers() == 3)
             num = 6;
         for (i = count; count <= num; count++) {
             getImageViewFromString("planceTower" + i).setVisible(false);

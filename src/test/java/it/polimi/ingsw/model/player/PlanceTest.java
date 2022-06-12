@@ -1,12 +1,17 @@
 package it.polimi.ingsw.model.player;
 
+import it.polimi.ingsw.controller.virtualView.PlanceView;
+import it.polimi.ingsw.model.game.Game;
+import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PlanceTest {
 
@@ -159,5 +164,46 @@ class PlanceTest {
             p.removeProfessor(professor);
             professors.clear();
         }
+    }
+
+    @Test
+    void getHall(){
+        Game game = new Game(GameMode.EXPERTMODE,2);
+        game.addPlayer("dan");
+        game.addPlayer("tom");
+        game.getPlayer(1).getPlance().addStudentHall(Student.RED);
+        game.getPlayer(1).getPlance().addStudentHall(Student.YELLOW);
+        HashMap<Student,Integer> hall=game.getPlayer(1).getPlance().getHall();
+
+        assertEquals(1,hall.get(Student.RED));
+        assertEquals(1,hall.get(Student.YELLOW));
+        assertEquals(0,hall.get(Student.BLUE));
+        assertEquals(0,hall.get(Student.GREEN));
+        assertEquals(0,hall.get(Student.PINK));
+    }
+
+    @Test
+    void getPlanceView(){
+        Game game = new Game(GameMode.EXPERTMODE,2);
+        game.addPlayer("dan");
+        game.addPlayer("tom");
+        ArrayList<Student> entrance= new ArrayList<>(game.getPlayer(1).getPlance().getEntrance());
+        ArrayList<Professor> professors= new ArrayList<>(game.getPlayer(1).getPlance().getProfessors());
+        HashMap<Student,Integer> hall= game.getPlayer(1).getPlance().getHall();
+        int numoftowers=game.getPlayer(1).getPlance().getNumOfTowers();
+        Tower tower=game.getPlayer(1).getPlance().getTower();
+
+        PlanceView planceView=game.getPlayer(1).getPlance().getPlanceView();
+
+        assertEquals(entrance.size(),planceView.getEntrance().size());
+        assertTrue(planceView.getEntrance().containsAll(entrance));
+
+        assertEquals(professors.size(),planceView.getProfessors().size());
+        assertTrue(planceView.getProfessors().containsAll(professors));
+
+        assertEquals(hall.size(),planceView.getHall().size());
+
+        assertEquals(numoftowers,planceView.getNumoftowers());
+        assertEquals(tower,planceView.getTower());
     }
 }

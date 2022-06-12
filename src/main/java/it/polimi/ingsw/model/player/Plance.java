@@ -26,11 +26,11 @@ public class Plance {
     }
 
     public void addStudentHall(Student student) {
-        hall.replace(student, Integer.valueOf(hall.get(student).intValue() + 1));
+        hall.replace(student, hall.get(student) + 1);
     }
 
     public int getNumberOfStudentHall(Student student){
-        return hall.get(student).intValue();
+        return hall.get(student);
     }
 
     public ArrayList<Student> getEntrance() {
@@ -72,8 +72,8 @@ public class Plance {
         entrance.remove(student);
     }
     public void removeStudentFromHall(Student student) {
-        if(hall.get(student).intValue()>0)
-            hall.replace(student, Integer.valueOf(hall.get(student).intValue() - 1));
+        if(hall.get(student) >0)
+            hall.replace(student, hall.get(student) - 1);
     }
 
     public HashMap<Student, Integer> getHall() {

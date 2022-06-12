@@ -37,8 +37,6 @@ public class GUI extends Application implements View{
     private ArrayList<PlayerView> players = new ArrayList<>();
     private EffectHandler effectHandler;
     private PlayerView player;
-    private int numOfPlayers;
-    private GameMode gameMode;
     private boolean correctlyConnected=false;
     private PlayerView currentPlayerView;
     private boolean character4played=false;
@@ -177,22 +175,6 @@ public class GUI extends Application implements View{
         return false;
     }
 
-    public int getNumOfPlayers() {
-        return numOfPlayers;
-    }
-
-    public GameMode getGameMode() {
-        return gameMode;
-    }
-
-    public void setNumOfPlayers(int numOfPlayers) {
-        this.numOfPlayers = numOfPlayers;
-    }
-
-    public void setGameMode(GameMode gameMode) {
-        this.gameMode = gameMode;
-    }
-
     public void chooseStudentToMove(){
         Platform.runLater(() -> {
             dashboardController.setupPlance(player);
@@ -277,9 +259,11 @@ public class GUI extends Application implements View{
 
 
     @Override
-    public void printStartGame() {
+    public void printStartGame(boolean restart) {
         Platform.runLater(() -> {
-            dashboardController.setGameUpdateLabel("GAME: Game is starting!");
+            if(!restart) {
+                dashboardController.setGameUpdateLabel("GAME: Game is starting!");
+            }else dashboardController.setGameUpdateLabel("GAME: Game is re-starting!");
             dashboardController.setupChoiceBox(null);
         });
     }
