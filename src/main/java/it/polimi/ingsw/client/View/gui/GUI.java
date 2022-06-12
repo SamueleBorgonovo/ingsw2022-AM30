@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GUI extends Application implements View{
     private Stage primaryStage;
@@ -269,11 +271,6 @@ public class GUI extends Application implements View{
     }
 
     @Override
-    public void winner(ArrayList<String> nicknamesWinner) {
-
-    }
-
-    @Override
     public void printAssistantChosen(String nick, Assistant assistant) {
         Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: "+nick+" choosed assistant "+assistant));
     }
@@ -385,7 +382,7 @@ public class GUI extends Application implements View{
 
     @Override
     public void printInvalidStop() {
-
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: There are not enough stops"));
     }
 
     @Override
@@ -419,7 +416,12 @@ public class GUI extends Application implements View{
 
     @Override
     public void printGameEndedTimeout() {
-
+        ArrayList<String> s=new ArrayList<>();
+        s.add(getClient().getNickname());
+        Platform.runLater(() -> {
+            dashboardController.winner(s);
+            dashboardController.setGameUpdateLabel("GAME: timer to reconnect ended");
+        } );
     }
 
     @Override

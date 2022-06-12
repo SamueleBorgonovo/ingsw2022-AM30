@@ -1,13 +1,10 @@
 package it.polimi.ingsw.client.View;
 
-import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.controller.virtualView.BoardView;
 import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 
-
 import it.polimi.ingsw.model.game.EffectHandler;
-import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Wizard;
 import it.polimi.ingsw.model.player.PlayerState;
@@ -17,73 +14,71 @@ import it.polimi.ingsw.model.player.Assistant;
 import java.util.ArrayList;
 
 public interface View {
-    public void chooseNickname(boolean validNickname, boolean reconnect);
+    void chooseNickname(boolean validNickname, boolean reconnect);
 
-    public void chooseSettings();
+    void chooseSettings();
 
-    public void chooseWizard(ArrayList<Wizard> avaiableWizards);
+    void chooseWizard(ArrayList<Wizard> avaiableWizards);
 
-    public void chooseAssistant();
+    void chooseAssistant();
 
-    public void moveMotherNature();
+    void moveMotherNature();
 
-    public void chooseCloud();
+    void chooseCloud();
 
-    public void setPlayers(ArrayList<PlayerView> players);
+    void setPlayers(ArrayList<PlayerView> players);
 
-    public void setBoard(BoardView board);
+    void setBoard(BoardView board);
 
-    public void setEffectHandler(EffectHandler effectHandler);
+    void setEffectHandler(EffectHandler effectHandler);
 
-    public void printStartGame(boolean restart);
+    void printStartGame(boolean restart);
 
-    public void winner(ArrayList<String> nicknamesWinner);
+    void printAssistantChosen(String nick, Assistant assistant);
 
-    public void printAssistantChosen(String nick, Assistant assistant);
+    void printTurn(String nick,boolean isAssistantPhase);
 
-    public void printTurn(String nick,boolean isAssistantPhase);
+     void printCharacterChosen(String nick, CharacterView character);
 
-    public void printCharacterChosen(String nick, CharacterView character);
+     void printCloudChosen(String nick, int cloudID);
 
-    public void printCloudChosen(String nick, int cloudID);
+     void printStudentToHall(String nick, Student student);
 
-    public void printStudentToHall(String nick, Student student);
+     void printStudentToIsland(String nick, Student student, int IslandID);
 
-    public void printStudentToIsland(String nick, Student student, int IslandID);
+     void printMotherNatureMovement(String nick, int islandID);
 
-    public void printMotherNatureMovement(String nick, int islandID);
+     void printPlayerDisconnection(String nick);
 
-    public void printPlayerDisconnection(String nick);
+     void printPlayerConnection(String nick,boolean reconnect);
 
-    public void printPlayerConnection(String nick,boolean reconnect);
+     void printInvalidAssistant();
 
-    public void printInvalidAssistant();
+     void printInvalidCloud();
 
-    public void printInvalidCloud();
+     void printInvalidIsland();
 
-    public void printInvalidIsland();
+     void printInvalidStudent();
 
-    public void printInvalidStudent();
+     void printInvalidTurn();
 
-    public void printInvalidTurn();
+     void printInvalidStop();
 
-    public void printInvalidStop();
+     void printInvalidWizard();
 
-    public void printInvalidWizard();
+     void printWinnerInstantly(ArrayList<String> nickname,int type);
 
-    public void printWinnerInstantly(ArrayList<String> nickname,int type);
+     void printWinnerEndRound(ArrayList<String> nickname, int type);
 
-    public void printWinnerEndRound(ArrayList<String> nickname, int type);
+     void printWaitingForPlayers(boolean lobby);
 
-    public void printWaitingForPlayers(boolean lobby);
+     void printGameEndedTimeout();
 
-    public void printGameEndedTimeout();
+     void printWinClose();
 
-    public void printWinClose();
+     void printConnectionClosed(boolean timeout);
 
-    public void printConnectionClosed(boolean timeout);
+     void correctlyConnected();
 
-    public void correctlyConnected();
-
-    public void nextMove(PlayerState playerState);
+     void nextMove(PlayerState playerState);
 }

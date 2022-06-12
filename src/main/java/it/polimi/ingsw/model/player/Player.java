@@ -83,10 +83,6 @@ public class Player implements PlayerInterface{
         else throw new OutOfCoinsException();
     }
 
-    public void setCoins(){
-        coins=0;
-    }
-
     public ArrayList<Assistant> getAssistantCards() {return assistantCards; }
 
     //removeAssistant is used when an assistant is used
@@ -96,10 +92,6 @@ public class Player implements PlayerInterface{
     }
 
     public Assistant getLastassistantplayed(){return lastassistantplayed;}
-
-    public boolean isAssistantPlayed() {
-        return assistantPlayed;
-    }
 
     public void setAssistantPlayed(boolean assistantPlayed) {
         this.assistantPlayed = assistantPlayed;
