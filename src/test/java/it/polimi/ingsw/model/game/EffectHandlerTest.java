@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.game;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EffectHandlerTest {
@@ -125,5 +128,46 @@ class EffectHandlerTest {
             effectHandler.setStudent(Student.values()[i]);
             assertEquals(Student.values()[i], effectHandler.getStudent());
         }
+    }
+
+    @Test
+    void studentsOnCardTest(){
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(Student.RED);
+        students.add(Student.PINK);
+        students.add(Student.YELLOW);
+
+        effectHandler.setEffect1students(students);
+        assertEquals(3,effectHandler.getEffect1students().size());
+        assertTrue(effectHandler.getEffect1students().containsAll(students));
+        effectHandler.setEffect7students(students);
+        assertEquals(3,effectHandler.getEffect7students().size());
+        assertTrue(effectHandler.getEffect7students().containsAll(students));
+        effectHandler.setEffect11students(students);
+        assertEquals(3,effectHandler.getEffect11students().size());
+        assertTrue(effectHandler.getEffect11students().containsAll(students));
+
+        effectHandler.removeStudentFromEffect1students(Student.RED);
+        effectHandler.removeStudentFromEffect7(Student.PINK);
+        effectHandler.removeStudentFromEffect11students(Student.YELLOW);
+        assertFalse(effectHandler.getEffect1students().contains(Student.RED));
+        assertFalse(effectHandler.getEffect7students().contains(Student.PINK));
+        assertFalse(effectHandler.getEffect11students().contains(Student.YELLOW));
+
+        effectHandler.addStudentInEffect1students(Student.BLUE);
+        effectHandler.addStudentInEffect7(Student.BLUE);
+        effectHandler.addStudentInEffect11students(Student.BLUE);
+        assertTrue(effectHandler.getEffect1students().contains(Student.BLUE));
+        assertTrue(effectHandler.getEffect7students().contains(Student.BLUE));
+        assertTrue(effectHandler.getEffect11students().contains(Student.BLUE));
+    }
+
+    @Test
+    void studentChooseTest(){
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(Student.RED);
+        students.add(Student.BLUE);
+        effectHandler.setStudentschoose(students);
+        assertTrue(effectHandler.getStudentschoose().containsAll(students));
     }
 }

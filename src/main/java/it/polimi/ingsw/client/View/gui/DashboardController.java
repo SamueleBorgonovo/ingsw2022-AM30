@@ -1496,7 +1496,7 @@ public class DashboardController {
     }
 
     public String getImageFromTower(Tower tower) {
-        return "img/TOWER_"+tower.getText(tower)+".png";
+        return "img/TOWER_"+tower.toString()+".png";
     }
 
     public ImageView getImageViewFromString(String s) {
