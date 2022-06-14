@@ -508,4 +508,49 @@ class GameTest {
         assertTrue(check);
 
     }
+
+    @Test
+    void setReconnectedPlayer() throws ReconnectedException {
+        game3players.addPlayer("Daniele");
+        player1 = game3players.getPlayer(1);
+        game3players.addPlayer("Giuseppe");
+        player2 = game3players.getPlayer(2);
+        game3players.addPlayer("Giuseppe");
+        player3 = game3players.getPlayer(3);
+
+        player1.setPlayerState(PlayerState.DISCONNECTED);
+        game3players.setReconnectedPlayer(1);
+        assertEquals(game3players.getPlayer(1).getPlayerState(),PlayerState.RECONNECTED);
+    }
+
+
+    @Test
+    void verifyWinner() {
+        ArrayList<Player> winners = new ArrayList<>();
+        game2players.addPlayer("Daniele");
+        game2players.addPlayer("Giuseppe");
+        for(int i=0; i<6; i++)
+            game2players.getPlayers().get(0).getPlance().removeTower();
+        winners.add(game2players.getPlayers().get(0));
+        assertEquals(winners, game2players.verifyWinner());
+
+        game3players.addPlayer("A");
+        game3players.addPlayer("B");
+        game3players.addPlayer("C");
+        for(int i=0; i<3; i++)
+            game3players.getPlayers().get(0).getPlance().removeTower();
+        for(int i=0; i<3; i++)
+            game3players.getPlayers().get(2).getPlance().removeTower();
+        for(int i=0; i<2; i++)
+            game3players.getPlayers().get(1).getPlance().removeTower();
+        game3players.getPlayers().get(0).getPlance().addProfessor(Professor.BLUE_UNICORN);
+        game3players.getPlayers().get(0).getPlance().addProfessor(Professor.RED_DRAGON);
+        game3players.getPlayers().get(2).getPlance().addProfessor(Professor.GREEN_FROG);
+        game3players.getPlayers().get(2).getPlance().addProfessor(Professor.PINK_FAIRY);
+        game3players.getPlayers().get(1).getPlance().addProfessor(Professor.YELLOW_ELF);
+        winners.clear();
+        winners.add(game3players.getPlayers().get(0));
+        winners.add(game3players.getPlayers().get(2));
+        assertEquals(winners,game3players.verifyWinner() );
+    }
 }
