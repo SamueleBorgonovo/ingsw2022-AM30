@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.player.PlayerState;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Effect5Test {
 
@@ -49,7 +50,20 @@ class Effect5Test {
 
         assertEquals(1,var);
 
+        while(game.getEffectHandler().getNumofislandstops()>0){
+            game.getEffectHandler().removeislandstop();
+        }
+        boolean check=false;
+        try{
+            effect5.effect(game,1);
+        }catch (InvalidStopException e){
+            check=true;
+        }
+        assertTrue(check);
+    }
 
-
+    @Test
+    void getName(){
+        assertEquals("GRANDMA",effect5.getName());
     }
 }

@@ -41,4 +41,9 @@ class Effect2Test {
         effect2.effect(game3players,1);
         assertTrue(game3players.getEffectHandler().isProfessorcontroll());
     }
+
+    @Test
+    void getName(){
+        assertEquals("FARMER",effect2.getName());
+    }
 }

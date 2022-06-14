@@ -49,4 +49,9 @@ class Effect3Test {
 
         assertEquals(1,var);
     }
+
+    @Test
+    void getName(){
+        assertEquals("HERALD",effect3.getName());
+    }
 }

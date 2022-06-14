@@ -36,4 +36,9 @@ class Effect4Test {
         if(mtpos+4>12) mtpos=mtpos-12;
         assertEquals(mtpos+4,game.getBoard().getArchipelago().getMothernature().isOn());
     }
+
+    @Test
+    void getName(){
+        assertEquals("POSTMAN",effect4.getName());
+    }
 }

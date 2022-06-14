@@ -1,11 +1,9 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.View.View;
-import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.messages.toClient.*;
 import it.polimi.ingsw.messages.toServer.*;
 import it.polimi.ingsw.model.game.GameMode;
-import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 
 import java.io.IOException;
@@ -15,6 +13,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Client {
+
     private final int PING_PERIOD = 10000;
     private final int TIMEOUT_FOR_RESPONSE = 240000;
     private String ip;
