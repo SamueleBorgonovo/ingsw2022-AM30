@@ -41,4 +41,9 @@ class Effect6Test {
         effect6.effect(game3players,1);
         assertTrue(game3players.getEffectHandler().isNotower());
     }
+
+    @Test
+    void getName(){
+        assertEquals("CENTAUR",effect6.getName());
+    }
 }

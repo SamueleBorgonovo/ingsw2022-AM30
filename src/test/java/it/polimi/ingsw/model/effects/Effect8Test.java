@@ -43,4 +43,9 @@ class Effect8Test {
             assertEquals(game3players.getEffectHandler().getTwopoints(),i);
         }
     }
+
+    @Test
+    void getName(){
+        assertEquals("KNIGHT",effect8.getName());
+    }
 }

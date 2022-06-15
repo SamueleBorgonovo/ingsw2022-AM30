@@ -44,17 +44,13 @@ public class Effect10 extends Effect{
             for(int count=game.getEffectHandler().getStudentschoose().size()/2;count<game.getEffectHandler().getStudentschoose().size();count++)
                 toEntrance.add(game.getEffectHandler().getStudentschoose().get(count));
 
-            for(int count=0;count<toEntrance.size();count++)
-                game.getPlayer(playerID).getPlance().removeStudentFromHall(toEntrance.get(count));
+            for (Student student : toEntrance) game.getPlayer(playerID).getPlance().removeStudentFromHall(student);
 
-            for(int count=0;count<toHall.size();count++)
-                game.getPlayer(playerID).getPlance().removeStudentEntrance(toHall.get(count));
+            for (Student student : toHall) game.getPlayer(playerID).getPlance().removeStudentEntrance(student);
 
-            for(int count=0;count<toEntrance.size();count++)
-                game.getPlayer(playerID).getPlance().addStudentEntrance(toEntrance.get(count));
+            for (Student student : toEntrance) game.getPlayer(playerID).getPlance().addStudentEntrance(student);
 
-            for(int count=0;count<toHall.size();count++)
-                game.getPlayer(playerID).getPlance().addStudentHall(toHall.get(count));
+            for (Student student : toHall) game.getPlayer(playerID).getPlance().addStudentHall(student);
 
             game.setCharacterInUse(null);
             game.getPlayer(playerID).setPlayerState(prevPlayerState);

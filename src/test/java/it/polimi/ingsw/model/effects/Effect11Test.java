@@ -1,69 +1,64 @@
 package it.polimi.ingsw.model.effects;
 
+import it.polimi.ingsw.exceptions.InvalidStopException;
+import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
+import it.polimi.ingsw.messages.toClient.InvalidMoveMessages.InvalidStudentEffectMessage;
+import it.polimi.ingsw.model.game.Game;
+import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.game.Student;
+import it.polimi.ingsw.model.player.PlayerState;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 class Effect11Test {
 
-    /*@Test
-    void setStudentsOnCard() {
-    }
+    Effect effect11 = new Effect11();
+  @Test
+    void effect(){
+      Game game = new Game(GameMode.EXPERTMODE,2);
+      game.addPlayer("tom");
+      game.getPlayer(1).setPlayerState(PlayerState.MOTHERNATUREPHASE);
 
-    @Test
-    void getStudentsOnCard() {
-    }
+      try{
+          effect11.effect(game,1);
+      }catch (InvalidStopException e){}
+      assertEquals(PlayerState.CHARACTHERSTUDENTSPHASE,game.getPlayer(1).getPlayerState());
 
-    @Test
-    void effect() {
-        final int gameID = 1;
-        final GameMode gameMode = null;
-        MotherNature mothernature = null;
-        ArrayList<Player> listOfPlayers = new ArrayList<>();
-        GameState gameState = null;
-        ArrayList<Student> studentbag = new ArrayList<>();
-        ArrayList<Student> studentonisland = new ArrayList<>();
-        Island island = new Island( 1);
-        ArrayList<Island> islands = new ArrayList<>();
-        islands.add(island);
-        Archipelago archipelago = new Archipelago();
-        final Board board = new Board(null, archipelago, null);
+      ArrayList<Student> studentsoncard = new ArrayList<>();
+      studentsoncard.add(Student.RED);
+      studentsoncard.add(Student.BLUE);
+      studentsoncard.add(Student.YELLOW);
+      studentsoncard.add(Student.GREEN);
+      game.getEffectHandler().setEffect11students(studentsoncard);
 
-        Game game = new Game(gameID, gameMode.SIMPLEMODE, , board);
-        ArrayList<Student> entrance = new ArrayList<>();
-        Plance plance = new Plance(Tower.WHITE,8);
-        Player player = new Player(null, null);
-        game.addPlayer(player,player.getPlayerID());
+      ArrayList<Student> students = new ArrayList<>();
+      students.add(Student.PINK);
+      game.getEffectHandler().setStudentschoose(students);
+      boolean check=false;
+      try{
+          effect11.secondPartEffect(game,1);
+      }catch (InvalidStudentEffectException e){
+          check=true;
+      }
+      assertTrue(check);
 
-        Effect11 effect11 = new Effect11();
-        //Set students on card
-        ArrayList<Student> studentoncard = new ArrayList<>();
-        studentoncard.add(Student.BLUE);
-        studentoncard.add(Student.RED);
-        studentoncard.add(Student.BLUE);
-        studentoncard.add(Student.YELLOW);
-        game.getBoard().addStudentBag(studentoncard);
-        effect11.setStudentsOnCard(game);
+      students.remove(Student.PINK);
+      students.add(Student.RED);
+      try{
+          effect11.secondPartEffect(game,1);
+      }catch (InvalidStudentEffectException e){}
 
+      assertEquals(PlayerState.MOTHERNATUREPHASE,game.getPlayer(1).getPlayerState());
+      assertEquals(4,game.getEffectHandler().getEffect11students().size());
+      assertEquals(1,game.getPlayer(1).getPlance().getNumberOfStudentHall(Student.RED));
 
-        effect11.effect(game,player.getPlayerID());
+  }
 
-        int var=1;
-        if(effect11.getStudentsOnCard().size()!=4)
-            var=-1;
-
-        if(player.getPlance().getNumberOfStudentHall(Student.BLUE)!=1)
-            var=-2;
-
-        if(player.getPlance().getNumberOfStudentHall(Student.RED)!=0)
-            var=-3;
-
-        if(player.getPlance().getNumberOfStudentHall(Student.YELLOW)!=0)
-            var=-4;
-
-        if(player.getPlance().getNumberOfStudentHall(Student.PINK)!=0)
-            var=-5;
-
-        if(player.getPlance().getNumberOfStudentHall(Student.GREEN)!=0)
-            var=-6;
-
-        assertEquals(1,var);
-
-    }*/
+  @Test
+    void getName(){
+      assertEquals("PRINCESS",effect11.getName());
+  }
 }

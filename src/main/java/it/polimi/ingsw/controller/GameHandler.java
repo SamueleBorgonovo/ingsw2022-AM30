@@ -492,6 +492,7 @@ public class GameHandler {
             } catch (InterruptedException e) { }
 
         });
+        //timer.start();
         gameToTimerMap.put(game,timer);
     }
 }

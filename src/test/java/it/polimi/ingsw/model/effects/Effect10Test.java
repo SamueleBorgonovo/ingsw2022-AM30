@@ -1,111 +1,76 @@
 package it.polimi.ingsw.model.effects;
 
+import com.sun.prism.GraphicsResource;
+import it.polimi.ingsw.exceptions.InvalidStopException;
+import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
+import it.polimi.ingsw.model.game.Game;
+import it.polimi.ingsw.model.game.GameMode;
+import it.polimi.ingsw.model.game.Student;
+import it.polimi.ingsw.model.player.PlayerState;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 class Effect10Test {
 
-    /*@Test
-    void setNumberofstudents() {
-    }
+    Effect effect10 = new Effect10();
 
-    @Test
-    void effect01() {
-        final int gameID = 1;
-        final GameMode gameMode = null;
-        EffectHandler verifyType = null;
-        MotherNature mothernature = null;
-        ArrayList<Player> listOfPlayers = new ArrayList<>();
-        GameState gameState = null;
-        ArrayList<Student> studentbag = new ArrayList<>();
-        ArrayList<Student> studentonisland = new ArrayList<>();
-        Island island = new Island( 1);
-        ArrayList<Island> islands = new ArrayList<>();
-        islands.add(island);
-        Archipelago archipelago = new Archipelago();
-        final Board board = new Board(null, archipelago, null);
+   @Test
+    void getTests(){
+       assertEquals("MINSTREL",effect10.getName());
+       assertEquals(1,effect10.getCost());
+   }
 
-        Game game = new Game(gameMode.SIMPLEMODE, );
-        Plance plance = new Plance(Tower.WHITE,8);
-        Player player = new Player(null, null);
-        game.addPlayer(player,player.getPlayerID());
+   @Test
+    void effect(){
+       Game game = new Game(GameMode.EXPERTMODE,2);
+       game.addPlayer("tom");
+       game.getPlayer(1).setPlayerState(PlayerState.MOTHERNATUREPHASE);
+       try{
+           effect10.effect(game,1);
+       }catch (InvalidStopException e){}
+       assertEquals(PlayerState.CHARACTHERSTUDENTSPHASE,game.getPlayer(1).getPlayerState());
 
-        Effect10 effect10 = new Effect10();
-        effect10.setNumberofstudents(1);
-        player.getPlance().addStudentEntrance(Student.BLUE);
-        player.getPlance().addStudentEntrance((Student.BLUE));
+       ArrayList<Student> students = new ArrayList<>();
+       students.add(Student.RED);
+       students.add(Student.BLUE);
+       students.add(Student.YELLOW);
+       game.getEffectHandler().setStudentschoose(students);
+       boolean check=false;
+       try{
+           effect10.secondPartEffect(game,1);
+       } catch (InvalidStudentEffectException e) {
+          check=true;
+       }
+       assertTrue(check);
 
-        player.getPlance().addStudentHall(Student.YELLOW);
-        player.getPlance().addStudentHall(Student.YELLOW);
+       students.add(Student.GREEN);
 
-        effect10.effect(game,player.getPlayerID());
+       for(Student student : game.getPlayer(1).getPlance().getEntrance())
+           game.getPlayer(1).getPlance().removeStudentEntrance(student);
+       game.getPlayer(1).getPlance().addStudentEntrance(Student.RED);
+       game.getPlayer(1).getPlance().addStudentEntrance(Student.BLUE);
 
-        int var=1;
-        int yellow=0;
-        int blue=0;
-        for(int count=0;count<player.getPlance().getEntrance().size();count++){
-            if(player.getPlance().getEntrance().get(count)==Student.YELLOW)
-                yellow=1;
-            else if(player.getPlance().getEntrance().get(count)==Student.BLUE)
-                blue=1;
-        }
-        if(blue+yellow!=2)
-            var=-1;
+       game.getPlayer(1).getPlance().addStudentHall(Student.YELLOW);
+       game.getPlayer(1).getPlance().addStudentHall(Student.GREEN);
 
-        int numberofinterestedstudent = player.getPlance().getNumberOfStudentHall(Student.BLUE);
-        if (numberofinterestedstudent != 1)
-            var=-2;
+       try{
+           effect10.secondPartEffect(game,1);
+       }catch (InvalidStudentEffectException e){}
+       assertEquals(PlayerState.MOTHERNATUREPHASE,game.getPlayer(1).getPlayerState());
 
-        numberofinterestedstudent = player.getPlance().getNumberOfStudentHall((Student.YELLOW));
-        if(numberofinterestedstudent != 1)
-            var=-3;
+       assertTrue(game.getPlayer(1).getPlance().getEntrance().contains(Student.YELLOW));
+       assertTrue(game.getPlayer(1).getPlance().getEntrance().contains(Student.GREEN));
+       assertFalse(game.getPlayer(1).getPlance().getEntrance().contains(Student.RED));
+       assertFalse(game.getPlayer(1).getPlance().getEntrance().contains(Student.BLUE));
 
-        assertEquals(1,var);
-    }
-
-    @Test
-    public void effect02(){
-        final int gameID = 1;
-        final GameMode gameMode = null;
-        MotherNature mothernature = null;
-        ArrayList<Player> listOfPlayers = new ArrayList<>();
-        GameState gameState = null;
-        ArrayList<Student> studentbag = new ArrayList<>();
-        ArrayList<Student> studentonisland = new ArrayList<>();
-        Island island = new Island( 1);
-        ArrayList<Island> islands = new ArrayList<>();
-        islands.add(island);
-        Archipelago archipelago = new Archipelago();
-        final Board board = new Board(null, archipelago, null);
-
-        Game game = new Game(gameID, gameMode.SIMPLEMODE, , board);
-        ArrayList<Student> entrance = new ArrayList<>();
-        Plance plance = new Plance(Tower.WHITE,8);
-        Player player = new Player(null, null);
-        game.addPlayer(player,player.getPlayerID());
-
-        Effect10 effect10 = new Effect10();
-        effect10.setNumberofstudents(2);
-        player.getPlance().addStudentEntrance(Student.BLUE);
-        player.getPlance().addStudentEntrance((Student.BLUE));
-
-        player.getPlance().addStudentHall(Student.YELLOW);
-        player.getPlance().addStudentHall(Student.YELLOW);
-
-        effect10.effect(game,player.getPlayerID());
-
-        int var=1;
-        int yellow=0;
-        int blue=0;
-        for(int count=0;count<player.getPlance().getEntrance().size();count++){
-            if(player.getPlance().getEntrance().get(count)==Student.YELLOW)
-                yellow++;
-        }
-        if(yellow!=2)
-            var=-1;
-
-        int numberofinterestedstudent = player.getPlance().getNumberOfStudentHall(Student.BLUE);
-        if (numberofinterestedstudent != 2)
-            var=-2;
+       assertEquals(1,game.getPlayer(1).getPlance().getNumberOfStudentHall(Student.RED));
+       assertEquals(1,game.getPlayer(1).getPlance().getNumberOfStudentHall(Student.BLUE));
+       assertEquals(0,game.getPlayer(1).getPlance().getNumberOfStudentHall(Student.YELLOW));
+       assertEquals(0,game.getPlayer(1).getPlance().getNumberOfStudentHall(Student.GREEN));
 
 
-        assertEquals(1,var);
-    }*/
+   }
 }
