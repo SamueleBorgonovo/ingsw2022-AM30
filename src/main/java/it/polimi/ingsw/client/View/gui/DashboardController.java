@@ -1277,7 +1277,7 @@ public class DashboardController {
         int i = 0;
         for (i = 1; i <= gui.getBoard().getIslandViews().size(); i++) {
             getPaneFromString("island" + i + "Pane").setVisible(true);
-            getPaneFromString("island" + i + "Pane").setDisable(true); //<------------------------------------------------------------------------------------------
+            getPaneFromString("island" + i + "Pane").setDisable(true);
             if (gui.getBoard().getMotherNature() == i)
                 getImageViewFromString("island" + i + "MotherNature").setVisible(true);
             else getImageViewFromString("island" + i + "MotherNature").setVisible(false);
@@ -1312,9 +1312,10 @@ public class DashboardController {
     }
 
     public void setupPlance(PlayerView player) {
-        coinLabel.setText(String.valueOf(gui.getPlayer().getCoins())); //////////////////////////////////////////////////////////////
+        coinLabel.setText(String.valueOf(gui.getPlayer().getCoins()));
+
         //Set entrance
-        int i = 0;
+        int i;
         for (i = 1; i <= player.getPlance().getEntrance().size(); i++) {
             getImageViewFromString("entranceStudent" + i).setImage(new Image(getImageFromStudent(player.getPlance().getEntrance().get(i - 1))));
             getImageViewFromString("entranceStudent" + i).setVisible(true);
@@ -1322,7 +1323,7 @@ public class DashboardController {
             getImageViewFromString("entranceStudent" + i).setDisable(true);
         }
 
-        for (int count = i + 1; count <= 9; count++) {
+        for (int count=i; count < 10; count++) {
             getImageViewFromString("entranceStudent" + i).setVisible(false);
             getImageViewFromString("entranceStudent" + i).setDisable(true);
         }
