@@ -46,6 +46,9 @@ public class DashboardController {
         getImageViewFromString("entranceStudent9").setVisible(false);
         getImageViewFromString("entranceStudent9").setDisable(true);
 
+        getImageViewFromString("planceTower7").setVisible(false);
+        getImageViewFromString("planceTower8").setVisible(false);
+
         coinPane.setVisible(false);
         characterButtor.setVisible(false);
         characterButtonLabel.setVisible(false);

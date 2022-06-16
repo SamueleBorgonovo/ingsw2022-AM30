@@ -411,7 +411,9 @@ public class GUI extends Application implements View{
 
     @Override
     public void printWaitingForPlayers(boolean lobby) {
-        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: You are the only remained, timer to win started"));
+        if(lobby)
+            Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Waiting for players"));
+        else Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: You are the only remained, timer to win started"));
     }
 
     @Override
