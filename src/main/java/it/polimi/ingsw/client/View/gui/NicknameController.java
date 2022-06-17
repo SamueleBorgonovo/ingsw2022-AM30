@@ -20,6 +20,7 @@ public class NicknameController {
     private Button reconnectButton;
 
     private GUI gui;
+    private boolean newGame=false;
 
     public void setGui(GUI gui){
         this.gui=gui;
@@ -28,23 +29,25 @@ public class NicknameController {
     public void login(ActionEvent actionEvent) {
         String nickname;
         nickname = nicknameWindows.getText();
-        gui.getClient().sendMessage(new ChooseNicknameMessage(nickname,false));
+        gui.getClient().sendMessage(new ChooseNicknameMessage(nickname,false, newGame));
         gui.setNickname(nickname);
     }
 
     public void reconnect(ActionEvent actionEvent) {
         String nickname = nicknameWindows.getText();
-        gui.getClient().sendMessage(new ChooseNicknameMessage(nickname,true));
+        gui.getClient().sendMessage(new ChooseNicknameMessage(nickname,true, false));
         gui.setNickname(nickname);
         gui.instantiateDashBoardScene();
     }
 
 
     public void setReconnectButton(boolean visible){
+        if(visible)
+            newGame=true;
         wrongNickname.setVisible(visible);
         wrongNickname.setWrapText(true);
         if(visible)
-            wrongNickname.setText("      Press 'Reconnect' if you want to reconnect to the game\n" +  "If you want start a new game change nickname and press 'Login'");
+            wrongNickname.setText("Press 'Reconnect' if you want to reconnect to the game\n" +  "       Press 'Login' if you want to start a new game");
         reconnectButton.setVisible(visible);
     }
 
@@ -52,15 +55,7 @@ public class NicknameController {
         wrongNickname.setVisible(visible);
     }
 
-    public void setLoginButton(boolean visible){
-        loginButton.setVisible(visible);
+    public void setLoginButton(double move){
+        loginButton.setLayoutX(move);
     }
-
-    public void moveLoginButtonX(double x){
-        loginButton.setTranslateX(x);
-    }
-
-
-
-
 }

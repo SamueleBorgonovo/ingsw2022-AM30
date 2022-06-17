@@ -72,28 +72,36 @@ public class GameHandler {
         }
 
     }
-    public void checkNickname(ClientHandlerInterface clientHandler,String nickname){
-        if(playertoGameMap.containsKey(nickname)){
-            GameInterface game = findGameofPlayer(nickname);
-            int playerid = findPlayeridofPlayer(nickname);
-            if(game.checkPlayerState(playerid)){
-                clientHandler.setNickname(nickname);
-                NicknameMessage message = new NicknameMessage(true,true);
-                clientHandler.sendMessageToClient(message);
-            }else{
-                NicknameMessage message = new NicknameMessage(false,false);
-                clientHandler.sendMessageToClient(message);
+    public void checkNickname(ClientHandlerInterface clientHandler,String nickname,boolean newGame){
+        if(!newGame) {
+            if (playertoGameMap.containsKey(nickname)) {
+                GameInterface game = findGameofPlayer(nickname);
+                int playerid = findPlayeridofPlayer(nickname);
+                if (game.checkPlayerState(playerid)) {
+                    clientHandler.setNickname(nickname);
+                    NicknameMessage message = new NicknameMessage(true, true);
+                    clientHandler.sendMessageToClient(message);
+                } else {
+                    NicknameMessage message = new NicknameMessage(false, false);
+                    clientHandler.sendMessageToClient(message);
+                }
+            } else {
+                if (nicknameChoosen.contains(nickname)) {
+                    NicknameMessage message = new NicknameMessage(false, false);
+                    clientHandler.sendMessageToClient(message);
+                } else {
+                    NicknameMessage message = new NicknameMessage(true, false);
+                    nicknameChoosen.add(nickname);
+                    clientHandler.setNickname(nickname);
+                    clientHandler.sendMessageToClient(message);
+                }
             }
-        }else{
-            if(nicknameChoosen.contains(nickname)){
-                NicknameMessage message = new NicknameMessage(false,false);
-                clientHandler.sendMessageToClient(message);
-            }else{
-                NicknameMessage message = new NicknameMessage(true,false);
-                nicknameChoosen.add(nickname);
-                clientHandler.setNickname(nickname);
-                clientHandler.sendMessageToClient(message);
-            }
+        }else {
+            playertoGameMap.remove(nickname);
+            playertoPlayerIDMap.remove(nickname);
+            playertoHandlerMap.remove(nickname);
+            clientHandler.setNickname(nickname);
+            clientHandler.sendMessageToClient(new NicknameMessage(true,false));
         }
     }
 

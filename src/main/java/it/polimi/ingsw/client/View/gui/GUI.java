@@ -130,7 +130,7 @@ public class GUI extends Application implements View{
             primaryStage.show();
             nicknameScene = fxmlLoader.getController();
             nicknameScene.setReconnectButton(false);
-            nicknameScene.moveLoginButtonX(110);
+            //nicknameScene.moveLoginButtonX(110);
             nicknameScene.setGui(this);
         });
     }
@@ -194,7 +194,7 @@ public class GUI extends Application implements View{
                 nicknameScene.setWrongNickname(true);
             else if(reconnect) {
                 nicknameScene.setReconnectButton(true);
-                nicknameScene.moveLoginButtonX(-10);
+                nicknameScene.setLoginButton(304.0);
             }
             else
                 client.gameSetup();

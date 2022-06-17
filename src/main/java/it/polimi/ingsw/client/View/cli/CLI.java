@@ -67,15 +67,15 @@ public class CLI implements View {
             Scanner stdin = new Scanner(System.in);
             System.out.println("Choose your nickname");
             this.nickname = stdin.nextLine();
-            client.sendMessage(new ChooseNicknameMessage(nickname, false));
+            client.sendMessage(new ChooseNicknameMessage(nickname, false, false));
         } else {
             if (validNickname) {
                 client.setNickname(this.nickname);
                 if (reconnect) {
                     if (tryToReconnect()) {
-                        client.sendMessage(new ChooseNicknameMessage(nickname, true));
+                        client.sendMessage(new ChooseNicknameMessage(nickname, true, false));
                     } else {
-                        client.sendMessage(new ChooseNicknameMessage(nickname, false));
+                        client.sendMessage(new ChooseNicknameMessage(nickname, false, false));
                         client.gameSetup();
                     }
                 } else {
@@ -86,7 +86,7 @@ public class CLI implements View {
                 Scanner stdin = new Scanner(System.in);
                 System.out.println("Choose your nickname");
                 this.nickname = stdin.nextLine();
-                client.sendMessage(new ChooseNicknameMessage(nickname, false));
+                client.sendMessage(new ChooseNicknameMessage(nickname, false, false));
             }
         }
     }

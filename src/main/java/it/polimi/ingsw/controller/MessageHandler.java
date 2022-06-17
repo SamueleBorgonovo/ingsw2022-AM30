@@ -31,7 +31,7 @@ public class MessageHandler {
         if(message.getReconnect())
             gameHandler.reconnectPlayer(clientHandler);
         else
-            gameHandler.checkNickname(clientHandler,message.getNickname());
+            gameHandler.checkNickname(clientHandler,message.getNickname(),message.getNewGame());
     }
 
     public void process(ChooseStudentsEffectMessage message, ClientHandlerInterface clientHandler){
