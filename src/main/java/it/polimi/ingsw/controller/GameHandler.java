@@ -480,7 +480,7 @@ public class GameHandler {
         sendMessagetoGame(game,new DisconnectMessage("win",timeout,win));
         for(Player player : game.getPlayers())
             if(player.getPlayerState()!=PlayerState.DISCONNECTED)
-                findHandler(player.getNickname()).handleSocketDisconnection(timeout, true);
+                findHandler(player.getNickname()).closePinger();
 
 
         for(Player player : game.getPlayers()){

@@ -20,6 +20,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
     private MessageHandler controller;
     private Socket clientSocket;
     private boolean active;
+    private boolean pingactive;
     private final Thread pinger;
     private Thread timer;
     private ObjectOutputStream os;
@@ -38,7 +39,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
     }
 
     public void startPinger() {
-        while(active){
+        while(pingactive){
             try {
                 Thread.sleep(PING_PERIOD);
                 PingToClientMessage message = new PingToClientMessage(true);
@@ -97,6 +98,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
             is = new ObjectInputStream(clientSocket.getInputStream());
             os = new ObjectOutputStream(clientSocket.getOutputStream());
             active=true;
+            pingactive=true;
             pinger.start();
             try {
                    while(active){
@@ -129,6 +131,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
             disconnectionCalled=true;
             stopTimer();
             active = false;
+            pingactive=false;
             if(!gameEnded) {
                 gameHandler.disconnectPlayer(getNickname());
 
@@ -155,6 +158,12 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
 
         }
     }
+
+    public void closePinger(){
+        stopTimer();
+        pingactive=false;
+    }
+
 
 
 }

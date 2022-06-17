@@ -6,16 +6,17 @@ import it.polimi.ingsw.messages.toClient.MessageToClient;
 
 public interface ClientHandlerInterface {
 
-    public String getNickname();
+    String getNickname();
 
-    public MessageHandler getController();
+    MessageHandler getController();
 
-    public void sendMessageToClient(MessageToClient message);
+    void sendMessageToClient(MessageToClient message);
 
-    public void stopTimer();
+    void stopTimer();
 
-    public void setNickname(String nickname);
+    void setNickname(String nickname);
 
-    public void handleSocketDisconnection(boolean timeout,boolean gameEnded);
+    void handleSocketDisconnection(boolean timeout,boolean gameEnded);
 
+    void closePinger();
 }

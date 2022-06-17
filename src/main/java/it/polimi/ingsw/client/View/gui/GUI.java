@@ -397,7 +397,6 @@ public class GUI extends Application implements View{
             Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Only 3 islands remained"));
         if(type==2)
             Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Last tower built"));
-
     }
 
     @Override
@@ -507,6 +506,10 @@ public class GUI extends Application implements View{
                 });
             }
         }
+    }
+
+    public void setExit(){
+        Platform.runLater(() -> dashboardController.setExitButton());
     }
 
 }

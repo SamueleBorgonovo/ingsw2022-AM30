@@ -35,6 +35,7 @@ public class DashboardController {
     private boolean characterButtonClicked = false;
     private CharacterView characterPlayed;
     private int numOfCharacterPlayed;
+    private boolean exitButton = false;
     int numEffect7=0;
     int numEffect10=0;
     ArrayList<Student> effect7Students = new ArrayList<>();
@@ -1162,27 +1163,31 @@ public class DashboardController {
     }
 
     public void clickCharacetrButton(MouseEvent mouseEvent) {
-        if (!characterButtonClicked) {
-            characterButtonClicked = true;
-            charactersPane.setVisible(true);
-            plancePane.setVisible(false);
-            characterButtonLabel.setText("RETURN TO PLANCE");
-            characterButtor.setDisable(false);
-            setupCharacterView();
+        if(exitButton){
+            System.exit(1);
+        }else {
+            if (!characterButtonClicked) {
+                characterButtonClicked = true;
+                charactersPane.setVisible(true);
+                plancePane.setVisible(false);
+                characterButtonLabel.setText("RETURN TO PLANCE");
+                characterButtor.setDisable(false);
+                setupCharacterView();
                 charactersPane.setDisable(false);
                 character1Image.setDisable(false);
                 character2Image.setDisable(false);
                 character3Image.setDisable(false);
-        } else {
-            characterButtonClicked = false;
-            charactersPane.setVisible(false);
-            plancePane.setVisible(true);
-            characterButtonLabel.setText("PLAY CHARACTER");
-            characterButtor.setDisable(false);
-            charactersPane.setDisable(true);
-            character1Image.setDisable(true);
-            character2Image.setDisable(true);
-            character3Image.setDisable(true);
+            } else {
+                characterButtonClicked = false;
+                charactersPane.setVisible(false);
+                plancePane.setVisible(true);
+                characterButtonLabel.setText("PLAY CHARACTER");
+                characterButtor.setDisable(false);
+                charactersPane.setDisable(true);
+                character1Image.setDisable(true);
+                character2Image.setDisable(true);
+                character3Image.setDisable(true);
+            }
         }
     }
 
@@ -1815,5 +1820,14 @@ public class DashboardController {
         cloudsPane.setDisable(true);
         winnerPane.setVisible(true);
         winnerNicknameLabel.setText(nickname.get(0));
+    }
+
+    public void setExitButton(){
+        exitButton=true;
+        characterButtor.setVisible(true);
+        characterButtor.setDisable(false);
+        characterButtonLabel.setVisible(true);
+        characterButtonLabel.setDisable(false);
+        characterButtonLabel.setText("EXIT");
     }
 }

@@ -725,4 +725,11 @@ public class CLI implements View {
         }
     }
 
+    public void setExit(){
+        System.out.println("Press any key to exit");
+        Scanner in = new Scanner(System.in);
+        in.nextLine();
+        System.exit(1);
+    }
+
 }

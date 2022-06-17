@@ -81,4 +81,6 @@ public interface View {
      void correctlyConnected();
 
      void nextMove(PlayerState playerState);
+
+     void setExit();
 }

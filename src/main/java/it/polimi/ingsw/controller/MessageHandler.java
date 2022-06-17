@@ -63,9 +63,12 @@ public class MessageHandler {
             PingToClientMessage message2 = new PingToClientMessage(false);
             clientHandler.sendMessageToClient(message2);
         }else {
-            //System.out.println("stop timer");
             clientHandler.stopTimer();
         }
+    }
+
+    public void process(DisconnectionRespondMessage message,ClientHandlerInterface clientHandler){
+        clientHandler.handleSocketDisconnection(false,true);
     }
 
 

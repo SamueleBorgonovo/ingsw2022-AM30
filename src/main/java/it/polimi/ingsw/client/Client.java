@@ -92,13 +92,22 @@ public class Client {
     public void handleDisconnection(String nick,boolean timeout,boolean win){
         //if timeout=true server disconnected all players, else someone is disconnected from game
         if(win){
+            sendMessage(new DisconnectionRespondMessage());
+            pingActive=false;
+            stopTimer();
             view.printWinClose();
             handleSocketDisconnection(false);
-        }
-        if(timeout){
+            view.setExit();
+        }else if(timeout){
+            sendMessage(new DisconnectionRespondMessage());
+            pingActive=false;
+            stopTimer();
             view.printGameEndedTimeout();
+            handleSocketDisconnection(true);
+            view.setExit();
         }else view.printPlayerDisconnection(nick);
     }
+
 
 
 
@@ -118,14 +127,16 @@ public class Client {
     }
 
     public synchronized void sendMessage(MessageToServer message){
-        try {
-            output.reset();
-            output.writeObject(message);
-            output.flush();
-        } catch (IOException e) {
-            System.out.println("Exception nel sendMessage del client");
-            e.printStackTrace();
-            handleSocketDisconnection(false);
+        if(pingActive) {
+            try {
+                output.reset();
+                output.writeObject(message);
+                output.flush();
+            } catch (IOException e) {
+                System.out.println("Exception nel sendMessage del client");
+                e.printStackTrace();
+                handleSocketDisconnection(false);
+            }
         }
 
     }
