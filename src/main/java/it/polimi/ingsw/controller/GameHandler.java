@@ -500,7 +500,7 @@ public class GameHandler {
             } catch (InterruptedException e) { }
 
         });
-        //timer.start();
+        timer.start();
         gameToTimerMap.put(game,timer);
     }
 }

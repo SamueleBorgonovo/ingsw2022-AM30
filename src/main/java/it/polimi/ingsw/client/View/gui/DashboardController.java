@@ -13,6 +13,8 @@ import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Professor;
 import it.polimi.ingsw.model.player.Wizard;
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -73,10 +75,10 @@ public class DashboardController {
 
     public void setupChoiceBox(PlayerView player) {
         if (player == null) {
-            showPlanceChoiceBox.getItems().add(gui.getPlayers().get(0).getNickname() + " plance");
-            showPlanceChoiceBox.getItems().add(gui.getPlayers().get(1).getNickname() + " plance");
-            if (gui.getClient().getNumofPlayers() == 3)
-                showPlanceChoiceBox.getItems().add(gui.getPlayers().get(2).getNickname() + " plance");
+            for(int i=0;i<gui.getPlayers().size();i++)
+                showPlanceChoiceBox.getItems().remove(gui.getPlayers().get(i).getNickname()+" plance");
+            for(int i=0;i<gui.getPlayers().size();i++)
+                showPlanceChoiceBox.getItems().add(gui.getPlayers().get(i).getNickname()+" plance");
 
             showPlanceChoiceBox.setOnAction((event) -> {
                 if (gui.getCurrentPlayerState() != PlayerState.ASSISTANTPHASE) {
