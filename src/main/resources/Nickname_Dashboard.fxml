@@ -23,7 +23,7 @@
             <Font name="Futura Medium" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="loginButton" alignment="CENTER" layoutX="304.0" layoutY="456.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@Style.css" text="   Login   ">
+      <Button fx:id="loginButton" alignment="CENTER" layoutX="449.0" layoutY="456.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@Style.css" text="   Login   ">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>
