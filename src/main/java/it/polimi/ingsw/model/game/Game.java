@@ -534,6 +534,8 @@ public class Game implements GameInterface {
                     maxScore = score;
                     playerMaxScore = player;
                 }
+                else if(score == maxScore)
+                    playerMaxScore=null;
             }
             effectHandler.setNocolor(false);
             effectHandler.setNotower(false);

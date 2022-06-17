@@ -15,6 +15,7 @@ class GameTest {
 
     Game game2players = new Game(GameMode.SIMPLEMODE,2);
     Game game3players = new Game(GameMode.SIMPLEMODE,3);
+    Game game2playersExpert = new Game(GameMode.EXPERTMODE,2);
     Player player1;
     Player player2;
     Player player3;
@@ -421,7 +422,15 @@ class GameTest {
     }
 
     @Test
-    void useCharacter() {
+    void useCharacter() throws InvalidTurnException, InvalidCharacterException, OutOfCoinsException, InvalidStopException {
+        game2playersExpert.addPlayer("Daniele");
+        game2playersExpert.addPlayer("Giuseppe");
+        for(int i=0; i<3; i++)
+            game2playersExpert.getPlayers().get(0).addCoins();
+        game2playersExpert.getPlayers().get(0).setPlayerState(PlayerState.STUDENTPHASE);
+        game2playersExpert.useCharacter(1,game2playersExpert.getBoard().getCharacters().get(0));
+        assertTrue(game2playersExpert.getBoard().getCharacters().get(0).isUsed());
+
     }
 
     @Test
@@ -553,4 +562,23 @@ class GameTest {
         winners.add(game3players.getPlayers().get(2));
         assertEquals(winners,game3players.verifyWinner() );
     }
+
+    /*@Test
+    void selectCloud() throws InvalidTurnException, InvalidCloudException {
+        game2players.addPlayer("Daniele");
+        game2players.addPlayer("Giuseppe");
+        game2players.startRound();
+        game2players.getPlayerorder().get(0).setLastassistantplayed(Assistant.CAT);
+        game2players.getPlayerorder().get(0).setLastassistantplayed(Assistant.DOG);
+        game2players.getPlayerorder().get(0).setPlayerState(PlayerState.CLOUDPHASE);
+        game2players.selectCloud(game2players.getPlayerorder().get(0).getPlayerID(),2);
+        assertTrue(game2players.getBoard().getCloud(2).isChoosen());
+        game2players.getPlayerorder().get(1).setPlayerState(PlayerState.CLOUDPHASE);
+        game2players.selectCloud(game2players.getPlayerorder().get(1).getPlayerID(),1);
+        assertFalse(game2players.getBoard().getCloud(1).isChoosen());
+        assertFalse(game2players.getBoard().getCloud(2).isChoosen());
+
+    }
+
+     */
 }
