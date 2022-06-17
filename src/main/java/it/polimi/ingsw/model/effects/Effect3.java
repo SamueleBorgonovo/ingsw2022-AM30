@@ -6,11 +6,12 @@ import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.player.PlayerState;
 
+/**
+ * Class used to choose an island and calculate the influence as if
+ * Mother Nature had finished her movement there
+ */
 public class Effect3 extends Effect {
-    // Choose an island and calculate the influence as if
-    // Mother Nature had finished her movement there.
     private PlayerState prevPlayerState;
-    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.ISLAND;
 
     @Override
     public int getCost(){ return 3;}
@@ -36,6 +37,6 @@ public class Effect3 extends Effect {
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return this.typeOfInputCharacter;
+        return TypeOfInputCharacter.ISLAND;
     }
 }

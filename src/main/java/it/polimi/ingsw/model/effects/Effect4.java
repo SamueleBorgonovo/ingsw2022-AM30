@@ -30,6 +30,6 @@ public class Effect4 extends Effect{
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return typeOfInputCharacter;
+        return TypeOfInputCharacter.INT;
     }
 }

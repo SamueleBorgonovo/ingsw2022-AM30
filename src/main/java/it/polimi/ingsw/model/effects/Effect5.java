@@ -6,12 +6,13 @@ import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.player.PlayerState;
 
+/**
+ * Class used to place a ban on an island of your choice.
+ * The first time Mother Nature moves there the ban falls and does not calculate the influence there.
+ * The bans can be a maximum of 4
+ */
 public class Effect5 extends Effect {
-    // Place a ban on an island of your choice.
-    // The first time Mother Nature moves there the ban falls and does not calculate the influence there.
-    // The bans can be a maximum of 4.
     private PlayerState prevPlayerState;
-    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.ISLAND;
 
     @Override
     public int getCost(){ return 2;}
@@ -44,6 +45,6 @@ public class Effect5 extends Effect {
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return this.typeOfInputCharacter;
+        return TypeOfInputCharacter.ISLAND;
     }
 }

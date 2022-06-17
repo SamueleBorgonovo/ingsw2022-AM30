@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.net.Inet4Address;
 import java.util.Scanner;
 
+/**
+ * Class used to start the server on a given port
+ */
 public class ServerMain {
     private static final int MIN_PORT = 1024;
     private static final int MAX_PORT = 49151;

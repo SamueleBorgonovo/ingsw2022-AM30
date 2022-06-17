@@ -5,10 +5,11 @@ import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
 import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.Game;
 
+/**
+ * Class used to counting the influence on an Island (or group of Islands)
+ * without counting the Towers present on island
+ */
 public class Effect6 extends Effect {
-    // When counting the influence on an Island (or group of Islands),
-    // the Towers present are not counted.
-    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.NOTHING;
     @Override
     public int getCost(){ return 3;}
 
@@ -29,6 +30,6 @@ public class Effect6 extends Effect {
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return this.typeOfInputCharacter;
+        return TypeOfInputCharacter.NOTHING;
     }
 }

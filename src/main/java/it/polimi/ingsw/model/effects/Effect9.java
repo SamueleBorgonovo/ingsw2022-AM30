@@ -6,11 +6,12 @@ import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.player.PlayerState;
 
+/**
+ * Class used to choose a student color. Once a student color has been chosen,
+ * that color does not provide influence in the influence calculation on the current turn
+ */
 public class Effect9 extends Effect {
-    // Once a student color has been chosen, that color does not provide influence
-    // in the influence calculation on the current turn.
     private PlayerState prevPlayerState;
-    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.STUDENT;
 
     @Override
     public int getCost() { return 3;}
@@ -37,6 +38,6 @@ public class Effect9 extends Effect {
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return this.typeOfInputCharacter;
+        return TypeOfInputCharacter.STUDENT;
     }
 }

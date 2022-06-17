@@ -5,10 +5,11 @@ import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
 import it.polimi.ingsw.model.board.TypeOfInputCharacter;
 import it.polimi.ingsw.model.game.Game;
 
+/**
+ * Class used to take control of the professors even if you have the same number of students
+ * in the hall as the player currently controlling them
+ */
 public class Effect2 extends Effect {
-    // Take control of the professors even if you have the same number of students
-    // in the hall as the player currently controlling them.
-    private final TypeOfInputCharacter typeOfInputCharacter = TypeOfInputCharacter.NOTHING;
 
     @Override
     public int getCost(){ return 2;}
@@ -31,6 +32,6 @@ public class Effect2 extends Effect {
 
     @Override
     public TypeOfInputCharacter getTypeOfInputCharacter() {
-        return this.typeOfInputCharacter;
+        return TypeOfInputCharacter.NOTHING;
     }
 }

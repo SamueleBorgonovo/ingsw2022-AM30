@@ -5,10 +5,12 @@ import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.controller.MessageHandler;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Class used to manage new connecting clients
+ */
 public class Server {
    private final int serverPort;
     private boolean isActive;
@@ -22,6 +24,9 @@ public class Server {
         isActive = true;
     }
 
+    /**
+     * Method used to start the server and accept new connections
+     */
     public void start(){
         try{
             ServerSocket serverSocket = new ServerSocket(serverPort);
@@ -34,7 +39,5 @@ public class Server {
         }catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }
