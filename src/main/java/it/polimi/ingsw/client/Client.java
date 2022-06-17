@@ -12,6 +12,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * Client handles connection with server, permitting sending and receiving messages
+ */
 public class Client {
 
     private final int PING_PERIOD = 10000;
@@ -36,7 +39,13 @@ public class Client {
     boolean characterPlayed = false;
     private ArrayList<Thread> timerThreads = new ArrayList<>();
 
-    //Cli e gui dopo che vengono scelti ip e porta chiamano il costruttore di client e poi il suo .setup
+    /**
+     * Constructor Client instantiates attributes to connect with the server. It instantiate also
+     *  threads used to receive messages and to ping server
+     * @param ip ip of the server
+     * @param port port of the server
+     * @param view view chosen by the player
+     */
     public Client(String ip, int port, View view){
         this.ip = ip;
         this.port = port;
@@ -46,7 +55,14 @@ public class Client {
         this.socketListener = new Thread(this::messageListener);
         this.pinger = new Thread(this::startPinger);
     }
-    public boolean setupConnection() throws IOException, ClassNotFoundException {
+
+    /**
+     * Method used to set up the connection with the server and creates input-output stream.
+     * It Starts also the message receiver and pinger threads.
+     * @return true if correctly connected, false otherwise
+     * @throws IOException if input-output stream is not created
+     */
+    public boolean setupConnection() throws IOException{
         try{
             socket = new Socket(ip, port);
         } catch (IOException e) {
@@ -67,18 +83,31 @@ public class Client {
         return true;
     }
 
+    /**
+     * Method used to call the view method to choose settings
+     */
     public void gameSetup(){
         view.chooseSettings();
 
     }
 
+    /**
+     * Method used to set settings of the game
+     * @param gamemode gamemode of the game
+     * @param numofPlayers num of players of the game
+     * @param wizard wizard chosen by the player
+     */
     public void setSettings(GameMode gamemode,int numofPlayers,Wizard wizard){
         this.gamemode=gamemode;
         this.numofPlayers=numofPlayers;
         this.wizard=wizard;
     }
 
-
+    /**
+     * Method used to set turn of the player
+     * @param nickname nickname of the player that has to play
+     * @param assistantPhase is true if is assistant phase, false otherwise
+     */
     public void setTurn(String nickname, boolean assistantPhase){
         if(this.nickname.equals(nickname)){
             myTurn=true;
@@ -89,6 +118,12 @@ public class Client {
         view.printTurn(nickname,assistantPhase);
     }
 
+    /**
+     * Method used to handle disconnection of a client from the server
+     * @param nick nickname of the player disconnected
+     * @param timeout if timeout is true game ended because a timeout expired
+     * @param win if win is true game ended because a player won the game
+     */
     public void handleDisconnection(String nick,boolean timeout,boolean win){
         //if timeout=true server disconnected all players, else someone is disconnected from game
         if(win){
@@ -108,10 +143,9 @@ public class Client {
         }else view.printPlayerDisconnection(nick);
     }
 
-
-
-
-
+    /**
+     * Method that receives messages from server
+     */
     public void messageListener(){
         try{
         while(active){
@@ -126,6 +160,10 @@ public class Client {
 
     }
 
+    /**
+     * Method used to send a message to the server
+     * @param message message to send to the server
+     */
     public synchronized void sendMessage(MessageToServer message){
         if(pingActive) {
             try {
@@ -141,6 +179,9 @@ public class Client {
 
     }
 
+    /**
+     * Method used to start the pinger system
+     */
     public void startPinger() {
         while(pingActive){
             try {
@@ -154,6 +195,10 @@ public class Client {
         }
     }
 
+    /**
+     * Method used to disconnect the client from the server
+     * @param timeout if is true is called by the pinger system
+     */
     public void handleSocketDisconnection(boolean timeout){
         active=false;
         pingActive=false;
@@ -173,6 +218,9 @@ public class Client {
         view.printConnectionClosed(timeout);
     }
 
+    /**
+     * Method used to start the timer of the ping system
+     */
     public synchronized void startTimer(){
         timer = new Thread(() -> {
             try{
@@ -186,13 +234,15 @@ public class Client {
         timer.start();
     }
 
+    /**
+     * Method used to stop the timer of the ping system
+     */
     public synchronized void stopTimer(){
         if (timer != null && timer.isAlive()){
             for(Thread time : timerThreads) {
                 time.interrupt();
             }
             timerThreads.clear();
-            //timer = null;
         }
     }
 
