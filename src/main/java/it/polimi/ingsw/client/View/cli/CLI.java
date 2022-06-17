@@ -75,8 +75,7 @@ public class CLI implements View {
                     if (tryToReconnect()) {
                         client.sendMessage(new ChooseNicknameMessage(nickname, true, false));
                     } else {
-                        client.sendMessage(new ChooseNicknameMessage(nickname, false, false));
-                        client.gameSetup();
+                        client.sendMessage(new ChooseNicknameMessage(nickname, false, true));
                     }
                 } else {
                     client.gameSetup();
@@ -118,7 +117,6 @@ public class CLI implements View {
         while (!pass) {
             if (choice.equalsIgnoreCase("s") || choice.equalsIgnoreCase("e")) {
                 pass = true;
-                ;
             } else {
                 System.out.println("Selection not valid. Please try again");
                 choice = stdin.nextLine();
