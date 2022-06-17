@@ -268,7 +268,7 @@ public class Game implements GameInterface {
 
     public int winnerIstantly(){
         int gameIsFinished=0;
-        if (board.getArchipelago().getNumOfIslands() == 3)
+        if (board.getArchipelago().getNumOfIslands() <= 3)
             gameIsFinished = 1;
         for (Player player : listOfPlayers)
             if (player.getPlance().getNumOfTowers() == 0)
