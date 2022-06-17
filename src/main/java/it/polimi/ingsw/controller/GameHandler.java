@@ -16,6 +16,9 @@ import it.polimi.ingsw.server.ClientHandlerInterface;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Class used to control multiple games
+ */
 public class GameHandler {
     private static ConcurrentHashMap<String, GameInterface> playertoGameMap;//Map that find the game of a player's nickname
     private static ConcurrentHashMap<String, Integer> playertoPlayerIDMap;//Map that find game's idplayer from a player's nickname
@@ -34,6 +37,12 @@ public class GameHandler {
         nicknameChoosen = new ArrayList<>();
     }
 
+    /**
+     * Method used to add a new player to a game. If a game with same settings already exists, player is added in that game.
+     * @param clientHandler clientHandler of the client to add
+     * @param gamemode gamemode chosen by the player
+     * @param numofplayers num of players chosen by the player
+     */
     public void addPlayer(ClientHandlerInterface clientHandler, GameMode gamemode, int numofplayers){
         int playerid;
         int found=0;
@@ -72,6 +81,13 @@ public class GameHandler {
         }
 
     }
+
+    /**
+     * Method used to check if the nickname chosen by the player is already used or he can reconnect to a game
+     * @param clientHandler clientHandler of the client of the player
+     * @param nickname nickname chosen by the player
+     * @param newGame if newGame is true player decided to don't reconnect to a game and to create a new one
+     */
     public void checkNickname(ClientHandlerInterface clientHandler,String nickname,boolean newGame){
         if(!newGame) {
             if (playertoGameMap.containsKey(nickname)) {
@@ -105,12 +121,20 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method used to start a game
+     * @param game game to start
+     */
     public void startGame(GameInterface game){
         sendMessagetoGame(game,new StartGameMessage(false));
         game.startGame();
         turnHandler(game);
     }
 
+    /**
+     * Method used to find the player that has to play and his phase. It sends a message of {@link SetTurnMessage} SetTurnMessage to all players of the game
+     * @param game game to check who has to play
+     */
     public void turnHandler(GameInterface game){
         if(game.getState()==GameState.PLAYING) {
             PlayerInterface playertoplay;
@@ -131,6 +155,11 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method used to disconnect a player from a game. Is game is not already started, player is removed from it.
+     *     If num of disconnected player is equals to num of players, game is closed.
+     * @param nickname nickname of the disconnected player
+     */
     public void disconnectPlayer(String nickname){
         boolean callhandler;
         GameInterface game = findGameofPlayer(nickname);
@@ -160,6 +189,10 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method used to reconnect a player to a game. If the game was set in pause, it starts.
+     * @param clientHandler clietnhandler of the player to reconnect
+     */
     public void reconnectPlayer(ClientHandlerInterface clientHandler){
         if(playertoGameMap.containsKey(clientHandler.getNickname())) {
             GameInterface game = findGameofPlayer(clientHandler.getNickname());
@@ -198,13 +231,24 @@ public class GameHandler {
 
     }
 
+    /**
+     * Method used to send message of lightView update to all clients of a game
+     * @param game game to send the updates
+     * @param boardView game's board update
+     * @param playerView game's list of players update
+     * @param effectHandler game's effecthandler update
+     */
     public void updateClient(GameInterface game, BoardView boardView, ArrayList<PlayerView> playerView, EffectHandler effectHandler){
         sendMessagetoGame(game,new BoardUpdateMessage(boardView));
         sendMessagetoGame(game,new PlanceUpdateMessage(playerView));
         sendMessagetoGame(game,new EffectHandlerUpdateMessage(effectHandler));
     }
 
-    //sends message to all client of a game
+    /**
+     * Method used to send a message to all clients of a game
+     * @param game game from which it picks the players
+     * @param message message to send to all clients
+     */
     public void sendMessagetoGame(GameInterface game,MessageToClient message){
         for(int count=0;count<game.getPlayers().size();count++)
             if(game.getPlayers().get(count).getPlayerState()!=PlayerState.DISCONNECTED) {
@@ -213,37 +257,75 @@ public class GameHandler {
     }
 
 
-
+    /**
+     * Method used to get the gameInterface of a player from playertoGameMap
+     * @param nickname nickname of the player
+     * @return the gameInterface of the game of the player
+     */
     public GameInterface findGameofPlayer(String nickname) {
         return playertoGameMap.get(nickname);
     }
 
+    /**
+     * Method used to set the gameInterface of a player in playertoGameMap
+     * @param nickname nickname of the player
+     * @param game gameInterface of the game of the player
+     */
     public void setGameofPlayer(String nickname, GameInterface game) {
         playertoGameMap.put(nickname, game);
     }
 
+    /**
+     * Method used to get the playerID of a player in a game
+     * @param nickname nickname of the player
+     * @return the playerID of the player in his game
+     */
     public int findPlayeridofPlayer(String nickname) {
         return playertoPlayerIDMap.get(nickname);
     }
 
+    /**
+     * Method used to set the playerID of a player in a game
+     * @param nickname nickname of the player
+     * @param playerid playerID of the player in the game
+     */
     public void setPlayeridofPlayer(String nickname, int playerid) {
         playertoPlayerIDMap.put(nickname, playerid);
     }
 
+    /**
+     * Method used to get the ClietHandlerInterface of a player
+     * @param nickname nickname of the player
+     * @return the ClientHandlerInterface of the player
+     */
    public ClientHandlerInterface findHandler(String nickname){
         return playertoHandlerMap.get(nickname);
    }
 
+    /**
+     * Method used to set the ClientHandlerInterface of a player
+     * @param nickname nickname of the player
+     * @param handler ClientHandlerInterface of the player
+     */
    public void setHandlerofPlayer(String nickname, ClientHandlerInterface handler){
         playertoHandlerMap.put(nickname,handler);
    }
 
+    /**
+     * Method used to set number of studentPlayed of a game
+     * @param game GameInterface of the game to set the studentPlayed
+     * @param num number to set
+     */
    public void setGameToStudentPlayed(GameInterface game,int num){
         if(gameToStudentPlayed.containsKey(game))
             gameToStudentPlayed.remove(game);
         gameToStudentPlayed.put(game,num);
    }
 
+    /**
+     * Method used to add 1 to a studentPlayed of a game
+     * @param game GameInterface of the game
+     */
    public void addGameToStudentPlayed(GameInterface game){
 
         int num = gameToStudentPlayed.get(game);
@@ -251,12 +333,21 @@ public class GameHandler {
         gameToStudentPlayed.put(game,num+1);
    }
 
+    /**
+     * Method used to get the studentPlayed of a game
+     * @param game GameInterface of the game
+     * @return the studentPlayed of the game
+     */
    public int getGameToStudentPlayed(GameInterface game){
         return gameToStudentPlayed.get(game);
    }
 
 
-
+    /**
+     * Method used when a client tries to use an assistant
+     * @param clientHandler ClientHandlerInterface of the client
+     * @param assistant assistant chosen
+     */
     public void chooseAssistant(ClientHandlerInterface clientHandler, Assistant assistant) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
@@ -276,6 +367,11 @@ public class GameHandler {
 
     }
 
+    /**
+     * Method used when a client tries to use a character
+     * @param clientHandler ClientHandlerInterface of the client
+     * @param characterview CharacterView of che character chosen
+     */
     public void chooseCharacter(ClientHandlerInterface clientHandler, CharacterView characterview) {
         System.out.println(characterview.getName());
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
@@ -306,6 +402,11 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method used when a client tries to use a cloud
+     * @param clientHandler ClientHandlerInterface of the client
+     * @param cloudID ID of che cloud in the game
+     */
     public void chooseCloud(ClientHandlerInterface clientHandler, int cloudID) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
@@ -328,6 +429,11 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method used when a client tries to move MotherNature
+     * @param clientHandler ClientHandlerInterface of the client
+     * @param movement number of movement chosen by the client
+     */
     public void moveMotherNature(ClientHandlerInterface clientHandler, int movement) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
@@ -347,6 +453,11 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method used when a client tries to move a student to the hall of his plance
+     * @param clientHandler ClientHandlerInterface of the client
+     * @param student student that the client chosen to move
+     */
     public void moveStudentToHall(ClientHandlerInterface clientHandler, Student student) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
@@ -371,6 +482,11 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method used when a client tries to move students after a character is  played
+     * @param clientHandler ClientHandlerInterface of the client
+     * @param students students chosen by the client
+     */
     public void chooseStudentsEffect(ClientHandlerInterface clientHandler, ArrayList<Student> students) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
@@ -387,6 +503,11 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method used when a client chosen an island after a character is played
+     * @param clientHandler ClientHandlerInterface of the client
+     * @param islandID islandID of the island chosen
+     */
     public void chooseIslandEffect(ClientHandlerInterface clientHandler, int islandID) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
@@ -406,6 +527,12 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method used when a client tries to move a student to an island
+     * @param clientHandler ClientHandlerInterface of the client
+     * @param islandID islandID of the island chosen
+     * @param student student chosen
+     */
     public void moveStudentToIsland(ClientHandlerInterface clientHandler, int islandID, Student student) {
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
@@ -430,6 +557,11 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method used when a client tries to select a wizard
+     * @param clientHandler ClientHandlerInterface of the client
+     * @param wizard wizard chosen
+     */
     public void chooseWizard(ClientHandlerInterface clientHandler, Wizard wizard){
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerid = findPlayeridofPlayer(clientHandler.getNickname());
@@ -447,6 +579,12 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method that checks if a player of a game has won. It does different check if the game is an end round phase or not
+     * @param game GameInterface of the game to check
+     * @param endRound is true if the game is in an end round phase, false otherwise
+     * @return true if there is a winner, false otherwise
+     */
    public boolean checkWinner(GameInterface game,boolean endRound){
        int check;
        ArrayList<Player> playerswinner;
@@ -476,6 +614,12 @@ public class GameHandler {
         return false;
     }
 
+    /**
+     * Method used when a game has to been shutdown
+     * @param game GameInterface of the game
+     * @param timeout if is true, method has been called after a timeout expired
+     * @param win if is true, method has been called after a player has won
+     */
     public void gameShutdown(GameInterface game,boolean timeout,boolean win){
         sendMessagetoGame(game,new DisconnectMessage("win",timeout,win));
         for(Player player : game.getPlayers())
@@ -492,6 +636,10 @@ public class GameHandler {
         }
     }
 
+    /**
+     * Method used to start a timer when only one player is remained in the game
+     * @param game GameInterface of the game
+     */
     public void startWinnerTimer(GameInterface game){
         Thread timer = new Thread(() ->{
             try {

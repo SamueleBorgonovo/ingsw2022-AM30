@@ -11,7 +11,7 @@ Progetto di Ingegneria del Software AA 2021/2022. Partecipanti: Anzillotti Giuse
 | Basic rules                   | 🟢 |
 | Complete rules                | 🟢 |
 | Socket                        | 🟢 |
-| GUI                           | 🟡 |
+| GUI                           | 🟢 |
 | CLI                           | 🟢 |
 | Multiple games                | 🟢 |
 | Persistence                   | 🔴 |
