@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.player;
 
+/**
+ * Enumeration representing all the Professor available in the game
+ */
 public enum Professor{
     GREEN_FROG,
     RED_DRAGON,

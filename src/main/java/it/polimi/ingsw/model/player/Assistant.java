@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.player;
 
+/**
+ * Enumeration representing all the Assistants available in the game
+ */
 public enum Assistant {
     LION(1, 1),
     OSTRICH(2, 1),

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.game;
 
+/**
+ * Enumeration representing all the Student available in the game
+ */
 public enum Student {
     GREEN,
     RED,

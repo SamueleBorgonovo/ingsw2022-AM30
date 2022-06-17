@@ -1,5 +1,8 @@
 package it.polimi.ingsw.client.View.cli.Graphical;
 
+/**
+ * Enumeration representing all the colors available in the CLI game
+ */
 public enum Colors {
     GREEN("\u001B[32m"),
     BRIGHT_RED("\u001B[91m"),

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.client.View.cli.Graphical;
 
+/**
+ * Enumeration representing all the symbols available in the CLI game
+ */
 public enum Symbols {
     STUDENT_FULL("\u25CF"),
     STUDENT_EMPTY("\u25CB"),
