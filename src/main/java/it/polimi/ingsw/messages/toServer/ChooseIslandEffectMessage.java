@@ -1,6 +1,5 @@
 package it.polimi.ingsw.messages.toServer;
 
-import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
 public class ChooseIslandEffectMessage extends MessageToServer {
@@ -15,6 +14,6 @@ public class ChooseIslandEffectMessage extends MessageToServer {
     }
 
     public void action(ClientHandlerInterface clientHandler) {
-        clientHandler.getController().process(this, clientHandler);
+        clientHandler.getMessageHandler().process(this, clientHandler);
     }
 }

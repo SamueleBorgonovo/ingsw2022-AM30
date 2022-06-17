@@ -14,7 +14,7 @@ public class ChooseNicknameMessage extends MessageToServer{
     }
 
     public void action(ClientHandlerInterface clientHandler) {
-        clientHandler.getController().process(this, clientHandler);
+        clientHandler.getMessageHandler().process(this, clientHandler);
     }
 
     public String getNickname(){return nickname;}

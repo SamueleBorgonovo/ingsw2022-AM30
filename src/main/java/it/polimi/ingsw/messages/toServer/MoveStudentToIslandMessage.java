@@ -21,6 +21,6 @@ public class MoveStudentToIslandMessage extends MessageToServer {
     }
 
     public void action(ClientHandlerInterface clientHandler) {
-        clientHandler.getController().process(this, clientHandler);
+        clientHandler.getMessageHandler().process(this, clientHandler);
     }
 }

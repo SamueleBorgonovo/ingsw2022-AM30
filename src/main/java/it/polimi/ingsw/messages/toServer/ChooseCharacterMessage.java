@@ -1,7 +1,6 @@
 package it.polimi.ingsw.messages.toServer;
 
 import it.polimi.ingsw.controller.virtualView.CharacterView;
-import it.polimi.ingsw.model.board.Characters;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
 public class ChooseCharacterMessage extends MessageToServer {
@@ -16,6 +15,6 @@ public class ChooseCharacterMessage extends MessageToServer {
     }
 
     public void action(ClientHandlerInterface clientHandler) {
-        clientHandler.getController().process(this, clientHandler);
+        clientHandler.getMessageHandler().process(this, clientHandler);
     }
 }

@@ -8,7 +8,7 @@ public interface ClientHandlerInterface {
 
     String getNickname();
 
-    MessageHandler getController();
+    MessageHandler getMessageHandler();
 
     void sendMessageToClient(MessageToClient message);
 

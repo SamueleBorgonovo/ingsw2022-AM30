@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Class used to control multiple games
+ * GameHandler handles multiple games, disconnection and reconnection of a player in a game and manage all
+ * methods called to change a game
  */
 public class GameHandler {
     private static ConcurrentHashMap<String, GameInterface> playertoGameMap;//Map that find the game of a player's nickname
@@ -28,6 +29,9 @@ public class GameHandler {
     private static ArrayList<String> nicknameChoosen;
     private final int WINNING_TIMER = 60000;
 
+    /**
+     * Constructor GameHandler instantiates maps used in the class
+     */
     public GameHandler(){
         playertoGameMap = new ConcurrentHashMap<>();//Map that find the game of a player's nickname
         playertoPlayerIDMap = new ConcurrentHashMap<>();//Map that find game's idplayer from a player's nickname
