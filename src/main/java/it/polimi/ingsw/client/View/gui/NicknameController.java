@@ -42,8 +42,9 @@ public class NicknameController {
 
     public void setReconnectButton(boolean visible){
         wrongNickname.setVisible(visible);
+        wrongNickname.setWrapText(true);
         if(visible)
-            wrongNickname.setText("Press 'reconnect' if you want to reconnect to the game");
+            wrongNickname.setText("      Press 'Reconnect' if you want to reconnect to the game\n" +  "If you want start a new game change nickname and press 'Login'");
         reconnectButton.setVisible(visible);
     }
 

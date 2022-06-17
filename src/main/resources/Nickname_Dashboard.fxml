@@ -18,17 +18,17 @@
             <Font name="Futura Medium" size="18.0" />
          </font>
       </TextField>
-      <Label fx:id="wrongNickname" alignment="CENTER" layoutY="372.0" prefHeight="24.0" prefWidth="1000.0" text="Ops!  This nickname is already in use, please try again" visible="false">
+      <Label fx:id="wrongNickname" alignment="CENTER" layoutY="372.0" prefHeight="80.0" prefWidth="1000.0" text="Ops!  This nickname is already in use, please try again" visible="false">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="loginButton" layoutX="304.0" layoutY="456.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@Style.css" text="    Login    ">
+      <Button fx:id="loginButton" alignment="CENTER" layoutX="304.0" layoutY="456.0" mnemonicParsing="false" onAction="#login" styleClass="box" stylesheets="@Style.css" text="   Login   ">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="reconnectButton" layoutX="586.0" layoutY="460.0" mnemonicParsing="false" onAction="#reconnect" styleClass="box" stylesheets="@Style.css" text="Reconnect">
+      <Button fx:id="reconnectButton" layoutX="586.0" layoutY="456.0" mnemonicParsing="false" onAction="#reconnect" styleClass="box" stylesheets="@Style.css" text="Reconnect">
          <font>
             <Font name="Futura Medium" size="18.0" />
          </font>
