@@ -27,6 +27,9 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
+/**
+ * Class DashboardController is the main class to control the GUI of the game
+ */
 public class DashboardController {
 
     private GUI gui;
@@ -40,7 +43,6 @@ public class DashboardController {
     int numEffect10=0;
     ArrayList<Student> effect7Students = new ArrayList<>();
     ArrayList<Student> effect10Students = new ArrayList<>();
-
 
     public void setup() {
 
