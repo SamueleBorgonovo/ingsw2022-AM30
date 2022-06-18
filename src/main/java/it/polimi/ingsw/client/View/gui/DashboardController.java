@@ -13,14 +13,11 @@ import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Professor;
 import it.polimi.ingsw.model.player.Wizard;
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -44,81 +41,6 @@ public class DashboardController {
     ArrayList<Student> effect7Students = new ArrayList<>();
     ArrayList<Student> effect10Students = new ArrayList<>();
 
-    public void setup() {
-
-        getImageViewFromString("entranceStudent8").setVisible(false);
-        getImageViewFromString("entranceStudent8").setDisable(true);
-        getImageViewFromString("entranceStudent9").setVisible(false);
-        getImageViewFromString("entranceStudent9").setDisable(true);
-
-        getImageViewFromString("planceTower7").setVisible(false);
-        getImageViewFromString("planceTower8").setVisible(false);
-
-        coinPane.setVisible(false);
-        characterButtor.setVisible(false);
-        characterButtonLabel.setVisible(false);
-        if (gui.getClient().getGamemode() == GameMode.EXPERTMODE) {
-            coinLabel.setText(String.valueOf(gui.getPlayer().getCoins()));
-            coinPane.setVisible(true);
-            characterButtor.setVisible(true);
-            characterButtor.setDisable(true);
-            characterButtor.setOpacity(0.3);
-            characterButtonLabel.setVisible(true);
-            characterButtonLabel.setDisable(true);
-            characterButtonLabel.setOpacity(1);
-        }
-        gui.setCurrentPlayerView(gui.getPlayer());
-        setupPlayerView(gui.getPlayer());
-        setupArchipelago();
-        setupPlance(gui.getPlayer());
-        charactersPane.setVisible(false);
-        showPlanceChoiceBox.setDisable(true);
-        showPlanceChoiceBox.setOpacity(0.3);
-    }
-
-    public void setupChoiceBox(PlayerView player) {
-        if (player == null) {
-            for(int i=0;i<gui.getPlayers().size();i++)
-                showPlanceChoiceBox.getItems().remove(gui.getPlayers().get(i).getNickname()+" plance");
-            for(int i=0;i<gui.getPlayers().size();i++)
-                showPlanceChoiceBox.getItems().add(gui.getPlayers().get(i).getNickname()+" plance");
-
-            showPlanceChoiceBox.setOnAction((event) -> {
-                if (gui.getCurrentPlayerState() != PlayerState.ASSISTANTPHASE) {
-                    int selectedIndex = showPlanceChoiceBox.getSelectionModel().getSelectedIndex();
-                    gui.setCurrentPlayerView(gui.getPlayers().get(selectedIndex));
-                    setupPlance(gui.getPlayers().get(selectedIndex));
-                    if (gui.getPlayer().getNickname().equals(gui.getPlayers().get(selectedIndex).getNickname()) && gui.getCurrentPlayerState() != PlayerState.WAITING
-                            && gui.getCurrentPlayerState() != PlayerState.RECONNECTED) {
-                        gui.nextMove(gui.getCurrentPlayerState());
-                    }
-                }
-                showPlanceLabel.setText("");
-            });
-
-            showPlanceChoiceBox.setDisable(false);
-            showPlanceChoiceBox.setOpacity(1);
-
-        }
-    }
-
-    public void setupChoiceBoxAssistantPhase(boolean isPhase) {
-        if (isPhase) {
-            showPlanceChoiceBox.setDisable(true);
-            showPlanceChoiceBox.setOpacity(0.3);
-        } else {
-            showPlanceChoiceBox.setDisable(false);
-            showPlanceChoiceBox.setOpacity(1);
-        }
-    }
-
-    public void setBackgroundImage(Wizard wizard){
-        backgroundImage.setImage(new Image("img/" + wizard.toString() + "_BACKGROUND.jpg"));
-    }
-
-    public void setGui(GUI gui) {
-        this.gui = gui;
-    }
 
     @FXML
     public ImageView backgroundImage;
@@ -963,309 +885,84 @@ public class DashboardController {
     @FXML
     public Label winnerNicknameLabel;
 
-    public void chosenCloud1(MouseEvent mouseEvent) {
-        chosenCluod(1);
+    public void setGui(GUI gui) {
+        this.gui = gui;
     }
 
-    public void chosenCloud2(MouseEvent mouseEvent) {
-        chosenCluod(2);
-    }
+    public void setup() {
 
-    public void chosenCloud3(MouseEvent mouseEvent) {
-        chosenCluod(3);
-    }
+        getImageViewFromString("entranceStudent8").setVisible(false);
+        getImageViewFromString("entranceStudent8").setDisable(true);
+        getImageViewFromString("entranceStudent9").setVisible(false);
+        getImageViewFromString("entranceStudent9").setDisable(true);
 
-    public void chosenCluod (int cloudID){
-        ChooseCloudMessage message = new ChooseCloudMessage(cloudID);
-        gui.getClient().sendMessage(message);
-        this.characterPlayed=null;
-        gui.setCharacter4played(false);
+        getImageViewFromString("planceTower7").setVisible(false);
+        getImageViewFromString("planceTower8").setVisible(false);
 
-        numEffect7=0;
-        numEffect10=0;
-        effect7Students.clear();
-        effect10Students.clear();
-    }
-
-    public void chosenAssistantLion(MouseEvent mouseEvent) {
-        chosenAssistant(Assistant.LION);
-    }
-
-    public void chosenAssistantOstrich(MouseEvent mouseEvent) {
-        chosenAssistant(Assistant.OSTRICH);
-    }
-
-    public void chosenAssistantCat(MouseEvent mouseEvent) {
-        chosenAssistant(Assistant.CAT);
-    }
-
-    public void chosenAssistantEagle(MouseEvent mouseEvent) {
-        chosenAssistant(Assistant.EAGLE);
-    }
-
-    public void chosenAssistantFox(MouseEvent mouseEvent) {
-        chosenAssistant(Assistant.FOX);
-    }
-
-    public void chosenAssistantSnake(MouseEvent mouseEvent) {
-        chosenAssistant(Assistant.SNAKE);
-    }
-
-    public void chosenAssistantOctopus(MouseEvent mouseEvent) {
-        chosenAssistant(Assistant.OCTOPUS);
-    }
-
-    public void chosenAssistantDog(MouseEvent mouseEvent) {
-        chosenAssistant(Assistant.DOG);
-    }
-
-    public void chosenAssistantElephants(MouseEvent mouseEvent) {
-        chosenAssistant(Assistant.ELEPHANTS);
-    }
-
-    public void chosenAssistantTurtle(MouseEvent mouseEvent) {
-        chosenAssistant(Assistant.TURTLE);
-    }
-
-    public void chosenAssistant (Assistant assistant){
-        plancePane.setVisible(true);
-        assistantsPane.setVisible(false);
-        plancePane.setDisable(false);
-        assistantsPane.setDisable(true);
-        setupChoiceBoxAssistantPhase(false);
-        gui.getClient().sendMessage(new ChooseAssistantMessage(assistant));
-    }
-
-    public void chosenEntranceStudent9(MouseEvent mouseEvent) {
-        chosenEntranceStudent(8);
-    }
-
-    public void chosenEntranceStudent6(MouseEvent mouseEvent) {
-        chosenEntranceStudent(5);
-    }
-
-    public void chosenEntranceStudent4(MouseEvent mouseEvent) {
-        chosenEntranceStudent(3);
-    }
-
-    public void chosenEntranceStudent2(MouseEvent mouseEvent) {
-        chosenEntranceStudent(1);
-    }
-
-    public void chosenEntranceStudent1(MouseEvent mouseEvent) {
-        chosenEntranceStudent(0);
-    }
-
-    public void chosenEntranceStudent5(MouseEvent mouseEvent) {
-        chosenEntranceStudent(4);
-    }
-
-    public void chosenEntranceStudent3(MouseEvent mouseEvent) {
-       chosenEntranceStudent(2);
-    }
-
-    public void chosenEntranceStudent7(MouseEvent mouseEvent) {
-       chosenEntranceStudent(6);
-    }
-
-    public void chosenEntranceStudent8(MouseEvent mouseEvent) {
-        chosenEntranceStudent(7);
-    }
-
-    public void chosenEntranceStudent(int studentNumber){
-        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
-            studentToMove = gui.getPlayer().getPlance().getEntrance().get(studentNumber);
-            setEntranceStudentNotClickable();
-            if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
-                hallPane.setDisable(false);
-            System.out.println("Scelto studente di colore" + studentToMove);
-            numOfStudentChosen = studentNumber;
-            setArchipelagoClickable();
+        coinPane.setVisible(false);
+        characterButtor.setVisible(false);
+        characterButtonLabel.setVisible(false);
+        if (gui.getClient().getGamemode() == GameMode.EXPERTMODE) {
+            coinLabel.setText(String.valueOf(gui.getPlayer().getCoins()));
+            coinPane.setVisible(true);
+            characterButtor.setVisible(true);
+            characterButtor.setDisable(true);
+            characterButtor.setOpacity(0.3);
+            characterButtonLabel.setVisible(true);
+            characterButtonLabel.setDisable(true);
+            characterButtonLabel.setOpacity(1);
         }
-        else if(gui.getCurrentPlayerState()==PlayerState.CHARACTHERSTUDENTSPHASE && characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT7INPUT){
-            setStudentsCardNotClickable();
-            effect7Students.add(gui.getPlayer().getPlance().getEntrance().get(studentNumber));
-            numEffect7--;
-            int y=studentNumber+1;
-            getImageViewFromString("entranceStudent"+ y).setDisable(true);
-            getImageViewFromString("entranceStudent"+ y).setOpacity(0.3);
-            if(numEffect7==0) {
-                ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(effect7Students);
-                gui.getClient().sendMessage(message);
-            }
-        }
-        else if(gui.getCurrentPlayerState()==PlayerState.CHARACTHERSTUDENTSPHASE && characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT10INPUT){
-            effect10Students.add(gui.getPlayer().getPlance().getEntrance().get(studentNumber));
-            numEffect10++;
-            int y=studentNumber+1;
-            getImageViewFromString("entranceStudent"+ y).setDisable(true);
-            getImageViewFromString("entranceStudent"+ y).setOpacity(0.3);
-            int num=0;
-            for(Student student : Student.values())
-                num=num+gui.getPlayer().getPlance().getNumberOfStudentHall(student);
-            if(numEffect10==2 || num==1)
-                setEntranceStudentNotClickable();
-            plancePane.setDisable(false);
-            hallPane.setDisable(false);
-            hallBlue.setDisable(false);
-            hallYellow.setDisable(false);
-            hallRed.setDisable(false);
-            hallPink.setDisable(false);
-            hallGreen.setDisable(false);
+        gui.setCurrentPlayerView(gui.getPlayer());
+        setupPlayerView(gui.getPlayer());
+        setupArchipelago();
+        setupPlance(gui.getPlayer());
+        charactersPane.setVisible(false);
+        showPlanceChoiceBox.setDisable(true);
+        showPlanceChoiceBox.setOpacity(0.3);
+    }
+
+    public void setupChoiceBox(PlayerView player) {
+        if (player == null) {
+            for(int i=0;i<gui.getPlayers().size();i++)
+                showPlanceChoiceBox.getItems().remove(gui.getPlayers().get(i).getNickname()+" plance");
+            for(int i=0;i<gui.getPlayers().size();i++)
+                showPlanceChoiceBox.getItems().add(gui.getPlayers().get(i).getNickname()+" plance");
+
+            showPlanceChoiceBox.setOnAction((event) -> {
+                if (gui.getCurrentPlayerState() != PlayerState.ASSISTANTPHASE) {
+                    int selectedIndex = showPlanceChoiceBox.getSelectionModel().getSelectedIndex();
+                    gui.setCurrentPlayerView(gui.getPlayers().get(selectedIndex));
+                    setupPlance(gui.getPlayers().get(selectedIndex));
+                    if (gui.getPlayer().getNickname().equals(gui.getPlayers().get(selectedIndex).getNickname()) && gui.getCurrentPlayerState() != PlayerState.WAITING
+                            && gui.getCurrentPlayerState() != PlayerState.RECONNECTED) {
+                        gui.nextMove(gui.getCurrentPlayerState());
+                    }
+                }
+                showPlanceLabel.setText("");
+            });
+
+            showPlanceChoiceBox.setDisable(false);
+            showPlanceChoiceBox.setOpacity(1);
+
         }
     }
 
-    public void chosenHall(MouseEvent mouseEvent) {
-        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
-            numOfStudentChosen++;
-            getImageViewFromString("entranceStudent" + numOfStudentChosen).setVisible(false);
-            getImageViewFromString("entranceStudent" + numOfStudentChosen).setDisable(true);
-            MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentToMove);
-            gui.getClient().sendMessage(message);
-            System.out.println("PROVA2");
+    public void setupChoiceBoxAssistantPhase(boolean isPhase) {
+        if (isPhase) {
+            showPlanceChoiceBox.setDisable(true);
+            showPlanceChoiceBox.setOpacity(0.3);
+        } else {
+            showPlanceChoiceBox.setDisable(false);
+            showPlanceChoiceBox.setOpacity(1);
         }
     }
 
-    public void chosenHallGreen(MouseEvent mouseEvent) {
-        chosenHallColor(Student.GREEN);
+    public void setBackgroundImage(Wizard wizard){
+        backgroundImage.setImage(new Image("img/" + wizard.toString() + "_BACKGROUND.jpg"));
     }
 
-    public void chosenHallRed(MouseEvent mouseEvent) {
-        chosenHallColor(Student.RED);
-    }
+    /* Setup of the game */
 
-    public void chosenHallYellow(MouseEvent mouseEvent) {
-        chosenHallColor(Student.YELLOW);
-    }
-
-    public void chosenHallPink(MouseEvent mouseEvent) {
-        chosenHallColor(Student.PINK);
-    }
-
-    public void chosenHallBlue(MouseEvent mouseEvent) {
-        chosenHallColor(Student.BLUE);
-    }
-
-    public void chosenHallColor (Student studentColor){
-        System.out.println("PROVA");
-        if(this.characterPlayed.getTypeOfInputCharacter() == TypeOfInputCharacter.STUDENT){
-            ArrayList<Student> students = new ArrayList<>();
-            students.add(studentColor);
-            ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
-            gui.getClient().sendMessage(message);
-        }
-        else if(this.characterPlayed.getTypeOfInputCharacter() == TypeOfInputCharacter.EFFECT10INPUT){
-            effect10Students.add(studentColor);
-            numEffect10--;
-            if(numEffect10==0) {
-                ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(effect10Students);
-                gui.getClient().sendMessage(message);
-            }
-        }
-    }
-
-    public void clickCharacetrButton(MouseEvent mouseEvent) {
-        if(exitButton){
-            System.exit(1);
-        }else {
-            if (!characterButtonClicked) {
-                characterButtonClicked = true;
-                charactersPane.setVisible(true);
-                plancePane.setVisible(false);
-                characterButtonLabel.setText("RETURN TO PLANCE");
-                characterButtor.setDisable(false);
-                setupCharacterView();
-                charactersPane.setDisable(false);
-                character1Image.setDisable(false);
-                character2Image.setDisable(false);
-                character3Image.setDisable(false);
-            } else {
-                characterButtonClicked = false;
-                charactersPane.setVisible(false);
-                plancePane.setVisible(true);
-                characterButtonLabel.setText("PLAY CHARACTER");
-                characterButtor.setDisable(false);
-                charactersPane.setDisable(true);
-                character1Image.setDisable(true);
-                character2Image.setDisable(true);
-                character3Image.setDisable(true);
-            }
-        }
-    }
-
-    public void chosenIsland1(MouseEvent mouseEvent) {
-        chosenIsland(1);
-    }
-
-    public void chosenIsland2(MouseEvent mouseEvent) {
-        chosenIsland(2);
-    }
-
-    public void chosenIsland3(MouseEvent mouseEvent) {
-        chosenIsland(3);
-    }
-
-    public void chosenIsland9(MouseEvent mouseEvent) {
-       chosenIsland(9);
-    }
-
-    public void chosenIsland4(MouseEvent mouseEvent) {
-        chosenIsland(4);
-    }
-
-
-    public void chosenIsland7(MouseEvent mouseEvent) {
-        chosenIsland(7);
-    }
-
-    public void chosenIsland8(MouseEvent mouseEvent) {
-       chosenIsland(8);
-    }
-
-    public void chosenIsland10(MouseEvent mouseEvent) {
-        chosenIsland(10);
-    }
-
-    public void chosenIsland11(MouseEvent mouseEvent) {
-        chosenIsland(11);
-    }
-
-    public void chosenIsland5(MouseEvent mouseEvent) {
-        chosenIsland(5);
-    }
-
-    public void chosenIsland12(MouseEvent mouseEvent) {
-        chosenIsland(12);
-    }
-
-    public void chosenIsland6(MouseEvent mouseEvent) {
-        chosenIsland(6);
-    }
-
-    public void chosenIsland(int islandID){
-        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
-            //int num = numOfColorStudent(studentToMove, gui.getBoard().getIslandViews().get(islandID-1).getStudents());
-            //num++;
-            //System.out.println("Sei qui");
-            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(islandID, studentToMove);
-            gui.getClient().sendMessage(message);
-        }
-        else if (gui.getCurrentPlayerState() == PlayerState.MOTHERNATUREPHASE) {
-            int num;
-            if (islandID - gui.getBoard().getMotherNature() > 0) {
-                num = islandID - gui.getBoard().getMotherNature();
-            } else num = gui.getBoard().getIslandViews().size() - Math.abs(islandID - gui.getBoard().getMotherNature());
-            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
-        }
-        else if(gui.getCurrentPlayerState() == PlayerState.CHARACTHERISLANDPHASE){
-            ChooseIslandEffectMessage message = new ChooseIslandEffectMessage(islandID);
-            gui.getClient().sendMessage(message);
-        }
-    }
-    //////////////////////////////////////////////////////////////
-
-
-    //First setup of the player
     public void setupPlayerView(PlayerView player) {
 
         nicknameLabel.setText(player.getNickname());
@@ -1283,7 +980,7 @@ public class DashboardController {
     public void setupArchipelago() {
 
         //Set islands
-        int i = 0;
+        int i;
         for (i = 1; i <= gui.getBoard().getIslandViews().size(); i++) {
             getPaneFromString("island" + i + "Pane").setVisible(true);
             getPaneFromString("island" + i + "Pane").setDisable(true);
@@ -1393,7 +1090,7 @@ public class DashboardController {
         charactersPane.setVisible(false);
         charactersPane.setDisable(true);
 
-        //set Characters //////////////////////////////////////////////////////////////////////////
+        //set Characters
         for(int k=1; k<=3; k++)
             for(int j=1; j<=6; j++)
                 getImageViewFromString("character" + k + "Student" + j).setDisable(true);
@@ -1401,24 +1098,6 @@ public class DashboardController {
         for(int k=1; k<=3; k++)
             for(int j=1; j<=4; j++)
                 getImageViewFromString("character" + k + "Stop" + j).setDisable(true);
-    }
-
-
-    public void setAssistantView() {
-        plancePane.setVisible(false);
-        plancePane.setDisable(true);
-        assistantsPane.setVisible(true);
-        assistantsPane.setDisable(false);
-
-        for(Assistant assistant: Assistant.values()){
-            getImageViewFromString(assistant.getText(assistant)).setDisable(true);
-            getImageViewFromString(assistant.getText(assistant)).setOpacity(0.3);
-        }
-
-        for (Assistant assistant : gui.getPlayer().getAssistantCards()) {
-            getImageViewFromString(assistant.getText(assistant)).setDisable(false);
-            getImageViewFromString(assistant.getText(assistant)).setOpacity(1);
-        }
     }
 
     public void setupClouds() {
@@ -1457,6 +1136,272 @@ public class DashboardController {
         }
     }
 
+    public void setGameUpdateLabel(String s) {
+        gameUpdateLabel.setText(s);
+    }
+
+    public void setPlayerStateLabel(PlayerState playerState) {
+        if (playerState == PlayerState.WAITING || playerState == PlayerState.RECONNECTED || playerState == PlayerState.DISCONNECTED)
+            playerStateLabel.setText(playerState.toString());
+        else playerStateLabel.setText("PLAYING");
+    }
+
+    /* Control of the assistant view Section */
+    public void setAssistantView() {
+        plancePane.setVisible(false);
+        plancePane.setDisable(true);
+        assistantsPane.setVisible(true);
+        assistantsPane.setDisable(false);
+
+        for(Assistant assistant: Assistant.values()){
+            getImageViewFromString(assistant.getText(assistant)).setDisable(true);
+            getImageViewFromString(assistant.getText(assistant)).setOpacity(0.3);
+        }
+
+        for (Assistant assistant : gui.getPlayer().getAssistantCards()) {
+            getImageViewFromString(assistant.getText(assistant)).setDisable(false);
+            getImageViewFromString(assistant.getText(assistant)).setOpacity(1);
+        }
+    }
+
+    public void chosenAssistant (Assistant assistant){
+        plancePane.setVisible(true);
+        assistantsPane.setVisible(false);
+        plancePane.setDisable(false);
+        assistantsPane.setDisable(true);
+        setupChoiceBoxAssistantPhase(false);
+        gui.getClient().sendMessage(new ChooseAssistantMessage(assistant));
+    }
+
+    /* Button of assistant section */
+    public void chosenAssistantLion() {
+        chosenAssistant(Assistant.LION);
+    }
+
+    public void chosenAssistantOstrich() {
+        chosenAssistant(Assistant.OSTRICH);
+    }
+
+    public void chosenAssistantCat() {
+        chosenAssistant(Assistant.CAT);
+    }
+
+    public void chosenAssistantEagle() {
+        chosenAssistant(Assistant.EAGLE);
+    }
+
+    public void chosenAssistantFox() {
+        chosenAssistant(Assistant.FOX);
+    }
+
+    public void chosenAssistantSnake() {
+        chosenAssistant(Assistant.SNAKE);
+    }
+
+    public void chosenAssistantOctopus() {
+        chosenAssistant(Assistant.OCTOPUS);
+    }
+
+    public void chosenAssistantDog() {
+        chosenAssistant(Assistant.DOG);
+    }
+
+    public void chosenAssistantElephants() {
+        chosenAssistant(Assistant.ELEPHANTS);
+    }
+
+    public void chosenAssistantTurtle() {
+        chosenAssistant(Assistant.TURTLE);
+    }
+
+    /* Control of Cloud Section */
+    public void chosenCluod (int cloudID){
+        ChooseCloudMessage message = new ChooseCloudMessage(cloudID);
+        gui.getClient().sendMessage(message);
+        this.characterPlayed=null;
+        gui.setCharacter4played(false);
+
+        numEffect7=0;
+        numEffect10=0;
+        effect7Students.clear();
+        effect10Students.clear();
+    }
+
+    /* Button of Cloud Section */
+    public void chosenCloud1() {
+        chosenCluod(1);
+    }
+
+    public void chosenCloud2() {
+        chosenCluod(2);
+    }
+
+    public void chosenCloud3() {
+        chosenCluod(3);
+    }
+
+
+    /* Control of Entrance Section */
+    public void chosenEntranceStudent(int studentNumber){
+        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
+            studentToMove = gui.getPlayer().getPlance().getEntrance().get(studentNumber);
+            setEntranceStudentNotClickable();
+            if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
+                hallPane.setDisable(false);
+            System.out.println("Scelto studente di colore" + studentToMove);
+            numOfStudentChosen = studentNumber;
+            setArchipelagoClickable();
+        }
+        else if(gui.getCurrentPlayerState()==PlayerState.CHARACTHERSTUDENTSPHASE && characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT7INPUT){
+            setStudentsCardNotClickable();
+            effect7Students.add(gui.getPlayer().getPlance().getEntrance().get(studentNumber));
+            numEffect7--;
+            int y=studentNumber+1;
+            getImageViewFromString("entranceStudent"+ y).setDisable(true);
+            getImageViewFromString("entranceStudent"+ y).setOpacity(0.3);
+            if(numEffect7==0) {
+                ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(effect7Students);
+                gui.getClient().sendMessage(message);
+            }
+        }
+        else if(gui.getCurrentPlayerState()==PlayerState.CHARACTHERSTUDENTSPHASE && characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT10INPUT){
+            effect10Students.add(gui.getPlayer().getPlance().getEntrance().get(studentNumber));
+            numEffect10++;
+            int y=studentNumber+1;
+            getImageViewFromString("entranceStudent"+ y).setDisable(true);
+            getImageViewFromString("entranceStudent"+ y).setOpacity(0.3);
+            int num=0;
+            for(Student student : Student.values())
+                num=num+gui.getPlayer().getPlance().getNumberOfStudentHall(student);
+            if(numEffect10==2 || num==1)
+                setEntranceStudentNotClickable();
+            plancePane.setDisable(false);
+            hallPane.setDisable(false);
+            hallBlue.setDisable(false);
+            hallYellow.setDisable(false);
+            hallRed.setDisable(false);
+            hallPink.setDisable(false);
+            hallGreen.setDisable(false);
+        }
+    }
+
+    public void setEntranceStudentClickable() {
+        plancePane.setDisable(false);
+        for (int j = 1; j <= gui.getPlayer().getPlance().getEntrance().size(); j++)
+            getImageViewFromString("entranceStudent" + j).setDisable(false);
+    }
+
+    public void setEntranceStudentNotClickable() {
+        for (int j = 1; j <= gui.getPlayer().getPlance().getEntrance().size(); j++)
+            getImageViewFromString("entranceStudent" + j).setDisable(true);
+    }
+
+    /* Button of Entrance Section */
+    public void chosenEntranceStudent1() {
+        chosenEntranceStudent(0);
+    }
+
+    public void chosenEntranceStudent2() {
+        chosenEntranceStudent(1);
+    }
+
+    public void chosenEntranceStudent3() {
+        chosenEntranceStudent(2);
+    }
+
+    public void chosenEntranceStudent4() {
+        chosenEntranceStudent(3);
+    }
+
+    public void chosenEntranceStudent5() {
+        chosenEntranceStudent(4);
+    }
+
+    public void chosenEntranceStudent6() {
+        chosenEntranceStudent(5);
+    }
+
+    public void chosenEntranceStudent7() {
+        chosenEntranceStudent(6);
+    }
+
+    public void chosenEntranceStudent8() {
+        chosenEntranceStudent(7);
+    }
+
+    public void chosenEntranceStudent9() {
+        chosenEntranceStudent(8);
+    }
+
+    /* Control of Hall section */
+    public void chosenHallColor (Student studentColor){
+        System.out.println("PROVA");
+        if(this.characterPlayed.getTypeOfInputCharacter() == TypeOfInputCharacter.STUDENT){
+            ArrayList<Student> students = new ArrayList<>();
+            students.add(studentColor);
+            ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
+            gui.getClient().sendMessage(message);
+        }
+        else if(this.characterPlayed.getTypeOfInputCharacter() == TypeOfInputCharacter.EFFECT10INPUT){
+            effect10Students.add(studentColor);
+            numEffect10--;
+            if(numEffect10==0) {
+                ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(effect10Students);
+                gui.getClient().sendMessage(message);
+            }
+        }
+    }
+
+    /* Button of Hall Section */
+    public void chosenHall() {
+        if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
+            numOfStudentChosen++;
+            getImageViewFromString("entranceStudent" + numOfStudentChosen).setVisible(false);
+            getImageViewFromString("entranceStudent" + numOfStudentChosen).setDisable(true);
+            MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentToMove);
+            gui.getClient().sendMessage(message);
+            System.out.println("PROVA2");
+        }
+    }
+
+    public void chosenHallGreen() {
+        chosenHallColor(Student.GREEN);
+    }
+
+    public void chosenHallRed() {
+        chosenHallColor(Student.RED);
+    }
+
+    public void chosenHallYellow() {
+        chosenHallColor(Student.YELLOW);
+    }
+
+    public void chosenHallPink() {
+        chosenHallColor(Student.PINK);
+    }
+
+    public void chosenHallBlue() {
+        chosenHallColor(Student.BLUE);
+    }
+
+    /* Control of Character Section */
+    public void setCharacterButtonClicked() {
+        characterButtor.setDisable(false);
+        characterButtor.setOpacity(1);
+        characterButtonLabel.setDisable(false);
+    }
+
+    public void setCharacterButtonNotClicked() {
+        characterButtor.setDisable(true);
+        characterButtor.setOpacity(0.3);
+        characterButtonLabel.setDisable(true);
+    }
+
+    public void resetCharacterButton(){
+        characterButtonLabel.setText("PLAY CHARACTER");
+        characterButtonClicked=false;
+    }
+
     public void setStudentsOnCharacter(int index) {
         EffectHandler handler = gui.getEffectHandler();
         switch (gui.getBoard().getCharacters().get(index - 1).getName()) {
@@ -1466,9 +1411,8 @@ public class DashboardController {
                     getImageViewFromString("character" + index + "Student" + (i + 1)).setImage(new Image(getImageFromStudent(handler.getEffect1students().get(i))));
                 }
             }
-            case "FARMER", "HERALD", "POSTMAN", "CENTAUR", "KNIGHT", "FUNGARO", "MINSTREL", "PICAROON" -> {
-                getGridPaneFromString("character" + index + "StudentsPane").setVisible(false);
-            }
+            case "FARMER", "HERALD", "POSTMAN", "CENTAUR", "KNIGHT", "FUNGARO", "MINSTREL", "PICAROON" -> getGridPaneFromString("character" + index + "StudentsPane").setVisible(false);
+
             case "GRANDMA" -> {
                 getGridPaneFromString("character" + index + "StudentsPane").setVisible(false);
                 getGridPaneFromString("character" + index + "StopsPane").setVisible(true);
@@ -1496,12 +1440,341 @@ public class DashboardController {
         }
     }
 
+    public void inputStudentCharacter() {
+        switch (this.characterPlayed.getTypeOfInputCharacter()) {
+            case EFFECT1INPUT, EFFECT11INPUT -> {
+                for (int i = 1; i <= 4; i++)
+                    getImageViewFromString("character"+ numOfCharacterPlayed + "Student" + i).setDisable(false);
+                setGameUpdateLabel("EFFECT: Choose one student from the card");
+            }
+            case EFFECT7INPUT ->{
+                for (int i = 1; i <= 6; i++)
+                    getImageViewFromString("character"+ numOfCharacterPlayed + "Student" + i).setDisable(false);
+                setGameUpdateLabel("EFFECT: Choose un to 3 students from the card and then from the entrance");
+            }
+            case STUDENT -> {
+                plancePane.setDisable(false);
+                hallPane.setDisable(false);
+                hallBlue.setDisable(false);
+                hallGreen.setDisable(false);
+                hallPink.setDisable(false);
+                hallRed.setDisable(false);
+                hallYellow.setDisable(false);
+                setGameUpdateLabel("EFFECT: Choose one color from the hall");
+            }
+            case EFFECT10INPUT ->{
+                setEntranceStudentClickable();
+                setGameUpdateLabel("EFFECT: Choose up two students from the entrance and then from the hall");
+            }
+        }
+    }
+
+    public void inputIslandCharacter(){
+        setArchipelagoClickable();
+        setGameUpdateLabel("EFFECT: Choose one island");
+    }
+
+    public void choseStudentCard1to4 (int numOfStudent, int numOfCharacter){
+        ArrayList<Student> students =new ArrayList<>();
+        if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT1INPUT){
+            students.add(gui.getEffectHandler().getEffect1students().get(numOfStudent));
+            ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
+            gui.getClient().sendMessage(message);
+        }
+        else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT11INPUT){
+            if(gui.getPlayer().getPlance().getNumberOfStudentHall(gui.getEffectHandler().getEffect11students().get(numOfStudent)) < 10) {
+                students.add(gui.getEffectHandler().getEffect11students().get(numOfStudent));
+                ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
+                gui.getClient().sendMessage(message);
+            }
+            else
+                gameUpdateLabel.setText("You can't use this one");
+        }
+        else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT7INPUT){
+            effect7Students.add(gui.getEffectHandler().getEffect7students().get(numOfStudent));
+            numEffect7++;
+            int y=numOfStudent+1;
+            getImageViewFromString("character"+numOfCharacter+"Student"+y).setDisable(true);
+            getImageViewFromString("character"+numOfCharacter+"Student"+y).setOpacity(0.3);
+            if(effect7Students.size()==3)
+                setStudentsCardNotClickable();
+            setEntranceStudentClickable();
+        }
+    }
+
+    public void choseStudent5or6(int numOfStudent, int numOfCharacter){
+        effect7Students.add(gui.getEffectHandler().getEffect7students().get(numOfStudent));
+        numEffect7++;
+        int y=numOfStudent+1;
+        getImageViewFromString("character"+numOfCharacter+"Student"+y).setDisable(true);
+        getImageViewFromString("character"+numOfCharacter+"Student"+y).setOpacity(0.3);
+        if(effect7Students.size()==3)
+            setStudentsCardNotClickable();
+        setEntranceStudentClickable();
+    }
+
+    public void choseCharacter(int characterNumber){
+        boolean checkM=true;
+        boolean checkP = true;
+        if(gui.getBoard().getCharacters().get(characterNumber-1).getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT10INPUT)
+            checkM = checkMinstrel();
+        if(gui.getBoard().getCharacters().get(characterNumber-1).getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT11INPUT)
+            checkP=checkPrincess();
+        if(gui.getBoard().getCharacters().get(characterNumber-1).getCost()<= gui.getPlayer().getCoins() && checkM && checkP && characterPlayed==null) {
+            ChooseCharacterMessage message = new ChooseCharacterMessage(gui.getBoard().getCharacters().get(characterNumber-1));
+            gui.getClient().sendMessage(message);
+            this.characterPlayed = gui.getBoard().getCharacters().get(characterNumber-1);
+            numOfCharacterPlayed = characterNumber;
+        }
+        else
+            gameUpdateLabel.setText("You don't have enough coins or you can't use this now");
+
+        if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.INT)
+            gui.setCharacter4played(true);
+        gui.getClient().setCharacterPlayed(true);
+    }
+
+    public boolean checkMinstrel(){
+        boolean check = true;
+        int num=0;
+        for(Student student : Student.values())
+            num=num + gui.getPlayer().getPlance().getNumberOfStudentHall(student);
+        if(num==0)
+            check=false;
+        return check;
+    }
+
+    public boolean checkPrincess(){
+        boolean check = false;
+        for(Student student : Student.values())
+            if(gui.getPlayer().getPlance().getNumberOfStudentHall(student) < 10)
+                check=true;
+        return check;
+    }
+
+    public void setStudentsCardNotClickable(){
+        for(int i=1; i<=6 ; i++)
+            getImageViewFromString("character" + numOfCharacterPlayed + "Student" + i).setDisable(true);
+    }
+
+    /* Button of Character Section */
+    public void clickCharacetrButton() {
+        if(exitButton){
+            System.exit(1);
+        }else {
+            if (!characterButtonClicked) {
+                characterButtonClicked = true;
+                charactersPane.setVisible(true);
+                plancePane.setVisible(false);
+                characterButtonLabel.setText("RETURN TO PLANCE");
+                characterButtor.setDisable(false);
+                setupCharacterView();
+                charactersPane.setDisable(false);
+                character1Image.setDisable(false);
+                character2Image.setDisable(false);
+                character3Image.setDisable(false);
+            } else {
+                characterButtonClicked = false;
+                charactersPane.setVisible(false);
+                plancePane.setVisible(true);
+                characterButtonLabel.setText("PLAY CHARACTER");
+                characterButtor.setDisable(false);
+                charactersPane.setDisable(true);
+                character1Image.setDisable(true);
+                character2Image.setDisable(true);
+                character3Image.setDisable(true);
+            }
+        }
+    }
+
+    public void choseCharacter1Student1() {
+        choseStudentCard1to4(0,1);
+    }
+
+    public void choseCharacter1Student2() {
+        choseStudentCard1to4(1,1);
+    }
+
+    public void choseCharacter1Student3() {
+        choseStudentCard1to4(2,1);
+    }
+
+    public void choseCharacter1Student4() {
+        choseStudentCard1to4(3,1);
+    }
+
+    public void choseCharacter1Student5() {
+        choseStudent5or6(4,1);
+    }
+
+    public void choseCharacter1Student6() {
+        choseStudent5or6(5,1);
+    }
+
+    public void choseCharacter2Student1() {
+        choseStudentCard1to4(0,2);
+    }
+
+    public void choseCharacter2Student2() {
+        choseStudentCard1to4(2,2);
+    }
+
+    public void choseCharacter2Student3() {
+        choseStudentCard1to4(2,2);
+    }
+
+    public void choseCharacter2Student4() {
+        choseStudentCard1to4(3,2);
+    }
+
+    public void choseCharacter2Student5() {
+        choseStudent5or6(4,2);
+    }
+
+    public void choseCharacter2Student6() {
+        choseStudent5or6(5,2);
+    }
+
+    public void choseCharacter3Student1() {
+        choseStudentCard1to4(0,3);
+    }
+
+    public void choseCharacter3Student2() {
+        choseStudentCard1to4(1,3);
+    }
+
+    public void choseCharacter3Student3() {
+        choseStudentCard1to4(2,3);
+    }
+
+    public void choseCharacter3Student4() {
+        choseStudentCard1to4(3,3);
+    }
+
+    public void choseCharacter3Student5() {
+        choseStudent5or6(4,3);
+    }
+
+    public void choseCharacter3Student6() {
+        choseStudent5or6(5,3);
+    }
+
+    public void choseCharacter1() {
+        choseCharacter(1);
+    }
+
+    public void choseCharacter2() {
+        choseCharacter(2);
+    }
+
+    public void choseCharacter3() {
+        choseCharacter(3);
+    }
+
+    /* Control of Islands Section */
+    public void chosenIsland(int islandID){
+        if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
+            MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(islandID, studentToMove);
+            gui.getClient().sendMessage(message);
+        }
+        else if (gui.getCurrentPlayerState() == PlayerState.MOTHERNATUREPHASE) {
+            int num;
+            if (islandID - gui.getBoard().getMotherNature() > 0) {
+                num = islandID - gui.getBoard().getMotherNature();
+            } else num = gui.getBoard().getIslandViews().size() - Math.abs(islandID - gui.getBoard().getMotherNature());
+            gui.getClient().sendMessage(new MoveMotherNatureMessage(num));
+        }
+        else if(gui.getCurrentPlayerState() == PlayerState.CHARACTHERISLANDPHASE){
+            ChooseIslandEffectMessage message = new ChooseIslandEffectMessage(islandID);
+            gui.getClient().sendMessage(message);
+        }
+    }
+
     public void setMotherNatureView(int num, int motherNatureIsland) {
         int k;
         for (int i = 0; i < num; i++) {
             k = ((motherNatureIsland + i) % gui.getBoard().getIslandViews().size()) + 1;
             getPaneFromString("island" + k + "Pane").setDisable(false);
         }
+    }
+
+    public void setArchipelagoClickable() {
+        for (int i = 1; i <= gui.getBoard().getIslandViews().size(); i++)
+            getPaneFromString("island" + i + "Pane").setDisable(false);
+    }
+
+    public void setCloudsClickable() {
+        for (int count = 1; count <= gui.getBoard().getClouds().size(); count++) {
+            if (!gui.getBoard().getClouds().get(count - 1).isChoosen())
+                getPaneFromString("cloud" + count + "Pane").setDisable(false);
+        }
+    }
+
+    /* Button of Islands Section */
+    public void chosenIsland1() {
+        chosenIsland(1);
+    }
+
+    public void chosenIsland2() {
+        chosenIsland(2);
+    }
+
+    public void chosenIsland3() {
+        chosenIsland(3);
+    }
+
+    public void chosenIsland4() {
+        chosenIsland(4);
+    }
+
+    public void chosenIsland5() {
+        chosenIsland(5);
+    }
+
+    public void chosenIsland6() {
+        chosenIsland(6);
+    }
+
+    public void chosenIsland7() {
+        chosenIsland(7);
+    }
+
+    public void chosenIsland8() {
+        chosenIsland(8);
+    }
+
+    public void chosenIsland9() {
+       chosenIsland(9);
+    }
+
+    public void chosenIsland10() {
+        chosenIsland(10);
+    }
+
+    public void chosenIsland11() {
+        chosenIsland(11);
+    }
+
+    public void chosenIsland12() {
+        chosenIsland(12);
+    }
+
+
+    ////////USEFUL METHODS
+    public void setExitButton(){
+        exitButton=true;
+        characterButtor.setVisible(true);
+        characterButtor.setDisable(false);
+        characterButtonLabel.setVisible(true);
+        characterButtonLabel.setDisable(false);
+        characterButtonLabel.setText("EXIT");
+    }
+
+    public void winner(ArrayList<String> nickname){
+        cloudsPane.setVisible(false);
+        cloudsPane.setDisable(true);
+        winnerPane.setVisible(true);
+        winnerNicknameLabel.setText(nickname.get(0));
     }
 
     public String getImageFromStudent(Student student) {
@@ -1552,284 +1825,11 @@ public class DashboardController {
         return ((GridPane) gridPane);
     }
 
-    public void setEntranceStudentClickable() {
-        plancePane.setDisable(false);
-        for (int j = 1; j <= gui.getPlayer().getPlance().getEntrance().size(); j++)
-            getImageViewFromString("entranceStudent" + j).setDisable(false);
-    }
-
-    public void setEntranceStudentNotClickable() {
-        for (int j = 1; j <= gui.getPlayer().getPlance().getEntrance().size(); j++)
-            getImageViewFromString("entranceStudent" + j).setDisable(true);
-    }
-
-    public void setGameUpdateLabel(String s) {
-        gameUpdateLabel.setText(s);
-    }
-
-    public void setPlayerStateLabel(PlayerState playerState) {
-        if (playerState == PlayerState.WAITING || playerState == PlayerState.RECONNECTED || playerState == PlayerState.DISCONNECTED)
-            playerStateLabel.setText(playerState.toString());
-        else playerStateLabel.setText("PLAYING");
-    }
-
     public int numOfColorStudent(Student student, ArrayList<Student> students) {
         int i = 0;
         for (Student stud : students)
             if (stud.equals(student))
                 i++;
         return i;
-    }
-
-    public void setArchipelagoClickable() {
-        for (int i = 1; i <= gui.getBoard().getIslandViews().size(); i++)
-            getPaneFromString("island" + i + "Pane").setDisable(false);
-    }
-
-    public void setCloudsClickable() {
-        for (int count = 1; count <= gui.getBoard().getClouds().size(); count++) {
-            if (!gui.getBoard().getClouds().get(count - 1).isChoosen())
-                getPaneFromString("cloud" + count + "Pane").setDisable(false);
-        }
-    }
-
-    public void setCharacterButtonClicked() {
-        characterButtor.setDisable(false);
-        characterButtor.setOpacity(1);
-        characterButtonLabel.setDisable(false);
-    }
-
-    public void setCharacterButtonNotClicked() {
-        characterButtor.setDisable(true);
-        characterButtor.setOpacity(0.3);
-        characterButtonLabel.setDisable(true);
-    }
-
-    public void resetCharacterButton(){
-        characterButtonLabel.setText("PLAY CHARACTER");
-        characterButtonClicked=false;
-    }
-
-    public void inputStudentCharacter() {
-       switch (this.characterPlayed.getTypeOfInputCharacter()) {
-           case EFFECT1INPUT, EFFECT11INPUT -> {
-                for (int i = 1; i <= 4; i++)
-                    getImageViewFromString("character"+ numOfCharacterPlayed + "Student" + i).setDisable(false);
-                setGameUpdateLabel("EFFECT: Choose one student from the card");
-            }
-           case EFFECT7INPUT ->{
-               for (int i = 1; i <= 6; i++)
-                   getImageViewFromString("character"+ numOfCharacterPlayed + "Student" + i).setDisable(false);
-               setGameUpdateLabel("EFFECT: Choose un to 3 students from the card and then from the entrance");
-           }
-           case STUDENT -> {
-               plancePane.setDisable(false);
-               hallPane.setDisable(false);
-               hallBlue.setDisable(false);
-               hallGreen.setDisable(false);
-               hallPink.setDisable(false);
-               hallRed.setDisable(false);
-               hallYellow.setDisable(false);
-               setGameUpdateLabel("EFFECT: Choose one color from the hall");
-           }
-            case EFFECT10INPUT ->{
-               setEntranceStudentClickable();
-                setGameUpdateLabel("EFFECT: Choose up two students from the entrance and then from the hall");
-            }
-        }
-    }
-
-    public void inputIslandCharacter(){
-        setArchipelagoClickable();
-        setGameUpdateLabel("EFFECT: Choose one island");
-    }
-
-    public void choseCharacter1Student1(MouseEvent mouseEvent) {
-        choseStudentCard1to4(0,1);
-    }
-
-    public void choseCharacter1Student2(MouseEvent mouseEvent) {
-        choseStudentCard1to4(1,1);
-    }
-
-    public void choseCharacter1Student3(MouseEvent mouseEvent) {
-        choseStudentCard1to4(2,1);
-    }
-
-    public void choseCharacter1Student4(MouseEvent mouseEvent) {
-        choseStudentCard1to4(3,1);;
-    }
-
-    public void choseCharacter1Student5(MouseEvent mouseEvent) {
-        choseStudent5or6(4,1);
-    }
-
-    public void choseCharacter1Student6(MouseEvent mouseEvent) {
-        choseStudent5or6(5,1);
-    }
-
-    public void choseCharacter2Student1(MouseEvent mouseEvent) {
-        choseStudentCard1to4(0,2);
-    }
-
-    public void choseCharacter2Student2(MouseEvent mouseEvent) {
-        choseStudentCard1to4(2,2);
-    }
-
-    public void choseCharacter2Student3(MouseEvent mouseEvent) {
-        choseStudentCard1to4(2,2);
-    }
-
-    public void choseCharacter2Student4(MouseEvent mouseEvent) {
-        choseStudentCard1to4(3,2);
-    }
-
-    public void choseCharacter2Student5(MouseEvent mouseEvent) {
-        choseStudent5or6(4,2);
-    }
-
-    public void choseCharacter2Student6(MouseEvent mouseEvent) {
-        choseStudent5or6(5,2);
-    }
-
-    public void choseCharacter3Student1(MouseEvent mouseEvent) {
-        choseStudentCard1to4(0,3);
-    }
-
-    public void choseCharacter3Student2(MouseEvent mouseEvent) {
-        choseStudentCard1to4(1,3);
-    }
-
-    public void choseCharacter3Student3(MouseEvent mouseEvent) {
-        choseStudentCard1to4(2,3);
-    }
-
-    public void choseCharacter3Student4(MouseEvent mouseEvent) {
-        choseStudentCard1to4(3,3);
-    }
-
-    public void choseCharacter3Student5(MouseEvent mouseEvent) {
-        choseStudent5or6(4,3);
-    }
-
-    public void choseCharacter3Student6(MouseEvent mouseEvent) {
-        choseStudent5or6(5,3);
-    }
-
-    public void choseStudentCard1to4 (int numOfStudent, int numOfCharacter){
-        ArrayList<Student> students =new ArrayList<>();
-        if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT1INPUT){
-            students.add(gui.getEffectHandler().getEffect1students().get(numOfStudent));
-            ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
-            gui.getClient().sendMessage(message);
-        }
-        else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT11INPUT){
-            if(gui.getPlayer().getPlance().getNumberOfStudentHall(gui.getEffectHandler().getEffect11students().get(numOfStudent)) < 10) {
-                students.add(gui.getEffectHandler().getEffect11students().get(numOfStudent));
-                ChooseStudentsEffectMessage message = new ChooseStudentsEffectMessage(students);
-                gui.getClient().sendMessage(message);
-            }
-            else
-                gameUpdateLabel.setText("You can't use this one");
-        }
-        else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT7INPUT){
-            effect7Students.add(gui.getEffectHandler().getEffect7students().get(numOfStudent));
-            numEffect7++;
-            int y=numOfStudent+1;
-            getImageViewFromString("character"+numOfCharacter+"Student"+y).setDisable(true);
-            getImageViewFromString("character"+numOfCharacter+"Student"+y).setOpacity(0.3);
-            if(effect7Students.size()==3)
-                setStudentsCardNotClickable();
-            setEntranceStudentClickable();
-        }
-    }
-
-    public void choseStudent5or6(int numOfStudent, int numOfCharacter){
-        effect7Students.add(gui.getEffectHandler().getEffect7students().get(numOfStudent));
-        numEffect7++;
-        int y=numOfStudent+1;
-        getImageViewFromString("character"+numOfCharacter+"Student"+y).setDisable(true);
-        getImageViewFromString("character"+numOfCharacter+"Student"+y).setOpacity(0.3);
-        if(effect7Students.size()==3)
-            setStudentsCardNotClickable();
-        setEntranceStudentClickable();
-    }
-
-    public void choseCharacter1(MouseEvent mouseEvent) {
-        choseCharacter(1);
-    }
-
-    public void choseCharacter2(MouseEvent mouseEvent) {
-        choseCharacter(2);
-    }
-
-    public void choseCharacter3(MouseEvent mouseEvent) {
-        choseCharacter(3);
-    }
-
-    public void choseCharacter(int characterNumber){
-        boolean checkM=true;
-        boolean checkP = true;
-        if(gui.getBoard().getCharacters().get(characterNumber-1).getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT10INPUT)
-            checkM = checkMinstrel();
-        if(gui.getBoard().getCharacters().get(characterNumber-1).getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT11INPUT)
-            checkP=checkPrincess();
-        if(gui.getBoard().getCharacters().get(characterNumber-1).getCost()<= gui.getPlayer().getCoins() && checkM && checkP && characterPlayed==null) {
-            ChooseCharacterMessage message = new ChooseCharacterMessage(gui.getBoard().getCharacters().get(characterNumber-1));
-            gui.getClient().sendMessage(message);
-            this.characterPlayed = gui.getBoard().getCharacters().get(characterNumber-1);
-            numOfCharacterPlayed = characterNumber;
-        }
-        else
-            gameUpdateLabel.setText("You don't have enough coins or you can't use this now");
-
-        if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.INT)
-            gui.setCharacter4played(true);
-        gui.getClient().setCharacterPlayed(true);
-
-       /* if(characterPlayed!=null)
-            charactersPane.setDisable(true);
-            for(int i=1; i<=3; i++)
-                getImageViewFromString("character"+i+"Image").setDisable(true);
-                */
-    }
-
-    public void setStudentsCardNotClickable(){
-        for(int i=1; i<=6 ; i++)
-            getImageViewFromString("character" + numOfCharacterPlayed + "Student" + i).setDisable(true);
-    }
-
-    public boolean checkMinstrel(){
-        boolean check = true;
-        int num=0;
-        for(Student student : Student.values())
-            num=num + gui.getPlayer().getPlance().getNumberOfStudentHall(student);
-        if(num==0)
-            check=false;
-        return check;
-    }
-
-    public boolean checkPrincess(){
-        boolean check = false;
-        for(Student student : Student.values())
-            if(gui.getPlayer().getPlance().getNumberOfStudentHall(student) < 10)
-                check=true;
-        return check;
-    }
-
-    public void winner(ArrayList<String> nickname){
-        cloudsPane.setVisible(false);
-        cloudsPane.setDisable(true);
-        winnerPane.setVisible(true);
-        winnerNicknameLabel.setText(nickname.get(0));
-    }
-
-    public void setExitButton(){
-        exitButton=true;
-        characterButtor.setVisible(true);
-        characterButtor.setDisable(false);
-        characterButtonLabel.setVisible(true);
-        characterButtonLabel.setDisable(false);
-        characterButtonLabel.setText("EXIT");
     }
 }

@@ -490,7 +490,7 @@ public class GUI extends Application implements View{
             case CHARACTHERSTUDENTSPHASE -> {
                 System.out.println("Fino a qui ci sei poi non so");
                 Platform.runLater(() -> {
-                    dashboardController.clickCharacetrButton(null);
+                    dashboardController.clickCharacetrButton();
                     dashboardController.setCharacterButtonClicked();
                     dashboardController.inputStudentCharacter();
                 });
@@ -498,7 +498,7 @@ public class GUI extends Application implements View{
             case CHARACTHERISLANDPHASE -> {
                 System.out.println("Fino a qui ci sei poi non so");
                 Platform.runLater(() -> {
-                    dashboardController.clickCharacetrButton(null);
+                    dashboardController.clickCharacetrButton();
                     dashboardController.setCharacterButtonClicked();
                     dashboardController.inputIslandCharacter();
                 });
