@@ -22,8 +22,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class GUI extends Application implements View{
     private Stage primaryStage;

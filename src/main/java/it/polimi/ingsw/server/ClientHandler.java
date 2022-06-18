@@ -159,7 +159,6 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
      * @param timeout if is true, disconnection caused by a timeout expired
      * @param gameEnded if is true, disconnection caused by the end of the game
      */
-    //if timer expired timeout is true(also socketTimerExpire), else is false
     public synchronized void handleSocketDisconnection(boolean timeout,boolean gameEnded) {
         if (!disconnectionCalled) {
             disconnectionCalled=true;
@@ -194,7 +193,7 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
     }
 
     /**
-     * Method used to end the pinger system
+     * Method used to end the ping system
      */
     public void closePinger(){
         stopTimer();

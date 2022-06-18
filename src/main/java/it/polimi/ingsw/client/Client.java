@@ -246,55 +246,98 @@ public class Client {
         }
     }
 
-
-
-
-
+    /**
+     * Method used to get the messageHandler of the client
+     * @return the messafeHandler of the client
+     */
     public ClientMessageHandler getMessageHandler() {
         return messageHandler;
     }
 
+    /**
+     * Method used to get the nickname of the player
+     * @return the nickname of the player
+     */
     public String getNickname() {
         return nickname;
     }
 
+    /**
+     * Method used to set the nickname of the player
+     * @param nickname nickname of the player
+     */
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
+    /**
+     * Method used to get the wizard of the player
+     * @return the wizerd of the player
+     */
     public Wizard getWizard() {
         return wizard;
     }
 
+    /**
+     * Method used to set the wizard of the player
+     * @param wizard wizard of the player
+     */
     public void setWizard(Wizard wizard) {
         this.wizard = wizard;
     }
 
+    /**
+     * Method used to get the game-mode of the game
+     * @return the game-mode of the game
+     */
     public GameMode getGamemode() {
         return gamemode;
     }
 
+    /**
+     * Method used to set the game-mode chosen by the player
+     * @param gamemode gamemode chosen by the player
+     */
     public void setGamemode(GameMode gamemode) {
         this.gamemode = gamemode;
     }
 
+    /**
+     * Method used to get the num of players of the game
+     * @return the num of players of the game
+     */
     public int getNumofPlayers() {
         return numofPlayers;
     }
 
+    /**
+     * Method used to set the num of players chosen by the player
+     * @param numofPlayers the num of player chosen by the player
+     */
     public void setNumofPlayers(int numofPlayers) {
         this.numofPlayers = numofPlayers;
     }
 
-
+    /**
+     * Method used to set the boolean of the character played
+     * @param characterPlayed set if the character is played
+     */
     public void setCharacterPlayed(boolean characterPlayed) {
         this.characterPlayed = characterPlayed;
     }
 
+    /**
+     * Method used to know if the character is played
+     * @return true if the character is played, false otherwise
+     */
     public boolean isCharacterPlayed() {
         return characterPlayed;
     }
 
+    /**
+     * Method used to know if is this client's turn
+     * @return true if the is client's turn, false otherwise
+     */
     public boolean isMyTurn() {
         return myTurn;
     }
