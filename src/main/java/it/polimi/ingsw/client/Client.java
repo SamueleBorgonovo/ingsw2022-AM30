@@ -88,7 +88,6 @@ public class Client {
      */
     public void gameSetup(){
         view.chooseSettings();
-
     }
 
     /**

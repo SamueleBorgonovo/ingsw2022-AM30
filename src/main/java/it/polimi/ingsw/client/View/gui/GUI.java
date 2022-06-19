@@ -128,7 +128,6 @@ public class GUI extends Application implements View{
             primaryStage.show();
             nicknameScene = fxmlLoader.getController();
             nicknameScene.setReconnectButton(false);
-            //nicknameScene.moveLoginButtonX(110);
             nicknameScene.setGui(this);
         });
     }
