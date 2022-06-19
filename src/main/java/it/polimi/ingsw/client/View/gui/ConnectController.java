@@ -7,6 +7,9 @@ import javafx.scene.control.TextField;
 
 import java.util.InputMismatchException;
 
+/**
+ * Class ConnectController controls the scene used to set the settings to connect to the server
+ */
 public class ConnectController {
     private GUI gui=null;
     @FXML
@@ -16,12 +19,19 @@ public class ConnectController {
     @FXML
     public Label connectionFailed;
 
+    /**
+     * Method setGui set an instance of the gui
+     * @param gui the instance of the gui to set
+     */
     public void setGui(GUI gui) {
         this.gui = gui;
     }
 
-
-    public void connect(ActionEvent actionEvent) {
+    /**
+     *Method connect is called when the player clicks the Connect Button. It tries to connect
+     * to the server, if the connection is accepted it calls the method to upload the next scene.
+     */
+    public void connect() {
         int a;
             try{
                 a = Integer.parseInt(portWindows.getText());

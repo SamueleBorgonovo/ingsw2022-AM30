@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
+/**
+ * Class GameSettingsController controls the scene used to choice the settings of the game
+ */
 public class GameSettingsController {
 
     private GUI gui;
@@ -32,13 +35,20 @@ public class GameSettingsController {
     @FXML
     public Label wrongGameSettings;
 
+    /**
+     * Method setGui set an instance of the gui
+     * @param gui instance of the gui to set
+     */
     public void setGui(GUI gui) {
         this.gui = gui;
     }
 
-    public void createGame(ActionEvent actionEvent) {
+    /**
+     *Method createGame is called when the player clicks the Create button. It checks the selected field and sends the
+     * message with settings to the server.
+     */
+    public void createGame() {
             if ((simpleField.isSelected() && expertField.isSelected()) || twoField.isSelected() && threeField.isSelected()) {
-                //messaggio di errore
                 simpleField.setSelected(false);
                 expertField.setSelected(false);
                 twoField.setSelected(false);
