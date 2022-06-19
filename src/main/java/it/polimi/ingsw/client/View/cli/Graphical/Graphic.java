@@ -9,7 +9,6 @@ import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.model.player.Professor;
 import it.polimi.ingsw.model.player.Wizard;
-
 import java.util.ArrayList;
 
 /**

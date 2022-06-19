@@ -1365,7 +1365,57 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="assistantsPane" layoutX="477.0" layoutY="483.0" prefHeight="188.0" prefWidth="490.0" styleClass="box" stylesheets="@Style.css" visible="false">
+      <Pane layoutX="558.0" layoutY="483.0" prefHeight="188.0" prefWidth="409.0" styleClass="box" stylesheets="@Style.css">
+         <children>
+            <VBox layoutX="20.0" layoutY="7.0" prefHeight="133.0" prefWidth="368.0" stylesheets="@Style.css">
+               <children>
+                  <Label id="nickname" fx:id="nicknameLabel" prefHeight="49.0" prefWidth="312.0" text="GIUSEPPE">
+                     <font>
+                        <Font name="Futura Medium" size="39.0" />
+                     </font>
+                  </Label>
+                  <Label id="playerStatus" fx:id="playerStateLabel" prefHeight="12.0" prefWidth="312.0" text="  WAITING">
+                     <font>
+                        <Font name="Futura Medium" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="gameStatus" fx:id="gameUpdateLabel" alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="95.0" prefHeight="56.0" prefWidth="368.0" text="  GAME : Samu is playing Assistant CAT">
+                     <font>
+                        <Font name="Futura Medium" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <ChoiceBox fx:id="showPlanceChoiceBox" layoutX="21.0" layoutY="144.0" prefWidth="165.0" styleClass="boxwhite" stylesheets="@Style.css" />
+            <Pane fx:id="characterButtor" layoutX="228.0" layoutY="144.0" onMouseClicked="#clickCharacetrButton" prefHeight="27.0" prefWidth="165.0" styleClass="boxwhite" stylesheets="@Style.css">
+            </Pane>
+                  <Label fx:id="characterButtonLabel" alignment="CENTER" layoutX="228.0" layoutY="145.0" onMouseClicked="#clickCharacetrButton" prefHeight="25.0" prefWidth="165.0" text="PLAY CHARACTER">
+                     <font>
+                        <Font name="Futura Medium" size="10.0" />
+                     </font>
+                  </Label>
+            <HBox fx:id="coinPane" layoutX="347.0" layoutY="15.0" prefHeight="25.0" prefWidth="39.0">
+               <children>
+                  <Label fx:id="coinLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
+                     <font>
+                        <Font name="Futura Medium" size="11.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="24.0" fitWidth="24.0">
+                     <image>
+                        <Image url="@img/COIN.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Label fx:id="showPlanceLabel" alignment="CENTER" layoutX="44.0" layoutY="145.0" prefHeight="24.0" prefWidth="115.0" text="SHOW OTHER PLANCE">
+               <font>
+                  <Font name="Futura Medium" size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="assistantsPane" layoutX="33.0" layoutY="483.0" prefHeight="188.0" prefWidth="490.0" styleClass="box" stylesheets="@Style.css" visible="false">
          <children>
             <ScrollPane layoutY="-2.0" prefHeight="188.0" prefWidth="490.0" styleClass="box" stylesheets="@Style.css">
                <content>
@@ -1427,7 +1477,7 @@
             </ScrollPane>
          </children>
       </Pane>
-      <Pane fx:id="plancePane" layoutX="477.0" layoutY="483.0" prefHeight="188.0" prefWidth="490.0" styleClass="box" stylesheets="@Style.css">
+      <Pane fx:id="plancePane" layoutX="33.0" layoutY="483.0" prefHeight="188.0" prefWidth="490.0" styleClass="box" stylesheets="@Style.css">
          <children>
             <ImageView fitHeight="188.0" fitWidth="490.0">
                <image>
@@ -1820,57 +1870,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="38.0" layoutY="483.0" prefHeight="188.0" prefWidth="409.0" styleClass="box" stylesheets="@Style.css">
-         <children>
-            <VBox layoutX="20.0" layoutY="7.0" prefHeight="133.0" prefWidth="368.0" stylesheets="@Style.css">
-               <children>
-                  <Label id="nickname" fx:id="nicknameLabel" prefHeight="49.0" prefWidth="312.0" text="GIUSEPPE">
-                     <font>
-                        <Font name="Futura Medium" size="39.0" />
-                     </font>
-                  </Label>
-                  <Label id="playerStatus" fx:id="playerStateLabel" prefHeight="12.0" prefWidth="312.0" text="  WAITING">
-                     <font>
-                        <Font name="Futura Medium" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="gameStatus" fx:id="gameUpdateLabel" alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="95.0" prefHeight="56.0" prefWidth="368.0" text="  GAME : Samu is playing Assistant CAT">
-                     <font>
-                        <Font name="Futura Medium" size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <ChoiceBox fx:id="showPlanceChoiceBox" layoutX="21.0" layoutY="144.0" prefWidth="165.0" styleClass="boxwhite" stylesheets="@Style.css" />
-            <Pane fx:id="characterButtor" layoutX="228.0" layoutY="144.0" onMouseClicked="#clickCharacetrButton" prefHeight="27.0" prefWidth="165.0" styleClass="boxwhite" stylesheets="@Style.css">
-            </Pane>
-                  <Label fx:id="characterButtonLabel" alignment="CENTER" layoutX="228.0" layoutY="145.0" onMouseClicked="#clickCharacetrButton" prefHeight="25.0" prefWidth="165.0" text="PLAY CHARACTER">
-                     <font>
-                        <Font name="Futura Medium" size="10.0" />
-                     </font>
-                  </Label>
-            <HBox fx:id="coinPane" layoutX="347.0" layoutY="15.0" prefHeight="25.0" prefWidth="39.0">
-               <children>
-                  <Label fx:id="coinLabel" alignment="CENTER" prefHeight="26.0" prefWidth="16.0" text="10">
-                     <font>
-                        <Font name="Futura Medium" size="11.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="24.0" fitWidth="24.0">
-                     <image>
-                        <Image url="@img/COIN.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <Label fx:id="showPlanceLabel" alignment="CENTER" layoutX="44.0" layoutY="145.0" prefHeight="24.0" prefWidth="115.0" text="SHOW OTHER PLANCE">
-               <font>
-                  <Font name="Futura Medium" size="10.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Pane fx:id="charactersPane" layoutX="477.0" layoutY="483.0" prefHeight="188.0" prefWidth="490.0" styleClass="box" stylesheets="@Style.css" visible="false">
+      <Pane fx:id="charactersPane" layoutX="33.0" layoutY="483.0" prefHeight="188.0" prefWidth="490.0" styleClass="box" stylesheets="@Style.css" visible="false">
          <children>
             <Pane layoutX="29.0" layoutY="8.0" prefHeight="171.0" prefWidth="117.0">
                <children>

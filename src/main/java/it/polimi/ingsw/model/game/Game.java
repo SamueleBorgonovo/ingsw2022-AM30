@@ -46,14 +46,14 @@ public class Game implements GameInterface {
 
     }
 
-    public void addWizardChoosen(Wizard wizard){
+    public void addWizardChosen(Wizard wizard){
         wizardChoosen.add(wizard);
     }
 
     public void setWizard(int playerid,Wizard wizard) throws InvalidWizardException {
         if(!wizardChoosen.contains(wizard)) {
             getPlayer(playerid).setWizard(wizard);
-            addWizardChoosen(wizard);
+            addWizardChosen(wizard);
         }
         else throw new InvalidWizardException();
     }
@@ -168,10 +168,8 @@ public class Game implements GameInterface {
         return board;
     }
 
-    public boolean checkPlayerState(int playerid){
-        if(getPlayer(playerid).getPlayerState()==PlayerState.DISCONNECTED)
-            return true;
-        return false;
+    public boolean checkPlayerState(int playerID){
+        return getPlayer(playerID).getPlayerState() == PlayerState.DISCONNECTED;
     }
     public int getNumOfPlayers() {
         return numOfPlayers;
@@ -184,20 +182,20 @@ public class Game implements GameInterface {
         return null;
     }
 
-    public void startRound(){
+    private void startRound(){
         if(numOfPlayers==2) {
             for (Player player : playerorder)
                 if (player.getPlance().getEntrance().size() != 7) {
-                    int cloudid = -1;
+                    int cloudID = -1;
                     for (Cloud cloud : board.getClouds())
                         if (!cloud.isChoosen()) {
-                            cloudid = cloud.getCloudID();
+                            cloudID = cloud.getCloudID();
                             cloud.setChoosen(true);
                             break;
                         }
                     int count = 0;
                     while (player.getPlance().getEntrance().size() != 7) {
-                        player.getPlance().addStudentEntrance(board.getCloud(cloudid).getStudents().get(count));
+                        player.getPlance().addStudentEntrance(board.getCloud(cloudID).getStudents().get(count));
                         count++;
 
                     }

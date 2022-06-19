@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.controller.virtualView.BoardView;
-import it.polimi.ingsw.controller.virtualView.CharacterView;
-import it.polimi.ingsw.controller.virtualView.CloudView;
-import it.polimi.ingsw.controller.virtualView.IslandView;
 import it.polimi.ingsw.exceptions.OutOfCoinsException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
@@ -87,21 +84,21 @@ class BoardTest {
         assertEquals(18,game2players.getBoard().getCoinReserve());
         game2players.getBoard().removeCoinsFromReserve(3);
         assertEquals(15, game2players.getBoard().getCoinReserve());
-        game2players.getBoard().addCoinstoReserve(1);
+        game2players.getBoard().addCoinsToReserve(1);
         assertEquals(16, game2players.getBoard().getCoinReserve());
 
         // Test 3 Players Game
         assertEquals(17,game3players.getBoard().getCoinReserve());
         game3players.getBoard().removeCoinsFromReserve(4);
         assertEquals(13, game3players.getBoard().getCoinReserve());
-        game3players.getBoard().addCoinstoReserve(2);
+        game3players.getBoard().addCoinsToReserve(2);
         assertEquals(15, game3players.getBoard().getCoinReserve());
     }
     @Test
     void addCoinstoReserve() throws OutOfCoinsException {
         //also test removeeCoinFromReserve
         assertEquals(17,game3players.getBoard().getCoinReserve());
-        game3players.getBoard().addCoinstoReserve(2);
+        game3players.getBoard().addCoinsToReserve(2);
         assertEquals(19,game3players.getBoard().getCoinReserve());
         game3players.getBoard().removeCoinsFromReserve(3);
         assertEquals(16,game3players.getBoard().getCoinReserve());
