@@ -36,7 +36,7 @@ public class GameSettingsController {
     public Label wrongGameSettings;
 
     /**
-     * Method setGui set an instance of the gui
+     * Method setGui sets an instance of the gui
      * @param gui instance of the gui to set
      */
     public void setGui(GUI gui) {

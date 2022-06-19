@@ -27,7 +27,7 @@ public class NicknameController {
     private boolean newGame=false;
 
     /**
-     * Method setGui set an instance of the gui
+     * Method setGui sets an instance of the gui
      * @param gui instance of the gui to set
      */
     public void setGui(GUI gui){
@@ -57,7 +57,7 @@ public class NicknameController {
     }
 
     /**
-     * Method setReconnectButton set the Reconnect button.
+     * Method setReconnectButton sets the Reconnect button.
      * @param visible if is true set Reconnect button visible, it set Reconnect button not visible otherwise.
      */
     public void setReconnectButton(boolean visible){
@@ -71,7 +71,7 @@ public class NicknameController {
     }
 
     /**
-     * Method setWrongNickname set the text in the label wrongNickname
+     * Method setWrongNickname sets the text in the label wrongNickname
      * @param visible if is true set it visible, it set not visible otherwise
      */
     public void setWrongNickname(boolean visible){
@@ -79,7 +79,7 @@ public class NicknameController {
     }
 
     /**
-     * Method setLoginButton set the position of the Login button.
+     * Method setLoginButton sets the position of the Login button.
      * @param move the position in which the Login button should move to
      */
     public void setLoginButton(double move){

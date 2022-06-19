@@ -20,7 +20,7 @@ public class ConnectController {
     public Label connectionFailed;
 
     /**
-     * Method setGui set an instance of the gui
+     * Method setGui sets an instance of the gui
      * @param gui the instance of the gui to set
      */
     public void setGui(GUI gui) {

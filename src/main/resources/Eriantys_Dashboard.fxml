@@ -1387,9 +1387,9 @@
                </children>
             </VBox>
             <ChoiceBox fx:id="showPlanceChoiceBox" layoutX="21.0" layoutY="144.0" prefWidth="165.0" styleClass="boxwhite" stylesheets="@Style.css" />
-            <Pane fx:id="characterButtor" layoutX="228.0" layoutY="144.0" onMouseClicked="#clickCharacetrButton" prefHeight="27.0" prefWidth="165.0" styleClass="boxwhite" stylesheets="@Style.css">
+            <Pane fx:id="characterButtor" layoutX="228.0" layoutY="144.0" onMouseClicked="#clickCharacterButton" prefHeight="27.0" prefWidth="165.0" styleClass="boxwhite" stylesheets="@Style.css">
             </Pane>
-                  <Label fx:id="characterButtonLabel" alignment="CENTER" layoutX="228.0" layoutY="145.0" onMouseClicked="#clickCharacetrButton" prefHeight="25.0" prefWidth="165.0" text="PLAY CHARACTER">
+                  <Label fx:id="characterButtonLabel" alignment="CENTER" layoutX="228.0" layoutY="145.0" onMouseClicked="#clickCharacterButton" prefHeight="25.0" prefWidth="165.0" text="PLAY CHARACTER">
                      <font>
                         <Font name="Futura Medium" size="10.0" />
                      </font>

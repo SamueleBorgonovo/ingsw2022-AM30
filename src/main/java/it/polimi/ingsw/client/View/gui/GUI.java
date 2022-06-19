@@ -2,15 +2,12 @@ package it.polimi.ingsw.client.View.gui;
 
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.View.View;
-import it.polimi.ingsw.client.View.cli.PossibleAction;
 import it.polimi.ingsw.controller.virtualView.BoardView;
 import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.controller.virtualView.PlayerView;
 import it.polimi.ingsw.model.game.EffectHandler;
-import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.player.Assistant;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerState;
 import it.polimi.ingsw.model.player.Wizard;
 import javafx.application.Application;
@@ -263,7 +260,7 @@ public class GUI extends Application implements View{
             if(!restart) {
                 dashboardController.setGameUpdateLabel("GAME: Game is starting!");
             }else dashboardController.setGameUpdateLabel("GAME: Game is re-starting!");
-            dashboardController.setupChoiceBox(null);
+            dashboardController.setupChoiceBox();
         });
     }
 
@@ -276,7 +273,7 @@ public class GUI extends Application implements View{
     public void printTurn(String nick,boolean isAssistantPhase) {
         if(!nick.equals(nickname)) {
             currentPlayerState = PlayerState.WAITING;
-            Platform.runLater(() -> dashboardController.setCharacterButtonNotClicked());
+            Platform.runLater(() -> dashboardController.setCharacterButtonNotClickable());
         }
         Platform.runLater(() -> {
             dashboardController.setupPlance(player);
@@ -455,7 +452,7 @@ public class GUI extends Application implements View{
                 Platform.runLater(() -> {
                     dashboardController.setupPlance(player);
                     dashboardController.setEntranceStudentClickable();
-                    dashboardController.setCharacterButtonClicked();
+                    dashboardController.setCharacterButtonClickable();
                     dashboardController.setGameUpdateLabel("GAME: Move one student from entrance!");
 
                 });
@@ -464,7 +461,7 @@ public class GUI extends Application implements View{
             case ASSISTANTPHASE -> {
                 Platform.runLater(() -> {
                     dashboardController.setupPlance(player);
-                    dashboardController.setCharacterButtonNotClicked();
+                    dashboardController.setCharacterButtonNotClickable();
                     dashboardController.setupChoiceBoxAssistantPhase(true);
                     dashboardController.setGameUpdateLabel("GAME: Choose one assistant!");
                 });
@@ -473,7 +470,7 @@ public class GUI extends Application implements View{
             case MOTHERNATUREPHASE -> {
                 Platform.runLater(() -> {
                     dashboardController.setupPlance(player);
-                    dashboardController.setCharacterButtonClicked();
+                    dashboardController.setCharacterButtonClickable();
                     dashboardController.setGameUpdateLabel("GAME: Move MotherNature to an island! MAX:"+player.getLastassistantplayed().getMovement());
                 });
                 moveMotherNature();
@@ -481,7 +478,7 @@ public class GUI extends Application implements View{
             case CLOUDPHASE -> {
                 Platform.runLater(() -> {
                     dashboardController.setupPlance(player);
-                    dashboardController.setCharacterButtonClicked();
+                    dashboardController.setCharacterButtonClickable();
                     dashboardController.setGameUpdateLabel("GAME: Choose one cloud!");
                 });
                 chooseCloud();
@@ -489,16 +486,16 @@ public class GUI extends Application implements View{
             case CHARACTHERSTUDENTSPHASE -> {
                 System.out.println("Fino a qui ci sei poi non so");
                 Platform.runLater(() -> {
-                    dashboardController.clickCharacetrButton();
-                    dashboardController.setCharacterButtonClicked();
+                    dashboardController.clickCharacterButton();
+                    dashboardController.setCharacterButtonClickable();
                     dashboardController.inputStudentCharacter();
                 });
             }
             case CHARACTHERISLANDPHASE -> {
                 System.out.println("Fino a qui ci sei poi non so");
                 Platform.runLater(() -> {
-                    dashboardController.clickCharacetrButton();
-                    dashboardController.setCharacterButtonClicked();
+                    dashboardController.clickCharacterButton();
+                    dashboardController.setCharacterButtonClickable();
                     dashboardController.inputIslandCharacter();
                 });
             }

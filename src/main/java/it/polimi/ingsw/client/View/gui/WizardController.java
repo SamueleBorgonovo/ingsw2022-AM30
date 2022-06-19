@@ -33,7 +33,7 @@ public class WizardController {
     ImageView wizardPink;
 
     /**
-     * Method setWizards set the list of available wizards received from the server
+     * Method setWizards sets the list of available wizards received from the server
      * @param wizards list of available wizard received from the server
      */
     public void setWizards(ArrayList<Wizard> wizards) {
@@ -42,7 +42,7 @@ public class WizardController {
     }
 
     /**
-     * Method setGui set an instance of the gui
+     * Method setGui sets an instance of the gui
      * @param gui instance of the gui to set
      */
     public void setGui(GUI gui){

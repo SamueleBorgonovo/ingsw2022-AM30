@@ -25,7 +25,7 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
 /**
- * Class DashboardController is the main class to control the GUI of the game
+ * Class DashboardController controls the scene of the game
  */
 public class DashboardController {
 
@@ -885,17 +885,22 @@ public class DashboardController {
     @FXML
     public Label winnerNicknameLabel;
 
+    /**
+     * Method setGui sets an instance of the gui
+     * @param gui the instance of the gui to set
+     */
     public void setGui(GUI gui) {
         this.gui = gui;
     }
 
+    /**
+     * Method setup sets the first view of the game
+     */
     public void setup() {
-
         getImageViewFromString("entranceStudent8").setVisible(false);
         getImageViewFromString("entranceStudent8").setDisable(true);
         getImageViewFromString("entranceStudent9").setVisible(false);
         getImageViewFromString("entranceStudent9").setDisable(true);
-
         getImageViewFromString("planceTower7").setVisible(false);
         getImageViewFromString("planceTower8").setVisible(false);
 
@@ -921,8 +926,10 @@ public class DashboardController {
         showPlanceChoiceBox.setOpacity(0.3);
     }
 
-    public void setupChoiceBox(PlayerView player) {
-        if (player == null) {
+    /**
+     * Method setupChoiceBox sets the choice box of the players' plance
+     */
+    public void setupChoiceBox() {
             for(int i=0;i<gui.getPlayers().size();i++)
                 showPlanceChoiceBox.getItems().remove(gui.getPlayers().get(i).getNickname()+" plance");
             for(int i=0;i<gui.getPlayers().size();i++)
@@ -940,13 +947,14 @@ public class DashboardController {
                 }
                 showPlanceLabel.setText("");
             });
-
             showPlanceChoiceBox.setDisable(false);
             showPlanceChoiceBox.setOpacity(1);
-
-        }
     }
 
+    /**
+     * Method setupChoiceBoxAssistantPhase sets the choice box during the assistant phase
+     * @param isPhase true if is assistant phase, false otherwise
+     */
     public void setupChoiceBoxAssistantPhase(boolean isPhase) {
         if (isPhase) {
             showPlanceChoiceBox.setDisable(true);
@@ -957,12 +965,20 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Method setBackgroundImage sets the background image of the player
+     * @param wizard wizard chosen by the player
+     */
     public void setBackgroundImage(Wizard wizard){
         backgroundImage.setImage(new Image("img/" + wizard.toString() + "_BACKGROUND.jpg"));
     }
 
     /* Setup of the game */
 
+    /**
+     * Method setupPlayerView sets the view of the player chosen
+     * @param player player to set the view
+     */
     public void setupPlayerView(PlayerView player) {
 
         nicknameLabel.setText(player.getNickname());
@@ -977,8 +993,10 @@ public class DashboardController {
         assistantsPane.setDisable(true);
     }
 
+    /**
+     * Method setupArchipelago sets the view of the archipelago
+     */
     public void setupArchipelago() {
-
         //Set islands
         int i;
         for (i = 1; i <= gui.getBoard().getIslandViews().size(); i++) {
@@ -1017,6 +1035,10 @@ public class DashboardController {
         setupClouds();
     }
 
+    /**
+     * Method setupPlance sets the plance of the player chosen
+     * @param player player to set the view
+     */
     public void setupPlance(PlayerView player) {
         coinLabel.setText(String.valueOf(gui.getPlayer().getCoins()));
 
@@ -1100,6 +1122,9 @@ public class DashboardController {
                 getImageViewFromString("character" + k + "Stop" + j).setDisable(true);
     }
 
+    /**
+     * Method setupClouds sets the view of clouds
+     */
     public void setupClouds() {
 
         if (gui.getBoard().getClouds().size() == 2) {
@@ -1125,6 +1150,9 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Method setupCharacterView sets the view of characters
+     */
     public void setupCharacterView() {
         for (int i = 1; i <= gui.getBoard().getCharacters().size(); i++) {
             getImageViewFromString("character" + i + "Image").setImage(new Image("img/" + gui.getBoard().getCharacters().get(i - 1).getName() + ".jpg"));
@@ -1136,10 +1164,18 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Method setGameUpdateLabel sets the text contained in gameUpdateLabel
+     * @param s Text to set
+     */
     public void setGameUpdateLabel(String s) {
         gameUpdateLabel.setText(s);
     }
 
+    /**
+     * Method setPlayerStateLabel sets the player state of the player
+     * @param playerState playerState of the player
+     */
     public void setPlayerStateLabel(PlayerState playerState) {
         if (playerState == PlayerState.WAITING || playerState == PlayerState.RECONNECTED || playerState == PlayerState.DISCONNECTED)
             playerStateLabel.setText(playerState.toString());
@@ -1147,6 +1183,10 @@ public class DashboardController {
     }
 
     /* Control of the assistant view Section */
+
+    /**
+     * Method setAssistantView sets the assistant view
+     */
     public void setAssistantView() {
         plancePane.setVisible(false);
         plancePane.setDisable(true);
@@ -1164,6 +1204,10 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Method chosenAssistant handles the choice of an assistant
+     * @param assistant assistant chosen
+     */
     public void chosenAssistant (Assistant assistant){
         plancePane.setVisible(true);
         assistantsPane.setVisible(false);
@@ -1174,53 +1218,86 @@ public class DashboardController {
     }
 
     /* Button of assistant section */
+
+    /**
+     * Method chosenAssistantLion is called when the player choice the Lion assistant
+     */
     public void chosenAssistantLion() {
         chosenAssistant(Assistant.LION);
     }
 
+    /**
+     * Method chosenAssistantOstrich is called when the player choice the Ostrich assistant
+     */
     public void chosenAssistantOstrich() {
         chosenAssistant(Assistant.OSTRICH);
     }
 
+    /**
+     * Method chosenAssistantCat is called when the player choice the Cat assistant
+     */
     public void chosenAssistantCat() {
         chosenAssistant(Assistant.CAT);
     }
 
+    /**
+     * Method chosenAssistantEagle is called when the player choice the Eagle assistant
+     */
     public void chosenAssistantEagle() {
         chosenAssistant(Assistant.EAGLE);
     }
 
+    /**
+     * Method chosenAssistantFox is called when the player choice the Fox assistant
+     */
     public void chosenAssistantFox() {
         chosenAssistant(Assistant.FOX);
     }
 
+    /**
+     * Method chosenAssistantSnake is called when the player choice the Snake assistant
+     */
     public void chosenAssistantSnake() {
         chosenAssistant(Assistant.SNAKE);
     }
 
-    public void chosenAssistantOctopus() {
-        chosenAssistant(Assistant.OCTOPUS);
-    }
+    /**
+     * Method chosenAssistantOctopus is called when the player choice the Octopus assistant
+     */
+    public void chosenAssistantOctopus() {chosenAssistant(Assistant.OCTOPUS);}
 
+    /**
+     * Method chosenAssistantDog is called when the player choice the Dog assistant
+     */
     public void chosenAssistantDog() {
         chosenAssistant(Assistant.DOG);
     }
 
+    /**
+     * Method chosenAssistantElephants is called when the player choice the Elephants assistant
+     */
     public void chosenAssistantElephants() {
         chosenAssistant(Assistant.ELEPHANTS);
     }
 
+    /**
+     * Method chosenAssistantTurtle is called when the player choice the Turtle assistant
+     */
     public void chosenAssistantTurtle() {
         chosenAssistant(Assistant.TURTLE);
     }
 
     /* Control of Cloud Section */
-    public void chosenCluod (int cloudID){
+
+    /**
+     * Method chosenCloud handles the choice of a cloud
+     * @param cloudID cloudID of che cloud chosen
+     */
+    public void chosenCloud(int cloudID){
         ChooseCloudMessage message = new ChooseCloudMessage(cloudID);
         gui.getClient().sendMessage(message);
         this.characterPlayed=null;
         gui.setCharacter4played(false);
-
         numEffect7=0;
         numEffect10=0;
         effect7Students.clear();
@@ -1228,20 +1305,35 @@ public class DashboardController {
     }
 
     /* Button of Cloud Section */
+
+    /**
+     * Method chosenCloud1 is called when the player choice the first cloud
+     */
     public void chosenCloud1() {
-        chosenCluod(1);
+        chosenCloud(1);
     }
 
+    /**
+     * Method chosenCloud2 is called when the player choice the second cloud
+     */
     public void chosenCloud2() {
-        chosenCluod(2);
+        chosenCloud(2);
     }
 
+    /**
+     * Method chosenCloud3 is called when the player choice the third cloud
+     */
     public void chosenCloud3() {
-        chosenCluod(3);
+        chosenCloud(3);
     }
 
 
     /* Control of Entrance Section */
+
+    /**
+     * Method chosenEntranceStudent handles the choice of a student in entrance
+     * @param studentNumber the number of the student chosen
+     */
     public void chosenEntranceStudent(int studentNumber){
         if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
             studentToMove = gui.getPlayer().getPlance().getEntrance().get(studentNumber);
@@ -1285,57 +1377,95 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Method setEntranceStudentClickable sets the students in entrance clickable
+     */
     public void setEntranceStudentClickable() {
         plancePane.setDisable(false);
         for (int j = 1; j <= gui.getPlayer().getPlance().getEntrance().size(); j++)
             getImageViewFromString("entranceStudent" + j).setDisable(false);
     }
 
+    /**
+     * Method setEntranceStudentNotClickable sets the students in entrance not clickable
+     */
     public void setEntranceStudentNotClickable() {
         for (int j = 1; j <= gui.getPlayer().getPlance().getEntrance().size(); j++)
             getImageViewFromString("entranceStudent" + j).setDisable(true);
     }
 
     /* Button of Entrance Section */
+
+    /**
+     * Method chosenEntranceStudent1 is called when the player choice the first student in entrance
+     */
     public void chosenEntranceStudent1() {
         chosenEntranceStudent(0);
     }
 
+    /**
+     * Method chosenEntranceStudent2 is called when the player choice the second student in entrance
+     */
     public void chosenEntranceStudent2() {
         chosenEntranceStudent(1);
     }
 
+    /**
+     * Method chosenEntranceStudent3 is called when the player choice the third student in entrance
+     */
     public void chosenEntranceStudent3() {
         chosenEntranceStudent(2);
     }
 
+    /**
+     * Method chosenEntranceStudent4 is called when the player choice the fourth student in entrance
+     */
     public void chosenEntranceStudent4() {
         chosenEntranceStudent(3);
     }
 
+    /**
+     * Method chosenEntranceStudent5 is called when the player choice the fifth student in entrance
+     */
     public void chosenEntranceStudent5() {
         chosenEntranceStudent(4);
     }
 
+    /**
+     * Method chosenEntranceStudent6 is called when the player choice the sixth student in entrance
+     */
     public void chosenEntranceStudent6() {
         chosenEntranceStudent(5);
     }
 
+    /**
+     * Method chosenEntranceStudent7 is called when the player choice the seventh student in entrance
+     */
     public void chosenEntranceStudent7() {
         chosenEntranceStudent(6);
     }
 
+    /**
+     * Method chosenEntranceStudent8 is called when the player choice the eighth student in entrance
+     */
     public void chosenEntranceStudent8() {
         chosenEntranceStudent(7);
     }
 
+    /**
+     * Method chosenEntranceStudent9 is called when the player choice the ninth student in entrance
+     */
     public void chosenEntranceStudent9() {
         chosenEntranceStudent(8);
     }
 
     /* Control of Hall section */
+
+    /**
+     * Method chosenHallColor is called when the player choice a color of the hall
+     * @param studentColor the student color that player has chosen
+     */
     public void chosenHallColor (Student studentColor){
-        System.out.println("PROVA");
         if(this.characterPlayed.getTypeOfInputCharacter() == TypeOfInputCharacter.STUDENT){
             ArrayList<Student> students = new ArrayList<>();
             students.add(studentColor);
@@ -1353,6 +1483,10 @@ public class DashboardController {
     }
 
     /* Button of Hall Section */
+
+    /**
+     * Method chosenHall is called when the player clicks on the hall when has to move a student from entrance
+     */
     public void chosenHall() {
         if(gui.getCurrentPlayerState()==PlayerState.STUDENTPHASE) {
             numOfStudentChosen++;
@@ -1360,48 +1494,76 @@ public class DashboardController {
             getImageViewFromString("entranceStudent" + numOfStudentChosen).setDisable(true);
             MoveStudentToHallMessage message = new MoveStudentToHallMessage(studentToMove);
             gui.getClient().sendMessage(message);
-            System.out.println("PROVA2");
         }
     }
 
+    /**
+     *Method chosenHallGreen is called when the player choice the green color
+     */
     public void chosenHallGreen() {
         chosenHallColor(Student.GREEN);
     }
 
+    /**
+     *Method chosenHallRed is called when the player choice the red color
+     */
     public void chosenHallRed() {
         chosenHallColor(Student.RED);
     }
 
+    /**
+     *Method chosenHallYellow is called when the player choice the yellow color
+     */
     public void chosenHallYellow() {
         chosenHallColor(Student.YELLOW);
     }
 
+    /**
+     *Method chosenHallPink is called when the player choice the pink color
+     */
     public void chosenHallPink() {
         chosenHallColor(Student.PINK);
     }
 
+    /**
+     *Method chosenHallBlue is called when the player choice the blue color
+     */
     public void chosenHallBlue() {
         chosenHallColor(Student.BLUE);
     }
 
     /* Control of Character Section */
-    public void setCharacterButtonClicked() {
+
+    /**
+     * Method setCharacterButtonClicked sets the Character button clickable
+     */
+    public void setCharacterButtonClickable() {
         characterButtor.setDisable(false);
         characterButtor.setOpacity(1);
         characterButtonLabel.setDisable(false);
     }
 
-    public void setCharacterButtonNotClicked() {
+    /**
+     * Method setCharacterButtonNotClicked sets the Character button not clickable
+     */
+    public void setCharacterButtonNotClickable() {
         characterButtor.setDisable(true);
         characterButtor.setOpacity(0.3);
         characterButtonLabel.setDisable(true);
     }
 
+    /**
+     * Method resetCharacterButton reset the Character button
+     */
     public void resetCharacterButton(){
         characterButtonLabel.setText("PLAY CHARACTER");
         characterButtonClicked=false;
     }
 
+    /**
+     * Method setStudentsOnCharacter sets the view of students in character cards
+     * @param index the index of the character to set
+     */
     public void setStudentsOnCharacter(int index) {
         EffectHandler handler = gui.getEffectHandler();
         switch (gui.getBoard().getCharacters().get(index - 1).getName()) {
@@ -1558,7 +1720,11 @@ public class DashboardController {
     }
 
     /* Button of Character Section */
-    public void clickCharacetrButton() {
+
+    /**
+     * Method clickCharacterButton is called when the player clicks the CharacterButton
+     */
+    public void clickCharacterButton() {
         if(exitButton){
             System.exit(1);
         }else {
@@ -1587,91 +1753,159 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Method choseCharacter1Student1 is called when the player choice the first student of the first character
+     */
     public void choseCharacter1Student1() {
         choseStudentCard1to4(0,1);
     }
 
+    /**
+     * Method choseCharacter1Student2 is called when the player choice the second student of the first character
+     */
     public void choseCharacter1Student2() {
         choseStudentCard1to4(1,1);
     }
 
+    /**
+     * Method choseCharacter1Student3 is called when the player choice the third student of the first character
+     */
     public void choseCharacter1Student3() {
         choseStudentCard1to4(2,1);
     }
 
+    /**
+     * Method choseCharacter1Student4 is called when the player choice the fourth student of the first character
+     */
     public void choseCharacter1Student4() {
         choseStudentCard1to4(3,1);
     }
 
+    /**
+     * Method choseCharacter1Student5 is called when the player choice the fifth student of the first character
+     */
     public void choseCharacter1Student5() {
         choseStudent5or6(4,1);
     }
 
+    /**
+     * Method choseCharacter1Student6 is called when the player choice the sixth student of the first character
+     */
     public void choseCharacter1Student6() {
         choseStudent5or6(5,1);
     }
 
+    /**
+     * Method choseCharacter2Student1 is called when the player choice the first student of the second character
+     */
     public void choseCharacter2Student1() {
         choseStudentCard1to4(0,2);
     }
 
+    /**
+     * Method choseCharacter2Student2 is called when the player choice the second student of the second character
+     */
     public void choseCharacter2Student2() {
         choseStudentCard1to4(2,2);
     }
 
+    /**
+     * Method choseCharacter2Student3 is called when the player choice the third student of the second character
+     */
     public void choseCharacter2Student3() {
         choseStudentCard1to4(2,2);
     }
 
+    /**
+     * Method choseCharacter2Student4 is called when the player choice the fourth student of the second character
+     */
     public void choseCharacter2Student4() {
         choseStudentCard1to4(3,2);
     }
 
+    /**
+     * Method choseCharacter2Student5 is called when the player choice the fifth student of the second character
+     */
     public void choseCharacter2Student5() {
         choseStudent5or6(4,2);
     }
 
+    /**
+     * Method choseCharacter2Student6 is called when the player choice the sixth student of the second character
+     */
     public void choseCharacter2Student6() {
         choseStudent5or6(5,2);
     }
 
+    /**
+     * Method choseCharacter3Student1 is called when the player choice the first student of the third character
+     */
     public void choseCharacter3Student1() {
         choseStudentCard1to4(0,3);
     }
 
+    /**
+     * Method choseCharacter3Student2 is called when the player choice the second student of the third character
+     */
     public void choseCharacter3Student2() {
         choseStudentCard1to4(1,3);
     }
 
+    /**
+     * Method choseCharacter3Student3 is called when the player choice the third student of the third character
+     */
     public void choseCharacter3Student3() {
         choseStudentCard1to4(2,3);
     }
 
+    /**
+     * Method choseCharacter3Student4 is called when the player choice the fourth student of the third character
+     */
     public void choseCharacter3Student4() {
         choseStudentCard1to4(3,3);
     }
 
+    /**
+     * Method choseCharacter3Student5 is called when the player choice the fifth student of the third character
+     */
     public void choseCharacter3Student5() {
         choseStudent5or6(4,3);
     }
 
+    /**
+     * Method choseCharacter3Student6 is called when the player choice the sixth student of the third character
+     */
     public void choseCharacter3Student6() {
         choseStudent5or6(5,3);
     }
 
+    /**
+     * Method choseCharacter1 is called when the player choice the first character
+     */
     public void choseCharacter1() {
         choseCharacter(1);
     }
 
+    /**
+     * Method choseCharacter2 is called when the player choice the second character
+     */
     public void choseCharacter2() {
         choseCharacter(2);
     }
 
+    /**
+     * Method choseCharacter3 is called when the player choice the third character
+     */
     public void choseCharacter3() {
         choseCharacter(3);
     }
 
     /* Control of Islands Section */
+
+    /**
+     * Method chosenIsland handles the choice of an island
+     * @param islandID islandID of the island
+     */
     public void chosenIsland(int islandID){
         if (gui.getCurrentPlayerState() == PlayerState.STUDENTPHASE) {
             MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(islandID, studentToMove);
@@ -1690,6 +1924,11 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Method setMotherNatureView sets the right islands clickable during motherNature phase
+     * @param num number of possible motherNature's movement
+     * @param motherNatureIsland islandID of the island where motherNature is
+     */
     public void setMotherNatureView(int num, int motherNatureIsland) {
         int k;
         for (int i = 0; i < num; i++) {
@@ -1698,11 +1937,17 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Method setArchipelagoClickable sets the archipelago clickable
+     */
     public void setArchipelagoClickable() {
         for (int i = 1; i <= gui.getBoard().getIslandViews().size(); i++)
             getPaneFromString("island" + i + "Pane").setDisable(false);
     }
 
+    /**
+     * Method setCloudsClickable sets the clouds clickable
+     */
     public void setCloudsClickable() {
         for (int count = 1; count <= gui.getBoard().getClouds().size(); count++) {
             if (!gui.getBoard().getClouds().get(count - 1).isChoosen())
@@ -1711,56 +1956,97 @@ public class DashboardController {
     }
 
     /* Button of Islands Section */
+
+    /**
+     * Method chosenIsland1 is called when the payer choice the first island
+     */
     public void chosenIsland1() {
         chosenIsland(1);
     }
 
+    /**
+     * Method chosenIsland2 is called when the payer choice the second island
+     */
     public void chosenIsland2() {
         chosenIsland(2);
     }
 
+    /**
+     * Method chosenIsland3 is called when the payer choice the third island
+     */
     public void chosenIsland3() {
         chosenIsland(3);
     }
 
+    /**
+     * Method chosenIsland4 is called when the payer choice the fourth island
+     */
     public void chosenIsland4() {
         chosenIsland(4);
     }
 
+    /**
+     * Method chosenIsland5 is called when the payer choice the fifth island
+     */
     public void chosenIsland5() {
         chosenIsland(5);
     }
 
+    /**
+     * Method chosenIsland6 is called when the payer choice the sixth island
+     */
     public void chosenIsland6() {
         chosenIsland(6);
     }
 
+    /**
+     * Method chosenIsland7 is called when the payer choice the seventh island
+     */
     public void chosenIsland7() {
         chosenIsland(7);
     }
 
+    /**
+     * Method chosenIsland8 is called when the payer choice the eighth island
+     */
     public void chosenIsland8() {
         chosenIsland(8);
     }
 
+    /**
+     * Method chosenIsland9 is called when the payer choice the ninth island
+     */
     public void chosenIsland9() {
        chosenIsland(9);
     }
 
+    /**
+     * Method chosenIsland10 is called when the payer choice the tenth island
+     */
     public void chosenIsland10() {
         chosenIsland(10);
     }
 
+    /**
+     * Method chosenIsland11 is called when the payer choice the eleventh island
+     */
     public void chosenIsland11() {
         chosenIsland(11);
     }
 
+    /**
+     * Method chosenIsland12 is called when the payer choice the twelfth island
+     */
     public void chosenIsland12() {
         chosenIsland(12);
     }
 
 
     ////////USEFUL METHODS
+
+    /**
+     * Method setExitButton sets the button to close the game
+     */
     public void setExitButton(){
         exitButton=true;
         characterButtor.setVisible(true);
@@ -1770,21 +2056,40 @@ public class DashboardController {
         characterButtonLabel.setText("EXIT");
     }
 
-    public void winner(ArrayList<String> nickname){
+    /**
+     * Method winner sets the winner scene
+     * @param nicknames nicknames of the players that won
+     */
+    public void winner(ArrayList<String> nicknames){
         cloudsPane.setVisible(false);
         cloudsPane.setDisable(true);
         winnerPane.setVisible(true);
-        winnerNicknameLabel.setText(nickname.get(0));
+        winnerNicknameLabel.setText(nicknames.get(0));
     }
 
+    /**
+     * Method getImageFromStudent return the path of the student image
+     * @param student the student to get the image
+     * @return the path of the student image chosen
+     */
     public String getImageFromStudent(Student student) {
         return "img/STUDENT_"+student.getText(student).toUpperCase()+".png";
     }
 
+    /**
+     * Method getImageFromTower return the path of the tower image
+     * @param tower the tower to get the image
+     * @return the path of the tower image chosen
+     */
     public String getImageFromTower(Tower tower) {
         return "img/TOWER_"+tower.toString()+".png";
     }
 
+    /**
+     * Method getImageViewFromString returns the imageView attribute of the string requested
+     * @param s name of the imageView to get
+     * @return the imageView attribute of the string requested
+     */
     public ImageView getImageViewFromString(String s) {
         Object imageview = null;
         try {
@@ -1795,6 +2100,11 @@ public class DashboardController {
         return ((ImageView) imageview);
     }
 
+    /**
+     * Method getPaneFromString returns the Pane attribute of the string requested
+     * @param s name of the Pane to get
+     * @return the Pane attribute of the string requested
+     */
     public Pane getPaneFromString(String s) {
         Object imageview = null;
         try {
@@ -1805,6 +2115,11 @@ public class DashboardController {
         return ((Pane) imageview);
     }
 
+    /**
+     * Method getLabelFromString returns the Label attribute of the string requested
+     * @param s name of the Label to get
+     * @return the Label attribute of the string requested
+     */
     public Label getLabelFromString(String s) {
         Object imageview = null;
         try {
@@ -1815,6 +2130,11 @@ public class DashboardController {
         return ((Label) imageview);
     }
 
+    /**
+     * Method getGridPaneFromString returns the GridPane attribute of the string requested
+     * @param s name of the GridPane to get
+     * @return the GridPane attribute of the string requested
+     */
     public GridPane getGridPaneFromString(String s) {
         Object gridPane = null;
         try {
@@ -1825,6 +2145,12 @@ public class DashboardController {
         return ((GridPane) gridPane);
     }
 
+    /**
+     * Method numOfColorStudent is used to get the number of a student type in an arrayList
+     * @param student student type to get the number
+     * @param students arrayList to check
+     * @return the number of a student type in the arrayList
+     */
     public int numOfColorStudent(Student student, ArrayList<Student> students) {
         int i = 0;
         for (Student stud : students)
