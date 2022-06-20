@@ -3,12 +3,14 @@ package it.polimi.ingsw.messages.toClient.StatesMessages;
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.messages.toClient.MessageToClient;
-import it.polimi.ingsw.model.board.Characters;
 
-public class CharacterChoosedMessage extends MessageToClient {
-    private String nickname;
-    private CharacterView character;
-    public CharacterChoosedMessage(String nickname,CharacterView character){
+/**
+ * Message to notify that a player chose a character
+ */
+public class CharacterChosenMessage extends MessageToClient {
+    private final String nickname;
+    private final CharacterView character;
+    public CharacterChosenMessage(String nickname, CharacterView character){
         this.nickname=nickname;
         this.character=character;
     }

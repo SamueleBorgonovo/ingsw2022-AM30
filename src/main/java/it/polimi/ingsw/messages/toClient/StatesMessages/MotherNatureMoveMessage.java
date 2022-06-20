@@ -3,9 +3,12 @@ package it.polimi.ingsw.messages.toClient.StatesMessages;
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.messages.toClient.MessageToClient;
 
+/**
+ * Message to notify that a player moved MotherNature
+ */
 public class MotherNatureMoveMessage extends MessageToClient {
-    private String nickname;
-    private int islandId;
+    private final String nickname;
+    private final int islandId;
     public MotherNatureMoveMessage(String nickname,int islandId){
         this.nickname=nickname;
         this.islandId=islandId;

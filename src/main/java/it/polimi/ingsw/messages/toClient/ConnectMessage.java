@@ -2,9 +2,12 @@ package it.polimi.ingsw.messages.toClient;
 
 import it.polimi.ingsw.client.Client;
 
+/**
+ * Message to notify that a player connected/reconnected to the game
+ */
 public class ConnectMessage extends MessageToClient{
-    private boolean reconnect;
-    private String nickname;
+    private final boolean reconnect;
+    private final String nickname;
 
     public ConnectMessage(String nickname,boolean reconnect){
         this.reconnect=reconnect;

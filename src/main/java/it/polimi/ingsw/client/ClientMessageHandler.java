@@ -11,8 +11,8 @@ import it.polimi.ingsw.messages.toServer.PingToServerMessage;
  */
 public class ClientMessageHandler {
 
-    private Client client;
-    private View view;
+    private final Client client;
+    private final View view;
 
     /**
      * Constructor ClientMessageHandler instantiates client and view
@@ -192,7 +192,7 @@ public class ClientMessageHandler {
      * Method used to process AssistantChoosedMessage
      * @param message message received from the server
      */
-    public void process(AssistantChoosedMessage message){
+    public void process(AssistantChosenMessage message){
         view.printAssistantChosen(message.getNickname(), message.getAssistant());
     }
 
@@ -200,7 +200,7 @@ public class ClientMessageHandler {
      * Method used to process StudentHallChoosedMessage
      * @param message message received from the server
      */
-    public void process(StudentHallChoosedMessage message){
+    public void process(StudentHallChosenMessage message){
         view.printStudentToHall(message.getNickname(),message.getStudent());
     }
 
@@ -208,7 +208,7 @@ public class ClientMessageHandler {
      * Method used to process StudentIslandChoosedMessage
      * @param message message received from the server
      */
-    public void process(StudentIslandChoosedMessage message){
+    public void process(StudentIslandChosenMessage message){
         view.printStudentToIsland(message.getNickname(),message.getStudent(),message.getIslandID());
     }
 
@@ -216,7 +216,7 @@ public class ClientMessageHandler {
      * Method used to process CharacterChoosedMessage
      * @param message message received from the server
      */
-    public void process(CharacterChoosedMessage message){
+    public void process(CharacterChosenMessage message){
         view.printCharacterChosen(message.getNickname(),message.getCharacter());
     }
 
@@ -224,7 +224,7 @@ public class ClientMessageHandler {
      * Method used to process CloudChoosedMessage
      * @param message message received from the server
      */
-    public void process(CloudChoosedMessage message){
+    public void process(CloudChosenMessage message){
         view.printCloudChosen(message.getNickname(),message.getCloud());
     }
 
@@ -240,7 +240,7 @@ public class ClientMessageHandler {
      * Method used to process WinInstantlyMessage
      * @param message message received from the server
      */
-    public void process(WinIstantlyMessage message){
+    public void process(WinInstantlyMessage message){
         view.printWinnerInstantly(message.getNickname(),message.getWinType());
     }
 

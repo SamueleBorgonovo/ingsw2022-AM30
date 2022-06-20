@@ -2,8 +2,11 @@ package it.polimi.ingsw.messages.toClient;
 
 import it.polimi.ingsw.client.Client;
 
+/**
+ * Message to notify that the game is in pause because there are not enough players
+ */
 public class WaitingForPlayersMessage extends MessageToClient{
-    private boolean lobby;
+    private final boolean lobby;
     public WaitingForPlayersMessage(boolean lobby){
         this.lobby=lobby;
     }

@@ -4,10 +4,13 @@ import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.player.Wizard;
 
+/**
+ * Message to send the settings of the game when a player is reconnecting
+ */
 public class SettingReconnectMessage extends MessageToClient{
-    private GameMode gameMode;
-    private int numOfPlayers;
-    private Wizard wizard;
+    private final GameMode gameMode;
+    private final int numOfPlayers;
+    private final Wizard wizard;
 
     public SettingReconnectMessage(GameMode gameMode,int numOfPlayers,Wizard wizard){
         this.gameMode=gameMode;

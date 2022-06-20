@@ -7,9 +7,11 @@ import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
 
-
+/**
+ * Message to send the players' plance update to the client
+ */
 public class PlanceUpdateMessage extends MessageToClient{
-    ArrayList<PlayerView> players;
+    private final ArrayList<PlayerView> players;
 
     public PlanceUpdateMessage(ArrayList<PlayerView> players){
         this.players=players;

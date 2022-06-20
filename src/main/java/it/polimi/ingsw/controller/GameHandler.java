@@ -358,7 +358,7 @@ public class GameHandler {
         try {
             game.useAssistant(playerID, assistant);
             updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler());
-            sendMessagetoGame(game,new AssistantChoosedMessage(clientHandler.getNickname(),assistant));
+            sendMessagetoGame(game,new AssistantChosenMessage(clientHandler.getNickname(),assistant));
             turnHandler(game);
         } catch (InvalidAssistantException e) {
             InvalidAssistantMessage message = new InvalidAssistantMessage();
@@ -388,7 +388,7 @@ public class GameHandler {
             try {
                 game.useCharacter(playerID, character);
                 updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
-                sendMessagetoGame(game,new CharacterChoosedMessage(clientHandler.getNickname(),characterview));
+                sendMessagetoGame(game,new CharacterChosenMessage(clientHandler.getNickname(),characterview));
                 turnHandler(game);
             } catch (InvalidStopException e) {
                 InvalidStopMessage message = new InvalidStopMessage();
@@ -417,7 +417,7 @@ public class GameHandler {
         try {
             boolean last = game.selectCloud(playerID,cloudID);
             updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
-            sendMessagetoGame(game,new CloudChoosedMessage(clientHandler.getNickname(), cloudID));
+            sendMessagetoGame(game,new CloudChosenMessage(clientHandler.getNickname(), cloudID));
             if(last) {
                 if (!checkWinner(game, true)) {
                     turnHandler(game);
@@ -468,7 +468,7 @@ public class GameHandler {
         try {
             game.moveStudentToHall(playerID,student);
             updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
-            sendMessagetoGame(game,new StudentHallChoosedMessage(clientHandler.getNickname(),student));
+            sendMessagetoGame(game,new StudentHallChosenMessage(clientHandler.getNickname(),student));
             addGameToStudentPlayed(game);
             if(getGameToStudentPlayed(game)<game.getNumOfPlayers()+1)
                 clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
@@ -543,7 +543,7 @@ public class GameHandler {
         try {
             game.moveStudentToIsland(playerID,islandID,student);
             updateClient(game,game.getBoard().getBoardView(), game.getPlayersView(),game.getEffectHandler() );
-            sendMessagetoGame(game,new StudentIslandChoosedMessage(clientHandler.getNickname(),student,islandID));
+            sendMessagetoGame(game,new StudentIslandChosenMessage(clientHandler.getNickname(),student,islandID));
             addGameToStudentPlayed(game);
             if(getGameToStudentPlayed(game)< game.getNumOfPlayers()+1)
                 clientHandler.sendMessageToClient(new PlayerStateMessage(PlayerState.STUDENTPHASE));
@@ -608,7 +608,7 @@ public class GameHandler {
                 ArrayList<String> nickWinners = new ArrayList<>();
                 for(Player player : playerswinner)
                     nickWinners.add(player.getNickname());
-                sendMessagetoGame(game,new WinIstantlyMessage(nickWinners,check));
+                sendMessagetoGame(game,new WinInstantlyMessage(nickWinners,check));
             }
         }
         if(check!=0){
@@ -649,7 +649,7 @@ public class GameHandler {
             try {
                 Thread.sleep(WINNING_TIMER);
                 gameShutdown(game,true,false);
-            } catch (InterruptedException e) { }
+            } catch (InterruptedException ignored) { }
 
         });
         timer.start();

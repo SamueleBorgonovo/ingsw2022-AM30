@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages.toClient;
 
 import it.polimi.ingsw.client.Client;
 
+/**
+ * Message to notify if the nickname chosen by the player is valid
+ */
 public class NicknameMessage extends MessageToClient {
     boolean check;
     boolean reconnect;

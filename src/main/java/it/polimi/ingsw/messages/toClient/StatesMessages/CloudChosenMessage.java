@@ -2,12 +2,14 @@ package it.polimi.ingsw.messages.toClient.StatesMessages;
 
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.messages.toClient.MessageToClient;
-import it.polimi.ingsw.model.board.Cloud;
 
-public class CloudChoosedMessage extends MessageToClient {
-    private String nickname;
-    private int cloudid;
-    public CloudChoosedMessage(String nickname,int cloud){
+/**
+ * Message to notify that a player chose a cloud
+ */
+public class CloudChosenMessage extends MessageToClient {
+    private final String nickname;
+    private final int cloudid;
+    public CloudChosenMessage(String nickname, int cloud){
         this.nickname=nickname;
         this.cloudid=cloud;
     }

@@ -4,12 +4,15 @@ import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.messages.toClient.MessageToClient;
 import it.polimi.ingsw.model.game.Student;
 
-public class StudentIslandChoosedMessage extends MessageToClient {
-    private String nickname;
-    private Student student;
-    private int islandID;
+/**
+ * Message to notify that a player moved a student to an island
+ */
+public class StudentIslandChosenMessage extends MessageToClient {
+    private final String nickname;
+    private final Student student;
+    private final int islandID;
 
-    public StudentIslandChoosedMessage(String nickname,Student student,int islandID){
+    public StudentIslandChosenMessage(String nickname, Student student, int islandID){
         this.nickname=nickname;
         this.student=student;
         this.islandID=islandID;

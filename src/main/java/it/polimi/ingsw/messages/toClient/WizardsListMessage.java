@@ -5,8 +5,11 @@ import it.polimi.ingsw.model.player.Wizard;
 
 import java.util.ArrayList;
 
+/**
+ * Message to send the available wizards that the player can choose
+ */
 public class WizardsListMessage extends MessageToClient{
-    ArrayList<Wizard> list = new ArrayList<>();
+    ArrayList<Wizard> list;
 
     public WizardsListMessage(ArrayList<Wizard> list){
         this.list=list;

@@ -3,9 +3,12 @@ package it.polimi.ingsw.messages.toClient.StatesMessages;
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.messages.toClient.MessageToClient;
 
+/**
+ * Message to notify that a player started his turn
+ */
 public class SetTurnMessage extends MessageToClient {
-    private String nickname;
-    private boolean assistantPhase;
+    private final String nickname;
+    private final boolean assistantPhase;
 
     public SetTurnMessage(String nickname, boolean assistantPhase){
         this.nickname=nickname;

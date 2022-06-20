@@ -4,9 +4,12 @@ import it.polimi.ingsw.client.Client;
 
 import java.util.ArrayList;
 
+/**
+ * Message to notify that a player won in his end round
+ */
 public class WinEndRoundMessage extends MessageToClient{
-    private ArrayList<String> nickname;
-    private int winType;
+    private final ArrayList<String> nickname;
+    private final int winType;
 
     public WinEndRoundMessage(ArrayList<String> nickname,int winType){
         this.nickname=nickname;
