@@ -1602,6 +1602,9 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Method inputStudentCharacter sets clickable the right students buttons useful for the character chosen
+     */
     public void inputStudentCharacter() {
         switch (this.characterPlayed.getTypeOfInputCharacter()) {
             case EFFECT1INPUT, EFFECT11INPUT -> {
@@ -1631,11 +1634,20 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Method inputIslandCharacter sets clickable the archipelago of the game useful for the character chosen
+     */
     public void inputIslandCharacter(){
         setArchipelagoClickable();
         setGameUpdateLabel("EFFECT: Choose one island");
     }
 
+    /**
+     * Method choseStudentCard1to4 is called when the player choose one of the first four students in the character's card
+     *
+     * @param numOfStudent the id of the student chosen
+     * @param numOfCharacter the id of the character chosen
+     */
     public void choseStudentCard1to4 (int numOfStudent, int numOfCharacter){
         ArrayList<Student> students =new ArrayList<>();
         if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT1INPUT){
@@ -1664,6 +1676,12 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Method choseStudentCard5or6 is called when the player choose one of the last two students in the character's card
+     *
+     * @param numOfStudent the id of the student chosen
+     * @param numOfCharacter the id of the character chosen
+     */
     public void choseStudent5or6(int numOfStudent, int numOfCharacter){
         effect7Students.add(gui.getEffectHandler().getEffect7students().get(numOfStudent));
         numEffect7++;
@@ -1675,6 +1693,11 @@ public class DashboardController {
         setEntranceStudentClickable();
     }
 
+    /**
+     * Method choseCharacter is called when the player is about to choose a character
+     *
+     * @param characterNumber the id of the character chosen
+     */
     public void choseCharacter(int characterNumber){
         boolean checkM=true;
         boolean checkP = true;
@@ -1696,6 +1719,11 @@ public class DashboardController {
         gui.getClient().setCharacterPlayed(true);
     }
 
+    /**
+     * Method checkMinstrel checks if it's possible to use character Minstrel
+     *
+     * @return true if it's possible to use character Minstrel, else false
+     */
     public boolean checkMinstrel(){
         boolean check = true;
         int num=0;
@@ -1706,6 +1734,11 @@ public class DashboardController {
         return check;
     }
 
+    /**
+     * Method checkMinstrel checks if it's possible to use character Princess
+     *
+     * @return true if it's possible to use character Princess, else false
+     */
     public boolean checkPrincess(){
         boolean check = false;
         for(Student student : Student.values())
@@ -1714,6 +1747,9 @@ public class DashboardController {
         return check;
     }
 
+    /**
+     * Method setStudentsCardNotClickable sets the students of the character as not clickable
+     */
     public void setStudentsCardNotClickable(){
         for(int i=1; i<=6 ; i++)
             getImageViewFromString("character" + numOfCharacterPlayed + "Student" + i).setDisable(true);

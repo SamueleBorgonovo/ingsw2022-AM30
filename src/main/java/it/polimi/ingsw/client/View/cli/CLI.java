@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * CLI class handles the cli view for the game
+ */
 public class CLI implements View {
 
     private static final int MIN_PORT = 1024;
@@ -35,7 +38,13 @@ public class CLI implements View {
     private boolean character4played = false;
     private CharacterView characterPlayed = new CharacterView(0, null, "",false);
 
-
+    /**
+     * Method init starts a new cli instance
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws NumberFormatException
+     */
     public void init() throws IOException, ClassNotFoundException, NumberFormatException {
         boolean check = false;
         this.graphic.printLogo();
@@ -60,6 +69,11 @@ public class CLI implements View {
         chooseNickname(true, false);
     }
 
+    /**
+     * Method chooseNickname calls methods in nicknameScene to set the nickname and reconnect to a game
+     * @param validNickname
+     * @param reconnect
+     */
     @Override
     public void chooseNickname(boolean validNickname, boolean reconnect) {
         if (isFirst) {
@@ -90,6 +104,7 @@ public class CLI implements View {
         }
     }
 
+
     public boolean tryToReconnect() {
         System.out.println("Do you want to reconnect to the last game?   y | n");
         Scanner stdin = new Scanner(System.in);
@@ -107,7 +122,9 @@ public class CLI implements View {
         return input.equals("y");
     }
 
-
+    /**
+     * Method chooseSettings instantiates the GameSettings scene
+     */
     public void chooseSettings(){
         GameMode gamemode;
         Scanner stdin = new Scanner(System.in);
@@ -147,16 +164,21 @@ public class CLI implements View {
         CreatePlayerInGameMessage message = new CreatePlayerInGameMessage(nickname,gamemode,choice1);
         client.sendMessage(message);
     }
+
+    /**
+     * Method chooseWizard handles the decision of the wizard by the player
+     * @param availableWizards available wizard that player can choose
+     */
     @Override
-    public void chooseWizard(ArrayList<Wizard> avaiableWizards) {
+    public void chooseWizard(ArrayList<Wizard> availableWizards) {
         Wizard wizardChosen = null;
         boolean checkwizard = false;
         System.out.println("Choose one Wizard between this available by typing his number associated");
-        this.graphic.printWizards(avaiableWizards);
+        this.graphic.printWizards(availableWizards);
         int wizardInt = inputParser.intParser();
         while (!checkwizard) {
-            if (wizardInt >= 1 && wizardInt <= avaiableWizards.size()) {
-                wizardChosen = avaiableWizards.get(wizardInt - 1);
+            if (wizardInt >= 1 && wizardInt <= availableWizards.size()) {
+                wizardChosen = availableWizards.get(wizardInt - 1);
                 checkwizard = true;
             } else {
                 System.out.println("Selection not valid. Try again");
@@ -169,6 +191,9 @@ public class CLI implements View {
         client.sendMessage(message);
     }
 
+    /**
+     * Method chooseAssistant handles the decision of the assistant by the player
+     */
     @Override
     public void chooseAssistant() {
         ArrayList<Assistant> avaiableAssistant = this.player.getAssistantCards();
@@ -194,6 +219,12 @@ public class CLI implements View {
         client.sendMessage(message);
     }
 
+    /**
+     * Method chooseNextAction handles the decision of the next possible action by the player
+     *
+     * @param playerState the state of the player in the turn
+     * @return the action chosen by the player
+     */
     public PossibleAction chooseNextAction(PlayerState playerState) {
         boolean check = false;
         PossibleAction actionChosen = null;
@@ -287,6 +318,11 @@ public class CLI implements View {
         return actionChosen;
     }
 
+    /**
+     * Method moveToHallPossible checks if it's possible to move students in the hall (to avoid errors)
+     *
+     * @return true if the move is possible, else false
+     */
     public boolean moveToHallPossible() {
         boolean check = false;
         for (Student student : player.getPlance().getEntrance())
@@ -295,6 +331,9 @@ public class CLI implements View {
         return check;
     }
 
+    /**
+     * Method moveStudentToHall handles the movement of the student in the hall by also sending the message
+     */
     public void moveStudentToHall() {
         ArrayList<PlayerView> playerList = new ArrayList<>();
         playerList.add(player);
@@ -304,6 +343,11 @@ public class CLI implements View {
         this.client.sendMessage(message);
     }
 
+    /**
+     * Method chooseStudentToMove handles the decision of the student to move by the player
+     *
+     * @return the student chosen
+     */
     public Student chooseStudentToMove() {
         ArrayList<Student> entrance = this.player.getPlance().getEntrance();
         Student studentChosen = inputParser.studentParser();
@@ -314,6 +358,9 @@ public class CLI implements View {
         return studentChosen;
     }
 
+    /**
+     * Method moveStudentToHall handles the movement of the student in the island by also sending the message
+     */
     public void moveStudentToIsland() {
         graphic.printArchipelago(this.board.getIslandViews(), this.board.getMotherNature());
         ArrayList<PlayerView> playerP = new ArrayList<>();
@@ -327,7 +374,9 @@ public class CLI implements View {
 
     }
 
-
+    /**
+     * Method moveMotherNature handles the mother nature action in the turn
+     */
     @Override
     public void moveMotherNature() {
         int num = 0;
@@ -351,6 +400,9 @@ public class CLI implements View {
         this.character4played = false;
     }
 
+    /**
+     * Method chooseCLoud handles the decision of the cloud by the player
+     */
     @Override
     public void chooseCloud() {
         ArrayList<CloudView> clouds = this.board.getClouds();
@@ -371,6 +423,11 @@ public class CLI implements View {
         this.client.sendMessage(message);
     }
 
+    /**
+     * Method useCharacter handles the decision of using a character by the player
+     *
+     * @param playerState the state of the player in the turn
+     */
     public void useCharacter(PlayerState playerState) {
         ArrayList<CharacterView> availableCharacter = this.board.getCharacters();
         int numOfCoins = this.player.getCoins();
@@ -440,6 +497,9 @@ public class CLI implements View {
 
     }
 
+    /**
+     * Method inputStudentCharacter handles the input of one or more students when using a character
+     */
     public void inputStudentCharacter() {
         System.out.println(characterPlayed.getName());
         switch (this.characterPlayed.getTypeOfInputCharacter()) {
@@ -453,11 +513,18 @@ public class CLI implements View {
             this.characterPlayed = null;
     }
 
+    /**
+     * Method inputStudentCharacter handles the input of an island when using a character
+     */
     public void inputIslandCharacter() {
         this.characterInput.islandInput(this.client, this.board.getIslandViews(),this.board.getMotherNature());
         this.characterPlayed = null;
     }
 
+    /**
+     * Method setPlayers sets the updated playerView of all players from game
+     * @param players arraylist of the view of all players
+     */
     @Override
     public void setPlayers(ArrayList<PlayerView> players) {
         this.players.clear();
@@ -467,18 +534,27 @@ public class CLI implements View {
                 player = play;
     }
 
+    /**
+     * Method setBoard sets the updated BoardView from game
+     * @param board view of the boardView
+     */
     @Override
     public void setBoard(BoardView board) {
         this.board = board;
     }
 
+    /**
+     * Method setEffectHandler sets the updated effectHandler from game
+     * @param effectHandler effectHandler from game
+     */
     public void setEffectHandler(EffectHandler effectHandler) {
         this.effectHandler = effectHandler;
     }
 
-
-
-
+    /**
+     * Method printStartGame handles the first connection with the player
+     * @param restart
+     */
     @Override
     public void printStartGame(boolean restart) {
         if(!restart)
@@ -490,7 +566,11 @@ public class CLI implements View {
             this.graphic.printCharacters(this.board.getCharacters(), this.effectHandler);
     }
 
-
+    /**
+     * Method printAssistantChosen handles the choice of an assistant by a player
+     * @param nick nickname of the player that chose the assistant
+     * @param assistant assistant chosen
+     */
     @Override
     public void printAssistantChosen(String nick, Assistant assistant) {
         if (!nick.equals(client.getNickname()))
@@ -498,6 +578,11 @@ public class CLI implements View {
 
     }
 
+    /**
+     * Method printTurn handles the start of a turn of a player
+     * @param nick nickname of the player that started his turn
+     * @param isAssistantPhase true if the player starts the assistant phase, false otherwise
+     */
     @Override
     public void printTurn(String nick,boolean isAssistantPhase) {
         if (!client.isMyTurn())
@@ -511,12 +596,22 @@ public class CLI implements View {
         }
     }
 
+    /**
+     * Method printCharacterChosen handles the choice of a character by a player
+     * @param nick nickname of the player that chose the character
+     * @param character character chosen
+     */
     @Override
     public void printCharacterChosen(String nick, CharacterView character) {
         if (!client.isMyTurn())
             System.out.println(nick + " is playing " + character.getName());
     }
 
+    /**
+     * Method printCloudChosen handles the choice of a cloud by a player
+     * @param nick nickname of the player that chose the cloud
+     * @param cloudID cloudID of the cloud chosen
+     */
     @Override
     public void printCloudChosen(String nick, int cloudID) {
         if (!client.isMyTurn())
@@ -524,33 +619,61 @@ public class CLI implements View {
 
     }
 
+    /**
+     * Method printStudentToHall handles the moves of a student to the hall by a player
+     * @param nick nickname of the player that moved the student
+     * @param student student moved
+     */
     @Override
     public void printStudentToHall(String nick, Student student) {
         if (!client.isMyTurn())
             System.out.println(nick + " moved " + student + " to hall");
     }
 
+    /**
+     * Method printStudentToIsland handles the moves of a student to an island by a player
+     * @param nick nickname of the player that moved the student
+     * @param student student moved
+     * @param islandID islandID chosen by the player
+     */
     @Override
     public void printStudentToIsland(String nick, Student student, int islandID) {
         if (!client.isMyTurn())
             System.out.println(nick + " moved " + student + " to island number " + islandID);
     }
 
+    /**
+     * Method printMotherNatureMovement handles the moves of motherNature by a player
+     * @param nick nickname of the player that moved motherNature
+     * @param islandID islandID where motherNature has been moved
+     */
     @Override
     public void printMotherNatureMovement(String nick, int islandID) {
         if (!client.isMyTurn())
             System.out.println(nick + " moved mother nature to island number  " + islandID);
     }
 
-
+    /**
+     * Method to handles the use of character  number 4 in the turn
+     * @param character4played
+     */
     public void setCharacter4played(boolean character4played) {
         this.character4played = character4played;
     }
 
+    /**
+     * Method printPlayerDisconnection handles the disconnection of a player
+     * @param nick nickname of the player disconnected
+     */
     public void printPlayerDisconnection(String nick) {
         System.out.println(nick + " disconnected from game");
     }
 
+    /**
+     * Method printPlayerConnection handles the connection of a player
+     * @param nick nickname of the player connected
+     * @param reconnect true if the player is reconnecting, false otherwise
+     */
     public void printPlayerConnection(String nick, boolean reconnect) {
         if (nick.equals(client.getNickname())) {
             if (reconnect) {
@@ -564,34 +687,60 @@ public class CLI implements View {
         }
     }
 
+    /**
+     * Method printInvalidAssistant warns the player that tried to move an invalid assistant
+     */
     public void printInvalidAssistant() {
         System.out.println("Assistant already chosen. Try again");
     }
 
+    /**
+     * Method printInvalidCloud warns the player that tried to move an invalid cloud
+     */
     public void printInvalidCloud() {
         System.out.println("Cloud not available. Try again");
     }
 
+    /**
+     * Method printInvalidIsland warns the player that tried to move an invalid island
+     */
     public void printInvalidIsland() {
         System.out.println("Island number not available. Try again");
     }
 
+    /**
+     * Method printInvalidStudent warns the player that tried to move an invalid student
+     */
     public void printInvalidStudent() {
         System.out.println("Student not available. Try again");
     }
 
+    /**
+     * Method printInvalidTurn warns the player that tried to do an action when wasn't his turn
+     */
     public void printInvalidTurn() {
         System.out.println("Action not available. Is not your turn");
     }
 
+    /**
+     * Method printInvalidStop warns the player that tried to use a stop but there wasn't enough
+     */
     public void printInvalidStop() {
         System.out.println("Character GRANDMA doesn't have enough stop");
     }
 
+    /**
+     * Method printInvalidStop warns the player that tried to use a stop but there wasn't enough
+     */
     public void printInvalidWizard() {
         System.out.println("Wizard is not more available.");
     }
 
+    /**
+     * Method printWinnerInstantly handles the players' win in the middle of a turn
+     * @param nickname players' nicknames that won
+     * @param type type of win
+     */
     public void printWinnerInstantly(ArrayList<String> nickname, int type) {
         if (nickname.contains(client.getNickname()))
             System.out.println("YOU WON");
@@ -603,6 +752,11 @@ public class CLI implements View {
         }
     }
 
+    /**
+     * Method printWinnerEndRound handles the players' win in the end of a turn
+     * @param nickname players' nicknames that won
+     * @param type type of win
+     */
     public void printWinnerEndRound(ArrayList<String> nickname, int type) {
         if (nickname.contains(client.getNickname()))
             System.out.println("YOU WON");
@@ -614,6 +768,10 @@ public class CLI implements View {
         }
     }
 
+    /**
+     * Method printWaitingForPlayers warns the player that the game is in pause because there are not enough players
+     * @param lobby true if the game is not started, false if the game is set in pause
+     */
     public void printWaitingForPlayers(boolean lobby) {
         if (lobby)
             System.out.println("Waiting for players to start the game");
@@ -621,14 +779,24 @@ public class CLI implements View {
             System.out.println("Waiting for players to reconnection to the game. Timer to win started");
     }
 
+    /**
+     * Method printGameEndedTimeout warns the player that the game is ended because no-one reconnected
+     */
     public void printGameEndedTimeout() {
         System.out.println("You won. Game ended because players did not reconnect");
     }
 
+    /**
+     * Method printWinClose handles the disconnection caused by the end of the game
+     */
     public void printWinClose() {
         System.out.println("Game Ended. Disconnection from server");
     }
 
+    /**
+     * Method printConnectionClosed handles the connection closed with the server
+     * @param timeout true if connection closed because of a timeout expired, false otherwise
+     */
     public void printConnectionClosed(boolean timeout) {
         if (timeout)
             System.out.println("Connection with server closed. Time expired");
@@ -639,6 +807,11 @@ public class CLI implements View {
     @Override
     public void correctlyConnected() {}
 
+    /**
+     * Method checkMinstrel checks if it's possible for the player to use character Minstrel
+     *
+     * @return true if it's possible for the player to use character Minstrel, else false
+     */
     public boolean checkMinstrel() {
         ArrayList<CharacterView> availableCharacter = this.board.getCharacters();
         int numOfCoins = this.player.getCoins();
@@ -659,6 +832,11 @@ public class CLI implements View {
         return check;
     }
 
+    /**
+     * Method checkPrincess checks if it's possible for the player to use character princess
+     *
+     * @return true if it's possible for the player to use character Princess, else false
+     */
     public boolean checkPrincess(){
         ArrayList<CharacterView> availableCharacter = this.board.getCharacters();
         int numOfCoins = this.player.getCoins();
@@ -677,6 +855,10 @@ public class CLI implements View {
         return check;
     }
 
+    /**
+     * Method nextMove calls the methods to play the next phase of the game
+     * @param playerState phase of the game
+     */
     public void nextMove(PlayerState playerState){
         PossibleAction action;
         if(playerState==PlayerState.STUDENTPHASE){
@@ -725,6 +907,9 @@ public class CLI implements View {
         }
     }
 
+    /**
+     * Method setExit handles the exit from the game when the game is over
+     */
     public void setExit(){
         System.out.println("Press any key to exit");
         Scanner in = new Scanner(System.in);

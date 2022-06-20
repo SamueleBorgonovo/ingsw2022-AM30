@@ -9,9 +9,17 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * InputParser class handles the input required in cli for the actions in the game
+ */
 public class InputParser {
     Graphic graphic = new Graphic();
 
+    /**
+     * Method intParser handles the input in cli when a number is required
+     *
+     * @return the number typed by the player
+     */
     public int intParser() {
         Scanner stdin = new Scanner(System.in);
         boolean check = false;
@@ -27,6 +35,11 @@ public class InputParser {
         return a;
     }
 
+    /**
+     * Method studentParser handles the input in cli when a student is required
+     *
+     * @return the student chosen by the player
+     */
     public Student studentParser(){
         Scanner stdin = new Scanner(System.in);
         boolean check = false;
@@ -66,6 +79,11 @@ public class InputParser {
         return studentChosen;
     }
 
+    /**
+     * Method IslandParser handles the input in cli when an island is required
+     *
+     * @return the island chosen by the player
+     */
     public int IslandParser(ArrayList<IslandView> archipelago, int motherNature){
         System.out.println("Choose one Island between this available by typing his number associated");
         this.graphic.printArchipelago(archipelago,motherNature);

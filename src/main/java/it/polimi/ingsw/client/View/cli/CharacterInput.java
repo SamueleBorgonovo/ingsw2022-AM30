@@ -9,12 +9,21 @@ import it.polimi.ingsw.model.game.Student;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * CharacterInput class handles the input required in cli when a character is in action
+ */
 public class CharacterInput {
 
     private final InputParser inputParser = new InputParser();
     //effect2, effect6, effect8 have no input
 
-
+    /**
+     * Method islandInput handles the input when the character requires an island for his effect
+     *
+     * @param client the instance of client in turn
+     * @param archipelago the archipelago of the game
+     * @param motherNature the id of the island with mother nature in the game
+     */
     public void islandInput(Client client, ArrayList<IslandView> archipelago, int motherNature){
         //effect3, effect5, effect1 part 2 input
         int islandID = inputParser.IslandParser(archipelago,motherNature);
@@ -22,8 +31,11 @@ public class CharacterInput {
         client.sendMessage(message);
     }
 
-
-
+    /**
+     * Method genericStudentInput handles the input when the character requires a student's color for his effect
+     *
+     * @param client the instance of client in turn
+     */
     public void genericStudentInput(Client client){
         //effect9, effect12
         Student student = inputParser.studentParser();
@@ -33,6 +45,13 @@ public class CharacterInput {
         client.sendMessage(message);
     }
 
+    /**
+     * Method jesterInput handles the input when the character chosen is jester
+     *
+     * @param client the instance of client in turn
+     * @param studentsCard the students on the jester's card
+     * @param studentsEntrance the students in the entrance of the player in turn
+     */
     public void jesterInput(Client client, ArrayList<Student> studentsCard, ArrayList<Student> studentsEntrance){
         //effect7
         ArrayList<Student> studentList = new ArrayList<>();
@@ -79,6 +98,13 @@ public class CharacterInput {
         client.sendMessage(message);
     }
 
+    /**
+     * Method minstrelInput handles the input when the character chosen is jester
+     *
+     * @param client the instance of client in turn
+     * @param entrance the students in the entrance of the player in turn
+     * @param hall the students in the hall of the player in turn
+     */
     public void minstrelInput(Client client, ArrayList<Student> entrance, HashMap<Student,Integer> hall){
         //effect10
         System.out.println("How many students do you want to move? 1 | 2");
@@ -128,7 +154,13 @@ public class CharacterInput {
         client.sendMessage(message);
     }
 
-
+    /**
+     * Method studentFromCard is used when a player chose a student from the character's card
+     *
+     * @param client the instance of the client in turn
+     * @param studentsCard the students on the character's card
+     * @param hall the students in the hall of the player in turn
+     */
     public void studentFromCard(Client client, ArrayList<Student> studentsCard, HashMap<Student,Integer> hall) {
         //effect 11, effect 1 part 1
         boolean check=true;
