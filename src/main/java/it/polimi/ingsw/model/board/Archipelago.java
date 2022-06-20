@@ -7,11 +7,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Archipelago class handles the action related to the islands in the game
+ */
 public class Archipelago implements Serializable {
     private final ArrayList<Island> islands = new ArrayList<>();
     private MotherNature mothernature;
 
-
+    /**
+     * Constructor Archipelago creates the islands of the game
+     */
     public Archipelago() {
         Random rnd = new Random();
 
@@ -20,14 +25,30 @@ public class Archipelago implements Serializable {
         mothernature = new MotherNature(rnd.nextInt(12) + 1);
     }
 
+    /**
+     * Method getMotherNature returns the id of the island with mother nature on
+     *
+     * @return the id the island with mother nature on
+     */
     public MotherNature getMothernature() {
         return mothernature;
     }
 
+    /**
+     * Method getIslands returns the islands of the Game
+     *
+     * @return the islands of the Game
+     */
     public ArrayList<Island> getIslands() {
         return islands;
     }
 
+    /**
+     * Method getStudentIslands returns the students on the island
+     *
+     * @param islandID the island id
+     * @return the students on the islands
+     */
     public ArrayList<Student> getStudentIslands(int islandID){
         for (Island island : islands)
             if (island.getIslandID() == islandID)
@@ -35,6 +56,12 @@ public class Archipelago implements Serializable {
         return null;
     }
 
+    /**
+     * Method getTowerTypeIsland return the tower located on the island
+     *
+     * @param islandID the island id
+     * @return the tower located on the island
+     */
     public  Tower getTowerTypeIsland (int islandID){
         for (Island island : islands)
             if (island.getIslandID() == islandID)
@@ -42,6 +69,12 @@ public class Archipelago implements Serializable {
         return null;
     }
 
+    /**
+     * Method mergeIslands merge two Island that have the same tower's color
+     *
+     * @param islandID1 the first island to merge
+     * @param islandID2 the second island to merge
+     */
     public void mergeIslands(int islandID1, int islandID2) {
         int max = Math.max(islandID1, islandID2);
         int min = Math.min(islandID1, islandID2);
@@ -79,10 +112,21 @@ public class Archipelago implements Serializable {
         }
     }
 
+    /**
+     * Method getNumOfIslands return the total number of the islands in the game
+     *
+     * @return the total number of the islands in the game
+     */
     public int getNumOfIslands(){
         return islands.size();
     }
 
+    /**
+     * Method getSingleIsland return the Island instance by his unique id
+     *
+     * @param islandID the island id
+     * @return the Island instance by his unique id
+     */
     public Island getSingleIsland(int islandID){
         for (Island island : islands)
             if (island.getIslandID() == islandID)
@@ -90,6 +134,9 @@ public class Archipelago implements Serializable {
         return null;
     }
 
+    /**
+     * Method verifyMergeableIsland check if there are any islands to merge
+     */
     public void verifyMergeableIsland() {
         for (int i = 0; i < this.getNumOfIslands(); i++)
             if (i != this.getNumOfIslands() -1 &&

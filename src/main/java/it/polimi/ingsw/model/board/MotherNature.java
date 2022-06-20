@@ -2,31 +2,52 @@ package it.polimi.ingsw.model.board;
 
 import java.io.Serializable;
 
+/**
+ * Mothernature class is the reference to the island with mother nature
+ */
 public class MotherNature implements Serializable {
         private int islandID;
 
-        //Quando madrenatura viene creata è posizionata in un isola random. Per semplicità preferisco far decidere l'isola prima
-        //della sua creazione, senza avere un riferimento a tutte le isole in questa classe
-        public MotherNature(int islandID) {
+    /**
+     * Constructor MotherNature creates the reference tho the Island with mother nature
+     *
+     * @param islandID the id of the island
+     */
+    public MotherNature(int islandID) {
             this.islandID = islandID;
         }
 
-        public int isOn() {
-            return islandID;
-        }
+    /**
+     * Method isOn returns the id of the island with mother nature on
+     *
+     * @return the id of the island with mother nature on
+     */
+    public int isOn() {
+        return islandID;
+    }
 
-        public void move(int numOfIslands) {
-            if(isOn()==numOfIslands){
-                this.islandID=1;
-            }
-            else{
-                this.islandID=this.islandID+1;
-            }
+    /**
+     * Metod move is used to move mother nature among the Archipelago
+     *
+     * @param numOfIslands the number of movements
+     */
+    public void move(int numOfIslands) {
+        if(isOn()==numOfIslands){
+            this.islandID=1;
         }
-
-        public void setMotherNature(int islandID){
-            if(islandID >= 1 && islandID <=12)
-                this.islandID=islandID;
+        else{
+            this.islandID=this.islandID+1;
         }
     }
+
+    /**
+     * Method setMotherNature set the island with mother nature
+     *
+     * @param islandID set the island wirìth mother nature
+     */
+    public void setMotherNature(int islandID){
+        if(islandID >= 1 && islandID <=12)
+            this.islandID=islandID;
+    }
+}
 

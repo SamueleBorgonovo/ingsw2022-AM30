@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+/**
+ * Game class contains the main logic of Eriantys
+ */
 public class Game implements GameInterface {
     private GameMode gameMode;
     private ArrayList<Player> listOfPlayers = new ArrayList<>();
@@ -26,6 +29,12 @@ public class Game implements GameInterface {
     private ArrayList<Wizard> wizardChoosen = new ArrayList<>();
     private ArrayList<Assistant> usedAssistant = new ArrayList<>();
 
+    /**
+     * Constructor Game creates a new Game Instance
+     *
+     * @param gameMode the gameMode of the game
+     * @param numofplayers the number of players in the game
+     */
     public Game(GameMode gameMode, int numofplayers) {
         this.gameMode = gameMode;
         this.numOfPlayers = numofplayers;
@@ -46,32 +55,70 @@ public class Game implements GameInterface {
 
     }
 
-    public void addWizardChosen(Wizard wizard){
+    /**
+     * Method addWizardChosen save the player's wizard so it will be not chosen again
+     *
+     * @param wizard the wizard chosen by the player in turn
+     */
+    public void addWizardChoosen(Wizard wizard){
         wizardChoosen.add(wizard);
     }
 
+    /**
+     * Method setWizard associates the player with the wizard chosen
+     *
+     * @param playerid the id of the player
+     * @param wizard the wizard chosen by the player
+     * @throws InvalidWizardException
+     */
     public void setWizard(int playerid,Wizard wizard) throws InvalidWizardException {
         if(!wizardChoosen.contains(wizard)) {
             getPlayer(playerid).setWizard(wizard);
-            addWizardChosen(wizard);
+            addWizardChoosen(wizard);
         }
         else throw new InvalidWizardException();
     }
 
+    /**
+     * Method setCharacterInUse save the character used in the turn
+     *
+     * @param character the character chosen in the turn
+     */
     public void setCharacterInUse(Characters character){characterInUse=character;}
 
+    /**
+     * Method getState return the gameState of the Game
+     *
+     * @return the gameState of the game
+     */
     public GameState getState() {
         return gameState;
     }
 
+    /**
+     * Method getGameMode return the gameMode of the Game
+     *
+     * @return the gameMode of the game
+     */
     public GameMode getGameMode() {
         return gameMode;
     }
 
+    /**
+     * Method getPlayers returns the player in the game
+     *
+     * @return the player in the game
+     */
     public ArrayList<Player> getPlayers(){
         return new ArrayList<>(listOfPlayers);
     }
 
+    /**
+     * Method setReconnectedPlayer handle the reconnection of a player
+     *
+     * @param playerid the player who is reconnecting
+     * @throws ReconnectedException
+     */
     public void setReconnectedPlayer(int playerid) throws ReconnectedException {
         if(getPlayer(playerid).getPlayerState() == PlayerState.DISCONNECTED) {
             getPlayer(playerid).setPlayerState(PlayerState.RECONNECTED);
@@ -86,6 +133,12 @@ public class Game implements GameInterface {
         else throw new ReconnectedException();
     }
 
+    /**
+     * Method setDisconnectedPlayer set a player as disconnect
+     *
+     * @param playerid the id of the player disconnected
+     * @return
+     */
     public boolean setDisconnectPlayer(int playerid){
         boolean callhandler=false;
         if(gameState==GameState.WAITINGFORPLAYERS){
@@ -137,6 +190,11 @@ public class Game implements GameInterface {
     return callhandler;
     }
 
+    /**
+     * Method searchFirst search the first player not disconnected and return his index in the player list
+     *
+     * @return the index of the first player not disconnected in the player list
+     */
     public int searchfisrt(){
         for(int count=0;count<playerorder.size();count++){
             if(playerorder.get(count).getPlayerState() != PlayerState.DISCONNECTED)
@@ -145,6 +203,12 @@ public class Game implements GameInterface {
         return -1;
     }
 
+    /**
+     * Method addPlayer add one player in the game
+     *
+     * @param nickname the nickname of the new  player
+     * @return the id of the new player
+     */
     public int addPlayer(String nickname) {
         Player player = new Player(nickname);
         listOfPlayers.add(player);
@@ -163,18 +227,43 @@ public class Game implements GameInterface {
         }
         return listOfPlayers.size();
     }
-
+////
+    /**
+     * Method getBoard returns the board of this Game Object
+     *
+     * @return the board of this Game Object
+     */
     public Board getBoard() {
         return board;
     }
 
-    public boolean checkPlayerState(int playerID){
-        return getPlayer(playerID).getPlayerState() == PlayerState.DISCONNECTED;
+    /**
+     *Method checkPlayerState checks if the player is connected to the game or not
+     *
+     * @param playerid the player to check
+     * @return true if the player is disconnected, else false
+     */
+    public boolean checkPlayerState(int playerid){
+        if(getPlayer(playerid).getPlayerState()==PlayerState.DISCONNECTED)
+            return true;
+        return false;
     }
+
+    /**
+     * Method getNumOfPlayer returns the number of player of this Game Object
+     *
+     * @return the number of player of this Game Object
+     */
     public int getNumOfPlayers() {
         return numOfPlayers;
     }
 
+    /**
+     * Method getPlayergets a player instance relying on his unique ID
+     *
+     * @param playerid the id of the player
+     * @return the player instance
+     */
     public Player getPlayer(int playerid) {
         for(Player player : listOfPlayers)
             if(player.getPlayerID() == playerid)
@@ -182,20 +271,23 @@ public class Game implements GameInterface {
         return null;
     }
 
-    private void startRound(){
+    /**
+     * Method startRound starts a new round of the game
+     */
+    public void startRound(){
         if(numOfPlayers==2) {
             for (Player player : playerorder)
                 if (player.getPlance().getEntrance().size() != 7) {
-                    int cloudID = -1;
+                    int cloudid = -1;
                     for (Cloud cloud : board.getClouds())
                         if (!cloud.isChoosen()) {
-                            cloudID = cloud.getCloudID();
+                            cloudid = cloud.getCloudID();
                             cloud.setChoosen(true);
                             break;
                         }
                     int count = 0;
                     while (player.getPlance().getEntrance().size() != 7) {
-                        player.getPlance().addStudentEntrance(board.getCloud(cloudID).getStudents().get(count));
+                        player.getPlance().addStudentEntrance(board.getCloud(cloudid).getStudents().get(count));
                         count++;
 
                     }
@@ -245,9 +337,11 @@ public class Game implements GameInterface {
 
     }
 
-
-
-
+    /**
+     * Method winnerEndRound returns the winner of the game (if there is one) by checking after every turn
+     *
+     * @return 1 if the game is out of students, 2 if there are no more assistant usable, 0 else
+     */
     public int winnerEndRound() {
         int gameIsFinished=0;
 
@@ -264,6 +358,11 @@ public class Game implements GameInterface {
 
     }
 
+    /**
+     * Method winnerInstantly return the winner of the game (if there is one) by checking after every action of the turn
+     *
+     * @return the player id of the winner (if there is one) else it returns 0
+     */
     public int winnerIstantly(){
         int gameIsFinished=0;
         if (board.getArchipelago().getNumOfIslands() <= 3)
@@ -274,6 +373,11 @@ public class Game implements GameInterface {
         return gameIsFinished;
     }
 
+    /**
+     * Method verifyWinner returns the winner of the game
+     *
+     * @return the player id of the winner player
+     */
     public ArrayList<Player> verifyWinner(){
 
         ArrayList<Player> playersCandidate = new ArrayList<>();
@@ -301,6 +405,16 @@ public class Game implements GameInterface {
         return playersChosen;
     }
     //Return true if is the last cloud of the round
+
+    /**
+     * Method selectCloud is used when a player select a cloud
+     *
+     * @param playerID the id of the player
+     * @param cloudID the id of the cloud
+     * @return true if the cloud has been selected, false if the player can't make this action
+     * @throws InvalidTurnException
+     * @throws InvalidCloudException
+     */
     public boolean selectCloud(int playerID, int cloudID) throws InvalidTurnException, InvalidCloudException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.CLOUDPHASE) {
             if(!getBoard().getCloud(cloudID).isChoosen()){
@@ -349,6 +463,14 @@ public class Game implements GameInterface {
         else throw new InvalidTurnException();
     }
 
+    /**
+     * Method moveStudentToHall move the student chosen by the player to his hall in the plance
+     *
+     * @param playerID the id of the player
+     * @param student the student to move
+     * @throws InvalidTurnException
+     * @throws InvalidStudentException
+     */
     public void moveStudentToHall(int playerID, Student student) throws InvalidTurnException, InvalidStudentException {
 
             if (getPlayer(playerID).getPlayerState() == PlayerState.STUDENTPHASE) {
@@ -368,6 +490,15 @@ public class Game implements GameInterface {
 
     }
 
+    /**
+     * Method moveStudentToHall move the student chosen by the player to the island chosen
+     *
+     * @param playerID the id of the player
+     * @param islandID the id of the island chosen
+     * @param student the student to move
+     * @throws InvalidTurnException
+     * @throws InvalidStudentException
+     */
     public void moveStudentToIsland(int playerID, int islandID, Student student) throws InvalidTurnException, InvalidStudentException {
 
             if (getPlayer(playerID).getPlayerState() == PlayerState.STUDENTPHASE) {
@@ -385,6 +516,14 @@ public class Game implements GameInterface {
 
     }
 
+    /**
+     * method useAssistant is used when a player chose one assistant
+     *
+     * @param playerID the player id
+     * @param assistant the assistant chosen
+     * @throws InvalidTurnException
+     * @throws InvalidAssistantException
+     */
     public void useAssistant(int playerID,Assistant assistant) throws InvalidTurnException, InvalidAssistantException{
         boolean ok=false;
         if(getPlayer(playerID).getPlayerState()== PlayerState.ASSISTANTPHASE){ //Check that is the right id of the player that has to play
@@ -431,7 +570,14 @@ public class Game implements GameInterface {
         }else throw new InvalidTurnException();
     }
 
-
+    /**
+     * Method moveMotherNature is used when a player move mother nature
+     *
+     * @param playerID the id of the player
+     * @param numberOfMovement the number of movement chosen
+     * @throws InvalidTurnException
+     * @throws InvalidValueException
+     */
     public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnException, InvalidValueException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.MOTHERNATUREPHASE) {
             if (!this.getEffectHandler().getTwomoremoves()) {  //Check if effect4 is in use
@@ -458,6 +604,16 @@ public class Game implements GameInterface {
         } else throw new InvalidTurnException();
     }
 
+    /**
+     * Method useCharacter is used when a player decides to use a character
+     *
+     * @param playerID the id of the player
+     * @param character the character chosen
+     * @throws InvalidStopException
+     * @throws InvalidTurnException
+     * @throws OutOfCoinsException
+     * @throws InvalidCharacterException
+     */
     public void useCharacter(int playerID, Characters character)  throws InvalidStopException, InvalidTurnException, OutOfCoinsException, InvalidCharacterException {
 
         if(getPlayer(playerID).getPlayerState() != PlayerState.WAITING) {
@@ -477,6 +633,15 @@ public class Game implements GameInterface {
 
     }
 
+    /**
+     * Method CharacterIslandPhase is used when the character used requires an island in input
+     *
+     * @param playerID the player id
+     * @param islandID the island id
+     * @throws InvalidTurnException
+     * @throws InvalidIslandException
+     * @throws InvalidStudentEffectException
+     */
     public void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnException, InvalidIslandException, InvalidStudentEffectException {
         if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERISLANDPHASE) {
             if (islandID >= 1 && islandID <= board.getArchipelago().getNumOfIslands()) {
@@ -488,6 +653,14 @@ public class Game implements GameInterface {
         else throw new InvalidTurnException();
     }
 
+    /**
+     * Method CharacterIslandPhase is used when the character used requires a student in input
+     *
+     * @param playerID the player id
+     * @param students the students chosen
+     * @throws InvalidTurnException
+     * @throws InvalidStudentEffectException
+     */
     public void CharacterStudentsPhase(int playerID,ArrayList<Student> students) throws InvalidTurnException, InvalidStudentEffectException {
         if(getPlayer(playerID).getPlayerState() == PlayerState.CHARACTHERSTUDENTSPHASE) {
             effectHandler.setStudentschoose(students);
@@ -496,14 +669,29 @@ public class Game implements GameInterface {
         else throw new InvalidTurnException();
     }
 
+    /**
+     * Method getEffectHandler returns the EffectHandler Object
+     *
+     * @return the EffectHandler Object
+     */
     public EffectHandler getEffectHandler() {
         return effectHandler;
     }
 
+    /**
+     * Method getListOfPlayer returns the player in the game
+     *
+     * @return the players in the game
+     */
     public ArrayList<Player> getListOfPlayers() {
         return listOfPlayers;
     }
 
+    /**
+     * Method verifyIslandInfluence calculate which player has the most influence on the island (if there is one)
+     *
+     * @param islandID the island id
+     */
     public void verifyIslandInfluence(int islandID) {
         // Check which Player has the most influence on an Island and arrange the towers appropriately.
         int maxScore = 0;
@@ -553,6 +741,9 @@ public class Game implements GameInterface {
         }
     }
 
+    /**
+     * Method verifyIslandInfluence calculate which player has the most influence on Professors (if there is one)
+     */
     public void verifyProfessorControl() {
         // Controll and check Professors.
         int numOfStudentColorHall;
@@ -581,6 +772,11 @@ public class Game implements GameInterface {
         }
     }
 
+    /**
+     * Method verifyPlayerOrder calculate the right order of player in the turn
+     *
+     * @return the right order of player in the turn
+     */
     public ArrayList<Player> verifyPlayerOrder() {
         ArrayList<Player> temporder = new ArrayList<>();
         Player minplayer = playerorder.get(0);
@@ -618,6 +814,9 @@ public class Game implements GameInterface {
         return playerorder;
     }
 
+    /**
+     * Method startGame starts a new game
+     */
     public void startGame() {
         Random rnd = new Random();
         int index;
@@ -632,19 +831,39 @@ public class Game implements GameInterface {
         playerorder.get(0).setPlayerState(PlayerState.ASSISTANTPHASE);
     }
 
+    /**
+     * Method getMotherNatureIsland returns the id of the island which has mother nature
+     *
+     * @return id of the island which has mother nature
+     */
     @Override
     public int getMotherNatureIsland() {
         return board.getArchipelago().getMothernature().isOn();
     }
 
+    /**
+     * Method getPlayerOrder returns the order of the player in the turn
+     *
+     * @return the order of the player in the turn
+     */
     public ArrayList<Player> getPlayerorder(){
         return playerorder;
     }
 
+    /**
+     * Method setPlayerOrder set the order of the player in the turn
+     *
+     * @param playerorder the order of the players
+     */
     public void setPlayerorder(ArrayList<Player> playerorder) {
         this.playerorder = playerorder;
     }
 
+    /**
+     * Method getPlayersView returns the view chosen by the player
+     *
+     * @return the view of the players in the game
+     */
     public ArrayList<PlayerView> getPlayersView(){
         ArrayList<PlayerView> tempplayerview = new ArrayList<>();
         for(Player player : listOfPlayers)
@@ -652,6 +871,12 @@ public class Game implements GameInterface {
         return tempplayerview;
     }
 
+    /**
+     * Method searchCaracter returns the character associated to the characterView
+     *
+     * @param characterView the characterView to search
+     * @return the character associated to the characterView
+     */
     public Characters searchCharacter(CharacterView characterView){
         for(Characters character : getBoard().getCharacters())
             if(character.getEffect().getName().equals(characterView.getName()))
@@ -659,6 +884,11 @@ public class Game implements GameInterface {
         return null;
     }
 
+    /**
+     * Method getNumPlayerDisconnected returns the character associated to the characterView
+     *
+     * @return the character associated to the characterView
+     */
     public int getNumPlayerDisconnected(){
         int num=0;
         for(Player player : listOfPlayers)
