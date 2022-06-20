@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class GameHandler {
     private static ConcurrentHashMap<String, GameInterface> playertoGameMap;//Map that find the game of a player's nickname
-    private static ConcurrentHashMap<String, Integer> playertoPlayerIDMap;//Map that find game's idplayer from a player's nickname
+    private static ConcurrentHashMap<String, Integer> playertoPlayerIDMap;//Map that find game's playerid from a player's nickname
     private static ConcurrentHashMap<String, ClientHandlerInterface> playertoHandlerMap;//Map that find player's handler
     private static ConcurrentHashMap<GameInterface, Thread> gameToTimerMap;//Map to find WinningTimer of a game
     private static ConcurrentHashMap<GameInterface, Integer> gameToStudentPlayed;
@@ -33,9 +33,9 @@ public class GameHandler {
      * Constructor GameHandler instantiates maps used in the class
      */
     public GameHandler(){
-        playertoGameMap = new ConcurrentHashMap<>();//Map that find the game of a player's nickname
-        playertoPlayerIDMap = new ConcurrentHashMap<>();//Map that find game's idplayer from a player's nickname
-        playertoHandlerMap = new ConcurrentHashMap<>();//Map that find player's handler
+        playertoGameMap = new ConcurrentHashMap<>();
+        playertoPlayerIDMap = new ConcurrentHashMap<>();
+        playertoHandlerMap = new ConcurrentHashMap<>();
         gameToTimerMap = new ConcurrentHashMap<>();
         gameToStudentPlayed = new ConcurrentHashMap<>();
         nicknameChoosen = new ArrayList<>();
