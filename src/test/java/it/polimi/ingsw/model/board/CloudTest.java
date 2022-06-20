@@ -64,7 +64,7 @@ class CloudTest {
         assertEquals(3,cloudView.getStudents().size());
         assertTrue(cloudView.getStudents().containsAll(students));
 
-        assertTrue(cloudView.isChoosen());
+        assertTrue(cloudView.isChosen());
         assertEquals(3,cloudView.getCloudID());
     }
 }

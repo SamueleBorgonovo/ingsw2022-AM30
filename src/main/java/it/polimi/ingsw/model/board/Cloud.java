@@ -42,7 +42,7 @@ public class Cloud{
     }
 
     /**
-     * Method isChoosen is used to check if a cloud has been chosen
+     * Method isChosen is used to check if a cloud has been chosen
      *
      * @return true if the cloud has been chosen, else false
      */

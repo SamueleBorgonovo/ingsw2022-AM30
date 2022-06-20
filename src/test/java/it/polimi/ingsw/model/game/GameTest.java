@@ -572,11 +572,11 @@ class GameTest {
         game2players.getPlayerorder().get(0).setLastassistantplayed(Assistant.DOG);
         game2players.getPlayerorder().get(0).setPlayerState(PlayerState.CLOUDPHASE);
         game2players.selectCloud(game2players.getPlayerorder().get(0).getPlayerID(),2);
-        assertTrue(game2players.getBoard().getCloud(2).isChoosen());
+        assertTrue(game2players.getBoard().getCloud(2).isChosen());
         game2players.getPlayerorder().get(1).setPlayerState(PlayerState.CLOUDPHASE);
         game2players.selectCloud(game2players.getPlayerorder().get(1).getPlayerID(),1);
-        assertFalse(game2players.getBoard().getCloud(1).isChoosen());
-        assertFalse(game2players.getBoard().getCloud(2).isChoosen());
+        assertFalse(game2players.getBoard().getCloud(1).isChosen());
+        assertFalse(game2players.getBoard().getCloud(2).isChosen());
 
     }
 

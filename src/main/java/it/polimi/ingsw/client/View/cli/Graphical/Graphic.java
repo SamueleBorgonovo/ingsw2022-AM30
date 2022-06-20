@@ -215,7 +215,7 @@ public class Graphic {
 
         System.out.print("│");
         for(CloudView cloud : clouds) {
-            if(cloud.isChoosen()) {
+            if(cloud.isChosen()) {
                 if(cloud.getCloudID()>1 && cloud.getCloudID()<10)
                     System.out.print(Colors.WHITE.getCode() + "    " + cloud.getCloudID() + "   " + Colors.RESET.getCode());
                 else
@@ -231,7 +231,7 @@ public class Graphic {
 
         for(Student student : Student.values()){
             for(CloudView cloud : clouds) {
-                if(cloud.isChoosen()) {
+                if(cloud.isChosen()) {
                     System.out.print("│");
                     System.out.print(Colors.WHITE.getCode() + " 0 :" + " "  + Symbols.STUDENT_FULL.getCode() + " " + Colors.RESET.getCode());
                 } else {

@@ -1140,7 +1140,7 @@ public class DashboardController {
             getPaneFromString("cloud" + 3 + "Pane").setDisable(true);
         }
         for (CloudView cloud : gui.getBoard().getClouds()) {
-            if (cloud.isChoosen()) {
+            if (cloud.isChosen()) {
                 getPaneFromString("cloud" + cloud.getCloudID() + "Pane").setDisable(true);
                 getPaneFromString("cloud" + cloud.getCloudID() + "Pane").setOpacity(0.3);
             } else {
@@ -1950,7 +1950,7 @@ public class DashboardController {
      */
     public void setCloudsClickable() {
         for (int count = 1; count <= gui.getBoard().getClouds().size(); count++) {
-            if (!gui.getBoard().getClouds().get(count - 1).isChoosen())
+            if (!gui.getBoard().getClouds().get(count - 1).isChosen())
                 getPaneFromString("cloud" + count + "Pane").setDisable(false);
         }
     }
