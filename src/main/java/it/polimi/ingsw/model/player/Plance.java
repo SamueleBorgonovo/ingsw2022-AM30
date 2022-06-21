@@ -4,7 +4,6 @@ import it.polimi.ingsw.controller.virtualView.PlanceView;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,8 +11,8 @@ import java.util.HashMap;
  * Plance class handles the action related to player's plance
  */
 public class Plance {
-    private ArrayList<Student> entrance = new ArrayList<>();
-    private ArrayList<Professor> professors = new ArrayList<>();
+    private final ArrayList<Student> entrance = new ArrayList<>();
+    private final ArrayList<Professor> professors = new ArrayList<>();
     private final HashMap<Student,Integer> hall = new HashMap<>();
     private int numoftowers;
     private final Tower tower;

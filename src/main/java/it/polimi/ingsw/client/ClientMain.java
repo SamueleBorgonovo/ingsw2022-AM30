@@ -6,6 +6,9 @@ import javafx.application.Application;
 
 import java.util.Scanner;
 
+/**
+ * Class used to start the client and choose the view
+ */
 public class ClientMain {
 
   public static void main(String[] args) throws Exception {
