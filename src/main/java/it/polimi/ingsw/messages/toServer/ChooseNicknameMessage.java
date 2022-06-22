@@ -2,6 +2,9 @@ package it.polimi.ingsw.messages.toServer;
 
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
+/**
+ * Message to send the player's nickname choose
+ */
 public class ChooseNicknameMessage extends MessageToServer{
     String nickname;
     boolean reconnect;

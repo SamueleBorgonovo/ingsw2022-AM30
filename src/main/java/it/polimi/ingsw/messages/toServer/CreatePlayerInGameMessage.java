@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages.toServer;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
+/**
+ * Message to send the player's settings choose
+ */
 public class CreatePlayerInGameMessage extends MessageToServer {
     String nickname;
     GameMode gamemode;

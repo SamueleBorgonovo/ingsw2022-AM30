@@ -2,6 +2,9 @@ package it.polimi.ingsw.messages.toServer;
 
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
+/**
+ * Message of ping to the server
+ */
 public class PingToServerMessage extends MessageToServer{
     public boolean isping;
     //if isping is false it's a "pong" message

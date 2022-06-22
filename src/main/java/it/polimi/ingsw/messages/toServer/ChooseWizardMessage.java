@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages.toServer;
 import it.polimi.ingsw.model.player.Wizard;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
+/**
+ * Message to send the player's wizard choose
+ */
 public class ChooseWizardMessage extends MessageToServer {
     Wizard wizard;
 

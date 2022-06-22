@@ -5,6 +5,9 @@ import it.polimi.ingsw.server.ClientHandlerInterface;
 
 import java.util.ArrayList;
 
+/**
+ * Message to send the player's students choose
+ */
 public class ChooseStudentsEffectMessage extends MessageToServer{
     ArrayList<Student> students;
 

@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages.toServer;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
+/**
+ * Message to send the student moved to hall by the player
+ */
 public class MoveStudentToHallMessage extends MessageToServer{
     Student student;
 

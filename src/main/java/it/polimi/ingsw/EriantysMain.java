@@ -2,12 +2,14 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.ClientMain;
 import it.polimi.ingsw.server.ServerMain;
-
 import java.util.Scanner;
 
+/**
+ * Class EriantysMain is the main start of the application
+ */
 public class EriantysMain {
 
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
 
         System.out.println("Welcome to Eriantys Game");
         Scanner scanner = new Scanner(System.in);

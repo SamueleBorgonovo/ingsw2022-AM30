@@ -1,15 +1,17 @@
 package it.polimi.ingsw.model.game;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Interface used to control effectHandler's methods calls
+ */
 public interface EffectHandlerInterface {
 
-    public ArrayList<Student> getEffect7students();
+    ArrayList<Student> getEffect7students();
 
-    public ArrayList<Student> getEffect1students();
+    ArrayList<Student> getEffect1students();
 
-    public ArrayList<Student> getEffect11students();
+    ArrayList<Student> getEffect11students();
 
-    public int getNumofislandstops();
+    int getNumofislandstops();
 }

@@ -2,6 +2,9 @@ package it.polimi.ingsw.messages.toServer;
 
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
+/**
+ * Message to send the player's cloud choose
+ */
 public class ChooseCloudMessage extends MessageToServer {
     int cloudID;
 

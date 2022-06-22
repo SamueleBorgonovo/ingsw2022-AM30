@@ -13,6 +13,9 @@ import it.polimi.ingsw.model.player.Assistant;
 
 import java.util.ArrayList;
 
+/**
+ * Interface of the player view
+ */
 public interface View {
     void chooseNickname(boolean validNickname, boolean reconnect);
 

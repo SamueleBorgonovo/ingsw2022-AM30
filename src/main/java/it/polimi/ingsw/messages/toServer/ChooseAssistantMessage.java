@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages.toServer;
 import it.polimi.ingsw.model.player.Assistant;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
+/**
+ * Message to send the player's assistant choose
+ */
 public class ChooseAssistantMessage extends MessageToServer {
     Assistant assistant;
 

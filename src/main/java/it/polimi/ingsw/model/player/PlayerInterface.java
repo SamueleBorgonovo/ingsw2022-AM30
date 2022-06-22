@@ -2,27 +2,29 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.exceptions.OutOfCoinsException;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Method used to control player's methods calls
+ */
 public interface PlayerInterface{
-    public Plance getPlance();
+    Plance getPlance();
 
-    public int getCoins();
+    int getCoins();
 
-    public void addCoins();
+    void addCoins();
 
-    public void removeCoins(int numOfCoins) throws OutOfCoinsException;
+    void removeCoins(int numOfCoins) throws OutOfCoinsException;
 
-    public String getNickname();
+    String getNickname();
 
-    public Wizard getWizard();
+    Wizard getWizard();
 
-    public ArrayList<Assistant> getAssistantCards();
+    ArrayList<Assistant> getAssistantCards();
 
-    public PlayerState getPlayerState();
+    PlayerState getPlayerState();
 
-    public Assistant getLastassistantplayed();
+    Assistant getLastassistantplayed();
 
 
 }

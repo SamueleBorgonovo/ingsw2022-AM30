@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages.toServer;
 import it.polimi.ingsw.controller.virtualView.CharacterView;
 import it.polimi.ingsw.server.ClientHandlerInterface;
 
+/**
+ * Message to send the player's character choose
+ */
 public class ChooseCharacterMessage extends MessageToServer {
     CharacterView character;
 

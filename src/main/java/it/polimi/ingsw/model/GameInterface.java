@@ -15,63 +15,66 @@ import it.polimi.ingsw.model.player.Wizard;
 
 import java.util.ArrayList;
 
+/**
+ * Interface used to control game's methods calls
+ */
 public interface GameInterface {
 
-    public int addPlayer(String nickname);
+    int addPlayer(String nickname);
 
-    public ArrayList<Wizard> getWizardAvailable();
+    ArrayList<Wizard> getWizardAvailable();
 
-    public void setWizard(int playerID,Wizard wizard) throws InvalidWizardException;
+    void setWizard(int playerID,Wizard wizard) throws InvalidWizardException;
 
-    public GameState getState();
+    GameState getState();
 
-    public int getNumOfPlayers();
+    int getNumOfPlayers();
 
-    public GameMode getGameMode();
+    GameMode getGameMode();
 
-    public boolean setDisconnectPlayer(int playerID);
+    boolean setDisconnectPlayer(int playerID);
 
-    public void setReconnectedPlayer(int playerid) throws ReconnectedException;
+    void setReconnectedPlayer(int playerid) throws ReconnectedException;
 
-    public boolean selectCloud(int playerID, int cloudID) throws InvalidTurnException, InvalidCloudException;
+    boolean selectCloud(int playerID, int cloudID) throws InvalidTurnException, InvalidCloudException;
 
-    public boolean checkPlayerState(int playerid);
+    boolean checkPlayerState(int playerid);
 
-    public void moveStudentToHall(int playerID, Student student) throws InvalidTurnException, InvalidStudentException;
+    void moveStudentToHall(int playerID, Student student) throws InvalidTurnException, InvalidStudentException;
 
-    public void moveStudentToIsland(int playerID, int islandID, Student student) throws InvalidTurnException, InvalidStudentException;
+    void moveStudentToIsland(int playerID, int islandID, Student student) throws InvalidTurnException, InvalidStudentException;
 
-    public void useAssistant(int playerID, Assistant assistant) throws InvalidAssistantException, InvalidTurnException;
+    void useAssistant(int playerID, Assistant assistant) throws InvalidAssistantException, InvalidTurnException;
 
-    public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnException, InvalidValueException;
+    void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnException, InvalidValueException;
 
-    public void useCharacter(int playerID, Characters character)  throws InvalidStopException, InvalidTurnException, OutOfCoinsException, InvalidCharacterException;
+    void useCharacter(int playerID, Characters character)  throws InvalidStopException, InvalidTurnException, OutOfCoinsException, InvalidCharacterException;
 
-    public void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnException, InvalidIslandException, InvalidStudentEffectException;
+    void CharacterIslandPhase(int playerID,int islandID) throws InvalidTurnException, InvalidIslandException, InvalidStudentEffectException;
 
-    public void CharacterStudentsPhase(int playerID, ArrayList<Student> students) throws InvalidTurnException, InvalidStudentEffectException;
+    void CharacterStudentsPhase(int playerID, ArrayList<Student> students) throws InvalidTurnException, InvalidStudentEffectException;
 
-    public ArrayList<Player> getPlayers();
+    ArrayList<Player> getPlayers();
 
-    public Board getBoard();
+    Board getBoard();
 
-    public void startGame();
+    void startGame();
 
-    public int getMotherNatureIsland();
+    int getMotherNatureIsland();
 
-    public ArrayList<Player> getPlayerorder();
+    ArrayList<Player> getPlayerorder();
 
-    public ArrayList<PlayerView> getPlayersView();
+    ArrayList<PlayerView> getPlayersView();
 
-    public Characters searchCharacter(CharacterView characterView);
+    Characters searchCharacter(CharacterView characterView);
 
-    public int winnerIstantly();
+    int winnerIstantly();
 
-    public int winnerEndRound();
+    int winnerEndRound();
 
-    public ArrayList<Player> verifyWinner();
+    ArrayList<Player> verifyWinner();
 
-    public int getNumPlayerDisconnected();
+    int getNumPlayerDisconnected();
 
-    public EffectHandler getEffectHandler();
+    EffectHandler getEffectHandler();
 }
