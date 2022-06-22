@@ -1714,7 +1714,7 @@ public class DashboardController {
         else
             gameUpdateLabel.setText("You don't have enough coins or you can't use this now");
 
-        if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.INT)
+        if(characterPlayed!= null && characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.INT)
             gui.setCharacter4played(true);
         gui.getClient().setCharacterPlayed(true);
     }

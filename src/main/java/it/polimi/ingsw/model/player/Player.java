@@ -19,6 +19,7 @@ public class Player implements PlayerInterface{
     private final ArrayList<Assistant> assistantCards = new ArrayList<>();
     private Assistant lastassistantplayed;
     private boolean characterPlayed;
+    private boolean assistantPlayed;
 
     /**
      * Constructor Player instantiates first player's setup
@@ -167,6 +168,14 @@ public class Player implements PlayerInterface{
      * @return player's last assistant played
      */
     public Assistant getLastassistantplayed(){return lastassistantplayed;}
+
+    /**
+     * Method setAssistantPlayed set the assistant played by the player
+     * @param assistantPlayed the assistant played by the player
+     */
+    public void setAssistantPlayed(boolean assistantPlayed) {
+        this.assistantPlayed = assistantPlayed;
+    }
 
     /**
      * Method setLastassistantplayed sets the player's last assistant played
