@@ -86,4 +86,8 @@ public interface View {
      void nextMove(PlayerState playerState);
 
      void setExit();
+
+     void displayGame();
+
+     void noGameReconnect();
 }

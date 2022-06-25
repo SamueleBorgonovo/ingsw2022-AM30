@@ -53,7 +53,7 @@ public class NicknameController {
         String nickname = nicknameWindows.getText();
         gui.getClient().sendMessage(new ChooseNicknameMessage(nickname,true, false));
         gui.setNickname(nickname);
-        gui.instantiateDashBoardScene();
+        //gui.instantiateDashBoardScene();
     }
 
     /**
@@ -84,5 +84,12 @@ public class NicknameController {
      */
     public void setLoginButton(double move){
         loginButton.setLayoutX(move);
+    }
+
+    public void noGameReconnect(){
+        wrongNickname.setText("You can't reconnect anymore, change name and press Login to start a new game");
+        reconnectButton.setVisible(false);
+        wrongNickname.setVisible(true);
+        newGame=false;
     }
 }

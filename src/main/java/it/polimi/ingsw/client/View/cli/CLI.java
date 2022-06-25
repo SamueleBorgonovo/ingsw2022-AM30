@@ -917,4 +917,17 @@ public class CLI implements View {
         System.exit(1);
     }
 
+    /**
+     * Method used only when the player is playing with GUI
+     */
+    public void displayGame(){}
+
+    /**
+     * Method noGameReconnect notify the player that he can't reconnect anymore and calls the method to start a new game
+     */
+    public void noGameReconnect(){
+        System.out.println("You can't reconnect anymore, start a new game!");
+        client.gameSetup();
+    }
+
 }

@@ -100,6 +100,7 @@ public class Client {
         this.gamemode=gamemode;
         this.numofPlayers=numofPlayers;
         this.wizard=wizard;
+        view.displayGame();
     }
 
     /**

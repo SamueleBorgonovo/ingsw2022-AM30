@@ -120,10 +120,6 @@ public class ClientMessageHandler {
         client.handleDisconnection(message.getNickname(), message.isTimeout(),message.isWin());
     }
 
-    public void process(NoGameMessage message){
-
-    }
-
     /**
      * Method used to process InvalidWizardMessage
      * @param message message received from the server
@@ -282,6 +278,10 @@ public class ClientMessageHandler {
      */
     public void process(CorrectlyConnectedMessage message){
         view.correctlyConnected();
+    }
+
+    public void process(NoGameMessage message){
+        view.noGameReconnect();
     }
 }
 

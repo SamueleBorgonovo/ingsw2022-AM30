@@ -732,4 +732,20 @@ public class GUI extends Application implements View{
         Platform.runLater(() -> dashboardController.setExitButton());
     }
 
+    /**
+     * Method displayGame calls the method to display the Game View
+     */
+    public void displayGame(){
+        instantiateDashBoardScene();
+    }
+
+    /**
+     * Method noGameReconnect handles that the player can't anymore reconnect to the game
+     */
+    public void noGameReconnect(){
+        Platform.runLater(() -> {
+            nicknameScene.noGameReconnect();
+        });
+    }
+
 }

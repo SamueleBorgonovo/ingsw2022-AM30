@@ -223,16 +223,9 @@ public class GameHandler {
                     turnHandler(game);
                 }
             }catch(ReconnectedException e){
-                //Fare il messaggio invalidReconnection
-                NicknameMessage message = new NicknameMessage(false,false);
-                clientHandler.sendMessageToClient(message);
+                clientHandler.sendMessageToClient(new NoGameMessage());
             }
             }
-        else{
-            NoGameMessage message = new NoGameMessage();
-            clientHandler.sendMessageToClient(message);
-        }
-
     }
 
     /**

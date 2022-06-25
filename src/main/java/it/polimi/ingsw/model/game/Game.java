@@ -69,7 +69,7 @@ public class Game implements GameInterface {
      *
      * @param playerid the id of the player
      * @param wizard the wizard chosen by the player
-     * @throws InvalidWizardException
+     * @throws InvalidWizardException if the wizard chosen is not available
      */
     public void setWizard(int playerid,Wizard wizard) throws InvalidWizardException {
         if(!wizardChoosen.contains(wizard)) {
