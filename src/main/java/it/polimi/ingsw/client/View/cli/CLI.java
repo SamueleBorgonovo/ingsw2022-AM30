@@ -824,7 +824,9 @@ public class CLI implements View {
         else System.out.println("Connection with server closed");
     }
 
-    //correctlyConnected it's only for GUI
+    /**
+     * Method correctlyConnected it's only for GUI
+     */
     @Override
     public void correctlyConnected() {}
 

@@ -254,8 +254,8 @@ public class GUI extends Application implements View{
 
     /**
      * Method chooseNickname calls methods in nicknameScene to set the nickname and reconnect to a game
-     * @param validNickname
-     * @param reconnect
+     * @param validNickname true if the nickname is valid, false otherwise
+     * @param reconnect true if the player can reconnect to a game, false otherwise
      */
     @Override
     public void chooseNickname(boolean validNickname, boolean reconnect) {
@@ -372,7 +372,7 @@ public class GUI extends Application implements View{
 
     /**
      * Method printStartGame calls methods in dashboardController that sets the view to start the game
-     * @param restart
+     * @param restart true if the game is restarting, false otherwise
      */
     @Override
     public void printStartGame(boolean restart) {
