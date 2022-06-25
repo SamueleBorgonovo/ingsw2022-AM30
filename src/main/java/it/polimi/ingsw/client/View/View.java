@@ -63,6 +63,12 @@ public interface View {
 
      void printInvalidStudent();
 
+     void printInvalidCharacter();
+
+     void printInvalidCoins();
+
+     void printInvalidValue();
+
      void printInvalidTurn();
 
      void printInvalidStop();

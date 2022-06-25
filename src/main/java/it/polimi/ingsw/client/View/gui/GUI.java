@@ -548,6 +548,27 @@ public class GUI extends Application implements View{
     }
 
     /**
+     * Method printInvalidCharacter warns the player that the character he tried to play is not available
+     */
+    public void printInvalidCharacter(){
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Invalid Character"));
+    }
+
+    /**
+     * Method printInvalidCoins warns the player that he hasn't enough coins to play that character
+     */
+    public void printInvalidCoins(){
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: You don't have enough coins!"));
+    }
+
+    /**
+     * Method printInvalidValue warns the player that he tried to move motherNature in an invalid island
+     */
+    public void printInvalidValue(){
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: Invalid island to move motherNature"));
+    }
+
+    /**
      * Method printInvalidTurn warns the player that tried to do an action when wasn't his turn
      */
     @Override

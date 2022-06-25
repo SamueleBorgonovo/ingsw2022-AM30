@@ -716,6 +716,27 @@ public class CLI implements View {
     }
 
     /**
+     * Method printInvalidCharacter warns the player that the character he tried to play is not available
+     */
+    public void printInvalidCharacter(){
+        System.out.println("Character not available. Try another");
+    }
+
+    /**
+     * Method printInvalidCoins warns the player that he hasn't enough coins to play that character
+     */
+    public void printInvalidCoins(){
+        System.out.println("You don't have enough coins!");
+    }
+
+    /**
+     * Method printInvalidValue warns the player that he tried to move motherNature in an invalid island
+     */
+    public void printInvalidValue(){
+        System.out.println("Invalid island to move motherNature");
+    }
+
+    /**
      * Method printInvalidTurn warns the player that tried to do an action when wasn't his turn
      */
     public void printInvalidTurn() {

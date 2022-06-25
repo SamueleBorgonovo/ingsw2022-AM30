@@ -60,12 +60,20 @@ public class ClientMessageHandler {
         view.printInvalidStop();
     }
 
+    /**
+     * Method used to process OutOfCoinsMessage
+     * @param message message received from the server
+     */
     public void process(OutOfCoinsMessage message){
-
+        view.printInvalidCoins();
     }
 
+    /**
+     * Method used to process InvalidCharacterMessage
+     * @param message message received from the server
+     */
     public void process(InvalidCharacterMessage message){
-
+        view.printInvalidCharacter();
     }
 
     /**
@@ -76,8 +84,12 @@ public class ClientMessageHandler {
         view.printInvalidCloud();
     }
 
+    /**
+     * Method used to process InvalidValueMessage
+     * @param message message received from the server
+     */
     public void process(InvalidValueMessage message){
-
+        view.printInvalidValue();
     }
 
     /**
@@ -89,7 +101,7 @@ public class ClientMessageHandler {
     }
 
     public void process(InvalidStudentEffectMessage message){
-
+        view.printInvalidStudent();
     }
 
     /**
@@ -276,6 +288,10 @@ public class ClientMessageHandler {
         view.correctlyConnected();
     }
 
+    /**
+     * Method used to process NoGameMessage
+     * @param message message received from the server
+     */
     public void process(NoGameMessage message){
         view.noGameReconnect();
     }
