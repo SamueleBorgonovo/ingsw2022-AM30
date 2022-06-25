@@ -492,6 +492,7 @@ class GameTest {
 
     @Test
     void startGame() {
+
     }
 
     @Test
@@ -563,22 +564,31 @@ class GameTest {
         assertEquals(winners,game3players.verifyWinner() );
     }
 
-    /*@Test
+    @Test
     void selectCloud() throws InvalidTurnException, InvalidCloudException {
         game2players.addPlayer("Daniele");
         game2players.addPlayer("Giuseppe");
-        game2players.startRound();
-        game2players.getPlayerorder().get(0).setLastassistantplayed(Assistant.CAT);
-        game2players.getPlayerorder().get(0).setLastassistantplayed(Assistant.DOG);
+        game2players.startGame();
         game2players.getPlayerorder().get(0).setPlayerState(PlayerState.CLOUDPHASE);
         game2players.selectCloud(game2players.getPlayerorder().get(0).getPlayerID(),2);
-        assertTrue(game2players.getBoard().getCloud(2).isChosen());
-        game2players.getPlayerorder().get(1).setPlayerState(PlayerState.CLOUDPHASE);
-        game2players.selectCloud(game2players.getPlayerorder().get(1).getPlayerID(),1);
-        assertFalse(game2players.getBoard().getCloud(1).isChosen());
-        assertFalse(game2players.getBoard().getCloud(2).isChosen());
+        assertTrue(game2players.getBoard().getCloud(2).isChoosen());
+        //game2players.getPlayerorder().get(1).setPlayerState(PlayerState.CLOUDPHASE);
+        //game2players.selectCloud(game2players.getPlayerorder().get(1).getPlayerID(),1);
+        //assertTrue(game2players.getBoard().getCloud(1).isChoosen());
+    }
+
+    @Test
+    void startRound() throws InvalidTurnException, InvalidAssistantException {
+        game2players.addPlayer("Daniele");
+        game2players.addPlayer("Giuseppe");
+        game2players.startGame();
+        game2players.getPlayerorder().get(1).getPlance().removeStudentEntrance(game2players.getPlayerorder().get(1).getPlance().getEntrance().get(0));
+        game2players.getPlayerorder().get(1).getPlance().removeStudentEntrance(game2players.getPlayerorder().get(1).getPlance().getEntrance().get(0));
+        assertEquals(game2players.getPlayerorder().get(0).getPlayerState(), PlayerState.ASSISTANTPHASE);
+        game2players.useAssistant(game2players.getPlayerorder().get(0).getPlayerID(), Assistant.CAT);
+        assertEquals(game2players.getPlayerorder().get(1).getPlayerState(), PlayerState.ASSISTANTPHASE);
+        game2players.useAssistant(game2players.getPlayerorder().get(1).getPlayerID(), Assistant.DOG);
 
     }
 
-     */
 }
