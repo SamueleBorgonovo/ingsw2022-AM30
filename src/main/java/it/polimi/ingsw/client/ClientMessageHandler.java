@@ -108,10 +108,6 @@ public class ClientMessageHandler {
         view.chooseWizard(message.getList());
     }
 
-    public void process(TimeExpiredMessage message){
-
-    }
-
     /**
      * Method used to process DisconnectMessage
      * @param message message received from the server

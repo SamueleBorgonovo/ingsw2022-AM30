@@ -140,8 +140,16 @@ public class Client {
             view.printGameEndedTimeout();
             handleSocketDisconnection(true);
             view.setExit();
-        }else view.printPlayerDisconnection(nick);
-    }
+        }else {
+            if (!nick.equals(nickname))
+                view.printPlayerDisconnection(nick);
+            else {
+                pingActive = false;
+                stopTimer();
+                handleSocketDisconnection(true);
+            }
+        }
+        }
 
     /**
      * Method that receives messages from server
@@ -154,7 +162,6 @@ public class Client {
         }
         }catch(IOException | ClassNotFoundException e) {
             System.out.println("Exception del metodo che riceve i messaggi dal server");
-            e.printStackTrace();
             handleSocketDisconnection(false);
         }
 
@@ -172,7 +179,6 @@ public class Client {
                 output.flush();
             } catch (IOException e) {
                 System.out.println("Exception nel sendMessage del client");
-                e.printStackTrace();
                 handleSocketDisconnection(false);
             }
         }
