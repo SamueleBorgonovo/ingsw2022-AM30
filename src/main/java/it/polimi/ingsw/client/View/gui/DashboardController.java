@@ -1085,14 +1085,14 @@ public class DashboardController {
 
         //Set towers
         int count;
-        for (count = 1; count <= player.getPlance().getNumoftowers(); count++) {
+        for (count = 1; count <= player.getPlance().numOfTowers(); count++) {
             getImageViewFromString("planceTower" + count).setImage(new Image(getImageFromTower(player.getPlance().getTower())));
             getImageViewFromString("planceTower" + count).setVisible(true);
         }
         int num = 0;
-        if (gui.getClient().getNumofPlayers() == 2)
+        if (gui.getClient().getNumOfPlayers() == 2)
             num = 8;
-        if (gui.getClient().getNumofPlayers() == 3)
+        if (gui.getClient().getNumOfPlayers() == 3)
             num = 6;
         for (i = count; count <= num; count++) {
             getImageViewFromString("planceTower" + i).setVisible(false);

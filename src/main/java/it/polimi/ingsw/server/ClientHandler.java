@@ -21,8 +21,8 @@ import java.util.ArrayList;
 public class ClientHandler implements Runnable, ClientHandlerInterface {
     private final int PING_PERIOD = 5000;
     private final int TIMEOUT_FOR_RESPONSE = 240000;
-    private MessageHandler messageHandler;
-    private Socket clientSocket;
+    private final MessageHandler messageHandler;
+    private final Socket clientSocket;
     private boolean active;
     private boolean pingactive;
     private final Thread pinger;
@@ -30,9 +30,9 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
     private ObjectOutputStream os;
     private ObjectInputStream is;
     private String nickname;
-    private GameHandler gameHandler;
+    private final GameHandler gameHandler;
     private boolean disconnectionCalled=false;
-    private ArrayList<Thread> timerThreads = new ArrayList<>();
+    private final ArrayList<Thread> timerThreads = new ArrayList<>();
 
     /**
      * Constructor ClientHandler instantiates attributes of the server
@@ -70,9 +70,8 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
         timer = new Thread(() -> {
             try{
                 Thread.sleep(TIMEOUT_FOR_RESPONSE);
-                System.out.println("Timer del pinger scattato "+getNickname());
                 handleSocketDisconnection(true,false);
-            } catch (InterruptedException e){ }
+            } catch (InterruptedException ignored){}
         });
         timerThreads.add(timer);
         timer.start();
@@ -133,7 +132,6 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
            } catch (ClassNotFoundException ignored) {}
 
         } catch (IOException e) {
-            System.out.println("IOException nel metodo che riceve i messaggi dal client");
            handleSocketDisconnection(e instanceof SocketTimeoutException,false);
         }
     }
@@ -172,21 +170,17 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
                     if(timeout) sendMessageToClient(new DisconnectMessage(nickname,false,false));
                     os.flush();
                     os.reset();
-                } catch (IOException e) {
-                }
+                } catch (IOException ignored) {}
             }
             try {
                 is.close();
-            } catch (IOException e) {
-            }
+            } catch (IOException ignored) {}
             try {
                 os.close();
-            } catch (IOException e) {
-            }
+            } catch (IOException ignored) {}
             try {
                 clientSocket.close();
-            } catch (IOException e) {
-            }
+            } catch (IOException ignored) {}
 
         }
     }

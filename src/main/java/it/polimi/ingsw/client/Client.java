@@ -28,7 +28,7 @@ public class Client {
     private String nickname;
     private Wizard wizard;
     private GameMode gamemode;
-    int numofPlayers;
+    int numOfPlayers;
     private final Thread socketListener;
     private final Thread pinger;
     private Thread timer;
@@ -40,7 +40,7 @@ public class Client {
     private final ArrayList<Thread> timerThreads = new ArrayList<>();
 
     /**
-     * Constructor Client instantiates attributes to connect with the server. It instantiate also
+     * Constructor Client instantiates attributes to connect with the server. It instantiates also
      *  threads used to receive messages and to ping server
      * @param ip ip of the server
      * @param port port of the server
@@ -92,13 +92,13 @@ public class Client {
 
     /**
      * Method used to set settings of the game
-     * @param gamemode gamemode of the game
-     * @param numofPlayers num of players of the game
+     * @param gamemode game mode of the game
+     * @param numOfPlayers num of players of the game
      * @param wizard wizard chosen by the player
      */
-    public void setSettings(GameMode gamemode,int numofPlayers,Wizard wizard){
+    public void setSettings(GameMode gamemode,int numOfPlayers,Wizard wizard){
         this.gamemode=gamemode;
-        this.numofPlayers=numofPlayers;
+        this.numOfPlayers =numOfPlayers;
         this.wizard=wizard;
         view.displayGame();
     }
@@ -109,12 +109,7 @@ public class Client {
      * @param assistantPhase is true if is assistant phase, false otherwise
      */
     public void setTurn(String nickname, boolean assistantPhase){
-        if(this.nickname.equals(nickname)){
-            myTurn=true;
-        }
-        else {
-            myTurn=false;
-        }
+        myTurn= this.nickname.equals(nickname);
         view.printTurn(nickname,assistantPhase);
     }
 
@@ -161,7 +156,6 @@ public class Client {
             ((MessageToClient) messageFromServer).action(this);
         }
         }catch(IOException | ClassNotFoundException e) {
-            System.out.println("Exception del metodo che riceve i messaggi dal server");
             handleSocketDisconnection(false);
         }
 
@@ -211,16 +205,13 @@ public class Client {
         stopTimer();
         try {
             input.close();
-        } catch (IOException e) {
-        }
+        } catch (IOException ignored) {}
         try {
             output.close();
-        } catch (IOException e) {
-        }
+        } catch (IOException ignored) {}
         try {
             socket.close();
-        } catch (IOException e) {
-        }
+        } catch (IOException ignored) {}
         view.printConnectionClosed(timeout);
     }
 
@@ -231,10 +222,8 @@ public class Client {
         timer = new Thread(() -> {
             try{
                 Thread.sleep(TIMEOUT_FOR_RESPONSE);
-                System.out.println("Timeout del pinger lato client scattato");
                 handleSocketDisconnection(true);
-            } catch (InterruptedException e){
-            }
+            } catch (InterruptedException ignored){}
         });
         timerThreads.add(timer);
         timer.start();
@@ -254,7 +243,7 @@ public class Client {
 
     /**
      * Method used to get the messageHandler of the client
-     * @return the messafeHandler of the client
+     * @return the messageHandler of the client
      */
     public ClientMessageHandler getMessageHandler() {
         return messageHandler;
@@ -278,7 +267,7 @@ public class Client {
 
     /**
      * Method used to get the wizard of the player
-     * @return the wizerd of the player
+     * @return the wizard of the player
      */
     public Wizard getWizard() {
         return wizard;
@@ -312,16 +301,16 @@ public class Client {
      * Method used to get the num of players of the game
      * @return the num of players of the game
      */
-    public int getNumofPlayers() {
-        return numofPlayers;
+    public int getNumOfPlayers() {
+        return numOfPlayers;
     }
 
     /**
      * Method used to set the num of players chosen by the player
-     * @param numofPlayers the num of player chosen by the player
+     * @param numOfPlayers the num of player chosen by the player
      */
-    public void setNumofPlayers(int numofPlayers) {
-        this.numofPlayers = numofPlayers;
+    public void setNumOfPlayers(int numOfPlayers) {
+        this.numOfPlayers = numOfPlayers;
     }
 
     /**

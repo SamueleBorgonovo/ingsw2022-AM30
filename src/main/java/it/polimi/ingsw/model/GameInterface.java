@@ -68,7 +68,7 @@ public interface GameInterface {
 
     Characters searchCharacter(CharacterView characterView);
 
-    int winnerIstantly();
+    int winnerInstantly();
 
     int winnerEndRound();
 

@@ -27,14 +27,14 @@ class Effect4Test {
         Game game = new Game(GameMode.EXPERTMODE,2);
         game.addPlayer("kek");
         game.getPlayer(1).setPlayerState(PlayerState.MOTHERNATUREPHASE);
-        int mtpos = game.getBoard().getArchipelago().getMothernature().isOn();
+        int mtpos = game.getBoard().getArchipelago().getMotherNature().isOn();
         game.getPlayer(1).setLastassistantplayed(Assistant.CAT);
         Characters character = new Characters(effect4);
         game.setCharacterInUse(character);
         effect4.effect(game,1);
         game.moveMotherNature(1,4);
         if(mtpos+4>12) mtpos=mtpos-12;
-        assertEquals(mtpos+4,game.getBoard().getArchipelago().getMothernature().isOn());
+        assertEquals(mtpos+4,game.getBoard().getArchipelago().getMotherNature().isOn());
     }
 
     @Test

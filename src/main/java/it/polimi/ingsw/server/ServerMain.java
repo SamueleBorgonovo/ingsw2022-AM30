@@ -4,7 +4,6 @@ import it.polimi.ingsw.client.View.cli.InputParser;
 
 import java.io.IOException;
 import java.net.Inet4Address;
-import java.util.Scanner;
 
 /**
  * Class used to start the server on a given port
@@ -14,7 +13,6 @@ public class ServerMain {
     private static final int MAX_PORT = 49151;
 
     public static void main(String[] args) throws IOException {
-        Scanner stdin = new Scanner(System.in);
         int serverPort;
         InputParser inputParser = new InputParser();
         System.out.println("Welcome");

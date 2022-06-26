@@ -23,5 +23,5 @@ public class SetTurnMessage extends MessageToClient {
         return nickname;
     }
 
-    public boolean isassistantPhase(){return assistantPhase;}
+    public boolean isAssistantPhase(){return assistantPhase;}
 }

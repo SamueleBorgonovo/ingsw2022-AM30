@@ -131,11 +131,11 @@ public class Graphic {
                 else
                     System.out.print(Symbols.PROFESSOR_EMPTY.getCode() + " ");
                 System.out.print("│ ");
-                if (studentEntrance < player.getPlance().getNumoftowers())
+                if (studentEntrance < player.getPlance().numOfTowers())
                     System.out.print(Colors.values()[player.getPlance().getTower().ordinal() + 5].getCode() + "▲ " + Colors.RESET.getCode());
                 else
                     System.out.print("  ");
-                if (studentEntrance + 1 < player.getPlance().getNumoftowers())
+                if (studentEntrance + 1 < player.getPlance().numOfTowers())
                     System.out.print(Colors.values()[player.getPlance().getTower().ordinal() + 5].getCode() + "▲ " + Colors.RESET.getCode());
                 else
                     System.out.print("  ");

@@ -156,10 +156,10 @@ class BoardTest {
         students.add(Student.RED);
         students.add(Student.GREEN);
         board.getCloud(2).setStudents(students);
-        board.getCloud(2).setChoosen(true);
+        board.getCloud(2).setChosen(true);
 
         Cloud cloud=board.getCloud(2);
-        assertTrue(cloud.isChoosen());
+        assertTrue(cloud.isChosen());
         assertTrue(cloud.getStudents().containsAll(students));
     }
 

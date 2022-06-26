@@ -27,7 +27,6 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
        notower = false;
        nocolor = false;
        professorcontroll = false;
-       Student student = null;
        numofislandstops = 4;
        twomoremoves = false;
    }
@@ -54,7 +53,7 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
     public void removeStudentFromEffect7(Student student){ effect7students.remove(student);}
 
     /**
-     * Metod addStudentInEffect7 add some student in character number 7
+     * Method addStudentInEffect7 add some student in character number 7
      *
      * @param student the students to add in character number 7
      */
@@ -79,7 +78,7 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
     }
 
     /**
-     * Metod addStudentInEffect1students add some student in character number 1
+     * Method addStudentInEffect1students add some student in character number 1
      *
      * @param student the students to add in character number 1
      */
@@ -113,7 +112,7 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
     }
 
     /**
-     * Metod addStudentInEffect11students add some student in character number 11
+     * Method addStudentInEffect11students add some student in character number 11
      *
      * @param student the students to add in character number 11
      */

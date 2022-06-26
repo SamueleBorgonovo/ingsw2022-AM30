@@ -43,7 +43,7 @@ public class Board {
                 bag.add(student);
         archipelago = new Archipelago();
         for (Island island : archipelago.getIslands()){
-            if (island.getIslandID() != archipelago.getMothernature().isOn() && island.getIslandID() != (((archipelago.getMothernature().isOn() +5) %12) +1))
+            if (island.getIslandID() != archipelago.getMotherNature().isOn() && island.getIslandID() != (((archipelago.getMotherNature().isOn() +5) %12) +1))
                 island.addStudent(this.getAndRemoveRandomBagStudent(1).get(0));
         }
         for (Student student : Student.values())
@@ -190,6 +190,6 @@ public class Board {
              islandsView.add(island.getIslandView());
         for(Characters character : this.getCharacters())
             characterViews.add(character.getCharacterView());
-        return new BoardView(cloudsViews, islandsView,this.getArchipelago().getMothernature().isOn(),characterViews);
+        return new BoardView(cloudsViews, islandsView,this.getArchipelago().getMotherNature().isOn(),characterViews);
     }
 }

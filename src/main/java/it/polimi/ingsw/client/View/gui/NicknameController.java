@@ -52,7 +52,6 @@ public class NicknameController {
         String nickname = nicknameWindows.getText();
         gui.getClient().sendMessage(new ChooseNicknameMessage(nickname,true, false));
         gui.setNickname(nickname);
-        //gui.instantiateDashBoardScene();
     }
 
     /**

@@ -2,17 +2,15 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Archipelago class handles the action related to the islands in the game
  */
-public class Archipelago implements Serializable {
+public class Archipelago{
     private final ArrayList<Island> islands = new ArrayList<>();
-    private MotherNature mothernature;
+    private final MotherNature mothernature;
 
     /**
      * Constructor Archipelago creates the islands of the game
@@ -30,7 +28,7 @@ public class Archipelago implements Serializable {
      *
      * @return the id the island with mother nature on
      */
-    public MotherNature getMothernature() {
+    public MotherNature getMotherNature() {
         return mothernature;
     }
 

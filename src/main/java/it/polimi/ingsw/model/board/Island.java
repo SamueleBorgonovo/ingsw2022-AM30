@@ -4,7 +4,6 @@ import it.polimi.ingsw.controller.virtualView.IslandView;
 import it.polimi.ingsw.model.game.Student;
 import it.polimi.ingsw.model.game.Tower;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**

@@ -122,18 +122,18 @@ class GameTest {
         game3players.addPlayer("tom");
         game3players.addPlayer("sam");
         player1=game3players.getPlayer(1);
-        assertEquals(0,game3players.winnerIstantly());
+        assertEquals(0,game3players.winnerInstantly());
         num=game3players.getPlayer(1).getPlance().getNumOfTowers();
         for(int i=0;i<num;i++) {
             player1.getPlance().removeTower();
         }
-        assertEquals(2,game3players.winnerIstantly());
+        assertEquals(2,game3players.winnerInstantly());
         game3players.getPlayer(1).getPlance().addTower();
 
         for(int i=11;i>2;i--) {
             game3players.getBoard().getArchipelago().getIslands().remove(i);
         }
-        assertEquals(1,game3players.winnerIstantly());
+        assertEquals(1,game3players.winnerInstantly());
 
         ArrayList<Player> winners;
         winners=game3players.verifyWinner();
@@ -243,16 +243,16 @@ class GameTest {
         player1.getPlance().addStudentEntrance(Student.RED);
         player1.getPlance().addStudentEntrance(Student.BLUE);
         player1.getPlance().addStudentEntrance(Student.YELLOW);
-        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMothernature().isOn(),Student.RED);
-        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMothernature().isOn(),Student.BLUE);
-        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMothernature().isOn(),Student.YELLOW);
-        assertEquals(game2players.getBoard().getArchipelago().getSingleIsland(game2players.getBoard().getArchipelago().getMothernature().isOn()).getStudents(),students);
+        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMotherNature().isOn(),Student.RED);
+        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMotherNature().isOn(),Student.BLUE);
+        game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMotherNature().isOn(),Student.YELLOW);
+        assertEquals(game2players.getBoard().getArchipelago().getSingleIsland(game2players.getBoard().getArchipelago().getMotherNature().isOn()).getStudents(),students);
 
         player1.setPlayerState(PlayerState.ASSISTANTPHASE);
         player1.getPlance().addStudentEntrance(Student.RED);
         boolean check=false;
         try{
-            game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMothernature().isOn(),Student.RED);
+            game2players.moveStudentToIsland(1,game2players.getBoard().getArchipelago().getMotherNature().isOn(),Student.RED);
         }catch(InvalidTurnException e){
             check=true;
         }
@@ -378,13 +378,13 @@ class GameTest {
 
 
         for(Assistant assistant: Assistant.values()) {
-            int j= game2players.getBoard().getArchipelago().getMothernature().isOn();
+            int j= game2players.getBoard().getArchipelago().getMotherNature().isOn();
             player1.setPlayerState(PlayerState.ASSISTANTPHASE);
             game2players.useAssistant(1,assistant);
             player1.setPlayerState(PlayerState.MOTHERNATUREPHASE);
             Random rnd = new Random();
             game2players.moveMotherNature(1, num = (rnd.nextInt(assistant.getMovement())+1));
-            assertEquals(((j + num - 1) % 12) + 1, game2players.getBoard().getArchipelago().getMothernature().isOn());
+            assertEquals(((j + num - 1) % 12) + 1, game2players.getBoard().getArchipelago().getMotherNature().isOn());
         }
 
         Game game = new Game(GameMode.EXPERTMODE,2);
@@ -571,10 +571,10 @@ class GameTest {
         game2players.startGame();
         game2players.getPlayerorder().get(0).setPlayerState(PlayerState.CLOUDPHASE);
         game2players.selectCloud(game2players.getPlayerorder().get(0).getPlayerID(),2);
-        assertTrue(game2players.getBoard().getCloud(2).isChoosen());
+        assertTrue(game2players.getBoard().getCloud(2).isChosen());
         //game2players.getPlayerorder().get(1).setPlayerState(PlayerState.CLOUDPHASE);
         //game2players.selectCloud(game2players.getPlayerorder().get(1).getPlayerID(),1);
-        //assertTrue(game2players.getBoard().getCloud(1).isChoosen());
+        //assertTrue(game2players.getBoard().getCloud(1).isChosen());
     }
 
     @Test

@@ -2,8 +2,6 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.controller.virtualView.CloudView;
 import it.polimi.ingsw.model.game.Student;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -11,13 +9,12 @@ import java.util.ArrayList;
  */
 public class Cloud{
     private ArrayList<Student> students = new ArrayList<>();
-    private boolean choosen = false;
-    private int cloudID;
+    private boolean chosen = false;
+    private final int cloudID;
 
     /**
      * Constructor Cloud creates a new Cloud in the game
-     *
-     * @param cloudID
+     * @param cloudID cloud's id
      */
     public Cloud(int cloudID) {
         this.cloudID = cloudID;
@@ -46,17 +43,17 @@ public class Cloud{
      *
      * @return true if the cloud has been chosen, else false
      */
-    public boolean isChoosen() {
-        return choosen;
+    public boolean isChosen() {
+        return chosen;
     }
 
     /**
-     * Method setChoosen set a cloud as chosen or not chosen
+     * Method setChosen set a cloud as chosen or not chosen
      *
-     * @param choosen true if the cloud has been chosen, else false
+     * @param chosen true if the cloud has been chosen, else false
      */
-    public void setChoosen(boolean choosen) {
-        this.choosen = choosen;
+    public void setChosen(boolean chosen) {
+        this.chosen = chosen;
     }
 
     /**
@@ -72,7 +69,7 @@ public class Cloud{
      * Method getCloudView returns the CloudView instance associated to the cloud
      */
     public CloudView getCloudView(){
-        return new CloudView(this.students,this.choosen, this.cloudID);
+        return new CloudView(this.students,this.chosen, this.cloudID);
     }
 
 }

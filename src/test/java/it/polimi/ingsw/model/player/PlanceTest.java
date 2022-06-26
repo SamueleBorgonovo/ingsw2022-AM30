@@ -203,7 +203,7 @@ class PlanceTest {
 
         assertEquals(hall.size(),planceView.getHall().size());
 
-        assertEquals(numoftowers,planceView.getNumoftowers());
+        assertEquals(numoftowers,planceView.numOfTowers());
         assertEquals(tower,planceView.getTower());
     }
 }

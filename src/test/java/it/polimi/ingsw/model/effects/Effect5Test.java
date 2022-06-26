@@ -29,7 +29,7 @@ class Effect5Test {
         game.addPlayer("kek");
         game.addPlayer("kek2");
         game.getPlayer(1).setPlayerState(PlayerState.MOTHERNATUREPHASE);
-        int mtpos = game.getBoard().getArchipelago().getMothernature().isOn();
+        int mtpos = game.getBoard().getArchipelago().getMotherNature().isOn();
         game.getPlayer(1).setLastassistantplayed(Assistant.CAT);
         if(mtpos==12) mtpos=0;
         game.getBoard().getArchipelago().getSingleIsland(mtpos + 1).setTowerColor(Tower.BLACK);

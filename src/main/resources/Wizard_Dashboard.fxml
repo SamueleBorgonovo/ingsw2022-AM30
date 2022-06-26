@@ -16,22 +16,22 @@
       </Label>
       <HBox alignment="CENTER" layoutX="76.0" layoutY="225.0" prefHeight="328.0" prefWidth="332.0" spacing="50.0" styleClass="box" stylesheets="@Style.css">
          <children>
-            <ImageView id="wizardGreen" fx:id="wizardGreen" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardGreen">
+            <ImageView id="wizardGreen" fx:id="wizardGreen" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#chosenWizardGreen">
                <image>
                   <Image url="@img/WIZARD_GREEN.png" />
                </image>
             </ImageView>
-            <ImageView id="wizardYellow" fx:id="wizardYellow" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardYellow">
+            <ImageView id="wizardYellow" fx:id="wizardYellow" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#chosenWizardYellow">
                <image>
                   <Image url="@img/WIZARD_YELLOW.png" />
                </image>
             </ImageView>
-            <ImageView id="wizardBlue" fx:id="wizardBlue" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardBlue">
+            <ImageView id="wizardBlue" fx:id="wizardBlue" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#chosenWizardBlue">
                <image>
                   <Image url="@img/WIZARD_BLUE.png" />
                </image>
             </ImageView>
-            <ImageView id="wizardPink" fx:id="wizardPink" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#choosenWizardPink">
+            <ImageView id="wizardPink" fx:id="wizardPink" fitHeight="274.0" fitWidth="179.0" onMouseClicked="#chosenWizardPink">
                <image>
                   <Image url="@img/WIZARD_PINK.png" />
                </image>

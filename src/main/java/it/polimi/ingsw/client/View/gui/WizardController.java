@@ -14,8 +14,6 @@ import java.util.ArrayList;
 public class WizardController {
     private GUI gui;
 
-    private ArrayList<Wizard> wizards;
-
     @FXML
     public Label wrongWizard;
 
@@ -36,7 +34,6 @@ public class WizardController {
      * @param wizards list of available wizard received from the server
      */
     public void setWizards(ArrayList<Wizard> wizards) {
-        this.wizards = wizards;
         visibleWizards(wizards);
     }
 
@@ -79,9 +76,9 @@ public class WizardController {
     }
 
     /**
-     * Method choosenWizardGreen is called when the player choice the Green wizard
+     * Method chosenWizardGreen is called when the player choice the Green wizard
      */
-    public void choosenWizardGreen() {
+    public void chosenWizardGreen() {
         gui.getClient().setWizard(Wizard.WIZARD_GREEN);
         ChooseWizardMessage message = new ChooseWizardMessage(Wizard.WIZARD_GREEN);
         gui.getClient().sendMessage(message);
@@ -91,9 +88,9 @@ public class WizardController {
     }
 
     /**
-     * Method choosenWizardYellow is called when the player choice the Yellow wizard
+     * Method chosenWizardYellow is called when the player choice the Yellow wizard
      */
-    public void choosenWizardYellow() {
+    public void chosenWizardYellow() {
         gui.getClient().setWizard(Wizard.WIZARD_YELLOW);
         ChooseWizardMessage message = new ChooseWizardMessage(Wizard.WIZARD_YELLOW);
         gui.getClient().sendMessage(message);
@@ -103,9 +100,9 @@ public class WizardController {
     }
 
     /**
-     * Method choosenWizardBlue is called when the player choice the Blue wizard
+     * Method chosenWizardBlue is called when the player choice the Blue wizard
      */
-    public void choosenWizardBlue() {
+    public void chosenWizardBlue() {
         gui.getClient().setWizard(Wizard.WIZARD_BLUE);
         ChooseWizardMessage message = new ChooseWizardMessage(Wizard.WIZARD_BLUE);
         gui.getClient().sendMessage(message);
@@ -115,9 +112,9 @@ public class WizardController {
     }
 
     /**
-     * Method choosenWizardPink is called when the player choice the Pink wizard
+     * Method chosenWizardPink is called when the player choice the Pink wizard
      */
-    public void choosenWizardPink() {
+    public void chosenWizardPink() {
         gui.getClient().setWizard(Wizard.WIZARD_PINK);
         ChooseWizardMessage message = new ChooseWizardMessage(Wizard.WIZARD_PINK);
         gui.getClient().sendMessage(message);

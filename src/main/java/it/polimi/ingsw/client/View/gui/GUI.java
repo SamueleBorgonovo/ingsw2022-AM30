@@ -41,7 +41,6 @@ public class GUI extends Application implements View{
     private PlayerView currentPlayerView;
     private boolean character4played=false;
     private PlayerState currentPlayerState;
-    private Wizard wizard;
 
     /**
      * Method start is called when GUI is launched. It sets the primary stage of the view and starts the view
@@ -51,14 +50,6 @@ public class GUI extends Application implements View{
     public void start(Stage primaryStage){
         this.primaryStage=primaryStage;
         instantiateConnectionScene();
-    }
-
-    /**
-     * Method setWizard sets the wizard chosen by the player
-     * @param wizard wizard chosen by the player
-     */
-    public void setWizard(Wizard wizard){
-        this.wizard=wizard;
     }
 
     /**
@@ -80,7 +71,7 @@ public class GUI extends Application implements View{
 
     /**
      * Method getCurrentPlayerState returns the current playerState of the player
-     * @return the current playrState of the player
+     * @return the current playerState of the player
      */
     public PlayerState getCurrentPlayerState() {
         return currentPlayerState;
@@ -244,8 +235,7 @@ public class GUI extends Application implements View{
         try {
             return client.setupConnection();
         }
-        catch (Exception e){}
-        return false;
+        catch (Exception e){ return false;}
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -391,7 +381,7 @@ public class GUI extends Application implements View{
      */
     @Override
     public void printAssistantChosen(String nick, Assistant assistant) {
-        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: "+nick+" choosed assistant "+assistant));
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("GAME: "+nick+" chose assistant "+assistant));
     }
 
     /**
@@ -438,7 +428,7 @@ public class GUI extends Application implements View{
             dashboardController.setupPlance(currentPlayerView);
             dashboardController.setupArchipelago();
             if (!nick.equals(nickname)) {
-                dashboardController.setGameUpdateLabel("GAME: " + nick + " choosed cloud " + cloudID);
+                dashboardController.setGameUpdateLabel("GAME: " + nick + " chose cloud " + cloudID);
             }
         });
     }
@@ -649,9 +639,7 @@ public class GUI extends Application implements View{
      */
     @Override
     public void printWinClose() {
-        Platform.runLater(() -> {
-            dashboardController.setGameUpdateLabel("Game Ended. Disconnection from server");
-        });
+        Platform.runLater(() -> dashboardController.setGameUpdateLabel("Game Ended. Disconnection from server"));
     }
 
     /**
@@ -674,9 +662,7 @@ public class GUI extends Application implements View{
         resetControllers();
         instantiateDashBoardScene();
         correctlyConnected=true;
-        Platform.runLater(() -> {
-            dashboardController.setupArchipelago();
-        });
+        Platform.runLater(() -> dashboardController.setupArchipelago());
 
     }
 
@@ -727,22 +713,16 @@ public class GUI extends Application implements View{
                 });
                 chooseCloud();
             }
-            case CHARACTHERSTUDENTSPHASE -> {
-                System.out.println("Fino a qui ci sei poi non so");
-                Platform.runLater(() -> {
-                    dashboardController.clickCharacterButton();
-                    dashboardController.setCharacterButtonClickable();
-                    dashboardController.inputStudentCharacter();
-                });
-            }
-            case CHARACTHERISLANDPHASE -> {
-                System.out.println("Fino a qui ci sei poi non so");
-                Platform.runLater(() -> {
-                    dashboardController.clickCharacterButton();
-                    dashboardController.setCharacterButtonClickable();
-                    dashboardController.inputIslandCharacter();
-                });
-            }
+            case CHARACTHERSTUDENTSPHASE -> Platform.runLater(() -> {
+                dashboardController.clickCharacterButton();
+                dashboardController.setCharacterButtonClickable();
+                dashboardController.inputStudentCharacter();
+            });
+            case CHARACTHERISLANDPHASE -> Platform.runLater(() -> {
+                dashboardController.clickCharacterButton();
+                dashboardController.setCharacterButtonClickable();
+                dashboardController.inputIslandCharacter();
+            });
         }
     }
 
@@ -761,12 +741,10 @@ public class GUI extends Application implements View{
     }
 
     /**
-     * Method noGameReconnect handles that the player can't anymore reconnect to the game
+     * Method noGameReconnect handles that the player can no longer reconnect to the game
      */
     public void noGameReconnect(){
-        Platform.runLater(() -> {
-            nicknameScene.noGameReconnect();
-        });
+        Platform.runLater(() -> nicknameScene.noGameReconnect());
     }
 
 }

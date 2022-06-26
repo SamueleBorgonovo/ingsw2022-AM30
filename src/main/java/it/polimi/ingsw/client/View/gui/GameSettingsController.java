@@ -69,7 +69,7 @@ public class GameSettingsController {
             if(this.gameMode!=null && this.numberOfPlayers!=0) {
                 CreatePlayerInGameMessage message = new CreatePlayerInGameMessage(gui.getNickname(),gameMode,numberOfPlayers);
                 gui.getClient().setGamemode(gameMode);
-                gui.getClient().setNumofPlayers(numberOfPlayers);
+                gui.getClient().setNumOfPlayers(numberOfPlayers);
                 gui.getClient().sendMessage(message);
             }
             else {

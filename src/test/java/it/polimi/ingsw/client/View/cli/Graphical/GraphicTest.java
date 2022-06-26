@@ -472,9 +472,9 @@ class GraphicTest {
     @Test
     void printClouds() {
         graphic.printClouds(game.getBoard().getBoardView().getClouds());
-        game.getBoard().getClouds().get(1).setChoosen(true);
+        game.getBoard().getClouds().get(1).setChosen(true);
         graphic.printClouds(game.getBoard().getBoardView().getClouds());
-        game.getBoard().getClouds().get(0).setChoosen(true);
+        game.getBoard().getClouds().get(0).setChosen(true);
         graphic.printClouds(game.getBoard().getBoardView().getClouds());
     }
 

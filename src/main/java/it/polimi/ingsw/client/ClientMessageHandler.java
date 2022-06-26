@@ -157,7 +157,7 @@ public class ClientMessageHandler {
      * @param message message received from the server
      */
     public void process(SetTurnMessage message){
-        client.setTurn(message.getNickname(), message.isassistantPhase());
+        client.setTurn(message.getNickname(), message.isAssistantPhase());
     }
 
     /**
@@ -193,7 +193,7 @@ public class ClientMessageHandler {
     }
 
     /**
-     * Method used to process AssistantChoosedMessage
+     * Method used to process AssistantChosenMessage
      * @param message message received from the server
      */
     public void process(AssistantChosenMessage message){
@@ -201,7 +201,7 @@ public class ClientMessageHandler {
     }
 
     /**
-     * Method used to process StudentHallChoosedMessage
+     * Method used to process StudentHallChosenMessage
      * @param message message received from the server
      */
     public void process(StudentHallChosenMessage message){
@@ -209,7 +209,7 @@ public class ClientMessageHandler {
     }
 
     /**
-     * Method used to process StudentIslandChoosedMessage
+     * Method used to process StudentIslandChosenMessage
      * @param message message received from the server
      */
     public void process(StudentIslandChosenMessage message){
@@ -217,7 +217,7 @@ public class ClientMessageHandler {
     }
 
     /**
-     * Method used to process CharacterChoosedMessage
+     * Method used to process CharacterChosenMessage
      * @param message message received from the server
      */
     public void process(CharacterChosenMessage message){
@@ -225,7 +225,7 @@ public class ClientMessageHandler {
     }
 
     /**
-     * Method used to process CloudChoosedMessage
+     * Method used to process CloudChosenMessage
      * @param message message received from the server
      */
     public void process(CloudChosenMessage message){

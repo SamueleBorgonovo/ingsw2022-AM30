@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.board;
 import java.io.Serializable;
 
 /**
- * Mothernature class is the reference to the island with mother nature
+ * MotherNature class is the reference to the island with mother nature
  */
 public class MotherNature implements Serializable {
         private int islandID;
@@ -27,7 +27,7 @@ public class MotherNature implements Serializable {
     }
 
     /**
-     * Metod move is used to move mother nature among the Archipelago
+     * Method move is used to move mother nature among the Archipelago
      *
      * @param numOfIslands the number of movements
      */
@@ -43,7 +43,7 @@ public class MotherNature implements Serializable {
     /**
      * Method setMotherNature set the island with mother nature
      *
-     * @param islandID set the island wirìth mother nature
+     * @param islandID set the island with mother nature
      */
     public void setMotherNature(int islandID){
         if(islandID >= 1 && islandID <=12)

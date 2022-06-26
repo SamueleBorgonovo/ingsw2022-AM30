@@ -19,8 +19,8 @@ class ArchipelagoTest {
     @Test
     void getMothernature(){
         Archipelago archipelago=board2Players.getArchipelago();
-        archipelago.getMothernature().setMotherNature(1);
-        assertEquals(1,archipelago.getMothernature().isOn());
+        archipelago.getMotherNature().setMotherNature(1);
+        assertEquals(1,archipelago.getMotherNature().isOn());
     }
 
     @Test
@@ -34,7 +34,7 @@ class ArchipelagoTest {
     void getStudentIslands() {
         ArrayList<Student> studentWanted= new ArrayList<>();
         ArrayList<Student> student;
-        int num = board2Players.getArchipelago().getMothernature().isOn();
+        int num = board2Players.getArchipelago().getMotherNature().isOn();
         if(num==12)
             num=0;
         studentWanted.add(board2Players.getArchipelago().getSingleIsland(num+1).getStudents().get(0));

@@ -40,16 +40,16 @@ class CloudTest {
 
     @Test
     void isChoosen() {
-        //tests also setChoosen
-        assertFalse(cloud.isChoosen());
-        cloud.setChoosen(true);
-        assertTrue(cloud.isChoosen());
+        //tests also setChosen
+        assertFalse(cloud.isChosen());
+        cloud.setChosen(true);
+        assertTrue(cloud.isChosen());
     }
 
     @Test
     void setChoosen(){
-        cloud.setChoosen(true);
-        assertTrue(cloud.isChoosen());
+        cloud.setChosen(true);
+        assertTrue(cloud.isChosen());
     }
 
     @Test
@@ -59,7 +59,7 @@ class CloudTest {
 
     @Test
     void getCloudView(){
-        cloud.setChoosen(true);
+        cloud.setChosen(true);
         CloudView cloudView=cloud.getCloudView();
         assertEquals(3,cloudView.getStudents().size());
         assertTrue(cloudView.getStudents().containsAll(students));

@@ -22,11 +22,11 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class GameHandler {
     private static ConcurrentHashMap<String, GameInterface> playertoGameMap;//Map that find the game of a player's nickname
-    private static ConcurrentHashMap<String, Integer> playertoPlayerIDMap;//Map that find game's playerid from a player's nickname
+    private static ConcurrentHashMap<String, Integer> playertoPlayerIDMap;//Map that find game's playerID from a player's nickname
     private static ConcurrentHashMap<String, ClientHandlerInterface> playertoHandlerMap;//Map that find player's handler
     private static ConcurrentHashMap<GameInterface, Thread> gameToTimerMap;//Map to find WinningTimer of a game
     private static ConcurrentHashMap<GameInterface, Integer> gameToStudentPlayed;
-    private static ArrayList<String> nicknameChoosen;
+    private static ArrayList<String> NicknameChosen;
     private final int WINNING_TIMER = 60000;
 
     /**
@@ -38,7 +38,7 @@ public class GameHandler {
         playertoHandlerMap = new ConcurrentHashMap<>();
         gameToTimerMap = new ConcurrentHashMap<>();
         gameToStudentPlayed = new ConcurrentHashMap<>();
-        nicknameChoosen = new ArrayList<>();
+        NicknameChosen = new ArrayList<>();
     }
 
     /**
@@ -78,7 +78,6 @@ public class GameHandler {
             setPlayeridofPlayer(clientHandler.getNickname(), playerid);
             setHandlerofPlayer(clientHandler.getNickname(),clientHandler);
             setGameToStudentPlayed(game,0);
-            //Possiamo mandare un messaggio di creazione nuova partita
             clientHandler.sendMessageToClient(new BoardUpdateMessage(game.getBoard().getBoardView()));
             WizardsListMessage message = new WizardsListMessage(game.getWizardAvailable());
             clientHandler.sendMessageToClient(message);
@@ -87,7 +86,7 @@ public class GameHandler {
     }
 
     /**
-     * Method used to check if the nickname chosen by the player is already used or he can reconnect to a game
+     * Method used to check if the nickname chosen by the player is already used, or if he can reconnect to a game
      * @param clientHandler clientHandler of the client of the player
      * @param nickname nickname chosen by the player
      * @param newGame if newGame is true player decided to don't reconnect to a game and to create a new one
@@ -106,12 +105,12 @@ public class GameHandler {
                     clientHandler.sendMessageToClient(message);
                 }
             } else {
-                if (nicknameChoosen.contains(nickname)) {
+                if (NicknameChosen.contains(nickname)) {
                     NicknameMessage message = new NicknameMessage(false, false);
                     clientHandler.sendMessageToClient(message);
                 } else {
                     NicknameMessage message = new NicknameMessage(true, false);
-                    nicknameChoosen.add(nickname);
+                    NicknameChosen.add(nickname);
                     clientHandler.setNickname(nickname);
                     clientHandler.sendMessageToClient(message);
                 }
@@ -170,7 +169,7 @@ public class GameHandler {
         int playerid = findPlayeridofPlayer(nickname);
 
         if(game.getState()==GameState.WAITINGFORPLAYERS) {
-            nicknameChoosen.remove(nickname);
+            NicknameChosen.remove(nickname);
             playertoGameMap.remove(nickname);
             playertoPlayerIDMap.remove(nickname);
         }
@@ -195,7 +194,7 @@ public class GameHandler {
 
     /**
      * Method used to reconnect a player to a game. If the game was set in pause, it starts.
-     * @param clientHandler clietnhandler of the player to reconnect
+     * @param clientHandler client handler of the player to reconnect
      */
     public void reconnectPlayer(ClientHandlerInterface clientHandler){
         if(playertoGameMap.containsKey(clientHandler.getNickname())) {
@@ -233,7 +232,7 @@ public class GameHandler {
      * @param game game to send the updates
      * @param boardView game's board update
      * @param playerView game's list of players update
-     * @param effectHandler game's effecthandler update
+     * @param effectHandler game's effectHandler update
      */
     public void updateClient(GameInterface game, BoardView boardView, ArrayList<PlayerView> playerView, EffectHandler effectHandler){
         sendMessagetoGame(game,new BoardUpdateMessage(boardView));
@@ -291,7 +290,7 @@ public class GameHandler {
     }
 
     /**
-     * Method used to get the ClietHandlerInterface of a player
+     * Method used to get the ClientHandlerInterface of a player
      * @param nickname nickname of the player
      * @return the ClientHandlerInterface of the player
      */
@@ -595,7 +594,7 @@ public class GameHandler {
                 sendMessagetoGame(game, new WinEndRoundMessage(nickWinners,check));
             }
         }else {
-            check=game.winnerIstantly();
+            check=game.winnerInstantly();
             if (check != 0) {
                 playerswinner=game.verifyWinner();
                 ArrayList<String> nickWinners = new ArrayList<>();
@@ -628,7 +627,7 @@ public class GameHandler {
             playertoHandlerMap.remove(player.getNickname());
             playertoGameMap.remove(player.getNickname());
             playertoPlayerIDMap.remove(player.getNickname());
-            nicknameChoosen.remove(player.getNickname());
+            NicknameChosen.remove(player.getNickname());
             gameToStudentPlayed.remove(game);
         }
     }

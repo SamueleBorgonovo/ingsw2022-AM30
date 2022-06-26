@@ -111,7 +111,7 @@ public class CharacterInput {
         ArrayList<Student> studentList = new ArrayList<>();
         int count=0;
         for (Student student: Student.values())
-            count = count + hall.get(student).intValue();
+            count = count + hall.get(student);
         int num = inputParser.intParser();
         while(num<1 || num>2 || num>count){
             System.out.println("Number not valid or you don't have enough students in the hall. Please try again");
@@ -169,7 +169,7 @@ public class CharacterInput {
         while (!studentsCard.contains(studentChosen) && check) {
             System.out.println("Student not available. Please try again");
             studentChosen = inputParser.studentParser();
-            if (hall != null && hall.get(studentChosen).intValue() == 10)
+            if (hall != null && hall.get(studentChosen) == 10)
                 System.out.println("Max students. Please try again");
                 check=false;
         }

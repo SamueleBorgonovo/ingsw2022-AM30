@@ -158,7 +158,7 @@ public class CLI implements View {
                 choice1 = inputParser.intParser();
             }
         }
-        client.setNumofPlayers(choice1);
+        client.setNumOfPlayers(choice1);
 
         CreatePlayerInGameMessage message = new CreatePlayerInGameMessage(nickname,gamemode,choice1);
         client.sendMessage(message);

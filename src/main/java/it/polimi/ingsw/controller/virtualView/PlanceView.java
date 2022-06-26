@@ -15,7 +15,7 @@ public class PlanceView implements Serializable {
     private final ArrayList<Student> entrance;
     private final ArrayList<Professor> professors;
     private final HashMap<Student,Integer> hall;
-    private final int numoftowers;
+    private final int numOfTowers;
     private final Tower tower;
 
     /**
@@ -23,14 +23,14 @@ public class PlanceView implements Serializable {
      * @param entrance plance's entrance
      * @param professors plance's professors
      * @param hall plance's hall
-     * @param numoftowers plance's num of towers
+     * @param numOfTowers plance's num of towers
      * @param tower plance's type of tower
      */
-    public PlanceView(ArrayList<Student> entrance,ArrayList<Professor> professors,HashMap<Student,Integer> hall,int numoftowers,Tower tower){
+    public PlanceView(ArrayList<Student> entrance,ArrayList<Professor> professors,HashMap<Student,Integer> hall,int numOfTowers,Tower tower){
         this.entrance=entrance;
         this.professors=professors;
         this.hall=hall;
-        this.numoftowers=numoftowers;
+        this.numOfTowers=numOfTowers;
         this.tower=tower;
     }
 
@@ -59,11 +59,11 @@ public class PlanceView implements Serializable {
     }
 
     /**
-     * Method getNumoftowers returns plance's num of towers
+     * Method getNumOfTowers returns plance's num of towers
      * @return the plance's num of towers
      */
-    public int getNumoftowers() {
-        return numoftowers;
+    public int numOfTowers() {
+        return numOfTowers;
     }
 
     /**

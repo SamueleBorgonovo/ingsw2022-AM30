@@ -18,7 +18,7 @@ public class Plance {
     private final Tower tower;
 
     /**
-     * Constructor Plance initiliaze the player's plance
+     * Constructor Plance initialize the player's plance
      *
      * @param tower the player's tower
      * @param numoftowers the number of towers of the player
@@ -53,7 +53,7 @@ public class Plance {
     }
 
     /**
-     * Methpd getEntrance returns the students which are in the entrance of the plance
+     * Method getEntrance returns the students which are in the entrance of the plance
      *
      * @return the students which are in the entrance of the plance
      */

@@ -13,7 +13,7 @@ import java.net.Socket;
  */
 public class Server {
    private final int serverPort;
-    private boolean isActive;
+    private final boolean isActive;
     MessageHandler messageHandler;
     GameHandler gameHandler;
 
