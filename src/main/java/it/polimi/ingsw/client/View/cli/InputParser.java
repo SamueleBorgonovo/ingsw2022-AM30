@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.View.cli;
 
 import it.polimi.ingsw.client.View.cli.Graphical.Graphic;
-import it.polimi.ingsw.controller.virtualView.BoardView;
 import it.polimi.ingsw.controller.virtualView.IslandView;
 import it.polimi.ingsw.model.game.Student;
 

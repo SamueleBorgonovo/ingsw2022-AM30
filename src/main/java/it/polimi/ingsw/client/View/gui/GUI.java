@@ -34,7 +34,7 @@ public class GUI extends Application implements View{
     private FXMLLoader fxmlLoader;
     private String nickname;
     private BoardView board;
-    private ArrayList<PlayerView> players = new ArrayList<>();
+    private final ArrayList<PlayerView> players = new ArrayList<>();
     private EffectHandler effectHandler;
     private PlayerView player;
     private boolean correctlyConnected=false;

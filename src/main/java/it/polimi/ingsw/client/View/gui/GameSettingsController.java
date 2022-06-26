@@ -2,7 +2,6 @@ package it.polimi.ingsw.client.View.gui;
 
 import it.polimi.ingsw.messages.toServer.CreatePlayerInGameMessage;
 import it.polimi.ingsw.model.game.GameMode;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;

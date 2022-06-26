@@ -27,10 +27,10 @@ public class CLI implements View {
 
     private final Graphic graphic = new Graphic();
     private Client client;
-    private InputParser inputParser = new InputParser();
-    private ArrayList<PlayerView> players = new ArrayList<>();
+    private final InputParser inputParser = new InputParser();
+    private final ArrayList<PlayerView> players = new ArrayList<>();
     private BoardView board;
-    private CharacterInput characterInput = new CharacterInput();
+    private final CharacterInput characterInput = new CharacterInput();
     private EffectHandler effectHandler;
     private String nickname;
     private PlayerView player;
@@ -42,10 +42,9 @@ public class CLI implements View {
      * Method init starts a new cli instance
      *
      * @throws IOException
-     * @throws ClassNotFoundException
      * @throws NumberFormatException
      */
-    public void init() throws IOException, ClassNotFoundException, NumberFormatException {
+    public void init() throws IOException, NumberFormatException {
         boolean check = false;
         this.graphic.printLogo();
 
@@ -71,8 +70,8 @@ public class CLI implements View {
 
     /**
      * Method chooseNickname calls methods in nicknameScene to set the nickname and reconnect to a game
-     * @param validNickname
-     * @param reconnect
+     * @param validNickname checks if the nickname is valid
+     * @param reconnect checks if there is a possible reconnection
      */
     @Override
     public void chooseNickname(boolean validNickname, boolean reconnect) {
@@ -366,7 +365,6 @@ public class CLI implements View {
         ArrayList<PlayerView> playerP = new ArrayList<>();
         playerP.add(player);
         graphic.printPlances(playerP);
-        int numOfIslands = this.board.getIslandViews().size();
         Student studentChosen = this.chooseStudentToMove();
         int islandID = inputParser.IslandParser(this.board.getIslandViews(),this.board.getMotherNature());
         MoveStudentToIslandMessage message = new MoveStudentToIslandMessage(islandID, studentChosen);
@@ -553,7 +551,8 @@ public class CLI implements View {
 
     /**
      * Method printStartGame handles the first connection with the player
-     * @param restart
+     * @param restart if is true it's a new game, else it's a previous game
+     *
      */
     @Override
     public void printStartGame(boolean restart) {
@@ -655,7 +654,7 @@ public class CLI implements View {
 
     /**
      * Method to handles the use of character  number 4 in the turn
-     * @param character4played
+     * @param character4played true if character number 4 is played, esle false
      */
     public void setCharacter4played(boolean character4played) {
         this.character4played = character4played;
@@ -887,26 +886,16 @@ public class CLI implements View {
         if(playerState==PlayerState.STUDENTPHASE){
             action=chooseNextAction(playerState);
             switch(action){
-                case MOVESTUDENTT0ISLAND -> {
-                    moveStudentToIsland();
-                }
-                case MOVESTUDENTTOHALL -> {
-                    moveStudentToHall();
-                }
-                case USECHARACTER -> {
-                    useCharacter(playerState);
-                }
+                case MOVESTUDENTT0ISLAND -> moveStudentToIsland();
+                case MOVESTUDENTTOHALL -> moveStudentToHall();
+                case USECHARACTER -> useCharacter(playerState);
             }
         }else if(playerState==PlayerState.MOTHERNATUREPHASE){
             if(client.getGamemode()==GameMode.EXPERTMODE) {
                 action = chooseNextAction(playerState);
                 switch (action) {
-                    case USECHARACTER -> {
-                        useCharacter(playerState);
-                    }
-                    case MOVEMOTHERNATURE -> {
-                        moveMotherNature();
-                    }
+                    case USECHARACTER -> useCharacter(playerState);
+                    case MOVEMOTHERNATURE -> moveMotherNature();
                 }
             }else moveMotherNature();
         }else if(playerState==PlayerState.ASSISTANTPHASE){
@@ -919,12 +908,8 @@ public class CLI implements View {
             if(client.getGamemode()==GameMode.EXPERTMODE){
                 action=chooseNextAction(playerState);
                 switch (action) {
-                    case CHOOSECLOUD -> {
-                        chooseCloud();
-                    }
-                    case USECHARACTER -> {
-                        useCharacter(playerState);
-                    }
+                    case CHOOSECLOUD -> chooseCloud();
+                    case USECHARACTER -> useCharacter(playerState);
                 }
             }else chooseCloud();
         }

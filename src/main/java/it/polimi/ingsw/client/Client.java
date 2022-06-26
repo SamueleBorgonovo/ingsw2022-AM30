@@ -19,8 +19,8 @@ public class Client {
 
     private final int PING_PERIOD = 10000;
     private final int TIMEOUT_FOR_RESPONSE = 240000;
-    private String ip;
-    private int port;
+    private final String ip;
+    private final int port;
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private Socket socket;
@@ -32,12 +32,12 @@ public class Client {
     private final Thread socketListener;
     private final Thread pinger;
     private Thread timer;
-    private View view;
-    private ClientMessageHandler messageHandler;
+    private final View view;
+    private final ClientMessageHandler messageHandler;
     private boolean pingActive;
     private boolean myTurn=false;
     boolean characterPlayed = false;
-    private ArrayList<Thread> timerThreads = new ArrayList<>();
+    private final ArrayList<Thread> timerThreads = new ArrayList<>();
 
     /**
      * Constructor Client instantiates attributes to connect with the server. It instantiate also

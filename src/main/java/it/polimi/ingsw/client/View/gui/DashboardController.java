@@ -1002,13 +1002,9 @@ public class DashboardController {
         for (i = 1; i <= gui.getBoard().getIslandViews().size(); i++) {
             getPaneFromString("island" + i + "Pane").setVisible(true);
             getPaneFromString("island" + i + "Pane").setDisable(true);
-            if (gui.getBoard().getMotherNature() == i)
-                getImageViewFromString("island" + i + "MotherNature").setVisible(true);
-            else getImageViewFromString("island" + i + "MotherNature").setVisible(false);
+            getImageViewFromString("island" + i + "MotherNature").setVisible(gui.getBoard().getMotherNature() == i);
 
-            if (gui.getBoard().getIslandViews().get(i - 1).isStop())
-                getImageViewFromString("island" + i + "Stop").setVisible(true);
-            else getImageViewFromString("island" + i + "Stop").setVisible(false);
+            getImageViewFromString("island" + i + "Stop").setVisible(gui.getBoard().getIslandViews().get(i - 1).isStop());
 
             getLabelFromString("island" + i + "BlueStudentLabel").setText(Integer.toString(numOfColorStudent(Student.BLUE, gui.getBoard().getIslandViews().get(i - 1).getStudents())));
             getLabelFromString("island" + i + "RedStudentLabel").setText(Integer.toString(numOfColorStudent(Student.RED, gui.getBoard().getIslandViews().get(i - 1).getStudents())));
@@ -1665,15 +1661,19 @@ public class DashboardController {
                 gameUpdateLabel.setText("You can't use this one");
         }
         else if(characterPlayed.getTypeOfInputCharacter()==TypeOfInputCharacter.EFFECT7INPUT){
-            effect7Students.add(gui.getEffectHandler().getEffect7students().get(numOfStudent));
-            numEffect7++;
-            int y=numOfStudent+1;
-            getImageViewFromString("character"+numOfCharacter+"Student"+y).setDisable(true);
-            getImageViewFromString("character"+numOfCharacter+"Student"+y).setOpacity(0.3);
-            if(effect7Students.size()==3)
-                setStudentsCardNotClickable();
-            setEntranceStudentClickable();
+            chooseStudentEffect7(numOfStudent, numOfCharacter);
         }
+    }
+
+    private void chooseStudentEffect7(int numOfStudent, int numOfCharacter) {
+        effect7Students.add(gui.getEffectHandler().getEffect7students().get(numOfStudent));
+        numEffect7++;
+        int y=numOfStudent+1;
+        getImageViewFromString("character"+numOfCharacter+"Student"+y).setDisable(true);
+        getImageViewFromString("character"+numOfCharacter+"Student"+y).setOpacity(0.3);
+        if(effect7Students.size()==3)
+            setStudentsCardNotClickable();
+        setEntranceStudentClickable();
     }
 
     /**
@@ -1683,14 +1683,7 @@ public class DashboardController {
      * @param numOfCharacter the id of the character chosen
      */
     public void choseStudent5or6(int numOfStudent, int numOfCharacter){
-        effect7Students.add(gui.getEffectHandler().getEffect7students().get(numOfStudent));
-        numEffect7++;
-        int y=numOfStudent+1;
-        getImageViewFromString("character"+numOfCharacter+"Student"+y).setDisable(true);
-        getImageViewFromString("character"+numOfCharacter+"Student"+y).setOpacity(0.3);
-        if(effect7Students.size()==3)
-            setStudentsCardNotClickable();
-        setEntranceStudentClickable();
+        chooseStudentEffect7(numOfStudent, numOfCharacter);
     }
 
     /**
