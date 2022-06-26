@@ -87,7 +87,7 @@ public class CharacterInput {
             Student student = inputParser.studentParser();
             if(studentsEntrance.contains(student)){
                 j++;
-                studentsCard.remove(student);
+                studentsEntrance.remove(student);
                 studentList.add(student);
             }
             else{
