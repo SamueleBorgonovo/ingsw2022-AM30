@@ -148,9 +148,12 @@ public class Game implements GameInterface {
         }
         else {
             int counter = getNumPlayerDisconnected();
-            if (counter == numOfPlayers - 1) {
+           /* if (counter == numOfPlayers - 1) {
                 getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
             } else {
+
+            */
+
                 if (counter == numOfPlayers - 2) {
                     gameState=GameState.WAITINGFORRECONNECTION;
                 }
@@ -185,7 +188,7 @@ public class Game implements GameInterface {
                     } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
 
                 }
-            }
+          //  }
         }
     return callhandler;
     }
