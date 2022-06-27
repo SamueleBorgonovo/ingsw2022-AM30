@@ -27,7 +27,7 @@ public class GameHandler {
     private static ConcurrentHashMap<GameInterface, Thread> gameToTimerMap;//Map to find WinningTimer of a game
     private static ConcurrentHashMap<GameInterface, Integer> gameToStudentPlayed;
     private static ArrayList<String> NicknameChosen;
-    private final int WINNING_TIMER = 60000;
+    private final int WINNING_TIMER = 240000;
 
     /**
      * Constructor GameHandler instantiates maps used in the class
