@@ -313,7 +313,7 @@ public class GUI extends Application implements View{
             num=2;
         int finalNum = num+player.getLastassistantplayed().getMovement();
         Platform.runLater(() -> dashboardController.setMotherNatureView(finalNum,getBoard().getMotherNature()));
-        character4played = false;//////////////////////////////////////////
+        character4played = false;
     }
 
     /**
@@ -701,7 +701,8 @@ public class GUI extends Application implements View{
                 Platform.runLater(() -> {
                     dashboardController.setupPlance(player);
                     dashboardController.setCharacterButtonClickable();
-                    dashboardController.setGameUpdateLabel("GAME: Move MotherNature to an island! MAX:"+player.getLastassistantplayed().getMovement());
+                    if(!character4played) dashboardController.setGameUpdateLabel("GAME: Move MotherNature to an island! MAX:"+player.getLastassistantplayed().getMovement());
+                        else dashboardController.setGameUpdateLabel("GAME: Move MotherNature to an island! MAX:"+(player.getLastassistantplayed().getMovement()+2));
                 });
                 moveMotherNature();
             }
