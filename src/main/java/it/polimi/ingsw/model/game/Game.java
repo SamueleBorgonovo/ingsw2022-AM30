@@ -212,7 +212,8 @@ public class Game implements GameInterface {
     public int addPlayer(String nickname) {
         Player player = new Player(nickname);
         listOfPlayers.add(player);
-        player.setPlayerID(listOfPlayers.size());
+        int playerID=checkPlayerID();
+        player.setPlayerID(playerID);
         if (numOfPlayers == 2) {
             player.setPlance(new Plance(Tower.values()[listOfPlayers.size()-1], 8));
             for(int i = 0; i < 7; i++)
@@ -225,9 +226,21 @@ public class Game implements GameInterface {
         if(gameMode.equals(GameMode.EXPERTMODE)) {
             player.setCoins(1);
         }
-        return listOfPlayers.size();
+        return playerID;
     }
-////
+
+    public int checkPlayerID() {
+        int i;
+        boolean check =true;
+        for (i = 1; i <= numOfPlayers && check; i++) {
+            check=false;
+            for (Player player : listOfPlayers)
+                if (player.getPlayerID() == i)
+                    check = true;
+        }
+        return i-1;
+    }
+
     /**
      * Method getBoard returns the board of this Game Object
      *

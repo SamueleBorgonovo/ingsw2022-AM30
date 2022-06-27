@@ -529,8 +529,16 @@ class GameTest {
         player3 = game3players.getPlayer(3);
 
         player1.setPlayerState(PlayerState.DISCONNECTED);
+        player2.setPlayerState(PlayerState.DISCONNECTED);
         game3players.setReconnectedPlayer(1);
         assertEquals(game3players.getPlayer(1).getPlayerState(),PlayerState.RECONNECTED);
+        boolean check=false;
+        try{
+            game3players.setReconnectedPlayer(1);
+        }catch (ReconnectedException e){
+            check=true;
+        }
+        assertTrue(check);
     }
 
 
@@ -590,5 +598,50 @@ class GameTest {
         game2players.useAssistant(game2players.getPlayerorder().get(1).getPlayerID(), Assistant.DOG);
 
     }
+
+    @Test
+    void setDisconnectPlayer() throws InvalidWizardException {
+        game3players.addPlayer("Daniele");
+        player1 = game3players.getPlayer(1);
+        game3players.addPlayer("Giuseppe");
+        player2 = game3players.getPlayer(2);
+        game3players.addPlayer("Giuseppe");
+        player3 = game3players.getPlayer(3);
+
+        game3players.setWizard(1,Wizard.WIZARD_YELLOW);
+        game3players.setDisconnectPlayer(1);
+        boolean check=false;
+        for(Player player : game3players.getPlayers())
+            if(player.getNickname().equals("Daniele"))
+                check=true;
+        assertFalse(check);
+
+        game3players.addPlayer("Daniele");
+        player1=game3players.getPlayer(1);
+        assertEquals("Daniele",player1.getNickname());
+
+    }
+
+    @Test
+    void checkPlayerID(){
+        Game game = new Game(GameMode.SIMPLEMODE,3);
+        Player player1 = new Player("d");
+        Player player2 = new Player("g");
+        Player player3 = new Player("s");
+        game.getListOfPlayers().add(player1);
+        game.getListOfPlayers().add(player2);
+        game.getListOfPlayers().add(player3);
+        player1.setPlayerID(game.checkPlayerID());
+        assertEquals(1,player1.getPlayerID());
+        player2.setPlayerID(game.checkPlayerID());
+        assertEquals(2,player2.getPlayerID());
+        player3.setPlayerID(game.checkPlayerID());
+        assertEquals(3,player3.getPlayerID());
+        game.getListOfPlayers().remove(1);
+
+
+    }
+
+
 
 }
