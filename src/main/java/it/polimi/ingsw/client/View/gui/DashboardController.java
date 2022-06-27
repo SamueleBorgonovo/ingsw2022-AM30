@@ -1562,10 +1562,13 @@ public class DashboardController {
      */
     public void setStudentsOnCharacter(int index) {
         EffectHandler handler = gui.getEffectHandler();
+        for(int i=1; i<=6; i++)
+            getImageViewFromString("character" + index + "Student" + i).setVisible(false);
         switch (gui.getBoard().getCharacters().get(index - 1).getName()) {
             case "MONK" -> {
                 getGridPaneFromString("character" + index + "StudentsPane").setVisible(true);
                 for (int i = 0; i < handler.getEffect1students().size(); i++) {
+                    getImageViewFromString("character" + index + "Student" + (i+1)).setVisible(true);
                     getImageViewFromString("character" + index + "Student" + (i + 1)).setImage(new Image(getImageFromStudent(handler.getEffect1students().get(i))));
                 }
             }
@@ -1585,6 +1588,7 @@ public class DashboardController {
             case "JESTER" -> {
                 getGridPaneFromString("character" + index + "StudentsPane").setVisible(true);
                 for (int i = 0; i < handler.getEffect7students().size(); i++) {
+                    getImageViewFromString("character" + index + "Student" + (i+1)).setVisible(true);
                     getImageViewFromString("character" + index + "Student" + (i + 1)).setImage(new Image(getImageFromStudent(handler.getEffect7students().get(i))));
                     getImageViewFromString("character" + index + "Student" + (i + 1)).setOpacity(1);
                 }
@@ -1592,6 +1596,7 @@ public class DashboardController {
             case "PRINCESS" -> {
                 getGridPaneFromString("character" + index + "StudentsPane").setVisible(true);
                 for (int i = 0; i < handler.getEffect11students().size(); i++) {
+                    getImageViewFromString("character" + index + "Student" + (i+1)).setVisible(true);
                     getImageViewFromString("character" + index + "Student" + (i + 1)).setImage(new Image(getImageFromStudent(handler.getEffect11students().get(i))));
                 }
             }
