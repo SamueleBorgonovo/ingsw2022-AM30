@@ -3,7 +3,9 @@ package it.polimi.ingsw.server;
 import it.polimi.ingsw.client.View.cli.InputParser;
 
 import java.io.IOException;
-import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 
 /**
  * Class used to start the server on a given port
@@ -22,11 +24,29 @@ public class ServerMain {
             System.out.println("Port Number is not valid, please insert a new one");
             serverPort=inputParser.intParser();
         }
-        System.out.println("IP: " + Inet4Address.getLocalHost().getHostAddress());
+        int i=0;
+        try {
+            Enumeration networkInterfaces = NetworkInterface.getNetworkInterfaces();
+            while (networkInterfaces.hasMoreElements()) {
+                NetworkInterface inet = (NetworkInterface) networkInterfaces.nextElement();
+                Enumeration address = inet.getInetAddresses();
+                while (address.hasMoreElements()) {
+                    InetAddress inetAddress = (InetAddress) address.nextElement();
+                    if (inetAddress.isSiteLocalAddress()) {
+                        if (i == 0) {
+                            System.out.println("LAN ip: " + inetAddress.getHostAddress());
+                            i++;
+                        }else System.out.println("Wi-Fi ip: "+inetAddress.getHostAddress());
+                    }
+                }
+            }
+        } catch (Exception ignored) {}
         System.out.println("Server listening on port: " + serverPort);
         Server server = new Server(serverPort);
         server.start();
     }
+
+
 
 
 }

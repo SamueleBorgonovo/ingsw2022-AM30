@@ -2087,6 +2087,10 @@ public class DashboardController {
         characterButtor.setDisable(false);
         characterButtonLabel.setVisible(true);
         characterButtonLabel.setDisable(false);
+        characterButtonLabel.setOpacity(1);
+        characterButtor.setOpacity(1);
+        showPlanceChoiceBox.setDisable(true);
+        showPlanceChoiceBox.setOpacity(0.3);
         characterButtonLabel.setText("EXIT");
     }
 
