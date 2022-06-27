@@ -1085,6 +1085,9 @@ public class DashboardController {
 
         //Set towers
         int count;
+        for(count =1;count<=8;count++)
+            getImageViewFromString("planceTower"+count).setVisible(false);
+
         for (count = 1; count <= player.getPlance().numOfTowers(); count++) {
             getImageViewFromString("planceTower" + count).setImage(new Image(getImageFromTower(player.getPlance().getTower())));
             getImageViewFromString("planceTower" + count).setVisible(true);
