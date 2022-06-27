@@ -215,11 +215,11 @@ public class Game implements GameInterface {
         int playerID=checkPlayerID();
         player.setPlayerID(playerID);
         if (numOfPlayers == 2) {
-            player.setPlance(new Plance(Tower.values()[listOfPlayers.size()-1], 8));
+            player.setPlance(new Plance(Tower.values()[playerID-1], 8));
             for(int i = 0; i < 7; i++)
                 player.getPlance().addStudentEntrance(board.getAndRemoveRandomBagStudent(1).get(0));
         } else {
-            player.setPlance(new Plance(Tower.values()[listOfPlayers.size()-1], 6));
+            player.setPlance(new Plance(Tower.values()[playerID-1], 6));
             for(int i = 0; i < 9; i++)
                 player.getPlance().addStudentEntrance(board.getAndRemoveRandomBagStudent(1).get(0));
         }
@@ -229,6 +229,10 @@ public class Game implements GameInterface {
         return playerID;
     }
 
+    /**
+     * Method checkPlayerID returns the playerID to give to a player
+     * @return the playerID to give to a player
+     */
     public int checkPlayerID() {
         int i;
         boolean check =true;
