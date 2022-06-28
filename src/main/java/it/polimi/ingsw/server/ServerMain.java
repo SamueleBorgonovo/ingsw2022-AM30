@@ -58,7 +58,7 @@ public class ServerMain {
                  InetSocketAddress inetAddr = new InetSocketAddress(nifAddresses.nextElement(), 0);
                     DatagramSocket socket = new DatagramSocket(inetAddr);
                  if(Arrays.stream(array).anyMatch(socket.getLocalAddress().toString()::contains)) {
-                     if(Arrays.stream(new String[]{"eth2"}).anyMatch(nif.getName()::contains))
+                     if(Arrays.stream(new String[]{"eth"}).anyMatch(nif.getName()::contains))
                         System.out.println("LAN: " + socket.getLocalAddress());
                      if(Arrays.stream(new String[]{"wlan"}).anyMatch(nif.getName()::contains))
                         System.out.println("Wi-Fi: " + socket.getLocalAddress());
