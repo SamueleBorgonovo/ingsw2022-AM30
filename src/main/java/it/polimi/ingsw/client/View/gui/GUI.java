@@ -739,6 +739,7 @@ public class GUI extends Application implements View{
      */
     public void displayGame(){
         instantiateDashBoardScene();
+        Platform.runLater(()-> dashboardController.setupPlance(player));
     }
 
     /**
