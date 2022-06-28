@@ -613,9 +613,11 @@ public class CLI implements View {
      */
     @Override
     public void printCloudChosen(String nick, int cloudID) {
-        if (!client.isMyTurn())
+        if (!client.isMyTurn()) {
+            graphic.printArchipelago(board.getIslandViews(), board.getMotherNature());
+            graphic.printPlances(players);
             System.out.println(nick + " has chosen cloud number " + cloudID);
-
+        }
     }
 
     /**
@@ -625,9 +627,13 @@ public class CLI implements View {
      */
     @Override
     public void printStudentToHall(String nick, Student student) {
-        if (!client.isMyTurn())
+        if (!client.isMyTurn()) {
+            graphic.printArchipelago(board.getIslandViews(), board.getMotherNature());
+            graphic.printPlances(players);
             System.out.println(nick + " moved " + student + " to hall");
+        }
     }
+
 
     /**
      * Method printStudentToIsland handles the moves of a student to an island by a player
@@ -637,8 +643,11 @@ public class CLI implements View {
      */
     @Override
     public void printStudentToIsland(String nick, Student student, int islandID) {
-        if (!client.isMyTurn())
+        if (!client.isMyTurn()) {
+            graphic.printArchipelago(board.getIslandViews(), board.getMotherNature());
+            graphic.printPlances(players);
             System.out.println(nick + " moved " + student + " to island number " + islandID);
+        }
     }
 
     /**
@@ -648,8 +657,11 @@ public class CLI implements View {
      */
     @Override
     public void printMotherNatureMovement(String nick, int islandID) {
-        if (!client.isMyTurn())
+        if (!client.isMyTurn()) {
+            graphic.printArchipelago(board.getIslandViews(), board.getMotherNature());
+            graphic.printPlances(players);
             System.out.println(nick + " moved mother nature to island number  " + islandID);
+        }
     }
 
     /**
