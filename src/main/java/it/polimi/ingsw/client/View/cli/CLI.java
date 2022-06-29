@@ -312,7 +312,6 @@ public class CLI implements View {
                 }
 
             }
-            System.out.println(actionChosen);
         }
         return actionChosen;
     }

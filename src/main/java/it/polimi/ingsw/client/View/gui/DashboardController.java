@@ -1339,7 +1339,6 @@ public class DashboardController {
             setEntranceStudentNotClickable();
             if (gui.getPlayer().getPlance().getHall().get(studentToMove) < 10)
                 hallPane.setDisable(false);
-            System.out.println("Scelto studente di colore" + studentToMove);
             numOfStudentChosen = studentNumber;
             setArchipelagoClickable();
         }
