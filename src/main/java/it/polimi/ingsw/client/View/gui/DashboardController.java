@@ -1842,7 +1842,7 @@ public class DashboardController {
      * Method choseCharacter2Student2 is called when the player choice the second student of the second character
      */
     public void choseCharacter2Student2() {
-        choseStudentCard1to4(2,2);
+        choseStudentCard1to4(1,2);
     }
 
     /**
