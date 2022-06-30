@@ -22,6 +22,7 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
    private ArrayList<Student> effect7students = new ArrayList<>();
    private boolean twomoremoves;
 
+
     /**
      * Constructor EffectHandler instantiates the first setup of the attributes
      */
