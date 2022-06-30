@@ -32,7 +32,7 @@ Progetto di Ingegneria del Software AA 2021/2022. Partecipanti: Anzillotti Giuse
     > java -jar Eriantys.jar
     ```
 - The Application contains a guided configuration to setup a server or to start a client
-- When starting the server it gives both LAN ip and Wi-Fi ip 
+- - When starting the server it gives LAN ip. If computers are connected via Wi-Fi, it's necessary to search for the ip in computer's settings
 
   ### CLI
 - To use the client with CLI the computer needs an UTF-8 shell
@@ -40,6 +40,21 @@ Progetto di Ingegneria del Software AA 2021/2022. Partecipanti: Anzillotti Giuse
   ###GUI
 - To use the client with GUI the computer needs monitor resolution of 1000 x 700 px
   (We recommend a full HD screen with an OS zoom of 125%)
+
+## Test Coverage
+
+The total coverage of model is 87% (823/994).
+In the following table there is the coverage of model's packages
+
+| Package |    Coverage    |
+|:--------|:--------------:|
+| board   | 193/194 (99%)  |
+| effects | 156/156 (100%) |
+| game    | 365/485 (75%)  |
+| player  | 109/109 (100%) |
+
+Model contains all the logic of our project, so the controller has not been tested
+
 
 ## Tools
 

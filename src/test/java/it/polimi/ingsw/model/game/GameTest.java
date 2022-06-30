@@ -85,9 +85,6 @@ class GameTest {
         assertNull(player2);
     }
 
-    @Test
-    void getBoard() {
-    }
 
     @Test
     void getNumOfPlayers() {
@@ -95,9 +92,6 @@ class GameTest {
         assertEquals(3,game3players.getNumOfPlayers());
     }
 
-    @Test
-    void getPlayer() {
-    }
 
     @Test
     void winnerTest() {
@@ -167,14 +161,6 @@ class GameTest {
         player2.getPlance().addStudentHall(Student.RED);
         game2players.verifyProfessorControl();
         assertEquals(Professor.RED_DRAGON, player1.getPlance().getProfessors().get(0));
-    }
-
-    @Test
-    void startTurn() {
-    }
-
-    @Test
-    void endTurn() {
     }
 
     @Test
@@ -434,16 +420,6 @@ class GameTest {
     }
 
     @Test
-    void getVerifyType() {
-    }
-
-
-
-    @Test
-    void getListOfPlayers() {
-    }
-
-    @Test
     void verifyIslandInfluence() {
         game2players.addPlayer("Daniele");
         player1 = game2players.getPlayer(1);
@@ -508,11 +484,6 @@ class GameTest {
             var=-3;
 
         assertEquals(1,var);
-    }
-
-    @Test
-    void startGame() {
-
     }
 
     @Test
@@ -658,10 +629,5 @@ class GameTest {
         player3.setPlayerID(game.checkPlayerID());
         assertEquals(3,player3.getPlayerID());
         game.getListOfPlayers().remove(1);
-
-
     }
-
-
-
 }
