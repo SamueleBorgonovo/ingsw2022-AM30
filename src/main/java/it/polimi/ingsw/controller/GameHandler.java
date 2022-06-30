@@ -163,7 +163,7 @@ public class GameHandler {
      *     If num of disconnected player is equals to num of players, game is closed.
      * @param nickname nickname of the disconnected player
      */
-    public void disconnectPlayer(String nickname){
+    public synchronized void disconnectPlayer(String nickname){
         boolean callhandler;
         GameInterface game = findGameofPlayer(nickname);
         int playerid = findPlayeridofPlayer(nickname);
@@ -178,17 +178,18 @@ public class GameHandler {
         int numPlayerDisconnected = game.getNumPlayerDisconnected();
         if (numPlayerDisconnected == game.getNumOfPlayers()) {
             gameShutdown(game,true,false);
-        }
-        if (numPlayerDisconnected <= game.getNumOfPlayers() - 1) {
-            sendMessagetoGame(game, new DisconnectMessage(nickname, false,false));
-            if (numPlayerDisconnected == game.getNumOfPlayers() - 1) {
-                sendMessagetoGame(game, new WaitingForPlayersMessage(false));
-                startWinnerTimer(game);
+        }else {
+            if (numPlayerDisconnected <= game.getNumOfPlayers() - 1) {
+                sendMessagetoGame(game, new DisconnectMessage(nickname, false, false));
+                if (numPlayerDisconnected == game.getNumOfPlayers() - 1) {
+                    sendMessagetoGame(game, new WaitingForPlayersMessage(false));
+                    startWinnerTimer(game);
+                }
             }
-        }
-        if (callhandler) {
-            setGameToStudentPlayed(game, 0);
-            turnHandler(game);
+            if (callhandler) {
+                setGameToStudentPlayed(game, 0);
+                turnHandler(game);
+            }
         }
     }
 
@@ -448,7 +449,6 @@ public class GameHandler {
             clientHandler.sendMessageToClient(message);
         }
     }
-
     /**
      * Method used when a client tries to move a student to the hall of his plance
      * @param clientHandler ClientHandlerInterface of the client

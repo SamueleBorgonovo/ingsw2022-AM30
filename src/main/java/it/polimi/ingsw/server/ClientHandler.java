@@ -81,12 +81,10 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
      * Method used to stop the timer of the ping
      */
     public synchronized void stopTimer(){
-        if (timer != null && timer.isAlive()){
-            for(Thread time : timerThreads) {
-                time.interrupt();
-            }
-            timerThreads.clear();
+        for(Thread time : timerThreads) {
+            time.interrupt();
         }
+        timerThreads.clear();
     }
 
     /**
@@ -147,7 +145,6 @@ public class ClientHandler implements Runnable, ClientHandlerInterface {
             os.reset();
         }
         catch(IOException e) {
-            System.out.println("Exception di sendMessage del clientHandler");
             handleSocketDisconnection(e instanceof SocketTimeoutException,false);
         }
     }

@@ -161,7 +161,9 @@ public class Game implements GameInterface {
                     if (numplayerhasplayed == numOfPlayers) {
                         verifyPlayerOrder();
                         int tmp = searchFirst();
-                        playerorder.get(tmp).setPlayerState(PlayerState.STUDENTPHASE);
+                        if(tmp!=-1) {
+                            playerorder.get(tmp).setPlayerState(PlayerState.STUDENTPHASE);
+                        }
                     } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
                 } else {
                     movementStudents=0;
@@ -894,15 +896,16 @@ public class Game implements GameInterface {
     }
 
     /**
-     * Method getNumPlayerDisconnected returns the character associated to the characterView
+     * Method getNumPlayerDisconnected returns the number of disconnected players
      *
-     * @return the character associated to the characterView
+     * @return the number of disconnected players
      */
     public int getNumPlayerDisconnected(){
         int num=0;
-        for(Player player : listOfPlayers)
-            if(player.getPlayerState()==PlayerState.DISCONNECTED)
+        for(Player player : listOfPlayers) {
+            if (player.getPlayerState() == PlayerState.DISCONNECTED)
                 num++;
+        }
         return num;
     }
 }
