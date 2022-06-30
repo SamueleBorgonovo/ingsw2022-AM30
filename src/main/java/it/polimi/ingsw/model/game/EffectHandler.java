@@ -22,6 +22,9 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
    private ArrayList<Student> effect7students = new ArrayList<>();
    private boolean twomoremoves;
 
+    /**
+     * Constructor EffectHandler instantiates the first setup of the attributes
+     */
    public EffectHandler(){
        twopoints = 0;
        notower = false;
@@ -165,60 +168,118 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
         this.islandIDchoose = islandIDchoose;
     }
 
+    /**
+     * Method getNumOfIslandStops returns the number of available island stops
+     * @return the number of available island stops
+     */
     public int getNumOfIslandStops() {
         return numofislandstops;
     }
 
+    /**
+     * Method addIslandStop adds an island stop
+     */
     public void addIslandStop(){
         numofislandstops++;
     }
 
+    /**
+     * Method removeIslandStop removes an island stop
+     */
     public void removeIslandStop(){
         numofislandstops--;
     }
 
+    /**
+     * Method getProfessorControl returns the professorControl int
+     * @return the professorControl int
+     */
     public int getProfessorControl() {
         return professorControl;
     }
 
+    /**
+     * Method setProfessorControl sets the professorControl with the player's playerID
+     * @param playerID player's playerID
+     */
     public void setProfessorControl(int playerID) {
         professorControl = playerID;
     }
 
+    /**
+     * Method getTwoPoints returns the twoPoints int
+     * @return the twoPoints int
+     */
     public int getTwoPoints() {
         return twopoints;
     }
 
+    /**
+     * Method setTwoPoints sets the twoPoints with the player's playerID
+     * @param playerID player's playerID
+     */
     public void setTwoPoints(int playerID) {
         twopoints = playerID;
     }
 
+    /**
+     * Method isNoTower returns if the noTower effect has been called
+     * @return true if noTower effect has been called, false otherwise
+     */
     public boolean isNoTower() {
         return notower;
     }
 
+    /**
+     * Method setNoTower sets noTower boolean
+     * @param notower true if noTower has been called, false otherwise
+     */
     public void setNoTower(boolean notower) {
         this.notower = notower;
     }
 
+    /**
+     * Method isNoColor returns if the noColor effect has been called
+     * @return true if noColor effect has been called, false otherwise
+     */
     public boolean isNoColor() {
         return nocolor;
     }
 
+    /**
+     * Method setNoColor sets noColor boolean
+     * @param nocolor true if noColor has been called, false otherwise
+     */
     public void setNoColor(boolean nocolor) {
         this.nocolor = nocolor;
     }
 
+    /**
+     * Method getStudents returns the student chosen in an effect
+     * @return returns the student chosen in an effect
+     */
     public Student getStudent() {
         return student;
     }
 
+    /**
+     * Method setStudent sets the student chosen in an effect
+     * @param student student chosen
+     */
     public void setStudent(Student student) {
         this.student = student;
     }
 
+    /**
+     * Method setTwoMoreMoves sets the twoMoreMoves effect
+     * @param choose true if twoMoreMoves has been called, false otherwise
+     */
     public void setTwoMoreMoves(boolean choose){ twomoremoves=choose;}
 
+    /**
+     * Method getTwoMoreMoves returns if the twoMoreMoves has been called
+     * @return true if twoMoreMoves has been called, false otherwise
+     */
     public boolean getTwoMoreMoves(){ return twomoremoves;}
 
 }

@@ -177,7 +177,6 @@ public class GameHandler {
             if (playerid != -1) {
                 callhandler = game.setDisconnectPlayer(playerid);
                 int numPlayerDisconnected = game.getNumPlayerDisconnected();
-                System.out.println(numPlayerDisconnected);
                 if (numPlayerDisconnected == game.getNumOfPlayers()) {
                     gameShutdown(game, true, false);
                 } else {
