@@ -167,29 +167,35 @@ public class GameHandler {
         boolean callhandler;
         GameInterface game = findGameofPlayer(nickname);
         int playerid = findPlayeridofPlayer(nickname);
-
-        if(game.getState()==GameState.WAITINGFORPLAYERS) {
-            NicknameChosen.remove(nickname);
-            playertoGameMap.remove(nickname);
-            playertoPlayerIDMap.remove(nickname);
-        }
-        playertoHandlerMap.remove(nickname);
-        callhandler = game.setDisconnectPlayer(playerid);
-        int numPlayerDisconnected = game.getNumPlayerDisconnected();
-        if (numPlayerDisconnected == game.getNumOfPlayers()) {
-            gameShutdown(game,true,false);
-        }else {
-            if (numPlayerDisconnected <= game.getNumOfPlayers() - 1) {
-                sendMessagetoGame(game, new DisconnectMessage(nickname, false, false));
-                if (numPlayerDisconnected == game.getNumOfPlayers() - 1) {
-                    sendMessagetoGame(game, new WaitingForPlayersMessage(false));
-                    startWinnerTimer(game);
+        if(game!=null) {
+            if (game.getState() == GameState.WAITINGFORPLAYERS) {
+                NicknameChosen.remove(nickname);
+                playertoGameMap.remove(nickname);
+                playertoPlayerIDMap.remove(nickname);
+            }
+            playertoHandlerMap.remove(nickname);
+            if (playerid != -1) {
+                callhandler = game.setDisconnectPlayer(playerid);
+                int numPlayerDisconnected = game.getNumPlayerDisconnected();
+                if (numPlayerDisconnected == game.getNumOfPlayers()) {
+                    gameShutdown(game, true, false);
+                } else {
+                    if (numPlayerDisconnected <= game.getNumOfPlayers() - 1) {
+                        sendMessagetoGame(game, new DisconnectMessage(nickname, false, false));
+                        if (numPlayerDisconnected == game.getNumOfPlayers() - 1) {
+                            sendMessagetoGame(game, new WaitingForPlayersMessage(false));
+                            startWinnerTimer(game);
+                        }
+                    }
+                    if (callhandler) {
+                        setGameToStudentPlayed(game, 0);
+                        turnHandler(game);
+                    }
                 }
             }
-            if (callhandler) {
-                setGameToStudentPlayed(game, 0);
-                turnHandler(game);
-            }
+        }else {
+            NicknameChosen.remove(nickname);
+            playertoHandlerMap.remove(nickname);
         }
     }
 
@@ -278,7 +284,10 @@ public class GameHandler {
      * @return the playerID of the player in his game
      */
     public int findPlayeridofPlayer(String nickname) {
-        return playertoPlayerIDMap.get(nickname);
+        int n=-1;
+        if(playertoPlayerIDMap.get(nickname)!=null)
+            n=playertoPlayerIDMap.get(nickname);
+        return n;
     }
 
     /**
