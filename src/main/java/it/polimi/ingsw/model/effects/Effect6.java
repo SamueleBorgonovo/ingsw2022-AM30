@@ -33,7 +33,7 @@ public class Effect6 extends Effect {
      */
     @Override
     public void effect(Game game, int playerID)  throws InvalidStopException {
-        game.getEffectHandler().setNotower(true);
+        game.getEffectHandler().setNoTower(true);
         game.setCharacterInUse(null);
     }
 

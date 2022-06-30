@@ -5,7 +5,6 @@ import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.GameMode;
 import it.polimi.ingsw.model.game.Student;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.PlayerState;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +39,7 @@ class Effect9Test {
         try{
             effect9.secondPartEffect(game,1);
         }catch (InvalidStudentEffectException e){}
-        assertTrue(game.getEffectHandler().isNocolor());
+        assertTrue(game.getEffectHandler().isNoColor());
         assertEquals(Student.RED,game.getEffectHandler().getStudent());
         assertEquals(PlayerState.MOTHERNATUREPHASE,game.getPlayer(1).getPlayerState());
 

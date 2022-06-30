@@ -409,7 +409,7 @@ class GameTest {
         assertTrue(check);
 
         check=false;
-        game.getEffectHandler().setTwomoremoves(true);
+        game.getEffectHandler().setTwoMoreMoves(true);
         game.getPlayer(1).setPlayerState(PlayerState.MOTHERNATUREPHASE);
         game.getPlayer(1).setLastassistantplayed(Assistant.LION);
         try{

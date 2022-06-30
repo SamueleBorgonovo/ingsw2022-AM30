@@ -508,7 +508,7 @@ class GraphicTest {
         for(Characters character : charactersGame)
             characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
-        game.getEffectHandler().removeislandstop();
+        game.getEffectHandler().removeIslandStop();
         game.getEffectHandler().removeStudentFromEffect1students(game.getEffectHandler().getEffect1students().get(1));
         game.getEffectHandler().removeStudentFromEffect7(game.getEffectHandler().getEffect7students().get(1));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(1));
@@ -517,7 +517,7 @@ class GraphicTest {
         for(Characters character : charactersGame)
             characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
-        game.getEffectHandler().removeislandstop();
+        game.getEffectHandler().removeIslandStop();
         game.getEffectHandler().removeStudentFromEffect1students(game.getEffectHandler().getEffect1students().get(1));
         game.getEffectHandler().removeStudentFromEffect7(game.getEffectHandler().getEffect7students().get(1));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(1));
@@ -525,7 +525,7 @@ class GraphicTest {
         for(Characters character : charactersGame)
             characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
-        game.getEffectHandler().removeislandstop();
+        game.getEffectHandler().removeIslandStop();
         game.getEffectHandler().removeStudentFromEffect1students(game.getEffectHandler().getEffect1students().get(1));
         game.getEffectHandler().removeStudentFromEffect7(game.getEffectHandler().getEffect7students().get(1));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(1));
@@ -534,7 +534,7 @@ class GraphicTest {
         for(Characters character : charactersGame)
             characters.add(character.getCharacterView());
         graphic.printCharacters(characters, game.getEffectHandler());
-        game.getEffectHandler().removeislandstop();
+        game.getEffectHandler().removeIslandStop();
         game.getEffectHandler().removeStudentFromEffect1students(game.getEffectHandler().getEffect1students().get(0));
         game.getEffectHandler().removeStudentFromEffect11students(game.getEffectHandler().getEffect11students().get(0));
         characters2.setUsed(true);

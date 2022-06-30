@@ -34,13 +34,13 @@ class Effect8Test {
         // Test 2 Players Game
         for(int i = 1; i < 3; i++) {
             effect8.effect(game2players, i);
-            assertEquals(game2players.getEffectHandler().getTwopoints(),i);
+            assertEquals(game2players.getEffectHandler().getTwoPoints(),i);
         }
 
         // Test 3 Players Game
         for(int i = 1; i < 4; i++) {
             effect8.effect(game3players, i);
-            assertEquals(game3players.getEffectHandler().getTwopoints(),i);
+            assertEquals(game3players.getEffectHandler().getTwoPoints(),i);
         }
     }
 

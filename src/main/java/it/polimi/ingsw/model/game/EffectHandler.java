@@ -12,7 +12,7 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
    private int twopoints;
    private boolean notower;
    private boolean nocolor;
-   private boolean professorcontroll;
+   private int professorControl;
    private Student student;
    private int numofislandstops;
    private int islandIDchoose;
@@ -26,7 +26,7 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
        twopoints = 0;
        notower = false;
        nocolor = false;
-       professorcontroll = false;
+       professorControl = -1;
        numofislandstops = 4;
        twomoremoves = false;
    }
@@ -165,47 +165,47 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
         this.islandIDchoose = islandIDchoose;
     }
 
-    public int getNumofislandstops() {
+    public int getNumOfIslandStops() {
         return numofislandstops;
     }
 
-    public void addislandstop(){
+    public void addIslandStop(){
         numofislandstops++;
     }
 
-    public void removeislandstop(){
+    public void removeIslandStop(){
         numofislandstops--;
     }
 
-    public boolean isProfessorcontroll() {
-        return professorcontroll;
+    public int getProfessorControl() {
+        return professorControl;
     }
 
-    public void setProfessorcontroll(boolean professorcontroll) {
-        this.professorcontroll = professorcontroll;
+    public void setProfessorControl(int playerID) {
+        professorControl = playerID;
     }
 
-    public int getTwopoints() {
+    public int getTwoPoints() {
         return twopoints;
     }
 
-    public void setTwopoints(int playerID) {
+    public void setTwoPoints(int playerID) {
         twopoints = playerID;
     }
 
-    public boolean isNotower() {
+    public boolean isNoTower() {
         return notower;
     }
 
-    public void setNotower(boolean notower) {
+    public void setNoTower(boolean notower) {
         this.notower = notower;
     }
 
-    public boolean isNocolor() {
+    public boolean isNoColor() {
         return nocolor;
     }
 
-    public void setNocolor(boolean nocolor) {
+    public void setNoColor(boolean nocolor) {
         this.nocolor = nocolor;
     }
 
@@ -217,8 +217,8 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
         this.student = student;
     }
 
-    public void setTwomoremoves(boolean choose){ twomoremoves=choose;}
+    public void setTwoMoreMoves(boolean choose){ twomoremoves=choose;}
 
-    public boolean getTwomoremoves(){ return twomoremoves;}
+    public boolean getTwoMoreMoves(){ return twomoremoves;}
 
 }

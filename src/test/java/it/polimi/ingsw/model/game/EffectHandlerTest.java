@@ -2,7 +2,6 @@ package it.polimi.ingsw.model.game;
 
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,106 +11,100 @@ class EffectHandlerTest {
 
     @Test
     void getNumofislandstops() {
-        assertEquals(4, effectHandler.getNumofislandstops());
+        assertEquals(4, effectHandler.getNumOfIslandStops());
         for(int i=3;i>=0;i--) {
-            effectHandler.removeislandstop();
-            assertEquals(i, effectHandler.getNumofislandstops());
+            effectHandler.removeIslandStop();
+            assertEquals(i, effectHandler.getNumOfIslandStops());
         }
         for(int i=0;i<5;i++){
-            assertEquals(i, effectHandler.getNumofislandstops());
-            effectHandler.addislandstop();
+            assertEquals(i, effectHandler.getNumOfIslandStops());
+            effectHandler.addIslandStop();
         }
     }
 
     @Test
     void addislandstop() {
-        assertEquals(4, effectHandler.getNumofislandstops());
+        assertEquals(4, effectHandler.getNumOfIslandStops());
         for(int i=3;i>=0;i--) {
-            effectHandler.removeislandstop();
-            assertEquals(i, effectHandler.getNumofislandstops());
+            effectHandler.removeIslandStop();
+            assertEquals(i, effectHandler.getNumOfIslandStops());
         }
         for(int i=0;i<5;i++){
-            assertEquals(i, effectHandler.getNumofislandstops());
-            effectHandler.addislandstop();
+            assertEquals(i, effectHandler.getNumOfIslandStops());
+            effectHandler.addIslandStop();
         }
     }
 
     @Test
     void removeislandstop() {
-        assertEquals(4, effectHandler.getNumofislandstops());
+        assertEquals(4, effectHandler.getNumOfIslandStops());
         for(int i=3;i>=0;i--) {
-            effectHandler.removeislandstop();
-            assertEquals(i, effectHandler.getNumofislandstops());
+            effectHandler.removeIslandStop();
+            assertEquals(i, effectHandler.getNumOfIslandStops());
         }
         for(int i=0;i<5;i++){
-            assertEquals(i, effectHandler.getNumofislandstops());
-            effectHandler.addislandstop();
+            assertEquals(i, effectHandler.getNumOfIslandStops());
+            effectHandler.addIslandStop();
         }
     }
 
     @Test
-    void isProfessorcontroll() {
-        effectHandler.setProfessorcontroll(false);
-        assertFalse(effectHandler.isProfessorcontroll());
-        effectHandler.setProfessorcontroll(true);
-        assertTrue(effectHandler.isProfessorcontroll());
-    }
+    void setProfessorControl() {
+        int i;
 
-    @Test
-    void setProfessorcontroll() {
-        effectHandler.setProfessorcontroll(false);
-        assertFalse(effectHandler.isProfessorcontroll());
-        effectHandler.setProfessorcontroll(true);
-        assertTrue(effectHandler.isProfessorcontroll());
+        for(i=1; i<4; i++) {
+            effectHandler.setProfessorControl(i);
+            assertEquals(i, effectHandler.getProfessorControl());
+        }
     }
 
     @Test
     void getTwopoints() {
-        assertEquals(0, effectHandler.getTwopoints());
-        effectHandler.setTwopoints(1);
-        assertEquals(1, effectHandler.getTwopoints());
-        effectHandler.setTwopoints(0);
+        assertEquals(0, effectHandler.getTwoPoints());
+        effectHandler.setTwoPoints(1);
+        assertEquals(1, effectHandler.getTwoPoints());
+        effectHandler.setTwoPoints(0);
     }
 
     @Test
     void setTwopoints() {
-        effectHandler.setNotower(false);
-        assertEquals(0, effectHandler.getTwopoints());
-        effectHandler.setTwopoints(1);
-        assertEquals(1, effectHandler.getTwopoints());
-        effectHandler.setTwopoints(0);
+        effectHandler.setNoTower(false);
+        assertEquals(0, effectHandler.getTwoPoints());
+        effectHandler.setTwoPoints(1);
+        assertEquals(1, effectHandler.getTwoPoints());
+        effectHandler.setTwoPoints(0);
     }
 
     @Test
     void isNotower() {
-        effectHandler.setNotower(false);
-        assertFalse(effectHandler.isNotower());
-        effectHandler.setNotower(true);
-        assertTrue(effectHandler.isNotower());
+        effectHandler.setNoTower(false);
+        assertFalse(effectHandler.isNoTower());
+        effectHandler.setNoTower(true);
+        assertTrue(effectHandler.isNoTower());
     }
 
     @Test
     void setNotower() {
-        effectHandler.setNotower(false);
-        assertFalse(effectHandler.isNotower());
-        effectHandler.setNotower(true);
-        assertTrue(effectHandler.isNotower());
+        effectHandler.setNoTower(false);
+        assertFalse(effectHandler.isNoTower());
+        effectHandler.setNoTower(true);
+        assertTrue(effectHandler.isNoTower());
     }
 
     @Test
     void isNocolor() {
-        effectHandler.setNocolor(false);
-        assertFalse(effectHandler.isNocolor());
-        effectHandler.setNocolor(true);
-        assertTrue(effectHandler.isNocolor());
+        effectHandler.setNoColor(false);
+        assertFalse(effectHandler.isNoColor());
+        effectHandler.setNoColor(true);
+        assertTrue(effectHandler.isNoColor());
     }
 
     @Test
     void setNocolor() {
-        effectHandler.setNocolor(false);
-        assertFalse(effectHandler.isNocolor());
-        effectHandler.setNocolor(true);
-        assertTrue(effectHandler.isNocolor());
+        effectHandler.setNoColor(false);
+        assertFalse(effectHandler.isNoColor());
+        effectHandler.setNoColor(true);
+        assertTrue(effectHandler.isNoColor());
     }
 
     @Test

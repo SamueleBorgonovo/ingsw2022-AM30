@@ -34,7 +34,7 @@ public class Effect2 extends Effect {
      */
     @Override
     public void effect(Game game, int playerID)  throws InvalidStopException {
-        game.getEffectHandler().setProfessorcontroll(true);
+        game.getEffectHandler().setProfessorControl(playerID);
         game.verifyProfessorControl();
         game.setCharacterInUse(null);
     }

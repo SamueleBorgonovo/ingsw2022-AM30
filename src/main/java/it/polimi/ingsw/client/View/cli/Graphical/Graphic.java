@@ -297,13 +297,13 @@ public class Graphic {
                 for(i=0; i<5-effectHandler.getEffect11students().size();i++)
                     System.out.print(" ");
                 System.out.print("│ ");
-            } else if("GRANDMA".equals(character.getName()) && effectHandler.getNumofislandstops()!=0){
+            } else if("GRANDMA".equals(character.getName()) && effectHandler.getNumOfIslandStops()!=0){
                 System.out.print("│");
-                for(i=0; i<6-effectHandler.getNumofislandstops();i++)
+                for(i=0; i<6-effectHandler.getNumOfIslandStops(); i++)
                     System.out.print(" ");
-                for(i=0; i<effectHandler.getNumofislandstops();i++)
+                for(i=0; i<effectHandler.getNumOfIslandStops(); i++)
                     System.out.print("✗ ");
-                for(i=0; i<5-effectHandler.getNumofislandstops();i++)
+                for(i=0; i<5-effectHandler.getNumOfIslandStops(); i++)
                     System.out.print(" ");
                 System.out.print("│ ");
             }

@@ -37,7 +37,7 @@ public class Effect5 extends Effect {
      */
     @Override
     public void effect(Game game, int playerID)  throws InvalidStopException{
-        if(game.getEffectHandler().getNumofislandstops()>0) {
+        if(game.getEffectHandler().getNumOfIslandStops()>0) {
             prevPlayerState = game.getPlayer(playerID).getPlayerState();
             game.getPlayer(playerID).setPlayerState(PlayerState.CHARACTHERISLANDPHASE);
         }
@@ -63,7 +63,7 @@ public class Effect5 extends Effect {
     @Override
     public void secondPartEffect(Game game, int playerID) throws InvalidStudentEffectException {
         game.getBoard().getArchipelago().getSingleIsland(game.getEffectHandler().getIslandIDchoose()).setStop(true);
-        game.getEffectHandler().removeislandstop();
+        game.getEffectHandler().removeIslandStop();
         game.setCharacterInUse(null);
         game.getPlayer(playerID).setPlayerState(prevPlayerState);
     }

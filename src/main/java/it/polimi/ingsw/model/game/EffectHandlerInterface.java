@@ -13,5 +13,5 @@ public interface EffectHandlerInterface {
 
     ArrayList<Student> getEffect11students();
 
-    int getNumofislandstops();
+    int getNumOfIslandStops();
 }

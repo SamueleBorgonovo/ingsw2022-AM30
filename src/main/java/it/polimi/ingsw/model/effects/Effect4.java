@@ -36,7 +36,7 @@ public class Effect4 extends Effect{
      */
     @Override
     public void effect(Game game, int playerID)  throws InvalidStopException {
-        game.getEffectHandler().setTwomoremoves(true);
+        game.getEffectHandler().setTwoMoreMoves(true);
         game.setCharacterInUse(null);
     }
 

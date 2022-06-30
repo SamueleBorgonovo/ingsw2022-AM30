@@ -31,7 +31,7 @@ public class Effect8 extends Effect {
      */
     @Override
     public void effect(Game game, int playerID)  throws InvalidStopException {
-        game.getEffectHandler().setTwopoints(playerID);
+        game.getEffectHandler().setTwoPoints(playerID);
         game.setCharacterInUse(null);
     }
 

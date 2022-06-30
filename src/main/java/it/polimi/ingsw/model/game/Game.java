@@ -438,8 +438,8 @@ public class Game implements GameInterface {
             if(numplayerhasplayed < numOfPlayers) {
                 //Set next player to play
                 getPlayer(playerID).setPlayerState(PlayerState.WAITING);
-                if (effectHandler.isProfessorcontroll())
-                    effectHandler.setProfessorcontroll(false);
+                if (effectHandler.getProfessorControl()!=-1)
+                    effectHandler.setProfessorControl(-1);
                 if(playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.DISCONNECTED && playerorder.get(numplayerhasplayed).getPlayerState()!=PlayerState.RECONNECTED) {
                     playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
                 }
@@ -590,7 +590,7 @@ public class Game implements GameInterface {
      */
     public void moveMotherNature(int playerID, int numberOfMovement) throws InvalidTurnException, InvalidValueException {
         if(getPlayer(playerID).getPlayerState()==PlayerState.MOTHERNATUREPHASE) {
-            if (!this.getEffectHandler().getTwomoremoves()) {  //Check if effect4 is in use
+            if (!this.getEffectHandler().getTwoMoreMoves()) {  //Check if effect4 is in use
                 if (numberOfMovement >= 1 && numberOfMovement <= getPlayer(playerID).getLastassistantplayed().getValue()) {
                     for (int count = 0; count < numberOfMovement; count++)
                         this.getBoard().getArchipelago().getMotherNature().move(this.getBoard().getArchipelago().getNumOfIslands());
@@ -607,7 +607,7 @@ public class Game implements GameInterface {
                     verifyIslandInfluence(getBoard().getArchipelago().getSingleIsland((this.getBoard().getArchipelago().getMotherNature().isOn())).getIslandID());
                     this.getBoard().getArchipelago().verifyMergeableIsland();
                     //probably have to put winner method
-                    this.getEffectHandler().setTwomoremoves(false);
+                    this.getEffectHandler().setTwoMoreMoves(false);
                     getPlayer(playerID).setPlayerState(PlayerState.CLOUDPHASE);
                 } else throw new InvalidValueException();
             }
@@ -635,9 +635,9 @@ public class Game implements GameInterface {
                     character.getEffect().effect(this, playerID);
                     character.setUsed(true);
                 } else
-                throw new InvalidCharacterException();
+                    throw new InvalidCharacterException();
             } else
-            throw new InvalidCharacterException();
+                throw new InvalidCharacterException();
         }
         else throw new InvalidTurnException();
 
@@ -711,20 +711,20 @@ public class Game implements GameInterface {
 
         if (island.isStop()) {
             island.setStop(false);
-            effectHandler.addislandstop();
+            effectHandler.addIslandStop();
         } else {
             for (Player player : listOfPlayers) {
                 score=0;
                 for (Professor professor : player.getPlance().getProfessors())
                     for (Student student : island.getStudents())
                         if (professor.ordinal() == student.ordinal())
-                            if (!effectHandler.isNocolor() || (effectHandler.isNocolor() && !effectHandler.getStudent().equals(student)))
+                            if (!effectHandler.isNoColor() || (effectHandler.isNoColor() && !effectHandler.getStudent().equals(student)))
                                 score++;
-                for (int i = 0; i<island.getNumOfTowers() && player.getPlance().getTower().equals(island.getTowerColor()) && !effectHandler.isNotower(); i++)
+                for (int i = 0; i<island.getNumOfTowers() && player.getPlance().getTower().equals(island.getTowerColor()) && !effectHandler.isNoTower(); i++)
                     score++;
-                if (effectHandler.getTwopoints()!=0 && player.getPlayerID() == effectHandler.getTwopoints()) {
+                if (effectHandler.getTwoPoints()!=0 && player.getPlayerID() == effectHandler.getTwoPoints()) {
                     score = score + 2;
-                    effectHandler.setTwopoints(0);
+                    effectHandler.setTwoPoints(0);
                 }
                 if (score > maxScore) {
                     maxScore = score;
@@ -733,8 +733,8 @@ public class Game implements GameInterface {
                 else if(score == maxScore)
                     playerMaxScore=null;
             }
-            effectHandler.setNocolor(false);
-            effectHandler.setNotower(false);
+            effectHandler.setNoColor(false);
+            effectHandler.setNoTower(false);
             if (playerMaxScore != null && !playerMaxScore.getPlance().getTower().equals(island.getTowerColor()) && maxScore != 0) {
                 if (island.getNumOfTowers()==0)
                     island.setTowerColor(playerMaxScore.getPlance().getTower());
@@ -767,7 +767,7 @@ public class Game implements GameInterface {
                     numOfStudentColorHallMax=player.getPlance().getNumberOfStudentHall(Student.values()[i]);
             for (Player player : listOfPlayers) {
                 numOfStudentColorHall = player.getPlance().getNumberOfStudentHall(Student.values()[i]);
-                if (numOfStudentColorHall > numOfStudentColorHallMax || (effectHandler.isProfessorcontroll() && numOfStudentColorHall >= numOfStudentColorHallMax)) {
+                if (numOfStudentColorHall > numOfStudentColorHallMax || (effectHandler.getProfessorControl()==player.getPlayerID() && numOfStudentColorHall >= numOfStudentColorHallMax)) {
                     numOfStudentColorHallMax = numOfStudentColorHall;
                     playerMax = player;
                 }

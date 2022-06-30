@@ -57,7 +57,7 @@ public class Effect9 extends Effect {
      */
     @Override
     public void secondPartEffect(Game game, int playerID) throws InvalidStudentEffectException {
-        game.getEffectHandler().setNocolor(true);
+        game.getEffectHandler().setNoColor(true);
         game.getEffectHandler().setStudent(game.getEffectHandler().getStudentschoose().get(0));
         game.setCharacterInUse(null);
         game.getPlayer(playerID).setPlayerState(prevPlayerState);

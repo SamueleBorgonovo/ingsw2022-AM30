@@ -50,8 +50,8 @@ class Effect5Test {
 
         assertEquals(1,var);
 
-        while(game.getEffectHandler().getNumofislandstops()>0){
-            game.getEffectHandler().removeislandstop();
+        while(game.getEffectHandler().getNumOfIslandStops()>0){
+            game.getEffectHandler().removeIslandStop();
         }
         boolean check=false;
         try{

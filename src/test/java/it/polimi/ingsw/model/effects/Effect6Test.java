@@ -32,14 +32,14 @@ class Effect6Test {
     @Test
     void effect() throws InvalidStopException {
         // Test 2 Players Game
-        assertFalse(game2players.getEffectHandler().isNotower());
+        assertFalse(game2players.getEffectHandler().isNoTower());
         effect6.effect(game2players,1);
-        assertTrue(game2players.getEffectHandler().isNotower());
+        assertTrue(game2players.getEffectHandler().isNoTower());
 
         // Test 3 Players Game
-        assertFalse(game3players.getEffectHandler().isNotower());
+        assertFalse(game3players.getEffectHandler().isNoTower());
         effect6.effect(game3players,1);
-        assertTrue(game3players.getEffectHandler().isNotower());
+        assertTrue(game3players.getEffectHandler().isNoTower());
     }
 
     @Test

@@ -1580,7 +1580,7 @@ public class DashboardController {
                 getGridPaneFromString("character" + index + "StudentsPane").setVisible(false);
                 getGridPaneFromString("character" + index + "StopsPane").setVisible(true);
                 int i;
-                for (i = 1; i <= handler.getNumofislandstops(); i++) {
+                for (i = 1; i <= handler.getNumOfIslandStops(); i++) {
                     getImageViewFromString("character" + index + "Stop" + i).setVisible(true);
                 }
                 for (int j = i; j <= 4; j++) {
