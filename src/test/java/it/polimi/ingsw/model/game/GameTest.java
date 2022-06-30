@@ -23,7 +23,6 @@ class GameTest {
     @Test
     void settingsTest() {
         // Test 2 Players Game
-
         game2players.addPlayer("Daniele");
         assertEquals(GameState.WAITINGFORPLAYERS,game2players.getState());
         assertEquals(GameMode.SIMPLEMODE,game2players.getGameMode());

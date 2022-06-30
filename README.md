@@ -44,7 +44,7 @@ Progetto di Ingegneria del Software AA 2021/2022. Partecipanti: Anzillotti Giuse
 ## Test Coverage
 
 The total coverage of model is 87% (823/994).
-In the following table there is the coverage of model's packages
+In the following table there is the coverage of model's packages.
 
 | Package |    Coverage    |
 |:--------|:--------------:|
@@ -53,7 +53,7 @@ In the following table there is the coverage of model's packages
 | game    | 365/485 (75%)  |
 | player  | 109/109 (100%) |
 
-Model contains all the logic of our project, so the controller has not been tested
+Model contains all the logic of our project, so the controller has not been tested.
 
 
 ## Tools
