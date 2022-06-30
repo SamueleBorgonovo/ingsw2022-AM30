@@ -148,26 +148,27 @@ public class Game implements GameInterface {
         }
         else {
             int counter = getNumPlayerDisconnected();
+            if (counter < numOfPlayers - 1) {
                 if (counter == numOfPlayers - 2) {
-                    gameState=GameState.WAITINGFORRECONNECTION;
+                    gameState = GameState.WAITINGFORRECONNECTION;
                 }
 
                 if (getPlayer(playerid).getPlayerState() == PlayerState.WAITING) {
                     getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
                 } else if (getPlayer(playerid).getPlayerState() == PlayerState.ASSISTANTPHASE) {
-                    callhandler=true;
+                    callhandler = true;
                     numplayerhasplayed++;
                     getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
                     if (numplayerhasplayed == numOfPlayers) {
                         verifyPlayerOrder();
                         int tmp = searchFirst();
-                        if(tmp!=-1) {
+                        if (tmp != -1) {
                             playerorder.get(tmp).setPlayerState(PlayerState.STUDENTPHASE);
                         }
                     } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.ASSISTANTPHASE);
                 } else {
-                    movementStudents=0;
-                    callhandler=true;
+                    movementStudents = 0;
+                    callhandler = true;
                     numplayerhasplayed++;
                     getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
                     if (numplayerhasplayed == numOfPlayers) {
@@ -181,9 +182,12 @@ public class Game implements GameInterface {
                             player.setCharacterPlayed(false);
                         }
                         startRound();  //Start the new round
-                    } else playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
-
+                    } else {
+                        System.out.println("sono qui");
+                        playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
+                    }
                 }
+            }else getPlayer(playerid).setPlayerState(PlayerState.DISCONNECTED);
         }
     return callhandler;
     }
