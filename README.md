@@ -37,7 +37,7 @@ Progetto di Ingegneria del Software AA 2021/2022. Partecipanti: Anzillotti Giuse
   ### CLI
 - To use the client with CLI the computer needs an UTF-8 shell
 
-  ###GUI
+  ### GUI
 - To use the client with GUI the computer needs monitor resolution of 1000 x 700 px
   (We recommend a full HD screen with an OS zoom of 125%)
 
