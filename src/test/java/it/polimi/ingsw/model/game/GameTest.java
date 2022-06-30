@@ -460,6 +460,26 @@ class GameTest {
         assertEquals(Tower.WHITE, game2players.getBoard().getArchipelago().getSingleIsland(2).getTowerColor());
     }
 
+    @Test
+    void verifyIslandInfluence2(){
+        game2players.addPlayer("d");
+        game2players.addPlayer("s");
+        game2players.getPlayer(1).getPlance().addProfessor(Professor.RED_DRAGON);
+        game2players.getPlayer(1).getPlance().addProfessor(Professor.YELLOW_ELF);
+        game2players.getPlayer(2).getPlance().addProfessor(Professor.GREEN_FROG);
+        game2players.getBoard().getArchipelago().getSingleIsland(1).removeAllStudents();
+        assertEquals(0,game2players.getBoard().getArchipelago().getSingleIsland(1).getStudents().size());
+        game2players.getBoard().getArchipelago().getSingleIsland(1).addStudent(Student.RED);
+        game2players.getBoard().getArchipelago().getSingleIsland(1).addStudent(Student.GREEN);
+        game2players.getBoard().getArchipelago().getSingleIsland(1).addStudent(Student.RED);
+        game2players.getBoard().getArchipelago().getSingleIsland(1).setTowerColor(game2players.getPlayer(2).getPlance().getTower());
+        game2players.verifyIslandInfluence(1);
+        assertEquals(game2players.getPlayer(2).getPlance().getTower(),game2players.getBoard().getArchipelago().getSingleIsland(1).getTowerColor());
+        game2players.getEffectHandler().setNoTower(true);
+        game2players.verifyIslandInfluence(1);
+        assertEquals(game2players.getPlayer(1).getPlance().getTower(),game2players.getBoard().getArchipelago().getSingleIsland(1).getTowerColor());
+    }
+
 
     @Test
     void verifyPlayerOrder() {

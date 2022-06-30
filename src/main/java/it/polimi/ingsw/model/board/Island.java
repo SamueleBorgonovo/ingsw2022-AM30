@@ -137,4 +137,10 @@ public class Island {
         return new IslandView(students,numOfTowers,tower,stop,islandID);
     }
 
+    /**
+     * Method removeAllStudents removes all students on the island
+     */
+    public void removeAllStudents(){
+        students.clear();
+    }
 }
