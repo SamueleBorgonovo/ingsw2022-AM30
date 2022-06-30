@@ -33,6 +33,7 @@ public class EffectHandler implements EffectHandlerInterface, Serializable {
        professorControl = -1;
        numofislandstops = 4;
        twomoremoves = false;
+
    }
 
     /**
