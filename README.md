@@ -32,7 +32,7 @@ Progetto di Ingegneria del Software AA 2021/2022. Partecipanti: Anzillotti Giuse
     > java -jar Eriantys.jar
     ```
 - The Application contains a guided configuration to setup a server or to start a client
-- - When starting the server it gives LAN ip. If computers are connected via Wi-Fi, it's necessary to search for the ip in computer's settings
+- When starting the server it gives LAN ip. If computers are connected via Wi-Fi, it's necessary to search for the ip in computer's settings
 
   ### CLI
 - To use the client with CLI the computer needs an UTF-8 shell
