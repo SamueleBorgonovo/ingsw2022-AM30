@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.effects;
 
-import com.sun.prism.GraphicsResource;
 import it.polimi.ingsw.exceptions.InvalidStopException;
 import it.polimi.ingsw.exceptions.InvalidStudentEffectException;
 import it.polimi.ingsw.model.game.Game;
@@ -70,7 +69,5 @@ class Effect10Test {
        assertEquals(1,game.getPlayer(1).getPlance().getNumberOfStudentHall(Student.BLUE));
        assertEquals(0,game.getPlayer(1).getPlance().getNumberOfStudentHall(Student.YELLOW));
        assertEquals(0,game.getPlayer(1).getPlance().getNumberOfStudentHall(Student.GREEN));
-
-
    }
 }
