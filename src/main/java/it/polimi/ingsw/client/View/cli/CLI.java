@@ -483,7 +483,6 @@ public class CLI implements View {
             this.client.setCharacterPlayed(true);
             ChooseCharacterMessage message = new ChooseCharacterMessage(characterPlayed);
             this.client.sendMessage(message);
-            System.out.println(character.getName());
 
             if (character.getTypeOfInputCharacter() == TypeOfInputCharacter.INT)
                 this.setCharacter4played(true);
@@ -498,7 +497,6 @@ public class CLI implements View {
      * Method inputStudentCharacter handles the input of one or more students when using a character
      */
     public void inputStudentCharacter() {
-        System.out.println(characterPlayed.getName());
         switch (this.characterPlayed.getTypeOfInputCharacter()) {
             case EFFECT1INPUT -> this.characterInput.studentFromCard(this.client, this.effectHandler.getEffect1students(),null);
             case EFFECT7INPUT -> this.characterInput.jesterInput(this.client, this.effectHandler.getEffect7students(), this.player.getPlance().getEntrance());

@@ -172,7 +172,6 @@ public class Client {
                 output.writeObject(message);
                 output.flush();
             } catch (IOException e) {
-                System.out.println("Exception nel sendMessage del client");
                 handleSocketDisconnection(false);
             }
         }

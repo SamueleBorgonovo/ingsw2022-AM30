@@ -379,7 +379,6 @@ public class GameHandler {
      * @param characterview CharacterView of che character chosen
      */
     public void chooseCharacter(ClientHandlerInterface clientHandler, CharacterView characterview) {
-        System.out.println(characterview.getName());
         GameInterface game = findGameofPlayer(clientHandler.getNickname());
         int playerID = findPlayeridofPlayer(clientHandler.getNickname());
         Characters character = game.searchCharacter(characterview);

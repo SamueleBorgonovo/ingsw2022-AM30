@@ -183,7 +183,6 @@ public class Game implements GameInterface {
                         }
                         startRound();  //Start the new round
                     } else {
-                        System.out.println("sono qui");
                         playerorder.get(numplayerhasplayed).setPlayerState(PlayerState.STUDENTPHASE);
                     }
                 }
